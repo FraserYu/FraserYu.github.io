@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://dayarch.top/p/java-concurrency-dead-lock.html</loc>
+    
+    <lastmod>2019-11-03T04:53:24.208Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://dayarch.top/website/index.html</loc>
     
     <lastmod>2019-11-03T04:21:29.959Z</lastmod>
@@ -89,13 +96,6 @@
     <loc>https://dayarch.top/comments/index.html</loc>
     
     <lastmod>2019-11-03T01:56:17.333Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://dayarch.top/p/java-concurrency-dead-lock.html</loc>
-    
-    <lastmod>2019-11-03T00:34:22.905Z</lastmod>
     
   </url>
   

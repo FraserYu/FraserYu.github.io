@@ -490,7 +490,7 @@
 <p>我们刚刚说过的理想状态是钱庄只有一个柜员(既单线程)。随着钱庄规模变大，墙上早已挂了非常多个账本，钱庄为了应对繁忙的业务，开通了多个窗口，此时有多个柜员(多线程)处理钱庄业务。</p>
 <p><img src="http://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E5%A4%9A%E7%BA%BF%E7%A8%8B/_image/2019-10-17/2019-10-17-18-42-42.png" alt=""></p>
 <p>柜员 1 正在办理给铁蛋儿转账的业务，但只拿到了你的账本；柜员 2 正在办理铁蛋儿给你转账的业务，但只拿到了铁蛋儿的账本，此时双方出现了尴尬状态，两位柜员都在等待对方归还账本为当前客户办理转账业务。</p>
-<p>![](<a href="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img银行转帐循环等待" target="_blank" rel="noopener">https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img银行转帐循环等待</a> (2).png)</p>
+<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgbank.png" alt=""></p>
 <p>现实中柜员会沟通，喊出一嗓子 <strong><em>老铁，铁蛋儿的账本先给我用一下，用完还给你</em></strong>，但程序却没这么智能，synchronized 内置锁非常执着，它会告诉你「死等」的道理，最终出现死锁</p>
 <blockquote>
 <p> Java 有了 synchronized 内置锁，还发明了显示锁 Lock，是不是就为了治一治 synchronized 「死等」的执着呢？😏</p>
@@ -565,7 +565,7 @@
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2019-11-03T08:34:22+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2019-11-03T12:53:24+08:00">
   <a class='notlink'>
     <i class="fas fa-clock" aria-hidden="true"></i>
     <p>更新于 2019年11月3日</p>
