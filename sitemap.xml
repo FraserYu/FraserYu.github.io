@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://dayarch.top/comments/index.html</loc>
+    
+    <lastmod>2019-11-03T12:15:27.885Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://dayarch.top/friends/index.html</loc>
     
     <lastmod>2019-11-03T05:57:37.202Z</lastmod>
@@ -12,13 +19,6 @@
     <loc>https://dayarch.top/website/index.html</loc>
     
     <lastmod>2019-11-03T05:37:24.161Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://dayarch.top/comments/index.html</loc>
-    
-    <lastmod>2019-11-03T05:37:13.995Z</lastmod>
     
   </url>
   
