@@ -1,0 +1,1814 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  
+  <title>Shiro—小而美的安全框架 | 日拱一兵</title>
+  
+  
+  <meta name="description" content="技术有时很枯燥，需要用有趣的方式解读.">
+  
+
+  
+
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <!-- meta -->
+  
+
+  <!-- link -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-waves@0.7.6/dist/waves.min.css">
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.10.1/css/all.min.css">
+  
+
+  
+  <link rel="shortcut icon" type='image/x-icon' href="https://cdn.jsdelivr.net/gh/xaoxuu/assets@master/favicon/favicon.ico">
+  
+
+  
+    <link rel="stylesheet" href="/style.css">
+  
+
+  <script>
+    function setLoadingBarProgress(num) {
+      document.getElementById('loading-bar').style.width=num+"%";
+    }
+  </script>
+
+  
+  
+
+
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-1774278264048334",
+        enable_page_level_ads: true
+      });
+    </script>
+
+    
+        <script>
+        (function(i,s,o,g,r,a,m){i["DaoVoiceObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;a.charset="utf-8";m.parentNode.insertBefore(a,m)})(window,document,"script",('https:' == document.location.protocol ? 'https:' : 'http:') + "//widget.daovoice.io/widget/0f81ff2f.js","daovoice")
+        daovoice('init', {
+            app_id: "8a3d6849"
+        });
+        daovoice('update');
+        </script>
+    
+</head>
+
+<body>
+  
+  
+  <div class="cover-wrapper">
+    <cover class='cover post half'>
+      
+        
+  <img class='logo' src='/assets/logo.png'/>
+
+
+  <div class="m_search">
+    <form name="searchform" class="form u-search-form">
+      <input type="text" class="input u-search-input" placeholder="" />
+      <i class="icon fas fa-search fa-fw"></i>
+    </form>
+  </div>
+
+<div class='menu navgation'>
+  <ul class='h-list'>
+    
+      
+        <li>
+          <a class="nav home" href="/"
+            
+              rel="nofollow"
+            
+            
+            id="home">
+            <i class='fas fa-home fa-fw'></i>&nbsp;主页
+          </a>
+        </li>
+      
+        <li>
+          <a class="nav home" href="/categories/"
+            
+              rel="nofollow"
+            
+            
+            id="categories">
+            <i class='fas fa-folder-open fa-fw'></i>&nbsp;分类
+          </a>
+        </li>
+      
+        <li>
+          <a class="nav home" href="/tags/"
+            
+              rel="nofollow"
+            
+            
+            id="tags">
+            <i class='fas fa-tags fa-fw'></i>&nbsp;标签
+          </a>
+        </li>
+      
+        <li>
+          <a class="nav home" href="/archives/"
+            
+              rel="nofollow"
+            
+            
+            id="archives">
+            <i class='fas fa-archive fa-fw'></i>&nbsp;归档
+          </a>
+        </li>
+      
+        <li>
+          <a class="nav home" href="/friends/"
+            
+              rel="nofollow"
+            
+            
+            id="friends">
+            <i class='fas fa-link fa-fw'></i>&nbsp;友链
+          </a>
+        </li>
+      
+        <li>
+          <a class="nav home" href="/comments/"
+            
+              rel="nofollow"
+            
+            
+            id="comments">
+            <i class='fas fa-comments fa-fw'></i>&nbsp;留言板
+          </a>
+        </li>
+      
+    
+  </ul>
+</div>
+
+<br>
+<div class="description center-align">
+    
+    <span id="typed"></span>
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.9"></script>
+    <script>
+        var typed = new Typed("#typed", {
+            strings: ['从来没有真正的绝境, 只有心灵的迷途', 'Never really desperate, only the lost of the soul'],
+            startDelay: 300,
+            typeSpeed: 100,
+            loop: true,
+            backSpeed: 50,
+            showCursor: true
+        });
+    </script>
+    
+</div>
+
+      
+    </cover>
+    <header class="l_header pure">
+  <div id="loading-bar-wrapper">
+    <div id="loading-bar" class="pure"></div>
+  </div>
+
+	<div class='wrapper'>		
+		<div class="nav-main container container--flex">
+      <a class="logo flat-box" href='/' >
+        
+          日拱一兵
+        
+      </a>
+		<div class='menu navgation'>
+				<ul class='h-list'>
+          
+  					
+  						<li>
+								<a class="nav flat-box" href="/"
+                  
+                    rel="nofollow"
+                  
+                  
+                  id="home">
+									<i class='fas fa-home fa-fw'></i>&nbsp;主页
+								</a>
+							</li>
+      			
+  						<li>
+								<a class="nav flat-box" href="/categories/"
+                  
+                    rel="nofollow"
+                  
+                  
+                  id="categories">
+									<i class='fas fa-folder-open fa-fw'></i>&nbsp;分类
+								</a>
+							</li>
+      			
+  						<li>
+								<a class="nav flat-box" href="/tags/"
+                  
+                    rel="nofollow"
+                  
+                  
+                  id="tags">
+									<i class='fas fa-tags fa-fw'></i>&nbsp;标签
+								</a>
+							</li>
+      			
+  						<li>
+								<a class="nav flat-box" href="/archives/"
+                  
+                    rel="nofollow"
+                  
+                  
+                  id="archives">
+									<i class='fas fa-archive fa-fw'></i>&nbsp;归档
+								</a>
+							</li>
+      			
+  						<li>
+								<a class="nav flat-box" href="/friends/"
+                  
+                    rel="nofollow"
+                  
+                  
+                  id="friends">
+									<i class='fas fa-link fa-fw'></i>&nbsp;友链
+								</a>
+							</li>
+      			
+  						<li>
+								<a class="nav flat-box" href="/comments/"
+                  
+                    rel="nofollow"
+                  
+                  
+                  id="comments">
+									<i class='fas fa-comments fa-fw'></i>&nbsp;留言板
+								</a>
+							</li>
+      			
+      		
+				</ul>
+			</div>
+
+			
+				<div class="m_search">
+					<form name="searchform" class="form u-search-form">
+						<input type="text" class="input u-search-input" placeholder="搜索" />
+						<i class="icon fas fa-search fa-fw"></i>
+					</form>
+				</div>
+			
+			<ul class='switcher h-list'>
+				
+					<li class='s-search'><a class="fas fa-search fa-fw" href='javascript:void(0)'></a></li>
+				
+				<li class='s-menu'><a class="fas fa-bars fa-fw" href='javascript:void(0)'></a></li>
+			</ul>
+		</div>
+		<div class='nav-sub container container--flex'>
+			<a class="logo flat-box"></a>
+			<ul class='switcher h-list'>
+				<li class='s-comment'><a class="flat-btn fas fa-comments fa-fw" href='javascript:void(0)'></a></li>
+        
+          <li class='s-toc'><a class="flat-btn fas fa-list fa-fw" href='javascript:void(0)'></a></li>
+        
+			</ul>
+		</div>
+	</div>
+</header>
+	<aside class="menu-phone">
+    <header>
+		<nav class="menu navgation">
+      <ul>
+        
+          
+            <li>
+							<a class="nav flat-box" href="/"
+                
+                
+                id="home">
+								<i class='fas fa-clock fa-fw'></i>&nbsp;近期文章
+							</a>
+            </li>
+          
+            <li>
+							<a class="nav flat-box" href="/blog/archives/"
+                
+                  rel="nofollow"
+                
+                
+                id="blogarchives">
+								<i class='fas fa-archive fa-fw'></i>&nbsp;文章归档
+							</a>
+            </li>
+          
+            <li>
+							<a class="nav flat-box" href="/projects/"
+                
+                
+                id="projects">
+								<i class='fas fa-code-branch fa-fw'></i>&nbsp;开源项目
+							</a>
+            </li>
+          
+            <li>
+							<a class="nav flat-box" href="/friends/"
+                
+                  rel="nofollow"
+                
+                
+                id="friends">
+								<i class='fas fa-link fa-fw'></i>&nbsp;我的友链
+							</a>
+            </li>
+          
+            <li>
+							<a class="nav flat-box" href="https://xaoxuu.com/wiki/material-x/"
+                
+                  rel="nofollow"
+                
+                
+                id="https:xaoxuu.comwikimaterial-x">
+								<i class='fas fa-book fa-fw'></i>&nbsp;主题文档
+							</a>
+            </li>
+          
+            <li>
+							<a class="nav flat-box" href="/about/"
+                
+                  rel="nofollow"
+                
+                
+                id="about">
+								<i class='fas fa-info-circle fa-fw'></i>&nbsp;关于小站
+							</a>
+            </li>
+          
+       
+      </ul>
+		</nav>
+    </header>
+	</aside>
+<script>setLoadingBarProgress(40);</script>
+
+  </div>
+
+
+  <div class="l_body">
+    <div class='body-wrapper'>
+      <div class='l_main'>
+  
+
+  <article id="post" class="post white-box article-type-post" itemscope itemprop="blogPost">
+    
+
+
+  <section class='meta'>
+    
+    
+    <div class="meta" id="header-meta">
+      
+        
+  
+    <h1 class="title">
+      <a href="/p/shiro-in-practice.html">
+        Shiro—小而美的安全框架
+      </a>
+    </h1>
+  
+
+
+      
+      <div class='new-meta-box'>
+        
+          
+        
+          
+            
+  <div class='new-meta-item author'>
+    
+      <a href="https://dayarch.top" rel="nofollow">
+        
+          <img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png">
+        
+        <p>tanθ</p>
+      </a>
+    
+  </div>
+
+
+          
+        
+          
+            <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+    <p>2019-08-05</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+  
+  <div class='new-meta-item category'>
+    <a href='/categories/Coding/Spring-Boot/' rel="nofollow">
+      <i class="fas fa-folder-open" aria-hidden="true"></i>
+      <p>Coding&nbsp;/&nbsp;Spring-Boot</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            
+  
+    <div class="new-meta-item browse busuanzi">
+      <a class='notlink'>
+        <i class="fas fa-eye" aria-hidden="true"></i>
+        <p>
+          <span id="busuanzi_value_page_pv">
+            <i class="fas fa-spinner fa-spin fa-fw" aria-hidden="true"></i>
+          </span>
+        </p>
+      </a>
+    </div>
+  
+
+
+          
+        
+          
+            
+
+          
+        
+      </div>
+      
+        <hr>
+      
+    </div>
+  </section>
+
+
+    <section class="article typo">
+      <div class="article-entry" itemprop="articleBody">
+        <h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>在一款应用的整个生命周期，我们都会谈及该应用的数据安全问题。用户的合法性与数据的可见性是数据安全中非常重要的一部分。但是，一方面，不同的应用对于数据的合法性和可见性要求的维度与粒度都有所区别；另一方面，以当前微服务、多服务的架构方式，如何共享Session，如何缓存认证和授权数据应对高并发访问都迫切需要我们解决。Shiro的出现让我们可以快速和简单的应对我们应用的数据安全问题</p>
+<h2 id="Shiro介绍"><a href="#Shiro介绍" class="headerlink" title="Shiro介绍"></a>Shiro介绍</h2><h3 id="Shiro简介"><a href="#Shiro简介" class="headerlink" title="Shiro简介"></a>Shiro简介</h3><p>这个官网解释不抽象，所以直接用官网解释：Apache Shiro™是一个强大且易用的 Java 安全框架，可以执行身份验证、授权、加密和会话管理等。基于 Shiro 的易于理解的API，您可以快速、轻松地使任何应用程序变得安全（从最小的移动应用到最大的网络和企业应用）。</p>
+<p>谈及安全，多数 Java 开发人员都离不开 Spring 框架的支持，自然也就会先想到 Spring Security，那我们先来看二者的差别</p>
+<table>
+<thead>
+<tr>
+<th>Shiro</th>
+<th>Spring Security</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>简单、灵活</td>
+<td>复杂、笨重</td>
+</tr>
+<tr>
+<td>可脱离Spring</td>
+<td>不可脱离Spring</td>
+</tr>
+<tr>
+<td>粒度较粗</td>
+<td>粒度较细</td>
+</tr>
+</tbody></table>
+<p>虽然 Spring Security 属于名震中外 Spring 家族的一部分，但是了解 Shiro 之后，你不会想 “嫁入豪门”，而是选择追求「诗和远方」冲动。</p>
+<p>横看成岭侧成峰，远近高低各不同 (依旧是先了解概念就好)</p>
+<h3 id="远看-Shiro-看轮廓"><a href="#远看-Shiro-看轮廓" class="headerlink" title="远看 Shiro 看轮廓"></a>远看 Shiro 看轮廓</h3><p><img src="https://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/Spring/_image/2019-08-05/image001.png" alt=""></p>
+<h4 id="Subject"><a href="#Subject" class="headerlink" title="Subject"></a>Subject</h4><p>它是一个主体，代表了当前“用户”，这个用户不一定是一个具体的人，与当前应用交互的任何东西都是Subject，如网络爬虫，机器人等；即一个抽象概念；所有 Subject 都绑定到 SecurityManager，与 Subject 的所有交互都会委托给SecurityManager；可以把 Subject 认为是一个门面；SecurityManager 才是实际的执行者</p>
+<h4 id="SecurityManager"><a href="#SecurityManager" class="headerlink" title="SecurityManager"></a>SecurityManager</h4><p>安全管理器；即所有与安全有关的操作都会与 SecurityManager 交互；且它管理着所有 Subject；可以看出它是 Shiro 的核心，它负责与后边介绍的其他组件进行交互，如果学习过 SpringMVC，你可以把它看成 DispatcherServlet前端控制器</p>
+<h4 id="Realm"><a href="#Realm" class="headerlink" title="Realm"></a>Realm</h4><p>域，Shiro 从 Realm 获取安全数据（如用户、角色、权限），就是说 SecurityManager 要验证用户身份，那么它需要从 Realm 获取相应的用户进行比较以确定用户身份是否合法；也需要从 Realm 得到用户相应的角色/权限进行验证用户是否能进行操作；可以把 Realm 看成 DataSource，即安全数据源。</p>
+<h3 id="近看-Shiro-看细节"><a href="#近看-Shiro-看细节" class="headerlink" title="近看 Shiro 看细节"></a>近看 Shiro 看细节</h3><p>看图瞬间懵逼？别慌，会为你拆解来看，结合着图看下面的解释，这不是啥大问题，且看:</p>
+<p><img src="https://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/Spring/_image/2019-08-05/image002.png" alt=""></p>
+<h4 id="Subject-1"><a href="#Subject-1" class="headerlink" title="Subject"></a>Subject</h4><p>主体，可以看到主体可以是任何可以与应用交互的 “用户”</p>
+<h4 id="SecurityManager-1"><a href="#SecurityManager-1" class="headerlink" title="SecurityManager"></a>SecurityManager</h4><p>相当于 SpringMVC 中的 DispatcherServlet；是 Shiro 的心脏；所有具体的交互都通过 SecurityManager 进行控制；它管理着所有 Subject、且负责进行认证和授权、及会话、缓存的管理</p>
+<h4 id="Authenticator"><a href="#Authenticator" class="headerlink" title="Authenticator"></a>Authenticator</h4><p>认证器，负责主体认证的，这是一个扩展点，如果用户觉得 Shiro 默认的不好，可以自定义实现；需要自定义认证策略（Authentication Strategy），即什么情况下算用户认证通过了</p>
+<h4 id="Authrizer"><a href="#Authrizer" class="headerlink" title="Authrizer"></a>Authrizer</h4><p>授权器，或者访问控制器，用来决定主体是否有权限进行相应的操作；即控制着用户能访问应用中的哪些功能</p>
+<h4 id="Realm-1"><a href="#Realm-1" class="headerlink" title="Realm"></a>Realm</h4><p>可以有 1 个或多个 Realm，可以认为是安全实体数据源，即用于获取安全实体的；可以是JDBC实现，也可以是LDAP实现，或者内存实现等等；由用户提供；注意：Shiro 不知道你的用户/权限存储在哪及以何种格式存储；所以我们一般在应用中都需要实现自己的Realm</p>
+<h4 id="SessionManager"><a href="#SessionManager" class="headerlink" title="SessionManager"></a>SessionManager</h4><p>如果写过 Servlet 就应该知道 Session 的概念，Session 需要有人去管理它的生命周期，这个组件就是 SessionManager；而Shiro 并不仅仅可以用在 Web 环境，也可以用在如普通的 JavaSE 环境、EJB等环境；所以，Shiro 就抽象了一个自己的Session 来管理主体与应用之间交互的数据；这样的话，比如我们在 Web 环境用，刚开始是一台Web服务器；接着又上了台EJB 服务器；这时又想把两台服务器的会话数据放到一个地方，我们就可以实现自己的分布式会话（如把数据放到Memcached 服务器）</p>
+<h4 id="SessionDAO"><a href="#SessionDAO" class="headerlink" title="SessionDAO"></a>SessionDAO</h4><p>DAO大家都用过，数据访问对象，用于会话的 CRUD，比如我们想把 Session 保存到数据库，那么可以实现自己的SessionDAO，通过如JDBC写到数据库；比如想把 Session 放到 Memcached 中，可以实现自己的 Memcached SessionDAO；另外 SessionDAO 中可以使用 Cache 进行缓存，以提高性能；</p>
+<h4 id="CacheManager"><a href="#CacheManager" class="headerlink" title="CacheManager"></a>CacheManager</h4><p>缓存控制器，来管理如用户、角色、权限等的缓存的；因为这些数据基本上很少去改变，放到缓存中后可以提高访问的性能</p>
+<h4 id="Cryptography"><a href="#Cryptography" class="headerlink" title="Cryptography"></a>Cryptography</h4><p>密码模块，Shiro提高了一些常见的加密组件用于如密码「加密/解密」的</p>
+<p><strong>注意上图的结构，我们会根据这张图来逐步拆分讲解，记住这张图也更有助于我们理解 Shiro 的工作原理</strong>，所以依旧是打开两个网页一起看就好喽</p>
+<h2 id="搭建概览"><a href="#搭建概览" class="headerlink" title="搭建概览"></a>搭建概览</h2><p>多数小伙伴都在使用 Spring Boot， Shiro 也很应景的定义了 starter，做了更好的封装，对于我们来说使用起来也就更加方便，来看选型概览</p>
+<table>
+<thead>
+<tr>
+<th>序号</th>
+<th>名称</th>
+<th>版本</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>Springboot</td>
+<td>2.0.4</td>
+</tr>
+<tr>
+<td>2</td>
+<td>JPA</td>
+<td>2.0.4</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Mysql</td>
+<td>8.0.12</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Redis</td>
+<td>2.0.4</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Lombok</td>
+<td>1.16.22</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Guava</td>
+<td>26.0-jre</td>
+</tr>
+<tr>
+<td>7</td>
+<td>Shiro</td>
+<td>1.4.0</td>
+</tr>
+</tbody></table>
+<p>使用 Spring Boot，大多都是通过添加 starter 依赖，会自动解决依赖包版本，所以自己尝试的时候用最新版本不会有什么问题，比如 Shiro 现在的版本是 1.5.0 了，整体问题不大，大家自行尝试就好</p>
+<h3 id="添加-Gradle-依赖管理"><a href="#添加-Gradle-依赖管理" class="headerlink" title="添加 Gradle 依赖管理"></a>添加 Gradle 依赖管理</h3><p><img src="https://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/Spring/_image/2019-08-05/2019-08-05-11-06-41%402x.png" alt=""></p>
+<h3 id="大体目录结构"><a href="#大体目录结构" class="headerlink" title="大体目录结构"></a>大体目录结构</h3><p><img src="https://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/Spring/_image/2019-08-05/2019-08-05-09-29-54.png" alt=""></p>
+<h3 id="application-yml-配置"><a href="#application-yml-配置" class="headerlink" title="application.yml 配置"></a>application.yml 配置</h3><p><img src="https://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/Spring/_image/2019-08-05/2019-08-05-11-07-29%402x.png" alt=""></p>
+<h3 id="基本配置"><a href="#基本配置" class="headerlink" title="基本配置"></a>基本配置</h3><p><img src="https://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/Spring/_image/2019-08-05/2019-08-05-11-08-17%402x.png" alt=""></p>
+<p><img src="https://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/Spring/_image/2019-08-05/6af89bc8gw1f8su5fhsizg208c08ct9n.gif" alt=""></p>
+<p>你就让我看这？这只是一个概览，先做到心中有数，我们来看具体配置，逐步完成搭建</p>
+<p>其中 shiroFilter bean 部分指定了拦截路径和相应的过滤器，”/user/login”, ”/user”, ”/user/loginout” 可以匿名访问，其他路径都需要授权访问，shiro 提供和多个默认的过滤器，我们可以用这些过滤器来配置控制指定url的权限(先了解个大概即可)：</p>
+<table>
+<thead>
+<tr>
+<th>配置缩写</th>
+<th>对应的过滤器</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>anon</td>
+<td>AnonymousFilter</td>
+<td>指定url可以匿名访问</td>
+</tr>
+<tr>
+<td>authc</td>
+<td>FormAuthenticationFilter</td>
+<td>指定url需要form表单登录，默认会从请求中获取username、password,rememberMe等参数并尝试登录，如果登录不了就会跳转到loginUrl配置的路径。我们也可以用这个过滤器做默认的登录逻辑，但是一般都是我们自己在控制器写登录逻辑的，自己写的话出错返回的信息都可以定制嘛。</td>
+</tr>
+<tr>
+<td>authcBasic</td>
+<td>BasicHttpAuthenticationFilter</td>
+<td>指定url需要basic登录</td>
+</tr>
+<tr>
+<td>Logout</td>
+<td>LogoutFilter</td>
+<td>登出过滤器，配置指定url就可以实现退出功能，非常方便</td>
+</tr>
+<tr>
+<td>noSessionCreation</td>
+<td>NoSessionCreationFilter</td>
+<td>禁止创建会话</td>
+</tr>
+<tr>
+<td>perms</td>
+<td>PermissionsAuthorizationFilter</td>
+<td>需要指定权限才能访问</td>
+</tr>
+<tr>
+<td>port</td>
+<td>PortFilter</td>
+<td>需要指定端口才能访问</td>
+</tr>
+<tr>
+<td>rest</td>
+<td>HttpMethodPermissionFilter</td>
+<td>将http请求方法转化成相应的动词来构造一个权限字符串，这个感觉意义不大，有兴趣自己看源码的注释</td>
+</tr>
+<tr>
+<td>roles</td>
+<td>RolesAuthorizationFilter</td>
+<td>需要指定角色才能访问</td>
+</tr>
+<tr>
+<td>ssl</td>
+<td>SslFilter</td>
+<td>需要https请求才能访问</td>
+</tr>
+<tr>
+<td>user</td>
+<td>UserFilter</td>
+<td>需要已登录或“记住我”的用户才能访问</td>
+</tr>
+</tbody></table>
+<h3 id="数据库表设计"><a href="#数据库表设计" class="headerlink" title="数据库表设计"></a>数据库表设计</h3><p>数据库表设计请参考 entity package下的 bean，通过@Entity 注解与 JPA 的设置自动生成表结构 (你需要简单的了解一下 JPA 的功能)。</p>
+<p>我们要说重点啦～～～</p>
+<h2 id="身份认证"><a href="#身份认证" class="headerlink" title="身份认证"></a>身份认证</h2><p>身份认证是一个证明 “李雷是李雷，韩梅梅是韩梅梅” 的过程，回看上图，Realm 模块就是用来做这件事的，Shiro 提供了 IniRealm，JdbcReaml，LDAPReam等认证方式，但自定义的 Realm 通常是最适合我们业务需要的，认证通常是校验登录用户是否合法。</p>
+<h3 id="新建用户-User"><a href="#新建用户-User" class="headerlink" title="新建用户 User"></a>新建用户 User</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="meta">@Entity</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">User</span> <span class="keyword">implements</span> <span class="title">Serializable</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Id</span></span><br><span class="line">    <span class="meta">@GeneratedValue</span>(strategy=GenerationType.AUTO)</span><br><span class="line">    <span class="keyword">private</span> Long id;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Column</span>(unique =<span class="keyword">true</span>)</span><br><span class="line">    <span class="keyword">private</span> String username;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> String password;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> String salt;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="定义-Repository"><a href="#定义-Repository" class="headerlink" title="定义 Repository"></a>定义 Repository</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Repository</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">UserRepository</span> <span class="keyword">extends</span> <span class="title">JpaRepository</span>&lt;<span class="title">User</span>, <span class="title">Long</span>&gt; </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> User <span class="title">findUserByUsername</span><span class="params">(String username)</span></span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="编写UserController："><a href="#编写UserController：" class="headerlink" title="编写UserController："></a>编写UserController：</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@GetMapping</span>(<span class="string">"/login"</span>)</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">login</span><span class="params">(String username, String password)</span> </span>&#123;</span><br><span class="line">    UsernamePasswordToken token = <span class="keyword">new</span> UsernamePasswordToken(username, password);</span><br><span class="line">    token.setRememberMe(<span class="keyword">true</span>);</span><br><span class="line">    Subject currentUser = SecurityUtils.getSubject();</span><br><span class="line">    currentUser.login(token);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="自定义-Realm"><a href="#自定义-Realm" class="headerlink" title="自定义 Realm"></a>自定义 Realm</h3><p>自定义 Realm，主要是为了重写 doGetAuthenticationInfo(…)方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">protected</span> AuthenticationInfo <span class="title">doGetAuthenticationInfo</span><span class="params">(AuthenticationToken authenticationToken)</span> <span class="keyword">throws</span> AuthenticationException </span>&#123;</span><br><span class="line">    UsernamePasswordToken token = (UsernamePasswordToken) authenticationToken;</span><br><span class="line">    String username = token.getUsername();</span><br><span class="line">    User user = userRepository.findUserByUsername(username);</span><br><span class="line">    SimpleAuthenticationInfo simpleAuthenticationInfo = <span class="keyword">new</span> SimpleAuthenticationInfo(user, user.getPassword(), getName());</span><br><span class="line">    simpleAuthenticationInfo.setCredentialsSalt(ByteSource.Util.bytes(user.getSalt()));</span><br><span class="line">    <span class="keyword">return</span> simpleAuthenticationInfo;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这些代码我需要做一个说明，你可能也满肚子疑惑:</p>
+<ol>
+<li>这段代码怎么应用了 shiro？</li>
+<li>controller 是怎么调用到 custom realm 的？</li>
+<li>重写的  doGetAuthenticationInfo(…) 方法目的是什么？</li>
+</ol>
+<h3 id="认证流程说明"><a href="#认证流程说明" class="headerlink" title="认证流程说明"></a>认证流程说明</h3><p>用户访问<code>/user/login</code> 路径，生成 UsernamePasswordToken,  通过SecurityUtils.getSubject()获取Subject（currentUser），调用 login 方法进行验证，让我们跟踪一下代码，瞧一瞧就知道自定义的CustomRealm怎样起作用的，一起来看源码：</p>
+<p><img src="https://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/Spring/_image/2019-08-05/image013.png" alt=""></p>
+<p>到这里我们要停一停了，请回看 Shiro 近景图，将源码追踪路径与其对比，是完全一致的</p>
+<h2 id="授权"><a href="#授权" class="headerlink" title="授权"></a>授权</h2><p>身份认证是验证你是谁的问题，而授权是你能干什么的问题，</p>
+<blockquote>
+<p>产品经理：申购模块只能科室看<br>程序员：好的<br>产品经理：科长权限大一些，他也能看申购模块<br>程序员：好的(黑脸)<br>产品经理：科长不但能看，还能修改数据<br>程序员：关公提大刀，拿命来<br>…</p>
+</blockquote>
+<p>作为程序员，我们的宗旨是：「能动手就不吵吵」; 硝烟怒火拔地起，耳边响起驼铃声（Shiro）：「放下屠刀，立地成佛」授权没有那么麻烦，大家好商量…</p>
+<p>整个过程和身份认证基本是一毛一样，你对比看看</p>
+<h3 id="角色实体创建"><a href="#角色实体创建" class="headerlink" title="角色实体创建"></a>角色实体创建</h3><p>涉及到授权，自然要和角色相关，所以我们创建 Role 实体:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="meta">@Entity</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Role</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Id</span></span><br><span class="line">    <span class="meta">@GeneratedValue</span>(strategy=GenerationType.AUTO)</span><br><span class="line">    <span class="keyword">private</span> Long id;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Column</span>(unique =<span class="keyword">true</span>)</span><br><span class="line">    <span class="keyword">private</span> String roleCode;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> String roleName;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="新建-Role-Repository"><a href="#新建-Role-Repository" class="headerlink" title="新建 Role Repository"></a>新建 Role Repository</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Repository</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">RoleRepository</span> <span class="keyword">extends</span> <span class="title">JpaRepository</span>&lt;<span class="title">Role</span>, <span class="title">Long</span>&gt; </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Query</span>(value = <span class="string">"select roleId from UserRoleRel ur where ur.userId = ?1"</span>)</span><br><span class="line">    <span class="function">List&lt;Long&gt; <span class="title">findUserRole</span><span class="params">(Long userId)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function">List&lt;Role&gt; <span class="title">findByIdIn</span><span class="params">(List&lt;Long&gt; ids)</span></span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="定义权限实体-Permission"><a href="#定义权限实体-Permission" class="headerlink" title="定义权限实体 Permission"></a>定义权限实体 Permission</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="meta">@Entity</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Permission</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Id</span></span><br><span class="line">    <span class="meta">@GeneratedValue</span>(strategy=GenerationType.AUTO)</span><br><span class="line">    <span class="keyword">private</span> Long id;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Column</span>(unique =<span class="keyword">true</span>)</span><br><span class="line">    <span class="keyword">private</span> String permCode;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> String permName;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="定义-Permission-Repository"><a href="#定义-Permission-Repository" class="headerlink" title="定义 Permission Repository"></a>定义 Permission Repository</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Repository</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">PermissionRepository</span> <span class="keyword">extends</span> <span class="title">JpaRepository</span>&lt;<span class="title">Permission</span>, <span class="title">Long</span>&gt; </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Query</span>(value = <span class="string">"select permId from RolePermRel pr where pr.roleId in ?1"</span>)</span><br><span class="line">    <span class="function">List&lt;Long&gt; <span class="title">findRolePerm</span><span class="params">(List&lt;Long&gt; roleIds)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function">List&lt;Permission&gt; <span class="title">findByIdIn</span><span class="params">(List&lt;Long&gt; ids)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="建立用户与角色关系"><a href="#建立用户与角色关系" class="headerlink" title="建立用户与角色关系"></a>建立用户与角色关系</h3><p>其实可以通过 JPA 注解来制定关系的，这里为了说明问题，以单独外键形式说明</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="meta">@Entity</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserRoleRel</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Id</span></span><br><span class="line">    <span class="meta">@GeneratedValue</span>(strategy=GenerationType.AUTO)</span><br><span class="line">    <span class="keyword">private</span> Long id;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> Long userId;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> Long roleId;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="建立角色与权限关系"><a href="#建立角色与权限关系" class="headerlink" title="建立角色与权限关系"></a>建立角色与权限关系</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="meta">@Entity</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RolePermRel</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Id</span></span><br><span class="line">    <span class="meta">@GeneratedValue</span>(strategy=GenerationType.AUTO)</span><br><span class="line">    <span class="keyword">private</span> Long id;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> Long permId;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> Long roleId;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="编写-UserController"><a href="#编写-UserController" class="headerlink" title="编写 UserController"></a>编写 UserController</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequiresPermissions</span>(<span class="string">"user:list:view"</span>)</span><br><span class="line"><span class="meta">@GetMapping</span>()</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">getAllUsers</span><span class="params">()</span></span>&#123;</span><br><span class="line">    List&lt;User&gt; users = userRepository.findAll();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>@RequiresPermissions(&quot;user:list:view&quot;)</code> 注解说明具有用户：列表：查看权限的才可以访问），官网明确给出权限定义格式，包括通配符等，我希望你自行去查看</p>
+<p>自定义 CustomRealm (主要重写 doGetAuthorizationInfo) 方法:</p>
+<p><img src="https://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/Spring/_image/2019-08-05/2019-08-05-11-10-16%402x.png" alt=""></p>
+<p>与认证流程如出一辙，只不过多了用户，角色，权限的关系罢了</p>
+<h3 id="授权流程说明"><a href="#授权流程说明" class="headerlink" title="授权流程说明"></a>授权流程说明</h3><p>这里通过过滤器（见Shiro配置）和注解二者结合的方式来进行授权，和认证流程一样，最终会走到我们自定义的 CustomRealm 中，同样 Shiro 默认提供了许多注解用来处理不同的授权情况</p>
+<table>
+<thead>
+<tr>
+<th>注解</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>@RequiresGuest</td>
+<td>只有游客可以访问</td>
+</tr>
+<tr>
+<td>@RequiresAuthentication</td>
+<td>需要登录才能访问</td>
+</tr>
+<tr>
+<td>@RequiresUser</td>
+<td>已登录的用户或“记住我”的用户能访问</td>
+</tr>
+<tr>
+<td>@RequiresRoles</td>
+<td>已登录的用户需具有指定的角色才能访问</td>
+</tr>
+<tr>
+<td>@RequiresPermissions</td>
+<td>已登录的用户需具有指定的权限才能访问（如果不想和产品经理华山论剑，推荐用这个注解）</td>
+</tr>
+</tbody></table>
+<p>授权官网给出明确的授权策略与案例，请查看：<a href="http://shiro.apache.org/permissions.html" target="_blank" rel="noopener">http://shiro.apache.org/permissions.html</a></p>
+<p>上面的例子我们通过一直在通过访问 Mysql 获取用户认证和授权信息，这中方式明显不符合生产环境的需求</p>
+<h2 id="Session会话管理"><a href="#Session会话管理" class="headerlink" title="Session会话管理"></a>Session会话管理</h2><p>做过 Web 开发的同学都知道 Session 的概念，最常用的是 Session 过期时间，数据在 Session 的 CRUD，同样看上图，我们需要关注 SessionManager 和 SessionDAO 模块，Shiro starter 已经提供了基本的 Session配置信息，我们按需在YAML中配置就好（官网<a href="https://shiro.apache.org/spring-boot.html" target="_blank" rel="noopener">https://shiro.apache.org/spring-boot.html</a> 已经明确给出Session的配置信息）</p>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Default Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>shiro.enabled</td>
+<td>true</td>
+<td>Enables Shiro’s Spring module</td>
+</tr>
+<tr>
+<td>shiro.web.enabled</td>
+<td>true</td>
+<td>Enables Shiro’s Spring web module</td>
+</tr>
+<tr>
+<td>shiro.annotations.enabled</td>
+<td>true</td>
+<td>Enables Spring support for Shiro’s annotations</td>
+</tr>
+<tr>
+<td>shiro.sessionManager.deleteInvalidSessions</td>
+<td>true</td>
+<td>Remove invalid session from session storage</td>
+</tr>
+<tr>
+<td>shiro.sessionManager.sessionIdCookieEnabled</td>
+<td>true</td>
+<td>Enable session ID to cookie, for session tracking</td>
+</tr>
+<tr>
+<td>shiro.sessionManager.sessionIdUrlRewritingEnabled</td>
+<td>true</td>
+<td>Enable session URL rewriting support</td>
+</tr>
+<tr>
+<td>shiro.userNativeSessionManager</td>
+<td>false</td>
+<td>If enabled Shiro will manage the HTTP sessions instead of the container</td>
+</tr>
+<tr>
+<td>shiro.sessionManager.cookie.name</td>
+<td>JSESSIONID</td>
+<td>Session cookie name</td>
+</tr>
+<tr>
+<td>shiro.sessionManager.cookie.maxAge</td>
+<td>-1</td>
+<td>Session cookie max age</td>
+</tr>
+<tr>
+<td>shiro.sessionManager.cookie.domain</td>
+<td>null</td>
+<td>Session cookie domain</td>
+</tr>
+<tr>
+<td>shiro.sessionManager.cookie.path</td>
+<td>null</td>
+<td>Session cookie path</td>
+</tr>
+<tr>
+<td>shiro.sessionManager.cookie.secure</td>
+<td>false</td>
+<td>Session cookie secure flag</td>
+</tr>
+<tr>
+<td>shiro.rememberMeManager.cookie.name</td>
+<td>rememberMe</td>
+<td>RememberMe cookie name</td>
+</tr>
+<tr>
+<td>shiro.rememberMeManager.cookie.maxAge</td>
+<td>one year</td>
+<td>RememberMe cookie max age</td>
+</tr>
+<tr>
+<td>shiro.rememberMeManager.cookie.domain</td>
+<td>null</td>
+<td>RememberMe cookie domain</td>
+</tr>
+<tr>
+<td>shiro.rememberMeManager.cookie.path</td>
+<td>null</td>
+<td>RememberMe cookie path</td>
+</tr>
+<tr>
+<td>shiro.rememberMeManager.cookie.secure</td>
+<td>false</td>
+<td>RememberMe cookie secure flag</td>
+</tr>
+<tr>
+<td>shiro.loginUrl</td>
+<td>/login.jsp</td>
+<td>Login URL used when unauthenticated users are redirected to login page</td>
+</tr>
+<tr>
+<td>shiro.successUrl</td>
+<td>/</td>
+<td>Default landing page after a user logs in (if alternative cannot be found in the current session)</td>
+</tr>
+<tr>
+<td>shiro.unauthorizedUrl</td>
+<td>null</td>
+<td>Page to redirect user to if they are unauthorized (403 page)</td>
+</tr>
+</tbody></table>
+<p>分布式服务中，我们通常需要将Session信息放入Redis中来管理，来应对高并发的访问需求，这时只需重写SessionDAO即可完成自定义的Session管理</p>
+<h3 id="整合Redis"><a href="#整合Redis" class="headerlink" title="整合Redis"></a>整合Redis</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RedisConfig</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> RedisConnectionFactory redisConnectionFactory;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> RedisTemplate&lt;String, Object&gt; <span class="title">stringObjectRedisTemplate</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        RedisTemplate&lt;String, Object&gt; template = <span class="keyword">new</span> RedisTemplate&lt;&gt;();</span><br><span class="line">        template.setConnectionFactory(redisConnectionFactory);</span><br><span class="line">        template.setKeySerializer(<span class="keyword">new</span> StringRedisSerializer());</span><br><span class="line">        template.setValueSerializer(<span class="keyword">new</span> GenericJackson2JsonRedisSerializer());</span><br><span class="line">        <span class="keyword">return</span> template;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="重写SessionDao"><a href="#重写SessionDao" class="headerlink" title="重写SessionDao"></a>重写SessionDao</h3><p><img src="https://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/Spring/_image/2019-08-05/2019-08-05-11-10-59%402x.png" alt=""></p>
+<p>查看源码，可以看到调用默认SessionManager的retriveSession方法，我们重写该方法，将Session放入HttpRequest中，进一步提高session访问效率</p>
+<p><img src="https://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/Spring/_image/2019-08-05/2019-08-05-11-11-37%402x.png" alt=""></p>
+<h3 id="向ShiroConfig中添加配置"><a href="#向ShiroConfig中添加配置" class="headerlink" title="向ShiroConfig中添加配置"></a>向ShiroConfig中添加配置</h3><p> 其实在概览模块已经给出代码展示，这里单独列出来做说明:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 自定义RedisSessionDao用来管理Session在Redis中的CRUD</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Bean</span>(name = <span class="string">"redisSessionDao"</span>)</span><br><span class="line"><span class="function"><span class="keyword">public</span> RedisSessionDao <span class="title">redisSessionDao</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> RedisSessionDao();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 自定义SessionManager,应用自定义SessionDao</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Bean</span>(name = <span class="string">"customerSessionManager"</span>)</span><br><span class="line"><span class="function"><span class="keyword">public</span> CustomerWebSessionManager <span class="title">customerWebSessionManager</span><span class="params">()</span></span>&#123;</span><br><span class="line">    CustomerWebSessionManager customerWebSessionManager = <span class="keyword">new</span> CustomerWebSessionManager();</span><br><span class="line">    customerWebSessionManager.setSessionDAO(redisSessionDao());</span><br><span class="line">    <span class="keyword">return</span> customerWebSessionManager;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 定义Security manager</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> customRealm</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Bean</span>(name = <span class="string">"securityManager"</span>)</span><br><span class="line"><span class="function"><span class="keyword">public</span> DefaultWebSecurityManager <span class="title">defaultWebSecurityManager</span><span class="params">(CustomRealm customRealm)</span> </span>&#123;</span><br><span class="line">    DefaultWebSecurityManager  securityManager = <span class="keyword">new</span> DefaultWebSecurityManager ();</span><br><span class="line">    securityManager.setRealm(customRealm);</span><br><span class="line">    securityManager.setSessionManager(customerWebSessionManager()); <span class="comment">// 可不指定，Shiro会用默认Session manager</span></span><br><span class="line">    securityManager.setCacheManager(redisCacheManagers());  <span class="comment">//可不指定，Shiro会用默认CacheManager</span></span><br><span class="line"><span class="comment">//        securityManager.setSessionManager(defaultWebSessionManager());</span></span><br><span class="line">    <span class="keyword">return</span> securityManager;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 定义session管理器</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Bean</span>(name = <span class="string">"sessionManager"</span>)</span><br><span class="line"><span class="function"><span class="keyword">public</span> DefaultWebSessionManager <span class="title">defaultWebSessionManager</span><span class="params">()</span></span>&#123;</span><br><span class="line">    DefaultWebSessionManager defaultWebSessionManager = <span class="keyword">new</span> DefaultWebSessionManager();</span><br><span class="line">    defaultWebSessionManager.setSessionDAO(redisSessionDao());</span><br><span class="line">    <span class="keyword">return</span> defaultWebSessionManager;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>至此，将 session 信息由 redis 管理功能就这样完成了</p>
+<h2 id="缓存管理"><a href="#缓存管理" class="headerlink" title="缓存管理"></a>缓存管理</h2><p>应对分布式服务，对于高并发访问数据库权限内容是非常低效的方式，同样我们可以利用Redis来解决这一问题，将授权数据缓存到Redis中</p>
+<h3 id="新建-RedisCache"><a href="#新建-RedisCache" class="headerlink" title="新建 RedisCache"></a>新建 RedisCache</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Slf</span>4j</span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RedisCache</span>&lt;<span class="title">K</span>, <span class="title">V</span>&gt; <span class="keyword">implements</span> <span class="title">Cache</span>&lt;<span class="title">K</span>, <span class="title">V</span>&gt; </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String SHIRO_PREFIX = <span class="string">"shiro-cache:"</span>;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Resource</span></span><br><span class="line">    <span class="keyword">private</span> RedisTemplate&lt;String, Object&gt; stringObjectRedisTemplate;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> String <span class="title">getKey</span><span class="params">(K key)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (key <span class="keyword">instanceof</span> String)&#123;</span><br><span class="line">            <span class="keyword">return</span> (SHIRO_PREFIX + key);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> key.toString();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> V <span class="title">get</span><span class="params">(K k)</span> <span class="keyword">throws</span> CacheException </span>&#123;</span><br><span class="line">        log.info(<span class="string">"read from redis..."</span>);</span><br><span class="line">        V v = (V) stringObjectRedisTemplate.opsForValue().get(getKey(k));</span><br><span class="line">        <span class="keyword">if</span> (v != <span class="keyword">null</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> v;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> V <span class="title">put</span><span class="params">(K k, V v)</span> <span class="keyword">throws</span> CacheException </span>&#123;</span><br><span class="line">        stringObjectRedisTemplate.opsForValue().set(getKey(k), v);</span><br><span class="line">        stringObjectRedisTemplate.expire(getKey(k), <span class="number">100</span>, TimeUnit.SECONDS);</span><br><span class="line">        <span class="keyword">return</span> v;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> V <span class="title">remove</span><span class="params">(K k)</span> <span class="keyword">throws</span> CacheException </span>&#123;</span><br><span class="line">        V v = (V) stringObjectRedisTemplate.opsForValue().get(getKey(k));</span><br><span class="line">        stringObjectRedisTemplate.delete((String) get(k));</span><br><span class="line">        <span class="keyword">if</span> (v != <span class="keyword">null</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> v;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">clear</span><span class="params">()</span> <span class="keyword">throws</span> CacheException </span>&#123;</span><br><span class="line">        <span class="comment">//不要重写，如果只保存shiro数据无所谓</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">size</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Set&lt;K&gt; <span class="title">keys</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Collection&lt;V&gt; <span class="title">values</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="新建-RedisCacheManager"><a href="#新建-RedisCacheManager" class="headerlink" title="新建 RedisCacheManager"></a>新建 RedisCacheManager</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RedisCacheManager</span> <span class="keyword">implements</span> <span class="title">CacheManager</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Resource</span></span><br><span class="line">    <span class="keyword">private</span> RedisCache redisCache;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> &lt;K, V&gt; <span class="function">Cache&lt;K, V&gt; <span class="title">getCache</span><span class="params">(String s)</span> <span class="keyword">throws</span> CacheException </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> redisCache;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>至此，我们不用每次访问 Mysql DB 来获取认证和授权信息，而是通过 Redis 来缓存这些信息，大大提升了效率，也满足分布式系统的设计需求</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>回复公众号 「demo」获取 demo 代码。这里只是梳理了Springboot整合Shiro的流程，以及应用Redis最大化利用Shiro，Shiro的使用细节还很多，官网说的也很明确，带着上面的架构图来理解Shiro会事半功倍，感觉这里面的代码挺多挺头大的？那是你没有自己动手去尝试，结合官网与 demo 相信你会对 Shiro 有更好的理解，另外你可以理解 Shiro 是 mini 版本的 Spring Security，我希望以小见大，当需要更细粒度的认证授权时，也会对理解 Spring Security 有很大帮助，点击文末「阅读原文」，效果更好</p>
+<p>落霞与孤鹜齐飞 秋水共长天一色，产品经理和程序员一片祥和…  </p>
+<h2 id="灵魂追问"><a href="#灵魂追问" class="headerlink" title="灵魂追问"></a>灵魂追问</h2><ol>
+<li>都说 Redis 是单线程，但是很快，你知道为什么吗？</li>
+<li>你们项目中是怎样控制认证授权的呢？当授权有变化，对于程序员来说，这个修改是灾难吗？</li>
+</ol>
+<h2 id="提高效率工具"><a href="#提高效率工具" class="headerlink" title="提高效率工具"></a>提高效率工具</h2><p><img src="https://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E6%84%9F%E6%83%B3%E4%B8%8E%E6%80%BB%E7%BB%93/_image/2019-06-18/b.png" alt=""></p>
+<h3 id="MarkDown-表格生成器"><a href="#MarkDown-表格生成器" class="headerlink" title="MarkDown 表格生成器"></a>MarkDown 表格生成器</h3><p>本文的好多表格是从官网粘贴的，如何将其直接转换成 MD table 呢？那么 <a href="https://www.tablesgenerator.com/markdown_tables" target="_blank" rel="noopener">https://www.tablesgenerator.com/markdown_tables</a> 就可以帮到你了，无论是生成 MD table，还是粘贴内容生成 table 和内容都是极好的，当然了不止 MD table，自己发现吧，更多工具，公众号回复 「工具」获得</p>
+<p><img src="https://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/Spring/_image/2019-08-05/2019-08-05-10-52-55.png" alt=""></p>
+<hr>
+<h2 id="推荐阅读"><a href="#推荐阅读" class="headerlink" title="推荐阅读"></a>推荐阅读</h2><ul>
+<li><a href="https://mp.weixin.qq.com/s/6dg3u2PkcTSQHu_3T_QYnA" target="_blank" rel="noopener">只会用 git pull ？有时候你可以尝试更优雅的处理方式 </a></li>
+<li><a href="https://mp.weixin.qq.com/s/Dnr1jLebvBUHnziZzSfcrA" target="_blank" rel="noopener">双亲委派模型：大厂高频面试题，轻松搞定</a></li>
+<li><a href="https://mp.weixin.qq.com/s/YBQB086ADBjHUmwrFQrWew" target="_blank" rel="noopener">面试还不知道BeanFactory和ApplicationContext的区别？</a></li>
+<li><a href="https://mp.weixin.qq.com/s/hR1TqkVzwZ_T8fuMnsM4hQ" target="_blank" rel="noopener">如何设计好的RESTful API</a></li>
+<li><a href="https://mp.weixin.qq.com/s/V7h8O6pVFQ-nr_iA2SNqtw" target="_blank" rel="noopener">程序猿为什么要看源码？</a></li>
+</ul>
+<hr>
+<blockquote>
+<h3 id="欢迎持续关注公众号：「日拱一兵」"><a href="#欢迎持续关注公众号：「日拱一兵」" class="headerlink" title="欢迎持续关注公众号：「日拱一兵」"></a>欢迎持续关注公众号：「日拱一兵」</h3><ul>
+<li>前沿 Java 技术干货分享</li>
+<li>高效工具汇总  回复「工具」</li>
+<li>面试问题分析与解答</li>
+<li>技术资料领取 回复「资料」</li>
+</ul>
+</blockquote>
+<p>后续会推出「多线程」与「ElasticSearch」等连载内容</p>
+<blockquote>
+<p>以读侦探小说思维轻松趣味学习 Java 技术栈相关知识，本着将复杂问题简单化，抽象问题具体化和图形化原则逐步分解技术问题，技术持续更新，请持续关注……</p>
+</blockquote>
+<p><img src="https://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E6%84%9F%E6%83%B3%E4%B8%8E%E6%80%BB%E7%BB%93/_image/2019-06-18/a%20%281%29.png" alt=""></p>
+
+      </div>
+      
+        <br>
+        
+
+
+  <section class='meta' id="footer-meta">
+    <div class='new-meta-box'>
+      
+        
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2019-11-01T16:50:04+08:00">
+  <a class='notlink'>
+    <i class="fas fa-clock" aria-hidden="true"></i>
+    <p>更新于 2019年11月1日</p>
+  </a>
+</div>
+
+        
+      
+        
+          
+  
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/Shiro/" rel="nofollow"><i class="fas fa-tag" aria-hidden="true"></i><p>Shiro</p></a></div>
+
+
+        
+      
+        
+          
+  <div class="new-meta-item share -mob-share-list">
+  <div class="-mob-share-list share-body">
+    
+      
+        <a class="-mob-share-qq" title="QQ好友" rel="external nofollow noopener noreferrer"
+          
+          href="http://connect.qq.com/widget/shareqq/index.html?url=https://dayarch.top/p/shiro-in-practice.html&title=Shiro—小而美的安全框架 | 日拱一兵&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=写在前面
+在一款应用的整个生命周期，我们都会谈及该应用的数据安全问题。用户的合法性与数据的可见性是数据安全中非常重要的一部分。但是，一方面，不同的应用对于数据的合法性和可见性要求的维度与粒度都有所区别；另一方面，以当前微服务、多服务的架构方式，如何共享Session，如何缓存认证和授权数据应对高并发访问都迫切需要我们解决。Shiro的出现让我们可以快速和简单的应对我们应用的数据安全问题
+
+Shiro介绍
+Shiro简介
+这个官网解释不抽象，所以直接用官网解释：Apache Shiro™是一个强大且易用的 Java 安全框架，可以执行身份验证、授权、加密和会话管理等。基于 Shiro 的易于理解"
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/assets@19.1.9/logo/128/qq.png">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-qzone" title="QQ空间" rel="external nofollow noopener noreferrer"
+          
+          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://dayarch.top/p/shiro-in-practice.html&title=Shiro—小而美的安全框架 | 日拱一兵&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=写在前面
+在一款应用的整个生命周期，我们都会谈及该应用的数据安全问题。用户的合法性与数据的可见性是数据安全中非常重要的一部分。但是，一方面，不同的应用对于数据的合法性和可见性要求的维度与粒度都有所区别；另一方面，以当前微服务、多服务的架构方式，如何共享Session，如何缓存认证和授权数据应对高并发访问都迫切需要我们解决。Shiro的出现让我们可以快速和简单的应对我们应用的数据安全问题
+
+Shiro介绍
+Shiro简介
+这个官网解释不抽象，所以直接用官网解释：Apache Shiro™是一个强大且易用的 Java 安全框架，可以执行身份验证、授权、加密和会话管理等。基于 Shiro 的易于理解"
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/assets@19.1.9/logo/128/qzone.png">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-weibo" title="微博" rel="external nofollow noopener noreferrer"
+          
+          href="http://service.weibo.com/share/share.php?url=https://dayarch.top/p/shiro-in-practice.html&title=Shiro—小而美的安全框架 | 日拱一兵&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=写在前面
+在一款应用的整个生命周期，我们都会谈及该应用的数据安全问题。用户的合法性与数据的可见性是数据安全中非常重要的一部分。但是，一方面，不同的应用对于数据的合法性和可见性要求的维度与粒度都有所区别；另一方面，以当前微服务、多服务的架构方式，如何共享Session，如何缓存认证和授权数据应对高并发访问都迫切需要我们解决。Shiro的出现让我们可以快速和简单的应对我们应用的数据安全问题
+
+Shiro介绍
+Shiro简介
+这个官网解释不抽象，所以直接用官网解释：Apache Shiro™是一个强大且易用的 Java 安全框架，可以执行身份验证、授权、加密和会话管理等。基于 Shiro 的易于理解"
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/assets@19.1.9/logo/128/weibo.png">
+          
+        </a>
+      
+    
+  </div>
+</div>
+
+
+
+        
+      
+    </div>
+  </section>
+
+
+      
+      
+          <div class="prev-next">
+              
+                  <section class="prev">
+                      <span class="art-item-left">
+                          <h6><i class="fas fa-chevron-left" aria-hidden="true"></i>&nbsp;上一页</h6>
+                          <h4>
+                              <a href="/p/spring-boot-global-return.html" rel="prev" title="Springboot返回统一JSON数据格式是怎么实现的？">
+                                
+                                    Springboot返回统一JSON数据格式是怎么实现的？
+                                
+                              </a>
+                          </h4>
+                          
+                              
+                              <h6 class="tags">
+                                  <a class="tag" href="/tags/Spring-Boot/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> Spring Boot</a>
+                              </h6>
+                          
+                      </span>
+                  </section>
+              
+              
+                  <section class="next">
+                      <span class="art-item-right" aria-hidden="true">
+                          <h6>下一页&nbsp;<i class="fas fa-chevron-right" aria-hidden="true"></i></h6>
+                          <h4>
+                              <a href="/p/spring-boot-condition-annotation.html" rel="prev" title="@Conditional注解，Spring Boot 的灵活配置">
+                                  
+                                      @Conditional注解，Spring Boot 的灵活配置
+                                  
+                              </a>
+                          </h4>
+                          
+                              
+                              <h6 class="tags">
+                                  <a class="tag" href="/tags/Spring-Boot/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> Spring Boot</a> <a class="tag" href="/tags/%E6%B3%A8%E8%A7%A3/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> 注解</a>
+                              </h6>
+                          
+                      </span>
+                  </section>
+              
+          </div>
+      
+    </section>
+  </article>
+
+
+
+  <!-- 显示推荐文章和评论 -->
+
+
+
+  <article class="post white-box comments">
+    <section class="article typo">
+      <h4><i class="fas fa-comments fa-fw" aria-hidden="true"></i>&nbsp;评论</h4>
+      
+      
+      
+        <section id="comments">
+          <div id="gitalk-container"></div>
+        </section>
+      
+      
+    </section>
+  </article>
+
+
+
+
+
+
+<!-- 根据页面mathjax变量决定是否加载MathJax数学公式js -->
+
+
+
+  <script>
+    window.subData = {
+      title: 'Shiro—小而美的安全框架',
+      tools: true
+    }
+  </script>
+
+
+
+  <script src="https://my.openwrite.cn/js/readmore.js" type="text/javascript"></script>
+  <script>
+      const btw = new BTWPlugin();
+      btw.init({
+          id: 'post',
+          blogId: '10015-1569397635991-668',
+          name: '日拱一兵',
+          qrcode: 'https://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E6%84%9F%E6%83%B3%E4%B8%8E%E6%80%BB%E7%BB%93/_image/2019-07-25/qrcode.jpg',
+          keyword: 'tanrgyb',
+      });
+  </script>
+  
+
+</div>
+<aside class='l_side'>
+  
+    
+    
+      
+      
+        
+          
+          
+            
+              <section class='widget author'>
+  <div class='content pure'>
+    
+      <div class='avatar'>
+        <img class='avatar' src='https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgqrcode.jpg'/>
+      </div>
+    
+    
+      <div class='text'>
+        
+        
+        
+          <p><span id="jinrishici-sentence">从来没有真正的绝境，只有心灵的迷途</span></p>
+          <script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
+        
+      </div>
+    
+    
+  </div>
+</section>
+
+            
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+      
+        
+          
+          
+        
+          
+          
+            
+              
+  <section class='widget toc-wrapper'>
+    
+<header class='pure'>
+  <div><i class="fas fa-list fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;本文目录</div>
+  
+    <!-- <div class='wrapper'><a class="s-toc rightBtn" rel="external nofollow noopener noreferrer" href="javascript:void(0)"><i class="fas fa-thumbtack fa-fw"></i></a></div> -->
+  
+</header>
+
+    <div class='content pure'>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#写在前面"><span class="toc-text">写在前面</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Shiro介绍"><span class="toc-text">Shiro介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Shiro简介"><span class="toc-text">Shiro简介</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#远看-Shiro-看轮廓"><span class="toc-text">远看 Shiro 看轮廓</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Subject"><span class="toc-text">Subject</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#SecurityManager"><span class="toc-text">SecurityManager</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Realm"><span class="toc-text">Realm</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#近看-Shiro-看细节"><span class="toc-text">近看 Shiro 看细节</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Subject-1"><span class="toc-text">Subject</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#SecurityManager-1"><span class="toc-text">SecurityManager</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Authenticator"><span class="toc-text">Authenticator</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Authrizer"><span class="toc-text">Authrizer</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Realm-1"><span class="toc-text">Realm</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#SessionManager"><span class="toc-text">SessionManager</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#SessionDAO"><span class="toc-text">SessionDAO</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#CacheManager"><span class="toc-text">CacheManager</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Cryptography"><span class="toc-text">Cryptography</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#搭建概览"><span class="toc-text">搭建概览</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#添加-Gradle-依赖管理"><span class="toc-text">添加 Gradle 依赖管理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#大体目录结构"><span class="toc-text">大体目录结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#application-yml-配置"><span class="toc-text">application.yml 配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#基本配置"><span class="toc-text">基本配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#数据库表设计"><span class="toc-text">数据库表设计</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#身份认证"><span class="toc-text">身份认证</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#新建用户-User"><span class="toc-text">新建用户 User</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#定义-Repository"><span class="toc-text">定义 Repository</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#编写UserController："><span class="toc-text">编写UserController：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#自定义-Realm"><span class="toc-text">自定义 Realm</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#认证流程说明"><span class="toc-text">认证流程说明</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#授权"><span class="toc-text">授权</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#角色实体创建"><span class="toc-text">角色实体创建</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#新建-Role-Repository"><span class="toc-text">新建 Role Repository</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#定义权限实体-Permission"><span class="toc-text">定义权限实体 Permission</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#定义-Permission-Repository"><span class="toc-text">定义 Permission Repository</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#建立用户与角色关系"><span class="toc-text">建立用户与角色关系</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#建立角色与权限关系"><span class="toc-text">建立角色与权限关系</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#编写-UserController"><span class="toc-text">编写 UserController</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#授权流程说明"><span class="toc-text">授权流程说明</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Session会话管理"><span class="toc-text">Session会话管理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#整合Redis"><span class="toc-text">整合Redis</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#重写SessionDao"><span class="toc-text">重写SessionDao</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#向ShiroConfig中添加配置"><span class="toc-text">向ShiroConfig中添加配置</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#缓存管理"><span class="toc-text">缓存管理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#新建-RedisCache"><span class="toc-text">新建 RedisCache</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#新建-RedisCacheManager"><span class="toc-text">新建 RedisCacheManager</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-text">总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#灵魂追问"><span class="toc-text">灵魂追问</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#提高效率工具"><span class="toc-text">提高效率工具</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#MarkDown-表格生成器"><span class="toc-text">MarkDown 表格生成器</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#推荐阅读"><span class="toc-text">推荐阅读</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#欢迎持续关注公众号：「日拱一兵」"><span class="toc-text">欢迎持续关注公众号：「日拱一兵」</span></a></li></ol></li></ol>
+    </div>
+  </section>
+
+
+            
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+      
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+            
+              <section class='widget grid'>
+  
+<header class='pure'>
+  <div><i class="fas fa-map-signs fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;站内导航</div>
+  
+</header>
+
+  <div class='content pure'>
+    <ul class="grid navgation">
+      
+        <li><a class="flat-box" title="/" href="/"
+          
+          
+          id="home">
+          
+            <i class="fas fa-clock fa-fw" aria-hidden="true"></i>
+          
+          近期文章
+        </a></li>
+      
+        <li><a class="flat-box" title="/archives/" href="/archives/"
+          
+            rel="nofollow"
+          
+          
+          id="archives">
+          
+            <i class="fas fa-archive fa-fw" aria-hidden="true"></i>
+          
+          文章归档
+        </a></li>
+      
+        <li><a class="flat-box" title="/categories/Coding/Java-Concurrency" href="/categories/Coding/Java-Concurrency"
+          
+            rel="nofollow"
+          
+          
+          id="categoriesCodingJava-Concurrency">
+          
+            <i class="fas fa-th-list fa-fw" aria-hidden="true"></i>
+          
+          并发系列
+        </a></li>
+      
+        <li><a class="flat-box" title="/comments/" href="/comments/"
+          
+            rel="nofollow"
+          
+          
+          id="comments">
+          
+            <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
+          
+          留言板
+        </a></li>
+      
+        <li><a class="flat-box" title="/website/" href="/website/"
+          
+            rel="nofollow"
+          
+          
+          id="website">
+          
+            <i class="fas fa-file fa-fw" aria-hidden="true"></i>
+          
+          维护日志
+        </a></li>
+      
+        <li><a class="flat-box" title="/books/" href="/books/"
+          
+            rel="nofollow"
+          
+          
+          id="books">
+          
+            <i class="fas fa-book fa-fw" aria-hidden="true"></i>
+          
+          我的书房
+        </a></li>
+      
+    </ul>
+  </div>
+</section>
+
+            
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+      
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+            
+              
+  <section class='widget category'>
+    
+<header class='pure'>
+  <div><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;文章分类</div>
+  
+    <a class="rightBtn rotate90"
+    
+      rel="nofollow"
+    
+    
+      target="blank"
+    
+    href="/blog/categories/"
+    title="blog/categories/">
+    <i class="fas fa-expand-arrows-alt fa-fw"></i></a>
+  
+</header>
+
+    <div class='content pure'>
+      <ul class="entry">
+        
+          <li><a class="flat-box" title="/categories/Coding/" href="/categories/Coding/"><div class='name'>Coding</div><div class='badge'>(49)</div></a></li>
+        
+          <li><a class="flat-box child" title="/categories/Coding/Arthas/" href="/categories/Coding/Arthas/"><div class='name'>Arthas</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box child" title="/categories/Coding/DevOps/" href="/categories/Coding/DevOps/"><div class='name'>DevOps</div><div class='badge'>(7)</div></a></li>
+        
+          <li><a class="flat-box child" title="/categories/Coding/Docker/" href="/categories/Coding/Docker/"><div class='name'>Docker</div><div class='badge'>(5)</div></a></li>
+        
+          <li><a class="flat-box child" title="/categories/Coding/Java-Concurrency/" href="/categories/Coding/Java-Concurrency/"><div class='name'>Java-Concurrency</div><div class='badge'>(8)</div></a></li>
+        
+          <li><a class="flat-box child" title="/categories/Coding/Java/" href="/categories/Coding/Java/"><div class='name'>Java</div><div class='badge'>(7)</div></a></li>
+        
+          <li><a class="flat-box child" title="/categories/Coding/Linux/" href="/categories/Coding/Linux/"><div class='name'>Linux</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box child" title="/categories/Coding/Mybatis/" href="/categories/Coding/Mybatis/"><div class='name'>Mybatis</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box child" title="/categories/Coding/Others/" href="/categories/Coding/Others/"><div class='name'>Others</div><div class='badge'>(6)</div></a></li>
+        
+          <li><a class="flat-box child" title="/categories/Coding/Spring-Boot/" href="/categories/Coding/Spring-Boot/"><div class='name'>Spring-Boot</div><div class='badge'>(10)</div></a></li>
+        
+          <li><a class="flat-box child" title="/categories/Coding/Spring/" href="/categories/Coding/Spring/"><div class='name'>Spring</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box child" title="/categories/Coding/%E5%AE%89%E5%85%A8-%E5%8D%8F%E8%AE%AE-%E8%A7%84%E8%8C%83/" href="/categories/Coding/%E5%AE%89%E5%85%A8-%E5%8D%8F%E8%AE%AE-%E8%A7%84%E8%8C%83/"><div class='name'>安全-协议-规范</div><div class='badge'>(2)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/Life/" href="/categories/Life/"><div class='name'>Life</div><div class='badge'>(3)</div></a></li>
+        
+          <li><a class="flat-box child" title="/categories/Life/English/" href="/categories/Life/English/"><div class='name'>English</div><div class='badge'>(2)</div></a></li>
+        
+          <li><a class="flat-box child" title="/categories/Life/%E6%8A%95%E8%B5%84%E7%90%86%E8%B4%A2%E5%AD%A6%E4%B9%A0/" href="/categories/Life/%E6%8A%95%E8%B5%84%E7%90%86%E8%B4%A2%E5%AD%A6%E4%B9%A0/"><div class='name'>投资理财学习</div><div class='badge'>(1)</div></a></li>
+        
+      </ul>
+    </div>
+  </section>
+
+
+            
+          
+        
+          
+          
+        
+          
+          
+        
+      
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+            
+              
+  <section class='widget tagcloud'>
+    
+<header class='pure'>
+  <div><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;热门标签</div>
+  
+    <a class="rightBtn rotate90"
+    
+      rel="nofollow"
+    
+    
+      target="blank"
+    
+    href="/blog/tags/"
+    title="blog/tags/">
+    <i class="fas fa-expand-arrows-alt fa-fw"></i></a>
+  
+</header>
+
+    <div class='content pure'>
+      <a href="/tags/AOP/" style="font-size: 14px; color: #999">AOP</a> <a href="/tags/ArrayList/" style="font-size: 14px; color: #999">ArrayList</a> <a href="/tags/Arthas/" style="font-size: 14px; color: #999">Arthas</a> <a href="/tags/Chrome/" style="font-size: 14px; color: #999">Chrome</a> <a href="/tags/ClassLoader/" style="font-size: 14px; color: #999">ClassLoader</a> <a href="/tags/Docker/" style="font-size: 24px; color: #555">Docker</a> <a href="/tags/EasyExcel/" style="font-size: 14px; color: #999">EasyExcel</a> <a href="/tags/English/" style="font-size: 17.33px; color: #828282">English</a> <a href="/tags/Excel/" style="font-size: 14px; color: #999">Excel</a> <a href="/tags/Exception/" style="font-size: 14px; color: #999">Exception</a> <a href="/tags/Git/" style="font-size: 20.67px; color: #6c6c6c">Git</a> <a href="/tags/GitHub-Pages/" style="font-size: 14px; color: #999">GitHub Pages</a> <a href="/tags/HTTP/" style="font-size: 14px; color: #999">HTTP</a> <a href="/tags/Happens-before/" style="font-size: 14px; color: #999">Happens-before</a> <a href="/tags/Hybris/" style="font-size: 14px; color: #999">Hybris</a> <a href="/tags/IO/" style="font-size: 14px; color: #999">IO</a> <a href="/tags/JVM/" style="font-size: 14px; color: #999">JVM</a> <a href="/tags/Jenkins/" style="font-size: 17.33px; color: #828282">Jenkins</a> <a href="/tags/Jrebel/" style="font-size: 14px; color: #999">Jrebel</a> <a href="/tags/Json/" style="font-size: 17.33px; color: #828282">Json</a> <a href="/tags/Linux/" style="font-size: 14px; color: #999">Linux</a> <a href="/tags/Maven/" style="font-size: 17.33px; color: #828282">Maven</a> <a href="/tags/MyBatis/" style="font-size: 14px; color: #999">MyBatis</a> <a href="/tags/Node/" style="font-size: 14px; color: #999">Node</a> <a href="/tags/OAuth2-0/" style="font-size: 14px; color: #999">OAuth2.0</a> <a href="/tags/POI/" style="font-size: 14px; color: #999">POI</a> <a href="/tags/PostMan/" style="font-size: 14px; color: #999">PostMan</a> <a href="/tags/RESTful/" style="font-size: 14px; color: #999">RESTful</a> <a href="/tags/SSL/" style="font-size: 14px; color: #999">SSL</a> <a href="/tags/Shiro/" style="font-size: 14px; color: #999">Shiro</a> <a href="/tags/Spring/" style="font-size: 17.33px; color: #828282">Spring</a> <a href="/tags/Spring-Boot/" style="font-size: 24px; color: #555">Spring Boot</a> <a href="/tags/SpringMVC/" style="font-size: 14px; color: #999">SpringMVC</a> <a href="/tags/Springboot/" style="font-size: 14px; color: #999">Springboot</a> <a href="/tags/Starter/" style="font-size: 14px; color: #999">Starter</a> <a href="/tags/Windows/" style="font-size: 14px; color: #999">Windows</a> <a href="/tags/annotation/" style="font-size: 14px; color: #999">annotation</a> <a href="/tags/thread/" style="font-size: 14px; color: #999">thread</a> <a href="/tags/volatile/" style="font-size: 14px; color: #999">volatile</a> <a href="/tags/%E4%BA%8C%E5%8F%89%E6%9F%A5%E6%89%BE%E6%A0%91/" style="font-size: 14px; color: #999">二叉查找树</a> <a href="/tags/%E4%BA%92%E6%96%A5/" style="font-size: 14px; color: #999">互斥</a> <a href="/tags/%E5%88%86%E5%B7%A5/" style="font-size: 14px; color: #999">分工</a> <a href="/tags/%E5%8E%9F%E5%AD%90%E6%80%A7/" style="font-size: 14px; color: #999">原子性</a> <a href="/tags/%E5%8F%AF%E8%A7%81%E6%80%A7/" style="font-size: 14px; color: #999">可见性</a> <a href="/tags/%E5%90%8C%E6%AD%A5/" style="font-size: 14px; color: #999">同步</a> <a href="/tags/%E5%A4%9A%E6%80%81/" style="font-size: 14px; color: #999">多态</a> <a href="/tags/%E5%B9%B6%E5%8F%91/" style="font-size: 14px; color: #999">并发</a> <a href="/tags/%E6%8C%87%E6%95%B0%E5%9F%BA%E9%87%91/" style="font-size: 14px; color: #999">指数基金</a> <a href="/tags/%E6%9C%89%E5%BA%8F%E6%80%A7/" style="font-size: 14px; color: #999">有序性</a> <a href="/tags/%E6%AD%BB%E9%94%81/" style="font-size: 14px; color: #999">死锁</a> <a href="/tags/%E6%B3%A8%E8%A7%A3/" style="font-size: 17.33px; color: #828282">注解</a> <a href="/tags/%E7%83%AD%E9%83%A8%E7%BD%B2/" style="font-size: 14px; color: #999">热部署</a> <a href="/tags/%E7%BA%A2%E9%BB%91%E6%A0%91/" style="font-size: 14px; color: #999">红黑树</a> <a href="/tags/%E8%B4%B9%E7%94%A8/" style="font-size: 14px; color: #999">费用</a> <a href="/tags/%E9%94%81/" style="font-size: 17.33px; color: #828282">锁</a> <a href="/tags/%E9%94%81%E7%B2%92%E5%BA%A6/" style="font-size: 14px; color: #999">锁粒度</a>
+    </div>
+  </section>
+
+
+            
+          
+        
+          
+          
+        
+      
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+            
+              
+    <section class='widget advertise'>
+        
+<header class='pure'>
+  <div><i class="fas fa-gift fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;广告</div>
+  
+</header>
+
+        <div class='content pure'>
+            <center>这是一个神奇的广告</center>
+            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+            <!-- 正方形卡片 -->
+            <ins class="adsbygoogle"
+                style="display:block"
+                data-ad-client="ca-pub-1774278264048334"
+                data-ad-slot="1492300051"
+                data-ad-format="auto"
+                data-full-width-responsive="true"></ins>
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+    </section>
+
+      
+            
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+      
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+      
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+      
+    
+
+  
+</aside>
+
+<footer id="footer" class="clearfix">
+  
+  
+  <br>
+  Copyright <i class="far fa-copyright"></i>  2018-2019 
+  <a href="https://www.itrhx.com/" target="_blank"> Tanθ's Blog </a>
+  &nbsp;&nbsp;|&nbsp;&nbsp;<img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgicp.png">
+  <a href="http://www.beian.miit.gov.cn/" target="_blank">辽ICP备19017651号-1</a>
+
+  &nbsp;&nbsp;|&nbsp;&nbsp;  
+  
+    &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+        class="white-color">130k</span>&nbsp;字
+    
+
+  &nbsp;&nbsp;|&nbsp;&nbsp;  
+  
+    <span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+    <script>
+        var now = new Date(); 
+        function createtime() { 
+            var grt= new Date("05/22/2019 09:09:06");//在此处修改你的建站时间
+            now.setTime(now.getTime()+250); 
+            days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+            hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+            if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+            mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+            seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+            snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+            document.getElementById("timeDate").innerHTML = "本站已运行 "+dnum+" 天 "; 
+            document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+        } 
+    setInterval("createtime()",250);
+    </script>
+    
+  &nbsp;&nbsp;|&nbsp;&nbsp;<a href="https://dayarch.top/sitemap.xml" target="_blank">站点地图</a>
+  &nbsp;&nbsp;|&nbsp;&nbsp;<a href="https://tongji.baidu.com/web/welcome/ico?s=f553477a3dc5ab3837e9a4dead4e0bc7" target="_blank">站长统计</a>
+  
+  
+
+
+
+
+  <div>
+    <!-- 本站使用
+    <a href="https://xaoxuu.com/wiki/material-x/" target="_blank" class="codename">Material X</a>
+    作为主题 -->
+    
+      <!-- ， -->
+      总访问量为
+      <span id="busuanzi_value_site_pv"><i class="fas fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span>
+      次
+    
+    。
+  </div>
+  <div><p>博客内容遵循 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
+</div>
+  <div class="github-badge">
+      <a style="color: #fff" rel="license" href="https://hexo.io/" target="_blank" title="由 Hexo 强力驱动">
+      <span class="badge-subject">Powered</span><span class="badge-value bg-blue">Hexo</span></a>
+    </div>
+</footer>
+<script>setLoadingBarProgress(80);</script>
+
+
+<script>
+    (function(){
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        }
+        else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+   
+
+    <script data-ad-client="ca-pub-1774278264048334" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+
+
+      <script>setLoadingBarProgress(60);</script>
+    </div>
+    <a class="s-top fas fa-arrow-up fa-fw" href='javascript:void(0)'></a>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+
+  <script>
+    var GOOGLE_CUSTOM_SEARCH_API_KEY = "";
+    var GOOGLE_CUSTOM_SEARCH_ENGINE_ID = "";
+    var ALGOLIA_API_KEY = "";
+    var ALGOLIA_APP_ID = "";
+    var ALGOLIA_INDEX_NAME = "";
+    var AZURE_SERVICE_NAME = "";
+    var AZURE_INDEX_NAME = "";
+    var AZURE_QUERY_KEY = "";
+    var BAIDU_API_ID = "";
+    var SEARCH_SERVICE = "hexo" || "hexo";
+    var ROOT = "/"||"/";
+    if(!ROOT.endsWith('/'))ROOT += '/';
+  </script>
+
+<script src="//instant.page/1.2.2" type="module" integrity="sha384-2xV8M5griQmzyiY3CDqh1dn4z3llDVqZDqzjzcY+jCBCk/a5fXJmuZ/40JJAPeoU"></script>
+
+
+  <script async src="https://cdn.jsdelivr.net/npm/scrollreveal@4.0.5/dist/scrollreveal.min.js"></script>
+  <script type="text/javascript">
+    $(function() {
+      const $reveal = $('.reveal');
+      if ($reveal.length === 0) return;
+      const sr = ScrollReveal({ distance: 0 });
+      sr.reveal('.reveal');
+    });
+  </script>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/node-waves@0.7.6/dist/waves.min.js"></script>
+  <script type="text/javascript">
+    $(function() {
+      Waves.attach('.flat-btn', ['waves-button']);
+      Waves.attach('.float-btn', ['waves-button', 'waves-float']);
+      Waves.attach('.float-btn-light', ['waves-button', 'waves-float', 'waves-light']);
+      Waves.attach('.flat-box', ['waves-block']);
+      Waves.attach('.float-box', ['waves-block', 'waves-float']);
+      Waves.attach('.waves-image');
+      Waves.init();
+    });
+  </script>
+
+
+  <script async src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-busuanzi@2.3/js/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+
+
+
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+  <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+  <script type="text/javascript">
+    var gitalk = new Gitalk({
+      clientID: "57bd3ce366ba25a73a1a",
+      clientSecret: "bab4a248180b9ac85b16fb44bf4ba171648f9cab",
+      repo: "myBlogTalk",
+      owner: "FraserYu",
+      admin: "FraserYu",
+      
+        id: location.pathname,      // Ensure uniqueness and length less than 50
+      
+      distractionFreeMode: false  // Facebook-like distraction free mode
+    });
+    gitalk.render('gitalk-container');
+  </script>
+
+
+
+
+
+  <script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/app.js"></script>
+
+
+  <script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/search.js"></script>
+
+
+
+
+<!-- 复制 -->
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  let COPY_SUCCESS = "复制成功";
+  let COPY_FAILURE = "复制失败";
+  /*页面载入完成后，创建复制按钮*/
+  !function (e, t, a) {
+    /* code */
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '  <i class="fa fa-copy"></i><span>复制</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+
+      clipboard.on('success', function(e) {
+        //您可以加入成功提示
+        console.info('Action:', e.action);
+        console.info('Text:', e.text);
+        console.info('Trigger:', e.trigger);
+        success_prompt(COPY_SUCCESS);
+        e.clearSelection();
+      });
+      clipboard.on('error', function(e) {
+        //您可以加入失败提示
+        console.error('Action:', e.action);
+        console.error('Trigger:', e.trigger);
+        fail_prompt(COPY_FAILURE);
+      });
+    }
+    initCopyCode();
+
+  }(window, document);
+
+  /**
+   * 弹出式提示框，默认1.5秒自动消失
+   * @param message 提示信息
+   * @param style 提示样式，有alert-success、alert-danger、alert-warning、alert-info
+   * @param time 消失时间
+   */
+  var prompt = function (message, style, time)
+  {
+      style = (style === undefined) ? 'alert-success' : style;
+      time = (time === undefined) ? 1500 : time*1000;
+      $('<div>')
+          .appendTo('body')
+          .addClass('alert ' + style)
+          .html(message)
+          .show()
+          .delay(time)
+          .fadeOut();
+  };
+
+  // 成功提示
+  var success_prompt = function(message, time)
+  {
+      prompt(message, 'alert-success', time);
+  };
+
+  // 失败提示
+  var fail_prompt = function(message, time)
+  {
+      prompt(message, 'alert-danger', time);
+  };
+
+  // 提醒
+  var warning_prompt = function(message, time)
+  {
+      prompt(message, 'alert-warning', time);
+  };
+
+  // 信息提示
+  var info_prompt = function(message, time)
+  {
+      prompt(message, 'alert-info', time);
+  };
+
+</script>
+
+
+<!-- fancybox -->
+<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+<script>
+  let LAZY_LOAD_IMAGE = "";
+  $(".article-entry").find("fancybox").find("img").each(function () {
+      var element = document.createElement("a");
+      $(element).attr("data-fancybox", "gallery");
+      $(element).attr("href", $(this).attr("src"));
+      /* 图片采用懒加载处理时,
+       * 一般图片标签内会有个属性名来存放图片的真实地址，比如 data-original,
+       * 那么此处将原本的属性名src替换为对应属性名data-original,
+       * 修改如下
+       */
+       if (LAZY_LOAD_IMAGE) {
+         $(element).attr("href", $(this).attr("data-original"));
+       }
+      $(this).wrap(element);
+  });
+</script>
+
+
+
+
+
+  <script>setLoadingBarProgress(100);</script>
+
+<canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+<script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+<script type="text/javascript" src="/js/fireworks.js"></script>
+
+  <!--动态线条背景-->
+<!-- <script type="text/javascript" color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script> -->
+<!-- 样式二（飘动的彩带） -->
+<script src="https://g.joyinshare.com/hc/piao.js" type="text/javascript"></script>
+<!-- 样式一（鼠标点击更换样式） -->
+<!-- <script src="https://g.joyinshare.com/hc/ribbon.min.js" type="text/javascript"></script> -->
+</body>
+</html>
