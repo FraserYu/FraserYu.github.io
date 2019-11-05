@@ -2,9 +2,23 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://dayarch.top/p/spring-boot-starter-custom.html</loc>
+    
+    <lastmod>2019-11-05T11:30:31.912Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://dayarch.top/p/jdk12-collectors-teeing-api-usage.html</loc>
     
-    <lastmod>2019-11-05T08:49:10.882Z</lastmod>
+    <lastmod>2019-11-05T09:05:49.453Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://dayarch.top/p/redblack-tree.html</loc>
+    
+    <lastmod>2019-11-05T09:05:24.489Z</lastmod>
     
   </url>
   
@@ -33,13 +47,6 @@
     <loc>https://dayarch.top/p/java-concurrency-dead-lock.html</loc>
     
     <lastmod>2019-11-03T04:53:24.208Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://dayarch.top/p/redblack-tree.html</loc>
-    
-    <lastmod>2019-11-03T03:43:27.011Z</lastmod>
     
   </url>
   
@@ -96,13 +103,6 @@
     <loc>https://dayarch.top/p/easyexcel-read.html</loc>
     
     <lastmod>2019-11-03T02:56:56.893Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://dayarch.top/p/spring-boot-starter-custom.html</loc>
-    
-    <lastmod>2019-11-03T02:51:42.736Z</lastmod>
     
   </url>
   

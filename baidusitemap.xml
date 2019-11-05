@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://dayarch.top//p/spring-boot-starter-custom.html</loc>
+    <lastmod>2019-11-05</lastmod>
+  </url>  <url>
     <loc>https://dayarch.top//p/jdk12-collectors-teeing-api-usage.html</loc>
     <lastmod>2019-11-05</lastmod>
   </url>  <url>
-    <loc>https://dayarch.top//p/java-concurrency-dead-lock.html</loc>
-    <lastmod>2019-11-03</lastmod>
-  </url>  <url>
     <loc>https://dayarch.top//p/redblack-tree.html</loc>
+    <lastmod>2019-11-05</lastmod>
+  </url>  <url>
+    <loc>https://dayarch.top//p/java-concurrency-dead-lock.html</loc>
     <lastmod>2019-11-03</lastmod>
   </url>  <url>
     <loc>https://dayarch.top//p/maven-dependency-optional-transitive.html</loc>
@@ -32,9 +35,6 @@
     <lastmod>2019-11-03</lastmod>
   </url>  <url>
     <loc>https://dayarch.top//p/easyexcel-read.html</loc>
-    <lastmod>2019-11-03</lastmod>
-  </url>  <url>
-    <loc>https://dayarch.top//p/spring-boot-starter-custom.html</loc>
     <lastmod>2019-11-03</lastmod>
   </url>  <url>
     <loc>https://dayarch.top//p/java-parents-delegation-model.html</loc>

@@ -6,8 +6,10 @@
   
   <title>Spring Boot 自定义starter 全面教程 | 日拱一兵</title>
   
+  <meta name="keywords" content="后端博客,Java,Spring,SpringBoot,Mybatis,RabbitMQ,ElasticSearch,JPA,Docker,DevOps">
   
-  <meta name="description" content="技术有时很枯燥，需要用有趣的方式解读.">
+  
+  <meta name="description" content="Java后端技术博客，用有趣的方式解读技术">
   
 
   
@@ -107,8 +109,6 @@
         <li>
           <a class="nav home" href="/"
             
-              rel="nofollow"
-            
             
             id="home">
             <i class='fas fa-home fa-fw'></i>&nbsp;主页
@@ -117,8 +117,6 @@
       
         <li>
           <a class="nav home" href="/categories/"
-            
-              rel="nofollow"
             
             
             id="categories">
@@ -129,8 +127,6 @@
         <li>
           <a class="nav home" href="/tags/"
             
-              rel="nofollow"
-            
             
             id="tags">
             <i class='fas fa-tags fa-fw'></i>&nbsp;标签
@@ -139,8 +135,6 @@
       
         <li>
           <a class="nav home" href="/archives/"
-            
-              rel="nofollow"
             
             
             id="archives">
@@ -191,8 +185,6 @@
   						<li>
 								<a class="nav flat-box" href="/"
                   
-                    rel="nofollow"
-                  
                   
                   id="home">
 									<i class='fas fa-home fa-fw'></i>&nbsp;主页
@@ -201,8 +193,6 @@
       			
   						<li>
 								<a class="nav flat-box" href="/categories/"
-                  
-                    rel="nofollow"
                   
                   
                   id="categories">
@@ -213,8 +203,6 @@
   						<li>
 								<a class="nav flat-box" href="/tags/"
                   
-                    rel="nofollow"
-                  
                   
                   id="tags">
 									<i class='fas fa-tags fa-fw'></i>&nbsp;标签
@@ -223,8 +211,6 @@
       			
   						<li>
 								<a class="nav flat-box" href="/archives/"
-                  
-                    rel="nofollow"
                   
                   
                   id="archives">
@@ -469,7 +455,7 @@
       <div class="article-entry" itemprop="articleBody">
         <h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>我们每次构建一个 Spring 应用程序时，我们都不希望从头开始实现具有「横切关注点」的内容；相反，我们希望一次性实现这些功能，并根据需要将它们包含到任何我们要构建的应用程序中</p>
 <blockquote>
-<p>####横切关注点<br> 横切关注点: 指的是一些具有横越多个模块的行为 (来自维基百科的介绍)<br> <strong>说白了就是多个项目或模块都可以用到的内容，比如一个 SDK</strong></p>
+<h4 id="横切关注点"><a href="#横切关注点" class="headerlink" title="横切关注点"></a>横切关注点</h4><p> 横切关注点: 指的是一些具有横越多个模块的行为 (来自维基百科的介绍)<br> <strong>说白了就是多个项目或模块都可以用到的内容，比如一个 SDK</strong></p>
 </blockquote>
 <p>在Spring Boot中，用于表示提供这种横切关注点的模块的术语是 <strong>starter</strong>，通过依赖 starter 可以轻松使用其包含的一些功能特性，<strong>无论你的工作中是否会构建自己的 starter，你都要具有构建 「starter」的思想</strong>，本文将结合 Spring Boot 官方标准构建一个简单的 starter</p>
 <h2 id="自定义-starter"><a href="#自定义-starter" class="headerlink" title="自定义 starter"></a>自定义 starter</h2><p>在我们深入了解如何自定义 starter 之前，为了更好的理解我们每一步在干什么，以及 starter 是如何起作用的，我们先从宏观角度来看 starter 的结构组成到底是什么样的</p>
@@ -618,10 +604,10 @@
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2019-11-03T10:51:42+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2019-11-05T19:30:31+08:00">
   <a class='notlink'>
     <i class="fas fa-clock" aria-hidden="true"></i>
-    <p>更新于 2019年11月3日</p>
+    <p>更新于 2019年11月5日</p>
   </a>
 </div>
 
@@ -646,11 +632,11 @@
           href="http://connect.qq.com/widget/shareqq/index.html?url=https://dayarch.top/p/spring-boot-starter-custom.html&title=Spring Boot 自定义starter 全面教程 | 日拱一兵&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=写在前面
 我们每次构建一个 Spring 应用程序时，我们都不希望从头开始实现具有「横切关注点」的内容；相反，我们希望一次性实现这些功能，并根据需要将它们包含到任何我们要构建的应用程序中
 
-####横切关注点
-横切关注点: 指的是一些具有横越多个模块的行为 (来自维基百科的介绍)
+横切关注点
+ 横切关注点: 指的是一些具有横越多个模块的行为 (来自维基百科的介绍)
 说白了就是多个项目或模块都可以用到的内容，比如一个 SDK
 
-在Spring Boot中，用于表示提供这种横切关注点的模块的术语是 starter，通过依赖 starter 可以轻松使用其包含的一些功能特性，无论你的工作中是否会构建自己的 starter，你都要具有构建 「starter」的思想，本文将结合 Spri"
+在Spring Boot中，用于表示提供这种横切关注点的模块的术语是 starter，通过依赖 starter 可以轻松使用其包含的一些功能特性，无论你的工作中是否会构建自己的 starter，你都要具有构建 「starter」的思想，本文将结合 Spring "
           
           >
           
@@ -665,11 +651,11 @@
           href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://dayarch.top/p/spring-boot-starter-custom.html&title=Spring Boot 自定义starter 全面教程 | 日拱一兵&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=写在前面
 我们每次构建一个 Spring 应用程序时，我们都不希望从头开始实现具有「横切关注点」的内容；相反，我们希望一次性实现这些功能，并根据需要将它们包含到任何我们要构建的应用程序中
 
-####横切关注点
-横切关注点: 指的是一些具有横越多个模块的行为 (来自维基百科的介绍)
+横切关注点
+ 横切关注点: 指的是一些具有横越多个模块的行为 (来自维基百科的介绍)
 说白了就是多个项目或模块都可以用到的内容，比如一个 SDK
 
-在Spring Boot中，用于表示提供这种横切关注点的模块的术语是 starter，通过依赖 starter 可以轻松使用其包含的一些功能特性，无论你的工作中是否会构建自己的 starter，你都要具有构建 「starter」的思想，本文将结合 Spri"
+在Spring Boot中，用于表示提供这种横切关注点的模块的术语是 starter，通过依赖 starter 可以轻松使用其包含的一些功能特性，无论你的工作中是否会构建自己的 starter，你都要具有构建 「starter」的思想，本文将结合 Spring "
           
           >
           
@@ -684,11 +670,11 @@
           href="http://service.weibo.com/share/share.php?url=https://dayarch.top/p/spring-boot-starter-custom.html&title=Spring Boot 自定义starter 全面教程 | 日拱一兵&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=写在前面
 我们每次构建一个 Spring 应用程序时，我们都不希望从头开始实现具有「横切关注点」的内容；相反，我们希望一次性实现这些功能，并根据需要将它们包含到任何我们要构建的应用程序中
 
-####横切关注点
-横切关注点: 指的是一些具有横越多个模块的行为 (来自维基百科的介绍)
+横切关注点
+ 横切关注点: 指的是一些具有横越多个模块的行为 (来自维基百科的介绍)
 说白了就是多个项目或模块都可以用到的内容，比如一个 SDK
 
-在Spring Boot中，用于表示提供这种横切关注点的模块的术语是 starter，通过依赖 starter 可以轻松使用其包含的一些功能特性，无论你的工作中是否会构建自己的 starter，你都要具有构建 「starter」的思想，本文将结合 Spri"
+在Spring Boot中，用于表示提供这种横切关注点的模块的术语是 starter，通过依赖 starter 可以轻松使用其包含的一些功能特性，无论你的工作中是否会构建自己的 starter，你都要具有构建 「starter」的思想，本文将结合 Spring "
           
           >
           
@@ -882,7 +868,7 @@
 </header>
 
     <div class='content pure'>
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#写在前面"><span class="toc-text">写在前面</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#自定义-starter"><span class="toc-text">自定义 starter</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Auto-Configure-Module"><span class="toc-text">Auto-Configure Module</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Starter-Module"><span class="toc-text">Starter Module</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#命名"><span class="toc-text">命名</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Parent-Module-创建"><span class="toc-text">Parent Module 创建</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Auto-Configure-Module-构建"><span class="toc-text">Auto-Configure Module 构建</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#条件配置"><span class="toc-text">条件配置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#配置属性管理"><span class="toc-text">配置属性管理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#提升启动时间"><span class="toc-text">提升启动时间</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Starter-Module-构建"><span class="toc-text">Starter Module 构建</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#创建-Sample-Module"><span class="toc-text">创建 Sample Module</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#编写测试类"><span class="toc-text">编写测试类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-text">总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#知识点说明"><span class="toc-text">知识点说明</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Dependency-optinal"><span class="toc-text">Dependency optinal</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#spring-factories"><span class="toc-text">spring.factories</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#实际案例"><span class="toc-text">实际案例</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#灵魂追问"><span class="toc-text">灵魂追问</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#提高效率工具"><span class="toc-text">提高效率工具</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#推荐阅读"><span class="toc-text">推荐阅读</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#欢迎持续关注公众号：「日拱一兵」"><span class="toc-text">欢迎持续关注公众号：「日拱一兵」</span></a></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#写在前面"><span class="toc-text">写在前面</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#横切关注点"><span class="toc-text">横切关注点</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#自定义-starter"><span class="toc-text">自定义 starter</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Auto-Configure-Module"><span class="toc-text">Auto-Configure Module</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Starter-Module"><span class="toc-text">Starter Module</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#命名"><span class="toc-text">命名</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Parent-Module-创建"><span class="toc-text">Parent Module 创建</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Auto-Configure-Module-构建"><span class="toc-text">Auto-Configure Module 构建</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#条件配置"><span class="toc-text">条件配置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#配置属性管理"><span class="toc-text">配置属性管理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#提升启动时间"><span class="toc-text">提升启动时间</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Starter-Module-构建"><span class="toc-text">Starter Module 构建</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#创建-Sample-Module"><span class="toc-text">创建 Sample Module</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#编写测试类"><span class="toc-text">编写测试类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-text">总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#知识点说明"><span class="toc-text">知识点说明</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Dependency-optinal"><span class="toc-text">Dependency optinal</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#spring-factories"><span class="toc-text">spring.factories</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#实际案例"><span class="toc-text">实际案例</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#灵魂追问"><span class="toc-text">灵魂追问</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#提高效率工具"><span class="toc-text">提高效率工具</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#推荐阅读"><span class="toc-text">推荐阅读</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#欢迎持续关注公众号：「日拱一兵」"><span class="toc-text">欢迎持续关注公众号：「日拱一兵」</span></a></li></ol></li></ol>
     </div>
   </section>
 
@@ -947,8 +933,6 @@
       
         <li><a class="flat-box" title="/archives/" href="/archives/"
           
-            rel="nofollow"
-          
           
           id="archives">
           
@@ -958,8 +942,6 @@
         </a></li>
       
         <li><a class="flat-box" title="/categories/Coding/Java-Concurrency" href="/categories/Coding/Java-Concurrency"
-          
-            rel="nofollow"
           
           
           id="categoriesCodingJava-Concurrency">
@@ -1049,7 +1031,7 @@
   
     <a class="rightBtn rotate90"
     
-      rel="nofollow"
+      rel="external nofollow noopener noreferrer"
     
     
       target="blank"
@@ -1138,7 +1120,7 @@
   
     <a class="rightBtn rotate90"
     
-      rel="nofollow"
+      rel="external nofollow noopener noreferrer"
     
     
       target="blank"
