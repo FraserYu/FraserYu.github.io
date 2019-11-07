@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://dayarch.top/p/java-concurrency-atomic.html</loc>
+    
+    <lastmod>2019-11-07T06:47:16.338Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://dayarch.top/p/java-concurrency-volatile.html</loc>
     
     <lastmod>2019-11-07T06:38:33.111Z</lastmod>
@@ -159,13 +166,6 @@
     <loc>https://dayarch.top/p/redblack-tree.html</loc>
     
     <lastmod>2019-11-07T06:06:38.332Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://dayarch.top/p/java-concurrency-atomic.html</loc>
-    
-    <lastmod>2019-11-07T06:01:02.078Z</lastmod>
     
   </url>
   
