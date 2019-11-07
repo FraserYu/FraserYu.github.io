@@ -1,0 +1,53 @@
+<% if (theme.cover.logo) { %>
+  <img class='logo' src='<%- url_for(theme.cover.logo) %>'/>
+<% } else { %>
+  <h1 class='title'><%- theme.cover.title ? theme.cover.title : config.title %></h1>
+<% } %>
+<% if (theme.search.enable === true) { %>
+  <div class="m_search">
+    <form name="searchform" class="form u-search-form">
+      <input type="text" class="input u-search-input" placeholder="<%- theme.cover.search_placeholder %>" />
+      <i class="icon fas fa-search fa-fw"></i>
+    </form>
+  </div>
+<% } %>
+<div class='menu navgation'>
+  <ul class='h-list'>
+    <% if (theme.cover.features) { %>
+      <% (theme.cover.features || []).forEach(function(value){ %>
+        <li>
+          <a class="nav home" href="<%= url_for(value.url) %>"
+            <% if (value.rel) { %>
+              rel="<%- value.rel %>"
+            <% } %>
+            <% if (value.target) { %>
+              target="<%- value.target %>"
+            <% } %>
+            id="<%= url_for(value.url).replace(/\/|%/g, "")?url_for(value.url).replace(/\/|%/g, ""):"home" %>">
+            <i class='<%= value.icon %> fa-fw'></i>&nbsp;<%= __('navbar.'+value.name) == ('navbar.'+value.name) ? value.name : __('navbar.'+value.name) %>
+          </a>
+        </li>
+      <%})%>
+    <% } %>
+  </ul>
+</div>
+
+<br>
+<div class="description center-align">
+    <% if (theme.subtitle.enable) { %>
+    <span id="typed"></span>
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.9"></script>
+    <script>
+        var typed = new Typed("#typed", {
+            strings: ['<%= theme.subtitle.sub1 %>', '<%= theme.subtitle.sub2 %>'],
+            startDelay: <%= theme.subtitle.startDelay %>,
+            typeSpeed: <%= theme.subtitle.typeSpeed %>,
+            loop: <%= theme.subtitle.loop %>,
+            backSpeed: <%= theme.subtitle.backSpeed %>,
+            showCursor: <%= theme.subtitle.showCursor %>
+        });
+    </script>
+    <% } else { %>
+    <%= config.description %>
+    <% } %>
+</div>
