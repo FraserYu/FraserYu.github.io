@@ -467,7 +467,7 @@
 <p>当我们配置了自己的 MessageConverter， SpringMVC 启动过程就不会调用 <code>addDefaultHttpMessageConverters</code> 方法，且看下面代码 <code>if</code> 条件，这样做也是为了定制化我们自己的 MessageConverter</p>
 </blockquote>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">protected</span> <span class="keyword">final</span> List&lt;HttpMessageConverter&lt;?&gt;&gt; getMessageConverters() &#123;</span><br><span class="line">		<span class="keyword">if</span> (<span class="keyword">this</span>.messageConverters == <span class="keyword">null</span>) &#123;</span><br><span class="line">			<span class="keyword">this</span>.messageConverters = <span class="keyword">new</span> ArrayList&lt;HttpMessageConverter&lt;?&gt;&gt;();</span><br><span class="line">			configureMessageConverters(<span class="keyword">this</span>.messageConverters);</span><br><span class="line">			<span class="keyword">if</span> (<span class="keyword">this</span>.messageConverters.isEmpty()) &#123;</span><br><span class="line">				addDefaultHttpMessageConverters(<span class="keyword">this</span>.messageConverters);</span><br><span class="line">			&#125;</span><br><span class="line">			extendMessageConverters(<span class="keyword">this</span>.messageConverters);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">this</span>.messageConverters;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="类关系图"><a href="#类关系图" class="headerlink" title="类关系图"></a>类关系图</h3><p>在此处仅列出 <code>MappingJackson2HttpMessageConverter</code> 和 <code>StringHttpMessageConverter</code> 两个转换器，我们发现， 前者实现了 <code>GenericHttpMessageConverter</code> 接口, 而后者却没有，留有这个<strong>关键</strong>印象，这是数据流转过程中关键逻辑判断<br><img src="./_image/2019-05-24/2019-05-24-15-41-26.png" alt=""></p>
+<h3 id="类关系图"><a href="#类关系图" class="headerlink" title="类关系图"></a>类关系图</h3><p>在此处仅列出 <code>MappingJackson2HttpMessageConverter</code> 和 <code>StringHttpMessageConverter</code> 两个转换器，我们发现， 前者实现了 <code>GenericHttpMessageConverter</code> 接口, 而后者却没有，留有这个<strong>关键</strong>印象，这是数据流转过程中关键逻辑判断<br><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img2019-05-24-15-41-26.png" alt=""></p>
 <h2 id="数据流转解析"><a href="#数据流转解析" class="headerlink" title="数据流转解析"></a>数据流转解析</h2><p>数据的请求和响应都要经过 <code>DispatcherServlet</code> 类的 <code>doDispatch(HttpServletRequest request, HttpServletResponse response)</code> 方法的处理</p>
 <h3 id="请求过程解析"><a href="#请求过程解析" class="headerlink" title="请求过程解析"></a>请求过程解析</h3><p>看 doDispatch 方法中的关键代码：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 这里的 Adapter 实际上是 RequestMappingHandlerAdapter</span></span><br><span class="line">HandlerAdapter ha = <span class="keyword">this</span>.getHandlerAdapter(mappedHandler.getHandler()); </span><br><span class="line"><span class="keyword">if</span> (!mappedHandler.applyPreHandle(processedRequest, response)) &#123;</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 实际处理的handler</span></span><br><span class="line">mv = ha.handle(processedRequest, response, mappedHandler.getHandler());            mappedHandler.applyPostHandle(processedRequest, response, mv);</span><br></pre></td></tr></table></figure>
@@ -493,20 +493,59 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//对应无法直接返回String类型</span></span><br><span class="line">converters.add(<span class="number">0</span>, <span class="keyword">new</span> MappingJackson2HttpMessageConverter()&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> ObjectMapper <span class="title">getObjectMapper</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.getObjectMapper().setSerializationInclusion(JsonInclude.Include.NON_NULL);</span><br><span class="line"></span><br><span class="line">                <span class="comment">// XSS 脚本过滤</span></span><br><span class="line">        SimpleModule simpleModule = <span class="keyword">new</span> SimpleModule();</span><br><span class="line">        simpleModule.addDeserializer(String.class, <span class="keyword">new</span> StringXssDeserializer());</span><br><span class="line">        <span class="keyword">super</span>.getObjectMapper().registerModule(simpleModule);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">super</span>.getObjectMapper();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h2 id="细节分析"><a href="#细节分析" class="headerlink" title="细节分析"></a>细节分析</h2><p>canRead 和 canWrite 的判断逻辑是什么呢？ 请看下图：</p>
-<p><img src="./_image/2019-05-24/2019-05-24-20-34-47.png" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img2019-05-24-20-34-47.png" alt=""></p>
 <p>客户端 Request Header 中设置好 Content-Type（传入的数据格式）和Accept（接收的数据格式），根据配置好的MessageConverter来判断是否 canRead 或 canWrite，然后决定 response.body 的 Content-Type 的第一要素是对应的request.headers.Accept 属性的值，又叫做 MediaType。如果服务端支持这个 Accept，那么应该按照这个 Accept 来确定返回response.body 对应的格式，同时把 response.headers.Content-Type 设置成自己支持的符合那个 Accept 的 MediaType</p>
-<h2 id="总结与思考"><a href="#总结与思考" class="headerlink" title="总结与思考"></a>总结与思考</h2><p>站在上帝视角看，整个流程可以按照下图进行概括，请求报文先转换成 HttpInputMessage, 然后再通过 HttpMessageConverter 将其转换成 SpringMVC 的 java 对象，反之亦然。<br><img src="./_image/2019-05-24/2019-05-26-10-25-17.png" alt=""><br>将各种常用 HttpMessageConverter 支持的MediaType 和 JavaType 以及对应关系总结在此处：<br>| 类名     |   支持的JavaType   |支持的MediaType      |<br>| :—- | :—- | :—- |<br>| ByteArrayHttpMessageConverter     | byte[]     | application/octet-stream, */*     |<br>| StringHttpMessageConverter     |String      | text/plain, */<em>|<br>| MappingJackson2HttpMessageConverter     |Object      |application/json, application/</em>+json    |<br>| AllEncompassingFormHttpMessageConverter | Map&lt;K, List&lt;?&gt;&gt; | application/x-www-form-urlencoded, multipart/form-data |<br>| SourceHttpMessageConverter | Source | application/xml, text/xml, application/*+xml |</p>
+<h2 id="总结与思考"><a href="#总结与思考" class="headerlink" title="总结与思考"></a>总结与思考</h2><p>站在上帝视角看，整个流程可以按照下图进行概括，请求报文先转换成 HttpInputMessage, 然后再通过 HttpMessageConverter 将其转换成 SpringMVC 的 java 对象，反之亦然。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img2019-05-26-10-25-17.png" alt=""></p>
+<p>将各种常用 HttpMessageConverter 支持的MediaType 和 JavaType 以及对应关系总结在此处：</p>
+<table>
+<thead>
+<tr>
+<th align="left">类名</th>
+<th align="left">支持的JavaType</th>
+<th align="left">支持的MediaType</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">ByteArrayHttpMessageConverter</td>
+<td align="left">byte[]</td>
+<td align="left">application/octet-stream, */*</td>
+</tr>
+<tr>
+<td align="left">StringHttpMessageConverter</td>
+<td align="left">String</td>
+<td align="left">text/plain, */*</td>
+</tr>
+<tr>
+<td align="left">MappingJackson2HttpMessageConverter</td>
+<td align="left">Object</td>
+<td align="left">application/json, application/*+json</td>
+</tr>
+<tr>
+<td align="left">AllEncompassingFormHttpMessageConverter</td>
+<td align="left">Map&lt;K, List&lt;?&gt;&gt;</td>
+<td align="left">application/x-www-form-urlencoded, multipart/form-data</td>
+</tr>
+<tr>
+<td align="left">SourceHttpMessageConverter</td>
+<td align="left">Source</td>
+<td align="left">application/xml, text/xml, application/*+xml</td>
+</tr>
+</tbody></table>
 <p>最后思考这样一个问题：为什么 HttpMessageConverter 在写的过程中，先判断 canWrite 后判断是否有 responseBodyAdvice 的数据封装呢？ 如果先进行 responseBodyAdvice 的数据封装后判断 canWrite 会怎样呢？ </p>
 <h2 id="提高效率工具"><a href="#提高效率工具" class="headerlink" title="提高效率工具"></a>提高效率工具</h2><p>依旧介绍写该文章用到的一些好的工具</p>
-<h3 id="processon"><a href="#processon" class="headerlink" title="processon"></a>processon</h3><p>ProcessOn是一个在线作图工具的聚合平台，它可以在线画流程图、思维导图、UI原型图、UML、网络拓扑图、组织结构图等等，<br>您无需担心下载和更新的问题，不管Mac还是Windows，一个浏览器就可以随时随地的发挥创意，规划工作，同时您可以把作品分享给团队成员或好友，无论何时何地大家都可以对作品进行编辑、阅读和评论<br><img src="./_image/2019-05-24/2019-05-26-10-40-06.jpg" alt=""></p>
+<h3 id="processon"><a href="#processon" class="headerlink" title="processon"></a>processon</h3><p>ProcessOn是一个在线作图工具的聚合平台，它可以在线画流程图、思维导图、UI原型图、UML、网络拓扑图、组织结构图等等，<br>您无需担心下载和更新的问题，不管Mac还是Windows，一个浏览器就可以随时随地的发挥创意，规划工作，同时您可以把作品分享给团队成员或好友，无论何时何地大家都可以对作品进行编辑、阅读和评论</p>
+<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img2019-05-26-10-40-06.jpg" alt=""></p>
 <h3 id="SequenceDiagram"><a href="#SequenceDiagram" class="headerlink" title="SequenceDiagram"></a>SequenceDiagram</h3><p><a href="https://plugins.jetbrains.com/plugin/8286-sequencediagram" target="_blank" rel="noopener">SequenceDiagram</a> 是 IntelliJ IDEA 的一个插件，有了这个插件，你可以</p>
 <ol>
 <li>生成简单序列图。</li>
 <li>单击图形形状来导航代码。</li>
 <li>从图中删除类。</li>
 <li>将图表导出为图像。</li>
-<li>通过“设置”&gt;“其他设置”&gt;“序列”从图表中排除类<br>方便快速的定位方法和理解类的调用过程<br><img src="./_image/2019-05-24/2019-05-26-10-43-55.jpg" alt=""></li>
+<li>通过“设置”&gt;“其他设置”&gt;“序列”从图表中排除类</li>
 </ol>
+<p>方便快速的定位方法和理解类的调用过程</p>
+<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img2019-05-26-10-43-55.jpg" alt=""></p>
 
       </div>
       
@@ -518,7 +557,7 @@
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2019-11-07T18:21:54+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2019-11-07T18:36:43+08:00">
   <a class='notlink'>
     <i class="fas fa-clock" aria-hidden="true"></i>
     <p>更新于 2019年11月7日</p>
