@@ -1,0 +1,505 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>日拱一兵</title>
+  <icon>https://dayarch.top/icon.png</icon>
+  <subtitle>Quick notes</subtitle>
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="https://dayarch.top/"/>
+  <updated>2019-11-08T09:01:22.470Z</updated>
+  <id>https://dayarch.top/</id>
+  
+  <author>
+    <name>tanθ</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>HttpMessageConverter转换原理解析</title>
+    <link href="https://dayarch.top//p/spring-boot-messageconverter.html"/>
+    <id>https://dayarch.top//p/spring-boot-messageconverter.html</id>
+    <published>2019-11-07T10:15:50.000Z</published>
+    <updated>2019-11-08T09:01:22.470Z</updated>
+    
+    <summary type="html">
+    
+      透彻了解Spring是如何应用MessageConverter来转换请求和响应数据的
+    
+    </summary>
+    
+    
+      <category term="Coding" scheme="https://dayarch.top/categories/Coding/"/>
+    
+      <category term="Spring-Boot" scheme="https://dayarch.top/categories/Coding/Spring-Boot/"/>
+    
+    
+      <category term="Spring Boot" scheme="https://dayarch.top/tags/Spring-Boot/"/>
+    
+      <category term="HTTP" scheme="https://dayarch.top/tags/HTTP/"/>
+    
+      <category term="MessageConverter" scheme="https://dayarch.top/tags/MessageConverter/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Java12 Collectors.teeing 的使用详解</title>
+    <link href="https://dayarch.top//p/jdk12-collectors-teeing-api-usage.html"/>
+    <id>https://dayarch.top//p/jdk12-collectors-teeing-api-usage.html</id>
+    <published>2019-11-05T08:43:32.000Z</published>
+    <updated>2019-11-07T06:36:13.203Z</updated>
+    
+    <summary type="html">
+    
+      Java12新特性teeing的使用，merge合并两个集合的内容，提高了编程效率
+    
+    </summary>
+    
+    
+      <category term="Coding" scheme="https://dayarch.top/categories/Coding/"/>
+    
+      <category term="Java" scheme="https://dayarch.top/categories/Coding/Java/"/>
+    
+    
+      <category term="Java" scheme="https://dayarch.top/tags/Java/"/>
+    
+      <category term="JDK源码" scheme="https://dayarch.top/tags/JDK%E6%BA%90%E7%A0%81/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Java并发死锁解决思路</title>
+    <link href="https://dayarch.top//p/java-concurrency-dead-lock.html"/>
+    <id>https://dayarch.top//p/java-concurrency-dead-lock.html</id>
+    <published>2019-10-18T06:01:20.000Z</published>
+    <updated>2019-11-07T06:36:28.719Z</updated>
+    
+    <summary type="html">
+    
+      避免死锁，只需要打破Coffman所说的三个条件即可
+    
+    </summary>
+    
+    
+      <category term="Coding" scheme="https://dayarch.top/categories/Coding/"/>
+    
+      <category term="Java-Concurrency" scheme="https://dayarch.top/categories/Coding/Java-Concurrency/"/>
+    
+    
+      <category term="死锁" scheme="https://dayarch.top/tags/%E6%AD%BB%E9%94%81/"/>
+    
+      <category term="锁粒度" scheme="https://dayarch.top/tags/%E9%94%81%E7%B2%92%E5%BA%A6/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Spring Boot 自定义starter 全面教程</title>
+    <link href="https://dayarch.top//p/spring-boot-starter-custom.html"/>
+    <id>https://dayarch.top//p/spring-boot-starter-custom.html</id>
+    <published>2019-10-15T11:35:53.000Z</published>
+    <updated>2019-11-07T06:24:19.750Z</updated>
+    
+    <summary type="html">
+    
+      Spring Boot 自定义starter 全面教程，模仿官方标准构建属于自己的starter
+    
+    </summary>
+    
+    
+      <category term="Coding" scheme="https://dayarch.top/categories/Coding/"/>
+    
+      <category term="Spring-Boot" scheme="https://dayarch.top/categories/Coding/Spring-Boot/"/>
+    
+    
+      <category term="Spring Boot" scheme="https://dayarch.top/tags/Spring-Boot/"/>
+    
+      <category term="Starter" scheme="https://dayarch.top/tags/Starter/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Maven 依赖传递性透彻理解</title>
+    <link href="https://dayarch.top//p/maven-dependency-optional-transitive.html"/>
+    <id>https://dayarch.top//p/maven-dependency-optional-transitive.html</id>
+    <published>2019-10-11T07:36:38.000Z</published>
+    <updated>2019-11-07T06:36:38.010Z</updated>
+    
+    <summary type="html">
+    
+      通过图形了解Maven Optional传递性背后的道理
+    
+    </summary>
+    
+    
+      <category term="Coding" scheme="https://dayarch.top/categories/Coding/"/>
+    
+      <category term="DevOps" scheme="https://dayarch.top/categories/Coding/DevOps/"/>
+    
+    
+      <category term="Maven" scheme="https://dayarch.top/tags/Maven/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>锁保护资源，synchronized方法就够了吗</title>
+    <link href="https://dayarch.top//p/java-concurrency-lock-resource.html"/>
+    <id>https://dayarch.top//p/java-concurrency-lock-resource.html</id>
+    <published>2019-10-10T06:17:23.000Z</published>
+    <updated>2019-11-07T06:38:28.104Z</updated>
+    
+    <summary type="html">
+    
+      解决Java并发问题，单纯依靠synchronized并不能解决问题，你的锁能是否能保护到你的资源是关键
+    
+    </summary>
+    
+    
+      <category term="Coding" scheme="https://dayarch.top/categories/Coding/"/>
+    
+      <category term="Java-Concurrency" scheme="https://dayarch.top/categories/Coding/Java-Concurrency/"/>
+    
+    
+      <category term="锁" scheme="https://dayarch.top/tags/%E9%94%81/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>EasyExcel读取Excel实际应用</title>
+    <link href="https://dayarch.top//p/easyexcel-read.html"/>
+    <id>https://dayarch.top//p/easyexcel-read.html</id>
+    <published>2019-10-07T10:32:34.000Z</published>
+    <updated>2019-11-07T05:22:34.502Z</updated>
+    
+    <summary type="html">
+    
+      通过EasyExcel读写Excel，极大的增加了业务灵活性，同时降低了内存溢出的风险
+    
+    </summary>
+    
+    
+      <category term="Coding" scheme="https://dayarch.top/categories/Coding/"/>
+    
+      <category term="Java" scheme="https://dayarch.top/categories/Coding/Java/"/>
+    
+    
+      <category term="EasyExcel" scheme="https://dayarch.top/tags/EasyExcel/"/>
+    
+      <category term="POI" scheme="https://dayarch.top/tags/POI/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>面试volatile关键字时，我们应该具备哪些谈资？</title>
+    <link href="https://dayarch.top//p/java-concurrency-volatile.html"/>
+    <id>https://dayarch.top//p/java-concurrency-volatile.html</id>
+    <published>2019-09-29T12:03:33.000Z</published>
+    <updated>2019-11-07T06:38:33.111Z</updated>
+    
+    <summary type="html">
+    
+      透彻理解 volatile 的内存语义与读-写语义，会为你的面试带来很多谈资，这也会为面试带来更多加分，其实很简单
+    
+    </summary>
+    
+    
+      <category term="Coding" scheme="https://dayarch.top/categories/Coding/"/>
+    
+      <category term="Java-Concurrency" scheme="https://dayarch.top/categories/Coding/Java-Concurrency/"/>
+    
+    
+      <category term="volatile" scheme="https://dayarch.top/tags/volatile/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>解决原子性问题？你首先需要的是宏观理解</title>
+    <link href="https://dayarch.top//p/java-concurrency-atomic.html"/>
+    <id>https://dayarch.top//p/java-concurrency-atomic.html</id>
+    <published>2019-09-19T02:05:31.000Z</published>
+    <updated>2019-11-07T06:47:16.338Z</updated>
+    
+    <summary type="html">
+    
+      Java并发解决原子性问题，原子性问题解决方案
+    
+    </summary>
+    
+    
+      <category term="Coding" scheme="https://dayarch.top/categories/Coding/"/>
+    
+      <category term="Java-Concurrency" scheme="https://dayarch.top/categories/Coding/Java-Concurrency/"/>
+    
+    
+      <category term="锁" scheme="https://dayarch.top/tags/%E9%94%81/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>有序性可见性，Happens-before来搞定</title>
+    <link href="https://dayarch.top//p/java-concurrency-happens-before-rule.html"/>
+    <id>https://dayarch.top//p/java-concurrency-happens-before-rule.html</id>
+    <published>2019-09-12T10:24:22.000Z</published>
+    <updated>2019-11-08T08:51:44.745Z</updated>
+    
+    <summary type="html">
+    
+      Happens-before是解决并发编程可见性有有序性的核心约束，图形与代码展示将不再抽象,让你透过现象看本质
+    
+    </summary>
+    
+    
+      <category term="Coding" scheme="https://dayarch.top/categories/Coding/"/>
+    
+      <category term="Java-Concurrency" scheme="https://dayarch.top/categories/Coding/Java-Concurrency/"/>
+    
+    
+      <category term="Happens-before" scheme="https://dayarch.top/tags/Happens-before/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>并发编程三大问题</title>
+    <link href="https://dayarch.top//p/java-concurrency-three-questions.html"/>
+    <id>https://dayarch.top//p/java-concurrency-three-questions.html</id>
+    <published>2019-09-04T08:31:34.000Z</published>
+    <updated>2019-11-07T06:38:00.676Z</updated>
+    
+    <summary type="html">
+    
+      可见性，原子性和有序性是引发并发诸多问题的根源，解决并发问题，你需要充分理解它们是怎么坑你的
+    
+    </summary>
+    
+    
+      <category term="Coding" scheme="https://dayarch.top/categories/Coding/"/>
+    
+      <category term="Java-Concurrency" scheme="https://dayarch.top/categories/Coding/Java-Concurrency/"/>
+    
+    
+      <category term="可见性" scheme="https://dayarch.top/tags/%E5%8F%AF%E8%A7%81%E6%80%A7/"/>
+    
+      <category term="原子性" scheme="https://dayarch.top/tags/%E5%8E%9F%E5%AD%90%E6%80%A7/"/>
+    
+      <category term="有序性" scheme="https://dayarch.top/tags/%E6%9C%89%E5%BA%8F%E6%80%A7/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Mybatis拦截器实现数据加密与解密</title>
+    <link href="https://dayarch.top//p/mybatis-interceptor-encrypt-decrypt.html"/>
+    <id>https://dayarch.top//p/mybatis-interceptor-encrypt-decrypt.html</id>
+    <published>2019-09-02T00:40:51.000Z</published>
+    <updated>2019-11-07T06:36:44.351Z</updated>
+    
+    <summary type="html">
+    
+      Mybatis拦截器实现数据加密与解密，全局处理需要在数据库中敏感数据
+    
+    </summary>
+    
+    
+      <category term="Coding" scheme="https://dayarch.top/categories/Coding/"/>
+    
+      <category term="Mybatis" scheme="https://dayarch.top/categories/Coding/Mybatis/"/>
+    
+    
+      <category term="MyBatis" scheme="https://dayarch.top/tags/MyBatis/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Java String基础面试</title>
+    <link href="https://dayarch.top//p/java-string-interview.html"/>
+    <id>https://dayarch.top//p/java-string-interview.html</id>
+    <published>2019-08-31T03:57:49.000Z</published>
+    <updated>2019-11-07T06:36:07.777Z</updated>
+    
+    <summary type="html">
+    
+      Java String面试内容基本上都在这里
+    
+    </summary>
+    
+    
+      <category term="Coding" scheme="https://dayarch.top/categories/Coding/"/>
+    
+      <category term="Java" scheme="https://dayarch.top/categories/Coding/Java/"/>
+    
+    
+      <category term="JVM" scheme="https://dayarch.top/tags/JVM/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>并发编程三大核心</title>
+    <link href="https://dayarch.top//p/java-concurrency-core.html"/>
+    <id>https://dayarch.top//p/java-concurrency-core.html</id>
+    <published>2019-08-28T12:29:07.000Z</published>
+    <updated>2019-11-07T06:37:29.576Z</updated>
+    
+    <summary type="html">
+    
+      了解分工，同步与互斥，才能真正了解并发, 学习并发上来就研究SDK源码，就好比没学会走就要跑一样，结果可想而知
+    
+    </summary>
+    
+    
+      <category term="Coding" scheme="https://dayarch.top/categories/Coding/"/>
+    
+      <category term="Java-Concurrency" scheme="https://dayarch.top/categories/Coding/Java-Concurrency/"/>
+    
+    
+      <category term="分工" scheme="https://dayarch.top/tags/%E5%88%86%E5%B7%A5/"/>
+    
+      <category term="同步" scheme="https://dayarch.top/tags/%E5%90%8C%E6%AD%A5/"/>
+    
+      <category term="互斥" scheme="https://dayarch.top/tags/%E4%BA%92%E6%96%A5/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>并发编程之初探</title>
+    <link href="https://dayarch.top//p/java-concurrency-metaphor.html"/>
+    <id>https://dayarch.top//p/java-concurrency-metaphor.html</id>
+    <published>2019-08-25T11:45:08.000Z</published>
+    <updated>2019-11-07T06:38:05.265Z</updated>
+    
+    <summary type="html">
+    
+      如何学习Java并发,起步阶段你需要形象化的理解
+    
+    </summary>
+    
+    
+      <category term="Coding" scheme="https://dayarch.top/categories/Coding/"/>
+    
+      <category term="Java-Concurrency" scheme="https://dayarch.top/categories/Coding/Java-Concurrency/"/>
+    
+    
+      <category term="thread" scheme="https://dayarch.top/tags/thread/"/>
+    
+      <category term="并发" scheme="https://dayarch.top/tags/%E5%B9%B6%E5%8F%91/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>SpringBoot统一异常处理</title>
+    <link href="https://dayarch.top//p/spring-boot-global-exception.html"/>
+    <id>https://dayarch.top//p/spring-boot-global-exception.html</id>
+    <published>2019-08-09T07:13:46.000Z</published>
+    <updated>2019-11-07T06:37:19.144Z</updated>
+    
+    <summary type="html">
+    
+      SpringBoot RESTful API 统一处理异常，让你的代码更清秀，了解其背后原理，加深理解，做到知其然也要知其所以然
+    
+    </summary>
+    
+    
+      <category term="Coding" scheme="https://dayarch.top/categories/Coding/"/>
+    
+      <category term="Spring-Boot" scheme="https://dayarch.top/categories/Coding/Spring-Boot/"/>
+    
+    
+      <category term="Exception" scheme="https://dayarch.top/tags/Exception/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Springboot返回统一JSON数据格式是怎么实现的？</title>
+    <link href="https://dayarch.top//p/spring-boot-global-return.html"/>
+    <id>https://dayarch.top//p/spring-boot-global-return.html</id>
+    <published>2019-08-08T13:22:23.000Z</published>
+    <updated>2019-11-07T06:38:17.571Z</updated>
+    
+    <summary type="html">
+    
+      SpringBoot RESTful API 返回统一数据格式，这是一种非常简单的方式，透过本文，你更能了解这种简单实现方式背后的秘密
+    
+    </summary>
+    
+    
+      <category term="Coding" scheme="https://dayarch.top/categories/Coding/"/>
+    
+      <category term="Spring-Boot" scheme="https://dayarch.top/categories/Coding/Spring-Boot/"/>
+    
+    
+      <category term="Spring Boot" scheme="https://dayarch.top/tags/Spring-Boot/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Shiro—小而美的安全框架</title>
+    <link href="https://dayarch.top//p/shiro-in-practice.html"/>
+    <id>https://dayarch.top//p/shiro-in-practice.html</id>
+    <published>2019-08-05T03:21:40.000Z</published>
+    <updated>2019-11-07T06:36:52.166Z</updated>
+    
+    <summary type="html">
+    
+      Shiro—小而美的安全框架，中小项目的选择，更灵活的定制
+    
+    </summary>
+    
+    
+      <category term="Coding" scheme="https://dayarch.top/categories/Coding/"/>
+    
+      <category term="Spring-Boot" scheme="https://dayarch.top/categories/Coding/Spring-Boot/"/>
+    
+    
+      <category term="Shiro" scheme="https://dayarch.top/tags/Shiro/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>@Conditional注解，Spring Boot 的灵活配置</title>
+    <link href="https://dayarch.top//p/spring-boot-condition-annotation.html"/>
+    <id>https://dayarch.top//p/spring-boot-condition-annotation.html</id>
+    <published>2019-07-31T08:30:07.000Z</published>
+    <updated>2019-11-07T06:35:47.024Z</updated>
+    
+    <summary type="html">
+    
+      灵活使用SpringBoot Conditonal相关注解，增加编程的灵活性
+    
+    </summary>
+    
+    
+      <category term="Coding" scheme="https://dayarch.top/categories/Coding/"/>
+    
+      <category term="Spring-Boot" scheme="https://dayarch.top/categories/Coding/Spring-Boot/"/>
+    
+    
+      <category term="Spring Boot" scheme="https://dayarch.top/tags/Spring-Boot/"/>
+    
+      <category term="注解" scheme="https://dayarch.top/tags/%E6%B3%A8%E8%A7%A3/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>红黑树，史上最强动静图详解</title>
+    <link href="https://dayarch.top//p/redblack-tree.html"/>
+    <id>https://dayarch.top//p/redblack-tree.html</id>
+    <published>2019-07-29T08:42:05.000Z</published>
+    <updated>2019-11-07T06:06:38.332Z</updated>
+    
+    <summary type="html">
+    
+      红黑树解决了二叉树遍历深度的问题，极大的增加了索引效率,Java8 HashMap也从链表转化到了红黑树
+    
+    </summary>
+    
+    
+      <category term="Coding" scheme="https://dayarch.top/categories/Coding/"/>
+    
+      <category term="Java" scheme="https://dayarch.top/categories/Coding/Java/"/>
+    
+    
+      <category term="红黑树" scheme="https://dayarch.top/tags/%E7%BA%A2%E9%BB%91%E6%A0%91/"/>
+    
+      <category term="二叉查找树" scheme="https://dayarch.top/tags/%E4%BA%8C%E5%8F%89%E6%9F%A5%E6%89%BE%E6%A0%91/"/>
+    
+  </entry>
+  
+</feed>
