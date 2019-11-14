@@ -10,6 +10,7 @@ id: spring-boot-messageconverter
 thumbnail: https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgspringbootconverter.png
 description: 透彻了解Spring是如何应用MessageConverter来转换请求和响应数据的
 keywords: MessageConverter,HttpMessageConverter,转换,JSON,Bean
+
 ---
 
 

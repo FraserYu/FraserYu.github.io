@@ -53,6 +53,10 @@ backstretch:
     # - https://img.vim-cn.com/29/91197b04c13f512f734a76d4ac422d89dbe229.jpg
     # - https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img72732.png
     # - https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img756062.png
+    # - https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imglmz52r.jpg
+    # - https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgeod5k8.jpg
+    # - https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgyj91ml.jpg
+    # - https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgzm5p5w.jpg
 
 
 
@@ -63,25 +67,25 @@ cover:
   height: half      # full（默认值）: 首页封面占据整个第一屏幕，其他页面占半个屏幕高度， half: 所有页面都封面都只占半个屏幕高度
   title: Demo
   logo: assets/logo.png    # logo和title只显示一个，若同时设置，则只显示logo
-  # search_placeholder: '搜索'
+  search_placeholder: '世界很大，搜索一下'
   # 主页封面菜单
   features:
     - name: 主页
       icon: fas fa-home
       url: /
-      # rel: nofollow
+      rel: nofollow
     - name: 分类
       icon: fas fa-folder-open
       url: /categories/
-      # rel: nofollow
+      rel: nofollow
     - name: 标签
       icon: fas fa-tags
       url: /tags/
-      # rel: nofollow
+      rel: nofollow
     - name: 归档
       icon: fas fa-archive
       url: /archives/
-      # rel: nofollow
+      rel: nofollow
     # - name: 项目
     #   icon: fas fa-code-branch
     #   url: projects/
@@ -93,10 +97,10 @@ cover:
     #   icon: fas fa-info-circle
     #   url: about/
     #   rel: nofollow
-    # - name: 留言板
-    #   icon: fas fa-comments
-    #   url: comments/
-    #   rel: nofollow      
+    - name: 留言板
+      icon: fas fa-comments
+      url: comments/
+      rel: nofollow      
 
 
 # 桌面端导航栏菜单
@@ -104,19 +108,19 @@ menu_desktop:
     - name: 主页
       icon: fas fa-home
       url: /
-      # rel: nofollow
+      rel: nofollow
     - name: 分类
       icon: fas fa-folder-open
       url: /categories/
-      # rel: nofollow
+      rel: nofollow
     - name: 标签
       icon: fas fa-tags
       url: /tags/
-      # rel: nofollow
+      rel: nofollow
     - name: 归档
       icon: fas fa-archive
       url: /archives/
-      # rel: nofollow
+      rel: nofollow
     # - name: 项目
     #   icon: fas fa-code-branch
     #   url: projects/
@@ -137,6 +141,7 @@ menu_mobile:
   - name: 近期文章
     icon: fas fa-clock
     url: /
+    rel: nofollow
   - name: 分类
     icon: fas fa-folder-open
     url: /categories/
@@ -188,9 +193,11 @@ layout:
 
 # 侧边栏小部件配置
 sidebar:
+  # - widget: related_posts
   - widget: author
     avatar: https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgqrcode.jpg
     jinrishici: 从来没有真正的绝境，只有心灵的迷途
+    social: true
   - widget: toc
   - widget: plain
     icon: fas fa-bullhorn
@@ -207,14 +214,15 @@ sidebar:
       - name: 近期文章
         icon: fas fa-clock
         url: /
+        rel: nofollow
       - name: 文章归档
         icon: fas fa-archive
         url: /archives/
-        # rel: nofollow
+        rel: nofollow
       - name: 并发系列
         icon: fas fa-th-list
         url: /categories/Coding/Java-Concurrency
-        # rel: nofollow
+        rel: nofollow
       - name: 留言看板
         icon: fas fa-comments
         url: /comments/
@@ -248,7 +256,7 @@ sidebar:
       url: blog/categories/
       animate: rotate90
       target: blank
-      # rel: nofollow
+      rel: nofollow
   - widget: tagcloud
     icon: fas fa-tags
     more:
@@ -256,7 +264,7 @@ sidebar:
       url: blog/tags/
       animate: rotate90
       target: blank
-      # rel: nofollow
+      rel: nofollow
   # - widget: related_posts # 需要安装插件  npm i -S hexo-related-popular-posts
   - widget: music
     icon: fas fa-compact-disc
@@ -288,15 +296,19 @@ sidebar:
 
 
 # 社交信息
-# social:
-#   - icon: fas fa-rss
-#     url: atom.xml
-#   - icon: fas fa-envelope
-#     url: mailto:me@xaoxuu.com
-#   - icon: fab fa-github
-#     url: https://github.com/xaoxuu
-#   - icon: fas fa-headphones-alt
-#     url: https://music.163.com/#/user/home?id=63035382
+social:
+  - icon: fas fa-rss
+    url: atom.xml
+    rel: nofollow
+  - icon: fas fa-envelope
+    url: mailto:dayarch@126.com
+    rel: nofollow
+  - icon: fab fa-github
+    url: https://github.com/FraserYu
+    rel: nofollow
+  - icon: fas fa-headphones-alt
+    url: https://music.163.com/#/user/home?id=79299022
+    rel: nofollow
 
 
 # 分享按钮
@@ -320,7 +332,7 @@ share:
 
 
 
-# footer: '页脚文字，支持[markdown](/)'
+footer: '**If you can NOT explain it simply, you do NOT understand it well enough**'
 
 
 ############################### 评论系统 ###############################
