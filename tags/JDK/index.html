@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   
-  <title>Tag: Git | 日拱一兵</title>
+  <title>Tag: JDK | 日拱一兵</title>
   
   <meta name="keywords" content="后端博客,Java,SpringBoot,ElasticSearch">
   
@@ -394,10 +394,6 @@
         
           
         
-          
-        
-          
-        
       
     
     
@@ -411,12 +407,14 @@
   <section class='meta'>
     
     
+      <a title='SDKMAN 统一灵活管理多版本Java' href='/p/multiple-java-management.html'><img class='thumbnail' src='https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgjava.png'></a>
+    
     <div class="meta" id="header-meta">
       
         
   <h2 class="title">
-    <a href="/p/git-ignore.html">
-      Git Ignoring Files
+    <a href="/p/multiple-java-management.html">
+      SDKMAN 统一灵活管理多版本Java
     </a>
   </h2>
 
@@ -446,7 +444,7 @@
             <div class="new-meta-item date">
   <a class='notlink'>
     <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-    <p>2016-10-15</p>
+    <p>2019-11-14</p>
   </a>
 </div>
 
@@ -456,9 +454,9 @@
             
   
   <div class='new-meta-item category'>
-    <a href='/categories/Coding/DevOps/' rel="nofollow">
+    <a href='/categories/Coding/Java/' rel="nofollow">
       <i class="fas fa-folder-open" aria-hidden="true"></i>
-      <p>Coding&nbsp;/&nbsp;DevOps</p>
+      <p>Coding&nbsp;/&nbsp;Java</p>
     </a>
   </div>
 
@@ -481,16 +479,21 @@
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
       前言
-以下内容根据Git Help以及Git Docs 整理翻译
+近两年，Java 版本升级频繁，感觉刚刚掌握 Java8，写本文时，已听到 java14 的消息，无论是尝鲜新特性(Java12 中超级香的一个功能)，还是由于项目升级/兼容需要，我们可能都要面临管理多个 Java 版本的情
 
-Ignoring files(忽略文件)
-有时候会有一些我们不想Git 提交一些文件到GitHub/GitLab，下面有几种方式让我们告诉Git来忽略哪些文件.
+配置单个 Java 环境变量本身没什么技术含量可言，但当需要管理多个 Java 版本，重复配置环境变量显然是非常枯燥的，按照传统的配置方式我们又不能灵活的切换 Java 版本
 
-Create a local .gitignore（创建局部/本地的.gitignore文件）
-如果在local repository（仓库）中创建一个名为.gitignore的文件，在你commit（提交）动作之前，Git 将会读取*.gitignore文件去判断哪些文件或者目录需要忽略掉. 同时这个文件应该push到remote repository, 这样cl
+那要如何轻松管理与使用多个版本 Java？
+
+多版本 Java 管理
+显然我们不是第一个有这种困境的人，我所知道的现有方案有三种:
+
+ 1. Jabba
+ 2. jenv
+ 3. sdkm
       
         <div class="readmore">
-          <a href="/p/git-ignore.html" class="flat-box">
+          <a href="/p/multiple-java-management.html" class="flat-box">
             <i class="fas fa-book-open fa-fw" aria-hidden="true"></i>
             阅读全文
           </a>
@@ -500,224 +503,9 @@ Create a local .gitignore（创建局部/本地的.gitignore文件）
     
       <div class="full-width auto-padding tags">
         
-          <a href="/tags/Git/" rel="nofollow"><i class="fas fa-tag fa-fw"></i> Git</a>
+          <a href="/tags/Java/" rel="nofollow"><i class="fas fa-tag fa-fw"></i> Java</a>
         
-      </div>
-    
-  </section>
-</article>
-
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <article class="post reveal ">
-  
-
-
-  <section class='meta'>
-    
-    
-    <div class="meta" id="header-meta">
-      
-        
-  <h2 class="title">
-    <a href="/p/git-multiple-account.html">
-      Git配置多个账号（GitLab和GitHub）
-    </a>
-  </h2>
-
-
-      
-      <div class='new-meta-box'>
-        
-          
-        
-          
-            
-  <div class='new-meta-item author'>
-    
-      <a href="https://dayarch.top" rel="nofollow">
-        
-          <img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png">
-        
-        <p>tanθ</p>
-      </a>
-    
-  </div>
-
-
-          
-        
-          
-            <div class="new-meta-item date">
-  <a class='notlink'>
-    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-    <p>2016-08-09</p>
-  </a>
-</div>
-
-          
-        
-          
-            
-  
-  <div class='new-meta-item category'>
-    <a href='/categories/Coding/DevOps/' rel="nofollow">
-      <i class="fas fa-folder-open" aria-hidden="true"></i>
-      <p>Coding&nbsp;/&nbsp;DevOps</p>
-    </a>
-  </div>
-
-
-          
-        
-          
-            
-
-          
-        
-      </div>
-      
-        <hr>
-      
-    </div>
-  </section>
-
-
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      背景
-现在好多公司用GitLab作为项目管理工具，自己也会有开源项目在GitHub上，按照以往的配置全局的用户貌似在这种情形下就没有作用了（公司的项目需要用公司邮箱，自己的项目需要用自己的邮箱），此时就要做Git多账户的管理与设置。
-
-Git支持的协议
-Git主要支持四中协议： file:// , git://, http(s)://, ssh://, 这里主要说明一下http(s)和ssh协议的区别。
-
-https 和 SSH 的区别
- 1. 前者可以随意克隆github上的项目，而不管是谁的；而后者则是你必须是你要克隆的项目的拥有者或管理员，且需要先添加 SSH key (这里就是添加公钥
-      
-        <div class="readmore">
-          <a href="/p/git-multiple-account.html" class="flat-box">
-            <i class="fas fa-book-open fa-fw" aria-hidden="true"></i>
-            阅读全文
-          </a>
-        </div>
-      
-    </div>
-    
-      <div class="full-width auto-padding tags">
-        
-          <a href="/tags/Git/" rel="nofollow"><i class="fas fa-tag fa-fw"></i> Git</a>
-        
-      </div>
-    
-  </section>
-</article>
-
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <article class="post reveal ">
-  
-
-
-  <section class='meta'>
-    
-    
-    <div class="meta" id="header-meta">
-      
-        
-  <h2 class="title">
-    <a href="/p/git-workflow.html">
-      git 使用流程
-    </a>
-  </h2>
-
-
-      
-      <div class='new-meta-box'>
-        
-          
-        
-          
-            
-  <div class='new-meta-item author'>
-    
-      <a href="https://dayarch.top" rel="nofollow">
-        
-          <img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png">
-        
-        <p>tanθ</p>
-      </a>
-    
-  </div>
-
-
-          
-        
-          
-            <div class="new-meta-item date">
-  <a class='notlink'>
-    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-    <p>2016-06-24</p>
-  </a>
-</div>
-
-          
-        
-          
-            
-  
-  <div class='new-meta-item category'>
-    <a href='/categories/Coding/DevOps/' rel="nofollow">
-      <i class="fas fa-folder-open" aria-hidden="true"></i>
-      <p>Coding&nbsp;/&nbsp;DevOps</p>
-    </a>
-  </div>
-
-
-          
-        
-          
-            
-
-          
-        
-      </div>
-      
-        <hr>
-      
-    </div>
-  </section>
-
-
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      Git分支管理策略
-首先share一下Ruan老师的博客内容：Git分支管理策略 ，读过之后，理解Master、Develop、临时分支（feature、release、fixbug）的基本意思，这里写的就更加透彻了：A successful Git branching model， 项目中如果按照这种严格规范来执行版本的管理，应该是会取得成功的结果. 仔细阅读这个workflow深刻的体会：
-
-
-Git 使用实战情景说明
-为什么不罗列出来Git的命令列表，因为罗列在这貌似也很难深刻理解命令的含义，也不知道怎样去使用，所以做一些情景案例来说明git命令
-
-跟踪GitHub上开源项目
-当在Git
-      
-        <div class="readmore">
-          <a href="/p/git-workflow.html" class="flat-box">
-            <i class="fas fa-book-open fa-fw" aria-hidden="true"></i>
-            阅读全文
-          </a>
-        </div>
-      
-    </div>
-    
-      <div class="full-width auto-padding tags">
-        
-          <a href="/tags/Git/" rel="nofollow"><i class="fas fa-tag fa-fw"></i> Git</a>
+          <a href="/tags/JDK/" rel="nofollow"><i class="fas fa-tag fa-fw"></i> JDK</a>
         
       </div>
     

@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://dayarch.top/"/>
-  <updated>2019-11-08T09:01:22.470Z</updated>
+  <updated>2019-11-14T01:03:26.817Z</updated>
   <id>https://dayarch.top/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>SDKMAN 统一灵活管理多版本Java</title>
+    <link href="https://dayarch.top//p/multiple-java-management.html"/>
+    <id>https://dayarch.top//p/multiple-java-management.html</id>
+    <published>2019-11-14T00:51:02.000Z</published>
+    <updated>2019-11-14T01:03:26.817Z</updated>
+    
+    <summary type="html">
+    
+      面对快速升级的Java，我们应该灵活的管理多个Java版本，不再去做枯燥的Java环境变量的配置
+    
+    </summary>
+    
+    
+      <category term="Coding" scheme="https://dayarch.top/categories/Coding/"/>
+    
+      <category term="Java" scheme="https://dayarch.top/categories/Coding/Java/"/>
+    
+    
+      <category term="Java" scheme="https://dayarch.top/tags/Java/"/>
+    
+      <category term="JDK" scheme="https://dayarch.top/tags/JDK/"/>
+    
+  </entry>
   
   <entry>
     <title>HttpMessageConverter转换原理解析</title>
@@ -474,31 +499,6 @@
       <category term="Spring Boot" scheme="https://dayarch.top/tags/Spring-Boot/"/>
     
       <category term="注解" scheme="https://dayarch.top/tags/%E6%B3%A8%E8%A7%A3/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>红黑树，史上最强动静图详解</title>
-    <link href="https://dayarch.top//p/redblack-tree.html"/>
-    <id>https://dayarch.top//p/redblack-tree.html</id>
-    <published>2019-07-29T08:42:05.000Z</published>
-    <updated>2019-11-07T06:06:38.332Z</updated>
-    
-    <summary type="html">
-    
-      红黑树解决了二叉树遍历深度的问题，极大的增加了索引效率,Java8 HashMap也从链表转化到了红黑树
-    
-    </summary>
-    
-    
-      <category term="Coding" scheme="https://dayarch.top/categories/Coding/"/>
-    
-      <category term="Java" scheme="https://dayarch.top/categories/Coding/Java/"/>
-    
-    
-      <category term="红黑树" scheme="https://dayarch.top/tags/%E7%BA%A2%E9%BB%91%E6%A0%91/"/>
-    
-      <category term="二叉查找树" scheme="https://dayarch.top/tags/%E4%BA%8C%E5%8F%89%E6%9F%A5%E6%89%BE%E6%A0%91/"/>
     
   </entry>
   
