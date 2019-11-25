@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://dayarch.top/"/>
-  <updated>2019-11-25T05:38:45.382Z</updated>
+  <updated>2019-11-25T05:41:24.129Z</updated>
   <id>https://dayarch.top/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://dayarch.top//p/lombok-usage.html"/>
     <id>https://dayarch.top//p/lombok-usage.html</id>
     <published>2019-11-25T05:34:12.000Z</published>
-    <updated>2019-11-25T05:38:45.382Z</updated>
+    <updated>2019-11-25T05:41:24.129Z</updated>
     
     <summary type="html">
     
@@ -37,7 +37,7 @@
     
       <category term="Java" scheme="https://dayarch.top/tags/Java/"/>
     
-      <category term="JDK" scheme="https://dayarch.top/tags/JDK/"/>
+      <category term="Lombok" scheme="https://dayarch.top/tags/Lombok/"/>
     
   </entry>
   
