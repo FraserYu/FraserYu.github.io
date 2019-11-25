@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://dayarch.top/"/>
-  <updated>2019-11-14T01:24:50.504Z</updated>
+  <updated>2019-11-25T05:38:45.382Z</updated>
   <id>https://dayarch.top/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Lombok 使用教程详解</title>
+    <link href="https://dayarch.top//p/lombok-usage.html"/>
+    <id>https://dayarch.top//p/lombok-usage.html</id>
+    <published>2019-11-25T05:34:12.000Z</published>
+    <updated>2019-11-25T05:38:45.382Z</updated>
+    
+    <summary type="html">
+    
+      Lombok 是一种 Java™ 实用工具，可用来帮助开发人员消除 Java 的冗长，尤其是对于简单的 Java 对象（POJO）
+    
+    </summary>
+    
+    
+      <category term="Coding" scheme="https://dayarch.top/categories/Coding/"/>
+    
+      <category term="Java" scheme="https://dayarch.top/categories/Coding/Java/"/>
+    
+    
+      <category term="Java" scheme="https://dayarch.top/tags/Java/"/>
+    
+      <category term="JDK" scheme="https://dayarch.top/tags/JDK/"/>
+    
+  </entry>
   
   <entry>
     <title>SDKMAN 统一灵活管理多版本Java</title>
@@ -474,31 +499,6 @@
     
     
       <category term="Shiro" scheme="https://dayarch.top/tags/Shiro/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>@Conditional注解，Spring Boot 的灵活配置</title>
-    <link href="https://dayarch.top//p/spring-boot-condition-annotation.html"/>
-    <id>https://dayarch.top//p/spring-boot-condition-annotation.html</id>
-    <published>2019-07-31T08:30:07.000Z</published>
-    <updated>2019-11-07T06:35:47.024Z</updated>
-    
-    <summary type="html">
-    
-      灵活使用SpringBoot Conditonal相关注解，增加编程的灵活性
-    
-    </summary>
-    
-    
-      <category term="Coding" scheme="https://dayarch.top/categories/Coding/"/>
-    
-      <category term="Spring-Boot" scheme="https://dayarch.top/categories/Coding/Spring-Boot/"/>
-    
-    
-      <category term="Spring Boot" scheme="https://dayarch.top/tags/Spring-Boot/"/>
-    
-      <category term="注解" scheme="https://dayarch.top/tags/%E6%B3%A8%E8%A7%A3/"/>
     
   </entry>
   
