@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   
-  <title>Archives: 2017/2 | 日拱一兵</title>
+  <title>Archives: 2019/12 | 日拱一兵</title>
   
   <meta name="keywords" content="后端博客,Java,SpringBoot,ElasticSearch">
   
@@ -405,12 +405,14 @@
   <section class='meta'>
     
     
+      <a title='Spring 数据绑定剖析' href='/p/spring-data-binding-mechanism.html'><img class='thumbnail' src='https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgspringbootconverter.png'></a>
+    
     <div class="meta" id="header-meta">
       
         
   <h2 class="title">
-    <a href="/p/spring-aop.html">
-      Spring AOP
+    <a href="/p/spring-data-binding-mechanism.html">
+      Spring 数据绑定剖析
     </a>
   </h2>
 
@@ -440,7 +442,7 @@
             <div class="new-meta-item date">
   <a class='notlink'>
     <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-    <p>2017-02-23</p>
+    <p>2019-12-12</p>
   </a>
 </div>
 
@@ -450,9 +452,9 @@
             
   
   <div class='new-meta-item category'>
-    <a href='/categories/Coding/Spring/' rel="nofollow">
+    <a href='/categories/Coding/Spring-Boot/' rel="nofollow">
       <i class="fas fa-folder-open" aria-hidden="true"></i>
-      <p>Coding&nbsp;/&nbsp;Spring</p>
+      <p>Coding&nbsp;/&nbsp;Spring-Boot</p>
     </a>
   </div>
 
@@ -475,16 +477,14 @@
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
       前言
-Spring AOP 的道理懂得，但是很少在项目中使用，刚巧这个项目中有用到，将AOP的理解以及使用中遇到的问题加以总结记录
+在剖析完 「Spring Boot 统一数据格式是怎么实现的？ 」文章之后，一直觉得有必要说明一下 Spring’s Data Binding Mechanism 「Spring 数据绑定机制」。
 
-使用场景
-设想一下，项目已接近尾声，经理说为了项目验收，更好的监控程序调用日志，需要在每个方法调用前或调用后加上日志，天啊，这是多大的工作量，项目中至少有几百个方法，我们要做这种无脑的工作了吗？ 如果不懂得Spring AOP面向切面编程的道理，那这个体力活看来是费力不讨好的事情，接下来让我们慢慢剖析Spring AOP 的道理.
+默认情况下，Spring 只知道如何转换简单数据类型。比如我们提交的 int、String 或 boolean类型的请求数据，它会自动绑定到与之对应的 Java 类型。但在实际项目中，远远不够，因为我们可能需要绑定更复杂的对象类型。
 
-Java 动态代理
-Java23中设计模式之一代理模式，Spring AOP充分利用了Java 动态代理功能来实现（对动态代理有所
+我们需要了解 Spring 数据绑定机制，这样我们就可以更灵活的做全局配置或自定义配置，进而让我们的 RESTful API 更简洁，可读性也更好。本文依旧先
       
         <div class="readmore">
-          <a href="/p/spring-aop.html" class="flat-box">
+          <a href="/p/spring-data-binding-mechanism.html" class="flat-box">
             <i class="fas fa-book-open fa-fw" aria-hidden="true"></i>
             阅读全文
           </a>
@@ -494,9 +494,9 @@ Java23中设计模式之一代理模式，Spring AOP充分利用了Java 动态�
     
       <div class="full-width auto-padding tags">
         
-          <a href="/tags/Spring/" rel="nofollow"><i class="fas fa-tag fa-fw"></i> Spring</a>
+          <a href="/tags/Spring-Boot/" rel="nofollow"><i class="fas fa-tag fa-fw"></i> Spring Boot</a>
         
-          <a href="/tags/AOP/" rel="nofollow"><i class="fas fa-tag fa-fw"></i> AOP</a>
+          <a href="/tags/Spring-Data-Binding/" rel="nofollow"><i class="fas fa-tag fa-fw"></i> Spring Data Binding</a>
         
       </div>
     

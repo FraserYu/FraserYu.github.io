@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://dayarch.top/"/>
-  <updated>2019-11-25T05:41:24.129Z</updated>
+  <updated>2019-12-12T12:06:15.677Z</updated>
   <id>https://dayarch.top/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Spring 数据绑定剖析</title>
+    <link href="https://dayarch.top//p/spring-data-binding-mechanism.html"/>
+    <id>https://dayarch.top//p/spring-data-binding-mechanism.html</id>
+    <published>2019-12-12T11:59:04.000Z</published>
+    <updated>2019-12-12T12:06:15.677Z</updated>
+    
+    <summary type="html">
+    
+      Spring Boot的整个请求过程，都离不开Spring 数据绑定机制，透彻理解该机制，可以让我们的编码更加整洁清晰，同时可以应对更多特殊请求处理
+    
+    </summary>
+    
+    
+      <category term="Coding" scheme="https://dayarch.top/categories/Coding/"/>
+    
+      <category term="Spring-Boot" scheme="https://dayarch.top/categories/Coding/Spring-Boot/"/>
+    
+    
+      <category term="Spring Boot" scheme="https://dayarch.top/tags/Spring-Boot/"/>
+    
+      <category term="Spring Data Binding" scheme="https://dayarch.top/tags/Spring-Data-Binding/"/>
+    
+  </entry>
   
   <entry>
     <title>Lombok 使用教程详解</title>
@@ -476,29 +501,6 @@
     
     
       <category term="Spring Boot" scheme="https://dayarch.top/tags/Spring-Boot/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Shiro—小而美的安全框架</title>
-    <link href="https://dayarch.top//p/shiro-in-practice.html"/>
-    <id>https://dayarch.top//p/shiro-in-practice.html</id>
-    <published>2019-08-05T03:21:40.000Z</published>
-    <updated>2019-11-07T06:36:52.166Z</updated>
-    
-    <summary type="html">
-    
-      Shiro—小而美的安全框架，中小项目的选择，更灵活的定制
-    
-    </summary>
-    
-    
-      <category term="Coding" scheme="https://dayarch.top/categories/Coding/"/>
-    
-      <category term="Spring-Boot" scheme="https://dayarch.top/categories/Coding/Spring-Boot/"/>
-    
-    
-      <category term="Shiro" scheme="https://dayarch.top/tags/Shiro/"/>
     
   </entry>
   

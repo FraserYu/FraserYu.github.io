@@ -1,5 +1,5 @@
+https://dayarch.top/p/spring-data-binding-mechanism.html
 https://dayarch.top/p/lombok-usage.html
 https://dayarch.top/p/multiple-java-management.html
 https://dayarch.top/p/spring-boot-messageconverter.html
 https://dayarch.top/p/jdk12-collectors-teeing-api-usage.html
-https://dayarch.top/p/java-concurrency-dead-lock.html

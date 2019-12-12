@@ -4,12 +4,12 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   
-  <title>Archives: 2017/2 | 日拱一兵</title>
+  <title>Spring 数据绑定剖析 | 日拱一兵</title>
   
-  <meta name="keywords" content="后端博客,Java,SpringBoot,ElasticSearch">
+  <meta name="keywords" content="Spring数据绑定,Spring Data Binding,resolver, 后端博客,Java,SpringBoot,ElasticSearch">
   
   
-  <meta name="description" content="Java后端技术博客，用有趣的方式解读技术">
+  <meta name="description" content="Spring Boot的整个请求过程，都离不开Spring 数据绑定机制，透彻理解该机制，可以让我们的编码更加整洁清晰，同时可以应对更多特殊请求处理, Java后端技术博客，用有趣的方式解读技术">
   
 
   
@@ -91,7 +91,7 @@
   
   
   <div class="cover-wrapper">
-    <cover class='cover  half'>
+    <cover class='cover post half'>
       
         
   <img class='logo' src='/assets/logo.png'/>
@@ -384,35 +384,27 @@
   <div class="l_body">
     <div class='body-wrapper'>
       <div class='l_main'>
-	
-		
-  <section class="post-list">
-    
-      
-        
-          
-        
-      
-    
-    
-      
-        
-          <div class='post-wrapper'>
-            <article class="post reveal ">
   
+
+  <article id="post" class="post white-box article-type-post" itemscope itemprop="blogPost">
+    
 
 
   <section class='meta'>
     
     
+      <a title='Spring 数据绑定剖析' href='/p/spring-data-binding-mechanism.html'><img class='thumbnail' src='https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgspringbootconverter.png'></a>
+    
     <div class="meta" id="header-meta">
       
         
-  <h2 class="title">
-    <a href="/p/spring-aop.html">
-      Spring AOP
-    </a>
-  </h2>
+  
+    <h1 class="title">
+      <a href="/p/spring-data-binding-mechanism.html">
+        Spring 数据绑定剖析
+      </a>
+    </h1>
+  
 
 
       
@@ -440,7 +432,7 @@
             <div class="new-meta-item date">
   <a class='notlink'>
     <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-    <p>2017-02-23</p>
+    <p>2019-12-12</p>
   </a>
 </div>
 
@@ -450,11 +442,29 @@
             
   
   <div class='new-meta-item category'>
-    <a href='/categories/Coding/Spring/' rel="nofollow">
+    <a href='/categories/Coding/Spring-Boot/' rel="nofollow">
       <i class="fas fa-folder-open" aria-hidden="true"></i>
-      <p>Coding&nbsp;/&nbsp;Spring</p>
+      <p>Coding&nbsp;/&nbsp;Spring-Boot</p>
     </a>
   </div>
+
+
+          
+        
+          
+            
+  
+    <div class="new-meta-item browse busuanzi">
+      <a class='notlink'>
+        <i class="fas fa-eye" aria-hidden="true"></i>
+        <p>
+          <span id="busuanzi_value_page_pv">
+            <i class="fas fa-spinner fa-spin fa-fw" aria-hidden="true"></i>
+          </span>
+        </p>
+      </a>
+    </div>
+  
 
 
           
@@ -472,52 +482,247 @@
   </section>
 
 
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      前言
-Spring AOP 的道理懂得，但是很少在项目中使用，刚巧这个项目中有用到，将AOP的理解以及使用中遇到的问题加以总结记录
+    <section class="article typo">
+      <div class="article-entry" itemprop="articleBody">
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在剖析完 「<a href="https://dayarch.top/p/spring-boot-global-return.html">Spring Boot 统一数据格式是怎么实现的？</a> 」文章之后，一直觉得有必要说明一下 Spring’s Data Binding Mechanism 「Spring 数据绑定机制」。</p>
+<p>默认情况下，Spring 只知道如何转换简单数据类型。比如我们提交的 int、String 或 boolean类型的请求数据，它会自动绑定到与之对应的 Java 类型。但在实际项目中，远远不够，因为我们可能需要绑定更复杂的对象类型。</p>
+<p>我们需要了解 Spring 数据绑定机制，这样我们就可以更灵活的做全局配置或自定义配置，进而让我们的 RESTful API 更简洁，可读性也更好。本文依旧先通过示例代码说明实现，然后进行源码分析，带领大家了解这个机制是如何生效的，知其所以然， Let’s go……</p>
+<h2 id="Spring-数据绑定"><a href="#Spring-数据绑定" class="headerlink" title="Spring 数据绑定"></a>Spring 数据绑定</h2><h3 id="日期绑定"><a href="#日期绑定" class="headerlink" title="日期绑定"></a>日期绑定</h3><p>先来看下面一小段代码</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/bindings/"</span>)</span><br><span class="line"><span class="meta">@Slf</span>4j</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BindingController</span> </span>&#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	<span class="meta">@GetMapping</span>(<span class="string">"/&#123;date&#125;"</span>)</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">getSpecificDateInfo</span><span class="params">(@PathVariable LocalDateTime date)</span> </span>&#123;</span><br><span class="line">		log.info(date.toString());</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-使用场景
-设想一下，项目已接近尾声，经理说为了项目验收，更好的监控程序调用日志，需要在每个方法调用前或调用后加上日志，天啊，这是多大的工作量，项目中至少有几百个方法，我们要做这种无脑的工作了吗？ 如果不懂得Spring AOP面向切面编程的道理，那这个体力活看来是费力不讨好的事情，接下来让我们慢慢剖析Spring AOP 的道理.
+<p>当我们用 Postman 请求这个 API</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://localhost:8080/rgyb/bindings/2019-12-10 12:00:00</span><br></pre></td></tr></table></figure>
 
-Java 动态代理
-Java23中设计模式之一代理模式，Spring AOP充分利用了Java 动态代理功能来实现（对动态代理有所
+<p>如我们所料，抛出数据类型转换异常<br><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgXnip2019-12-12_13-44-29.jpg" alt=""><br>因为 Spring 默认不支持将 String 类型的请求参数转换为 LocalDateTime 类型，所以我们需要自定义 converter 「转换器」完整整个转换过程</p>
+<p>自定义转换器 <code>StringToLocalDateTimeConverter</code>，使其实现 <code>org.springframework.core.convert.converter.Converter&lt;S, T&gt;</code> 接口，在重写的 convert 方法中实现我们自定义的转换逻辑</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StringToLocalDateTimeConverter</span> <span class="keyword">implements</span> <span class="title">Converter</span>&lt;<span class="title">String</span>, <span class="title">LocalDateTime</span>&gt; </span>&#123;</span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> LocalDateTime <span class="title">convert</span><span class="params">(String s)</span> </span>&#123;</span><br><span class="line">		DateTimeFormatter formatter = DateTimeFormatter.ofPattern(<span class="string">"yyyy-MM-dd HH:mm:ss"</span>, Locale.CHINESE);</span><br><span class="line">		<span class="keyword">return</span> LocalDateTime.parse(s, formatter);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>将转换器注册到上下文中:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UnifiedReturnConfig</span> <span class="keyword">implements</span> <span class="title">WebMvcConfigurer</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addFormatters</span><span class="params">(FormatterRegistry registry)</span> </span>&#123;</span><br><span class="line">		registry.addConverter(<span class="keyword">new</span> StringToLocalDateTimeConverter());</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>重新访问上面链接，查看控制台，按照预期得到相应转换结果:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">c.e.unifiedreturn.api.BindingController  : 2019-12-10T12:00</span><br></pre></td></tr></table></figure>
+
+<p>知道了这个，比如我们常用的枚举类型也可以应用这种方式做数据绑定</p>
+<h3 id="枚举类型绑定"><a href="#枚举类型绑定" class="headerlink" title="枚举类型绑定"></a>枚举类型绑定</h3><p>同样的套路，自定义转换器</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StringToEnumConverter</span> <span class="keyword">implements</span> <span class="title">Converter</span>&lt;<span class="title">String</span>, <span class="title">Modes</span>&gt; </span>&#123;</span><br><span class="line">	</span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> Modes <span class="title">convert</span><span class="params">(String s)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> Modes.valueOf(s);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>将其添加至上下文，请小伙伴们自行尝试吧，知道了这个，我们再也不用在 RESTful API 内部做数据转换了，我们做到了全局控制，同时让整个 API 看起来更加清晰简洁</p>
+<h3 id="绑定对象"><a href="#绑定对象" class="headerlink" title="绑定对象"></a>绑定对象</h3><p>在某些情况下，我们希望将数据绑定到对象，这时我们可能马上联想起来使用 <code>@RequestBody</code> 注解，该注解通常用于获取 POST 请求体，并将其转换相应的数据对象</p>
+<p>在实际业务场景中，除了<code>请求体</code>中的数据，我们同样需要<code>请求头</code>中的数据，比如 <code>token</code> ，token 中包含当前登陆用户的信息，每一次 RESTful 请求我们都需要从 header 中获取 token 数据处理实际业务，这种场景，上文提到的 <code>Converter</code> 以及 <code>@RequestBody</code> 显然不能满足我们的需求，此时我们就要换另一种解决方案 : <code>HandlerMethodArgumentResolver</code></p>
+<p>首先我们需要自定义一个注解 <code>LoginUser</code> (<strong>运行时生效，作用于参数上</strong>)</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Retention</span>(RetentionPolicy.RUNTIME)</span><br><span class="line"><span class="meta">@Target</span>(ElementType.PARAMETER)</span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> LoginUser &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然后自定义 <code>LoginUserArgumentResolver</code> ，使其实现 <code>HandlerMethodArgumentResolver</code> 接口</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LoginUserArgumentResolver</span> <span class="keyword">implements</span> <span class="title">HandlerMethodArgumentResolver</span> </span>&#123;</span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">supportsParameter</span><span class="params">(MethodParameter methodParameter)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//判断参数是否有自定义注解 LoginUser 修饰</span></span><br><span class="line">		<span class="keyword">return</span> methodParameter.hasParameterAnnotation(LoginUser.class);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> Object <span class="title">resolveArgument</span><span class="params">(MethodParameter methodParameter, ModelAndViewContainer modelAndViewContainer, NativeWebRequest nativeWebRequest, WebDataBinderFactory webDataBinderFactory)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line"></span><br><span class="line">		HttpServletRequest request = (HttpServletRequest) nativeWebRequest.getNativeRequest();</span><br><span class="line"></span><br><span class="line">		LoginUserVo loginUserVo = <span class="keyword">new</span> LoginUserVo();</span><br><span class="line"></span><br><span class="line">		String token = request.getHeader(<span class="string">"token"</span>);</span><br><span class="line">		<span class="keyword">if</span> (Strings.isNotBlank(token))&#123;</span><br><span class="line">			<span class="comment">//通常这里需要编写 token 解析逻辑，并将其放到 LoginUserVo 对象中</span></span><br><span class="line">			<span class="comment">//logic</span></span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="comment">//在此为了快速简洁的做演示说明，省略掉解析 token 部分，直接从 header 指定 key 中获取数据</span></span><br><span class="line">		loginUserVo.setId(Long.valueOf(request.getHeader(<span class="string">"userId"</span>)));</span><br><span class="line">		loginUserVo.setName(request.getHeader(<span class="string">"userName"</span>));</span><br><span class="line">		<span class="keyword">return</span> loginUserVo;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>依旧将自定义的 <code>LoginUserArgumentResolver</code> 添加到上下文中</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addArgumentResolvers</span><span class="params">(List&lt;HandlerMethodArgumentResolver&gt; resolvers)</span> </span>&#123;</span><br><span class="line">    resolvers.add(<span class="keyword">new</span> LoginUserArgumentResolver());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>编写 API:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@GetMapping</span>(<span class="string">"/id"</span>)</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">getLoginUserInfo</span><span class="params">(@LoginUser LoginUserVo loginUserVo)</span> </span>&#123;</span><br><span class="line">    log.info(loginUserVo.toString());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>通过 Postman 请求，在 header 中设置好相应的 K-V，如下图</p>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">http://localhost:8080/rgyb/bindings/id</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="./_image/2019-12-10/2019-12-12-15-32-27.png" alt=""></p>
+<p>发送请求，查看控制台，得到预期结果</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">c.e.unifiedreturn.api.BindingController  : LoginUserVo(id=111111, name=rgyb)</span><br></pre></td></tr></table></figure>
+
+<p>相信到这里，你已经了解了基本的使用，接下来我们进行源码分析，透过现象看本质 (希望可以打开 IDE 跟着步骤查看)</p>
+<h2 id="Spring-数据绑定源码分析"><a href="#Spring-数据绑定源码分析" class="headerlink" title="Spring 数据绑定源码分析"></a>Spring 数据绑定源码分析</h2><p>首先我们需要了解我们自定义的  <code>LoginUserArgumentResolver</code> 是如何被加载到上下文中的，在你看过  <a href="https://dayarch.top/p/spring-boot-messageconverter.html">HttpMessageConverter转换原理解析</a>  和 <a href="https://dayarch.top/p/spring-boot-global-return.html">Springboot返回统一JSON数据格式是怎么实现的？</a>后，你也许已经有了眉目，同加载 MessageConverter 如出一辙，在 <code>RequestMappingHandlerAdapter</code> 类中，同样有添加 ArgumentResolver 的方法，该方法会把系统内置的 resolver 和用户自定义的 resolver 都加载到上下文中，关键代码展示如下:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> List&lt;HandlerMethodArgumentResolver&gt; <span class="title">getDefaultArgumentResolvers</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    List&lt;HandlerMethodArgumentResolver&gt; resolvers = <span class="keyword">new</span> ArrayList();</span><br><span class="line">    resolvers.add(<span class="keyword">new</span> RequestParamMethodArgumentResolver(<span class="keyword">this</span>.getBeanFactory(), <span class="keyword">false</span>));</span><br><span class="line">    <span class="comment">//其他内置 resolver</span></span><br><span class="line"></span><br><span class="line">    resolvers.add(<span class="keyword">new</span> RequestResponseBodyMethodProcessor(<span class="keyword">this</span>.getMessageConverters(), <span class="keyword">this</span>.requestResponseBodyAdvice));</span><br><span class="line">    ...</span><br><span class="line">    ...</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">this</span>.getCustomArgumentResolvers() != <span class="keyword">null</span>) &#123;</span><br><span class="line">        resolvers.addAll(<span class="keyword">this</span>.getCustomArgumentResolvers());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    ...</span><br><span class="line">    ...</span><br><span class="line">    <span class="keyword">return</span> resolvers;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在 <a href="https://dayarch.top/p/spring-boot-messageconverter.html">HttpMessageConverter转换原理解析</a> 文章中有一段调用栈跟踪，我再次粘贴在此处，并用红框做出标记，其实我们在分析 messageConverter 时已经悄悄的路过了我们本节要说的内容<br><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgXnip2019-12-12_16-00-32.jpg" alt=""></p>
+<p>我们进入相应的类中瞧一瞧:<br><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgXnip2019-12-12_16-02-47.jpg" alt=""></p>
+<p>到这里你应该猛的了解这背后的道理了吧</p>
+<p>接下来，我们来验证我们天天用的 <code>@RequestBody</code> 注解是不是这个套路呢？<br>处理该注解的类是 <code>RequestResponseBodyMethodProcessor</code>，查看其类图，发现其依旧实现了 <code>HandlerMethodArgumentResolver</code> 接口</p>
+<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgXnip2019-12-12_16-09-04.jpg" alt=""></p>
+<p>打开该类，你会看到下图代码，重点地方我已标记出来<br><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgXnip2019-12-12_16-18-36.jpg" alt=""></p>
+<p>整体处理流程如出一辙，只不过在里面调用了 messageConverter 来解析 JSON 数据。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>本文说的 Converter 和 ArgumentResolver 以及在 Spring MVC 中常用的 <code>@InitBinder</code> 注解整体过程都如出一辙，大家都可以按照这个思路来查看具体的实现。另外，在我们完成日常编码工作时，都可以从 Spring 现有的处理方式中摸索到一些解决方案，但前提是你了解 Spring 底层的一些调用过程</p>
+<p>最后希望小伙伴打开 IDE 切实查看相应代码，你一定还会有新发现，我们可以一起探讨。本文代码已上传，公众号回复「demo」，打开链接查看 「spring-boot-unified-return」文件夹内容即可，也可以顺路回顾以前 Spring Boot 统一返回格式的代码实现</p>
+<hr>
+<h2 id="灵魂追问"><a href="#灵魂追问" class="headerlink" title="灵魂追问"></a>灵魂追问</h2><p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgXnip2019-12-12_18-12-09.jpg" alt=""></p>
+<ol>
+<li>如上图所示，在追中源码时，发现<code>HandlerMethodArgumentResolverComposite</code> 是 <code>HandlerMethodArgumentResolver</code> 的实现类之一，其中有一个 Map 类型的成员变量，通常我们使用 Map，key 的类型多数为 String 类型，但看到这个 Map 中有这样的 key 你马上想到的是什么？基础面试经常会问 equals 和 hashcode 的问题，下一篇文章会借着这个类来分析说明一下你总困惑的这件小事</li>
+<li>对于 Spring Boot 的整个调用过程，你能描述出整体流程吗？</li>
+<li>Spring 内置多少个 Resolver？你可以跟踪调试获取到</li>
+</ol>
+
+      </div>
       
-        <div class="readmore">
-          <a href="/p/spring-aop.html" class="flat-box">
-            <i class="fas fa-book-open fa-fw" aria-hidden="true"></i>
-            阅读全文
-          </a>
-        </div>
+        <br>
+        
+
+
+  <section class='meta' id="footer-meta">
+    <div class='new-meta-box'>
+      
+        
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2019-12-12T20:06:15+08:00">
+  <a class='notlink'>
+    <i class="fas fa-clock" aria-hidden="true"></i>
+    <p>更新于 2019年12月12日</p>
+  </a>
+</div>
+
+        
+      
+        
+          
+  
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/Spring-Boot/" rel="nofollow"><i class="fas fa-tag" aria-hidden="true"></i><p>Spring Boot</p></a></div> <div class="new-meta-item meta-tags"><a class="tag" href="/tags/Spring-Data-Binding/" rel="nofollow"><i class="fas fa-tag" aria-hidden="true"></i><p>Spring Data Binding</p></a></div>
+
+
+        
+      
+        
+          
+  <div class="new-meta-item share -mob-share-list">
+  <div class="-mob-share-list share-body">
+    
+      
+        <a class="-mob-share-qq" title="QQ好友" rel="external nofollow noopener noreferrer"
+          
+          href="http://connect.qq.com/widget/shareqq/index.html?url=https://dayarch.top/p/spring-data-binding-mechanism.html&title=Spring 数据绑定剖析 | 日拱一兵&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=前言
+在剖析完 「Spring Boot 统一数据格式是怎么实现的？ 」文章之后，一直觉得有必要说明一下 Spring’s Data Binding Mechanism 「Spring 数据绑定机制」。
+
+默认情况下，Spring 只知道如何转换简单数据类型。比如我们提交的 int、String 或 boolean类型的请求数据，它会自动绑定到与之对应的 Java 类型。但在实际项目中，远远不够，因为我们可能需要绑定更复杂的对象类型。
+
+我们需要了解 Spring 数据绑定机制，这样我们就可以更灵活的做全局配置或自定义配置，进而让我们的 RESTful API 更简洁，可读性也更好。本文依旧先"
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/assets@19.1.9/logo/128/qq.png">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-qzone" title="QQ空间" rel="external nofollow noopener noreferrer"
+          
+          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://dayarch.top/p/spring-data-binding-mechanism.html&title=Spring 数据绑定剖析 | 日拱一兵&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=前言
+在剖析完 「Spring Boot 统一数据格式是怎么实现的？ 」文章之后，一直觉得有必要说明一下 Spring’s Data Binding Mechanism 「Spring 数据绑定机制」。
+
+默认情况下，Spring 只知道如何转换简单数据类型。比如我们提交的 int、String 或 boolean类型的请求数据，它会自动绑定到与之对应的 Java 类型。但在实际项目中，远远不够，因为我们可能需要绑定更复杂的对象类型。
+
+我们需要了解 Spring 数据绑定机制，这样我们就可以更灵活的做全局配置或自定义配置，进而让我们的 RESTful API 更简洁，可读性也更好。本文依旧先"
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/assets@19.1.9/logo/128/qzone.png">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-weibo" title="微博" rel="external nofollow noopener noreferrer"
+          
+          href="http://service.weibo.com/share/share.php?url=https://dayarch.top/p/spring-data-binding-mechanism.html&title=Spring 数据绑定剖析 | 日拱一兵&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=前言
+在剖析完 「Spring Boot 统一数据格式是怎么实现的？ 」文章之后，一直觉得有必要说明一下 Spring’s Data Binding Mechanism 「Spring 数据绑定机制」。
+
+默认情况下，Spring 只知道如何转换简单数据类型。比如我们提交的 int、String 或 boolean类型的请求数据，它会自动绑定到与之对应的 Java 类型。但在实际项目中，远远不够，因为我们可能需要绑定更复杂的对象类型。
+
+我们需要了解 Spring 数据绑定机制，这样我们就可以更灵活的做全局配置或自定义配置，进而让我们的 RESTful API 更简洁，可读性也更好。本文依旧先"
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/assets@19.1.9/logo/128/weibo.png">
+          
+        </a>
+      
+    
+  </div>
+</div>
+
+
+
+        
       
     </div>
-    
-      <div class="full-width auto-padding tags">
-        
-          <a href="/tags/Spring/" rel="nofollow"><i class="fas fa-tag fa-fw"></i> Spring</a>
-        
-          <a href="/tags/AOP/" rel="nofollow"><i class="fas fa-tag fa-fw"></i> AOP</a>
-        
-      </div>
-    
   </section>
-</article>
 
-          </div>
-        
+
       
-    
-  </section>
+      
+          <div class="prev-next">
+              
+              
+                  <section class="next">
+                      <span class="art-item-right" aria-hidden="true">
+                          <h6>下一页&nbsp;<i class="fas fa-chevron-right" aria-hidden="true"></i></h6>
+                          <h4>
+                              <a href="/p/lombok-usage.html" rel="prev" title="Lombok 使用教程详解">
+                                  
+                                      Lombok 使用教程详解
+                                  
+                              </a>
+                          </h4>
+                          
+                              
+                              <h6 class="tags">
+                                  <a class="tag" href="/tags/Java/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> Java</a> <a class="tag" href="/tags/Lombok/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> Lombok</a>
+                              </h6>
+                          
+                      </span>
+                  </section>
+              
+          </div>
+      
+    </section>
+  </article>
+
+
+
+  <!-- 显示推荐文章和评论 -->
+
+
+
+  <article class="post white-box comments">
+    <section class="article typo">
+      <h4><i class="fas fa-comments fa-fw" aria-hidden="true"></i>&nbsp;评论</h4>
+      
+      
+      
+        <section id="comments">
+          <div id="gitalk-container"></div>
+        </section>
+      
+      
+    </section>
+  </article>
+
+
+
+
+
+
+<!-- 根据页面mathjax变量决定是否加载MathJax数学公式js -->
+
+
+
+  <script>
+    window.subData = {
+      title: 'Spring 数据绑定剖析',
+      tools: true
+    }
+  </script>
+
+
+
+  <script src="https://my.openwrite.cn/js/readmore.js" type="text/javascript"></script>
+  <script>
+      const btw = new BTWPlugin();
+      btw.init({
+          id: 'post',
+          blogId: '10015-1569397635991-668',
+          name: '日拱一兵',
+          qrcode: 'https://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E6%84%9F%E6%83%B3%E4%B8%8E%E6%80%BB%E7%BB%93/_image/2019-07-25/qrcode.jpg',
+          keyword: 'tanrgyb',
+      });
+  </script>
   
-    
-    <!-- 根据主题中的设置决定是否在archive中针对摘要部分的MathJax公式加载mathjax.js文件 -->
-    
-    
 
-  
-
-
-	
 </div>
 <aside class='l_side'>
   
@@ -609,47 +814,24 @@ Java23中设计模式之一代理模式，Spring AOP充分利用了Java 动态�
         
           
           
-        
-          
-          
             
-              <section class='widget plain'>
-  
+              
+  <section class='widget toc-wrapper'>
+    
 <header class='pure'>
-  <div><i class="fas fa-bullhorn fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;公告</div>
+  <div><i class="fas fa-list fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;本文目录</div>
+  
+    <!-- <div class='wrapper'><a class="s-toc rightBtn" rel="external nofollow noopener noreferrer" href="javascript:void(0)"><i class="fas fa-thumbtack fa-fw"></i></a></div> -->
   
 </header>
 
-  <div class='content pure'>
-    <p>博客升级改造中… 如有问题请<a href="/comments/">留言</a>交流</p>
+    <div class='content pure'>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Spring-数据绑定"><span class="toc-text">Spring 数据绑定</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#日期绑定"><span class="toc-text">日期绑定</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#枚举类型绑定"><span class="toc-text">枚举类型绑定</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#绑定对象"><span class="toc-text">绑定对象</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Spring-数据绑定源码分析"><span class="toc-text">Spring 数据绑定源码分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-text">总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#灵魂追问"><span class="toc-text">灵魂追问</span></a></li></ol>
+    </div>
+  </section>
 
-  </div>
-</section>
 
             
-          
-        
-          
-          
-        
-          
-          
-        
-          
-          
-        
-          
-          
-        
-          
-          
-        
-      
-        
-          
-          
-        
-          
           
         
           
@@ -1004,50 +1186,31 @@ Java23中设计模式之一代理模式，Spring AOP充分利用了Java 动态�
         
           
           
-            
-              
-
-
-  <section class='widget music'>
-    
-<header class='pure'>
-  <div><i class="fas fa-compact-disc fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;最近在听</div>
-  
-    <a class="rightBtn"
-    
-      rel="external nofollow noopener noreferrer"
-    
-    
-      target="_blank"
-    
-    href="https://music.163.com/#/my/m/music/playlist?id=2565998811"
-    title="https://music.163.com/#/my/m/music/playlist?id=2565998811">
-    <i class="far fa-heart fa-fw"></i></a>
-  
-</header>
-
-    <div class='content pure'>
+        
       
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.7.0/dist/APlayer.min.css">
-  <div class="aplayer"
-    data-theme="#1BCDFC"
-    
-    
-    data-mode="circulation"
-    data-server="netease"
-    data-type="playlist"
-    data-id="2565998811"
-    data-volume="0.7">
-  </div>
-  <script src="https://cdn.jsdelivr.net/npm/aplayer@1.7.0/dist/APlayer.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/meting@1.1.0/dist/Meting.min.js"></script>
-
-
-    </div>
-  </section>
-
-
-            
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
           
         
       
@@ -1167,13 +1330,23 @@ Java23中设计模式之一代理模式，Spring AOP充分利用了Java 动态�
 <script>setLoadingBarProgress(80);</script>
 
 
+<script>
+    (function(){
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        }
+        else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+   
 
-
-	<!-- 根据主题中的设置决定是否在archive中针对摘要部分的MathJax公式加载mathjax.js文件 -->
-	
-
-	
-
+    <script data-ad-client="ca-pub-1774278264048334" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 
       <script>setLoadingBarProgress(60);</script>
     </div>
@@ -1235,6 +1408,23 @@ Java23中设计模式之一代理模式，Spring AOP充分利用了Java 动态�
 
 
 
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+  <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+  <script type="text/javascript">
+    var gitalk = new Gitalk({
+      clientID: "57bd3ce366ba25a73a1a",
+      clientSecret: "bab4a248180b9ac85b16fb44bf4ba171648f9cab",
+      repo: "myBlogTalk",
+      owner: "FraserYu",
+      admin: "FraserYu",
+      
+        id: location.pathname,      // Ensure uniqueness and length less than 50
+      
+      distractionFreeMode: false  // Facebook-like distraction free mode
+    });
+    gitalk.render('gitalk-container');
+  </script>
 
 
 
