@@ -244,7 +244,7 @@
     <link href="https://dayarch.top//p/easyexcel-read.html"/>
     <id>https://dayarch.top//p/easyexcel-read.html</id>
     <published>2019-10-07T10:32:34.000Z</published>
-    <updated>2019-11-07T05:22:34.502Z</updated>
+    <updated>2019-12-15T13:04:40.165Z</updated>
     
     <summary type="html">
     
@@ -257,6 +257,10 @@
     
       <category term="Java" scheme="https://dayarch.top/categories/Coding/Java/"/>
     
+    
+      <category term="Excel" scheme="https://dayarch.top/tags/Excel/"/>
+    
+      <category term="Spring Boot" scheme="https://dayarch.top/tags/Spring-Boot/"/>
     
       <category term="EasyExcel" scheme="https://dayarch.top/tags/EasyExcel/"/>
     
