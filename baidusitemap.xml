@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://dayarch.top//p/java-equals-hashcode.html</loc>
+    <lastmod>2019-12-17</lastmod>
+  </url>  <url>
+    <loc>https://dayarch.top//p/java-string-interview.html</loc>
+    <lastmod>2019-12-17</lastmod>
+  </url>  <url>
     <loc>https://dayarch.top//p/spring-data-binding-mechanism.html</loc>
     <lastmod>2019-12-16</lastmod>
   </url>  <url>
@@ -68,9 +74,6 @@
     <lastmod>2019-11-07</lastmod>
   </url>  <url>
     <loc>https://dayarch.top//p/jdk12-collectors-teeing-api-usage.html</loc>
-    <lastmod>2019-11-07</lastmod>
-  </url>  <url>
-    <loc>https://dayarch.top//p/java-string-interview.html</loc>
     <lastmod>2019-11-07</lastmod>
   </url>  <url>
     <loc>https://dayarch.top//p/git-workflow.html</loc>

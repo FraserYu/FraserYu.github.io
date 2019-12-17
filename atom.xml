@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://dayarch.top/"/>
-  <updated>2019-12-16T04:30:41.731Z</updated>
+  <updated>2019-12-17T12:53:53.046Z</updated>
   <id>https://dayarch.top/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Java equals 和 hashCode 面试那点事</title>
+    <link href="https://dayarch.top//p/java-equals-hashcode.html"/>
+    <id>https://dayarch.top//p/java-equals-hashcode.html</id>
+    <published>2019-12-17T12:41:51.000Z</published>
+    <updated>2019-12-17T12:53:53.046Z</updated>
+    
+    <summary type="html">
+    
+      Java基础面试中经常会被问到 equals 和 hashcode 之间的关系及他们的约束，其实这些内容不是通过死记硬背的，我们可以通过渐进明细的形式分析其背后的道理
+    
+    </summary>
+    
+    
+      <category term="Coding" scheme="https://dayarch.top/categories/Coding/"/>
+    
+      <category term="Java" scheme="https://dayarch.top/categories/Coding/Java/"/>
+    
+    
+      <category term="Java" scheme="https://dayarch.top/tags/Java/"/>
+    
+      <category term="面试" scheme="https://dayarch.top/tags/%E9%9D%A2%E8%AF%95/"/>
+    
+  </entry>
   
   <entry>
     <title>Spring 数据绑定剖析</title>
@@ -392,7 +417,7 @@
     <link href="https://dayarch.top//p/java-string-interview.html"/>
     <id>https://dayarch.top//p/java-string-interview.html</id>
     <published>2019-08-31T03:57:49.000Z</published>
-    <updated>2019-11-07T06:36:07.777Z</updated>
+    <updated>2019-12-17T12:47:59.582Z</updated>
     
     <summary type="html">
     
@@ -407,6 +432,8 @@
     
     
       <category term="JVM" scheme="https://dayarch.top/tags/JVM/"/>
+    
+      <category term="面试" scheme="https://dayarch.top/tags/%E9%9D%A2%E8%AF%95/"/>
     
   </entry>
   
@@ -482,29 +509,6 @@
     
     
       <category term="Exception" scheme="https://dayarch.top/tags/Exception/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Springboot返回统一JSON数据格式是怎么实现的？</title>
-    <link href="https://dayarch.top//p/spring-boot-global-return.html"/>
-    <id>https://dayarch.top//p/spring-boot-global-return.html</id>
-    <published>2019-08-08T13:22:23.000Z</published>
-    <updated>2019-11-07T06:38:17.571Z</updated>
-    
-    <summary type="html">
-    
-      SpringBoot RESTful API 返回统一数据格式，这是一种非常简单的方式，透过本文，你更能了解这种简单实现方式背后的秘密
-    
-    </summary>
-    
-    
-      <category term="Coding" scheme="https://dayarch.top/categories/Coding/"/>
-    
-      <category term="Spring-Boot" scheme="https://dayarch.top/categories/Coding/Spring-Boot/"/>
-    
-    
-      <category term="Spring Boot" scheme="https://dayarch.top/tags/Spring-Boot/"/>
     
   </entry>
   
