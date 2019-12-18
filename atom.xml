@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>日拱一兵 ｜ Java ｜ Spring Boot ｜ 并发编程 ｜ 最新干货分享</title>
+  <title>日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享</title>
   <icon>https://dayarch.top/icon.png</icon>
   <subtitle>Quick notes</subtitle>
   <link href="/atom.xml" rel="self"/>
