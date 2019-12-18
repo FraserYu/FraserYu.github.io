@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://dayarch.top/website/index.html</loc>
+    
+    <lastmod>2019-12-18T09:12:35.232Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://dayarch.top/p/java-equals-hashcode.html</loc>
     
     <lastmod>2019-12-18T08:17:31.910Z</lastmod>
@@ -19,13 +26,6 @@
     <loc>https://dayarch.top/p/spring-data-binding-mechanism.html</loc>
     
     <lastmod>2019-12-16T04:30:41.731Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://dayarch.top/website/index.html</loc>
-    
-    <lastmod>2019-12-15T13:07:07.586Z</lastmod>
     
   </url>
   
