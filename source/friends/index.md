@@ -62,19 +62,27 @@ links:
       tags:     # 标签
       - 宝藏
       - CloudNative
-#   - group: 分组2
-#     icon: fas fa-user-tie
-#     items:
-#     - name:     # 博客名
-#       avatar:   # 头像链接
-#       url:      # 博客链接
-#       backgroundColor: '#3E74C9' # 卡片背景颜色
-#       textColor: '#fff'  # 卡片文字颜色
-#       tags:     # 标签
-#       - 标签1
-#       - 标签2
----
 
+  - group: 道上的朋友（感谢有你）
+    icon: fas fa-user-tie
+    items:
+    - name: Fg社区
+      avatar: https://faceghost.com/statics/img/fg_logo.png
+      url: https://faceghost.com
+      backgroundColor: 'linear-gradient(to right, #16a085 0%, #f4d03f 100%)' # 卡片背景颜色
+      textColor: '#fff'  # 卡片文字颜色
+      tags:     # 标签
+      - 技术博客
+      - 问答
+    - name: 残梦学习博客
+      avatar: https://cdn.jsdelivr.net/gh/2662419405/CDN@1.0/sh.jpg
+      url: https://2662419405.github.io
+      backgroundColor: 'linear-gradient(to right, #a6c0fe 0%, #f68084 100%)' # 卡片背景颜色
+      textColor: '#fff'  # 卡片文字颜色
+      tags:     # 标签
+      - 前端
+      - JS
+---
 
 > 需要添加友链，请在下方留言，需要以下内容：
 

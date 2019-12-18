@@ -6,6 +6,25 @@
       <div class="article-entry" itemprop="articleBody">
         <%- post.content %>
       </div>
+      <div class="tuijian">
+        <br><br>
+        📚相关文章
+        <%-
+        popular_posts( {} , post )
+        %>
+        <!-- <%-
+        popular_posts_json({ isDate: true, ulClass: 'none'} , post )
+        %> -->
+      </div>
+      <div class="personalweixin">
+        <br><br>
+        <blockquote>
+          <a href="https://mp.weixin.qq.com/s/G7BXuZh0Qh1-mE6ts4LJqQ">加我微信</a>，咱们交流技术与思想，共同成长
+        </blockquote>
+        <br>
+
+      </div>
+      
       <% if(post.layout == 'post'){ %>
         <br>
         <%- partial('meta', {post: post, position: 'footer'}) %>

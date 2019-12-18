@@ -1,20 +1,32 @@
-<% if (theme.googleads.square) { %>
+<% if (theme.advertisement.enable) { %>
     <section class='widget <%- item.widget?item.widget:'advertise' %>'>
         <%- partial('header', {item: item, defIcon: '', defTitle: ''}) %>
         <div class='content <%= theme.style %>'>
-            <%- markdown(item.body) %>
-            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-            <!-- 正方形卡片 -->
-            <ins class="adsbygoogle"
-                style="display:block"
-                data-ad-client="ca-pub-1774278264048334"
-                data-ad-slot="1492300051"
-                data-ad-format="auto"
-                data-full-width-responsive="true"></ins>
-            <script>
-                (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
+            <!-- <%- markdown(item.body) %> -->
+            <% (theme.advertisement.tuiguang.pingtai||[]).forEach(function(value){ %>
+                <% if (value.enable && value.url && value.img) { %>
+                    <div>
+                        <a href="<%- url_for(value.url) %>" title="<%- value.title %>" rel="external nofollow noopener noreferrer" target="_blank">
+                            <img src="<%- value.img %>" width="269">
+                        </a>
+                    </div>
+                <%}%>
+            <%})%>
+
+            <% if (theme.advertisement.googleads.square) { %>
+                <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                <!-- 正方形卡片 -->
+                <ins class="adsbygoogle"
+                    style="display:block"
+                    data-ad-client="ca-pub-1774278264048334"
+                    data-ad-slot="1492300051"
+                    data-ad-format="auto"
+                    data-full-width-responsive="true"></ins>
+                <script>
+                    (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+            <% } %>
         </div>
     </section>
 <% } %>
-      
+
