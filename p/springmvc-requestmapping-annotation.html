@@ -516,7 +516,9 @@
 </li>
 </ol>
 <p><strong><em>Also supports media type wildcards (</em>), for headers such as Accept and Content-Type. For instance,will match requests with a Content-Type of “text/html”, “text/plain”, etc. *</strong><br>和params属性类似，支持通配符匹配。</p>
-<pre><code>@RequestMapping(value = &quot;/something&quot;, headers = &quot;content-type=text/*&quot;)</code></pre><ol start="5">
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping</span>(value = <span class="string">"/something"</span>, headers = <span class="string">"content-type=text/*"</span>)</span><br></pre></td></tr></table></figure>
+
+<ol start="5">
 <li><p><strong>name</strong></p>
 <blockquote>
 <p><em>Assign a name to this mapping. Supported at the type level as well as at the method level! When used on both levels, a combined name is derived by concatenation with “#” as separator.</em><br>给mapping命名，支持在类和方法上使用该属性，联合起来的name用#来分隔</p>
@@ -679,10 +681,10 @@ public String testParams(){
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2019-11-07T14:13:31+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2019-12-19T21:34:55+08:00">
   <a class='notlink'>
     <i class="fas fa-clock" aria-hidden="true"></i>
-    <p>更新于 2019年11月7日</p>
+    <p>更新于 2019年12月19日</p>
   </a>
 </div>
 
@@ -1133,7 +1135,7 @@ public String testParams(){
   &nbsp;&nbsp;|&nbsp;&nbsp;  
   
     &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-        class="white-color">141.9k</span>&nbsp;字
+        class="white-color">142.8k</span>&nbsp;字
     
 
   &nbsp;&nbsp;|&nbsp;&nbsp;  

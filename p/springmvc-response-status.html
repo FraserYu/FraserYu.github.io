@@ -490,28 +490,15 @@
 <a id="more"></a>
 
 <h4 id="应用在类级别"><a href="#应用在类级别" class="headerlink" title="应用在类级别"></a>应用在类级别</h4><p>创建一个异常类，用该注解标注</p>
-<pre><code>package com.zj.exception;
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.zj.exception;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.springframework.http.HttpStatus;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.ResponseStatus;</span><br><span class="line"></span><br><span class="line"><span class="meta">@ResponseStatus</span>(value=HttpStatus.FORBIDDEN,reason=<span class="string">"用户不匹配"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserNotMatchException</span> <span class="keyword">extends</span> <span class="title">RuntimeException</span></span>&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.ResponseStatus;
+<p>写一个目标方法来抛出异常</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/testResponseStatus"</span>)</span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">testResponseStatus</span><span class="params">(<span class="keyword">int</span> i)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(i==<span class="number">0</span>)</span><br><span class="line">		<span class="keyword">throw</span> <span class="keyword">new</span> UserNotMatchException();</span><br><span class="line">	<span class="keyword">return</span> <span class="string">"hello"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-@ResponseStatus(value=HttpStatus.FORBIDDEN,reason=&quot;用户不匹配&quot;)
-public class UserNotMatchException extends RuntimeException{
+<p>这样当我们请求该方法，如果出现异常，会将用户不匹配的信息返回给浏览器，让异常信息更加明确，而不是一堆异常信息代码</p>
+<h4 id="应用在方法级别"><a href="#应用在方法级别" class="headerlink" title="应用在方法级别"></a>应用在方法级别</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@ResponseStatus</span>(value=HttpStatus.FORBIDDEN,reason=<span class="string">"用户名不匹配"</span>)</span><br><span class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/testResponseStatus"</span>)</span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">testResponseStatus</span><span class="params">(<span class="keyword">int</span> i)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(i==<span class="number">0</span>)</span><br><span class="line">		<span class="keyword">throw</span> <span class="keyword">new</span> UserNotMatchException();</span><br><span class="line">	<span class="keyword">return</span> <span class="string">"hello"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-}</code></pre><p>写一个目标方法来抛出异常</p>
-<pre><code>@RequestMapping(&quot;/testResponseStatus&quot;)
-public String testResponseStatus(int i){
-    if(i==0)
-        throw new UserNotMatchException();
-    return &quot;hello&quot;;
-}</code></pre><p>  这样当我们请求该方法，如果出现异常，会将用户不匹配的信息返回给浏览器，让异常信息更加明确，而不是一堆异常信息代码</p>
-<h4 id="应用在方法级别"><a href="#应用在方法级别" class="headerlink" title="应用在方法级别"></a>应用在方法级别</h4><pre><code>@ResponseStatus(value=HttpStatus.FORBIDDEN,reason=&quot;用户名不匹配&quot;)
-@RequestMapping(&quot;/testResponseStatus&quot;)
-public String testResponseStatus(int i){
-    if(i==0)
-        throw new UserNotMatchException();
-    return &quot;hello&quot;;
-}</code></pre><p><strong>ResponseStatus修饰目标方法，无论它执行方法过程中有没有异常产生，用户都会得到异常的界面。而目标方法正常执行</strong></p>
+<p><strong>ResponseStatus修饰目标方法，无论它执行方法过程中有没有异常产生，用户都会得到异常的界面。而目标方法正常执行</strong></p>
 <p>这个情况要看项目的使用情况，通常会制定一个标准的异常信息显示，可以灵活使用.</p>
 
       </div>
@@ -539,10 +526,10 @@ public String testResponseStatus(int i){
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2019-11-03T11:08:01+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2019-12-19T21:33:55+08:00">
   <a class='notlink'>
     <i class="fas fa-clock" aria-hidden="true"></i>
-    <p>更新于 2019年11月3日</p>
+    <p>更新于 2019年12月19日</p>
   </a>
 </div>
 
@@ -1047,7 +1034,7 @@ CHECKPOINT(103"
   &nbsp;&nbsp;|&nbsp;&nbsp;  
   
     &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-        class="white-color">141.9k</span>&nbsp;字
+        class="white-color">142.8k</span>&nbsp;字
     
 
   &nbsp;&nbsp;|&nbsp;&nbsp;  

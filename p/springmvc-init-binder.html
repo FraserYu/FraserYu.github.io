@@ -488,33 +488,12 @@
 <h3 id="initbinder"><a href="#initbinder" class="headerlink" title="@initbinder"></a>@initbinder</h3><p>在我的项目中是在BaseController中增加方法initBinder，并使用注解@InitBinder标注，那么spring mvc在绑定表单之前，都会先注册这些编辑器, Spring自己提供了大量的实现类，诸如CustomDateEditor ，CustomBooleanEditor，CustomNumberEditor等许多，基本上够用, 当然我们也可以自己来写这些编辑器.</p>
 <a id="more"></a>
 
-<h4 id="自定义编辑器"><a href="#自定义编辑器" class="headerlink" title="自定义编辑器"></a>自定义编辑器</h4><pre><code>import org.springframework.beans.propertyeditors.PropertiesEditor;  
+<h4 id="自定义编辑器"><a href="#自定义编辑器" class="headerlink" title="自定义编辑器"></a>自定义编辑器</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.springframework.beans.propertyeditors.PropertiesEditor;  </span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DoubleEditor</span> <span class="keyword">extends</span> <span class="title">PropertiesEditor</span> </span>&#123;    </span><br><span class="line">	<span class="meta">@Override</span>    </span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setAsText</span><span class="params">(String text)</span> <span class="keyword">throws</span> IllegalArgumentException </span>&#123;    </span><br><span class="line">		<span class="keyword">if</span> (text == <span class="keyword">null</span> || text.equals(<span class="string">""</span>)) &#123;    </span><br><span class="line">			text = <span class="string">"0"</span>;    </span><br><span class="line">		&#125;    </span><br><span class="line">		setValue(Double.parseDouble(text));    </span><br><span class="line">	&#125;    </span><br><span class="line"></span><br><span class="line">	<span class="meta">@Override</span>    </span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">getAsText</span><span class="params">()</span> </span>&#123;    </span><br><span class="line">		<span class="keyword">return</span> getValue().toString();    </span><br><span class="line">	&#125;    </span><br><span class="line">&#125;  </span><br><span class="line">```	</span><br><span class="line"></span><br><span class="line">类似Long、Float等都可以这样写，然后将这些自定义的编辑器或Spring自带的编辑器放到BaseController中带有<span class="meta">@initbinder</span>的方法中注册就好.</span><br><span class="line">```java</span><br><span class="line"><span class="meta">@InitBinder</span>    </span><br><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">initBinder</span><span class="params">(WebDataBinder binder)</span> </span>&#123;    </span><br><span class="line">	binder.registerCustomEditor(Date.class, <span class="keyword">new</span> CustomDateEditor(<span class="keyword">new</span> SimpleDateFormat(<span class="string">"yyyy-MM-dd HH:mm:ss"</span>), <span class="keyword">true</span>));    </span><br><span class="line">	binder.registerCustomEditor(<span class="keyword">int</span>.class, <span class="keyword">new</span> CustomNumberEditor(<span class="keyword">int</span>.class, <span class="keyword">true</span>));    </span><br><span class="line">	binder.registerCustomEditor(<span class="keyword">int</span>.class, <span class="keyword">new</span> IntegerEditor());    </span><br><span class="line">	binder.registerCustomEditor(<span class="keyword">long</span>.class, <span class="keyword">new</span> CustomNumberEditor(<span class="keyword">long</span>.class, <span class="keyword">true</span>));  </span><br><span class="line">	binder.registerCustomEditor(<span class="keyword">long</span>.class, <span class="keyword">new</span> LongEditor());    </span><br><span class="line">	binder.registerCustomEditor(<span class="keyword">double</span>.class, <span class="keyword">new</span> DoubleEditor());    </span><br><span class="line">	binder.registerCustomEditor(<span class="keyword">float</span>.class, <span class="keyword">new</span> FloatEditor());    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-public class DoubleEditor extends PropertiesEditor {    
-    @Override    
-    public void setAsText(String text) throws IllegalArgumentException {    
-        if (text == null || text.equals(&quot;&quot;)) {    
-            text = &quot;0&quot;;    
-        }    
-        setValue(Double.parseDouble(text));    
-    }    
+<p>当然我们也可以将自定义的编辑器直接继承 <strong>PropertyEditorSupport</strong>， 因为：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">org</span>.<span class="title">springframework</span>.<span class="title">beans</span>.<span class="title">propertyeditors</span>.<span class="title">PropertiesEditor</span> <span class="keyword">extends</span> <span class="title">java</span>.<span class="title">beans</span>.<span class="title">PropertyEditorSupport</span> </span>&#123;</span><br></pre></td></tr></table></figure>
 
-    @Override    
-    public String getAsText() {    
-        return getValue().toString();    
-    }    
-}  </code></pre><p>类似Long、Float等都可以这样写，然后将这些自定义的编辑器或Spring自带的编辑器放到BaseController中带有@initbinder的方法中注册就好.</p>
-<pre><code>@InitBinder    
-protected void initBinder(WebDataBinder binder) {    
-    binder.registerCustomEditor(Date.class, new CustomDateEditor(new SimpleDateFormat(&quot;yyyy-MM-dd HH:mm:ss&quot;), true));    
-  binder.registerCustomEditor(int.class, new CustomNumberEditor(int.class, true));    
-    binder.registerCustomEditor(int.class, new IntegerEditor());    
-    binder.registerCustomEditor(long.class, new CustomNumberEditor(long.class, true));  
-    binder.registerCustomEditor(long.class, new LongEditor());    
-    binder.registerCustomEditor(double.class, new DoubleEditor());    
-    binder.registerCustomEditor(float.class, new FloatEditor());    
-}  </code></pre><p>当然我们也可以将自定义的编辑器直接继承 <strong>PropertyEditorSupport</strong>， 因为：</p>
-<pre><code>public class org.springframework.beans.propertyeditors.PropertiesEditor extends java.beans.PropertyEditorSupport {      </code></pre><h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p>非常感谢一下两位作者贡献整理的文章：</p>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p>非常感谢一下两位作者贡献整理的文章：</p>
 <ol>
 <li><a href="http://blog.csdn.net/axin66ok/article/details/17938095#" target="_blank" rel="noopener">spring mvc使用@InitBinder 标签对表单数据绑定</a></li>
 <li><a href="http://www.cnblogs.com/shenxiaoquan/p/5753351.html" target="_blank" rel="noopener">@InitBind来解决字符串转日期类型</a></li>
@@ -545,10 +524,10 @@ protected void initBinder(WebDataBinder binder) {
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2019-11-03T11:07:54+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2019-12-19T21:33:04+08:00">
   <a class='notlink'>
     <i class="fas fa-clock" aria-hidden="true"></i>
-    <p>更新于 2019年11月3日</p>
+    <p>更新于 2019年12月19日</p>
   </a>
 </div>
 
@@ -990,7 +969,7 @@ protected void initBinder(WebDataBinder binder) {
   &nbsp;&nbsp;|&nbsp;&nbsp;  
   
     &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-        class="white-color">141.9k</span>&nbsp;字
+        class="white-color">142.8k</span>&nbsp;字
     
 
   &nbsp;&nbsp;|&nbsp;&nbsp;  

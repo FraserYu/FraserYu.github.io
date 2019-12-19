@@ -4,12 +4,12 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   
-  <title>Hybris tomcat Jrebel热部署配置 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享</title>
+  <title>面试还不知道BeanFactory和ApplicationContext的区别？ | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享</title>
   
-  <meta name="keywords" content="Hybris,Jebrel,热部署, Java,SpringBoot,并发编程, ElasticSearch, 日拱一兵">
+  <meta name="keywords" content="BeanFactory, ApplicationContext, Spring容器, Spring懒加载, Java,SpringBoot,并发编程, ElasticSearch, 日拱一兵">
   
   
-  <meta name="description" content="Hybris通过Jrebel插件实现热部署，提高编程调试效率, 本站是日拱一兵的技术分享博客，内容涵盖Java后端技术、Spring Boot、Java并发编程等技术研究与分享，用有趣的方式解读技术">
+  <meta name="description" content="BeanFactory和ApplicationContext是Sring容器的核心，面试经常会问二者区别，本文会透彻说明, 本站是日拱一兵的技术分享博客，内容涵盖Java后端技术、Spring Boot、Java并发编程等技术研究与分享，用有趣的方式解读技术">
   
 
   
@@ -393,13 +393,15 @@
   <section class='meta'>
     
     
+      <a title='面试还不知道BeanFactory和ApplicationContext的区别？' href='/p/difference-between-beanfactory-and-applicationcontext.html'><img class='thumbnail' src='https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgspringbootconverter.png'></a>
+    
     <div class="meta" id="header-meta">
       
         
   
     <h1 class="title">
-      <a href="/p/hybris-jrebel.html">
-        Hybris tomcat Jrebel热部署配置
+      <a href="/p/difference-between-beanfactory-and-applicationcontext.html">
+        面试还不知道BeanFactory和ApplicationContext的区别？
       </a>
     </h1>
   
@@ -430,7 +432,7 @@
             <div class="new-meta-item date">
   <a class='notlink'>
     <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-    <p>2017-03-30</p>
+    <p>2019-12-19</p>
   </a>
 </div>
 
@@ -440,9 +442,9 @@
             
   
   <div class='new-meta-item category'>
-    <a href='/categories/Coding/Others/' rel="nofollow">
+    <a href='/categories/Coding/Spring-Boot/' rel="nofollow">
       <i class="fas fa-folder-open" aria-hidden="true"></i>
-      <p>Coding&nbsp;/&nbsp;Others</p>
+      <p>Coding&nbsp;/&nbsp;Spring-Boot</p>
     </a>
   </div>
 
@@ -482,35 +484,50 @@
 
     <section class="article typo">
       <div class="article-entry" itemprop="articleBody">
-        <h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>Jrebel是非常强大的实现项目热部署的软件，当然也比较消耗电脑的性能，当如Hybris的这种启动需要一段时间的项目，对于后端开发人员来说，改动一些东西就要重启服务真的是一种折磨，浪费时间，接下来说明一下Jrebel在Hybris项目中的配置</p>
-<h3 id="配置Jrebel"><a href="#配置Jrebel" class="headerlink" title="配置Jrebel"></a>配置Jrebel</h3><p>Jrebel可以通过IntelliJ IDEA来下载安装集成好的插件，也可以单独下载Jrebel的包 （请支持正版）</p>
-<a id="more"></a>
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><blockquote>
+<p>接口 BeanFactory 和 ApplicationContext 都是用来从容器中获取 Spring beans 的，但是，他们二者有很大不同</p>
+</blockquote>
+<p>我看到过很多问 BeanFactory 和 ApplicationContext 不同点的问题，考虑到这，我应该使用前者还是后者从 Spring 容器中获取 beans 呢？请向下看</p>
+<h2 id="什么是-Spring-Bean"><a href="#什么是-Spring-Bean" class="headerlink" title="什么是 Spring Bean"></a>什么是 Spring Bean</h2><p>这是一个非常简单而又很复杂的问题，通常来说，Spring beans 就是被 Spring 容器所管理的 Java 对象，来看一个简单的例子</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.zoltanraffai;  </span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloWorld</span> </span>&#123; </span><br><span class="line">   <span class="keyword">private</span> String message;  </span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setMessage</span><span class="params">(String message)</span></span>&#123; </span><br><span class="line">      <span class="keyword">this</span>.message  = message; </span><br><span class="line">   &#125;  </span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">getMessage</span><span class="params">()</span></span>&#123; </span><br><span class="line">      System.out.println(<span class="string">"My Message : "</span> + message); </span><br><span class="line">   &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h4 id="方法一：通过IntelliJ-IDEA-插件"><a href="#方法一：通过IntelliJ-IDEA-插件" class="headerlink" title="方法一：通过IntelliJ IDEA 插件"></a>方法一：通过IntelliJ IDEA 插件</h4><p>如下图下载安装InteliJ IDEA 插件<br><img src="http://7xkyc7.com1.z0.glb.clouddn.com/jrebel_jrebel.png" alt="Jrebel"></p>
-<p>安装好之后我们就可以在IntelliJ IDEA的安装目录中看到该插件，接下来在Hybris的local.properties文件中来配置tomcat</p>
-<pre><code>#JRebel
-tomcat.javaoptions=-agentpath:&quot;D:/Users/fraser/.IntelliJIdea2016.2/config/plugins/jr-ide-idea/lib/jrebel6/lib/jrebel64.dll&quot;  -DforceANSI=true
-tomcat.debugjavaoptions=-agentpath:&quot;D:/Users/fraser/.IntelliJIdea2016.2/config/plugins/jr-ide-idea/lib/jrebel6/lib/jrebel64.dll&quot; -Xdebug -Xrunjdwp:transport=dt_socket,server=y,address=8000,suspend=n -DforceANSI=true</code></pre><h4 id="方法二：通过安装包"><a href="#方法二：通过安装包" class="headerlink" title="方法二：通过安装包"></a>方法二：通过安装包</h4><p>下载Jrebel安装包来，将安装包解压到某一个目录下，然后同样配置local.properties 文件如下：</p>
-<pre><code>#JREBEL
-tomcat.javaoptions=-Xverify:none -javaagent:&quot;E:/MyProjectSpace/jrebel_5.6.0/jrebe/jrebel.jar=de.hybris.tomcat.HybrisWebappClassLoader60&quot;
-tomcat.debugjavaoptions=-Xverify:none -javaagent:&quot;E:/MyProjectSpace/jrebel_5.6.0/jrebe/jrebel.jar=de.hybris.tomcat.HybrisWebappClassLoader60&quot;-Xdebug -Xrunjdwp:transport=dt_socket,server=y,address=8060,suspend=y
+<p>在基于 XML 的配置中， beans.xml 为 Spring 容器管理 bean 提供元数据</p>
+<h2 id="什么是-Spring-容器"><a href="#什么是-Spring-容器" class="headerlink" title="什么是 Spring 容器"></a>什么是 Spring 容器</h2><p>Spring 容器负责实例化，配置和装配 Spring beans，下面来看如何为 IoC 容器配置我们的 HelloWorld POJO</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version = "1.0" encoding = "UTF-8"?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">xmlns</span> = <span class="string">"http://www.springframework.org/schema/beans"</span></span></span><br><span class="line"><span class="tag">   <span class="attr">xmlns:xsi</span> = <span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span></span></span><br><span class="line"><span class="tag">   <span class="attr">xsi:schemaLocation</span> = <span class="string">"http://www.springframework.org/schema/beans</span></span></span><br><span class="line"><span class="tag"><span class="string">   http://www.springframework.org/schema/beans/spring-beans-3.0.xsd"</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span> = <span class="string">"helloWorld"</span> <span class="attr">class</span> = <span class="string">"com.zoltanraffai.HelloWorld"</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span> = <span class="string">"message"</span> <span class="attr">value</span> = <span class="string">"Hello World!"</span>/&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-#可不配
-tomcat.generaloptions=-Xmx2G -Xms2G -XX:PermSize=500M -XX:MaxPermSize=300M -Xss256K -XX:+DisableExplicitGC -XX:+UseConcMarkSweepGC -XX:CMSInitiatingOccupancyFraction=75 -XX:+CMSPermGenSweepingEnabled -XX:+CMSClassUnloadingEnabled -XX:+UseCMSInitiatingOccupancyOnly -XX:+CMSParallelRemarkEnabled -XX:+ParallelRefProcEnabled -XX:+CMSScavengeBeforeRemark  -XX:+PrintGCTimeStamps -XX:+PrintGCDetails -Xloggc:&quot;${HYBRIS_LOG_DIR}/tomcat/java_gc.log&quot; -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Dorg.tanukisoftware.wrapper.WrapperManager.mbean=true -Djava.endorsed.dirs=..b/endorsed -Dcatalina.base=%CATALINA_BASE% -Dcatalina.home=%CATALINA_HOME% -Dfile.encoding=UTF-8 -Dlog4j.configuration=log4j_init_tomcat.properties -Djava.util.logging.config.file=jdk_logging.properties -Djava.io.tmpdir=&quot;${HYBRIS_TEMP_DIR}&quot; -Dsun.rmi.dgc.client.gcInterval=3600000 -Dsun.rmi.dgc.server.gcInterval=3600000</code></pre><h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><p>启动Hybris服务器如看到如下信息就说明Jrebel配置成功：<br><img src="http://7xkyc7.com1.z0.glb.clouddn.com/jrebel_jrebel1.png" alt="jrebel1"></p>
-<p>这样我们执行<strong>ant build</strong> 命令等待build成功，就可以实现热部署，如果遇到如下问题：<br><img src="http://7xkyc7.com1.z0.glb.clouddn.com/jrebel_jrebel2.png" alt="jrebel3"></p>
-<p>找到<strong>D:\projects\hybrisHn\hybris\bin\ext-backoffice\backoffice\buildcallbacks.xml</strong> 文件，按照如下注释掉<strong><backoffice_remove_web_fragments/></strong> 即可</p>
-<pre><code>&lt;macrodef name=&quot;backoffice_after_build&quot;&gt;
-    &lt;sequential&gt;
-        &lt;!--&lt;backoffice_remove_web_fragments/&gt;--&gt;
-        &lt;backoffice_create_web_fragments/&gt;
-    &lt;/sequential&gt;
-&lt;/macrodef&gt;</code></pre><p>重新尝试<strong>ant build</strong> 命令应该就可以build成功，快尝试一下吧</p>
+<p>现在，它已经被 Spring 容器管理了，接下来的问题是：我们怎样获取它？</p>
+<h2 id="BeanFactory-和-ApplicationContext-的不同点"><a href="#BeanFactory-和-ApplicationContext-的不同点" class="headerlink" title="BeanFactory 和 ApplicationContext 的不同点"></a>BeanFactory 和 ApplicationContext 的不同点</h2><h3 id="BeanFactory-接口"><a href="#BeanFactory-接口" class="headerlink" title="BeanFactory 接口"></a>BeanFactory 接口</h3><p>这是一个用来访问 Spring 容器的 root 接口，要访问 Spring 容器，我们将使用 Spring 依赖注入功能，使用 BeanFactory 接口和它的子接口</p>
+<p><strong>特性：</strong></p>
+<ul>
+<li>Bean 的实例化/串联<br>通常情况，BeanFactory 的实现是使用懒加载的方式，这意味着 beans 只有在我们通过 getBean() 方法直接调用它们时才进行实例化<br>实现 BeanFactory 最常用的 API 是 XMLBeanFactory<br>这里是如何通过 BeanFactory 获取一个 bean 的例子：</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.zoltanraffai;  </span><br><span class="line"><span class="keyword">import</span> org.springframework.core.io.ClassPathResource;  </span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.InitializingBean; </span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.xml.XmlBeanFactory; </span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloWorldApp</span></span>&#123; </span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123; </span><br><span class="line">      XmlBeanFactory factory = <span class="keyword">new</span> XmlBeanFactory (<span class="keyword">new</span> ClassPathResource(<span class="string">"beans.xml"</span>)); </span><br><span class="line">      HelloWorld obj = (HelloWorld) factory.getBean(<span class="string">"helloWorld"</span>);    </span><br><span class="line">      obj.getMessage();    </span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="ApplicationContext-接口"><a href="#ApplicationContext-接口" class="headerlink" title="ApplicationContext 接口"></a>ApplicationContext 接口</h3><p>ApplicationContext 是 Spring 应用程序中的中央接口，用于向应用程序提供配置信息<br>它继承了 BeanFactory 接口，所以 ApplicationContext 包含 BeanFactory 的所有功能以及更多功能！它的主要功能是支持大型的业务应用的创建</p>
+<p><strong>特性：</strong></p>
+<ul>
+<li>Bean instantiation/wiring</li>
+<li>Bean 的实例化/串联</li>
+<li>自动的 BeanPostProcessor 注册</li>
+<li>自动的 BeanFactoryPostProcessor 注册</li>
+<li>方便的 MessageSource 访问（i18n）</li>
+<li>ApplicationEvent 的发布</li>
+</ul>
+<p>与 BeanFactory 懒加载的方式不同，它是预加载，所以，每一个 bean 都在 ApplicationContext 启动之后实例化</p>
+<p>这里是 ApplicationContext 的使用例子：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.zoltanraffai;  </span><br><span class="line"><span class="keyword">import</span> org.springframework.core.io.ClassPathResource;  </span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.InitializingBean; </span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.xml.XmlBeanFactory; </span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloWorldApp</span></span>&#123; </span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123; </span><br><span class="line">      ApplicationContext context=<span class="keyword">new</span> ClassPathXmlApplicationContext(<span class="string">"beans.xml"</span>); </span><br><span class="line">      HelloWorld obj = (HelloWorld) context.getBean(<span class="string">"helloWorld"</span>);    </span><br><span class="line">      obj.getMessage();    </span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>ApplicationContext 包含 BeanFactory 的所有特性，通常推荐使用前者。但是也有一些限制情形，比如移动应用内存消耗比较严苛，在那些情景中，使用更轻量级的 BeanFactory 是更合理的。然而，在大多数企业级的应用中，ApplicationContext 是你的首选。</p>
+<h2 id="灵魂追问"><a href="#灵魂追问" class="headerlink" title="灵魂追问"></a>灵魂追问</h2><ul>
+<li>如何使用 BeanPostProcessor 和 BeanFactoryPostProcessor ？</li>
+<li>你了解 Spring Bean 的生命周期吗？了解了这些对与 bean 的使用将有非常大的帮助.</li>
+</ul>
 
       </div>
       <div class="tuijian">
         <br><br>
         📚相关文章
-        
+        <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/spring-boot-json-return-non-null.html" title="Springboot Json格式数据不返回null值属性" rel="bookmark">Springboot Json格式数据不返回null值属性</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/docker-deploy-spring-boot.html" title="使用 Docker 部署 Spring Boot" rel="bookmark">使用 Docker 部署 Spring Boot</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/spring-boot-condition-annotation.html" title="@Conditional注解，Spring Boot 的灵活配置" rel="bookmark">@Conditional注解，Spring Boot 的灵活配置</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/spring-boot-starter-custom.html" title="Spring Boot 自定义starter 全面教程" rel="bookmark">Spring Boot 自定义starter 全面教程</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/spring-data-binding-mechanism.html" title="Spring 数据绑定剖析" rel="bookmark">Spring 数据绑定剖析</a></h3></div></li></ul>
         <!-- [object Object] -->
       </div>
       <div class="personalweixin">
@@ -531,10 +548,10 @@ tomcat.generaloptions=-Xmx2G -Xms2G -XX:PermSize=500M -XX:MaxPermSize=300M -Xss2
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2019-11-07T13:28:27+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2019-12-19T21:45:38+08:00">
   <a class='notlink'>
     <i class="fas fa-clock" aria-hidden="true"></i>
-    <p>更新于 2019年11月7日</p>
+    <p>更新于 2019年12月19日</p>
   </a>
 </div>
 
@@ -543,7 +560,7 @@ tomcat.generaloptions=-Xmx2G -Xms2G -XX:PermSize=500M -XX:MaxPermSize=300M -Xss2
         
           
   
-  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/Hybris/" rel="nofollow"><i class="fas fa-tag" aria-hidden="true"></i><p>Hybris</p></a></div> <div class="new-meta-item meta-tags"><a class="tag" href="/tags/Jrebel/" rel="nofollow"><i class="fas fa-tag" aria-hidden="true"></i><p>Jrebel</p></a></div>
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/Spring-Boot/" rel="nofollow"><i class="fas fa-tag" aria-hidden="true"></i><p>Spring Boot</p></a></div> <div class="new-meta-item meta-tags"><a class="tag" href="/tags/%E9%9D%A2%E8%AF%95/" rel="nofollow"><i class="fas fa-tag" aria-hidden="true"></i><p>面试</p></a></div>
 
 
         
@@ -556,17 +573,27 @@ tomcat.generaloptions=-Xmx2G -Xms2G -XX:PermSize=500M -XX:MaxPermSize=300M -Xss2
       
         <a class="-mob-share-qq" title="QQ好友" rel="external nofollow noopener noreferrer"
           
-          href="http://connect.qq.com/widget/shareqq/index.html?url=https://dayarch.top/p/hybris-jrebel.html&title=Hybris tomcat Jrebel热部署配置 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=背景
-Jrebel是非常强大的实现项目热部署的软件，当然也比较消耗电脑的性能，当如Hybris的这种启动需要一段时间的项目，对于后端开发人员来说，改动一些东西就要重启服务真的是一种折磨，浪费时间，接下来说明一下Jrebel在Hybris项目中的配置
+          href="http://connect.qq.com/widget/shareqq/index.html?url=https://dayarch.top/p/difference-between-beanfactory-and-applicationcontext.html&title=面试还不知道BeanFactory和ApplicationContext的区别？ | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=前言
+接口 BeanFactory 和 ApplicationContext 都是用来从容器中获取 Spring beans 的，但是，他们二者有很大不同
 
-配置Jrebel
-Jrebel可以通过IntelliJ IDEA来下载安装集成好的插件，也可以单独下载Jrebel的包 （请支持正版）
+我看到过很多问 BeanFactory 和 ApplicationContext 不同点的问题，考虑到这，我应该使用前者还是后者从 Spring 容器中获取 beans 呢？请向下看
 
-方法一：通过IntelliJ IDEA 插件
-如下图下载安装InteliJ IDEA 插件
+什么是 Spring Bean
+这是一个非常简单而又很复杂的问题，通常来说，Spring beans 就是被 Spring 容器所管理的 Java 对象，来看一个简单的例子
+
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
 
 
-安装好之后我们就可以在IntelliJ IDEA的安装目录中看到该插件，接下来在Hybris的local.prop"
+package com.zolta"
           
           >
           
@@ -578,17 +605,27 @@ Jrebel可以通过IntelliJ IDEA来下载安装集成好的插件，也可以单�
       
         <a class="-mob-share-qzone" title="QQ空间" rel="external nofollow noopener noreferrer"
           
-          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://dayarch.top/p/hybris-jrebel.html&title=Hybris tomcat Jrebel热部署配置 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=背景
-Jrebel是非常强大的实现项目热部署的软件，当然也比较消耗电脑的性能，当如Hybris的这种启动需要一段时间的项目，对于后端开发人员来说，改动一些东西就要重启服务真的是一种折磨，浪费时间，接下来说明一下Jrebel在Hybris项目中的配置
+          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://dayarch.top/p/difference-between-beanfactory-and-applicationcontext.html&title=面试还不知道BeanFactory和ApplicationContext的区别？ | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=前言
+接口 BeanFactory 和 ApplicationContext 都是用来从容器中获取 Spring beans 的，但是，他们二者有很大不同
 
-配置Jrebel
-Jrebel可以通过IntelliJ IDEA来下载安装集成好的插件，也可以单独下载Jrebel的包 （请支持正版）
+我看到过很多问 BeanFactory 和 ApplicationContext 不同点的问题，考虑到这，我应该使用前者还是后者从 Spring 容器中获取 beans 呢？请向下看
 
-方法一：通过IntelliJ IDEA 插件
-如下图下载安装InteliJ IDEA 插件
+什么是 Spring Bean
+这是一个非常简单而又很复杂的问题，通常来说，Spring beans 就是被 Spring 容器所管理的 Java 对象，来看一个简单的例子
+
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
 
 
-安装好之后我们就可以在IntelliJ IDEA的安装目录中看到该插件，接下来在Hybris的local.prop"
+package com.zolta"
           
           >
           
@@ -600,17 +637,27 @@ Jrebel可以通过IntelliJ IDEA来下载安装集成好的插件，也可以单�
       
         <a class="-mob-share-weibo" title="微博" rel="external nofollow noopener noreferrer"
           
-          href="http://service.weibo.com/share/share.php?url=https://dayarch.top/p/hybris-jrebel.html&title=Hybris tomcat Jrebel热部署配置 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=背景
-Jrebel是非常强大的实现项目热部署的软件，当然也比较消耗电脑的性能，当如Hybris的这种启动需要一段时间的项目，对于后端开发人员来说，改动一些东西就要重启服务真的是一种折磨，浪费时间，接下来说明一下Jrebel在Hybris项目中的配置
+          href="http://service.weibo.com/share/share.php?url=https://dayarch.top/p/difference-between-beanfactory-and-applicationcontext.html&title=面试还不知道BeanFactory和ApplicationContext的区别？ | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=前言
+接口 BeanFactory 和 ApplicationContext 都是用来从容器中获取 Spring beans 的，但是，他们二者有很大不同
 
-配置Jrebel
-Jrebel可以通过IntelliJ IDEA来下载安装集成好的插件，也可以单独下载Jrebel的包 （请支持正版）
+我看到过很多问 BeanFactory 和 ApplicationContext 不同点的问题，考虑到这，我应该使用前者还是后者从 Spring 容器中获取 beans 呢？请向下看
 
-方法一：通过IntelliJ IDEA 插件
-如下图下载安装InteliJ IDEA 插件
+什么是 Spring Bean
+这是一个非常简单而又很复杂的问题，通常来说，Spring beans 就是被 Spring 容器所管理的 Java 对象，来看一个简单的例子
+
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
 
 
-安装好之后我们就可以在IntelliJ IDEA的安装目录中看到该插件，接下来在Hybris的local.prop"
+package com.zolta"
           
           >
           
@@ -634,40 +681,21 @@ Jrebel可以通过IntelliJ IDEA来下载安装集成好的插件，也可以单�
       
           <div class="prev-next">
               
-                  <section class="prev">
-                      <span class="art-item-left">
-                          <h6><i class="fas fa-chevron-left" aria-hidden="true"></i>&nbsp;上一页</h6>
-                          <h4>
-                              <a href="/p/oauth2-detail.html" rel="prev" title="OAuth2.0 详解">
-                                
-                                    OAuth2.0 详解
-                                
-                              </a>
-                          </h4>
-                          
-                              
-                              <h6 class="tags">
-                                  <a class="tag" href="/tags/OAuth2-0/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> OAuth2.0</a>
-                              </h6>
-                          
-                      </span>
-                  </section>
-              
               
                   <section class="next">
                       <span class="art-item-right" aria-hidden="true">
                           <h6>下一页&nbsp;<i class="fas fa-chevron-right" aria-hidden="true"></i></h6>
                           <h4>
-                              <a href="/p/linux-search-keyword-script.html" rel="prev" title="Linux 根据关键字查看集群服务器的log">
+                              <a href="/p/java-equals-hashcode.html" rel="prev" title="Java equals 和 hashCode 面试那点事">
                                   
-                                      Linux 根据关键字查看集群服务器的log
+                                      Java equals 和 hashCode 面试那点事
                                   
                               </a>
                           </h4>
                           
                               
                               <h6 class="tags">
-                                  <a class="tag" href="/tags/Linux/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> Linux</a>
+                                  <a class="tag" href="/tags/Java/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> Java</a> <a class="tag" href="/tags/%E9%9D%A2%E8%AF%95/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> 面试</a>
                               </h6>
                           
                       </span>
@@ -709,7 +737,7 @@ Jrebel可以通过IntelliJ IDEA来下载安装集成好的插件，也可以单�
 
   <script>
     window.subData = {
-      title: 'Hybris tomcat Jrebel热部署配置',
+      title: '面试还不知道BeanFactory和ApplicationContext的区别？',
       tools: true
     }
   </script>
@@ -913,7 +941,7 @@ Jrebel可以通过IntelliJ IDEA来下载安装集成好的插件，也可以单�
 </header>
 
     <div class='content pure'>
-      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#背景"><span class="toc-text">背景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#配置Jrebel"><span class="toc-text">配置Jrebel</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#方法一：通过IntelliJ-IDEA-插件"><span class="toc-text">方法一：通过IntelliJ IDEA 插件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#方法二：通过安装包"><span class="toc-text">方法二：通过安装包</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#测试"><span class="toc-text">测试</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#什么是-Spring-Bean"><span class="toc-text">什么是 Spring Bean</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#什么是-Spring-容器"><span class="toc-text">什么是 Spring 容器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#BeanFactory-和-ApplicationContext-的不同点"><span class="toc-text">BeanFactory 和 ApplicationContext 的不同点</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#BeanFactory-接口"><span class="toc-text">BeanFactory 接口</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ApplicationContext-接口"><span class="toc-text">ApplicationContext 接口</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-text">总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#灵魂追问"><span class="toc-text">灵魂追问</span></a></li></ol>
     </div>
   </section>
 

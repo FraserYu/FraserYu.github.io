@@ -1,5 +1,5 @@
+https://dayarch.top/p/difference-between-beanfactory-and-applicationcontext.html
 https://dayarch.top/p/java-equals-hashcode.html
 https://dayarch.top/p/spring-data-binding-mechanism.html
 https://dayarch.top/p/lombok-usage.html
 https://dayarch.top/p/multiple-java-management.html
-https://dayarch.top/p/spring-boot-messageconverter.html

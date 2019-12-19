@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://dayarch.top/"/>
-  <updated>2019-12-18T09:25:08.620Z</updated>
+  <updated>2019-12-19T13:45:38.771Z</updated>
   <id>https://dayarch.top/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>面试还不知道BeanFactory和ApplicationContext的区别？</title>
+    <link href="https://dayarch.top//p/difference-between-beanfactory-and-applicationcontext.html"/>
+    <id>https://dayarch.top//p/difference-between-beanfactory-and-applicationcontext.html</id>
+    <published>2019-12-19T13:37:30.000Z</published>
+    <updated>2019-12-19T13:45:38.771Z</updated>
+    
+    <summary type="html">
+    
+      BeanFactory和ApplicationContext是Sring容器的核心，面试经常会问二者区别，本文会透彻说明
+    
+    </summary>
+    
+    
+      <category term="Coding" scheme="https://dayarch.top/categories/Coding/"/>
+    
+      <category term="Spring-Boot" scheme="https://dayarch.top/categories/Coding/Spring-Boot/"/>
+    
+    
+      <category term="Spring Boot" scheme="https://dayarch.top/tags/Spring-Boot/"/>
+    
+      <category term="面试" scheme="https://dayarch.top/tags/%E9%9D%A2%E8%AF%95/"/>
+    
+  </entry>
   
   <entry>
     <title>Java equals 和 hashCode 面试那点事</title>
@@ -431,9 +456,9 @@
       <category term="Java" scheme="https://dayarch.top/categories/Coding/Java/"/>
     
     
-      <category term="JVM" scheme="https://dayarch.top/tags/JVM/"/>
-    
       <category term="面试" scheme="https://dayarch.top/tags/%E9%9D%A2%E8%AF%95/"/>
+    
+      <category term="JVM" scheme="https://dayarch.top/tags/JVM/"/>
     
   </entry>
   
@@ -486,29 +511,6 @@
       <category term="thread" scheme="https://dayarch.top/tags/thread/"/>
     
       <category term="并发" scheme="https://dayarch.top/tags/%E5%B9%B6%E5%8F%91/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>SpringBoot统一异常处理</title>
-    <link href="https://dayarch.top//p/spring-boot-global-exception.html"/>
-    <id>https://dayarch.top//p/spring-boot-global-exception.html</id>
-    <published>2019-08-09T07:13:46.000Z</published>
-    <updated>2019-11-07T06:37:19.144Z</updated>
-    
-    <summary type="html">
-    
-      SpringBoot RESTful API 统一处理异常，让你的代码更清秀，了解其背后原理，加深理解，做到知其然也要知其所以然
-    
-    </summary>
-    
-    
-      <category term="Coding" scheme="https://dayarch.top/categories/Coding/"/>
-    
-      <category term="Spring-Boot" scheme="https://dayarch.top/categories/Coding/Spring-Boot/"/>
-    
-    
-      <category term="Exception" scheme="https://dayarch.top/tags/Exception/"/>
     
   </entry>
   
