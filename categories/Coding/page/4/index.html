@@ -405,6 +405,157 @@
       
         
   <h2 class="title">
+    <a href="/p/spring-boot-request-body-space.html">
+      Springboot去掉@RequestBody中字符串类型值的前后空格
+    </a>
+  </h2>
+
+
+      
+      <div class='new-meta-box'>
+        
+          
+        
+          
+            
+  <div class='new-meta-item author'>
+    
+      <a href="https://dayarch.top" rel="nofollow">
+        
+          <img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png">
+        
+        <p>tanθ</p>
+      </a>
+    
+  </div>
+
+
+          
+        
+          
+            <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+    <p>2018-07-12</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+  
+  <div class='new-meta-item category'>
+    <a href='/categories/Coding/Spring-Boot/' rel="nofollow">
+      <i class="fas fa-folder-open" aria-hidden="true"></i>
+      <p>Coding&nbsp;/&nbsp;Spring-Boot</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            
+
+          
+        
+      </div>
+      
+        <hr>
+      
+    </div>
+  </section>
+
+
+  <section class="article typo">
+    <div class="article-entry" itemprop="articleBody">
+      改造MappingJackson2HttpMessageConverter前言
+项目组提出要求，Springboot项目中，@ResquestBody标记的bean传入的字符串类型的值要去掉前后空格
+
+实现
+因为项目默认使用 MappingJackson2HttpMessageConverter 作为 Json转换器， 于是乎重写一些方法做文章，具体实现如下：
+
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+
+      
+        <div class="readmore">
+          <a href="/p/spring-boot-request-body-space.html" class="flat-box">
+            <i class="fas fa-book-open fa-fw" aria-hidden="true"></i>
+            阅读全文
+          </a>
+        </div>
+      
+    </div>
+    
+      <div class="full-width auto-padding tags">
+        
+          <a href="/tags/Json/" rel="nofollow"><i class="fas fa-tag fa-fw"></i> Json</a>
+        
+          <a href="/tags/Springboot/" rel="nofollow"><i class="fas fa-tag fa-fw"></i> Springboot</a>
+        
+      </div>
+    
+  </section>
+</article>
+
+          </div>
+        
+      
+        
+          <div class='post-wrapper'>
+            <article class="post reveal ">
+  
+
+
+  <section class='meta'>
+    
+    
+    <div class="meta" id="header-meta">
+      
+        
+  <h2 class="title">
     <a href="/p/java-download-file-zip.html">
       Java实现文件下载并压缩成zip文件
     </a>
@@ -1416,119 +1567,6 @@ public class A {
           </div>
         
       
-        
-          <div class='post-wrapper'>
-            <article class="post reveal ">
-  
-
-
-  <section class='meta'>
-    
-    
-    <div class="meta" id="header-meta">
-      
-        
-  <h2 class="title">
-    <a href="/p/hybris-jrebel.html">
-      Hybris tomcat Jrebel热部署配置
-    </a>
-  </h2>
-
-
-      
-      <div class='new-meta-box'>
-        
-          
-        
-          
-            
-  <div class='new-meta-item author'>
-    
-      <a href="https://dayarch.top" rel="nofollow">
-        
-          <img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png">
-        
-        <p>tanθ</p>
-      </a>
-    
-  </div>
-
-
-          
-        
-          
-            <div class="new-meta-item date">
-  <a class='notlink'>
-    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-    <p>2017-03-30</p>
-  </a>
-</div>
-
-          
-        
-          
-            
-  
-  <div class='new-meta-item category'>
-    <a href='/categories/Coding/Others/' rel="nofollow">
-      <i class="fas fa-folder-open" aria-hidden="true"></i>
-      <p>Coding&nbsp;/&nbsp;Others</p>
-    </a>
-  </div>
-
-
-          
-        
-          
-            
-
-          
-        
-      </div>
-      
-        <hr>
-      
-    </div>
-  </section>
-
-
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      背景
-Jrebel是非常强大的实现项目热部署的软件，当然也比较消耗电脑的性能，当如Hybris的这种启动需要一段时间的项目，对于后端开发人员来说，改动一些东西就要重启服务真的是一种折磨，浪费时间，接下来说明一下Jrebel在Hybris项目中的配置
-
-配置Jrebel
-Jrebel可以通过IntelliJ IDEA来下载安装集成好的插件，也可以单独下载Jrebel的包 （请支持正版）
-
-方法一：通过IntelliJ IDEA 插件
-如下图下载安装InteliJ IDEA 插件
-
-
-安装好之后我们就可以在IntelliJ IDEA的安装目录中看到该插件，接下来在Hybris的local.prop
-      
-        <div class="readmore">
-          <a href="/p/hybris-jrebel.html" class="flat-box">
-            <i class="fas fa-book-open fa-fw" aria-hidden="true"></i>
-            阅读全文
-          </a>
-        </div>
-      
-    </div>
-    
-      <div class="full-width auto-padding tags">
-        
-          <a href="/tags/Hybris/" rel="nofollow"><i class="fas fa-tag fa-fw"></i> Hybris</a>
-        
-          <a href="/tags/Jrebel/" rel="nofollow"><i class="fas fa-tag fa-fw"></i> Jrebel</a>
-        
-      </div>
-    
-  </section>
-</article>
-
-          </div>
-        
-      
     
   </section>
   
@@ -1944,7 +1982,7 @@ Jrebel可以通过IntelliJ IDEA来下载安装集成好的插件，也可以单�
     <div class='content pure'>
       <ul class="entry">
         
-          <li><a class="flat-box" title="/categories/Coding/" href="/categories/Coding/"><div class='name'>Coding</div><div class='badge'>(56)</div></a></li>
+          <li><a class="flat-box" title="/categories/Coding/" href="/categories/Coding/"><div class='name'>Coding</div><div class='badge'>(57)</div></a></li>
         
           <li><a class="flat-box child" title="/categories/Coding/Arthas/" href="/categories/Coding/Arthas/"><div class='name'>Arthas</div><div class='badge'>(1)</div></a></li>
         
@@ -1962,7 +2000,7 @@ Jrebel可以通过IntelliJ IDEA来下载安装集成好的插件，也可以单�
         
           <li><a class="flat-box child" title="/categories/Coding/Others/" href="/categories/Coding/Others/"><div class='name'>Others</div><div class='badge'>(6)</div></a></li>
         
-          <li><a class="flat-box child" title="/categories/Coding/Spring-Boot/" href="/categories/Coding/Spring-Boot/"><div class='name'>Spring-Boot</div><div class='badge'>(13)</div></a></li>
+          <li><a class="flat-box child" title="/categories/Coding/Spring-Boot/" href="/categories/Coding/Spring-Boot/"><div class='name'>Spring-Boot</div><div class='badge'>(14)</div></a></li>
         
           <li><a class="flat-box child" title="/categories/Coding/Spring/" href="/categories/Coding/Spring/"><div class='name'>Spring</div><div class='badge'>(1)</div></a></li>
         
@@ -2171,7 +2209,7 @@ Jrebel可以通过IntelliJ IDEA来下载安装集成好的插件，也可以单�
   &nbsp;&nbsp;|&nbsp;&nbsp;  
   
     &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-        class="white-color">142.8k</span>&nbsp;字
+        class="white-color">144.1k</span>&nbsp;字
     
 
   &nbsp;&nbsp;|&nbsp;&nbsp;  
