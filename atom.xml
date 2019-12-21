@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://dayarch.top/"/>
-  <updated>2019-12-21T09:33:51.966Z</updated>
+  <updated>2019-12-21T10:12:36.099Z</updated>
   <id>https://dayarch.top/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://dayarch.top//p/spring-bean-lifecycle-destroy.html"/>
     <id>https://dayarch.top//p/spring-bean-lifecycle-destroy.html</id>
     <published>2019-12-21T09:23:42.000Z</published>
-    <updated>2019-12-21T09:33:51.966Z</updated>
+    <updated>2019-12-21T10:12:36.099Z</updated>
     
     <summary type="html">
     
@@ -36,6 +36,10 @@
     
     
       <category term="Spring Boot" scheme="https://dayarch.top/tags/Spring-Boot/"/>
+    
+      <category term="Spring Bean" scheme="https://dayarch.top/tags/Spring-Bean/"/>
+    
+      <category term="生命周期" scheme="https://dayarch.top/tags/%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/"/>
     
   </entry>
   
@@ -44,7 +48,7 @@
     <link href="https://dayarch.top//p/spring-bean-lifecycle-creation.html"/>
     <id>https://dayarch.top//p/spring-bean-lifecycle-creation.html</id>
     <published>2019-12-20T01:04:56.000Z</published>
-    <updated>2019-12-20T02:00:12.111Z</updated>
+    <updated>2019-12-21T10:12:29.078Z</updated>
     
     <summary type="html">
     
@@ -59,6 +63,10 @@
     
     
       <category term="Spring Boot" scheme="https://dayarch.top/tags/Spring-Boot/"/>
+    
+      <category term="Spring Bean" scheme="https://dayarch.top/tags/Spring-Bean/"/>
+    
+      <category term="生命周期" scheme="https://dayarch.top/tags/%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/"/>
     
   </entry>
   
