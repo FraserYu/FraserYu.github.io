@@ -425,6 +425,125 @@
   <section class='meta'>
     
     
+      <a title='Spring Bean生命周期之缘尽' href='/p/spring-bean-lifecycle-destroy.html'><img class='thumbnail' src='https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgspringbootconverter.png'></a>
+    
+    <div class="meta" id="header-meta">
+      
+        
+  <h2 class="title">
+    <a href="/p/spring-bean-lifecycle-destroy.html">
+      Spring Bean生命周期之缘尽
+    </a>
+  </h2>
+
+
+      
+      <div class='new-meta-box'>
+        
+          
+        
+          
+            
+  <div class='new-meta-item author'>
+    
+      <a href="https://dayarch.top" rel="nofollow">
+        
+          <img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png">
+        
+        <p>tanθ</p>
+      </a>
+    
+  </div>
+
+
+          
+        
+          
+            <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+    <p>2019-12-21</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+  
+  <div class='new-meta-item category'>
+    <a href='/categories/Coding/Spring-Boot/' rel="nofollow">
+      <i class="fas fa-folder-open" aria-hidden="true"></i>
+      <p>Coding&nbsp;/&nbsp;Spring-Boot</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            
+
+          
+        
+      </div>
+      
+        <hr>
+      
+    </div>
+  </section>
+
+
+  <section class="article typo">
+    <div class="article-entry" itemprop="articleBody">
+      上一篇文章 Spring Bean 生命周期之缘起 说明了我是谁？ 和 我从哪里来? 的两大哲学问题，今天我们要讨论一下终极哲学我要到哪里去？
+
+ 
+
+ 初始化 Spring Bean 有三种方式：
+
+ 1. @PostConstruct
+ 2. InitializingBean.afterPropertiesSet()
+ 3. init-method
+
+销毁 Spring Bean 同样有三种方式：
+
+ 1. @PreDestroy
+ 2. DisposableBean.destroy()
+ 3. destroy-method
+
+正所谓，天对地，雨对风； @PostConstruct 对 @
+      
+        <div class="readmore">
+          <a href="/p/spring-bean-lifecycle-destroy.html" class="flat-box">
+            <i class="fas fa-book-open fa-fw" aria-hidden="true"></i>
+            阅读全文
+          </a>
+        </div>
+      
+    </div>
+    
+      <div class="full-width auto-padding tags">
+        
+          <a href="/tags/Spring-Boot/" rel="nofollow"><i class="fas fa-tag fa-fw"></i> Spring Boot</a>
+        
+      </div>
+    
+  </section>
+</article>
+
+          </div>
+        
+      
+        
+          <div class='post-wrapper'>
+            <article class="post reveal ">
+  
+
+
+  <section class='meta'>
+    
+    
       <a title='Spring Bean生命周期之缘起' href='/p/spring-bean-lifecycle-creation.html'><img class='thumbnail' src='https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgspringbootconverter.png'></a>
     
     <div class="meta" id="header-meta">
@@ -1429,119 +1548,27 @@ Java 后端程序员应该会遇到读取 Excel 信息到 DB 等相关需求，�
           </div>
         
       
-        
-          <div class='post-wrapper'>
-            <article class="post reveal ">
-  
-
-
-  <section class='meta'>
     
-    
-    <div class="meta" id="header-meta">
-      
-        
-  <h2 class="title">
-    <a href="/p/docker-deploy-spring-boot.html">
-      使用 Docker 部署 Spring Boot
-    </a>
-  </h2>
-
-
-      
-      <div class='new-meta-box'>
-        
-          
-        
-          
-            
-  <div class='new-meta-item author'>
-    
-      <a href="https://dayarch.top" rel="nofollow">
-        
-          <img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png">
-        
-        <p>tanθ</p>
-      </a>
-    
-  </div>
-
-
-          
-        
-          
-            <div class="new-meta-item date">
-  <a class='notlink'>
-    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-    <p>2018-04-09</p>
-  </a>
-</div>
-
-          
-        
-          
-            
-  
-  <div class='new-meta-item category'>
-    <a href='/categories/Coding/Docker/' rel="nofollow">
-      <i class="fas fa-folder-open" aria-hidden="true"></i>
-      <p>Coding&nbsp;/&nbsp;Docker</p>
-    </a>
-  </div>
-
-
-          
-        
-          
-            
-
-          
-        
-      </div>
-      
-        <hr>
-      
-    </div>
   </section>
-
-
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      前言
-最近陆续在通过SpringBoot搭建项目，往里面逐渐添加功能，项目地址SpringBootLearning, 当总结Docker部署SpringBoot的时候，我遇到了一些问题，加以总结
-
-问题汇总
-文章主要参考Spring Boot 2.0(四)：使用 Docker 部署 Spring Boot, 因为我是已有的SpringBoot项目，不是简单的SpringBoot项目，所以使用Docker部署SpringBoot的时候遇到了一些问题，现总结如下：
-
- 1. mvn package 打包命令不能生成jar包到target目录下
-    因为Docker会用到jar包，所以在用Doc
-      
-        <div class="readmore">
-          <a href="/p/docker-deploy-spring-boot.html" class="flat-box">
-            <i class="fas fa-book-open fa-fw" aria-hidden="true"></i>
-            阅读全文
-          </a>
+  
+    
+      <br>
+      <div class="prev-next">
+        <div class="prev-next">
+          
+          <p class="current">
+            1 / 2
+          </p>
+          
+            <a class="next" rel="next" href="/tags/Spring-Boot/page/2/">
+              <section class="post next">
+                &nbsp;下一页&nbsp;<i class="fas fa-chevron-right" aria-hidden="true"></i>
+              </section>
+            </a>
+          
         </div>
-      
-    </div>
-    
-      <div class="full-width auto-padding tags">
-        
-          <a href="/tags/Docker/" rel="nofollow"><i class="fas fa-tag fa-fw"></i> Docker</a>
-        
-          <a href="/tags/Spring-Boot/" rel="nofollow"><i class="fas fa-tag fa-fw"></i> Spring Boot</a>
-        
       </div>
-    
-  </section>
-</article>
 
-          </div>
-        
-      
-    
-  </section>
-  
     
     <!-- 根据主题中的设置决定是否在archive中针对摘要部分的MathJax公式加载mathjax.js文件 -->
     
@@ -1929,7 +1956,7 @@ Java 后端程序员应该会遇到读取 Excel 信息到 DB 等相关需求，�
     <div class='content pure'>
       <ul class="entry">
         
-          <li><a class="flat-box" title="/categories/Coding/" href="/categories/Coding/"><div class='name'>Coding</div><div class='badge'>(57)</div></a></li>
+          <li><a class="flat-box" title="/categories/Coding/" href="/categories/Coding/"><div class='name'>Coding</div><div class='badge'>(58)</div></a></li>
         
           <li><a class="flat-box child" title="/categories/Coding/Arthas/" href="/categories/Coding/Arthas/"><div class='name'>Arthas</div><div class='badge'>(1)</div></a></li>
         
@@ -1947,7 +1974,7 @@ Java 后端程序员应该会遇到读取 Excel 信息到 DB 等相关需求，�
         
           <li><a class="flat-box child" title="/categories/Coding/Others/" href="/categories/Coding/Others/"><div class='name'>Others</div><div class='badge'>(6)</div></a></li>
         
-          <li><a class="flat-box child" title="/categories/Coding/Spring-Boot/" href="/categories/Coding/Spring-Boot/"><div class='name'>Spring-Boot</div><div class='badge'>(14)</div></a></li>
+          <li><a class="flat-box child" title="/categories/Coding/Spring-Boot/" href="/categories/Coding/Spring-Boot/"><div class='name'>Spring-Boot</div><div class='badge'>(15)</div></a></li>
         
           <li><a class="flat-box child" title="/categories/Coding/Spring/" href="/categories/Coding/Spring/"><div class='name'>Spring</div><div class='badge'>(1)</div></a></li>
         
@@ -2156,7 +2183,7 @@ Java 后端程序员应该会遇到读取 Excel 信息到 DB 等相关需求，�
   &nbsp;&nbsp;|&nbsp;&nbsp;  
   
     &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-        class="white-color">144.1k</span>&nbsp;字
+        class="white-color">144.8k</span>&nbsp;字
     
 
   &nbsp;&nbsp;|&nbsp;&nbsp;  
@@ -2275,6 +2302,31 @@ Java 后端程序员应该会遇到读取 Excel 信息到 DB 等相关需求，�
 
 
 
+
+  
+  
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-backstretch/2.0.4/jquery.backstretch.min.js"></script>
+    <script type="text/javascript">
+      $(function(){
+        if ('.cover') {
+          $('.cover').backstretch(
+          ["https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img4lmgwl.jpg"],
+          {
+            duration: "6000",
+            fade: "2500"
+          });
+        } else {
+          $.backstretch(
+          ["https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img4lmgwl.jpg"],
+          {
+            duration: "6000",
+            fade: "2500"
+          });
+        }
+      });
+    </script>
+  
 
 
 

@@ -1,5 +1,5 @@
+https://dayarch.top/p/spring-bean-lifecycle-destroy.html
 https://dayarch.top/p/spring-bean-lifecycle-creation.html
 https://dayarch.top/p/difference-between-beanfactory-and-applicationcontext.html
 https://dayarch.top/p/java-equals-hashcode.html
 https://dayarch.top/p/spring-data-binding-mechanism.html
-https://dayarch.top/p/lombok-usage.html
