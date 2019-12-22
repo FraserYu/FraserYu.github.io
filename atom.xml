@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://dayarch.top/"/>
-  <updated>2019-12-21T10:12:36.099Z</updated>
+  <updated>2019-12-22T11:29:15.518Z</updated>
   <id>https://dayarch.top/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Spring Aware 到底是什么？</title>
+    <link href="https://dayarch.top//p/spring-aware.html"/>
+    <id>https://dayarch.top//p/spring-aware.html</id>
+    <published>2019-12-22T11:20:52.000Z</published>
+    <updated>2019-12-22T11:29:15.518Z</updated>
+    
+    <summary type="html">
+    
+      Spring 源码中大量应用Aware，通过本文你将透彻理解 Spring Aware背后的道理，以及如何应用它
+    
+    </summary>
+    
+    
+      <category term="Coding" scheme="https://dayarch.top/categories/Coding/"/>
+    
+      <category term="Spring-Boot" scheme="https://dayarch.top/categories/Coding/Spring-Boot/"/>
+    
+    
+      <category term="Spring Bean" scheme="https://dayarch.top/tags/Spring-Bean/"/>
+    
+      <category term="生命周期" scheme="https://dayarch.top/tags/%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/"/>
+    
+      <category term="Spring Aware" scheme="https://dayarch.top/tags/Spring-Aware/"/>
+    
+  </entry>
   
   <entry>
     <title>Spring Bean生命周期之缘尽</title>
@@ -488,31 +515,6 @@
     
     
       <category term="MyBatis" scheme="https://dayarch.top/tags/MyBatis/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Java String基础面试</title>
-    <link href="https://dayarch.top//p/java-string-interview.html"/>
-    <id>https://dayarch.top//p/java-string-interview.html</id>
-    <published>2019-08-31T03:57:49.000Z</published>
-    <updated>2019-12-17T12:47:59.582Z</updated>
-    
-    <summary type="html">
-    
-      Java String面试内容基本上都在这里
-    
-    </summary>
-    
-    
-      <category term="Coding" scheme="https://dayarch.top/categories/Coding/"/>
-    
-      <category term="Java" scheme="https://dayarch.top/categories/Coding/Java/"/>
-    
-    
-      <category term="面试" scheme="https://dayarch.top/tags/%E9%9D%A2%E8%AF%95/"/>
-    
-      <category term="JVM" scheme="https://dayarch.top/tags/JVM/"/>
     
   </entry>
   

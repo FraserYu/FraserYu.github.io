@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   
-  <title>Tag: Windows | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享</title>
+  <title>Tag: Spring Aware | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享</title>
   
   <meta name="keywords" content="Java,SpringBoot,并发编程, ElasticSearch, 日拱一兵">
   
@@ -407,12 +407,14 @@
   <section class='meta'>
     
     
+      <a title='Spring Aware 到底是什么？' href='/p/spring-aware.html'><img class='thumbnail' src='https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgspringbootconverter.png'></a>
+    
     <div class="meta" id="header-meta">
       
         
   <h2 class="title">
-    <a href="/p/delete-long-name-file-in-windows.html">
-      Windows下删除过长文件路径或过长文件名的文件
+    <a href="/p/spring-aware.html">
+      Spring Aware 到底是什么？
     </a>
   </h2>
 
@@ -442,7 +444,7 @@
             <div class="new-meta-item date">
   <a class='notlink'>
     <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-    <p>2016-09-05</p>
+    <p>2019-12-22</p>
   </a>
 </div>
 
@@ -452,9 +454,9 @@
             
   
   <div class='new-meta-item category'>
-    <a href='/categories/Coding/Others/' rel="nofollow">
+    <a href='/categories/Coding/Spring-Boot/' rel="nofollow">
       <i class="fas fa-folder-open" aria-hidden="true"></i>
-      <p>Coding&nbsp;/&nbsp;Others</p>
+      <p>Coding&nbsp;/&nbsp;Spring-Boot</p>
     </a>
   </div>
 
@@ -476,26 +478,20 @@
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      在Windows下，删除文件时报错”文件路径太长或者文件名太长”，无论是Shift+Del、进入子目录一点点删除都不可以以及使用Windows内置命令都不可以，但是我电脑中装有node，于是安装【rimraf】——是专门用于删除模块的插件
+      通过如下前序两篇文章:
 
-官方描述：A deep deletion module for node (like rm -rf)
+ 1. Spring Bean 生命周期之缘起
+ 2. Spring Bean 生命周期之缘尽
+    我们了解了 Spring Bean 的生命周期核心内容，bean 是如何被初始化变为 Ready for Use 的状态，当资源被回收时又是如何被 destroy 的，但 Spring Bean Life Cycle图并未被全部点亮，这篇文章将点亮剩余内容，同时说说你常见的 XxxxAware 接口
 
-npm install -g rimraf
+为什么要说 Spring Bean 生命周期又说 Aware 呢？下来点亮剩下内容你也许就明白了：
 
-使用方法：
 
- 1. 进入project目录
-    
-    cd project/
-    
-    
- 2. 删除hybris目录及目录下所有文件
-    
-    rimraf hybris
-    
+
+ 1. 在 Spring Bean Ready for Us
       
         <div class="readmore">
-          <a href="/p/delete-long-name-file-in-windows.html" class="flat-box">
+          <a href="/p/spring-aware.html" class="flat-box">
             <i class="fas fa-book-open fa-fw" aria-hidden="true"></i>
             阅读全文
           </a>
@@ -505,9 +501,11 @@ npm install -g rimraf
     
       <div class="full-width auto-padding tags">
         
-          <a href="/tags/Windows/" rel="nofollow"><i class="fas fa-tag fa-fw"></i> Windows</a>
+          <a href="/tags/Spring-Bean/" rel="nofollow"><i class="fas fa-tag fa-fw"></i> Spring Bean</a>
         
-          <a href="/tags/Node/" rel="nofollow"><i class="fas fa-tag fa-fw"></i> Node</a>
+          <a href="/tags/%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/" rel="nofollow"><i class="fas fa-tag fa-fw"></i> 生命周期</a>
+        
+          <a href="/tags/Spring-Aware/" rel="nofollow"><i class="fas fa-tag fa-fw"></i> Spring Aware</a>
         
       </div>
     
