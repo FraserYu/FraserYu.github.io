@@ -5,7 +5,7 @@ tags:
     - Java
     - 面试
 categories: [Coding, Java]
-thumbnail: https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgjava.pngs
+thumbnail: https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgjava.png
 id: java-equals-hashcode
 description: Java基础面试中经常会被问到 equals 和 hashcode 之间的关系及他们的约束，其实这些内容不是通过死记硬背的，我们可以通过渐进明细的形式分析其背后的道理
 keywords: 重写equals方法, 重写hashCode方法, 重写equals和hashCode方法

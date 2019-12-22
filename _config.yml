@@ -3,10 +3,10 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: 日拱一兵
-subtitle: Quick notes
-description: Java后端技术博客，用有趣的方式解读技术
-keywords: 后端博客,Java,SpringBoot,ElasticSearch
+title: 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享 
+subtitle: 日拱一兵
+description: 本站是日拱一兵的技术分享博客，内容涵盖Java后端技术、Spring Boot、Java并发编程等技术研究与分享，用有趣的方式解读技术   
+keywords: Java,SpringBoot,并发编程, ElasticSearch, 日拱一兵
 author: tanθ
 language: zh-CN
 timezone:

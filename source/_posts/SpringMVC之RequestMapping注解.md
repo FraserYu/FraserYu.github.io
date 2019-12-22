@@ -38,8 +38,9 @@ keywords: RequestMapping,注解,SpringMVC
 > *Same format for any environment: a sequence of "My-Header=myValue" style expressions, with a request only mapped if each such header is found to have the given value. Expressions can be negated by using the "!=" operator, as in "My-Header!=myValue". "My-Header" style expressions are also supported, with such headers having to be present in the request (allowed to have any value). Finally, "!My-Header" style expressions indicate that the specified header is not supposed to be present in the request.*
 ***Also supports media type wildcards (*), for headers such as Accept and Content-Type. For instance,will match requests with a Content-Type of "text/html", "text/plain", etc. ***
 和params属性类似，支持通配符匹配。
-
-		@RequestMapping(value = "/something", headers = "content-type=text/*")
+```java
+@RequestMapping(value = "/something", headers = "content-type=text/*")
+```
 
 5. **name**
 > *Assign a name to this mapping. Supported at the type level as well as at the method level! When used on both levels, a combined name is derived by concatenation with "#" as separator.*

@@ -24,10 +24,8 @@ PKIX path building failed: sun.security.provider.certpath.SunCertPathBuilderExce
 ### 图解SSL（Secure Socket Layer）协议
 
 开始加密通信之前，客户端和服务器首先必须建立连接和交换参数，这个过程叫做握手（handshake）
-<!-- more -->
 
-<img itemprop="url image" src="/uploads/SSL.png"/>
-
+<fancybox>![](https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgSSL.png)</fancybox>
 
 
 1. 客户端给出协议版本号、一个客户端生成的随机数（Client random），以及客户端支持的加密方法

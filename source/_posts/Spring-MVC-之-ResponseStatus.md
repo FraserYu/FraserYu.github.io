@@ -35,37 +35,40 @@ Restful webservice请求会用到@ResponseStatus 注解，该注解可用于类�
 
 #### 应用在类级别
 创建一个异常类，用该注解标注
+```java
+package com.zj.exception;
 
-	package com.zj.exception;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
-	import org.springframework.http.HttpStatus;
-	import org.springframework.web.bind.annotation.ResponseStatus;
+@ResponseStatus(value=HttpStatus.FORBIDDEN,reason="用户不匹配")
+public class UserNotMatchException extends RuntimeException{
 
-	@ResponseStatus(value=HttpStatus.FORBIDDEN,reason="用户不匹配")
-	public class UserNotMatchException extends RuntimeException{
-
-	}
+}
+```
 
 写一个目标方法来抛出异常
+```java
+@RequestMapping("/testResponseStatus")
+public String testResponseStatus(int i){
+	if(i==0)
+		throw new UserNotMatchException();
+	return "hello";
+}
+```
 
-	@RequestMapping("/testResponseStatus")
-    public String testResponseStatus(int i){
-        if(i==0)
-            throw new UserNotMatchException();
-        return "hello";
-    }
-
-  这样当我们请求该方法，如果出现异常，会将用户不匹配的信息返回给浏览器，让异常信息更加明确，而不是一堆异常信息代码
+这样当我们请求该方法，如果出现异常，会将用户不匹配的信息返回给浏览器，让异常信息更加明确，而不是一堆异常信息代码
 
 #### 应用在方法级别
-
-	@ResponseStatus(value=HttpStatus.FORBIDDEN,reason="用户名不匹配")
-    @RequestMapping("/testResponseStatus")
-    public String testResponseStatus(int i){
-        if(i==0)
-            throw new UserNotMatchException();
-        return "hello";
-    }
+```java
+@ResponseStatus(value=HttpStatus.FORBIDDEN,reason="用户名不匹配")
+@RequestMapping("/testResponseStatus")
+public String testResponseStatus(int i){
+	if(i==0)
+		throw new UserNotMatchException();
+	return "hello";
+}
+```
 
 **ResponseStatus修饰目标方法，无论它执行方法过程中有没有异常产生，用户都会得到异常的界面。而目标方法正常执行**
 

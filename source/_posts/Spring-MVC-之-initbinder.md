@@ -18,40 +18,44 @@ thumbnail: https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgspringbootannot
 <!-- more -->
 
 #### 自定义编辑器
+```java
+import org.springframework.beans.propertyeditors.PropertiesEditor;  
 
-	import org.springframework.beans.propertyeditors.PropertiesEditor;  
+public class DoubleEditor extends PropertiesEditor {    
+	@Override    
+	public void setAsText(String text) throws IllegalArgumentException {    
+		if (text == null || text.equals("")) {    
+			text = "0";    
+		}    
+		setValue(Double.parseDouble(text));    
+	}    
 
-	public class DoubleEditor extends PropertiesEditor {    
-	    @Override    
-	    public void setAsText(String text) throws IllegalArgumentException {    
-	        if (text == null || text.equals("")) {    
-	            text = "0";    
-	        }    
-	        setValue(Double.parseDouble(text));    
-	    }    
-
-	    @Override    
-	    public String getAsText() {    
-	        return getValue().toString();    
-	    }    
-	}  
+	@Override    
+	public String getAsText() {    
+		return getValue().toString();    
+	}    
+}  
+```	
 
 类似Long、Float等都可以这样写，然后将这些自定义的编辑器或Spring自带的编辑器放到BaseController中带有@initbinder的方法中注册就好.
-
-	   @InitBinder    
-	   protected void initBinder(WebDataBinder binder) {    
-	       binder.registerCustomEditor(Date.class, new CustomDateEditor(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"), true));    
-         binder.registerCustomEditor(int.class, new CustomNumberEditor(int.class, true));    
-	       binder.registerCustomEditor(int.class, new IntegerEditor());    
-	       binder.registerCustomEditor(long.class, new CustomNumberEditor(long.class, true));  
-	       binder.registerCustomEditor(long.class, new LongEditor());    
-	       binder.registerCustomEditor(double.class, new DoubleEditor());    
-	       binder.registerCustomEditor(float.class, new FloatEditor());    
-	   }  
+```java
+@InitBinder    
+protected void initBinder(WebDataBinder binder) {    
+	binder.registerCustomEditor(Date.class, new CustomDateEditor(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"), true));    
+	binder.registerCustomEditor(int.class, new CustomNumberEditor(int.class, true));    
+	binder.registerCustomEditor(int.class, new IntegerEditor());    
+	binder.registerCustomEditor(long.class, new CustomNumberEditor(long.class, true));  
+	binder.registerCustomEditor(long.class, new LongEditor());    
+	binder.registerCustomEditor(double.class, new DoubleEditor());    
+	binder.registerCustomEditor(float.class, new FloatEditor());    
+}  
+```
 
 当然我们也可以将自定义的编辑器直接继承 **PropertyEditorSupport**， 因为：
 
-	public class org.springframework.beans.propertyeditors.PropertiesEditor extends java.beans.PropertyEditorSupport {  	
+```java
+public class org.springframework.beans.propertyeditors.PropertiesEditor extends java.beans.PropertyEditorSupport {  	
+```
 
 ### 参考
 非常感谢一下两位作者贡献整理的文章：
