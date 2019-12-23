@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://dayarch.top/"/>
-  <updated>2019-12-22T11:29:15.518Z</updated>
+  <updated>2019-12-23T13:53:27.651Z</updated>
   <id>https://dayarch.top/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Spring Boot @ConfigurationProperties 注解最强使用详解</title>
+    <link href="https://dayarch.top//p/spring-boot-configurationProperties-usage.html"/>
+    <id>https://dayarch.top//p/spring-boot-configurationProperties-usage.html</id>
+    <published>2019-12-23T13:43:55.000Z</published>
+    <updated>2019-12-23T13:53:27.651Z</updated>
+    
+    <summary type="html">
+    
+      在编写项目代码时，我们要求更灵活的配置，更好的模块化整合。在 Spring Boot 项目中，为满足以上要求，就要用到ConfigurationProperties注解
+    
+    </summary>
+    
+    
+      <category term="Coding" scheme="https://dayarch.top/categories/Coding/"/>
+    
+      <category term="Spring-Boot" scheme="https://dayarch.top/categories/Coding/Spring-Boot/"/>
+    
+    
+      <category term="Spring Boot" scheme="https://dayarch.top/tags/Spring-Boot/"/>
+    
+  </entry>
   
   <entry>
     <title>Spring Aware 到底是什么？</title>
@@ -35,11 +58,11 @@
       <category term="Spring-Boot" scheme="https://dayarch.top/categories/Coding/Spring-Boot/"/>
     
     
+      <category term="Spring Aware" scheme="https://dayarch.top/tags/Spring-Aware/"/>
+    
       <category term="Spring Bean" scheme="https://dayarch.top/tags/Spring-Bean/"/>
     
       <category term="生命周期" scheme="https://dayarch.top/tags/%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/"/>
-    
-      <category term="Spring Aware" scheme="https://dayarch.top/tags/Spring-Aware/"/>
     
   </entry>
   
@@ -62,11 +85,11 @@
       <category term="Spring-Boot" scheme="https://dayarch.top/categories/Coding/Spring-Boot/"/>
     
     
-      <category term="Spring Boot" scheme="https://dayarch.top/tags/Spring-Boot/"/>
-    
       <category term="Spring Bean" scheme="https://dayarch.top/tags/Spring-Bean/"/>
     
       <category term="生命周期" scheme="https://dayarch.top/tags/%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/"/>
+    
+      <category term="Spring Boot" scheme="https://dayarch.top/tags/Spring-Boot/"/>
     
   </entry>
   
@@ -89,11 +112,11 @@
       <category term="Spring-Boot" scheme="https://dayarch.top/categories/Coding/Spring-Boot/"/>
     
     
-      <category term="Spring Boot" scheme="https://dayarch.top/tags/Spring-Boot/"/>
-    
       <category term="Spring Bean" scheme="https://dayarch.top/tags/Spring-Bean/"/>
     
       <category term="生命周期" scheme="https://dayarch.top/tags/%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/"/>
+    
+      <category term="Spring Boot" scheme="https://dayarch.top/tags/Spring-Boot/"/>
     
   </entry>
   
@@ -127,7 +150,7 @@
     <link href="https://dayarch.top//p/java-equals-hashcode.html"/>
     <id>https://dayarch.top//p/java-equals-hashcode.html</id>
     <published>2019-12-17T12:41:51.000Z</published>
-    <updated>2019-12-18T09:25:08.620Z</updated>
+    <updated>2019-12-22T11:48:22.310Z</updated>
     
     <summary type="html">
     
@@ -492,29 +515,6 @@
       <category term="原子性" scheme="https://dayarch.top/tags/%E5%8E%9F%E5%AD%90%E6%80%A7/"/>
     
       <category term="有序性" scheme="https://dayarch.top/tags/%E6%9C%89%E5%BA%8F%E6%80%A7/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Mybatis拦截器实现数据加密与解密</title>
-    <link href="https://dayarch.top//p/mybatis-interceptor-encrypt-decrypt.html"/>
-    <id>https://dayarch.top//p/mybatis-interceptor-encrypt-decrypt.html</id>
-    <published>2019-09-02T00:40:51.000Z</published>
-    <updated>2019-11-07T06:36:44.351Z</updated>
-    
-    <summary type="html">
-    
-      Mybatis拦截器实现数据加密与解密，全局处理需要在数据库中敏感数据
-    
-    </summary>
-    
-    
-      <category term="Coding" scheme="https://dayarch.top/categories/Coding/"/>
-    
-      <category term="Mybatis" scheme="https://dayarch.top/categories/Coding/Mybatis/"/>
-    
-    
-      <category term="MyBatis" scheme="https://dayarch.top/tags/MyBatis/"/>
     
   </entry>
   

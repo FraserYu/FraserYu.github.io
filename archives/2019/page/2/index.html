@@ -399,6 +399,120 @@
   <section class='meta'>
     
     
+      <a title='Java12 Collectors.teeing 的使用详解' href='/p/jdk12-collectors-teeing-api-usage.html'><img class='thumbnail' src='https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgjava.png'></a>
+    
+    <div class="meta" id="header-meta">
+      
+        
+  <h2 class="title">
+    <a href="/p/jdk12-collectors-teeing-api-usage.html">
+      Java12 Collectors.teeing 的使用详解
+    </a>
+  </h2>
+
+
+      
+      <div class='new-meta-box'>
+        
+          
+        
+          
+            
+  <div class='new-meta-item author'>
+    
+      <a href="https://dayarch.top" rel="nofollow">
+        
+          <img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png">
+        
+        <p>tanθ</p>
+      </a>
+    
+  </div>
+
+
+          
+        
+          
+            <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+    <p>2019-11-05</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+  
+  <div class='new-meta-item category'>
+    <a href='/categories/Coding/Java/' rel="nofollow">
+      <i class="fas fa-folder-open" aria-hidden="true"></i>
+      <p>Coding&nbsp;/&nbsp;Java</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            
+
+          
+        
+      </div>
+      
+        <hr>
+      
+    </div>
+  </section>
+
+
+  <section class="article typo">
+    <div class="article-entry" itemprop="articleBody">
+      前言
+在 Java 12 里面有个非常好用但在官方 JEP 没有公布的功能，因为它只是 Collector 中的一个小改动，它的作用是 merge 两个 collector 的结果，这句话显得很抽象，老规矩，我们先来看个图:
+
+
+管道改造经常会用这个小东西，通常我们叫它「三通」，它的主要作用就是将 downstream1 和 downstream2 的流入合并，然后从 merger 流出
+
+有了这个形象的说明我们就进入正题吧
+
+Collectors.teeing
+上面提到的小功能就是 Collectors.teeing API, 先来看一下 JDK 关于该 API 的说明，看着觉得难受的直接忽
+      
+        <div class="readmore">
+          <a href="/p/jdk12-collectors-teeing-api-usage.html" class="flat-box">
+            <i class="fas fa-book-open fa-fw" aria-hidden="true"></i>
+            阅读全文
+          </a>
+        </div>
+      
+    </div>
+    
+      <div class="full-width auto-padding tags">
+        
+          <a href="/tags/Java/" rel="nofollow"><i class="fas fa-tag fa-fw"></i> Java</a>
+        
+          <a href="/tags/JDK%E6%BA%90%E7%A0%81/" rel="nofollow"><i class="fas fa-tag fa-fw"></i> JDK源码</a>
+        
+      </div>
+    
+  </section>
+</article>
+
+          </div>
+        
+      
+        
+          <div class='post-wrapper'>
+            <article class="post reveal ">
+  
+
+
+  <section class='meta'>
+    
+    
       <a title='Java并发死锁解决思路' href='/p/java-concurrency-dead-lock.html'><img class='thumbnail' src='https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgconcurrency.png'></a>
     
     <div class="meta" id="header-meta">
@@ -1429,125 +1543,6 @@ happens-before 之 volatile 变量规则
           </div>
         
       
-        
-          <div class='post-wrapper'>
-            <article class="post reveal ">
-  
-
-
-  <section class='meta'>
-    
-    
-    <div class="meta" id="header-meta">
-      
-        
-  <h2 class="title">
-    <a href="/p/mybatis-interceptor-encrypt-decrypt.html">
-      Mybatis拦截器实现数据加密与解密
-    </a>
-  </h2>
-
-
-      
-      <div class='new-meta-box'>
-        
-          
-        
-          
-            
-  <div class='new-meta-item author'>
-    
-      <a href="https://dayarch.top" rel="nofollow">
-        
-          <img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png">
-        
-        <p>tanθ</p>
-      </a>
-    
-  </div>
-
-
-          
-        
-          
-            <div class="new-meta-item date">
-  <a class='notlink'>
-    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-    <p>2019-09-02</p>
-  </a>
-</div>
-
-          
-        
-          
-            
-  
-  <div class='new-meta-item category'>
-    <a href='/categories/Coding/Mybatis/' rel="nofollow">
-      <i class="fas fa-folder-open" aria-hidden="true"></i>
-      <p>Coding&nbsp;/&nbsp;Mybatis</p>
-    </a>
-  </div>
-
-
-          
-        
-          
-            
-
-          
-        
-      </div>
-      
-        <hr>
-      
-    </div>
-  </section>
-
-
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      拦截器介绍
-Mybatis Interceptor 在 Mybatis 中被当作 Plugin(插件)，不知道为什么，但确实是在 org.apache.ibatis.plugin 包下面
-
-
-
-既然是拦截器，可以拦截哪些内容呢？试想一下…… 当程序写到持久层时，Mybatis 会 执行 指定 SQL 语句，并处理 请求参数 和 返回值。没错，Mybatis 拦截器可以帮助我们处理上述内容，请看官网的 Plugins 的片段, 内容不多
-
-1
-2
-3
-4
-5
-6
-7
-8
-
-
-// 执行
-Executor (update, query, flushStatements, commit, rollb
-      
-        <div class="readmore">
-          <a href="/p/mybatis-interceptor-encrypt-decrypt.html" class="flat-box">
-            <i class="fas fa-book-open fa-fw" aria-hidden="true"></i>
-            阅读全文
-          </a>
-        </div>
-      
-    </div>
-    
-      <div class="full-width auto-padding tags">
-        
-          <a href="/tags/MyBatis/" rel="nofollow"><i class="fas fa-tag fa-fw"></i> MyBatis</a>
-        
-      </div>
-    
-  </section>
-</article>
-
-          </div>
-        
-      
     
   </section>
   
@@ -1979,7 +1974,7 @@ Executor (update, query, flushStatements, commit, rollb
     <div class='content pure'>
       <ul class="entry">
         
-          <li><a class="flat-box" title="/categories/Coding/" href="/categories/Coding/"><div class='name'>Coding</div><div class='badge'>(59)</div></a></li>
+          <li><a class="flat-box" title="/categories/Coding/" href="/categories/Coding/"><div class='name'>Coding</div><div class='badge'>(60)</div></a></li>
         
           <li><a class="flat-box child" title="/categories/Coding/Arthas/" href="/categories/Coding/Arthas/"><div class='name'>Arthas</div><div class='badge'>(1)</div></a></li>
         
@@ -1997,7 +1992,7 @@ Executor (update, query, flushStatements, commit, rollb
         
           <li><a class="flat-box child" title="/categories/Coding/Others/" href="/categories/Coding/Others/"><div class='name'>Others</div><div class='badge'>(6)</div></a></li>
         
-          <li><a class="flat-box child" title="/categories/Coding/Spring-Boot/" href="/categories/Coding/Spring-Boot/"><div class='name'>Spring-Boot</div><div class='badge'>(16)</div></a></li>
+          <li><a class="flat-box child" title="/categories/Coding/Spring-Boot/" href="/categories/Coding/Spring-Boot/"><div class='name'>Spring-Boot</div><div class='badge'>(17)</div></a></li>
         
           <li><a class="flat-box child" title="/categories/Coding/Spring/" href="/categories/Coding/Spring/"><div class='name'>Spring</div><div class='badge'>(1)</div></a></li>
         
@@ -2212,7 +2207,7 @@ Executor (update, query, flushStatements, commit, rollb
   &nbsp;&nbsp;|&nbsp;&nbsp;  
   
     &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-        class="white-color">146k</span>&nbsp;字
+        class="white-color">148.6k</span>&nbsp;字
     
 
   &nbsp;&nbsp;|&nbsp;&nbsp;  
