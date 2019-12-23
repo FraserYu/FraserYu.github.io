@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://dayarch.top//p/spring-aware.html</loc>
+    <lastmod>2019-12-23</lastmod>
+  </url>  <url>
     <loc>https://dayarch.top//p/spring-boot-configurationProperties-usage.html</loc>
     <lastmod>2019-12-23</lastmod>
   </url>  <url>
     <loc>https://dayarch.top//p/java-equals-hashcode.html</loc>
-    <lastmod>2019-12-22</lastmod>
-  </url>  <url>
-    <loc>https://dayarch.top//p/spring-aware.html</loc>
     <lastmod>2019-12-22</lastmod>
   </url>  <url>
     <loc>https://dayarch.top//p/pkix-certificate-import.html</loc>
