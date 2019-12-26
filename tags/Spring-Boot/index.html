@@ -425,6 +425,141 @@
   <section class='meta'>
     
     
+      <a title='在Spring Boot启动时执行代码的几种方法' href='/p/spring-boot-execute-on-startup.html'><img class='thumbnail' src='https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgspringbootconverter.png'></a>
+    
+    <div class="meta" id="header-meta">
+      
+        
+  <h2 class="title">
+    <a href="/p/spring-boot-execute-on-startup.html">
+      在Spring Boot启动时执行代码的几种方法
+    </a>
+  </h2>
+
+
+      
+      <div class='new-meta-box'>
+        
+          
+        
+          
+            
+  <div class='new-meta-item author'>
+    
+      <a href="https://dayarch.top" rel="nofollow">
+        
+          <img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png">
+        
+        <p>tanθ</p>
+      </a>
+    
+  </div>
+
+
+          
+        
+          
+            <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+    <p>2019-12-25</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+  
+  <div class='new-meta-item category'>
+    <a href='/categories/Coding/Spring-Boot/' rel="nofollow">
+      <i class="fas fa-folder-open" aria-hidden="true"></i>
+      <p>Coding&nbsp;/&nbsp;Spring-Boot</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            
+
+          
+        
+      </div>
+      
+        <hr>
+      
+    </div>
+  </section>
+
+
+  <section class="article typo">
+    <div class="article-entry" itemprop="articleBody">
+      前言
+有时候我们需要在应用启动时执行一些代码片段，这些片段可能是仅仅是为了记录 log，也可能是在启动时检查与安装证书 ，诸如上述业务要求我们可能会经常碰到
+
+Spring Boot 提供了至少 5 种方式用于在应用启动时执行代码。我们应该如何选择？本文将会逐步解释与分析这几种不同方式
+
+CommandLineRunner
+CommandLineRunner 是一个接口，通过实现它，我们可以在 Spring 应用成功启动之后 执行一些代码片段
+
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+
+
+@Slf4j
+@Component
+@Order(2)
+public cl
+      
+        <div class="readmore">
+          <a href="/p/spring-boot-execute-on-startup.html" class="flat-box">
+            <i class="fas fa-book-open fa-fw" aria-hidden="true"></i>
+            阅读全文
+          </a>
+        </div>
+      
+    </div>
+    
+      <div class="full-width auto-padding tags">
+        
+          <a href="/tags/Spring-Bean/" rel="nofollow"><i class="fas fa-tag fa-fw"></i> Spring Bean</a>
+        
+          <a href="/tags/%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/" rel="nofollow"><i class="fas fa-tag fa-fw"></i> 生命周期</a>
+        
+          <a href="/tags/Spring-Boot/" rel="nofollow"><i class="fas fa-tag fa-fw"></i> Spring Boot</a>
+        
+      </div>
+    
+  </section>
+</article>
+
+          </div>
+        
+      
+        
+          <div class='post-wrapper'>
+            <article class="post reveal ">
+  
+
+
+  <section class='meta'>
+    
+    
       <a title='Spring Boot @ConfigurationProperties 注解最强使用详解' href='/p/spring-boot-configurationProperties-usage.html'><img class='thumbnail' src='https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgspringbootconverter.png'></a>
     
     <div class="meta" id="header-meta">
@@ -1440,117 +1575,6 @@ Java 后端程序员应该会遇到读取 Excel 信息到 DB 等相关需求，�
           </div>
         
       
-        
-          <div class='post-wrapper'>
-            <article class="post reveal ">
-  
-
-
-  <section class='meta'>
-    
-    
-      <a title='@Conditional注解，Spring Boot 的灵活配置' href='/p/spring-boot-condition-annotation.html'><img class='thumbnail' src='https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgspringbootcondition.png'></a>
-    
-    <div class="meta" id="header-meta">
-      
-        
-  <h2 class="title">
-    <a href="/p/spring-boot-condition-annotation.html">
-      @Conditional注解，Spring Boot 的灵活配置
-    </a>
-  </h2>
-
-
-      
-      <div class='new-meta-box'>
-        
-          
-        
-          
-            
-  <div class='new-meta-item author'>
-    
-      <a href="https://dayarch.top" rel="nofollow">
-        
-          <img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png">
-        
-        <p>tanθ</p>
-      </a>
-    
-  </div>
-
-
-          
-        
-          
-            <div class="new-meta-item date">
-  <a class='notlink'>
-    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-    <p>2019-07-31</p>
-  </a>
-</div>
-
-          
-        
-          
-            
-  
-  <div class='new-meta-item category'>
-    <a href='/categories/Coding/Spring-Boot/' rel="nofollow">
-      <i class="fas fa-folder-open" aria-hidden="true"></i>
-      <p>Coding&nbsp;/&nbsp;Spring-Boot</p>
-    </a>
-  </div>
-
-
-          
-        
-          
-            
-
-          
-        
-      </div>
-      
-        <hr>
-      
-    </div>
-  </section>
-
-
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      上一篇文章 你应该知道的 @ConfigurationProperties 注解的使用姿势，这一篇就够了 介绍了如何通过 @ConfigurationProperties 注解灵活读取配置属性，这篇文章将介绍如何灵活配置 Spring Bean
-
-写在前面
-当我们构建一个 Spring 应用的时候，有时我们想在满足指定条件的时候才将某个 bean 加载到应用上下文中， 在Spring 4.0 时代，我们可以通过 @Conditional 注解来实现这类操作
-
-
-我们看到 @Conditional 注解接收的参数是 extends Condition 接口的泛型类，也就是说，我们要使用 @Con
-      
-        <div class="readmore">
-          <a href="/p/spring-boot-condition-annotation.html" class="flat-box">
-            <i class="fas fa-book-open fa-fw" aria-hidden="true"></i>
-            阅读全文
-          </a>
-        </div>
-      
-    </div>
-    
-      <div class="full-width auto-padding tags">
-        
-          <a href="/tags/Spring-Boot/" rel="nofollow"><i class="fas fa-tag fa-fw"></i> Spring Boot</a>
-        
-          <a href="/tags/%E6%B3%A8%E8%A7%A3/" rel="nofollow"><i class="fas fa-tag fa-fw"></i> 注解</a>
-        
-      </div>
-    
-  </section>
-</article>
-
-          </div>
-        
-      
     
   </section>
   
@@ -1977,7 +2001,7 @@ Java 后端程序员应该会遇到读取 Excel 信息到 DB 等相关需求，�
     <div class='content pure'>
       <ul class="entry">
         
-          <li><a class="flat-box" title="/categories/Coding/" href="/categories/Coding/"><div class='name'>Coding</div><div class='badge'>(60)</div></a></li>
+          <li><a class="flat-box" title="/categories/Coding/" href="/categories/Coding/"><div class='name'>Coding</div><div class='badge'>(61)</div></a></li>
         
           <li><a class="flat-box child" title="/categories/Coding/Arthas/" href="/categories/Coding/Arthas/"><div class='name'>Arthas</div><div class='badge'>(1)</div></a></li>
         
@@ -1995,7 +2019,7 @@ Java 后端程序员应该会遇到读取 Excel 信息到 DB 等相关需求，�
         
           <li><a class="flat-box child" title="/categories/Coding/Others/" href="/categories/Coding/Others/"><div class='name'>Others</div><div class='badge'>(6)</div></a></li>
         
-          <li><a class="flat-box child" title="/categories/Coding/Spring-Boot/" href="/categories/Coding/Spring-Boot/"><div class='name'>Spring-Boot</div><div class='badge'>(17)</div></a></li>
+          <li><a class="flat-box child" title="/categories/Coding/Spring-Boot/" href="/categories/Coding/Spring-Boot/"><div class='name'>Spring-Boot</div><div class='badge'>(18)</div></a></li>
         
           <li><a class="flat-box child" title="/categories/Coding/Spring/" href="/categories/Coding/Spring/"><div class='name'>Spring</div><div class='badge'>(1)</div></a></li>
         
@@ -2070,7 +2094,7 @@ Java 后端程序员应该会遇到读取 Excel 信息到 DB 等相关需求，�
 </header>
 
     <div class='content pure'>
-      <a href="/tags/AOP/" style="font-size: 14px; color: #999">AOP</a> <a href="/tags/ArrayList/" style="font-size: 14px; color: #999">ArrayList</a> <a href="/tags/Arthas/" style="font-size: 14px; color: #999">Arthas</a> <a href="/tags/Chrome/" style="font-size: 14px; color: #999">Chrome</a> <a href="/tags/ClassLoader/" style="font-size: 14px; color: #999">ClassLoader</a> <a href="/tags/Docker/" style="font-size: 22px; color: #636363">Docker</a> <a href="/tags/EasyExcel/" style="font-size: 14px; color: #999">EasyExcel</a> <a href="/tags/English/" style="font-size: 16px; color: #8b8b8b">English</a> <a href="/tags/Excel/" style="font-size: 16px; color: #8b8b8b">Excel</a> <a href="/tags/Exception/" style="font-size: 14px; color: #999">Exception</a> <a href="/tags/Git/" style="font-size: 18px; color: #7e7e7e">Git</a> <a href="/tags/GitHub-Pages/" style="font-size: 14px; color: #999">GitHub Pages</a> <a href="/tags/HTTP/" style="font-size: 16px; color: #8b8b8b">HTTP</a> <a href="/tags/Happens-before/" style="font-size: 14px; color: #999">Happens-before</a> <a href="/tags/Hybris/" style="font-size: 14px; color: #999">Hybris</a> <a href="/tags/IO/" style="font-size: 14px; color: #999">IO</a> <a href="/tags/JDK/" style="font-size: 14px; color: #999">JDK</a> <a href="/tags/JDK%E6%BA%90%E7%A0%81/" style="font-size: 14px; color: #999">JDK源码</a> <a href="/tags/JVM/" style="font-size: 14px; color: #999">JVM</a> <a href="/tags/Java/" style="font-size: 20px; color: #707070">Java</a> <a href="/tags/Jenkins/" style="font-size: 16px; color: #8b8b8b">Jenkins</a> <a href="/tags/Jrebel/" style="font-size: 14px; color: #999">Jrebel</a> <a href="/tags/Json/" style="font-size: 16px; color: #8b8b8b">Json</a> <a href="/tags/Linux/" style="font-size: 14px; color: #999">Linux</a> <a href="/tags/Lombok/" style="font-size: 14px; color: #999">Lombok</a> <a href="/tags/Maven/" style="font-size: 16px; color: #8b8b8b">Maven</a> <a href="/tags/MessageConverter/" style="font-size: 14px; color: #999">MessageConverter</a> <a href="/tags/MyBatis/" style="font-size: 14px; color: #999">MyBatis</a> <a href="/tags/Node/" style="font-size: 14px; color: #999">Node</a> <a href="/tags/OAuth2-0/" style="font-size: 14px; color: #999">OAuth2.0</a> <a href="/tags/POI/" style="font-size: 14px; color: #999">POI</a> <a href="/tags/PostMan/" style="font-size: 14px; color: #999">PostMan</a> <a href="/tags/RESTful/" style="font-size: 14px; color: #999">RESTful</a> <a href="/tags/SSL/" style="font-size: 14px; color: #999">SSL</a> <a href="/tags/Shiro/" style="font-size: 14px; color: #999">Shiro</a> <a href="/tags/Spring/" style="font-size: 16px; color: #8b8b8b">Spring</a> <a href="/tags/Spring-Aware/" style="font-size: 14px; color: #999">Spring Aware</a> <a href="/tags/Spring-Bean/" style="font-size: 18px; color: #7e7e7e">Spring Bean</a> <a href="/tags/Spring-Boot/" style="font-size: 24px; color: #555">Spring Boot</a> <a href="/tags/Spring-Data-Binding/" style="font-size: 14px; color: #999">Spring Data Binding</a> <a href="/tags/SpringMVC/" style="font-size: 14px; color: #999">SpringMVC</a> <a href="/tags/Springboot/" style="font-size: 14px; color: #999">Springboot</a> <a href="/tags/Starter/" style="font-size: 14px; color: #999">Starter</a> <a href="/tags/Windows/" style="font-size: 14px; color: #999">Windows</a> <a href="/tags/annotation/" style="font-size: 14px; color: #999">annotation</a> <a href="/tags/thread/" style="font-size: 14px; color: #999">thread</a> <a href="/tags/volatile/" style="font-size: 14px; color: #999">volatile</a> <a href="/tags/%E4%BA%8C%E5%8F%89%E6%9F%A5%E6%89%BE%E6%A0%91/" style="font-size: 14px; color: #999">二叉查找树</a> <a href="/tags/%E4%BA%92%E6%96%A5/" style="font-size: 14px; color: #999">互斥</a> <a href="/tags/%E5%88%86%E5%B7%A5/" style="font-size: 14px; color: #999">分工</a> <a href="/tags/%E5%8E%9F%E5%AD%90%E6%80%A7/" style="font-size: 14px; color: #999">原子性</a> <a href="/tags/%E5%8F%AF%E8%A7%81%E6%80%A7/" style="font-size: 14px; color: #999">可见性</a> <a href="/tags/%E5%90%8C%E6%AD%A5/" style="font-size: 14px; color: #999">同步</a> <a href="/tags/%E5%A4%9A%E6%80%81/" style="font-size: 14px; color: #999">多态</a> <a href="/tags/%E5%B9%B6%E5%8F%91/" style="font-size: 14px; color: #999">并发</a> <a href="/tags/%E6%8C%87%E6%95%B0%E5%9F%BA%E9%87%91/" style="font-size: 14px; color: #999">指数基金</a> <a href="/tags/%E6%9C%89%E5%BA%8F%E6%80%A7/" style="font-size: 14px; color: #999">有序性</a> <a href="/tags/%E6%AD%BB%E9%94%81/" style="font-size: 14px; color: #999">死锁</a> <a href="/tags/%E6%B3%A8%E8%A7%A3/" style="font-size: 16px; color: #8b8b8b">注解</a> <a href="/tags/%E7%83%AD%E9%83%A8%E7%BD%B2/" style="font-size: 14px; color: #999">热部署</a> <a href="/tags/%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/" style="font-size: 18px; color: #7e7e7e">生命周期</a> <a href="/tags/%E7%BA%A2%E9%BB%91%E6%A0%91/" style="font-size: 14px; color: #999">红黑树</a> <a href="/tags/%E8%B4%B9%E7%94%A8/" style="font-size: 14px; color: #999">费用</a> <a href="/tags/%E9%94%81/" style="font-size: 16px; color: #8b8b8b">锁</a> <a href="/tags/%E9%94%81%E7%B2%92%E5%BA%A6/" style="font-size: 14px; color: #999">锁粒度</a> <a href="/tags/%E9%9D%A2%E8%AF%95/" style="font-size: 18px; color: #7e7e7e">面试</a>
+      <a href="/tags/AOP/" style="font-size: 14px; color: #999">AOP</a> <a href="/tags/ArrayList/" style="font-size: 14px; color: #999">ArrayList</a> <a href="/tags/Arthas/" style="font-size: 14px; color: #999">Arthas</a> <a href="/tags/Chrome/" style="font-size: 14px; color: #999">Chrome</a> <a href="/tags/ClassLoader/" style="font-size: 14px; color: #999">ClassLoader</a> <a href="/tags/Docker/" style="font-size: 22px; color: #636363">Docker</a> <a href="/tags/EasyExcel/" style="font-size: 14px; color: #999">EasyExcel</a> <a href="/tags/English/" style="font-size: 16px; color: #8b8b8b">English</a> <a href="/tags/Excel/" style="font-size: 16px; color: #8b8b8b">Excel</a> <a href="/tags/Exception/" style="font-size: 14px; color: #999">Exception</a> <a href="/tags/Git/" style="font-size: 18px; color: #7e7e7e">Git</a> <a href="/tags/GitHub-Pages/" style="font-size: 14px; color: #999">GitHub Pages</a> <a href="/tags/HTTP/" style="font-size: 16px; color: #8b8b8b">HTTP</a> <a href="/tags/Happens-before/" style="font-size: 14px; color: #999">Happens-before</a> <a href="/tags/Hybris/" style="font-size: 14px; color: #999">Hybris</a> <a href="/tags/IO/" style="font-size: 14px; color: #999">IO</a> <a href="/tags/JDK/" style="font-size: 14px; color: #999">JDK</a> <a href="/tags/JDK%E6%BA%90%E7%A0%81/" style="font-size: 14px; color: #999">JDK源码</a> <a href="/tags/JVM/" style="font-size: 14px; color: #999">JVM</a> <a href="/tags/Java/" style="font-size: 20px; color: #707070">Java</a> <a href="/tags/Jenkins/" style="font-size: 16px; color: #8b8b8b">Jenkins</a> <a href="/tags/Jrebel/" style="font-size: 14px; color: #999">Jrebel</a> <a href="/tags/Json/" style="font-size: 16px; color: #8b8b8b">Json</a> <a href="/tags/Linux/" style="font-size: 14px; color: #999">Linux</a> <a href="/tags/Lombok/" style="font-size: 14px; color: #999">Lombok</a> <a href="/tags/Maven/" style="font-size: 16px; color: #8b8b8b">Maven</a> <a href="/tags/MessageConverter/" style="font-size: 14px; color: #999">MessageConverter</a> <a href="/tags/MyBatis/" style="font-size: 14px; color: #999">MyBatis</a> <a href="/tags/Node/" style="font-size: 14px; color: #999">Node</a> <a href="/tags/OAuth2-0/" style="font-size: 14px; color: #999">OAuth2.0</a> <a href="/tags/POI/" style="font-size: 14px; color: #999">POI</a> <a href="/tags/PostMan/" style="font-size: 14px; color: #999">PostMan</a> <a href="/tags/RESTful/" style="font-size: 14px; color: #999">RESTful</a> <a href="/tags/SSL/" style="font-size: 14px; color: #999">SSL</a> <a href="/tags/Shiro/" style="font-size: 14px; color: #999">Shiro</a> <a href="/tags/Spring/" style="font-size: 16px; color: #8b8b8b">Spring</a> <a href="/tags/Spring-Aware/" style="font-size: 14px; color: #999">Spring Aware</a> <a href="/tags/Spring-Bean/" style="font-size: 20px; color: #707070">Spring Bean</a> <a href="/tags/Spring-Boot/" style="font-size: 24px; color: #555">Spring Boot</a> <a href="/tags/Spring-Data-Binding/" style="font-size: 14px; color: #999">Spring Data Binding</a> <a href="/tags/SpringMVC/" style="font-size: 14px; color: #999">SpringMVC</a> <a href="/tags/Springboot/" style="font-size: 14px; color: #999">Springboot</a> <a href="/tags/Starter/" style="font-size: 14px; color: #999">Starter</a> <a href="/tags/Windows/" style="font-size: 14px; color: #999">Windows</a> <a href="/tags/annotation/" style="font-size: 14px; color: #999">annotation</a> <a href="/tags/thread/" style="font-size: 14px; color: #999">thread</a> <a href="/tags/volatile/" style="font-size: 14px; color: #999">volatile</a> <a href="/tags/%E4%BA%8C%E5%8F%89%E6%9F%A5%E6%89%BE%E6%A0%91/" style="font-size: 14px; color: #999">二叉查找树</a> <a href="/tags/%E4%BA%92%E6%96%A5/" style="font-size: 14px; color: #999">互斥</a> <a href="/tags/%E5%88%86%E5%B7%A5/" style="font-size: 14px; color: #999">分工</a> <a href="/tags/%E5%8E%9F%E5%AD%90%E6%80%A7/" style="font-size: 14px; color: #999">原子性</a> <a href="/tags/%E5%8F%AF%E8%A7%81%E6%80%A7/" style="font-size: 14px; color: #999">可见性</a> <a href="/tags/%E5%90%8C%E6%AD%A5/" style="font-size: 14px; color: #999">同步</a> <a href="/tags/%E5%A4%9A%E6%80%81/" style="font-size: 14px; color: #999">多态</a> <a href="/tags/%E5%B9%B6%E5%8F%91/" style="font-size: 14px; color: #999">并发</a> <a href="/tags/%E6%8C%87%E6%95%B0%E5%9F%BA%E9%87%91/" style="font-size: 14px; color: #999">指数基金</a> <a href="/tags/%E6%9C%89%E5%BA%8F%E6%80%A7/" style="font-size: 14px; color: #999">有序性</a> <a href="/tags/%E6%AD%BB%E9%94%81/" style="font-size: 14px; color: #999">死锁</a> <a href="/tags/%E6%B3%A8%E8%A7%A3/" style="font-size: 16px; color: #8b8b8b">注解</a> <a href="/tags/%E7%83%AD%E9%83%A8%E7%BD%B2/" style="font-size: 14px; color: #999">热部署</a> <a href="/tags/%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/" style="font-size: 20px; color: #707070">生命周期</a> <a href="/tags/%E7%BA%A2%E9%BB%91%E6%A0%91/" style="font-size: 14px; color: #999">红黑树</a> <a href="/tags/%E8%B4%B9%E7%94%A8/" style="font-size: 14px; color: #999">费用</a> <a href="/tags/%E9%94%81/" style="font-size: 16px; color: #8b8b8b">锁</a> <a href="/tags/%E9%94%81%E7%B2%92%E5%BA%A6/" style="font-size: 14px; color: #999">锁粒度</a> <a href="/tags/%E9%9D%A2%E8%AF%95/" style="font-size: 18px; color: #7e7e7e">面试</a>
     </div>
   </section>
 
@@ -2210,7 +2234,7 @@ Java 后端程序员应该会遇到读取 Excel 信息到 DB 等相关需求，�
   &nbsp;&nbsp;|&nbsp;&nbsp;  
   
     &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-        class="white-color">148.6k</span>&nbsp;字
+        class="white-color">150.7k</span>&nbsp;字
     
 
   &nbsp;&nbsp;|&nbsp;&nbsp;  
@@ -2329,31 +2353,6 @@ Java 后端程序员应该会遇到读取 Excel 信息到 DB 等相关需求，�
 
 
 
-
-  
-  
-  
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-backstretch/2.0.4/jquery.backstretch.min.js"></script>
-    <script type="text/javascript">
-      $(function(){
-        if ('.cover') {
-          $('.cover').backstretch(
-          ["https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img4lmgwl.jpg"],
-          {
-            duration: "6000",
-            fade: "2500"
-          });
-        } else {
-          $.backstretch(
-          ["https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img4lmgwl.jpg"],
-          {
-            duration: "6000",
-            fade: "2500"
-          });
-        }
-      });
-    </script>
-  
 
 
 

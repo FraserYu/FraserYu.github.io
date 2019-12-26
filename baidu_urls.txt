@@ -1,5 +1,5 @@
+https://dayarch.top/p/spring-boot-execute-on-startup.html
 https://dayarch.top/p/spring-boot-configurationProperties-usage.html
 https://dayarch.top/p/spring-aware.html
 https://dayarch.top/p/spring-bean-lifecycle-destroy.html
 https://dayarch.top/p/spring-bean-lifecycle-creation.html
-https://dayarch.top/p/difference-between-beanfactory-and-applicationcontext.html

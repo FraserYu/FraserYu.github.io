@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://dayarch.top/"/>
-  <updated>2019-12-23T13:56:35.162Z</updated>
+  <updated>2019-12-26T05:17:59.020Z</updated>
   <id>https://dayarch.top/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>在Spring Boot启动时执行代码的几种方法</title>
+    <link href="https://dayarch.top//p/spring-boot-execute-on-startup.html"/>
+    <id>https://dayarch.top//p/spring-boot-execute-on-startup.html</id>
+    <published>2019-12-25T08:13:15.000Z</published>
+    <updated>2019-12-26T05:17:59.020Z</updated>
+    
+    <summary type="html">
+    
+      我们经常会碰到在Spring Boot启动阶段执行一些代码片段需求，Spring 为我们提供了至少五种方式，比如：MyCommandLineRunner，ApplicationRunner， ApplicationListener， PostConstruct， afterPropertiesSet，但是他们之间还是有很大区别的，本文将带你透彻理解他们的区别，在实战中选择最适合你的那一个
+    
+    </summary>
+    
+    
+      <category term="Coding" scheme="https://dayarch.top/categories/Coding/"/>
+    
+      <category term="Spring-Boot" scheme="https://dayarch.top/categories/Coding/Spring-Boot/"/>
+    
+    
+      <category term="Spring Bean" scheme="https://dayarch.top/tags/Spring-Bean/"/>
+    
+      <category term="生命周期" scheme="https://dayarch.top/tags/%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/"/>
+    
+      <category term="Spring Boot" scheme="https://dayarch.top/tags/Spring-Boot/"/>
+    
+  </entry>
   
   <entry>
     <title>Spring Boot @ConfigurationProperties 注解最强使用详解</title>
@@ -488,33 +515,6 @@
     
     
       <category term="Happens-before" scheme="https://dayarch.top/tags/Happens-before/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>并发编程三大问题</title>
-    <link href="https://dayarch.top//p/java-concurrency-three-questions.html"/>
-    <id>https://dayarch.top//p/java-concurrency-three-questions.html</id>
-    <published>2019-09-04T08:31:34.000Z</published>
-    <updated>2019-11-07T06:38:00.676Z</updated>
-    
-    <summary type="html">
-    
-      可见性，原子性和有序性是引发并发诸多问题的根源，解决并发问题，你需要充分理解它们是怎么坑你的
-    
-    </summary>
-    
-    
-      <category term="Coding" scheme="https://dayarch.top/categories/Coding/"/>
-    
-      <category term="Java-Concurrency" scheme="https://dayarch.top/categories/Coding/Java-Concurrency/"/>
-    
-    
-      <category term="可见性" scheme="https://dayarch.top/tags/%E5%8F%AF%E8%A7%81%E6%80%A7/"/>
-    
-      <category term="原子性" scheme="https://dayarch.top/tags/%E5%8E%9F%E5%AD%90%E6%80%A7/"/>
-    
-      <category term="有序性" scheme="https://dayarch.top/tags/%E6%9C%89%E5%BA%8F%E6%80%A7/"/>
     
   </entry>
   
