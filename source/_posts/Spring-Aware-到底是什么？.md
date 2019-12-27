@@ -53,7 +53,7 @@ Aware 是 Spring 中的一个根接口，继承该接口的子接口有很多，
 
 Aware 翻译过来可以理解为"察觉的；注意到的；感知的" ，XxxxAware 也就是对....感知的，没有 Aware 就是无感知的吗？对喽
 
-> Spring 的依赖注入最大亮点就是所有的 Bean 对 Spring 容器的存在是没有意识的，拿 [Spring Bean 生命周期之“我从哪里来”？]() 文章中“小学生入少先队”为例子说明，小学生还是那个小学生，加入少先队还是加入共青团只不过规则不一样罢了
+> Spring 的依赖注入最大亮点就是所有的 Bean 对 Spring 容器的存在是没有意识的，拿 [Spring Bean 生命周期之缘起](https://dayarch.top/p/spring-bean-lifecycle-creation.html) 文章中“小学生入少先队”为例子说明，小学生还是那个小学生，加入少先队还是加入共青团只不过规则不一样罢了
 但是在实际项目中，我们不可避免的要用到 Spring 容器本身提供的资源（难免要有事情需要少先队组织的帮助），这时候要让 Bean 主动意识到 Spring 容器的存在，才能调用 Spring 所提供的资源，这就是 Spring Aware. 其实 Spring Aware 是 Spring 设计为框架内部使用的，若使用了，你的 Bean 将会和 Spring 框架耦合，所以自己不单独使用，但是在读框架源码时希望你不再模糊.
 
 常见的 Spring Aware 接口
@@ -63,7 +63,7 @@ Aware 翻译过来可以理解为"察觉的；注意到的；感知的" ，XxxxA
 | :-- | :-- |
 |  BeanNameAware   | 获取容器中 Bean 的名称    |
 |   BeanFactoryAware  |   获取当前 BeanFactory ，这样可以调用容器的服务  |
-|  ApplicationContextAware   |  同上，在[BeanFactory 和 ApplicationContext 的区别]() 中已明确说明   |
+|  ApplicationContextAware   |  同上，在[BeanFactory 和 ApplicationContext 的区别](https://dayarch.top/p/difference-between-beanfactory-and-applicationcontext.html) 中已明确说明   |
 |   MessageSourceAware  | 获取 Message Source 相关文本信息    |
 |  ApplicationEventPublisherAware   | 发布事件    |
 |   ResourceLoaderAware  |  获取资源加载器，这样获取外部资源文件   |
