@@ -484,7 +484,7 @@
 
     <section class="article typo">
       <div class="article-entry" itemprop="articleBody">
-        <h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>上一篇文章<a href="https://dayarch.top/p/32b8e26a.html">原子性问题的宏观理解</a> 带领大家了解了锁和资源的模型，有了这篇文章的铺垫，相信理解这一篇文章就非常轻松了</p>
+        <h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>上一篇文章<a href="https://dayarch.top/p/java-concurrency-atomic.html">原子性问题的宏观理解</a> 带领大家了解了锁和资源的模型，有了这篇文章的铺垫，相信理解这一篇文章就非常轻松了</p>
 <p>当我们要保护单个资源并对其进行修改其实很简单，只需按照下图分三步走</p>
 <ol>
 <li>创建受保护资源 R 的锁</li>
@@ -521,12 +521,13 @@
 <p><img src="http://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E5%A4%9A%E7%BA%BF%E7%A8%8B/_image/2019-10-09/%E9%93%B6%E8%A1%8C%E8%BD%AC%E8%B4%A61.png" alt=""></p>
 <p>还记得 <a href="https://dayarch.top/p/815d7647.html">happens-before 规则</a> 这篇文章提到的<strong>监视器锁规则</strong>和<strong>传递性规则</strong>吗？</p>
 <blockquote>
-<p>####监视器锁规则<br> 对一个锁的解锁 happens-before 于随后对这个锁的加锁<br>####传递性规则<br>如果 A happens-before B, 且 B happens-before C, 那么 A happens-before C</p>
+<h4 id="监视器锁规则"><a href="#监视器锁规则" class="headerlink" title="监视器锁规则"></a>监视器锁规则</h4><p> 对一个锁的解锁 happens-before 于随后对这个锁的加锁</p>
+<h4 id="传递性规则"><a href="#传递性规则" class="headerlink" title="传递性规则"></a>传递性规则</h4><p>如果 A happens-before B, 且 B happens-before C, 那么 A happens-before C</p>
 </blockquote>
 <p><strong>资源 B.balance 存在于两个”临界区”中，所以这个”临界区”对 B.balance 来说形同虚设，也就不满足监视器锁规则，进而导致传递性规则也不生效，说白了，前序线程的更改结果对后一个线程不可见</strong></p>
 <p>这样最终导致:</p>
 <ul>
-<li><p><strong>账户 B 的余额可能是 100: ** 线程 1 写 B.balance 100(balance = 300) **先于</strong> 线程 2 写 B.balance(balance = 100)，也就是说线程 1 的结果会被线程 2 覆盖，导致最终账户 B 的余额为 100</p>
+<li><p><strong>账户 B 的余额可能是 100:</strong> 线程 1 写 B.balance 100(balance = 300) <strong>先于</strong> 线程 2 写 B.balance(balance = 100)，也就是说线程 1 的结果会被线程 2 覆盖，导致最终账户 B 的余额为 100</p>
 </li>
 <li><p><strong>账户 B 的余额可能是 300:</strong> 与上述情况相反，线程 1 写 B.balance 100(balance = 300) <strong>后于</strong> 线程 2 写 B.balance(balance = 100)，也就是说线程 2 的结果线程 1 覆盖，导致最终账户 B 的余额为 300</p>
 </li>
@@ -535,7 +536,7 @@
 <h2 id="正确姿势"><a href="#正确姿势" class="headerlink" title="正确姿势"></a>正确姿势</h2><p>上面的问题就是为资源创建的锁不能保护所有关联的资源，那我们就想办法解决这个问题，来看下面代码:</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Account</span> </span>&#123;</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">int</span> balance;</span><br><span class="line">  <span class="comment">// 转账</span></span><br><span class="line">  <span class="function"><span class="keyword">void</span> <span class="title">transfer</span><span class="params">(Account target, <span class="keyword">int</span> amt)</span></span>&#123;</span><br><span class="line">    <span class="keyword">synchronized</span>(Account.class) &#123;</span><br><span class="line">      <span class="keyword">if</span> (<span class="keyword">this</span>.balance &gt; amt) &#123;</span><br><span class="line">        <span class="keyword">this</span>.balance -= amt;</span><br><span class="line">        target.balance += amt;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>我们将 this 锁变为 Account.class 锁，Account.class 是虚拟机加载 Account 类时创建的，肯定是唯一的(<a href="https://dayarch.top/p/127ec041.html">双亲委派模型解释了为何该对象是唯一的</a>)， 所有 Account 对象都共享 Account.class, 也就是说，Account.class 锁能保护所有 Account 对象，我们将上面程序再用模型解释一下</p>
+<p>我们将 this 锁变为 Account.class 锁，Account.class 是虚拟机加载 Account 类时创建的，肯定是唯一的(<a href="https://dayarch.top/p/java-parents-delegation-model.html">双亲委派模型解释了为何该对象是唯一的</a>)， 所有 Account 对象都共享 Account.class, 也就是说，Account.class 锁能保护所有 Account 对象，我们将上面程序再用模型解释一下</p>
 <p><img src="http://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E5%A4%9A%E7%BA%BF%E7%A8%8B/_image/2019-10-09/%E9%93%B6%E8%A1%8C%E8%BD%AC%E8%B4%A62.png" alt=""></p>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>到这里关于锁和资源的关系你应该了解的更加透彻了，单个资源和多个无关联资源的情形都很好处理，为各自资源创建相应的锁就好，如果多个资源有关联，为了让锁起到保护作用，我们需要将锁的粒度变大，比如将 this 锁变成了 Account.class 锁。</p>
 <p>转账业务非常常见，并发量非常大，如果我们将锁的粒度都提升到 Account.class 这个级别(分久必合)，假设每次转账业务都很耗时，那么显然这个锁的性能是比较低的，<strong>所以接下来的文章，我们还会继续优化这个模型，选择合适的锁粒度，同时能保护多个有关联的资源</strong>，</p>
@@ -545,36 +546,6 @@
 <li>偏向锁，轻量锁，重量锁是不是和我们这节内容有异曲同工之处呢？</li>
 <li>提前想一下，我们如何来优化这个模型呢？ </li>
 </ol>
-<h2 id="附加说明"><a href="#附加说明" class="headerlink" title="附加说明"></a>附加说明</h2><p>如果你对这篇文章理解有些困难，可以按照下面的顺序回忆前序文章相关内容</p>
-<ol>
-<li><a href="https://dayarch.top/p/d7e125a1.html">这次走进并发的世界，请不要错过</a></li>
-<li><a href="https://dayarch.top/p/86243a5b.html">学并发编程，透彻理解这三个核心是关键</a></li>
-<li><a href="https://dayarch.top/p/6d12b8cf.html">并发Bug之源有三，请睁大眼睛看清它们</a></li>
-<li><a href="https://dayarch.top/p/815d7647.html">可见性有序性，Happens-before来搞定</a></li>
-<li><a href="https://dayarch.top/p/32b8e26a.html">解决原子性问题？你首先需要的是宏观理解</a></li>
-<li><a href="https://dayarch.top/p/fb3c7eeb.html">面试并发volatile关键字时，我们应该具备哪些谈资？</a></li>
-</ol>
-<h2 id="推荐阅读"><a href="#推荐阅读" class="headerlink" title="推荐阅读"></a>推荐阅读</h2><ul>
-<li><a href="https://dayarch.top/p/af68cfb3.html">每天用SpringBoot，还不懂RESTful API返回统一数据格式是怎么实现的？ </a></li>
-<li><a href="https://dayarch.top/p/127ec041.html">双亲委派模型：大厂高频面试题，轻松搞定</a></li>
-<li><a href="https://dayarch.top/p/61d8a472.html">EasyExcel 读取 excel 真的很easy</a></li>
-<li><a href="https://dayarch.top/p/86cf6746.html">红黑树，超强动静图详解，简单易懂</a></li>
-</ul>
-<hr>
-<h2 id="提高效率工具"><a href="#提高效率工具" class="headerlink" title="提高效率工具"></a>提高效率工具</h2><p><img src="http://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E6%84%9F%E6%83%B3%E4%B8%8E%E6%80%BB%E7%BB%93/_image/2019-06-18/b.png" alt=""> </p>
-<hr>
-<blockquote>
-<h3 id="欢迎持续关注公众号：「日拱一兵」"><a href="#欢迎持续关注公众号：「日拱一兵」" class="headerlink" title="欢迎持续关注公众号：「日拱一兵」"></a>欢迎持续关注公众号：「日拱一兵」</h3><ul>
-<li>前沿 Java 技术干货分享 </li>
-<li>高效工具汇总 | 回复「工具」</li>
-<li>面试问题分析与解答 </li>
-<li>技术资料领取 | 回复「资料」</li>
-</ul>
-</blockquote>
-<blockquote>
-<p>以读侦探小说思维轻松趣味学习 Java 技术栈相关知识，本着将复杂问题简单化，抽象问题具体化和图形化原则逐步分解技术问题，技术持续更新，请持续关注……</p>
-</blockquote>
-<p><img src="http://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E6%84%9F%E6%83%B3%E4%B8%8E%E6%80%BB%E7%BB%93/_image/2019-06-18/a%20%281%29.png" alt=""></p>
 
       </div>
       <!-- <div class="tuijian">
@@ -600,10 +571,10 @@
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2019-11-07T14:38:28+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2019-12-29T17:49:34+08:00">
   <a class='notlink'>
     <i class="fas fa-clock" aria-hidden="true"></i>
-    <p>更新于 2019年11月7日</p>
+    <p>更新于 2019年12月29日</p>
   </a>
 </div>
 
@@ -1072,7 +1043,7 @@
 </header>
 
     <div class='content pure'>
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#写在前面"><span class="toc-text">写在前面</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#保护多个资源"><span class="toc-text">保护多个资源</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#保护多个没有关系的资源"><span class="toc-text">保护多个没有关系的资源</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#保护多个关系的资源"><span class="toc-text">保护多个关系的资源</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#正确姿势"><span class="toc-text">正确姿势</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-text">总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#灵魂追问"><span class="toc-text">灵魂追问</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#附加说明"><span class="toc-text">附加说明</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#推荐阅读"><span class="toc-text">推荐阅读</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#提高效率工具"><span class="toc-text">提高效率工具</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#欢迎持续关注公众号：「日拱一兵」"><span class="toc-text">欢迎持续关注公众号：「日拱一兵」</span></a></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#写在前面"><span class="toc-text">写在前面</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#保护多个资源"><span class="toc-text">保护多个资源</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#保护多个没有关系的资源"><span class="toc-text">保护多个没有关系的资源</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#保护多个关系的资源"><span class="toc-text">保护多个关系的资源</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#监视器锁规则"><span class="toc-text">监视器锁规则</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#传递性规则"><span class="toc-text">传递性规则</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#正确姿势"><span class="toc-text">正确姿势</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-text">总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#灵魂追问"><span class="toc-text">灵魂追问</span></a></li></ol>
     </div>
   </section>
 
@@ -1153,7 +1124,7 @@
   &nbsp;&nbsp;|&nbsp;&nbsp;  
   
     &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-        class="white-color">150.7k</span>&nbsp;字
+        class="white-color">151.1k</span>&nbsp;字
     
 
   &nbsp;&nbsp;|&nbsp;&nbsp;  

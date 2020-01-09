@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://dayarch.top/"/>
-  <updated>2019-12-26T06:43:01.889Z</updated>
+  <updated>2020-01-09T02:55:04.291Z</updated>
   <id>https://dayarch.top/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>小小TODO也有大道理</title>
+    <link href="https://dayarch.top//p/how-to-use-todo-feature.html"/>
+    <id>https://dayarch.top//p/how-to-use-todo-feature.html</id>
+    <published>2020-01-09T02:50:07.000Z</published>
+    <updated>2020-01-09T02:55:04.291Z</updated>
+    
+    <summary type="html">
+    
+      有时，我们需要标记部分代码以供将来参考，比如:优化，改进，可能的更改，要讨论的问题等。通常我们会在代码中加入TODO作为标识，但是在团队中协同工作，TODO的背后也蕴藏着一些道理
+    
+    </summary>
+    
+    
+      <category term="Coding" scheme="https://dayarch.top/categories/Coding/"/>
+    
+      <category term="安全-协议-规范" scheme="https://dayarch.top/categories/Coding/%E5%AE%89%E5%85%A8-%E5%8D%8F%E8%AE%AE-%E8%A7%84%E8%8C%83/"/>
+    
+    
+      <category term="TODO" scheme="https://dayarch.top/tags/TODO/"/>
+    
+  </entry>
   
   <entry>
     <title>在Spring Boot启动时执行代码的几种方法</title>
@@ -329,7 +352,7 @@
     <link href="https://dayarch.top//p/java-concurrency-dead-lock.html"/>
     <id>https://dayarch.top//p/java-concurrency-dead-lock.html</id>
     <published>2019-10-18T06:01:20.000Z</published>
-    <updated>2019-11-07T06:36:28.719Z</updated>
+    <updated>2019-12-31T03:09:05.244Z</updated>
     
     <summary type="html">
     
@@ -402,7 +425,7 @@
     <link href="https://dayarch.top//p/java-concurrency-lock-resource.html"/>
     <id>https://dayarch.top//p/java-concurrency-lock-resource.html</id>
     <published>2019-10-10T06:17:23.000Z</published>
-    <updated>2019-11-07T06:38:28.104Z</updated>
+    <updated>2019-12-29T09:49:34.396Z</updated>
     
     <summary type="html">
     
@@ -492,29 +515,6 @@
     
     
       <category term="锁" scheme="https://dayarch.top/tags/%E9%94%81/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>有序性可见性，Happens-before来搞定</title>
-    <link href="https://dayarch.top//p/java-concurrency-happens-before-rule.html"/>
-    <id>https://dayarch.top//p/java-concurrency-happens-before-rule.html</id>
-    <published>2019-09-12T10:24:22.000Z</published>
-    <updated>2019-11-08T08:51:44.745Z</updated>
-    
-    <summary type="html">
-    
-      Happens-before是解决并发编程可见性有有序性的核心约束，图形与代码展示将不再抽象,让你透过现象看本质
-    
-    </summary>
-    
-    
-      <category term="Coding" scheme="https://dayarch.top/categories/Coding/"/>
-    
-      <category term="Java-Concurrency" scheme="https://dayarch.top/categories/Coding/Java-Concurrency/"/>
-    
-    
-      <category term="Happens-before" scheme="https://dayarch.top/tags/Happens-before/"/>
     
   </entry>
   
