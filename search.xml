@@ -8,7 +8,7 @@
       <link href="//p/how-to-use-todo-feature.html"/>
       <url>//p/how-to-use-todo-feature.html</url>
       
-        <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>有时，我们需要标记部分代码以供将来参考，比如: 优化，改进，可能的更改，要讨论的问题等。 通常我们会在代码中加入如下的标记表示待办:</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//TODO 我将要在这里做 xxx</span></span><br></pre></td></tr></table></figure><p>你这样做，别人也会这样做。一时间，项目中可能会存在大量的 <code>TODO</code>，当你搜寻你的 <code>TODO</code> 时也就变得非常麻烦，如同石沉大海，也就失去了这个标记的意义。</p><p>IntelliJ IDEA允许我们添加特殊类型的注释，使得这些注释在编辑器中突出显示，它们被索引，并在 <code>TODO 工具窗口</code> 中列出。这样，我们就容易追踪自己的 <code>TODO</code> 了。</p><p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgTODOexample.png" alt=""></p><h2 id="默认的-TODO"><a href="#默认的-TODO" class="headerlink" title="默认的 TODO"></a>默认的 <code>TODO</code></h2><p>默认情况下，IntelliJ IDEA识别两种模式：小写和大写的 <code>TODO</code> 和 <code>FIXME</code> 这些模式可在任何受支持文件类型的行注释和块注释内部使用。我们可以根据需要修改默认模式或添加自己的模式</p><p>如上图，我们可以创建多行的 <code>TODO</code> (类似 Spring Boot 中的 YAML 配置多个值)，需要缩进第一行之后的注释行。如果没有缩进，则将行视为常规注释行</p><p>要禁用多行 <code>TODO</code> 项目，使用快捷键 <code>⌘ + ,</code> 打开 Preferences， 搜索 <code>TODO</code> (Editor | TODO), 你会看到如下界面</p><p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgXnip2020-01-09_09-06-39.jpg" alt=""></p><p>要查看系统中的所有 <code>TODO</code>，请打开 TODO 工具窗口 (快捷键 <code>⌘ + 6</code> )。切换选项查看 <code>TODO</code> 范围:</p><ul><li>从当前项目中的所有文件</li><li>仅基于当前文件的范围</li><li>指定范围的文件</li><li>活动的变更列表</li></ul><p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgXnip2020-01-09_09-23-45.jpg" alt=""></p><p>到这里 Intellij IDEA 默认提供的 <code>TODO</code> 就介绍完了，为了能更快的找到我们自己的 TODO，我们就需要进行自定义</p><h2 id="自定义-TODO"><a href="#自定义-TODO" class="headerlink" title="自定义 TODO"></a>自定义 TODO</h2><p>重新打开 <code>TODO</code> 位置，新增 TODO item，这里新增 <code>optimize</code>，用于标识待优化内容</p><p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgXnip2020-01-09_09-46-03.jpg" alt=""></p><p>添加个过滤器，用于 <code>TODO</code> 的分组<br><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgXnip2020-01-09_09-50-35.jpg" alt=""></p><p>随便添加一个优化备注，通过以上介绍的功能，快速定位到我们自己的 <code>TODO</code></p><p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgXnip2020-01-09_09-54-37.jpg" alt=""></p><p>如果你的待办事项通常是相对固定的描述，你也可以配合 Live Template 快速生成 <code>TODO</code> 内容</p><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>当团队规模很大，你又同时有很多待办的时候，<code>TODO</code> 特性可以帮助我们做标识，自定义 <code>TODO</code> 可以帮我们快速定位，我们可以充分利用这个特性，但是</p><blockquote><h4 id="定期清理-TODO"><a href="#定期清理-TODO" class="headerlink" title="定期清理 TODO"></a>定期清理 TODO</h4><p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img2020-01-09-10-45-53@2x.png" alt=""></p></blockquote><h2 id="灵魂追问"><a href="#灵魂追问" class="headerlink" title="灵魂追问"></a>灵魂追问</h2><ol><li>你觉得项目中代码有哪些不规范/不够整洁的地方？(欢迎到博客下方留言讨论)</li></ol><hr>]]></content>
+        <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>有时，我们需要标记部分代码以供将来参考，比如: 优化，改进，可能的更改，要讨论的问题等。 通常我们会在代码中加入如下的标记表示待办:</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//TODO 我将要在这里做 xxx</span></span><br></pre></td></tr></table></figure><p>你这样做，别人也会这样做。一时间，项目中可能会存在大量的 <code>TODO</code>，当你搜寻你的 <code>TODO</code> 时也就变得非常麻烦，如同石沉大海，也就失去了这个标记的意义。</p><p>IntelliJ IDEA允许我们添加特殊类型的注释，使得这些注释在编辑器中突出显示，它们被索引，并在 <code>TODO 工具窗口</code> 中列出。这样，我们就容易追踪自己的 <code>TODO</code> 了。</p><p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgTODOexample.png" alt=""></fancybox></p><h2 id="默认的-TODO"><a href="#默认的-TODO" class="headerlink" title="默认的 TODO"></a>默认的 <code>TODO</code></h2><p>默认情况下，IntelliJ IDEA识别两种模式：小写和大写的 <code>TODO</code> 和 <code>FIXME</code> 这些模式可在任何受支持文件类型的行注释和块注释内部使用。我们可以根据需要修改默认模式或添加自己的模式</p><p>如上图，我们可以创建多行的 <code>TODO</code> (类似 Spring Boot 中的 YAML 配置多个值)，需要缩进第一行之后的注释行。如果没有缩进，则将行视为常规注释行</p><p>要禁用多行 <code>TODO</code> 项目，使用快捷键 <code>⌘ + ,</code> 打开 Preferences， 搜索 <code>TODO</code> (Editor | TODO), 你会看到如下界面</p><p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgXnip2020-01-09_09-06-39.jpg" alt=""></fancybox></p><p>要查看系统中的所有 <code>TODO</code>，请打开 TODO 工具窗口 (快捷键 <code>⌘ + 6</code> )。切换选项查看 <code>TODO</code> 范围:</p><ul><li>从当前项目中的所有文件</li><li>仅基于当前文件的范围</li><li>指定范围的文件</li><li>活动的变更列表</li></ul><p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgXnip2020-01-09_09-23-45.jpg" alt=""></fancybox></p><p>到这里 Intellij IDEA 默认提供的 <code>TODO</code> 就介绍完了，为了能更快的找到我们自己的 TODO，我们就需要进行自定义</p><h2 id="自定义-TODO"><a href="#自定义-TODO" class="headerlink" title="自定义 TODO"></a>自定义 TODO</h2><p>重新打开 <code>TODO</code> 位置，新增 TODO item，这里新增 <code>optimize</code>，用于标识待优化内容</p><p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgXnip2020-01-09_09-46-03.jpg" alt=""></fancybox></p><p>添加个过滤器，用于 <code>TODO</code> 的分组<br><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgXnip2020-01-09_09-50-35.jpg" alt=""></fancybox></p><p>随便添加一个优化备注，通过以上介绍的功能，快速定位到我们自己的 <code>TODO</code></p><p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgXnip2020-01-09_09-54-37.jpg" alt=""></fancybox></p><p>如果你的待办事项通常是相对固定的描述，你也可以配合 Live Template 快速生成 <code>TODO</code> 内容</p><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>当团队规模很大，你又同时有很多待办的时候，<code>TODO</code> 特性可以帮助我们做标识，自定义 <code>TODO</code> 可以帮我们快速定位，我们可以充分利用这个特性，但是</p><blockquote><h4 id="定期清理-TODO"><a href="#定期清理-TODO" class="headerlink" title="定期清理 TODO"></a>定期清理 TODO</h4><p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img2020-01-09-10-45-53@2x.png" alt=""></fancybox></p></blockquote><h2 id="灵魂追问"><a href="#灵魂追问" class="headerlink" title="灵魂追问"></a>灵魂追问</h2><ol><li>你觉得项目中代码有哪些不规范/不够整洁的地方？(欢迎到博客下方留言讨论)</li></ol><hr>]]></content>
       
       
       <categories>
@@ -49,11 +49,11 @@
       
         <tags>
             
-            <tag> Spring Boot </tag>
-            
             <tag> Spring Bean </tag>
             
             <tag> 生命周期 </tag>
+            
+            <tag> Spring Boot </tag>
             
         </tags>
       
@@ -107,11 +107,11 @@
       
         <tags>
             
+            <tag> Spring Aware </tag>
+            
             <tag> Spring Bean </tag>
             
             <tag> 生命周期 </tag>
-            
-            <tag> Spring Aware </tag>
             
         </tags>
       
@@ -138,11 +138,11 @@
       
         <tags>
             
-            <tag> Spring Boot </tag>
-            
             <tag> Spring Bean </tag>
             
             <tag> 生命周期 </tag>
+            
+            <tag> Spring Boot </tag>
             
         </tags>
       
@@ -169,11 +169,11 @@
       
         <tags>
             
-            <tag> Spring Boot </tag>
-            
             <tag> Spring Bean </tag>
             
             <tag> 生命周期 </tag>
+            
+            <tag> Spring Boot </tag>
             
         </tags>
       
