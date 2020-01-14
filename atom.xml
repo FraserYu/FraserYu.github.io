@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://dayarch.top/"/>
-  <updated>2020-01-09T03:02:36.049Z</updated>
+  <updated>2020-01-14T07:53:04.347Z</updated>
   <id>https://dayarch.top/</id>
   
   <author>
@@ -17,11 +17,91 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>微信上线了10款默认新表情</title>
+    <link href="https://dayarch.top//p/wechat-new-expression.html"/>
+    <id>https://dayarch.top//p/wechat-new-expression.html</id>
+    <published>2020-01-14T07:33:22.000Z</published>
+    <updated>2020-01-14T07:53:04.347Z</updated>
+    
+    <summary type="html">
+    
+      微信新增十款默认表情！
+微信新增十款默认表情！
+微信新增十款默认表情！
+
+微信今日悄然上线了十款新默认表情， 其中包含了
+
+
+ 1.  吃瓜
+ 2.  加油
+ 3.  汗
+ 4.  天啊
+ 5.  Emm
+ 6.  社会社会
+ 7.  旺柴
+ 8.  好的
+ 9.  打脸
+ 10. 哇
+
+感觉比用了表情包还激动。据悉，目前这十款新默认表情正在进行灰度测试，部分微信用户可能无法正常显示
+
+一图胜千言，对于喜欢使用表情的你，快快打开你的微信看看吧
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>2019年总结</title>
+    <link href="https://dayarch.top//p/ck5dkwf7k0004qswc7mlm1sul.html"/>
+    <id>https://dayarch.top//p/ck5dkwf7k0004qswc7mlm1sul.html</id>
+    <published>2020-01-10T05:35:55.000Z</published>
+    <updated>2020-01-10T06:19:09.906Z</updated>
+    
+    <summary type="html">
+    
+      hexo 博客主题PR
+
+微信公众号原创文章
+
+SF粉丝
+
+头条粉丝
+
+结识挚友大佬 
+
+PMP
+
+项目 
+
+读书 30本
+
+植物神经紊乱
+
+羽毛球
+
+checkbox 记录
+
+专利
+
+技术期刊
+
+成果截图，对原创文章的鼓励
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
     <title>小小TODO也有大道理</title>
     <link href="https://dayarch.top//p/how-to-use-todo-feature.html"/>
     <id>https://dayarch.top//p/how-to-use-todo-feature.html</id>
     <published>2020-01-09T02:50:07.000Z</published>
-    <updated>2020-01-09T03:02:36.049Z</updated>
+    <updated>2020-01-09T03:12:53.983Z</updated>
     
     <summary type="html">
     
@@ -469,52 +549,6 @@
       <category term="EasyExcel" scheme="https://dayarch.top/tags/EasyExcel/"/>
     
       <category term="POI" scheme="https://dayarch.top/tags/POI/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>面试volatile关键字时，我们应该具备哪些谈资？</title>
-    <link href="https://dayarch.top//p/java-concurrency-volatile.html"/>
-    <id>https://dayarch.top//p/java-concurrency-volatile.html</id>
-    <published>2019-09-29T12:03:33.000Z</published>
-    <updated>2019-11-07T06:38:33.111Z</updated>
-    
-    <summary type="html">
-    
-      透彻理解 volatile 的内存语义与读-写语义，会为你的面试带来很多谈资，这也会为面试带来更多加分，其实很简单
-    
-    </summary>
-    
-    
-      <category term="Coding" scheme="https://dayarch.top/categories/Coding/"/>
-    
-      <category term="Java-Concurrency" scheme="https://dayarch.top/categories/Coding/Java-Concurrency/"/>
-    
-    
-      <category term="volatile" scheme="https://dayarch.top/tags/volatile/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>解决原子性问题？你首先需要的是宏观理解</title>
-    <link href="https://dayarch.top//p/java-concurrency-atomic.html"/>
-    <id>https://dayarch.top//p/java-concurrency-atomic.html</id>
-    <published>2019-09-19T02:05:31.000Z</published>
-    <updated>2019-11-07T06:47:16.338Z</updated>
-    
-    <summary type="html">
-    
-      Java并发解决原子性问题，原子性问题解决方案
-    
-    </summary>
-    
-    
-      <category term="Coding" scheme="https://dayarch.top/categories/Coding/"/>
-    
-      <category term="Java-Concurrency" scheme="https://dayarch.top/categories/Coding/Java-Concurrency/"/>
-    
-    
-      <category term="锁" scheme="https://dayarch.top/tags/%E9%94%81/"/>
     
   </entry>
   
