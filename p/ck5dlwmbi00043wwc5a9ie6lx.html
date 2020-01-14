@@ -4,12 +4,12 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   
-  <title>面试还不知道BeanFactory和ApplicationContext的区别？ | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享</title>
+  <title>2019年总结 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享</title>
   
-  <meta name="keywords" content="BeanFactory, ApplicationContext, Spring容器, Spring懒加载, Java,SpringBoot,并发编程, ElasticSearch, 日拱一兵">
+  <meta name="keywords" content="Java,SpringBoot,并发编程, ElasticSearch, 日拱一兵">
   
   
-  <meta name="description" content="BeanFactory和ApplicationContext是Sring容器的核心，面试经常会问二者区别，本文会透彻说明, 本站是日拱一兵的技术分享博客，内容涵盖Java后端技术、Spring Boot、Java并发编程等技术研究与分享，用有趣的方式解读技术">
+  <meta name="description" content="本站是日拱一兵的技术分享博客，内容涵盖Java后端技术、Spring Boot、Java并发编程等技术研究与分享，用有趣的方式解读技术">
   
 
   
@@ -393,15 +393,13 @@
   <section class='meta'>
     
     
-      <a title='面试还不知道BeanFactory和ApplicationContext的区别？' href='/p/difference-between-beanfactory-and-applicationcontext.html'><img class='thumbnail' src='https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgspringbootconverter.png'></a>
-    
     <div class="meta" id="header-meta">
       
         
   
     <h1 class="title">
-      <a href="/p/difference-between-beanfactory-and-applicationcontext.html">
-        面试还不知道BeanFactory和ApplicationContext的区别？
+      <a href="/p/ck5dlwmbi00043wwc5a9ie6lx.html">
+        2019年总结
       </a>
     </h1>
   
@@ -432,7 +430,7 @@
             <div class="new-meta-item date">
   <a class='notlink'>
     <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-    <p>2019-12-19</p>
+    <p>2020-01-10</p>
   </a>
 </div>
 
@@ -440,14 +438,6 @@
         
           
             
-  
-  <div class='new-meta-item category'>
-    <a href='/categories/Coding/Spring-Boot/' rel="nofollow">
-      <i class="fas fa-folder-open" aria-hidden="true"></i>
-      <p>Coding&nbsp;/&nbsp;Spring-Boot</p>
-    </a>
-  </div>
-
 
           
         
@@ -484,50 +474,26 @@
 
     <section class="article typo">
       <div class="article-entry" itemprop="articleBody">
-        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><blockquote>
-<p>接口 BeanFactory 和 ApplicationContext 都是用来从容器中获取 Spring beans 的，但是，他们二者有很大不同</p>
-</blockquote>
-<p>我看到过很多问 BeanFactory 和 ApplicationContext 不同点的问题，考虑到这，我应该使用前者还是后者从 Spring 容器中获取 beans 呢？请向下看</p>
-<h2 id="什么是-Spring-Bean"><a href="#什么是-Spring-Bean" class="headerlink" title="什么是 Spring Bean"></a>什么是 Spring Bean</h2><p>这是一个非常简单而又很复杂的问题，通常来说，Spring beans 就是被 Spring 容器所管理的 Java 对象，来看一个简单的例子</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.zoltanraffai;  </span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloWorld</span> </span>&#123; </span><br><span class="line">   <span class="keyword">private</span> String message;  </span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setMessage</span><span class="params">(String message)</span></span>&#123; </span><br><span class="line">      <span class="keyword">this</span>.message  = message; </span><br><span class="line">   &#125;  </span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">getMessage</span><span class="params">()</span></span>&#123; </span><br><span class="line">      System.out.println(<span class="string">"My Message : "</span> + message); </span><br><span class="line">   &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>在基于 XML 的配置中， beans.xml 为 Spring 容器管理 bean 提供元数据</p>
-<h2 id="什么是-Spring-容器"><a href="#什么是-Spring-容器" class="headerlink" title="什么是 Spring 容器"></a>什么是 Spring 容器</h2><p>Spring 容器负责实例化，配置和装配 Spring beans，下面来看如何为 IoC 容器配置我们的 HelloWorld POJO</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version = "1.0" encoding = "UTF-8"?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">xmlns</span> = <span class="string">"http://www.springframework.org/schema/beans"</span></span></span><br><span class="line"><span class="tag">   <span class="attr">xmlns:xsi</span> = <span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span></span></span><br><span class="line"><span class="tag">   <span class="attr">xsi:schemaLocation</span> = <span class="string">"http://www.springframework.org/schema/beans</span></span></span><br><span class="line"><span class="tag"><span class="string">   http://www.springframework.org/schema/beans/spring-beans-3.0.xsd"</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span> = <span class="string">"helloWorld"</span> <span class="attr">class</span> = <span class="string">"com.zoltanraffai.HelloWorld"</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span> = <span class="string">"message"</span> <span class="attr">value</span> = <span class="string">"Hello World!"</span>/&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>现在，它已经被 Spring 容器管理了，接下来的问题是：我们怎样获取它？</p>
-<h2 id="BeanFactory-和-ApplicationContext-的不同点"><a href="#BeanFactory-和-ApplicationContext-的不同点" class="headerlink" title="BeanFactory 和 ApplicationContext 的不同点"></a>BeanFactory 和 ApplicationContext 的不同点</h2><h3 id="BeanFactory-接口"><a href="#BeanFactory-接口" class="headerlink" title="BeanFactory 接口"></a>BeanFactory 接口</h3><p>这是一个用来访问 Spring 容器的 root 接口，要访问 Spring 容器，我们将使用 Spring 依赖注入功能，使用 BeanFactory 接口和它的子接口</p>
-<p><strong>特性：</strong></p>
-<ul>
-<li>Bean 的实例化/串联<br>通常情况，BeanFactory 的实现是使用懒加载的方式，这意味着 beans 只有在我们通过 getBean() 方法直接调用它们时才进行实例化<br>实现 BeanFactory 最常用的 API 是 XMLBeanFactory<br>这里是如何通过 BeanFactory 获取一个 bean 的例子：</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.zoltanraffai;  </span><br><span class="line"><span class="keyword">import</span> org.springframework.core.io.ClassPathResource;  </span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.InitializingBean; </span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.xml.XmlBeanFactory; </span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloWorldApp</span></span>&#123; </span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123; </span><br><span class="line">      XmlBeanFactory factory = <span class="keyword">new</span> XmlBeanFactory (<span class="keyword">new</span> ClassPathResource(<span class="string">"beans.xml"</span>)); </span><br><span class="line">      HelloWorld obj = (HelloWorld) factory.getBean(<span class="string">"helloWorld"</span>);    </span><br><span class="line">      obj.getMessage();    </span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="ApplicationContext-接口"><a href="#ApplicationContext-接口" class="headerlink" title="ApplicationContext 接口"></a>ApplicationContext 接口</h3><p>ApplicationContext 是 Spring 应用程序中的中央接口，用于向应用程序提供配置信息<br>它继承了 BeanFactory 接口，所以 ApplicationContext 包含 BeanFactory 的所有功能以及更多功能！它的主要功能是支持大型的业务应用的创建</p>
-<p><strong>特性：</strong></p>
-<ul>
-<li>Bean instantiation/wiring</li>
-<li>Bean 的实例化/串联</li>
-<li>自动的 BeanPostProcessor 注册</li>
-<li>自动的 BeanFactoryPostProcessor 注册</li>
-<li>方便的 MessageSource 访问（i18n）</li>
-<li>ApplicationEvent 的发布</li>
-</ul>
-<p>与 BeanFactory 懒加载的方式不同，它是预加载，所以，每一个 bean 都在 ApplicationContext 启动之后实例化</p>
-<p>这里是 ApplicationContext 的使用例子：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.zoltanraffai;  </span><br><span class="line"><span class="keyword">import</span> org.springframework.core.io.ClassPathResource;  </span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.InitializingBean; </span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.xml.XmlBeanFactory; </span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloWorldApp</span></span>&#123; </span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123; </span><br><span class="line">      ApplicationContext context=<span class="keyword">new</span> ClassPathXmlApplicationContext(<span class="string">"beans.xml"</span>); </span><br><span class="line">      HelloWorld obj = (HelloWorld) context.getBean(<span class="string">"helloWorld"</span>);    </span><br><span class="line">      obj.getMessage();    </span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>ApplicationContext 包含 BeanFactory 的所有特性，通常推荐使用前者。但是也有一些限制情形，比如移动应用内存消耗比较严苛，在那些情景中，使用更轻量级的 BeanFactory 是更合理的。然而，在大多数企业级的应用中，ApplicationContext 是你的首选。</p>
-<h2 id="灵魂追问"><a href="#灵魂追问" class="headerlink" title="灵魂追问"></a>灵魂追问</h2><ul>
-<li>如何使用 BeanPostProcessor 和 BeanFactoryPostProcessor ？</li>
-<li>你了解 Spring Bean 的生命周期吗？了解了这些对与 bean 的使用将有非常大的帮助.</li>
-</ul>
+        <p>hexo 博客主题PR</p>
+<p>微信公众号原创文章</p>
+<p>SF粉丝</p>
+<p>头条粉丝</p>
+<p>结识挚友大佬 </p>
+<p>PMP</p>
+<p>项目 </p>
+<p>读书 30本</p>
+<p>植物神经紊乱</p>
+<p>羽毛球</p>
+<p>checkbox 记录</p>
+<p>专利</p>
+<p>技术期刊</p>
+<p>成果截图，对原创文章的鼓励</p>
 
       </div>
       <!-- <div class="tuijian">
         <br><br>
         📚相关文章
-        <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/spring-bean-lifecycle-destroy.html" title="Spring Bean生命周期之缘尽" rel="bookmark">Spring Bean生命周期之缘尽</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/spring-bean-lifecycle-creation.html" title="Spring Bean生命周期之缘起" rel="bookmark">Spring Bean生命周期之缘起</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/spring-boot-json-return-non-null.html" title="Springboot Json格式数据不返回null值属性" rel="bookmark">Springboot Json格式数据不返回null值属性</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/docker-deploy-spring-boot.html" title="使用 Docker 部署 Spring Boot" rel="bookmark">使用 Docker 部署 Spring Boot</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/spring-boot-condition-annotation.html" title="@Conditional注解，Spring Boot 的灵活配置" rel="bookmark">@Conditional注解，Spring Boot 的灵活配置</a></h3></div></li></ul>
+        
       </div> -->
       <div class="personalweixin">
         <br><br>
@@ -547,10 +513,10 @@
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2019-12-19T21:45:38+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-01-14T16:20:39+08:00">
   <a class='notlink'>
     <i class="fas fa-clock" aria-hidden="true"></i>
-    <p>更新于 2019年12月19日</p>
+    <p>更新于 2020年1月14日</p>
   </a>
 </div>
 
@@ -558,9 +524,6 @@
       
         
           
-  
-  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/Spring-Boot/" rel="nofollow"><i class="fas fa-tag" aria-hidden="true"></i><p>Spring Boot</p></a></div> <div class="new-meta-item meta-tags"><a class="tag" href="/tags/%E9%9D%A2%E8%AF%95/" rel="nofollow"><i class="fas fa-tag" aria-hidden="true"></i><p>面试</p></a></div>
-
 
         
       
@@ -572,27 +535,33 @@
       
         <a class="-mob-share-qq" title="QQ好友" rel="external nofollow noopener noreferrer"
           
-          href="http://connect.qq.com/widget/shareqq/index.html?url=https://dayarch.top/p/difference-between-beanfactory-and-applicationcontext.html&title=面试还不知道BeanFactory和ApplicationContext的区别？ | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=前言
-接口 BeanFactory 和 ApplicationContext 都是用来从容器中获取 Spring beans 的，但是，他们二者有很大不同
+          href="http://connect.qq.com/widget/shareqq/index.html?url=https://dayarch.top/p/ck5dlwmbi00043wwc5a9ie6lx.html&title=2019年总结 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=hexo 博客主题PR
 
-我看到过很多问 BeanFactory 和 ApplicationContext 不同点的问题，考虑到这，我应该使用前者还是后者从 Spring 容器中获取 beans 呢？请向下看
+微信公众号原创文章
 
-什么是 Spring Bean
-这是一个非常简单而又很复杂的问题，通常来说，Spring beans 就是被 Spring 容器所管理的 Java 对象，来看一个简单的例子
+SF粉丝
 
-1
-2
-3
-4
-5
-6
-7
-8
-9
-10
+头条粉丝
 
+结识挚友大佬 
 
-package com.zolta"
+PMP
+
+项目 
+
+读书 30本
+
+植物神经紊乱
+
+羽毛球
+
+checkbox 记录
+
+专利
+
+技术期刊
+
+成果截图，对原创文章的鼓励"
           
           >
           
@@ -604,27 +573,33 @@ package com.zolta"
       
         <a class="-mob-share-qzone" title="QQ空间" rel="external nofollow noopener noreferrer"
           
-          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://dayarch.top/p/difference-between-beanfactory-and-applicationcontext.html&title=面试还不知道BeanFactory和ApplicationContext的区别？ | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=前言
-接口 BeanFactory 和 ApplicationContext 都是用来从容器中获取 Spring beans 的，但是，他们二者有很大不同
+          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://dayarch.top/p/ck5dlwmbi00043wwc5a9ie6lx.html&title=2019年总结 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=hexo 博客主题PR
 
-我看到过很多问 BeanFactory 和 ApplicationContext 不同点的问题，考虑到这，我应该使用前者还是后者从 Spring 容器中获取 beans 呢？请向下看
+微信公众号原创文章
 
-什么是 Spring Bean
-这是一个非常简单而又很复杂的问题，通常来说，Spring beans 就是被 Spring 容器所管理的 Java 对象，来看一个简单的例子
+SF粉丝
 
-1
-2
-3
-4
-5
-6
-7
-8
-9
-10
+头条粉丝
 
+结识挚友大佬 
 
-package com.zolta"
+PMP
+
+项目 
+
+读书 30本
+
+植物神经紊乱
+
+羽毛球
+
+checkbox 记录
+
+专利
+
+技术期刊
+
+成果截图，对原创文章的鼓励"
           
           >
           
@@ -636,27 +611,33 @@ package com.zolta"
       
         <a class="-mob-share-weibo" title="微博" rel="external nofollow noopener noreferrer"
           
-          href="http://service.weibo.com/share/share.php?url=https://dayarch.top/p/difference-between-beanfactory-and-applicationcontext.html&title=面试还不知道BeanFactory和ApplicationContext的区别？ | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=前言
-接口 BeanFactory 和 ApplicationContext 都是用来从容器中获取 Spring beans 的，但是，他们二者有很大不同
+          href="http://service.weibo.com/share/share.php?url=https://dayarch.top/p/ck5dlwmbi00043wwc5a9ie6lx.html&title=2019年总结 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=hexo 博客主题PR
 
-我看到过很多问 BeanFactory 和 ApplicationContext 不同点的问题，考虑到这，我应该使用前者还是后者从 Spring 容器中获取 beans 呢？请向下看
+微信公众号原创文章
 
-什么是 Spring Bean
-这是一个非常简单而又很复杂的问题，通常来说，Spring beans 就是被 Spring 容器所管理的 Java 对象，来看一个简单的例子
+SF粉丝
 
-1
-2
-3
-4
-5
-6
-7
-8
-9
-10
+头条粉丝
 
+结识挚友大佬 
 
-package com.zolta"
+PMP
+
+项目 
+
+读书 30本
+
+植物神经紊乱
+
+羽毛球
+
+checkbox 记录
+
+专利
+
+技术期刊
+
+成果截图，对原创文章的鼓励"
           
           >
           
@@ -684,16 +665,16 @@ package com.zolta"
                       <span class="art-item-left">
                           <h6><i class="fas fa-chevron-left" aria-hidden="true"></i>&nbsp;上一页</h6>
                           <h4>
-                              <a href="/p/spring-bean-lifecycle-creation.html" rel="prev" title="Spring Bean生命周期之缘起">
+                              <a href="/p/wechat-new-expression.html" rel="prev" title="微信上线了10款默认新表情">
                                 
-                                    Spring Bean生命周期之缘起
+                                    微信上线了10款默认新表情
                                 
                               </a>
                           </h4>
                           
                               
                               <h6 class="tags">
-                                  <a class="tag" href="/tags/Spring-Bean/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> Spring Bean</a> <a class="tag" href="/tags/%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> 生命周期</a> <a class="tag" href="/tags/Spring-Boot/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> Spring Boot</a>
+                                  <a class="tag" href="/tags/%E5%BE%AE%E4%BF%A1/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> 微信</a> <a class="tag" href="/tags/%E8%A1%A8%E6%83%85/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> 表情</a>
                               </h6>
                           
                       </span>
@@ -704,16 +685,16 @@ package com.zolta"
                       <span class="art-item-right" aria-hidden="true">
                           <h6>下一页&nbsp;<i class="fas fa-chevron-right" aria-hidden="true"></i></h6>
                           <h4>
-                              <a href="/p/java-equals-hashcode.html" rel="prev" title="Java equals 和 hashCode 面试那点事">
+                              <a href="/p/how-to-use-todo-feature.html" rel="prev" title="小小TODO也有大道理">
                                   
-                                      Java equals 和 hashCode 面试那点事
+                                      小小TODO也有大道理
                                   
                               </a>
                           </h4>
                           
                               
                               <h6 class="tags">
-                                  <a class="tag" href="/tags/Java/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> Java</a> <a class="tag" href="/tags/%E9%9D%A2%E8%AF%95/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> 面试</a>
+                                  <a class="tag" href="/tags/TODO/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> TODO</a>
                               </h6>
                           
                       </span>
@@ -740,7 +721,7 @@ package com.zolta"
 </header>
 
     <div class="content pure">
-      <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/spring-bean-lifecycle-destroy.html" title="Spring Bean生命周期之缘尽" rel="bookmark">Spring Bean生命周期之缘尽</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/spring-bean-lifecycle-creation.html" title="Spring Bean生命周期之缘起" rel="bookmark">Spring Bean生命周期之缘起</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/spring-boot-json-return-non-null.html" title="Springboot Json格式数据不返回null值属性" rel="bookmark">Springboot Json格式数据不返回null值属性</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/docker-deploy-spring-boot.html" title="使用 Docker 部署 Spring Boot" rel="bookmark">使用 Docker 部署 Spring Boot</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/spring-boot-condition-annotation.html" title="@Conditional注解，Spring Boot 的灵活配置" rel="bookmark">@Conditional注解，Spring Boot 的灵活配置</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/spring-boot-starter-custom.html" title="Spring Boot 自定义starter 全面教程" rel="bookmark">Spring Boot 自定义starter 全面教程</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/spring-data-binding-mechanism.html" title="Spring 数据绑定剖析" rel="bookmark">Spring 数据绑定剖析</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/spring-boot-execute-on-startup.html" title="在Spring Boot启动时执行代码的几种方法" rel="bookmark">在Spring Boot启动时执行代码的几种方法</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/spring-aware.html" title="Spring Aware 到底是什么？" rel="bookmark">Spring Aware 到底是什么？</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/springmvc-init-binder.html" title="Spring MVC 之 @initbinder" rel="bookmark">Spring MVC 之 @initbinder</a></h3></div></li></ul>
+      <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/arthas-log-level.html" title="Arthas调整log日志等级" rel="bookmark">Arthas调整log日志等级</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/chrome-save-offline-file.html" title="Chrome保存网页为脱机文件" rel="bookmark">Chrome保存网页为脱机文件</a></h3></div></li></ul>
     </div>
   </section>
 
@@ -800,7 +781,7 @@ package com.zolta"
 
   <script>
     window.subData = {
-      title: '面试还不知道BeanFactory和ApplicationContext的区别？',
+      title: '2019年总结',
       tools: true
     }
   </script>
@@ -1003,20 +984,6 @@ package com.zolta"
           
             
               
-  <section class='widget toc-wrapper'>
-    
-<header class='pure'>
-  <div><i class="fas fa-list fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;本文目录</div>
-  
-    <!-- <div class='wrapper'><a class="s-toc rightBtn" rel="external nofollow noopener noreferrer" href="javascript:void(0)"><i class="fas fa-thumbtack fa-fw"></i></a></div> -->
-  
-</header>
-
-    <div class='content pure'>
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#什么是-Spring-Bean"><span class="toc-text">什么是 Spring Bean</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#什么是-Spring-容器"><span class="toc-text">什么是 Spring 容器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#BeanFactory-和-ApplicationContext-的不同点"><span class="toc-text">BeanFactory 和 ApplicationContext 的不同点</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#BeanFactory-接口"><span class="toc-text">BeanFactory 接口</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ApplicationContext-接口"><span class="toc-text">ApplicationContext 接口</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-text">总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#灵魂追问"><span class="toc-text">灵魂追问</span></a></li></ol>
-    </div>
-  </section>
-
 
             
           
