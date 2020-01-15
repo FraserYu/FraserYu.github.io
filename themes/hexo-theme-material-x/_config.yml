@@ -180,7 +180,8 @@ layout:
     # 列表中每一篇文章的meta信息
     meta: [title, author, date, categories, top]
     # 列表类页面的侧边栏
-    sidebar: [plain, author, platform, list, grid, category, tagcloud, music]
+    # sidebar: [plain, author, platform, list, grid, category, tagcloud, music]
+    sidebar: [plain, author, list, grid, category, tagcloud, music]
   # 文章页面布局
   article:
     # 文章页面主体元素，你也可以在页面的Front-matter中设置
@@ -205,18 +206,18 @@ sidebar:
     jinrishici: 从来没有真正的绝境，只有心灵的迷途
     social: true
   - widget: toc
-  - widget: platform
-    title: 平台博客
-    body: '<center>我在其他平台的博客，欢迎点赞关注</center>'
-    icon: fas fa-fire
+  # - widget: platform
+  #   title: 平台博客
+  #   body: '<center>我在其他平台的博客，欢迎点赞关注</center>'
+  #   icon: fas fa-fire
   - widget: plain
     icon: fas fa-bullhorn
     title: 公告
     body: '博客持续升级改造中... 如有问题请[留言](/comments/)交流，也可以加我 [微信](https://mp.weixin.qq.com/s/G7BXuZh0Qh1-mE6ts4LJqQ")' 
-  - widget: advertise
-    icon: fas fa-gift
-    title: 惊喜礼包
-    body: '<center>这是一个神奇的广告</center>'
+  # - widget: advertise
+  #   icon: fas fa-gift
+  #   title: 惊喜礼包
+  #   body: '<center>这是一个神奇的广告</center>'
   - widget: grid
     icon: fas fa-map-signs
     title: 站内导航
@@ -415,20 +416,20 @@ subtitle:
   sub2: Never really desperate, only the lost of the soul
 
 advertisement:
-  enable: true
+  enable: false
   # google 广告 
   googleads:
     auto: false # post.ejs中引入的自动广告
     square: true # advertise.ejs引入的方形卡片广告，在sidebar处可配置
   # 广告推广
   tuiguang:
-    enable: true
+    enable: false
     pingtai:
-      - enable: true
+      - enable: false
         url: https://www.aliyun.com/minisite/goods?userCode=d4nba2y2
         title: 阿里云
         img: /images/tuiguang/aliyun300x90.jpg
-      - enable: true
+      - enable: false
         url: https://url.cn/5B5MNZY
         title: 腾讯云
         img: /images/tuiguang/tengxunyun.jpg
@@ -436,7 +437,7 @@ advertisement:
 
 # 其他平台博客
 otherplatform:
-  enable: true  
+  enable: false  
 
 # 页面即时聊天工具
 daovoice: true

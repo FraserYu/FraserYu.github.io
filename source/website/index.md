@@ -13,6 +13,8 @@ sidebar: false
 - 添加社交链接和RSS
 - 「关于」页面自定义改造
 - 添加其他渠道链接
+- bing的收录 https://www.bing.com/webmaster/home/mysites
+- 自定义邮箱 https://mp.weixin.qq.com/s/Mg60BmNOou-2J0g0GRUEkAs
 
 
 

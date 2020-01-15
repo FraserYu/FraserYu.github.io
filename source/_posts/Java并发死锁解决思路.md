@@ -108,31 +108,15 @@ class Account {
 
 也就是说账本管理员拿取账本是临界区，如果只拿到其中之一的账本，那么不会给柜员，而是等待柜员下一次询问是否两个账本都在
 ```java
-//账本管理员
-public class AccountBookManager {
-	synchronized boolean getAllRequiredAccountBook( Object from, Object to){
-		if(拿到所有账本){
-			return true;
-		} else{
-			return false;
-		}
-	}
-	// 归还资源
-	synchronized void releaseObtainedAccountBook(Object from, Object to){
-		归还获取到的账本
-	}
-}
-
-
 public class Account {
 	//单例的账本管理员
 	private AccountBookManager accountBookManager;
 
+	private int balance;
+
 	public void transfer(Account target, int amt){
 		// 一次性申请转出账户和转入账户，直到成功
-		while(!accountBookManager.getAllRequiredAccountBook(this, target)){
-			return;
-		}
+		while(accountBookManager.getAllRequiredAccountBook(this, target));
 
 		try{
 			// 锁定转出账户
@@ -148,6 +132,28 @@ public class Account {
 		} finally {
 			accountBookManager.releaseObtainedAccountBook(this, target);
 		}
+		
+	}
+}
+
+public class AccountBookManager {
+
+	List<Object> accounts = new ArrayList<>(2);
+
+	synchronized boolean getAllRequiredAccountBook( Object from, Object to){
+		if(accounts.contains(from) || accounts.contains(to)){
+			return false;
+		} else{
+			accounts.add(from);
+			accounts.add(to);
+
+			return true;
+		}
+	}
+	// 归还资源
+	synchronized void releaseObtainedAccountBook(Object from, Object to){
+		accounts.remove(from);
+		accounts.remove(to);
 	}
 }
 ```

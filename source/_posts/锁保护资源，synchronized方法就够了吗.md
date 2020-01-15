@@ -11,7 +11,7 @@ keywords: 锁,Java并发,synchronized,资源
 ---
 
 ## 写在前面
-上一篇文章[原子性问题的宏观理解](https://dayarch.top/p/32b8e26a.html) 带领大家了解了锁和资源的模型，有了这篇文章的铺垫，相信理解这一篇文章就非常轻松了
+上一篇文章[原子性问题的宏观理解](https://dayarch.top/p/java-concurrency-atomic.html) 带领大家了解了锁和资源的模型，有了这篇文章的铺垫，相信理解这一篇文章就非常轻松了
 
 当我们要保护单个资源并对其进行修改其实很简单，只需按照下图分三步走
 1. 创建受保护资源 R 的锁
@@ -84,15 +84,15 @@ class Account {
 ![](http://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E5%A4%9A%E7%BA%BF%E7%A8%8B/_image/2019-10-09/%E9%93%B6%E8%A1%8C%E8%BD%AC%E8%B4%A61.png)
 
 还记得 [happens-before 规则](https://dayarch.top/p/815d7647.html) 这篇文章提到的**监视器锁规则**和**传递性规则**吗？
-> ####监视器锁规则
+> #### 监视器锁规则
 >  对一个锁的解锁 happens-before 于随后对这个锁的加锁
-> ####传递性规则
+> #### 传递性规则
 > 如果 A happens-before B, 且 B happens-before C, 那么 A happens-before C
 
 **资源 B.balance 存在于两个"临界区"中，所以这个"临界区"对 B.balance 来说形同虚设，也就不满足监视器锁规则，进而导致传递性规则也不生效，说白了，前序线程的更改结果对后一个线程不可见**
 
 这样最终导致:
-- **账户 B 的余额可能是 100: ** 线程 1 写 B.balance 100(balance = 300) **先于** 线程 2 写 B.balance(balance = 100)，也就是说线程 1 的结果会被线程 2 覆盖，导致最终账户 B 的余额为 100
+- **账户 B 的余额可能是 100:** 线程 1 写 B.balance 100(balance = 300) **先于** 线程 2 写 B.balance(balance = 100)，也就是说线程 1 的结果会被线程 2 覆盖，导致最终账户 B 的余额为 100
 
 - **账户 B 的余额可能是 300:** 与上述情况相反，线程 1 写 B.balance 100(balance = 300) **后于** 线程 2 写 B.balance(balance = 100)，也就是说线程 2 的结果线程 1 覆盖，导致最终账户 B 的余额为 300
 
@@ -116,7 +116,7 @@ class Account {
 }
 ```
 
-我们将 this 锁变为 Account.class 锁，Account.class 是虚拟机加载 Account 类时创建的，肯定是唯一的([双亲委派模型解释了为何该对象是唯一的](https://dayarch.top/p/127ec041.html))， 所有 Account 对象都共享 Account.class, 也就是说，Account.class 锁能保护所有 Account 对象，我们将上面程序再用模型解释一下
+我们将 this 锁变为 Account.class 锁，Account.class 是虚拟机加载 Account 类时创建的，肯定是唯一的([双亲委派模型解释了为何该对象是唯一的](https://dayarch.top/p/java-parents-delegation-model.html))， 所有 Account 对象都共享 Account.class, 也就是说，Account.class 锁能保护所有 Account 对象，我们将上面程序再用模型解释一下
 
 
 ![](http://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E5%A4%9A%E7%BA%BF%E7%A8%8B/_image/2019-10-09/%E9%93%B6%E8%A1%8C%E8%BD%AC%E8%B4%A62.png)
@@ -134,37 +134,3 @@ class Account {
 2. 偏向锁，轻量锁，重量锁是不是和我们这节内容有异曲同工之处呢？
 3. 提前想一下，我们如何来优化这个模型呢？ 
 
-## 附加说明
-如果你对这篇文章理解有些困难，可以按照下面的顺序回忆前序文章相关内容
-1. [这次走进并发的世界，请不要错过](https://dayarch.top/p/d7e125a1.html)
-2. [学并发编程，透彻理解这三个核心是关键](https://dayarch.top/p/86243a5b.html)
-3. [并发Bug之源有三，请睁大眼睛看清它们](https://dayarch.top/p/6d12b8cf.html)
-4. [可见性有序性，Happens-before来搞定](https://dayarch.top/p/815d7647.html)
-5. [解决原子性问题？你首先需要的是宏观理解](https://dayarch.top/p/32b8e26a.html)
-6. [面试并发volatile关键字时，我们应该具备哪些谈资？](https://dayarch.top/p/fb3c7eeb.html)
-
-
-## 推荐阅读
-+ [每天用SpringBoot，还不懂RESTful API返回统一数据格式是怎么实现的？ ](https://dayarch.top/p/af68cfb3.html)
-+ [双亲委派模型：大厂高频面试题，轻松搞定](https://dayarch.top/p/127ec041.html)
-+ [EasyExcel 读取 excel 真的很easy](https://dayarch.top/p/61d8a472.html)
-+ [红黑树，超强动静图详解，简单易懂](https://dayarch.top/p/86cf6746.html)
-
---------
-
-## 提高效率工具
-
-![](http://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E6%84%9F%E6%83%B3%E4%B8%8E%E6%80%BB%E7%BB%93/_image/2019-06-18/b.png) 
-
---------
-
-
-> ### 欢迎持续关注公众号：「日拱一兵」
-> - 前沿 Java 技术干货分享 
-> - 高效工具汇总 | 回复「工具」
-> - 面试问题分析与解答 
-> - 技术资料领取 | 回复「资料」
-
-> 以读侦探小说思维轻松趣味学习 Java 技术栈相关知识，本着将复杂问题简单化，抽象问题具体化和图形化原则逐步分解技术问题，技术持续更新，请持续关注......
-
-![](http://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E6%84%9F%E6%83%B3%E4%B8%8E%E6%80%BB%E7%BB%93/_image/2019-06-18/a%20%281%29.png)
