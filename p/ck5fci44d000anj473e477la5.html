@@ -4,12 +4,12 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   
-  <title>Lombok 使用教程详解 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享</title>
+  <title>2019年总结 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享</title>
   
-  <meta name="keywords" content="Lombok, @Data, Lombok安装, @RequiredArgsConstructor, @AllArgsConstructor, Java,SpringBoot,并发编程, ElasticSearch, 日拱一兵">
+  <meta name="keywords" content="Java,SpringBoot,并发编程, ElasticSearch, 日拱一兵">
   
   
-  <meta name="description" content="Lombok 是一种 Java™ 实用工具，可用来帮助开发人员消除 Java 的冗长，尤其是对于简单的 Java 对象（POJO）, 本站是日拱一兵的技术分享博客，内容涵盖Java后端技术、Spring Boot、Java并发编程等技术研究与分享，用有趣的方式解读技术">
+  <meta name="description" content="本站是日拱一兵的技术分享博客，内容涵盖Java后端技术、Spring Boot、Java并发编程等技术研究与分享，用有趣的方式解读技术">
   
 
   
@@ -91,7 +91,7 @@
   
   
   <div class="cover-wrapper">
-    <cover class='cover post half'>
+    <cover class='cover draft half'>
       
         
   <img class='logo' src='/assets/logo.png'/>
@@ -386,22 +386,20 @@
       <div class='l_main'>
   
 
-  <article id="post" class="post white-box article-type-post" itemscope itemprop="blogPost">
+  <article id="draft" class="post white-box article-type-draft" itemscope itemprop="blogPost">
     
 
 
   <section class='meta'>
     
     
-      <a title='Lombok 使用教程详解' href='/p/lombok-usage.html'><img class='thumbnail' src='https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgjava.png'></a>
-    
     <div class="meta" id="header-meta">
       
         
   
     <h1 class="title">
-      <a href="/p/lombok-usage.html">
-        Lombok 使用教程详解
+      <a href="/p/ck5fci44d000anj473e477la5.html">
+        2019年总结
       </a>
     </h1>
   
@@ -432,7 +430,7 @@
             <div class="new-meta-item date">
   <a class='notlink'>
     <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-    <p>2019-11-25</p>
+    <p>2020-01-10</p>
   </a>
 </div>
 
@@ -440,14 +438,6 @@
         
           
             
-  
-  <div class='new-meta-item category'>
-    <a href='/categories/Coding/Java/' rel="nofollow">
-      <i class="fas fa-folder-open" aria-hidden="true"></i>
-      <p>Coding&nbsp;/&nbsp;Java</p>
-    </a>
-  </div>
-
 
           
         
@@ -484,91 +474,26 @@
 
     <section class="article typo">
       <div class="article-entry" itemprop="articleBody">
-        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在 Java 应用程序中存在许多重复相似的、生成之后几乎不对其做更改的代码，但是我们还不得不花费很多精力编写它们来满足 Java 的编译需求</p>
-<p>比如，在 Java 应用程序开发中，我们几乎要为所有 Bean 的成员变量添加 get() ,set() 等方法，这些相对固定但又不得不编写的代码浪费程序员很多精力，同时让类内容看着更杂乱，我们希望将有限的精力关注在更重要的地方。</p>
-<p>Lombok 已经诞生很久了，甚至在 Spring Boot Initalizr 中都已加入了 Lombok 选项，<br><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgXnip2019-11-25_11-53-49.jpg" alt=""></p>
-<p>这里我们将 Lombok 做一下详细说明:</p>
-<h2 id="Lombok"><a href="#Lombok" class="headerlink" title="Lombok"></a>Lombok</h2><blockquote>
-<p><strong>官网的介绍</strong>：Project Lombok is a java library that automatically plugs into your editor and build tools, spicing up your java. Never write another getter or equals method again. Early access to future java features such as val, and much more.</p>
-</blockquote>
-<p><strong>直白的说：</strong> Lombok 是一种 Java™ 实用工具，可用来帮助开发人员消除 Java 的冗长，尤其是对于简单的 Java 对象（POJO）。它通过注解实现这一目的，且看:</p>
-<h3 id="Bean-的对比"><a href="#Bean-的对比" class="headerlink" title="Bean 的对比"></a>Bean 的对比</h3><p>传统的 POJO 类是这样的<br> <img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgimage001.png" alt=""></p>
-<p>通过Lombok改造后的 POJO 类是这样的<br> <img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgimage003.png" alt=""></p>
-<p>一眼可以观察出来我们在编写 Employee 这个类的时候通过 <code>@Data</code> 注解就已经实现了所有成员变量的 <code>get()</code> 与 <code>set()</code> 方法等，同时 Employee 类看起来更加清晰简洁。Lombok 的神奇之处不止这些，丰富的注解满足了我们开发的多数需求。</p>
-<h3 id="Lombok的安装"><a href="#Lombok的安装" class="headerlink" title="Lombok的安装"></a>Lombok的安装</h3><p>查看下图，@Data的实现，我们发现这个注解是应用在编译阶段的<br> <img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgimage005.png" alt=""></p>
-<p>这和我们大多数使用的注解，如 Spring 的注解（在运行时，通过反射来实现业务逻辑）是有很大差别的，如Spring 的@RestController 注解<br><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgimage007.png" alt=""> </p>
-<p>一个更直接的体现就是，普通的包在引用之后一般的 IDE 都能够自动识别语法，但是 Lombok 的这些注解，一般的 IDE 都无法自动识别，因此如果要使用 Lombok 的话还需要配合安装相应的插件来支持 IDE 的编译，防止IDE 的自动检查报错，下面以 IntelliJ IDEA 举例安装插件。</p>
-<p>在Repositories中搜索Lombok，安装后重启IDE即可<br><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgimage009.png" alt=""></p>
-<p>在Maven或Gradle工程中添加依赖<br><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgXnip2019-11-25_11-32-32.jpg" alt=""></p>
-<p>至此我们就可以应用 Lombok 提供的注解干些事情了。</p>
-<h2 id="Lombok注解详解"><a href="#Lombok注解详解" class="headerlink" title="Lombok注解详解"></a>Lombok注解详解</h2><p>Lombok官网提供了许多注解，但是 “劲酒虽好，可不要贪杯哦”，接下来逐一讲解官网推荐使用的注解(有些注解和原有Java编写方式没太大差别的也没有在此处列举，如@ Synchronized等)<br> <img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgimage013.png" alt=""></p>
-<h3 id="Getter和-Setter"><a href="#Getter和-Setter" class="headerlink" title="@Getter和@Setter"></a>@Getter和@Setter</h3><p>该注解可应用在类或成员变量之上，和我们预想的一样，<code>@Getter</code> 和 <code>@Setter</code> 就是为成员变量自动生成 get 和 set 方法，默认生成访问权限为 public 方法，当然我们也可以指定访问权限 protected 等，如下图：<br><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgimage015.png" alt=""> </p>
-<p>成员变量name指定生成set方法，并且访问权限为protected；boolean类型的成员变量 female 只生成get方法，并修改方法名称为 isFemale()。当把该注解应用在类上，默认为所有非静态成员变量生成 get 和 set 方法，也可以通过 AccessLevel.NONE 手动禁止生成get或set方法，如下图：<br><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgimage017.png" alt=""></p>
-<h3 id="ToString"><a href="#ToString" class="headerlink" title="@ToString"></a>@ToString</h3><p>该注解需应用在类上，为我们生成 Object 的 toString 方法，而该注解里面的几个属性能更加丰富我们想要的内容, <code>exclude</code> 属性禁止在 toString 方法中使用某字段，而of属性可以指定需要使用的字段，如下图：</p>
-<p> <img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgimage019.png" alt=""></p>
-<p>查看编译后的Employee.class得到我们预期的结果，如下图<br> <img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgimage021.png" alt=""></p>
-<h3 id="EqualsAndHashCode"><a href="#EqualsAndHashCode" class="headerlink" title="@EqualsAndHashCode"></a>@EqualsAndHashCode</h3><p>该注解需应用在类上，使用该注解，lombok会为我们生成 equals(Object other) 和 hashcode() 方法，包括所有非静态属性和非transient的属性，同样该注解也可以通过 exclude 属性排除某些字段，of 属性指定某些字段，也可以通过 callSuper 属性在重写的方法中使用父类的字段，这样我们可以更灵活的定义bean的比对，如下图：<br><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgimage023.png" alt=""></p>
-<p>查看编译后的Employee.class文件，如下图：<br><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgimage025.png" alt=""></p>
-<h3 id="NonNull"><a href="#NonNull" class="headerlink" title="@NonNull"></a>@NonNull</h3><p>该注解需应用在方法或构造器的参数上或属性上，用来判断参数的合法性，默认抛出 NullPointerException 异常</p>
-<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgimage027.png" alt=""> </p>
-<p>查看NonNullExample.class文件，会为我们抛出空指针异常，如下图：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgimage029.png" alt=""></p>
-<p>当然我们可以通过指定异常类型抛出其他异常，lombok.nonNull.exceptionType = [NullPointerException | IllegalArgumentException] , 为实现此功能我们需要在项目的根目录新建lombok.config文件：</p>
-<p> <img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgimage031.png" alt=""></p>
-<p>重新编译NonNullExample类，已经为我们抛出非法参数异常：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgimage033.png" alt=""></p>
-<h3 id="NoArgsConstructor-RequiredArgsConstructor-AllArgsConstructor"><a href="#NoArgsConstructor-RequiredArgsConstructor-AllArgsConstructor" class="headerlink" title="@NoArgsConstructor, @RequiredArgsConstructor, @AllArgsConstructor"></a>@NoArgsConstructor, @RequiredArgsConstructor, @AllArgsConstructor</h3><p>以上三个注解分别为我们生成无参构造器，指定参数构造器和包含所有参数的构造器，默认情况下，<code>@RequiredArgsConstructor</code>, <code>@AllArgsConstructor</code> 生成的构造器会对所有标记 <code>@NonNull</code> 的属性做非空校验。</p>
-<p>无参构造器很好理解，我们主要看看后两种，先看 <code>@RequiredArgsConstructor</code><br><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgXnip2019-11-25_13-03-17.jpg" alt=""></p>
-<p>从上图中我们可以看出， <code>@RequiredArgsConstructor</code> 注解生成有参数构造器时只会包含有 final 和 <code>@NonNull</code> 标识的 field，同时我们可以指定 staticName 通过生成静态方法来构造对象</p>
-<p>查看Employee.class文件<br> <img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgXnip2019-11-25_13-06-48.jpg" alt=""></p>
-<p>当我们把 staticName 属性去掉我们来看遍以后的文件:<br><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgXnip2019-11-25_13-08-48.jpg" alt=""></p>
-<p>相信你已经注意到细节</p>
-<p><code>@AllArgsConstructor</code>  就更简单了，请大家自行查看吧</p>
-<h3 id="Data"><a href="#Data" class="headerlink" title="@Data"></a>@Data</h3><p>介绍了以上的注解，再来介绍 <code>@Data</code> 就非常容易懂了，<code>@Data</code> 注解应用在类上，是<code>@ToString</code>, <code>@EqualsAndHashCode</code>, <code>@Getter / @Setter</code> 和 <code>@RequiredArgsConstructor</code>合力的体现，如下图：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgimage039.png" alt=""></p>
-<h3 id="Builder"><a href="#Builder" class="headerlink" title="@Builder"></a>@Builder</h3><p>函数式编程或者说流式的操作越来越流行，应用在大多数语言中，让程序更具更简介，可读性更高，编写更连贯，<code>@Builder</code>就带来了这个功能，生成一系列的builder API，该注解也需要应用在类上，看下面的例子就会更加清晰明了。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgimage041.png" alt=""></p>
-<p>编译后的Employee.class文件如下：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgimage043.png" alt=""></p>
-<p>妈妈再也不用担心我 set 值那么麻烦了，流式操作搞定：<br> <img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgimage045.png" alt=""> </p>
-<h3 id="Log"><a href="#Log" class="headerlink" title="@Log"></a>@Log</h3><p>该注解需要应用到类上，在编写服务层，需要添加一些日志，以便定位问题，我们通常会定义一个静态常量Logger，然后应用到我们想日志的地方，现在一个注解就可以实现：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgimage047.png" alt=""></p>
-<p>查看class文件，和我们预想的一样：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgimage049.png" alt=""></p>
-<p>Log有很多变种，CommonLog，Log4j，Log4j2，Slf4j等，lombok依旧良好的通过变种注解做良好的支持：<br><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgimage051.png" alt=""> </p>
-<p>我实际使用的是 <code>@Slf4j</code> 注解</p>
-<h3 id="val"><a href="#val" class="headerlink" title="val"></a>val</h3><p>熟悉 Javascript 的同学都知道，var 可以定义任何类型的变量，而在 java 的实现中我们需要指定具体变量的类型，而 val 让我们摆脱指定，编译之后就精准匹配上类型，默认是 final 类型，就像 java8 的函数式表达式，()-&gt;System.out.println(“hello lombok”);  就可以解析到Runnable函数式接口。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgimage053.png" alt=""><br>查看解析后的class文件：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgimage055.png" alt=""></p>
-<h3 id="Cleanup"><a href="#Cleanup" class="headerlink" title="@Cleanup"></a>@Cleanup</h3><p>当我们对流进行操作，我们通常需要调用 close 方法来关闭或结束某资源，而 @Cleanup 注解可以帮助我们调用 close 方法，并且放到 try/finally 处理块中，如下图：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgimage057.png" alt=""></p>
-<p>编译后的class文件如下，我们发现被try/finally包围处理，并调用了流的close方法<br><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgimage059.png" alt=""></p>
-<p>其实在 JDK1.7 之后就有了 <code>try-with-resource</code>，不用我们显式的关闭流，这个请大家自行看吧</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>Lombok的基本操作流程是这样的：</p>
-<ol>
-<li>定义编译期的注解</li>
-<li>利用JSR269 api(Pluggable Annotation Processing API )创建编译期的注解处理器</li>
-<li>利用tools.jar的javac api处理AST(抽象语法树)</li>
-<li>将功能注册进jar包</li>
-</ol>
-<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgimage061.jpg" alt=""></p>
-<blockquote>
-<p>Lombok 当然还有很多注解，我推荐使用以上就足够了，这个工具是带来便利的，而不能被其捆绑，“弱水三千只取一瓢饮，代码千万需抓重点看”，Lombok 能让我更加专注有效代码排除意义微小的障眼代码（get，set等），另外Lombok生成的代码还能像使用工具类一样方便（@Builder）。</p>
-</blockquote>
-<p>更多内容请查看官网：<a href="https://www.projectlombok.org/" target="_blank" rel="noopener">https://www.projectlombok.org/</a></p>
-<hr>
-<h2 id="灵魂追问"><a href="#灵魂追问" class="headerlink" title="灵魂追问"></a>灵魂追问</h2><ol>
-<li>为什么只有一个整体 <code>@EqualsAndHashCode</code> 注解？而不是 <code>@Equals</code> 和 <code>@HashCode</code>？这涉及到一个规范哦</li>
-<li>如果把三种构造器方式同时应用又加上了 <code>@Builder</code> 注解，会发生什么？</li>
-<li><strong>你的灯还亮着吗？</strong></li>
-</ol>
-<hr>
+        <p>//todo </p>
+<p>hexo 博客主题PR</p>
+<p>微信公众号原创文章</p>
+<p>SF粉丝</p>
+<p>头条粉丝</p>
+<p>结识挚友大佬 </p>
+<p>PMP</p>
+<p>项目 </p>
+<p>读书 30本</p>
+<p>羽毛球</p>
+<p>checkbox 记录</p>
+<p>专利</p>
+<p>技术期刊</p>
+<p>成果截图，对原创文章的鼓励</p>
 
       </div>
       <!-- <div class="tuijian">
         <br><br>
         📚相关文章
-        <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/multiple-java-management.html" title="SDKMAN 统一灵活管理多版本Java" rel="bookmark">SDKMAN 统一灵活管理多版本Java</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-equals-hashcode.html" title="Java equals 和 hashCode 面试那点事" rel="bookmark">Java equals 和 hashCode 面试那点事</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/jdk12-collectors-teeing-api-usage.html" title="Java12 Collectors.teeing 的使用详解" rel="bookmark">Java12 Collectors.teeing 的使用详解</a></h3></div></li></ul>
+        
       </div> -->
       <div class="personalweixin">
         <br><br>
@@ -580,117 +505,6 @@
       </div>
       
       
-        <br>
-        
-
-
-  <section class='meta' id="footer-meta">
-    <div class='new-meta-box'>
-      
-        
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2019-11-25T13:41:24+08:00">
-  <a class='notlink'>
-    <i class="fas fa-clock" aria-hidden="true"></i>
-    <p>更新于 2019年11月25日</p>
-  </a>
-</div>
-
-        
-      
-        
-          
-  
-  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/Java/" rel="nofollow"><i class="fas fa-tag" aria-hidden="true"></i><p>Java</p></a></div> <div class="new-meta-item meta-tags"><a class="tag" href="/tags/Lombok/" rel="nofollow"><i class="fas fa-tag" aria-hidden="true"></i><p>Lombok</p></a></div>
-
-
-        
-      
-        
-          
-  <div class="new-meta-item share -mob-share-list">
-  <div class="-mob-share-list share-body">
-    
-      
-        <a class="-mob-share-qq" title="QQ好友" rel="external nofollow noopener noreferrer"
-          
-          href="http://connect.qq.com/widget/shareqq/index.html?url=https://dayarch.top/p/lombok-usage.html&title=Lombok 使用教程详解 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=前言
-在 Java 应用程序中存在许多重复相似的、生成之后几乎不对其做更改的代码，但是我们还不得不花费很多精力编写它们来满足 Java 的编译需求
-
-比如，在 Java 应用程序开发中，我们几乎要为所有 Bean 的成员变量添加 get() ,set() 等方法，这些相对固定但又不得不编写的代码浪费程序员很多精力，同时让类内容看着更杂乱，我们希望将有限的精力关注在更重要的地方。
-
-Lombok 已经诞生很久了，甚至在 Spring Boot Initalizr 中都已加入了 Lombok 选项，
-
-
-这里我们将 Lombok 做一下详细说明:
-
-Lombok
-官网的介绍：Project Lom"
-          
-          >
-          
-            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/assets@19.1.9/logo/128/qq.png">
-          
-        </a>
-      
-    
-      
-        <a class="-mob-share-qzone" title="QQ空间" rel="external nofollow noopener noreferrer"
-          
-          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://dayarch.top/p/lombok-usage.html&title=Lombok 使用教程详解 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=前言
-在 Java 应用程序中存在许多重复相似的、生成之后几乎不对其做更改的代码，但是我们还不得不花费很多精力编写它们来满足 Java 的编译需求
-
-比如，在 Java 应用程序开发中，我们几乎要为所有 Bean 的成员变量添加 get() ,set() 等方法，这些相对固定但又不得不编写的代码浪费程序员很多精力，同时让类内容看着更杂乱，我们希望将有限的精力关注在更重要的地方。
-
-Lombok 已经诞生很久了，甚至在 Spring Boot Initalizr 中都已加入了 Lombok 选项，
-
-
-这里我们将 Lombok 做一下详细说明:
-
-Lombok
-官网的介绍：Project Lom"
-          
-          >
-          
-            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/assets@19.1.9/logo/128/qzone.png">
-          
-        </a>
-      
-    
-      
-        <a class="-mob-share-weibo" title="微博" rel="external nofollow noopener noreferrer"
-          
-          href="http://service.weibo.com/share/share.php?url=https://dayarch.top/p/lombok-usage.html&title=Lombok 使用教程详解 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=前言
-在 Java 应用程序中存在许多重复相似的、生成之后几乎不对其做更改的代码，但是我们还不得不花费很多精力编写它们来满足 Java 的编译需求
-
-比如，在 Java 应用程序开发中，我们几乎要为所有 Bean 的成员变量添加 get() ,set() 等方法，这些相对固定但又不得不编写的代码浪费程序员很多精力，同时让类内容看着更杂乱，我们希望将有限的精力关注在更重要的地方。
-
-Lombok 已经诞生很久了，甚至在 Spring Boot Initalizr 中都已加入了 Lombok 选项，
-
-
-这里我们将 Lombok 做一下详细说明:
-
-Lombok
-官网的介绍：Project Lom"
-          
-          >
-          
-            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/assets@19.1.9/logo/128/weibo.png">
-          
-        </a>
-      
-    
-  </div>
-</div>
-
-
-
-        
-      
-    </div>
-  </section>
-
-
-      
       
           <div class="prev-next">
               
@@ -698,16 +512,16 @@ Lombok
                       <span class="art-item-left">
                           <h6><i class="fas fa-chevron-left" aria-hidden="true"></i>&nbsp;上一页</h6>
                           <h4>
-                              <a href="/p/spring-data-binding-mechanism.html" rel="prev" title="Spring 数据绑定剖析">
+                              <a href="/p/wechat-new-expression.html" rel="prev" title="微信上线了10款默认新表情">
                                 
-                                    Spring 数据绑定剖析
+                                    微信上线了10款默认新表情
                                 
                               </a>
                           </h4>
                           
                               
                               <h6 class="tags">
-                                  <a class="tag" href="/tags/Spring-Boot/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> Spring Boot</a> <a class="tag" href="/tags/Spring-Data-Binding/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> Spring Data Binding</a>
+                                  <a class="tag" href="/tags/%E5%BE%AE%E4%BF%A1/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> 微信</a> <a class="tag" href="/tags/%E8%A1%A8%E6%83%85/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> 表情</a>
                               </h6>
                           
                       </span>
@@ -718,16 +532,16 @@ Lombok
                       <span class="art-item-right" aria-hidden="true">
                           <h6>下一页&nbsp;<i class="fas fa-chevron-right" aria-hidden="true"></i></h6>
                           <h4>
-                              <a href="/p/multiple-java-management.html" rel="prev" title="SDKMAN 统一灵活管理多版本Java">
+                              <a href="/p/how-to-use-todo-feature.html" rel="prev" title="小小TODO也有大道理">
                                   
-                                      SDKMAN 统一灵活管理多版本Java
+                                      小小TODO也有大道理
                                   
                               </a>
                           </h4>
                           
                               
                               <h6 class="tags">
-                                  <a class="tag" href="/tags/Java/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> Java</a> <a class="tag" href="/tags/JDK/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> JDK</a>
+                                  <a class="tag" href="/tags/TODO/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> TODO</a>
                               </h6>
                           
                       </span>
@@ -746,18 +560,6 @@ Lombok
       
         
           
-  <section class='widget related_posts'>
-    
-<header class='pure'>
-  <div><i class="fas fa-bookmark fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;相关文章</div>
-  
-</header>
-
-    <div class="content pure">
-      <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/multiple-java-management.html" title="SDKMAN 统一灵活管理多版本Java" rel="bookmark">SDKMAN 统一灵活管理多版本Java</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-equals-hashcode.html" title="Java equals 和 hashCode 面试那点事" rel="bookmark">Java equals 和 hashCode 面试那点事</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/jdk12-collectors-teeing-api-usage.html" title="Java12 Collectors.teeing 的使用详解" rel="bookmark">Java12 Collectors.teeing 的使用详解</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-polymorphism-order.html" title="Java多态调用顺序" rel="bookmark">Java多态调用顺序</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-arraylist-capacity.html" title="Java中的ArrayList的容量" rel="bookmark">Java中的ArrayList的容量</a></h3></div></li></ul>
-    </div>
-  </section>
-
 
         
       
@@ -807,13 +609,6 @@ Lombok
 <!-- 根据页面mathjax变量决定是否加载MathJax数学公式js -->
 
 
-
-  <script>
-    window.subData = {
-      title: 'Lombok 使用教程详解',
-      tools: true
-    }
-  </script>
 
 
 
@@ -952,20 +747,6 @@ Lombok
           
             
               
-  <section class='widget toc-wrapper'>
-    
-<header class='pure'>
-  <div><i class="fas fa-list fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;本文目录</div>
-  
-    <!-- <div class='wrapper'><a class="s-toc rightBtn" rel="external nofollow noopener noreferrer" href="javascript:void(0)"><i class="fas fa-thumbtack fa-fw"></i></a></div> -->
-  
-</header>
-
-    <div class='content pure'>
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Lombok"><span class="toc-text">Lombok</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Bean-的对比"><span class="toc-text">Bean 的对比</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Lombok的安装"><span class="toc-text">Lombok的安装</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Lombok注解详解"><span class="toc-text">Lombok注解详解</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Getter和-Setter"><span class="toc-text">@Getter和@Setter</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ToString"><span class="toc-text">@ToString</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#EqualsAndHashCode"><span class="toc-text">@EqualsAndHashCode</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#NonNull"><span class="toc-text">@NonNull</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#NoArgsConstructor-RequiredArgsConstructor-AllArgsConstructor"><span class="toc-text">@NoArgsConstructor, @RequiredArgsConstructor, @AllArgsConstructor</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Data"><span class="toc-text">@Data</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Builder"><span class="toc-text">@Builder</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Log"><span class="toc-text">@Log</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#val"><span class="toc-text">val</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Cleanup"><span class="toc-text">@Cleanup</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-text">总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#灵魂追问"><span class="toc-text">灵魂追问</span></a></li></ol>
-    </div>
-  </section>
-
 
             
           
