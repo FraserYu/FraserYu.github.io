@@ -484,7 +484,34 @@
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      Java String面试内容基本上都在这里
+      关于 Java String，这是面试的基础，但是还有很多童鞋不能说清楚，所以本文将简单而又透彻的说明一下那个让你迷惑的 String
+
+
+
+在 Java 中，我们有两种方式创建一个字符串
+
+1
+2
+
+
+String x = "abc";
+String y = new String("abc");
+
+
+你常见也常写第一种，很少见第二种，但面试还总问这类问题，双引号和构造器两种形式创建字符串到底有什么差别呢？
+
+先来看例子
+
+例子 1
+1
+2
+3
+4
+
+
+String a = "abcd";
+String b = "abcd";
+System.out.println(a == b);  // T
       
         <div class="readmore">
           <a href="/p/java-string-interview.html" class="flat-box">
@@ -589,7 +616,19 @@
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      了解分工，同步与互斥，才能真正了解并发, 学习并发上来就研究SDK源码，就好比没学会走就要跑一样，结果可想而知
+      写在前面
+上一篇文章这次走进并发的世界，请不要错过 给大家带了并发编程的开胃菜，接下来我们逐步上正餐，在吃正餐之前，我还要引用那首诗词: 「横看成岭侧成峰，远近高低各不同」，远看看轮廓，近看看细节，不断切换思维或视角来学习
+
+
+
+远看并发，并发编程可以抽象成三个核心问题: 分工、同步/协作、互斥
+
+如果你已经工作了，那么你一定听说过或者正在应用敏捷开发模式来交付日常的工作任务，我们就用你熟悉的流程来解释这三个核心问题
+
+分工
+将当前 Sprint 的 Story 拆分成「合适」大小的 Task，并且安排给「合适」的 Team Member 去完成
+
+这里面用了两个「合适」，将 Story 拆分
       
         <div class="readmore">
           <a href="/p/java-concurrency-core.html" class="flat-box">
@@ -696,7 +735,12 @@
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      如何学习Java并发,起步阶段你需要形象化的理解
+      写在前面
+Java 有进阶，其名为并发，并发知识之大，一口吃不下。那好，请您多吃几口，又没说一顿吃完，细嚼慢咽才有味. 所有 Java 书籍都将并发编程放在其高级/进阶篇章中，其重要性不言而喻，学好并发也是自身走入高级行列的必备素质之一
+
+并发/并行，进程/线程 这些概念总是显得过于抽象，因为这是与操作系统沟通用到的词汇，就像我们习惯了使用十进制算法，二进制和 16 进制就需要思维的切换；生活中，我们彼此总是不能互相理解，平静之后，我们知道要换位思考；程序的世界也一样，为了更好的理解问题，你也要站在操作系统的角度来思考问题，但当你尝试理解对方时，是违背自己认知习惯的，所以有些困难在所难免
+
+生
       
         <div class="readmore">
           <a href="/p/java-concurrency-metaphor.html" class="flat-box">
@@ -801,7 +845,29 @@
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      SpringBoot RESTful API 统一处理异常，让你的代码更清秀，了解其背后原理，加深理解，做到知其然也要知其所以然
+      话说异常
+「欲渡黄河冰塞川，将登太行雪满天」，无论生活还是计算机世界难免发生异常，上一篇文章RESTful API 返回统一JSON数据格式 说明了统一返回的处理，这是请求一切正常的情形；这篇文章将说明如何统一处理异常，以及其背后的实现原理，老套路，先实现，后说明原理，有了上一篇文章的铺底，相信，理解这篇文章就驾轻就熟了
+
+
+
+实现
+新建业务异常
+新建 BusinessException.class 类表示业务异常，注意这是一个 Runtime 异常
+
+1
+2
+3
+4
+5
+6
+7
+8
+9
+
+
+@Data
+@AllArgsConstructor
+public final class Busine
       
         <div class="readmore">
           <a href="/p/spring-boot-global-exception.html" class="flat-box">
@@ -904,7 +970,22 @@
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      SpringBoot RESTful API 返回统一数据格式，这是一种非常简单的方式，透过本文，你更能了解这种简单实现方式背后的秘密
+      关于 Spring 的全局处理，我有两方面要说:
+
+ 1. 统一数据返回格式
+ 2. 统一异常处理
+    为了将两个问题说明清楚，将分两个章节分别说明，本章主要说第一点
+
+
+
+有童鞋说，我们项目都做了这种处理，就是在每个 API 都单独工具类将返回值进行封装，但这种不够优雅；我想写最少的代码完成这件事，也许有童鞋说，加几个注解就解决问题了，说的没错，但这篇文章主要是为了说明为什么加了几个注解就解决问题了，目的是希望大家知其所以然。
+
+
+
+为了更好的说明问题，本文先说明如何实现，然后再详细剖析实现原理(这很关键)
+
+为什么要做统一数据返回格式
+前后端分离是当今服务形式的主流，如何设计一个好的 
       
         <div class="readmore">
           <a href="/p/spring-boot-global-return.html" class="flat-box">
@@ -1005,7 +1086,12 @@
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      Shiro—小而美的安全框架，中小项目的选择，更灵活的定制
+      写在前面
+在一款应用的整个生命周期，我们都会谈及该应用的数据安全问题。用户的合法性与数据的可见性是数据安全中非常重要的一部分。但是，一方面，不同的应用对于数据的合法性和可见性要求的维度与粒度都有所区别；另一方面，以当前微服务、多服务的架构方式，如何共享Session，如何缓存认证和授权数据应对高并发访问都迫切需要我们解决。Shiro的出现让我们可以快速和简单的应对我们应用的数据安全问题
+
+Shiro介绍
+Shiro简介
+这个官网解释不抽象，所以直接用官网解释：Apache Shiro™是一个强大且易用的 Java 安全框架，可以执行身份验证、授权、加密和会话管理等。基于 Shiro 的易于理解
       
         <div class="readmore">
           <a href="/p/shiro-in-practice.html" class="flat-box">

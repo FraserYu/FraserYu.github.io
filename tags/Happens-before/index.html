@@ -478,7 +478,13 @@
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      Happens-before是解决并发编程可见性有有序性的核心约束，图形与代码展示将不再抽象,让你透过现象看本质
+      写在前面
+上一篇文章并发 Bug 之源有三，请睁大眼睛看清它们 谈到了可见性/原子性/有序性三个问题，这些问题通常违背我们的直觉和思考模式，也就导致了很多并发 Bug
+
+ * 为了解决 CPU，内存，IO 的短板，增加了缓存，但这导致了可见性问题
+ * 编译器/处理器擅自优化 ( Java代码在编译后会变成 Java 字节码, 字节码被类加载器加载到 JVM 里, JVM 执行字节码, 最终需要转化为汇编指令在 CPU 上执行) ，导致有序性问题
+
+初衷是好的，但引发了新问题，最有效的办法就禁止缓存和编译优化，问题虽然能解决，但「又回到最初的起点，呆呆地站在镜子前」是很尴尬的，我们程序的性能就
       
         <div class="readmore">
           <a href="/p/java-concurrency-happens-before-rule.html" class="flat-box">

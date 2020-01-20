@@ -474,15 +474,14 @@
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>Spring AOP 的道理懂得，但是很少在项目中使用，刚巧这个项目中有用到，将AOP的理解以及使用中遇到的问题加以总结记录</p>
-<h3 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h3><p>设想一下，项目已接近尾声，经理说为了项目验收，更好的监控程序调用日志，需要在每个方法调用前或调用后加上日志，天啊，这是多大的工作量，项目中至少有几百个方法，我们要做这种无脑的工作了吗？ 如果不懂得Spring AOP面向切面编程的道理，那这个体力活看来是费力不讨好的事情，接下来让我们慢慢剖析Spring AOP 的道理.</p>
-<h3 id="Java-动态代理"><a href="#Java-动态代理" class="headerlink" title="Java 动态代理"></a>Java 动态代理</h3><p>Java23中设计模式之一代理模式，Spring AOP充分利用了Java 动态代理功能来实现（对动态代理有所理解的可以跳过该段内容），即便没有Spring AOP 我们也能够通过Java  动态代理解决上述问题.  在Java 动态代理中有两个重要的接口或类：</p>
-<blockquote>
-<ol>
-<li><strong>InvocationHandler</strong> （Interface）</li>
-<li><strong>Proxy</strong> （Class）</li>
-</ol>
-</blockquote>
+      前言
+Spring AOP 的道理懂得，但是很少在项目中使用，刚巧这个项目中有用到，将AOP的理解以及使用中遇到的问题加以总结记录
+
+使用场景
+设想一下，项目已接近尾声，经理说为了项目验收，更好的监控程序调用日志，需要在每个方法调用前或调用后加上日志，天啊，这是多大的工作量，项目中至少有几百个方法，我们要做这种无脑的工作了吗？ 如果不懂得Spring AOP面向切面编程的道理，那这个体力活看来是费力不讨好的事情，接下来让我们慢慢剖析Spring AOP 的道理.
+
+Java 动态代理
+Java23中设计模式之一代理模式，Spring AOP充分利用了Java 动态代理功能来实现（对动态代理有所
       
         <div class="readmore">
           <a href="/p/spring-aop.html" class="flat-box">

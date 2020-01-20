@@ -480,19 +480,21 @@
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      <h2 id="双亲委派模型"><a href="#双亲委派模型" class="headerlink" title="双亲委派模型"></a>双亲委派模型</h2><p>在介绍这个Java技术点之前，先试着思考以下几个问题：</p>
-<ol>
-<li><p>为什么我们不能定义同名的 <strong>String</strong> 的 java 文件？</p>
-</li>
-<li><p>多线程的情况下，类的加载为什么不会出现重复加载的情况？</p>
-</li>
-<li><p>下面代码，虚拟机是怎样初始化注册 Mysql 连接驱动(Driver)的？</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Connection conn= DriverManager.getConnection(&quot;jdbc:mysql://localhost:3306/mydb?characterEncoding=GBK&quot;, &quot;root&quot;, &quot;000000&quot;);</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>热部署的原理是什么？</p>
-</li>
-</ol>
-<p>想理解以上几个问题的前提是了解类加载时机与过程, 这篇文章将会以非常详细的解读方式来回答以上几个问题</p>
+      双亲委派模型
+在介绍这个Java技术点之前，先试着思考以下几个问题：
+
+ 1. 为什么我们不能定义同名的 String 的 java 文件？
+    
+    
+ 2. 多线程的情况下，类的加载为什么不会出现重复加载的情况？
+    
+    
+ 3. 下面代码，虚拟机是怎样初始化注册 Mysql 连接驱动(Driver)的？
+    
+    1
+    
+    
+    Connection conn= DriverManager.getConnection("jdbc:mysql://localhost:3306/mydb?characterEncoding=GBK", "root",
       
         <div class="readmore">
           <a href="/p/java-parents-delegation-model.html" class="flat-box">
@@ -587,7 +589,17 @@
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      
+      通过理解SSL握手过程解决客户端证书问题最近做项目，调用远程服务器突然出现如下错误：
+
+1
+
+
+PKIX path building failed: sun.security.provider.certpath.SunCertPathBuilderException: unable to find valid certification path to requested target
+
+
+很明显，客户端找不到服务器端返回的public certificate，所以我们需要拿到服务器给客户端的证书，并且存放到Keystore中，这就涉及到SSL握手（handshake）获取信任的过程。
+
+图解
       
         <div class="readmore">
           <a href="/p/pkix-certificate-import.html" class="flat-box">
@@ -688,7 +700,30 @@
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      Arthas动态调节日志等级/level，大大方便查看日志效率
+      阿里的开源Java诊断工具Arthas可以在线调整log等级
+
+ 1. 查找当前类的classloader hashcode
+
+1
+
+
+sc -d com.example.demo.arthas.user.UserController | grep classLoaderHash
+
+
+ 2. 用OGNL获取logger
+
+1
+
+
+ognl -c 1be6f5c3 '@com.example.demo.arthas.user.UserController@logger'
+
+
+ 3. 单独设置UserController的logger level
+
+1
+
+
+ognl -c 1be6f5c3 '@c
       
         <div class="readmore">
           <a href="/p/arthas-log-level.html" class="flat-box">

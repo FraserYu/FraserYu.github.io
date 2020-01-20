@@ -480,8 +480,32 @@
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      <h3 id="ResponseStatus"><a href="#ResponseStatus" class="headerlink" title="@ResponseStatus"></a>@ResponseStatus</h3><p>Restful webservice请求会用到@ResponseStatus 注解，该注解可用于类级别上，也可以应用在方法级别上，代表请求响应的状态，通常就是返回HttpStatus的状态码，具体可查询每个状态码代，这里简单罗列一些：</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">CONTINUE(100, "Continue"),</span><br><span class="line">SWITCHING_PROTOCOLS(101, "Switching Protocols"),</span><br><span class="line">PROCESSING(102, "Processing"),</span><br><span class="line">CHECKPOINT(103, "Checkpoint"),</span><br><span class="line">OK(200, "OK"),</span><br><span class="line">CREATED(201, "Created"),</span><br><span class="line">ACCEPTED(202, "Accepted"),</span><br><span class="line">NON_AUTHORITATIVE_INFORMATION(203, "Non-Authoritative Information"),</span><br><span class="line">NO_CONTENT(204, "No Content"),</span><br><span class="line">RESET_CONTENT(205, "<span class="keyword">Reset</span> <span class="keyword">Content</span><span class="string">"),</span></span><br><span class="line"><span class="string">PARTIAL_CONTENT(206, "</span><span class="keyword">Partial</span> <span class="keyword">Content</span><span class="string">"),</span></span><br><span class="line"><span class="string">MULTI_STATUS(207, "</span>Multi-<span class="keyword">Status</span><span class="string">"),</span></span><br><span class="line"><span class="string">ALREADY_REPORTED(208, "</span>Already Reported<span class="string">"),</span></span><br><span class="line"><span class="string">IM_USED(226, "</span>IM Used<span class="string">"),</span></span><br><span class="line"><span class="string">MULTIPLE_CHOICES(300, "</span>Multiple Choices<span class="string">"),</span></span><br><span class="line"><span class="string">MOVED_PERMANENTLY(301, "</span>Moved Permanently<span class="string">"),</span></span><br><span class="line"><span class="string">FOUND(302, "</span><span class="keyword">Found</span><span class="string">"),</span></span><br></pre></td></tr></table></figure>
+      @ResponseStatus
+Restful webservice请求会用到@ResponseStatus 注解，该注解可用于类级别上，也可以应用在方法级别上，代表请求响应的状态，通常就是返回HttpStatus的状态码，具体可查询每个状态码代，这里简单罗列一些：
+
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+
+
+CONTINUE(100, "Continue"),
+SWITCHING_PROTOCOLS(101, "Switching Protocols"),
+PROCESSING(102, "Processing"),
+CHECKPOINT(103
       
         <div class="readmore">
           <a href="/p/springmvc-response-status.html" class="flat-box">
@@ -582,15 +606,14 @@
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>Spring AOP 的道理懂得，但是很少在项目中使用，刚巧这个项目中有用到，将AOP的理解以及使用中遇到的问题加以总结记录</p>
-<h3 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h3><p>设想一下，项目已接近尾声，经理说为了项目验收，更好的监控程序调用日志，需要在每个方法调用前或调用后加上日志，天啊，这是多大的工作量，项目中至少有几百个方法，我们要做这种无脑的工作了吗？ 如果不懂得Spring AOP面向切面编程的道理，那这个体力活看来是费力不讨好的事情，接下来让我们慢慢剖析Spring AOP 的道理.</p>
-<h3 id="Java-动态代理"><a href="#Java-动态代理" class="headerlink" title="Java 动态代理"></a>Java 动态代理</h3><p>Java23中设计模式之一代理模式，Spring AOP充分利用了Java 动态代理功能来实现（对动态代理有所理解的可以跳过该段内容），即便没有Spring AOP 我们也能够通过Java  动态代理解决上述问题.  在Java 动态代理中有两个重要的接口或类：</p>
-<blockquote>
-<ol>
-<li><strong>InvocationHandler</strong> （Interface）</li>
-<li><strong>Proxy</strong> （Class）</li>
-</ol>
-</blockquote>
+      前言
+Spring AOP 的道理懂得，但是很少在项目中使用，刚巧这个项目中有用到，将AOP的理解以及使用中遇到的问题加以总结记录
+
+使用场景
+设想一下，项目已接近尾声，经理说为了项目验收，更好的监控程序调用日志，需要在每个方法调用前或调用后加上日志，天啊，这是多大的工作量，项目中至少有几百个方法，我们要做这种无脑的工作了吗？ 如果不懂得Spring AOP面向切面编程的道理，那这个体力活看来是费力不讨好的事情，接下来让我们慢慢剖析Spring AOP 的道理.
+
+Java 动态代理
+Java23中设计模式之一代理模式，Spring AOP充分利用了Java 动态代理功能来实现（对动态代理有所
       
         <div class="readmore">
           <a href="/p/spring-aop.html" class="flat-box">

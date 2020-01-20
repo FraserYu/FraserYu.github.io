@@ -492,8 +492,27 @@
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      <p>现在越发的认识到巧用工具提高工作效率的重要性，接下来看一下PostMan带来的便利</p>
-<h3 id="业务情景"><a href="#业务情景" class="headerlink" title="业务情景"></a>业务情景</h3><p>在实际工作中，当App或其他渠道来调用Java后台接口的时候，我们通常会用到PostMan这个工具来模拟调用，当需要token来作为验证的时候，当每次请求的token发生变化的时候我们同时要改变其他请求URL中的token内容，这样很麻烦，降低工作效率，PostMan的环境变量解决了这个问题</p>
+      现在越发的认识到巧用工具提高工作效率的重要性，接下来看一下PostMan带来的便利
+
+业务情景
+在实际工作中，当App或其他渠道来调用Java后台接口的时候，我们通常会用到PostMan这个工具来模拟调用，当需要token来作为验证的时候，当每次请求的token发生变化的时候我们同时要改变其他请求URL中的token内容，这样很麻烦，降低工作效率，PostMan的环境变量解决了这个问题
+
+配置环境变量
+
+and
+
+and
+
+and
+
+and
+
+and
+
+and
+
+
+至此设置环境变量结束，其他功能会陆续补充.
       
         <div class="readmore">
           <a href="/p/postman-advanced-usage.html" class="flat-box">
@@ -594,8 +613,14 @@
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>以下内容根据<a href="https://help.github.com/articles/ignoring-files/" target="_blank" rel="noopener">Git Help</a>以及<a href="https://git-scm.com/docs/gitignore" target="_blank" rel="noopener">Git Docs</a> 整理翻译</p>
-<h3 id="Ignoring-files-忽略文件"><a href="#Ignoring-files-忽略文件" class="headerlink" title="Ignoring files(忽略文件)"></a>Ignoring files(忽略文件)</h3><p>有时候会有一些我们不想Git 提交一些文件到GitHub/GitLab，下面有几种方式让我们告诉Git来忽略哪些文件.</p>
+      前言
+以下内容根据Git Help以及Git Docs 整理翻译
+
+Ignoring files(忽略文件)
+有时候会有一些我们不想Git 提交一些文件到GitHub/GitLab，下面有几种方式让我们告诉Git来忽略哪些文件.
+
+Create a local .gitignore（创建局部/本地的.gitignore文件）
+如果在local repository（仓库）中创建一个名为.gitignore的文件，在你commit（提交）动作之前，Git 将会读取*.gitignore文件去判断哪些文件或者目录需要忽略掉. 同时这个文件应该push到remote repository, 这样cl
       
         <div class="readmore">
           <a href="/p/git-ignore.html" class="flat-box">
@@ -696,11 +721,23 @@
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      <p>在Windows下，删除文件时报错”文件路径太长或者文件名太长”，无论是Shift+Del、进入子目录一点点删除都不可以以及使用Windows内置命令都不可以，但是我电脑中装有node，于是安装<strong>【rimraf】</strong>——是专门用于删除模块的插件</p>
-<blockquote>
-<p>官方描述：A deep deletion module for node (like rm -rf)</p>
-</blockquote>
-<pre><code>npm install -g rimraf</code></pre><p>使用方法：</p>
+      在Windows下，删除文件时报错”文件路径太长或者文件名太长”，无论是Shift+Del、进入子目录一点点删除都不可以以及使用Windows内置命令都不可以，但是我电脑中装有node，于是安装【rimraf】——是专门用于删除模块的插件
+
+官方描述：A deep deletion module for node (like rm -rf)
+
+npm install -g rimraf
+
+使用方法：
+
+ 1. 进入project目录
+    
+    cd project/
+    
+    
+ 2. 删除hybris目录及目录下所有文件
+    
+    rimraf hybris
+    
       
         <div class="readmore">
           <a href="/p/delete-long-name-file-in-windows.html" class="flat-box">
@@ -803,14 +840,14 @@
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      <h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>现在好多公司用GitLab作为项目管理工具，自己也会有开源项目在GitHub上，按照以往的配置全局的用户貌似在这种情形下就没有作用了（公司的项目需要用公司邮箱，自己的项目需要用自己的邮箱），此时就要做Git多账户的管理与设置。</p>
-<h3 id="Git支持的协议"><a href="#Git支持的协议" class="headerlink" title="Git支持的协议"></a>Git支持的协议</h3><p>Git主要支持四中协议： file:// , git://,  http(s)://, ssh://, 这里主要说明一下http(s)和ssh协议的区别。</p>
-<h4 id="https-和-SSH-的区别"><a href="#https-和-SSH-的区别" class="headerlink" title="https 和 SSH 的区别"></a>https 和 SSH 的区别</h4><blockquote>
-<ol>
-<li>前者可以随意克隆github上的项目，而不管是谁的；而后者则是你必须是你要克隆的项目的拥有者或管理员，且需要先添加 SSH key (这里就是添加公钥，取得管理员的信任)，否则无法克隆。</li>
-<li>https url 在push的时候是需要验证用户名和密码的，而 SSH 在push的时候，是不需要输入用户名的，如果配置SSH key的时候设置了密码，则需要输入密码的，否则直接是不需要输入密码的。</li>
-</ol>
-</blockquote>
+      背景
+现在好多公司用GitLab作为项目管理工具，自己也会有开源项目在GitHub上，按照以往的配置全局的用户貌似在这种情形下就没有作用了（公司的项目需要用公司邮箱，自己的项目需要用自己的邮箱），此时就要做Git多账户的管理与设置。
+
+Git支持的协议
+Git主要支持四中协议： file:// , git://, http(s)://, ssh://, 这里主要说明一下http(s)和ssh协议的区别。
+
+https 和 SSH 的区别
+ 1. 前者可以随意克隆github上的项目，而不管是谁的；而后者则是你必须是你要克隆的项目的拥有者或管理员，且需要先添加 SSH key (这里就是添加公钥
       
         <div class="readmore">
           <a href="/p/git-multiple-account.html" class="flat-box">
@@ -911,19 +948,24 @@
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      <h2 id="Chrome-浏览器保存网页为脱机文件"><a href="#Chrome-浏览器保存网页为脱机文件" class="headerlink" title="Chrome 浏览器保存网页为脱机文件"></a>Chrome 浏览器保存网页为脱机文件</h2><p>我们经常需要将一些网页保存为脱机文件，这样即便没有网络我们也可以正常的浏览，IE浏览器将网页另存为在选择文件类型的地方会有选择*.mht, 可是Chrome 却没有这个选项，接下来教大家如何通过Chrome来保存网页为mht文件</p>
-<ol>
-<li><p>打开浏览器输入 <strong>chrome://flags/</strong></p>
-</li>
-<li><p>通过关键字搜索<strong>save</strong> 或 <strong>另存为</strong>如下图：<br><img src="http://7xkyc7.com1.z0.glb.clouddn.com/chrome_mht.png" alt="mht"></p>
-</li>
-<li><p>点击<strong>Enable</strong>或<strong>使用</strong>，重新启动浏览器</p>
-</li>
-<li><p>鼠标右键另存为选择类型和保存路径如下图：<br><img src="http://7xkyc7.com1.z0.glb.clouddn.com/chrome_save.png" alt="save"></p>
-</li>
-<li><p>等待下载完成即可</p>
-</li>
-</ol>
+      Chrome 浏览器保存网页为脱机文件
+我们经常需要将一些网页保存为脱机文件，这样即便没有网络我们也可以正常的浏览，IE浏览器将网页另存为在选择文件类型的地方会有选择*.mht, 可是Chrome 却没有这个选项，接下来教大家如何通过Chrome来保存网页为mht文件
+
+ 1. 打开浏览器输入 chrome://flags/
+    
+    
+ 2. 通过关键字搜索save 或 另存为如下图：
+    
+    
+    
+ 3. 点击Enable或使用，重新启动浏览器
+    
+    
+ 4. 鼠标右键另存为选择类型和保存路径如下图：
+    
+    
+    
+ 5. 等待下载完成即
       
         <div class="readmore">
           <a href="/p/chrome-save-offline-file.html" class="flat-box">
@@ -1024,8 +1066,15 @@
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      <h3 id="Git分支管理策略"><a href="#Git分支管理策略" class="headerlink" title="Git分支管理策略"></a>Git分支管理策略</h3><p>首先share一下Ruan老师的博客内容：<a href="http://www.ruanyifeng.com/blog/2012/07/git.html" target="_blank" rel="noopener">Git分支管理策略</a> ，读过之后，理解Master、Develop、临时分支（feature、release、fixbug）的基本意思，这里写的就更加透彻了：<a href="http://nvie.com/posts/a-successful-git-branching-model/" target="_blank" rel="noopener">A successful Git branching model</a>， 项目中如果按照这种严格规范来执行版本的管理，应该是会取得成功的结果.  仔细阅读这个workflow深刻的体会：<br><img src="http://7xkyc7.com1.z0.glb.clouddn.com/git_workflow.png" alt="Git Branch Model"></p>
-<h3 id="Git-使用实战情景说明"><a href="#Git-使用实战情景说明" class="headerlink" title="Git 使用实战情景说明"></a>Git 使用实战情景说明</h3><p>为什么不罗列出来Git的命令列表，因为罗列在这貌似也很难深刻理解命令的含义，也不知道怎样去使用，所以做一些情景案例来说明git命令</p>
+      Git分支管理策略
+首先share一下Ruan老师的博客内容：Git分支管理策略 ，读过之后，理解Master、Develop、临时分支（feature、release、fixbug）的基本意思，这里写的就更加透彻了：A successful Git branching model， 项目中如果按照这种严格规范来执行版本的管理，应该是会取得成功的结果. 仔细阅读这个workflow深刻的体会：
+
+
+Git 使用实战情景说明
+为什么不罗列出来Git的命令列表，因为罗列在这貌似也很难深刻理解命令的含义，也不知道怎样去使用，所以做一些情景案例来说明git命令
+
+跟踪GitHub上开源项目
+当在Git
       
         <div class="readmore">
           <a href="/p/git-workflow.html" class="flat-box">
@@ -1126,8 +1175,22 @@
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      <p><strong>郑重声明： 未经同意，不得转载</strong></p>
-<h2 id="微信作业反馈2016"><a href="#微信作业反馈2016" class="headerlink" title="微信作业反馈2016"></a>微信作业反馈2016</h2><h3 id="万能句型"><a href="#万能句型" class="headerlink" title="万能句型"></a>万能句型</h3><h4 id="万能句型第一发-got-to-get"><a href="#万能句型第一发-got-to-get" class="headerlink" title="万能句型第一发[got to get]"></a>万能句型第一发[got to get]</h4><p>先附上两张图片来做一个总览，接下来逐个举例说明：<br><img src="http://7xkyc7.com1.z0.glb.clouddn.com/wechat_1.1.jpg" alt="第一张"><br><img src="http://7xkyc7.com1.z0.glb.clouddn.com/wechat_1.2.jpg" alt="第二张"></p>
+      郑重声明： 未经同意，不得转载
+
+微信作业反馈2016
+万能句型
+万能句型第一发[got to get]
+先附上两张图片来做一个总览，接下来逐个举例说明：
+
+
+
+万能句型前面搭配：
+
+序号搭配省略’ve或’s1I’ve可以2We’ve可以3You’ve可以4They’ve可以5He’s不可以6She’s不可以万能句型举例：
+
+
+
+序号句子翻译连读音标1I got to get going我得走了2I got to get used to it我得适应某物3I got to get used to this bed我得适应这张床4I got to get Used to the new comp
       
         <div class="readmore">
           <a href="/p/english-common-model.html" class="flat-box">
@@ -1230,12 +1293,14 @@
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      <h1 id="SpringMVC之RequestMapping注解"><a href="#SpringMVC之RequestMapping注解" class="headerlink" title="SpringMVC之RequestMapping注解"></a>SpringMVC之RequestMapping注解</h1><hr>
-<h3 id="什么是RequestMapping注解"><a href="#什么是RequestMapping注解" class="headerlink" title="什么是RequestMapping注解"></a>什么是RequestMapping注解</h3><p>在SpringMVC的API中我们发现对@interface RequestMapping 有如下的定义：</p>
-<blockquote>
-<p>*Annotation for mapping web requests onto specific handler classes and/or handler methods. Provides a consistent style between Servlet and Portlet environments, with the semantics adapting to the concrete environment. *</p>
-</blockquote>
-<p>翻译过来的意思就是通过在在类和方法上的限制来匹配request</p>
+      SpringMVC之RequestMapping注解
+
+
+
+什么是RequestMapping注解
+在SpringMVC的API中我们发现对@interface RequestMapping 有如下的定义：
+
+*Annotation for mapping web requests onto specific handler classes and/or handler methods. Provides a consistent style between Servlet and Portlet environments, with the semantics adapting to the
       
         <div class="readmore">
           <a href="/p/springmvc-requestmapping-annotation.html" class="flat-box">
@@ -1338,8 +1403,12 @@
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      <h1 id="创建Maven-Web-Project"><a href="#创建Maven-Web-Project" class="headerlink" title="创建Maven Web Project"></a>创建Maven Web Project</h1><hr>
-<h3 id="什么是Maven"><a href="#什么是Maven" class="headerlink" title="什么是Maven"></a>什么是Maven</h3><p>在<a href="http://maven.apache.org/" target="_blank" rel="noopener">Apache Maven</a> 官网上的说明是：<em>Apache Maven is a software project management and comprehension tool. Based on the concept of a project object model (POM), Maven can manage a project’s build, reporting and documentation from a central piece of information.</em>   翻译过来的基本意思就是：<strong>Maven是基于项目对象模型(POM)，可以通过一小段描述信息来管理项目的构建，报告和文档的软件项目管理工 具。</strong></p>
+      创建Maven Web Project
+
+
+
+什么是Maven
+在Apache Maven 官网上的说明是：Apache Maven is a software project management and comprehension tool. Based on the concept of a project object model (POM), Maven can manage a project’s build, reporting and documentation from a central piece of information. 翻译过来的基本意思就是：Maven是基于项
       
         <div class="readmore">
           <a href="/p/maven-project-structure.html" class="flat-box">
@@ -1440,31 +1509,15 @@
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      <h3 id="连读"><a href="#连读" class="headerlink" title="连读"></a>连读</h3><ol>
-<li><p><strong>You’re gonna wanna get more experiences before you apply</strong>    </p>
-<blockquote>
-<p>before 可以读成 /b fɔr/， you和apply之间加w的音</p>
-</blockquote>
-</li>
-<li><p><strong>I just wanted to have a look at her resume before you hired her</strong>     </p>
-<blockquote>
-<p>wanted to 读成 /wa nI tə/， nt+vowel,省t wanted=/wɑntɪd/=/wɑnɪd/,  at her 读成/æ dər/   hired her 同理不发h的音</p>
-</blockquote>
-</li>
-<li><p>*<em>Give up or make decision because you can’t have it both ways *</em></p>
-<blockquote>
-<p>give up or 读成/gɪ vʌ pər/ , because 读成/kɔz/, 同时注意 can’t和can的读音区别</p>
-</blockquote>
-</li>
-<li><p><strong>Didn’t it <em>seem</em> kinda cold last night</strong></p>
-<blockquote>
-<p>Didn’t it /dɪ dɪn nɪ/</p>
-</blockquote>
-</li>
-<li><p><strong>And your daddy didn’t understand？</strong></p>
-<blockquote>
-<p>/ ə njər dæ di dɪ ‘ə nʌn dər sdænd?/</p>
-</blockquote>
+      连读
+ 1.  You’re gonna wanna get more experiences before you apply 
+     
+     before 可以读成 /b fɔr/， you和apply之间加w的音
+     
+     
+ 2.  I just wanted to have a look at her resume before you hired her 
+     
+     wanted to 读成 /wa nI tə/， nt+vowel,省t wanted=/wɑntɪd/=/wɑnɪd/, at her 读成/æ dər/ hired her 同理不发
       
         <div class="readmore">
           <a href="/p/spoken-english.html" class="flat-box">

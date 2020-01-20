@@ -478,7 +478,10 @@
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      通过EasyExcel读写Excel，极大的增加了业务灵活性，同时降低了内存溢出的风险
+      写在前面
+Java 后端程序员应该会遇到读取 Excel 信息到 DB 等相关需求，脑海中可能突然间想起 Apache POI 这个技术解决方案，但是当 Excel 的数据量非常大的时候，你也许发现，POI 是将整个 Excel 的内容全部读出来放入到内存中，所以内存消耗非常严重，如果同时进行包含大数据量的 Excel 读操作，很容易造成内存溢出问题
+
+但 EasyExcel 的出现很好的解决了 POI 相关问题，原本一个 3M 的 Excel 用 POI 需要100M左右内存, 而 EasyExcel 可以将其降低到几 M，同时再大的 Excel 都不会出现内存溢出的情况，因为是逐行读取 E
       
         <div class="readmore">
           <a href="/p/easyexcel-read.html" class="flat-box">

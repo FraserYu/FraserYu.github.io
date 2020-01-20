@@ -472,7 +472,13 @@
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      灵活使用SpringBoot Conditonal相关注解，增加编程的灵活性
+      上一篇文章 你应该知道的 @ConfigurationProperties 注解的使用姿势，这一篇就够了 介绍了如何通过 @ConfigurationProperties 注解灵活读取配置属性，这篇文章将介绍如何灵活配置 Spring Bean
+
+写在前面
+当我们构建一个 Spring 应用的时候，有时我们想在满足指定条件的时候才将某个 bean 加载到应用上下文中， 在Spring 4.0 时代，我们可以通过 @Conditional 注解来实现这类操作
+
+
+我们看到 @Conditional 注解接收的参数是 extends Condition 接口的泛型类，也就是说，我们要使用 @Con
       
         <div class="readmore">
           <a href="/p/spring-boot-condition-annotation.html" class="flat-box">
@@ -575,12 +581,14 @@
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      <blockquote class="blockquote-center">Spring ResponseBody without null field</blockquote>
+      Spring ResponseBody without null field通常Restful返回的Json格式数据，里面包含很多为空值null的字段，我们没必要将这些字段返回给前端，应该给出更多的有效字段，所以我们需要在Converter Message的时候将这些null值字段给过滤掉
 
-<blockquote>
-<p>通常Restful返回的Json格式数据，里面包含很多为空值null的字段，我们没必要将这些字段返回给前端，应该给出更多的有效字段，所以我们需要在Converter Message的时候将这些null值字段给过滤掉</p>
-</blockquote>
-<h4 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h4><p>添加 <strong>@JsonInclude(JsonInclude.Include.NON_NULL)</strong> 注解<br>该方法很简单，但是我们有太多的返回类型，一一添加也是很大的工作量，所以我们需要在转换的源头进行控制</p>
+方法一
+添加 @JsonInclude(JsonInclude.Include.NON_NULL) 注解
+该方法很简单，但是我们有太多的返回类型，一一添加也是很大的工作量，所以我们需要在转换的源头进行控制
+
+方法二
+实现 WebMvcConfigurer 接口，添加 @EnableWebMvc 和 @Co
       
         <div class="readmore">
           <a href="/p/spring-boot-json-return-non-null.html" class="flat-box">
@@ -683,7 +691,14 @@
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>最近陆续在通过SpringBoot搭建项目，往里面逐渐添加功能，项目地址<a href="https://github.com/FraserYu/springbootlearning.git" target="_blank" rel="noopener">SpringBootLearning</a>, 当总结Docker部署SpringBoot的时候，我遇到了一些问题，加以总结</p>
+      前言
+最近陆续在通过SpringBoot搭建项目，往里面逐渐添加功能，项目地址SpringBootLearning, 当总结Docker部署SpringBoot的时候，我遇到了一些问题，加以总结
+
+问题汇总
+文章主要参考Spring Boot 2.0(四)：使用 Docker 部署 Spring Boot, 因为我是已有的SpringBoot项目，不是简单的SpringBoot项目，所以使用Docker部署SpringBoot的时候遇到了一些问题，现总结如下：
+
+ 1. mvn package 打包命令不能生成jar包到target目录下
+    因为Docker会用到jar包，所以在用Doc
       
         <div class="readmore">
           <a href="/p/docker-deploy-spring-boot.html" class="flat-box">

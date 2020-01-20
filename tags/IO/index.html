@@ -476,29 +476,8 @@
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      <blockquote class="blockquote-center">IO流，网络编程的基础</blockquote>
-
-<h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>最近在做Springboot分布式微服务项目，用到了文件上传和下载，文件上传是既有的功能，将文件或图片上传到S3服务器上，将生成的文件URL地址和截取的文件名存储到DB中，正常我们只需要给前端URL，通过浏览器就可以实现文件的下载了，但是我们在将文件上传到S3服务器之前是将文件名称进行转码的，如：文件test.docx上传到S3服务器之后的URL地址是： <em><a href="http://www.S3.xxx.com/files/abRsdf.docx" target="_blank" rel="noopener">http://www.S3.xxx.com/files/abRsdf.docx</a></em>, 这样我们下载下来的文件文件名就是 <em>abRsdf.docx</em>, 显然这是不符合我们要求的，下载的文件名应该是test.docx, 并且需要多个文件压缩成zip文件打包下载. 所以需要在response中做一些文章，修改文件名，以及做多文件的压缩。</p>
-<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><p>因为DB中存储了文件的URL和文件名称，大概数据形式如下：</p>
-<table>
-<thead>
-<tr>
-<th align="left">序号</th>
-<th align="left">url</th>
-<th align="left">name</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">1</td>
-<td align="left"><a href="http://www.S3.xxx.com/files/abRsdf.docx" target="_blank" rel="noopener">http://www.S3.xxx.com/files/abRsdf.docx</a></td>
-<td align="left">test.docx</td>
-</tr>
-<tr>
-<td align="left">2</td>
-<td align="left"><a href="http://www.S3.xxx.com/files/lsdTew.docx" target="_blank" rel="noopener">http://www.S3.xxx.com/files/lsdTew.docx</a></td>
-<td align="left">test1.docx</td>
-</tr>
-</tbody></table>
+      IO流，网络编程的基础背景
+最近在做Springboot分布式微服务项目，用到了文件上传和下载，文件上传是既有的功能，将文件或图片上传到S3服务器上，将生成的文件URL地址和截取的文件名存储到DB中，正常我们只需要给前端URL，通过浏览器就可以实现文件的下载了，但是我们在将文件上传到S3服务器之前是将文件名称进行转码的，如：文件test.docx上传到S3服务器之后的URL地址是： http://www.S3.xxx.com/files/abRsdf.docx, 这样我们下载下来的文件文件名就是 abRsdf.docx, 显然这是不符合我们要求的，下载的文件名应该是test.docx, 并且需
       
         <div class="readmore">
           <a href="/p/java-download-file-zip.html" class="flat-box">

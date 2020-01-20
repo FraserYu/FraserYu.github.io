@@ -560,7 +560,12 @@
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      <p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgnight-1080547_1920.jpg" alt=""></p>
+      作为生长在内蒙的，不会套马的，酒精过敏的，不吃羊肉的，也不魁梧的奇葩，单曲循环听着腾格尔大爷的翻唱歌曲「可能否」，还是开始写了 2019 年总结，这个总结比 2002 😆 年来的更晚一些，因为在等待 2019 年末的一个 PMP(拍马屁)的成绩，赶不上各个平台的总结比赛了，写下来给自己个答复
+
+年初的一次旅行之后，回来倍感惶恐，总觉得应该做点什么继续充实自己的生活。写博客记录和维护公众号的想法也就随之浮现在脑海中
+
+
+翻看历史记录，在 2015 年就已经尝试搭建自己的博客了，奈何没有坚持分享，中途夭折。「种一棵树最好的时间是十年前，其次是现在」。这一刻，我要种一棵树，陪她长大，我变老，她茁壮
       
         <div class="readmore">
           <a href="/p/2019-summary.html" class="flat-box">
@@ -734,7 +739,31 @@
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      
+      微信新增表情
+微信新增十款默认表情！
+微信新增十款默认表情！
+微信新增十款默认表情！
+
+
+
+
+微信今日悄然上线了十款新默认表情， 其中包含了
+
+
+ 1.  吃瓜
+ 2.  加油
+ 3.  汗
+ 4.  天啊
+ 5.  Emm
+ 6.  社会社会
+ 7.  旺柴
+ 8.  好的
+ 9.  打脸
+ 10. 哇
+
+感觉比用了表情包还激动。据悉，目前这十款新默认表情正在进行灰度测试，部分微信用户可能无法正常显示
+
+一图胜千言，对于喜欢使用表情的你，快快打开你的微信看看吧
       
         <div class="readmore">
           <a href="/p/wechat-new-expression.html" class="flat-box">
@@ -839,7 +868,23 @@
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      有时，我们需要标记部分代码以供将来参考，比如:优化，改进，可能的更改，要讨论的问题等。通常我们会在代码中加入TODO作为标识，但是在团队中协同工作，TODO的背后也蕴藏着一些道理
+      前言
+有时，我们需要标记部分代码以供将来参考，比如: 优化，改进，可能的更改，要讨论的问题等。 通常我们会在代码中加入如下的标记表示待办:
+
+1
+
+
+//TODO 我将要在这里做 xxx
+
+
+你这样做，别人也会这样做。一时间，项目中可能会存在大量的 TODO，当你搜寻你的 TODO 时也就变得非常麻烦，如同石沉大海，也就失去了这个标记的意义。
+
+IntelliJ IDEA允许我们添加特殊类型的注释，使得这些注释在编辑器中突出显示，它们被索引，并在 TODO 工具窗口 中列出。这样，我们就容易追踪自己的 TODO 了。
+
+
+
+默认的 TODO
+默认情况下，IntelliJ IDEA识别两种模式：
       
         <div class="readmore">
           <a href="/p/how-to-use-todo-feature.html" class="flat-box">
@@ -942,7 +987,35 @@
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      我们经常会碰到在Spring Boot启动阶段执行一些代码片段需求，Spring 为我们提供了至少五种方式，比如：MyCommandLineRunner，ApplicationRunner， ApplicationListener， PostConstruct， afterPropertiesSet，但是他们之间还是有很大区别的，本文将带你透彻理解他们的区别，在实战中选择最适合你的那一个
+      前言
+有时候我们需要在应用启动时执行一些代码片段，这些片段可能是仅仅是为了记录 log，也可能是在启动时检查与安装证书 ，诸如上述业务要求我们可能会经常碰到
+
+Spring Boot 提供了至少 5 种方式用于在应用启动时执行代码。我们应该如何选择？本文将会逐步解释与分析这几种不同方式
+
+CommandLineRunner
+CommandLineRunner 是一个接口，通过实现它，我们可以在 Spring 应用成功启动之后 执行一些代码片段
+
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+
+
+@Slf4j
+@Component
+@Order(2)
+public cl
       
         <div class="readmore">
           <a href="/p/spring-boot-execute-on-startup.html" class="flat-box">
@@ -1049,7 +1122,11 @@
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      在编写项目代码时，我们要求更灵活的配置，更好的模块化整合。在 Spring Boot 项目中，为满足以上要求，就要用到ConfigurationProperties注解
+      前言
+在编写项目代码时，我们要求更灵活的配置，更好的模块化整合。在 Spring Boot 项目中，为满足以上要求，我们将大量的参数配置在 application.properties 或 application.yml 文件中，通过 @ConfigurationProperties 注解，我们可以方便的获取这些参数值
+
+使用 @ConfigurationProperties 配置模块
+假设我们正在搭建一个发送邮件的模块。在本地测试，我们不想该模块真的发送邮件，所以我们需要一个参数来「开关」 disable 这个功能。另外，我们希望为这些邮件配置一个默认的主题，这样，当我们查看邮件收件箱，通过
       
         <div class="readmore">
           <a href="/p/spring-boot-configurationProperties-usage.html" class="flat-box">
@@ -1152,7 +1229,17 @@
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      Spring 源码中大量应用Aware，通过本文你将透彻理解 Spring Aware背后的道理，以及如何应用它
+      通过如下前序两篇文章:
+
+ 1. Spring Bean 生命周期之缘起
+ 2. Spring Bean 生命周期之缘尽
+    我们了解了 Spring Bean 的生命周期核心内容，bean 是如何被初始化变为 Ready for Use 的状态，当资源被回收时又是如何被 destroy 的，但 Spring Bean Life Cycle图并未被全部点亮，这篇文章将点亮剩余内容，同时说说你常见的 XxxxAware 接口
+
+为什么要说 Spring Bean 生命周期又说 Aware 呢？下来点亮剩下内容你也许就明白了：
+
+
+
+ 1. 在 Spring Bean Ready for Us
       
         <div class="readmore">
           <a href="/p/spring-aware.html" class="flat-box">
@@ -1259,7 +1346,21 @@
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      透彻的理解Spring Bean 生命周期是掌握Spring Bean依赖的前提，了解它也可以让我们在特定的节点做特定的事情满足业务需要
+      上一篇文章 Spring Bean 生命周期之缘起 说明了我是谁？ 和 我从哪里来? 的两大哲学问题，今天我们要讨论一下终极哲学我要到哪里去？
+
+ 初始化 Spring Bean 有三种方式：
+
+ 1. @PostConstruct
+ 2. InitializingBean.afterPropertiesSet()
+ 3. init-method
+
+销毁 Spring Bean 同样有三种方式：
+
+ 1. @PreDestroy
+ 2. DisposableBean.destroy()
+ 3. destroy-method
+
+正所谓，天对地，雨对风； @PostConstruct 对 @Pre
       
         <div class="readmore">
           <a href="/p/spring-bean-lifecycle-destroy.html" class="flat-box">
@@ -1366,7 +1467,9 @@
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      透彻的理解Spring Bean 生命周期是掌握Spring Bean依赖的前提，了解它也可以让我们在特定的节点做特定的事情满足业务需要
+      Spring bean 的生命周期很容易理解。实例化 bean 时，可能需要执行一些初始化以使其进入可用 （Ready for Use）状态。类似地，当不再需要 bean 并将其从容器中移除时，可能需要进行一些清理，这就是它的生命周期
+
+上一篇文章 面试还不知道BeanFactory和ApplicationContext的区别？ 中说明了接口 Beanfactory 和 Applicationcontext 可以通过 T getBean(String name, Class<T> requiredType) 方法从 Spring 容器中获取bean，区别是，前者是懒加载形式，后者是预加载的形式
       
         <div class="readmore">
           <a href="/p/spring-bean-lifecycle-creation.html" class="flat-box">
@@ -1473,7 +1576,27 @@
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      BeanFactory和ApplicationContext是Sring容器的核心，面试经常会问二者区别，本文会透彻说明
+      前言
+接口 BeanFactory 和 ApplicationContext 都是用来从容器中获取 Spring beans 的，但是，他们二者有很大不同
+
+我看到过很多问 BeanFactory 和 ApplicationContext 不同点的问题，考虑到这，我应该使用前者还是后者从 Spring 容器中获取 beans 呢？请向下看
+
+什么是 Spring Bean
+这是一个非常简单而又很复杂的问题，通常来说，Spring beans 就是被 Spring 容器所管理的 Java 对象，来看一个简单的例子
+
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+
+
+package com.zolta
       
         <div class="readmore">
           <a href="/p/difference-between-beanfactory-and-applicationcontext.html" class="flat-box">
@@ -1578,7 +1701,21 @@
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      Java基础面试中经常会被问到 equals 和 hashcode 之间的关系及他们的约束，其实这些内容不是通过死记硬背的，我们可以通过渐进明细的形式分析其背后的道理
+      前言
+上一篇文章 如何妙用 Spring 数据绑定？ ，灵魂追问 环节留下了一个有关 equals 和 hashcode 问题 。基础面试经常会碰到与之相关的问题，这不是一个复杂的问题，但很多朋友都苦于说明他们二者的关系和约束，于是写本文做单独说明，本篇文章将循序渐进 ( 通过举例，让记忆与理解更轻松 ) 说明这些让你有些苦恼的问题，Let’s go …….
+
+面试问题
+1. Java 里面有了 == 运算符，为什么还需要 equals ？
+ == 比较的是对象地址，equals 比较的是对象值
+
+先来看一看 Object 类中 equals 方法:
+
+1
+2
+3
+
+
+public boole
       
         <div class="readmore">
           <a href="/p/java-equals-hashcode.html" class="flat-box">

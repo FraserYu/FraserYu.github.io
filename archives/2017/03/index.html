@@ -484,8 +484,17 @@
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      <h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>Jrebel是非常强大的实现项目热部署的软件，当然也比较消耗电脑的性能，当如Hybris的这种启动需要一段时间的项目，对于后端开发人员来说，改动一些东西就要重启服务真的是一种折磨，浪费时间，接下来说明一下Jrebel在Hybris项目中的配置</p>
-<h3 id="配置Jrebel"><a href="#配置Jrebel" class="headerlink" title="配置Jrebel"></a>配置Jrebel</h3><p>Jrebel可以通过IntelliJ IDEA来下载安装集成好的插件，也可以单独下载Jrebel的包 （请支持正版）</p>
+      背景
+Jrebel是非常强大的实现项目热部署的软件，当然也比较消耗电脑的性能，当如Hybris的这种启动需要一段时间的项目，对于后端开发人员来说，改动一些东西就要重启服务真的是一种折磨，浪费时间，接下来说明一下Jrebel在Hybris项目中的配置
+
+配置Jrebel
+Jrebel可以通过IntelliJ IDEA来下载安装集成好的插件，也可以单独下载Jrebel的包 （请支持正版）
+
+方法一：通过IntelliJ IDEA 插件
+如下图下载安装InteliJ IDEA 插件
+
+
+安装好之后我们就可以在IntelliJ IDEA的安装目录中看到该插件，接下来在Hybris的local.prop
       
         <div class="readmore">
           <a href="/p/hybris-jrebel.html" class="flat-box">
@@ -588,7 +597,17 @@
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      <h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>现在项目多数会采用集群部署的形式，进行负载均衡，来分担客户端大量请求的压力，当客户端请求发生异常，异常log只能在某一个服务器节点上产生，当服务器节点比较少时候，我们可以根据log的关键字来单个查找，但是当服务器节点多的时候我们还这么查找真的有些浪费时间而且不准确.</p>
+      背景
+现在项目多数会采用集群部署的形式，进行负载均衡，来分担客户端大量请求的压力，当客户端请求发生异常，异常log只能在某一个服务器节点上产生，当服务器节点比较少时候，我们可以根据log的关键字来单个查找，但是当服务器节点多的时候我们还这么查找真的有些浪费时间而且不准确.
+
+解决方案
+在某一台release 服务器上执行下面脚本即可完成多个节点的log信息的查询
+check_log_in_console.sh脚本内容如下
+
+#!/bin/bash
+
+if [ $# -lt 1 ]; then
+  echo "please provide the content you want to find
       
         <div class="readmore">
           <a href="/p/linux-search-keyword-script.html" class="flat-box">
@@ -691,8 +710,32 @@
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      <h3 id="ResponseStatus"><a href="#ResponseStatus" class="headerlink" title="@ResponseStatus"></a>@ResponseStatus</h3><p>Restful webservice请求会用到@ResponseStatus 注解，该注解可用于类级别上，也可以应用在方法级别上，代表请求响应的状态，通常就是返回HttpStatus的状态码，具体可查询每个状态码代，这里简单罗列一些：</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">CONTINUE(100, "Continue"),</span><br><span class="line">SWITCHING_PROTOCOLS(101, "Switching Protocols"),</span><br><span class="line">PROCESSING(102, "Processing"),</span><br><span class="line">CHECKPOINT(103, "Checkpoint"),</span><br><span class="line">OK(200, "OK"),</span><br><span class="line">CREATED(201, "Created"),</span><br><span class="line">ACCEPTED(202, "Accepted"),</span><br><span class="line">NON_AUTHORITATIVE_INFORMATION(203, "Non-Authoritative Information"),</span><br><span class="line">NO_CONTENT(204, "No Content"),</span><br><span class="line">RESET_CONTENT(205, "<span class="keyword">Reset</span> <span class="keyword">Content</span><span class="string">"),</span></span><br><span class="line"><span class="string">PARTIAL_CONTENT(206, "</span><span class="keyword">Partial</span> <span class="keyword">Content</span><span class="string">"),</span></span><br><span class="line"><span class="string">MULTI_STATUS(207, "</span>Multi-<span class="keyword">Status</span><span class="string">"),</span></span><br><span class="line"><span class="string">ALREADY_REPORTED(208, "</span>Already Reported<span class="string">"),</span></span><br><span class="line"><span class="string">IM_USED(226, "</span>IM Used<span class="string">"),</span></span><br><span class="line"><span class="string">MULTIPLE_CHOICES(300, "</span>Multiple Choices<span class="string">"),</span></span><br><span class="line"><span class="string">MOVED_PERMANENTLY(301, "</span>Moved Permanently<span class="string">"),</span></span><br><span class="line"><span class="string">FOUND(302, "</span><span class="keyword">Found</span><span class="string">"),</span></span><br></pre></td></tr></table></figure>
+      @ResponseStatus
+Restful webservice请求会用到@ResponseStatus 注解，该注解可用于类级别上，也可以应用在方法级别上，代表请求响应的状态，通常就是返回HttpStatus的状态码，具体可查询每个状态码代，这里简单罗列一些：
+
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+
+
+CONTINUE(100, "Continue"),
+SWITCHING_PROTOCOLS(101, "Switching Protocols"),
+PROCESSING(102, "Processing"),
+CHECKPOINT(103
       
         <div class="readmore">
           <a href="/p/springmvc-response-status.html" class="flat-box">
@@ -795,8 +838,11 @@
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      <h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>在Web项目中，太多需要提交表单或者在请求URL中添加参数信息的操作，无论是前者还是后者，SpringMVC都将每个元素当做String来处理， 如果前台传入格式化为字符串的日期或这数值类型的时候就会报错（在SpringMVC中，bean中定义了Date，double等类型，如果没有做任何处理的话，日期以及double都无法绑定），我们手动来强制转型很是麻烦，SpringMVC 提供的@initbinder 就是解决这个问题</p>
-<h3 id="initbinder"><a href="#initbinder" class="headerlink" title="@initbinder"></a>@initbinder</h3><p>在我的项目中是在BaseController中增加方法initBinder，并使用注解@InitBinder标注，那么spring mvc在绑定表单之前，都会先注册这些编辑器, Spring自己提供了大量的实现类，诸如CustomDateEditor ，CustomBooleanEditor，CustomNumberEditor等许多，基本上够用, 当然我们也可以自己来写这些编辑器.</p>
+      背景
+在Web项目中，太多需要提交表单或者在请求URL中添加参数信息的操作，无论是前者还是后者，SpringMVC都将每个元素当做String来处理， 如果前台传入格式化为字符串的日期或这数值类型的时候就会报错（在SpringMVC中，bean中定义了Date，double等类型，如果没有做任何处理的话，日期以及double都无法绑定），我们手动来强制转型很是麻烦，SpringMVC 提供的@initbinder 就是解决这个问题
+
+@initbinder
+在我的项目中是在BaseController中增加方法initBinder，并使用注解@InitBinder标注，那么spring mvc
       
         <div class="readmore">
           <a href="/p/springmvc-init-binder.html" class="flat-box">
@@ -897,12 +943,16 @@
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      <ol>
-<li><p>List接口的大小可变数组的实现。实现了所有可选列表操作，并允许包括 null 在内的所有元素。</p>
-</li>
-<li><p>ArrayList继承于List接口，除继承过来的方法外，还提供一些方法来操作内部用来存储列表的数组的大小。</p>
-</li>
-<li><p>每个ArrayList实例都有一个容量。该容量是指用来存储列表元素的数组的大小。它总是至少等于列表的大小。随着向ArrayList中不断添加元素，其容量也自动增长。并未指定增长策略的细节，因为这不只是添加元素会带来分摊固定时间开销那样简单。</p>
+      1. List接口的大小可变数组的实现。实现了所有可选列表操作，并允许包括 null 在内的所有元素。
+    
+    
+ 2. ArrayList继承于List接口，除继承过来的方法外，还提供一些方法来操作内部用来存储列表的数组的大小。
+    
+    
+ 3. 每个ArrayList实例都有一个容量。该容量是指用来存储列表元素的数组的大小。它总是至少等于列表的大小。随着向ArrayList中不断添加元素，其容量也自动增长。并未指定增长策略的细节，因为这不只是添加元素会带来分摊固定时间开销那样简单。
+    
+    
+ 4. ArrayList是经常会被用到的，一般情况下，使用的时候会
       
         <div class="readmore">
           <a href="/p/java-arraylist-capacity.html" class="flat-box">
@@ -1003,8 +1053,19 @@
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>项目开发时间不算紧张，知道项目应用Jenkins 持续集成实现自动化部署，这个部署是如何实现的，向架构师取经研究之后做此记录.</p>
-<h3 id="部署架构拓扑图"><a href="#部署架构拓扑图" class="headerlink" title="部署架构拓扑图"></a>部署架构拓扑图</h3><p>以下是项目部署架构简易拓扑图，不包括Solr服务器的部署, Prod Env采用Cluster Deployment的方式.  </p>
+      前言
+项目开发时间不算紧张，知道项目应用Jenkins 持续集成实现自动化部署，这个部署是如何实现的，向架构师取经研究之后做此记录.
+
+部署架构拓扑图
+以下是项目部署架构简易拓扑图，不包括Solr服务器的部署, Prod Env采用Cluster Deployment的方式. 
+
+
+
+运维人员搭建Jenkins服务器之后，每位被授权的开发人员都可以访问Jenkins 工作主页， 当push代码之后，统一在指定时间点build (Jenkins没有采用有push代码自动build的方式 ).
+
+ 1. 开发人员Push 代码
+ 2. Build QA1, 功能测试通过之后进行下一步
+ 3. Bu
       
         <div class="readmore">
           <a href="/p/jenkins-hybris-deploy.html" class="flat-box">

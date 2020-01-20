@@ -478,7 +478,12 @@
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      Spring Boot的整个请求过程，都离不开Spring 数据绑定机制，透彻理解该机制，可以让我们的编码更加整洁清晰，同时可以应对更多特殊请求处理
+      前言
+在剖析完 「Spring Boot 统一数据格式是怎么实现的？ 」文章之后，一直觉得有必要说明一下 Spring’s Data Binding Mechanism 「Spring 数据绑定机制」。
+
+默认情况下，Spring 只知道如何转换简单数据类型。比如我们提交的 int、String 或 boolean类型的请求数据，它会自动绑定到与之对应的 Java 类型。但在实际项目中，远远不够，因为我们可能需要绑定更复杂的对象类型。
+
+我们需要了解 Spring 数据绑定机制，这样我们就可以更灵活的做全局配置或自定义配置，进而让我们的 RESTful API 更简洁，可读性也更好。本文依旧先
       
         <div class="readmore">
           <a href="/p/spring-data-binding-mechanism.html" class="flat-box">

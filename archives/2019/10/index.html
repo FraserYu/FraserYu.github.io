@@ -484,7 +484,19 @@
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      避免死锁，只需要打破Coffman所说的三个条件即可
+      写在前面
+上一篇文章共享资源那么多，如何用一把锁保护多个资源？ 文章我们谈到了银行转账经典案例，其中有两个问题:
+
+ 1. 单纯的用 synchronized 方法起不到保护作用(不能保护 target)
+ 2. 用 Account.class 锁方案，锁的粒度又过大，导致涉及到账户的所有操作(取款，转账，修改密码等)都会变成串行操作
+
+如何解决这两个问题呢？咱们先换好衣服穿越回到过去寻找一下钱庄，一起透过现象看本质，dengdeng deng…….
+
+
+
+来到钱庄，告诉柜员你要给铁蛋儿转 100 铜钱，这时柜员转身在墙上寻找你和铁蛋儿的账本，此时柜员可能面临三种情况:
+
+ 1. 理想状态: 
       
         <div class="readmore">
           <a href="/p/java-concurrency-dead-lock.html" class="flat-box">
@@ -589,7 +601,14 @@
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      Spring Boot 自定义starter 全面教程，模仿官方标准构建属于自己的starter
+      写在前面
+我们每次构建一个 Spring 应用程序时，我们都不希望从头开始实现具有「横切关注点」的内容；相反，我们希望一次性实现这些功能，并根据需要将它们包含到任何我们要构建的应用程序中
+
+横切关注点
+ 横切关注点: 指的是一些具有横越多个模块的行为 (来自维基百科的介绍)
+说白了就是多个项目或模块都可以用到的内容，比如一个 SDK
+
+在Spring Boot中，用于表示提供这种横切关注点的模块的术语是 starter，通过依赖 starter 可以轻松使用其包含的一些功能特性，无论你的工作中是否会构建自己的 starter，你都要具有构建 「starter」的思想，本文将结合 Spring 
       
         <div class="readmore">
           <a href="/p/spring-boot-starter-custom.html" class="flat-box">
@@ -694,7 +713,26 @@
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      通过图形了解Maven Optional传递性背后的道理
+      写在前面
+本来想写一篇「如何自定义Spring Boot Starter」，但是为了更好理解 Starter 的一些设计理念和其中的关键点，所以提前将一些细节内容单独提取出来讲解说明
+
+在 Maven pom.xml 中，你经常会看到依赖项中有类似下面的代码:
+
+1
+2
+3
+4
+5
+6
+7
+
+
+<dependency>
+  <groupId>sample.ProjectA</groupId>
+  <artifactId>Project-A</artifactId>
+  <version>1.0</version>
+  <scope>compile</scope>
+  <optional>tru
       
         <div class="readmore">
           <a href="/p/maven-dependency-optional-transitive.html" class="flat-box">
@@ -797,7 +835,29 @@
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      解决Java并发问题，单纯依靠synchronized并不能解决问题，你的锁能是否能保护到你的资源是关键
+      写在前面
+上一篇文章原子性问题的宏观理解 带领大家了解了锁和资源的模型，有了这篇文章的铺垫，相信理解这一篇文章就非常轻松了
+
+当我们要保护单个资源并对其进行修改其实很简单，只需按照下图分三步走
+
+ 1. 创建受保护资源 R 的锁
+ 2. 加锁进入临界区
+ 3. 解锁走出临界区
+
+
+
+上图的关键是「R1 的锁保护 R1」的指向关系是否正确
+
+如果都是保护单个资源这样简单，程序猿的世界该有多美好，可惜并不是，通常我们需要保护多个资源
+
+保护多个资源
+保护多个没有关系的资源
+如果多个资源没有关系，那就是保护一个资源模型的复制，同样非常简单，且看下图:
+
+
+
+比如现实中银行取款和修改密码操作。
+银行取
       
         <div class="readmore">
           <a href="/p/java-concurrency-lock-resource.html" class="flat-box">
@@ -900,7 +960,10 @@
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      通过EasyExcel读写Excel，极大的增加了业务灵活性，同时降低了内存溢出的风险
+      写在前面
+Java 后端程序员应该会遇到读取 Excel 信息到 DB 等相关需求，脑海中可能突然间想起 Apache POI 这个技术解决方案，但是当 Excel 的数据量非常大的时候，你也许发现，POI 是将整个 Excel 的内容全部读出来放入到内存中，所以内存消耗非常严重，如果同时进行包含大数据量的 Excel 读操作，很容易造成内存溢出问题
+
+但 EasyExcel 的出现很好的解决了 POI 相关问题，原本一个 3M 的 Excel 用 POI 需要100M左右内存, 而 EasyExcel 可以将其降低到几 M，同时再大的 Excel 都不会出现内存溢出的情况，因为是逐行读取 E
       
         <div class="readmore">
           <a href="/p/easyexcel-read.html" class="flat-box">

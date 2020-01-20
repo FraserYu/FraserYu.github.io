@@ -468,7 +468,17 @@
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      
+      通过理解SSL握手过程解决客户端证书问题最近做项目，调用远程服务器突然出现如下错误：
+
+1
+
+
+PKIX path building failed: sun.security.provider.certpath.SunCertPathBuilderException: unable to find valid certification path to requested target
+
+
+很明显，客户端找不到服务器端返回的public certificate，所以我们需要拿到服务器给客户端的证书，并且存放到Keystore中，这就涉及到SSL握手（handshake）获取信任的过程。
+
+图解
       
         <div class="readmore">
           <a href="/p/pkix-certificate-import.html" class="flat-box">

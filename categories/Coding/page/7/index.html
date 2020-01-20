@@ -470,8 +470,12 @@
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      <h1 id="创建Maven-Web-Project"><a href="#创建Maven-Web-Project" class="headerlink" title="创建Maven Web Project"></a>创建Maven Web Project</h1><hr>
-<h3 id="什么是Maven"><a href="#什么是Maven" class="headerlink" title="什么是Maven"></a>什么是Maven</h3><p>在<a href="http://maven.apache.org/" target="_blank" rel="noopener">Apache Maven</a> 官网上的说明是：<em>Apache Maven is a software project management and comprehension tool. Based on the concept of a project object model (POM), Maven can manage a project’s build, reporting and documentation from a central piece of information.</em>   翻译过来的基本意思就是：<strong>Maven是基于项目对象模型(POM)，可以通过一小段描述信息来管理项目的构建，报告和文档的软件项目管理工 具。</strong></p>
+      创建Maven Web Project
+
+
+
+什么是Maven
+在Apache Maven 官网上的说明是：Apache Maven is a software project management and comprehension tool. Based on the concept of a project object model (POM), Maven can manage a project’s build, reporting and documentation from a central piece of information. 翻译过来的基本意思就是：Maven是基于项
       
         <div class="readmore">
           <a href="/p/maven-project-structure.html" class="flat-box">
@@ -572,39 +576,15 @@
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      <h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><p>长时间在某平台上写博客记录些什么，但是近期该平台陆陆续续出现一些小问题，让写博客这么愉快的事情总是充斥着各种插曲，稍稍不爽，于是乎开始准备搭建自己的的博客，通过查阅资料用了两天时间初步搭建起来，收获颇丰，所以趁热打铁记录整个过程，搭建过程参考了非常多前辈们的blog，先真诚的道一声<strong>“感谢”</strong>，文章末尾会给出相关的参考链接。可搭建博客的框架很多，参考<a href="http://www.chinaz.com/special/static-blog/index.html?qq-pf-to=pcqq.c2c" target="_blank" rel="noopener">静态博客框架对比</a>，选择你看上眼的，本文选择<a href="https://hexo.io/docs/" target="_blank" rel="noopener">Hexo</a>，为什么选择它，我只能说对比之后喜欢.</p>
-<h2 id="为什么选择github平台？"><a href="#为什么选择github平台？" class="headerlink" title="为什么选择github平台？"></a>为什么选择github平台？</h2><p>为什么选择<strong>github</strong>平台，我们通过下面的两组问题就可以得到答案了.</p>
-<blockquote>
-<p>博友们是否在编写博客的时候遇到过以下问题：</p>
-</blockquote>
-<blockquote>
-<ol>
-<li>博客平台升级维护</li>
-<li>没有网络（比博客升级和维护还惨）</li>
-<li>不够定制化</li>
-</ol>
-</blockquote>
-<hr>
-<blockquote>
-<p>github上搭建自己的博客当然是有很多好处的：</p>
-</blockquote>
-<blockquote>
-<ol>
-<li>学着用github，享受github的便利，上面有很多大牛，眼界会开阔很多</li>
-<li>顺便看看github工作原理，最好的团队协作流程</li>
-<li>自我认为开源是一种趋势，github上有良好的开源氛围与精神</li>
-<li>定制化的博客，可以按照自己的喜好来做更改</li>
-<li>即便离线我也可以按照Markdown语法来编写博客，有网络时上传即可</li>
-<li>一份使用 Markdown 格式撰写的文件应该可以直接以纯文本发布，并且看起来不会像是由许多标签或是格式指令所构成，可读性强</li>
-</ol>
-</blockquote>
-<h2 id="搭建过程"><a href="#搭建过程" class="headerlink" title="搭建过程"></a>搭建过程</h2><p>按照下面的过程逐步进行，细心理解领会，你会发现搭建过程很简单, 下文都是在Windows 环境进行搭建。</p>
-<h3 id="前期准备工作"><a href="#前期准备工作" class="headerlink" title="前期准备工作"></a>前期准备工作</h3><p>安装Hexo很简单，但是需要下面两样东东的支持：</p>
-<ul>
-<li>Node.js</li>
-<li>Git</li>
-</ul>
-<p>在Windows 环境安装真的是太简单了，基本上是无脑<strong>下一步</strong></p>
+      引言
+长时间在某平台上写博客记录些什么，但是近期该平台陆陆续续出现一些小问题，让写博客这么愉快的事情总是充斥着各种插曲，稍稍不爽，于是乎开始准备搭建自己的的博客，通过查阅资料用了两天时间初步搭建起来，收获颇丰，所以趁热打铁记录整个过程，搭建过程参考了非常多前辈们的blog，先真诚的道一声“感谢”，文章末尾会给出相关的参考链接。可搭建博客的框架很多，参考静态博客框架对比，选择你看上眼的，本文选择Hexo，为什么选择它，我只能说对比之后喜欢.
+
+为什么选择github平台？
+为什么选择github平台，我们通过下面的两组问题就可以得到答案了.
+
+博友们是否在编写博客的时候遇到过以下问题：
+
+ 1.
       
         <div class="readmore">
           <a href="/p/build-github-pages-blog.html" class="flat-box">

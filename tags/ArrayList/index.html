@@ -476,12 +476,16 @@
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      <ol>
-<li><p>List接口的大小可变数组的实现。实现了所有可选列表操作，并允许包括 null 在内的所有元素。</p>
-</li>
-<li><p>ArrayList继承于List接口，除继承过来的方法外，还提供一些方法来操作内部用来存储列表的数组的大小。</p>
-</li>
-<li><p>每个ArrayList实例都有一个容量。该容量是指用来存储列表元素的数组的大小。它总是至少等于列表的大小。随着向ArrayList中不断添加元素，其容量也自动增长。并未指定增长策略的细节，因为这不只是添加元素会带来分摊固定时间开销那样简单。</p>
+      1. List接口的大小可变数组的实现。实现了所有可选列表操作，并允许包括 null 在内的所有元素。
+    
+    
+ 2. ArrayList继承于List接口，除继承过来的方法外，还提供一些方法来操作内部用来存储列表的数组的大小。
+    
+    
+ 3. 每个ArrayList实例都有一个容量。该容量是指用来存储列表元素的数组的大小。它总是至少等于列表的大小。随着向ArrayList中不断添加元素，其容量也自动增长。并未指定增长策略的细节，因为这不只是添加元素会带来分摊固定时间开销那样简单。
+    
+    
+ 4. ArrayList是经常会被用到的，一般情况下，使用的时候会
       
         <div class="readmore">
           <a href="/p/java-arraylist-capacity.html" class="flat-box">

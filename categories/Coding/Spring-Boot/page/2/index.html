@@ -472,7 +472,22 @@
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      SpringBoot RESTful API 返回统一数据格式，这是一种非常简单的方式，透过本文，你更能了解这种简单实现方式背后的秘密
+      关于 Spring 的全局处理，我有两方面要说:
+
+ 1. 统一数据返回格式
+ 2. 统一异常处理
+    为了将两个问题说明清楚，将分两个章节分别说明，本章主要说第一点
+
+
+
+有童鞋说，我们项目都做了这种处理，就是在每个 API 都单独工具类将返回值进行封装，但这种不够优雅；我想写最少的代码完成这件事，也许有童鞋说，加几个注解就解决问题了，说的没错，但这篇文章主要是为了说明为什么加了几个注解就解决问题了，目的是希望大家知其所以然。
+
+
+
+为了更好的说明问题，本文先说明如何实现，然后再详细剖析实现原理(这很关键)
+
+为什么要做统一数据返回格式
+前后端分离是当今服务形式的主流，如何设计一个好的 
       
         <div class="readmore">
           <a href="/p/spring-boot-global-return.html" class="flat-box">
@@ -573,7 +588,12 @@
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      Shiro—小而美的安全框架，中小项目的选择，更灵活的定制
+      写在前面
+在一款应用的整个生命周期，我们都会谈及该应用的数据安全问题。用户的合法性与数据的可见性是数据安全中非常重要的一部分。但是，一方面，不同的应用对于数据的合法性和可见性要求的维度与粒度都有所区别；另一方面，以当前微服务、多服务的架构方式，如何共享Session，如何缓存认证和授权数据应对高并发访问都迫切需要我们解决。Shiro的出现让我们可以快速和简单的应对我们应用的数据安全问题
+
+Shiro介绍
+Shiro简介
+这个官网解释不抽象，所以直接用官网解释：Apache Shiro™是一个强大且易用的 Java 安全框架，可以执行身份验证、授权、加密和会话管理等。基于 Shiro 的易于理解
       
         <div class="readmore">
           <a href="/p/shiro-in-practice.html" class="flat-box">
@@ -676,7 +696,13 @@
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      灵活使用SpringBoot Conditonal相关注解，增加编程的灵活性
+      上一篇文章 你应该知道的 @ConfigurationProperties 注解的使用姿势，这一篇就够了 介绍了如何通过 @ConfigurationProperties 注解灵活读取配置属性，这篇文章将介绍如何灵活配置 Spring Bean
+
+写在前面
+当我们构建一个 Spring 应用的时候，有时我们想在满足指定条件的时候才将某个 bean 加载到应用上下文中， 在Spring 4.0 时代，我们可以通过 @Conditional 注解来实现这类操作
+
+
+我们看到 @Conditional 注解接收的参数是 extends Condition 接口的泛型类，也就是说，我们要使用 @Con
       
         <div class="readmore">
           <a href="/p/spring-boot-condition-annotation.html" class="flat-box">
@@ -779,9 +805,55 @@
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      <blockquote class="blockquote-center">改造MappingJackson2HttpMessageConverter</blockquote>
+      改造MappingJackson2HttpMessageConverter前言
+项目组提出要求，Springboot项目中，@ResquestBody标记的bean传入的字符串类型的值要去掉前后空格
 
-<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>项目组提出要求，Springboot项目中，@ResquestBody标记的bean传入的字符串类型的值要去掉前后空格</p>
+实现
+因为项目默认使用 MappingJackson2HttpMessageConverter 作为 Json转换器， 于是乎重写一些方法做文章，具体实现如下：
+
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+
       
         <div class="readmore">
           <a href="/p/spring-boot-request-body-space.html" class="flat-box">
@@ -884,12 +956,14 @@
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      <blockquote class="blockquote-center">Spring ResponseBody without null field</blockquote>
+      Spring ResponseBody without null field通常Restful返回的Json格式数据，里面包含很多为空值null的字段，我们没必要将这些字段返回给前端，应该给出更多的有效字段，所以我们需要在Converter Message的时候将这些null值字段给过滤掉
 
-<blockquote>
-<p>通常Restful返回的Json格式数据，里面包含很多为空值null的字段，我们没必要将这些字段返回给前端，应该给出更多的有效字段，所以我们需要在Converter Message的时候将这些null值字段给过滤掉</p>
-</blockquote>
-<h4 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h4><p>添加 <strong>@JsonInclude(JsonInclude.Include.NON_NULL)</strong> 注解<br>该方法很简单，但是我们有太多的返回类型，一一添加也是很大的工作量，所以我们需要在转换的源头进行控制</p>
+方法一
+添加 @JsonInclude(JsonInclude.Include.NON_NULL) 注解
+该方法很简单，但是我们有太多的返回类型，一一添加也是很大的工作量，所以我们需要在转换的源头进行控制
+
+方法二
+实现 WebMvcConfigurer 接口，添加 @EnableWebMvc 和 @Co
       
         <div class="readmore">
           <a href="/p/spring-boot-json-return-non-null.html" class="flat-box">
@@ -994,8 +1068,32 @@
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      <h3 id="ResponseStatus"><a href="#ResponseStatus" class="headerlink" title="@ResponseStatus"></a>@ResponseStatus</h3><p>Restful webservice请求会用到@ResponseStatus 注解，该注解可用于类级别上，也可以应用在方法级别上，代表请求响应的状态，通常就是返回HttpStatus的状态码，具体可查询每个状态码代，这里简单罗列一些：</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">CONTINUE(100, "Continue"),</span><br><span class="line">SWITCHING_PROTOCOLS(101, "Switching Protocols"),</span><br><span class="line">PROCESSING(102, "Processing"),</span><br><span class="line">CHECKPOINT(103, "Checkpoint"),</span><br><span class="line">OK(200, "OK"),</span><br><span class="line">CREATED(201, "Created"),</span><br><span class="line">ACCEPTED(202, "Accepted"),</span><br><span class="line">NON_AUTHORITATIVE_INFORMATION(203, "Non-Authoritative Information"),</span><br><span class="line">NO_CONTENT(204, "No Content"),</span><br><span class="line">RESET_CONTENT(205, "<span class="keyword">Reset</span> <span class="keyword">Content</span><span class="string">"),</span></span><br><span class="line"><span class="string">PARTIAL_CONTENT(206, "</span><span class="keyword">Partial</span> <span class="keyword">Content</span><span class="string">"),</span></span><br><span class="line"><span class="string">MULTI_STATUS(207, "</span>Multi-<span class="keyword">Status</span><span class="string">"),</span></span><br><span class="line"><span class="string">ALREADY_REPORTED(208, "</span>Already Reported<span class="string">"),</span></span><br><span class="line"><span class="string">IM_USED(226, "</span>IM Used<span class="string">"),</span></span><br><span class="line"><span class="string">MULTIPLE_CHOICES(300, "</span>Multiple Choices<span class="string">"),</span></span><br><span class="line"><span class="string">MOVED_PERMANENTLY(301, "</span>Moved Permanently<span class="string">"),</span></span><br><span class="line"><span class="string">FOUND(302, "</span><span class="keyword">Found</span><span class="string">"),</span></span><br></pre></td></tr></table></figure>
+      @ResponseStatus
+Restful webservice请求会用到@ResponseStatus 注解，该注解可用于类级别上，也可以应用在方法级别上，代表请求响应的状态，通常就是返回HttpStatus的状态码，具体可查询每个状态码代，这里简单罗列一些：
+
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+
+
+CONTINUE(100, "Continue"),
+SWITCHING_PROTOCOLS(101, "Switching Protocols"),
+PROCESSING(102, "Processing"),
+CHECKPOINT(103
       
         <div class="readmore">
           <a href="/p/springmvc-response-status.html" class="flat-box">
@@ -1098,8 +1196,11 @@
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      <h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>在Web项目中，太多需要提交表单或者在请求URL中添加参数信息的操作，无论是前者还是后者，SpringMVC都将每个元素当做String来处理， 如果前台传入格式化为字符串的日期或这数值类型的时候就会报错（在SpringMVC中，bean中定义了Date，double等类型，如果没有做任何处理的话，日期以及double都无法绑定），我们手动来强制转型很是麻烦，SpringMVC 提供的@initbinder 就是解决这个问题</p>
-<h3 id="initbinder"><a href="#initbinder" class="headerlink" title="@initbinder"></a>@initbinder</h3><p>在我的项目中是在BaseController中增加方法initBinder，并使用注解@InitBinder标注，那么spring mvc在绑定表单之前，都会先注册这些编辑器, Spring自己提供了大量的实现类，诸如CustomDateEditor ，CustomBooleanEditor，CustomNumberEditor等许多，基本上够用, 当然我们也可以自己来写这些编辑器.</p>
+      背景
+在Web项目中，太多需要提交表单或者在请求URL中添加参数信息的操作，无论是前者还是后者，SpringMVC都将每个元素当做String来处理， 如果前台传入格式化为字符串的日期或这数值类型的时候就会报错（在SpringMVC中，bean中定义了Date，double等类型，如果没有做任何处理的话，日期以及double都无法绑定），我们手动来强制转型很是麻烦，SpringMVC 提供的@initbinder 就是解决这个问题
+
+@initbinder
+在我的项目中是在BaseController中增加方法initBinder，并使用注解@InitBinder标注，那么spring mvc
       
         <div class="readmore">
           <a href="/p/springmvc-init-binder.html" class="flat-box">
@@ -1202,12 +1303,14 @@
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      <h1 id="SpringMVC之RequestMapping注解"><a href="#SpringMVC之RequestMapping注解" class="headerlink" title="SpringMVC之RequestMapping注解"></a>SpringMVC之RequestMapping注解</h1><hr>
-<h3 id="什么是RequestMapping注解"><a href="#什么是RequestMapping注解" class="headerlink" title="什么是RequestMapping注解"></a>什么是RequestMapping注解</h3><p>在SpringMVC的API中我们发现对@interface RequestMapping 有如下的定义：</p>
-<blockquote>
-<p>*Annotation for mapping web requests onto specific handler classes and/or handler methods. Provides a consistent style between Servlet and Portlet environments, with the semantics adapting to the concrete environment. *</p>
-</blockquote>
-<p>翻译过来的意思就是通过在在类和方法上的限制来匹配request</p>
+      SpringMVC之RequestMapping注解
+
+
+
+什么是RequestMapping注解
+在SpringMVC的API中我们发现对@interface RequestMapping 有如下的定义：
+
+*Annotation for mapping web requests onto specific handler classes and/or handler methods. Provides a consistent style between Servlet and Portlet environments, with the semantics adapting to the
       
         <div class="readmore">
           <a href="/p/springmvc-requestmapping-annotation.html" class="flat-box">

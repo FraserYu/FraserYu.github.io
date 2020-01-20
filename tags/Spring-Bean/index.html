@@ -484,7 +484,35 @@
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      我们经常会碰到在Spring Boot启动阶段执行一些代码片段需求，Spring 为我们提供了至少五种方式，比如：MyCommandLineRunner，ApplicationRunner， ApplicationListener， PostConstruct， afterPropertiesSet，但是他们之间还是有很大区别的，本文将带你透彻理解他们的区别，在实战中选择最适合你的那一个
+      前言
+有时候我们需要在应用启动时执行一些代码片段，这些片段可能是仅仅是为了记录 log，也可能是在启动时检查与安装证书 ，诸如上述业务要求我们可能会经常碰到
+
+Spring Boot 提供了至少 5 种方式用于在应用启动时执行代码。我们应该如何选择？本文将会逐步解释与分析这几种不同方式
+
+CommandLineRunner
+CommandLineRunner 是一个接口，通过实现它，我们可以在 Spring 应用成功启动之后 执行一些代码片段
+
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+
+
+@Slf4j
+@Component
+@Order(2)
+public cl
       
         <div class="readmore">
           <a href="/p/spring-boot-execute-on-startup.html" class="flat-box">
@@ -591,7 +619,17 @@
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      Spring 源码中大量应用Aware，通过本文你将透彻理解 Spring Aware背后的道理，以及如何应用它
+      通过如下前序两篇文章:
+
+ 1. Spring Bean 生命周期之缘起
+ 2. Spring Bean 生命周期之缘尽
+    我们了解了 Spring Bean 的生命周期核心内容，bean 是如何被初始化变为 Ready for Use 的状态，当资源被回收时又是如何被 destroy 的，但 Spring Bean Life Cycle图并未被全部点亮，这篇文章将点亮剩余内容，同时说说你常见的 XxxxAware 接口
+
+为什么要说 Spring Bean 生命周期又说 Aware 呢？下来点亮剩下内容你也许就明白了：
+
+
+
+ 1. 在 Spring Bean Ready for Us
       
         <div class="readmore">
           <a href="/p/spring-aware.html" class="flat-box">
@@ -698,7 +736,21 @@
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      透彻的理解Spring Bean 生命周期是掌握Spring Bean依赖的前提，了解它也可以让我们在特定的节点做特定的事情满足业务需要
+      上一篇文章 Spring Bean 生命周期之缘起 说明了我是谁？ 和 我从哪里来? 的两大哲学问题，今天我们要讨论一下终极哲学我要到哪里去？
+
+ 初始化 Spring Bean 有三种方式：
+
+ 1. @PostConstruct
+ 2. InitializingBean.afterPropertiesSet()
+ 3. init-method
+
+销毁 Spring Bean 同样有三种方式：
+
+ 1. @PreDestroy
+ 2. DisposableBean.destroy()
+ 3. destroy-method
+
+正所谓，天对地，雨对风； @PostConstruct 对 @Pre
       
         <div class="readmore">
           <a href="/p/spring-bean-lifecycle-destroy.html" class="flat-box">
@@ -805,7 +857,9 @@
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      透彻的理解Spring Bean 生命周期是掌握Spring Bean依赖的前提，了解它也可以让我们在特定的节点做特定的事情满足业务需要
+      Spring bean 的生命周期很容易理解。实例化 bean 时，可能需要执行一些初始化以使其进入可用 （Ready for Use）状态。类似地，当不再需要 bean 并将其从容器中移除时，可能需要进行一些清理，这就是它的生命周期
+
+上一篇文章 面试还不知道BeanFactory和ApplicationContext的区别？ 中说明了接口 Beanfactory 和 Applicationcontext 可以通过 T getBean(String name, Class<T> requiredType) 方法从 Spring 容器中获取bean，区别是，前者是懒加载形式，后者是预加载的形式
       
         <div class="readmore">
           <a href="/p/spring-bean-lifecycle-creation.html" class="flat-box">

@@ -480,7 +480,26 @@
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      通过图形了解Maven Optional传递性背后的道理
+      写在前面
+本来想写一篇「如何自定义Spring Boot Starter」，但是为了更好理解 Starter 的一些设计理念和其中的关键点，所以提前将一些细节内容单独提取出来讲解说明
+
+在 Maven pom.xml 中，你经常会看到依赖项中有类似下面的代码:
+
+1
+2
+3
+4
+5
+6
+7
+
+
+<dependency>
+  <groupId>sample.ProjectA</groupId>
+  <artifactId>Project-A</artifactId>
+  <version>1.0</version>
+  <scope>compile</scope>
+  <optional>tru
       
         <div class="readmore">
           <a href="/p/maven-dependency-optional-transitive.html" class="flat-box">
@@ -581,8 +600,12 @@
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      <h1 id="创建Maven-Web-Project"><a href="#创建Maven-Web-Project" class="headerlink" title="创建Maven Web Project"></a>创建Maven Web Project</h1><hr>
-<h3 id="什么是Maven"><a href="#什么是Maven" class="headerlink" title="什么是Maven"></a>什么是Maven</h3><p>在<a href="http://maven.apache.org/" target="_blank" rel="noopener">Apache Maven</a> 官网上的说明是：<em>Apache Maven is a software project management and comprehension tool. Based on the concept of a project object model (POM), Maven can manage a project’s build, reporting and documentation from a central piece of information.</em>   翻译过来的基本意思就是：<strong>Maven是基于项目对象模型(POM)，可以通过一小段描述信息来管理项目的构建，报告和文档的软件项目管理工 具。</strong></p>
+      创建Maven Web Project
+
+
+
+什么是Maven
+在Apache Maven 官网上的说明是：Apache Maven is a software project management and comprehension tool. Based on the concept of a project object model (POM), Maven can manage a project’s build, reporting and documentation from a central piece of information. 翻译过来的基本意思就是：Maven是基于项
       
         <div class="readmore">
           <a href="/p/maven-project-structure.html" class="flat-box">

@@ -480,7 +480,10 @@
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      透彻了解Spring是如何应用MessageConverter来转换请求和响应数据的
+      Java Web 人员经常要设计 RESTful API（如何设计好的RESTful API），通过 json 数据进行交互。那么前端传入的 json 数据如何被解析成 Java 对象作为 API入参，API 返回结果又如何将 Java 对象解析成 json 格式数据返回给前端，其实在整个数据流转过程中，HttpMessageConverter 起到了重要作用；另外在转换的过程我们可以加入哪些定制化内容？
+
+HttpMessageConverter 介绍
+org.springframework.http.converter.HttpMessageConverter 是一个策略接口，接口说明如下
       
         <div class="readmore">
           <a href="/p/spring-boot-messageconverter.html" class="flat-box">
@@ -587,7 +590,16 @@
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      微服务与前后端分离的当下，如何设计好的 RESTful API至关重要
+      现状
+现阶段的开发模式多以前后端分离形式存在，前后端开发人员需要通过大量 API 来进行数据交互，如果在交互过程中前后端人员经常遭遇如下问题：
+
+ * 前端人员不能快速理解接口字段含义及接口字段变化
+ * 后端人员想复用某些接口，但是不能快速从接口 URL 的定义中明确该接口的含义，需要进一步读代码确认
+ * URL中的英文单词使用五花八门，搜索某个接口不知道具体的关键字
+ * 请求方法动词如 POST GET 随意使用
+ * 完成当前业务接口对接，前端人员经常会询问下一步业务流程的接口定义在哪里，对接形式是什么样的
+
+以上只是前后端人员通过接口交互的一小部分问题，这些问题就好比”牙痛”，不致
       
         <div class="readmore">
           <a href="/p/restful-api-design.html" class="flat-box">

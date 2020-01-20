@@ -476,14 +476,14 @@
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      <h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>现在好多公司用GitLab作为项目管理工具，自己也会有开源项目在GitHub上，按照以往的配置全局的用户貌似在这种情形下就没有作用了（公司的项目需要用公司邮箱，自己的项目需要用自己的邮箱），此时就要做Git多账户的管理与设置。</p>
-<h3 id="Git支持的协议"><a href="#Git支持的协议" class="headerlink" title="Git支持的协议"></a>Git支持的协议</h3><p>Git主要支持四中协议： file:// , git://,  http(s)://, ssh://, 这里主要说明一下http(s)和ssh协议的区别。</p>
-<h4 id="https-和-SSH-的区别"><a href="#https-和-SSH-的区别" class="headerlink" title="https 和 SSH 的区别"></a>https 和 SSH 的区别</h4><blockquote>
-<ol>
-<li>前者可以随意克隆github上的项目，而不管是谁的；而后者则是你必须是你要克隆的项目的拥有者或管理员，且需要先添加 SSH key (这里就是添加公钥，取得管理员的信任)，否则无法克隆。</li>
-<li>https url 在push的时候是需要验证用户名和密码的，而 SSH 在push的时候，是不需要输入用户名的，如果配置SSH key的时候设置了密码，则需要输入密码的，否则直接是不需要输入密码的。</li>
-</ol>
-</blockquote>
+      背景
+现在好多公司用GitLab作为项目管理工具，自己也会有开源项目在GitHub上，按照以往的配置全局的用户貌似在这种情形下就没有作用了（公司的项目需要用公司邮箱，自己的项目需要用自己的邮箱），此时就要做Git多账户的管理与设置。
+
+Git支持的协议
+Git主要支持四中协议： file:// , git://, http(s)://, ssh://, 这里主要说明一下http(s)和ssh协议的区别。
+
+https 和 SSH 的区别
+ 1. 前者可以随意克隆github上的项目，而不管是谁的；而后者则是你必须是你要克隆的项目的拥有者或管理员，且需要先添加 SSH key (这里就是添加公钥
       
         <div class="readmore">
           <a href="/p/git-multiple-account.html" class="flat-box">
@@ -584,19 +584,24 @@
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      <h2 id="Chrome-浏览器保存网页为脱机文件"><a href="#Chrome-浏览器保存网页为脱机文件" class="headerlink" title="Chrome 浏览器保存网页为脱机文件"></a>Chrome 浏览器保存网页为脱机文件</h2><p>我们经常需要将一些网页保存为脱机文件，这样即便没有网络我们也可以正常的浏览，IE浏览器将网页另存为在选择文件类型的地方会有选择*.mht, 可是Chrome 却没有这个选项，接下来教大家如何通过Chrome来保存网页为mht文件</p>
-<ol>
-<li><p>打开浏览器输入 <strong>chrome://flags/</strong></p>
-</li>
-<li><p>通过关键字搜索<strong>save</strong> 或 <strong>另存为</strong>如下图：<br><img src="http://7xkyc7.com1.z0.glb.clouddn.com/chrome_mht.png" alt="mht"></p>
-</li>
-<li><p>点击<strong>Enable</strong>或<strong>使用</strong>，重新启动浏览器</p>
-</li>
-<li><p>鼠标右键另存为选择类型和保存路径如下图：<br><img src="http://7xkyc7.com1.z0.glb.clouddn.com/chrome_save.png" alt="save"></p>
-</li>
-<li><p>等待下载完成即可</p>
-</li>
-</ol>
+      Chrome 浏览器保存网页为脱机文件
+我们经常需要将一些网页保存为脱机文件，这样即便没有网络我们也可以正常的浏览，IE浏览器将网页另存为在选择文件类型的地方会有选择*.mht, 可是Chrome 却没有这个选项，接下来教大家如何通过Chrome来保存网页为mht文件
+
+ 1. 打开浏览器输入 chrome://flags/
+    
+    
+ 2. 通过关键字搜索save 或 另存为如下图：
+    
+    
+    
+ 3. 点击Enable或使用，重新启动浏览器
+    
+    
+ 4. 鼠标右键另存为选择类型和保存路径如下图：
+    
+    
+    
+ 5. 等待下载完成即
       
         <div class="readmore">
           <a href="/p/chrome-save-offline-file.html" class="flat-box">

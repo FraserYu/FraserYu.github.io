@@ -476,7 +476,17 @@
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      <h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>现在项目多数会采用集群部署的形式，进行负载均衡，来分担客户端大量请求的压力，当客户端请求发生异常，异常log只能在某一个服务器节点上产生，当服务器节点比较少时候，我们可以根据log的关键字来单个查找，但是当服务器节点多的时候我们还这么查找真的有些浪费时间而且不准确.</p>
+      背景
+现在项目多数会采用集群部署的形式，进行负载均衡，来分担客户端大量请求的压力，当客户端请求发生异常，异常log只能在某一个服务器节点上产生，当服务器节点比较少时候，我们可以根据log的关键字来单个查找，但是当服务器节点多的时候我们还这么查找真的有些浪费时间而且不准确.
+
+解决方案
+在某一台release 服务器上执行下面脚本即可完成多个节点的log信息的查询
+check_log_in_console.sh脚本内容如下
+
+#!/bin/bash
+
+if [ $# -lt 1 ]; then
+  echo "please provide the content you want to find
       
         <div class="readmore">
           <a href="/p/linux-search-keyword-script.html" class="flat-box">

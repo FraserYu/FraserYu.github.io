@@ -371,7 +371,12 @@
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      Spring Boot的整个请求过程，都离不开Spring 数据绑定机制，透彻理解该机制，可以让我们的编码更加整洁清晰，同时可以应对更多特殊请求处理
+      前言
+在剖析完 「Spring Boot 统一数据格式是怎么实现的？ 」文章之后，一直觉得有必要说明一下 Spring’s Data Binding Mechanism 「Spring 数据绑定机制」。
+
+默认情况下，Spring 只知道如何转换简单数据类型。比如我们提交的 int、String 或 boolean类型的请求数据，它会自动绑定到与之对应的 Java 类型。但在实际项目中，远远不够，因为我们可能需要绑定更复杂的对象类型。
+
+我们需要了解 Spring 数据绑定机制，这样我们就可以更灵活的做全局配置或自定义配置，进而让我们的 RESTful API 更简洁，可读性也更好。本文依旧先
       
         <div class="readmore">
           <a href="/p/spring-data-binding-mechanism.html" class="flat-box">
@@ -476,7 +481,18 @@
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      Lombok 是一种 Java™ 实用工具，可用来帮助开发人员消除 Java 的冗长，尤其是对于简单的 Java 对象（POJO）
+      前言
+在 Java 应用程序中存在许多重复相似的、生成之后几乎不对其做更改的代码，但是我们还不得不花费很多精力编写它们来满足 Java 的编译需求
+
+比如，在 Java 应用程序开发中，我们几乎要为所有 Bean 的成员变量添加 get() ,set() 等方法，这些相对固定但又不得不编写的代码浪费程序员很多精力，同时让类内容看着更杂乱，我们希望将有限的精力关注在更重要的地方。
+
+Lombok 已经诞生很久了，甚至在 Spring Boot Initalizr 中都已加入了 Lombok 选项，
+
+
+这里我们将 Lombok 做一下详细说明:
+
+Lombok
+官网的介绍：Project Lom
       
         <div class="readmore">
           <a href="/p/lombok-usage.html" class="flat-box">
@@ -581,7 +597,11 @@
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      面对快速升级的Java，我们应该灵活的管理多个Java版本，不再去做枯燥的Java环境变量的配置
+      近两年，Java 版本升级频繁，感觉刚刚掌握 Java8，写本文时，已听到 java14 的消息，无论是尝鲜新特性(Java12 中超级香的一个功能)，还是由于项目升级/兼容需要，我们可能都要面临管理多个 Java 版本的情
+
+另外 Oracle 自 Java11 开始，更改了用户协议，任何商用都会收费。在写本文时，得到消息「微软宣布加入 OpenJDK」，打不过就选择 OpenJDK。随便 G 一下，当个故事了解就可以
+
+配置单个 Java 环境变量本身没什么技术含量可言，但当需要管理多个 Java 版本，重复配置环境变量显然是非常枯燥的，按照传统的配置方式我们又不能灵活的切换 Java 版
       
         <div class="readmore">
           <a href="/p/multiple-java-management.html" class="flat-box">
@@ -686,7 +706,10 @@
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      透彻了解Spring是如何应用MessageConverter来转换请求和响应数据的
+      Java Web 人员经常要设计 RESTful API（如何设计好的RESTful API），通过 json 数据进行交互。那么前端传入的 json 数据如何被解析成 Java 对象作为 API入参，API 返回结果又如何将 Java 对象解析成 json 格式数据返回给前端，其实在整个数据流转过程中，HttpMessageConverter 起到了重要作用；另外在转换的过程我们可以加入哪些定制化内容？
+
+HttpMessageConverter 介绍
+org.springframework.http.converter.HttpMessageConverter 是一个策略接口，接口说明如下
       
         <div class="readmore">
           <a href="/p/spring-boot-messageconverter.html" class="flat-box">
@@ -793,7 +816,16 @@
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      Java12新特性teeing的使用，merge合并两个集合的内容，提高了编程效率
+      前言
+在 Java 12 里面有个非常好用但在官方 JEP 没有公布的功能，因为它只是 Collector 中的一个小改动，它的作用是 merge 两个 collector 的结果，这句话显得很抽象，老规矩，我们先来看个图:
+
+
+管道改造经常会用这个小东西，通常我们叫它「三通」，它的主要作用就是将 downstream1 和 downstream2 的流入合并，然后从 merger 流出
+
+有了这个形象的说明我们就进入正题吧
+
+Collectors.teeing
+上面提到的小功能就是 Collectors.teeing API, 先来看一下 JDK 关于该 API 的说明，看着觉得难受的直接忽
       
         <div class="readmore">
           <a href="/p/jdk12-collectors-teeing-api-usage.html" class="flat-box">
@@ -898,7 +930,19 @@
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      避免死锁，只需要打破Coffman所说的三个条件即可
+      写在前面
+上一篇文章共享资源那么多，如何用一把锁保护多个资源？ 文章我们谈到了银行转账经典案例，其中有两个问题:
+
+ 1. 单纯的用 synchronized 方法起不到保护作用(不能保护 target)
+ 2. 用 Account.class 锁方案，锁的粒度又过大，导致涉及到账户的所有操作(取款，转账，修改密码等)都会变成串行操作
+
+如何解决这两个问题呢？咱们先换好衣服穿越回到过去寻找一下钱庄，一起透过现象看本质，dengdeng deng…….
+
+
+
+来到钱庄，告诉柜员你要给铁蛋儿转 100 铜钱，这时柜员转身在墙上寻找你和铁蛋儿的账本，此时柜员可能面临三种情况:
+
+ 1. 理想状态: 
       
         <div class="readmore">
           <a href="/p/java-concurrency-dead-lock.html" class="flat-box">
@@ -1003,7 +1047,14 @@
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      Spring Boot 自定义starter 全面教程，模仿官方标准构建属于自己的starter
+      写在前面
+我们每次构建一个 Spring 应用程序时，我们都不希望从头开始实现具有「横切关注点」的内容；相反，我们希望一次性实现这些功能，并根据需要将它们包含到任何我们要构建的应用程序中
+
+横切关注点
+ 横切关注点: 指的是一些具有横越多个模块的行为 (来自维基百科的介绍)
+说白了就是多个项目或模块都可以用到的内容，比如一个 SDK
+
+在Spring Boot中，用于表示提供这种横切关注点的模块的术语是 starter，通过依赖 starter 可以轻松使用其包含的一些功能特性，无论你的工作中是否会构建自己的 starter，你都要具有构建 「starter」的思想，本文将结合 Spring 
       
         <div class="readmore">
           <a href="/p/spring-boot-starter-custom.html" class="flat-box">
@@ -1108,7 +1159,26 @@
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      通过图形了解Maven Optional传递性背后的道理
+      写在前面
+本来想写一篇「如何自定义Spring Boot Starter」，但是为了更好理解 Starter 的一些设计理念和其中的关键点，所以提前将一些细节内容单独提取出来讲解说明
+
+在 Maven pom.xml 中，你经常会看到依赖项中有类似下面的代码:
+
+1
+2
+3
+4
+5
+6
+7
+
+
+<dependency>
+  <groupId>sample.ProjectA</groupId>
+  <artifactId>Project-A</artifactId>
+  <version>1.0</version>
+  <scope>compile</scope>
+  <optional>tru
       
         <div class="readmore">
           <a href="/p/maven-dependency-optional-transitive.html" class="flat-box">
@@ -1211,7 +1281,29 @@
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      解决Java并发问题，单纯依靠synchronized并不能解决问题，你的锁能是否能保护到你的资源是关键
+      写在前面
+上一篇文章原子性问题的宏观理解 带领大家了解了锁和资源的模型，有了这篇文章的铺垫，相信理解这一篇文章就非常轻松了
+
+当我们要保护单个资源并对其进行修改其实很简单，只需按照下图分三步走
+
+ 1. 创建受保护资源 R 的锁
+ 2. 加锁进入临界区
+ 3. 解锁走出临界区
+
+
+
+上图的关键是「R1 的锁保护 R1」的指向关系是否正确
+
+如果都是保护单个资源这样简单，程序猿的世界该有多美好，可惜并不是，通常我们需要保护多个资源
+
+保护多个资源
+保护多个没有关系的资源
+如果多个资源没有关系，那就是保护一个资源模型的复制，同样非常简单，且看下图:
+
+
+
+比如现实中银行取款和修改密码操作。
+银行取
       
         <div class="readmore">
           <a href="/p/java-concurrency-lock-resource.html" class="flat-box">
@@ -1314,7 +1406,10 @@
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      通过EasyExcel读写Excel，极大的增加了业务灵活性，同时降低了内存溢出的风险
+      写在前面
+Java 后端程序员应该会遇到读取 Excel 信息到 DB 等相关需求，脑海中可能突然间想起 Apache POI 这个技术解决方案，但是当 Excel 的数据量非常大的时候，你也许发现，POI 是将整个 Excel 的内容全部读出来放入到内存中，所以内存消耗非常严重，如果同时进行包含大数据量的 Excel 读操作，很容易造成内存溢出问题
+
+但 EasyExcel 的出现很好的解决了 POI 相关问题，原本一个 3M 的 Excel 用 POI 需要100M左右内存, 而 EasyExcel 可以将其降低到几 M，同时再大的 Excel 都不会出现内存溢出的情况，因为是逐行读取 E
       
         <div class="readmore">
           <a href="/p/easyexcel-read.html" class="flat-box">

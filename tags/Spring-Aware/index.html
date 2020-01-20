@@ -478,7 +478,17 @@
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      Spring 源码中大量应用Aware，通过本文你将透彻理解 Spring Aware背后的道理，以及如何应用它
+      通过如下前序两篇文章:
+
+ 1. Spring Bean 生命周期之缘起
+ 2. Spring Bean 生命周期之缘尽
+    我们了解了 Spring Bean 的生命周期核心内容，bean 是如何被初始化变为 Ready for Use 的状态，当资源被回收时又是如何被 destroy 的，但 Spring Bean Life Cycle图并未被全部点亮，这篇文章将点亮剩余内容，同时说说你常见的 XxxxAware 接口
+
+为什么要说 Spring Bean 生命周期又说 Aware 呢？下来点亮剩下内容你也许就明白了：
+
+
+
+ 1. 在 Spring Bean Ready for Us
       
         <div class="readmore">
           <a href="/p/spring-aware.html" class="flat-box">

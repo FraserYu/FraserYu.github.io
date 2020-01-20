@@ -478,7 +478,16 @@
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      微服务与前后端分离的当下，如何设计好的 RESTful API至关重要
+      现状
+现阶段的开发模式多以前后端分离形式存在，前后端开发人员需要通过大量 API 来进行数据交互，如果在交互过程中前后端人员经常遭遇如下问题：
+
+ * 前端人员不能快速理解接口字段含义及接口字段变化
+ * 后端人员想复用某些接口，但是不能快速从接口 URL 的定义中明确该接口的含义，需要进一步读代码确认
+ * URL中的英文单词使用五花八门，搜索某个接口不知道具体的关键字
+ * 请求方法动词如 POST GET 随意使用
+ * 完成当前业务接口对接，前端人员经常会询问下一步业务流程的接口定义在哪里，对接形式是什么样的
+
+以上只是前后端人员通过接口交互的一小部分问题，这些问题就好比”牙痛”，不致
       
         <div class="readmore">
           <a href="/p/restful-api-design.html" class="flat-box">
@@ -581,7 +590,16 @@
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      Excel强大的办公工具，学习基本的公式增加工作效率
+      前言
+最近在做基础数据的整理，数据存放在 Word 表格中，要将大量的数据整理好并导入到数据库中着实需要费些力气，于是需要笨方法和巧方法一起用
+
+整理过程
+首先应用笨方法，将 Word 中的数据表格拷贝到 Excel 中，貌似这是必须的，由于拷贝过来的表格有合并单元格的情况，所以我们要将 Excel 中的表格标准化
+
+Excel通过公式拼接字符串换行
+我们通常都会通过Excel公式=CONCATENATE(Text1,[Text2])来拼接字符串，当我们需要拼接的字符串中需要换行时我们可以使用CHAR(10)来完成拼接换行符，请看如下例子
+
+=CONCATENATE("hello",CHAR(
       
         <div class="readmore">
           <a href="/p/excel-formula.html" class="flat-box">
