@@ -478,16 +478,7 @@
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      前言
-在 Java 12 里面有个非常好用但在官方 JEP 没有公布的功能，因为它只是 Collector 中的一个小改动，它的作用是 merge 两个 collector 的结果，这句话显得很抽象，老规矩，我们先来看个图:
-
-
-管道改造经常会用这个小东西，通常我们叫它「三通」，它的主要作用就是将 downstream1 和 downstream2 的流入合并，然后从 merger 流出
-
-有了这个形象的说明我们就进入正题吧
-
-Collectors.teeing
-上面提到的小功能就是 Collectors.teeing API, 先来看一下 JDK 关于该 API 的说明，看着觉得难受的直接忽
+      Java12新特性teeing的使用，merge合并两个集合的内容，提高了编程效率
       
         <div class="readmore">
           <a href="/p/jdk12-collectors-teeing-api-usage.html" class="flat-box">

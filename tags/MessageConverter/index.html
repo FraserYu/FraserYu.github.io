@@ -478,10 +478,7 @@
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      Java Web 人员经常要设计 RESTful API（如何设计好的RESTful API），通过 json 数据进行交互。那么前端传入的 json 数据如何被解析成 Java 对象作为 API入参，API 返回结果又如何将 Java 对象解析成 json 格式数据返回给前端，其实在整个数据流转过程中，HttpMessageConverter 起到了重要作用；另外在转换的过程我们可以加入哪些定制化内容？
-
-HttpMessageConverter 介绍
-org.springframework.http.converter.HttpMessageConverter 是一个策略接口，接口说明如下
+      透彻了解Spring是如何应用MessageConverter来转换请求和响应数据的
       
         <div class="readmore">
           <a href="/p/spring-boot-messageconverter.html" class="flat-box">

@@ -470,17 +470,7 @@
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      写在前面
- * 生活中你一定听说过——能者多劳
- * 作为 Java 程序员，你一定听过——这个功能请求慢，能加一层缓存或优化一下 SQL 吗？
- * 看过中国古代神话故事的也一定听过——天上一天，地上一年
-
-
-
-一切设计来源于生活，上一章 学并发编程，透彻理解这三个核心是关键 中有讲过，作为”资本家”，你要尽可能的榨取 CPU，内存与 IO 的剩余价值，但三者完成任务的速度相差很大，CPU > 内存 > IO分，CPU 是天，那内存就是地，内存是天，那 IO 就是地，那怎样平衡三者，提升整体速度呢？
-
- 1. CPU 增加缓存，还不止一层缓存，平衡内存的慢
- 2. CPU 能者多劳，通过分时
+      可见性，原子性和有序性是引发并发诸多问题的根源，解决并发问题，你需要充分理解它们是怎么坑你的
       
         <div class="readmore">
           <a href="/p/java-concurrency-three-questions.html" class="flat-box">
@@ -585,25 +575,7 @@
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      拦截器介绍
-Mybatis Interceptor 在 Mybatis 中被当作 Plugin(插件)，不知道为什么，但确实是在 org.apache.ibatis.plugin 包下面
-
-
-
-既然是拦截器，可以拦截哪些内容呢？试想一下…… 当程序写到持久层时，Mybatis 会 执行 指定 SQL 语句，并处理 请求参数 和 返回值。没错，Mybatis 拦截器可以帮助我们处理上述内容，请看官网的 Plugins 的片段, 内容不多
-
-1
-2
-3
-4
-5
-6
-7
-8
-
-
-// 执行
-Executor (update, query, flushStatements, commit, rollb
+      Mybatis拦截器实现数据加密与解密，全局处理需要在数据库中敏感数据
       
         <div class="readmore">
           <a href="/p/mybatis-interceptor-encrypt-decrypt.html" class="flat-box">
@@ -704,34 +676,7 @@ Executor (update, query, flushStatements, commit, rollb
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      关于 Java String，这是面试的基础，但是还有很多童鞋不能说清楚，所以本文将简单而又透彻的说明一下那个让你迷惑的 String
-
-
-
-在 Java 中，我们有两种方式创建一个字符串
-
-1
-2
-
-
-String x = "abc";
-String y = new String("abc");
-
-
-你常见也常写第一种，很少见第二种，但面试还总问这类问题，双引号和构造器两种形式创建字符串到底有什么差别呢？
-
-先来看例子
-
-例子 1
-1
-2
-3
-4
-
-
-String a = "abcd";
-String b = "abcd";
-System.out.println(a == b);  // T
+      Java String面试内容基本上都在这里
       
         <div class="readmore">
           <a href="/p/java-string-interview.html" class="flat-box">
@@ -836,19 +781,7 @@ System.out.println(a == b);  // T
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      写在前面
-上一篇文章这次走进并发的世界，请不要错过 给大家带了并发编程的开胃菜，接下来我们逐步上正餐，在吃正餐之前，我还要引用那首诗词: 「横看成岭侧成峰，远近高低各不同」，远看看轮廓，近看看细节，不断切换思维或视角来学习
-
-
-
-远看并发，并发编程可以抽象成三个核心问题: 分工、同步/协作、互斥
-
-如果你已经工作了，那么你一定听说过或者正在应用敏捷开发模式来交付日常的工作任务，我们就用你熟悉的流程来解释这三个核心问题
-
-分工
-将当前 Sprint 的 Story 拆分成「合适」大小的 Task，并且安排给「合适」的 Team Member 去完成
-
-这里面用了两个「合适」，将 Story 拆分
+      了解分工，同步与互斥，才能真正了解并发, 学习并发上来就研究SDK源码，就好比没学会走就要跑一样，结果可想而知
       
         <div class="readmore">
           <a href="/p/java-concurrency-core.html" class="flat-box">
@@ -955,12 +888,7 @@ System.out.println(a == b);  // T
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      写在前面
-Java 有进阶，其名为并发，并发知识之大，一口吃不下。那好，请您多吃几口，又没说一顿吃完，细嚼慢咽才有味. 所有 Java 书籍都将并发编程放在其高级/进阶篇章中，其重要性不言而喻，学好并发也是自身走入高级行列的必备素质之一
-
-并发/并行，进程/线程 这些概念总是显得过于抽象，因为这是与操作系统沟通用到的词汇，就像我们习惯了使用十进制算法，二进制和 16 进制就需要思维的切换；生活中，我们彼此总是不能互相理解，平静之后，我们知道要换位思考；程序的世界也一样，为了更好的理解问题，你也要站在操作系统的角度来思考问题，但当你尝试理解对方时，是违背自己认知习惯的，所以有些困难在所难免
-
-生
+      如何学习Java并发,起步阶段你需要形象化的理解
       
         <div class="readmore">
           <a href="/p/java-concurrency-metaphor.html" class="flat-box">
@@ -1065,29 +993,7 @@ Java 有进阶，其名为并发，并发知识之大，一口吃不下。那好
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      话说异常
-「欲渡黄河冰塞川，将登太行雪满天」，无论生活还是计算机世界难免发生异常，上一篇文章RESTful API 返回统一JSON数据格式 说明了统一返回的处理，这是请求一切正常的情形；这篇文章将说明如何统一处理异常，以及其背后的实现原理，老套路，先实现，后说明原理，有了上一篇文章的铺底，相信，理解这篇文章就驾轻就熟了
-
-
-
-实现
-新建业务异常
-新建 BusinessException.class 类表示业务异常，注意这是一个 Runtime 异常
-
-1
-2
-3
-4
-5
-6
-7
-8
-9
-
-
-@Data
-@AllArgsConstructor
-public final class Busine
+      SpringBoot RESTful API 统一处理异常，让你的代码更清秀，了解其背后原理，加深理解，做到知其然也要知其所以然
       
         <div class="readmore">
           <a href="/p/spring-boot-global-exception.html" class="flat-box">
@@ -1190,22 +1096,7 @@ public final class Busine
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      关于 Spring 的全局处理，我有两方面要说:
-
- 1. 统一数据返回格式
- 2. 统一异常处理
-    为了将两个问题说明清楚，将分两个章节分别说明，本章主要说第一点
-
-
-
-有童鞋说，我们项目都做了这种处理，就是在每个 API 都单独工具类将返回值进行封装，但这种不够优雅；我想写最少的代码完成这件事，也许有童鞋说，加几个注解就解决问题了，说的没错，但这篇文章主要是为了说明为什么加了几个注解就解决问题了，目的是希望大家知其所以然。
-
-
-
-为了更好的说明问题，本文先说明如何实现，然后再详细剖析实现原理(这很关键)
-
-为什么要做统一数据返回格式
-前后端分离是当今服务形式的主流，如何设计一个好的 
+      SpringBoot RESTful API 返回统一数据格式，这是一种非常简单的方式，透过本文，你更能了解这种简单实现方式背后的秘密
       
         <div class="readmore">
           <a href="/p/spring-boot-global-return.html" class="flat-box">
@@ -1306,12 +1197,7 @@ public final class Busine
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      写在前面
-在一款应用的整个生命周期，我们都会谈及该应用的数据安全问题。用户的合法性与数据的可见性是数据安全中非常重要的一部分。但是，一方面，不同的应用对于数据的合法性和可见性要求的维度与粒度都有所区别；另一方面，以当前微服务、多服务的架构方式，如何共享Session，如何缓存认证和授权数据应对高并发访问都迫切需要我们解决。Shiro的出现让我们可以快速和简单的应对我们应用的数据安全问题
-
-Shiro介绍
-Shiro简介
-这个官网解释不抽象，所以直接用官网解释：Apache Shiro™是一个强大且易用的 Java 安全框架，可以执行身份验证、授权、加密和会话管理等。基于 Shiro 的易于理解
+      Shiro—小而美的安全框架，中小项目的选择，更灵活的定制
       
         <div class="readmore">
           <a href="/p/shiro-in-practice.html" class="flat-box">
@@ -1414,13 +1300,7 @@ Shiro简介
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      上一篇文章 你应该知道的 @ConfigurationProperties 注解的使用姿势，这一篇就够了 介绍了如何通过 @ConfigurationProperties 注解灵活读取配置属性，这篇文章将介绍如何灵活配置 Spring Bean
-
-写在前面
-当我们构建一个 Spring 应用的时候，有时我们想在满足指定条件的时候才将某个 bean 加载到应用上下文中， 在Spring 4.0 时代，我们可以通过 @Conditional 注解来实现这类操作
-
-
-我们看到 @Conditional 注解接收的参数是 extends Condition 接口的泛型类，也就是说，我们要使用 @Con
+      灵活使用SpringBoot Conditonal相关注解，增加编程的灵活性
       
         <div class="readmore">
           <a href="/p/spring-boot-condition-annotation.html" class="flat-box">
@@ -1525,14 +1405,7 @@ Shiro简介
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      写在前面
-红黑树，对很多童鞋来说，是既熟悉又陌生。学校中学过，只了解大概；工作中不怎么使用，但面试又是重点。每次需要查看红黑树内容时都很难以更生动形象的方式来理解其内容。没错，本文内容就是要解决这个问题，用简单的语言，搭配静图和动图(利用大脑图形记忆方式)，让你对红黑树有更深入的了解和更清晰的记忆，希望小伙伴们再次遇到红黑树的问题不至于头大，建议读该文章姿势: 打开两个页面，一个页面看图片和内容，一个页面看公式，像玩魔方一样，多玩几次就明白了
-
-通过工具 (公众号回复「工具」—>那些可以提高效率的工具—>红黑树) 动态感受红黑树的转换过程
-
-
-
-俺家司令买完东西后，我俩经常会发生这样的一段对话
+      红黑树解决了二叉树遍历深度的问题，极大的增加了索引效率,Java8 HashMap也从链表转化到了红黑树
       
         <div class="readmore">
           <a href="/p/redblack-tree.html" class="flat-box">

@@ -476,30 +476,7 @@
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      阿里的开源Java诊断工具Arthas可以在线调整log等级
-
- 1. 查找当前类的classloader hashcode
-
-1
-
-
-sc -d com.example.demo.arthas.user.UserController | grep classLoaderHash
-
-
- 2. 用OGNL获取logger
-
-1
-
-
-ognl -c 1be6f5c3 '@com.example.demo.arthas.user.UserController@logger'
-
-
- 3. 单独设置UserController的logger level
-
-1
-
-
-ognl -c 1be6f5c3 '@c
+      Arthas动态调节日志等级/level，大大方便查看日志效率
       
         <div class="readmore">
           <a href="/p/arthas-log-level.html" class="flat-box">

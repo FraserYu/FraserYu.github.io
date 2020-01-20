@@ -369,14 +369,14 @@
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      背景
-现在好多公司用GitLab作为项目管理工具，自己也会有开源项目在GitHub上，按照以往的配置全局的用户貌似在这种情形下就没有作用了（公司的项目需要用公司邮箱，自己的项目需要用自己的邮箱），此时就要做Git多账户的管理与设置。
-
-Git支持的协议
-Git主要支持四中协议： file:// , git://, http(s)://, ssh://, 这里主要说明一下http(s)和ssh协议的区别。
-
-https 和 SSH 的区别
- 1. 前者可以随意克隆github上的项目，而不管是谁的；而后者则是你必须是你要克隆的项目的拥有者或管理员，且需要先添加 SSH key (这里就是添加公钥
+      <h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>现在好多公司用GitLab作为项目管理工具，自己也会有开源项目在GitHub上，按照以往的配置全局的用户貌似在这种情形下就没有作用了（公司的项目需要用公司邮箱，自己的项目需要用自己的邮箱），此时就要做Git多账户的管理与设置。</p>
+<h3 id="Git支持的协议"><a href="#Git支持的协议" class="headerlink" title="Git支持的协议"></a>Git支持的协议</h3><p>Git主要支持四中协议： file:// , git://,  http(s)://, ssh://, 这里主要说明一下http(s)和ssh协议的区别。</p>
+<h4 id="https-和-SSH-的区别"><a href="#https-和-SSH-的区别" class="headerlink" title="https 和 SSH 的区别"></a>https 和 SSH 的区别</h4><blockquote>
+<ol>
+<li>前者可以随意克隆github上的项目，而不管是谁的；而后者则是你必须是你要克隆的项目的拥有者或管理员，且需要先添加 SSH key (这里就是添加公钥，取得管理员的信任)，否则无法克隆。</li>
+<li>https url 在push的时候是需要验证用户名和密码的，而 SSH 在push的时候，是不需要输入用户名的，如果配置SSH key的时候设置了密码，则需要输入密码的，否则直接是不需要输入密码的。</li>
+</ol>
+</blockquote>
       
         <div class="readmore">
           <a href="/p/git-multiple-account.html" class="flat-box">
@@ -477,24 +477,19 @@ https 和 SSH 的区别
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      Chrome 浏览器保存网页为脱机文件
-我们经常需要将一些网页保存为脱机文件，这样即便没有网络我们也可以正常的浏览，IE浏览器将网页另存为在选择文件类型的地方会有选择*.mht, 可是Chrome 却没有这个选项，接下来教大家如何通过Chrome来保存网页为mht文件
-
- 1. 打开浏览器输入 chrome://flags/
-    
-    
- 2. 通过关键字搜索save 或 另存为如下图：
-    
-    
-    
- 3. 点击Enable或使用，重新启动浏览器
-    
-    
- 4. 鼠标右键另存为选择类型和保存路径如下图：
-    
-    
-    
- 5. 等待下载完成即
+      <h2 id="Chrome-浏览器保存网页为脱机文件"><a href="#Chrome-浏览器保存网页为脱机文件" class="headerlink" title="Chrome 浏览器保存网页为脱机文件"></a>Chrome 浏览器保存网页为脱机文件</h2><p>我们经常需要将一些网页保存为脱机文件，这样即便没有网络我们也可以正常的浏览，IE浏览器将网页另存为在选择文件类型的地方会有选择*.mht, 可是Chrome 却没有这个选项，接下来教大家如何通过Chrome来保存网页为mht文件</p>
+<ol>
+<li><p>打开浏览器输入 <strong>chrome://flags/</strong></p>
+</li>
+<li><p>通过关键字搜索<strong>save</strong> 或 <strong>另存为</strong>如下图：<br><img src="http://7xkyc7.com1.z0.glb.clouddn.com/chrome_mht.png" alt="mht"></p>
+</li>
+<li><p>点击<strong>Enable</strong>或<strong>使用</strong>，重新启动浏览器</p>
+</li>
+<li><p>鼠标右键另存为选择类型和保存路径如下图：<br><img src="http://7xkyc7.com1.z0.glb.clouddn.com/chrome_save.png" alt="save"></p>
+</li>
+<li><p>等待下载完成即可</p>
+</li>
+</ol>
       
         <div class="readmore">
           <a href="/p/chrome-save-offline-file.html" class="flat-box">
@@ -595,15 +590,8 @@ https 和 SSH 的区别
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      Git分支管理策略
-首先share一下Ruan老师的博客内容：Git分支管理策略 ，读过之后，理解Master、Develop、临时分支（feature、release、fixbug）的基本意思，这里写的就更加透彻了：A successful Git branching model， 项目中如果按照这种严格规范来执行版本的管理，应该是会取得成功的结果. 仔细阅读这个workflow深刻的体会：
-
-
-Git 使用实战情景说明
-为什么不罗列出来Git的命令列表，因为罗列在这貌似也很难深刻理解命令的含义，也不知道怎样去使用，所以做一些情景案例来说明git命令
-
-跟踪GitHub上开源项目
-当在Git
+      <h3 id="Git分支管理策略"><a href="#Git分支管理策略" class="headerlink" title="Git分支管理策略"></a>Git分支管理策略</h3><p>首先share一下Ruan老师的博客内容：<a href="http://www.ruanyifeng.com/blog/2012/07/git.html" target="_blank" rel="noopener">Git分支管理策略</a> ，读过之后，理解Master、Develop、临时分支（feature、release、fixbug）的基本意思，这里写的就更加透彻了：<a href="http://nvie.com/posts/a-successful-git-branching-model/" target="_blank" rel="noopener">A successful Git branching model</a>， 项目中如果按照这种严格规范来执行版本的管理，应该是会取得成功的结果.  仔细阅读这个workflow深刻的体会：<br><img src="http://7xkyc7.com1.z0.glb.clouddn.com/git_workflow.png" alt="Git Branch Model"></p>
+<h3 id="Git-使用实战情景说明"><a href="#Git-使用实战情景说明" class="headerlink" title="Git 使用实战情景说明"></a>Git 使用实战情景说明</h3><p>为什么不罗列出来Git的命令列表，因为罗列在这貌似也很难深刻理解命令的含义，也不知道怎样去使用，所以做一些情景案例来说明git命令</p>
       
         <div class="readmore">
           <a href="/p/git-workflow.html" class="flat-box">
@@ -704,22 +692,8 @@ Git 使用实战情景说明
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      郑重声明： 未经同意，不得转载
-
-微信作业反馈2016
-万能句型
-万能句型第一发[got to get]
-先附上两张图片来做一个总览，接下来逐个举例说明：
-
-
-
-万能句型前面搭配：
-
-序号搭配省略’ve或’s1I’ve可以2We’ve可以3You’ve可以4They’ve可以5He’s不可以6She’s不可以万能句型举例：
-
-
-
-序号句子翻译连读音标1I got to get going我得走了2I got to get used to it我得适应某物3I got to get used to this bed我得适应这张床4I got to get Used to the new comp
+      <p><strong>郑重声明： 未经同意，不得转载</strong></p>
+<h2 id="微信作业反馈2016"><a href="#微信作业反馈2016" class="headerlink" title="微信作业反馈2016"></a>微信作业反馈2016</h2><h3 id="万能句型"><a href="#万能句型" class="headerlink" title="万能句型"></a>万能句型</h3><h4 id="万能句型第一发-got-to-get"><a href="#万能句型第一发-got-to-get" class="headerlink" title="万能句型第一发[got to get]"></a>万能句型第一发[got to get]</h4><p>先附上两张图片来做一个总览，接下来逐个举例说明：<br><img src="http://7xkyc7.com1.z0.glb.clouddn.com/wechat_1.1.jpg" alt="第一张"><br><img src="http://7xkyc7.com1.z0.glb.clouddn.com/wechat_1.2.jpg" alt="第二张"></p>
       
         <div class="readmore">
           <a href="/p/english-common-model.html" class="flat-box">
@@ -822,14 +796,12 @@ Git 使用实战情景说明
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      SpringMVC之RequestMapping注解
-
-
-
-什么是RequestMapping注解
-在SpringMVC的API中我们发现对@interface RequestMapping 有如下的定义：
-
-*Annotation for mapping web requests onto specific handler classes and/or handler methods. Provides a consistent style between Servlet and Portlet environments, with the semantics adapting to the
+      <h1 id="SpringMVC之RequestMapping注解"><a href="#SpringMVC之RequestMapping注解" class="headerlink" title="SpringMVC之RequestMapping注解"></a>SpringMVC之RequestMapping注解</h1><hr>
+<h3 id="什么是RequestMapping注解"><a href="#什么是RequestMapping注解" class="headerlink" title="什么是RequestMapping注解"></a>什么是RequestMapping注解</h3><p>在SpringMVC的API中我们发现对@interface RequestMapping 有如下的定义：</p>
+<blockquote>
+<p>*Annotation for mapping web requests onto specific handler classes and/or handler methods. Provides a consistent style between Servlet and Portlet environments, with the semantics adapting to the concrete environment. *</p>
+</blockquote>
+<p>翻译过来的意思就是通过在在类和方法上的限制来匹配request</p>
       
         <div class="readmore">
           <a href="/p/springmvc-requestmapping-annotation.html" class="flat-box">
@@ -932,12 +904,8 @@ Git 使用实战情景说明
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      创建Maven Web Project
-
-
-
-什么是Maven
-在Apache Maven 官网上的说明是：Apache Maven is a software project management and comprehension tool. Based on the concept of a project object model (POM), Maven can manage a project’s build, reporting and documentation from a central piece of information. 翻译过来的基本意思就是：Maven是基于项
+      <h1 id="创建Maven-Web-Project"><a href="#创建Maven-Web-Project" class="headerlink" title="创建Maven Web Project"></a>创建Maven Web Project</h1><hr>
+<h3 id="什么是Maven"><a href="#什么是Maven" class="headerlink" title="什么是Maven"></a>什么是Maven</h3><p>在<a href="http://maven.apache.org/" target="_blank" rel="noopener">Apache Maven</a> 官网上的说明是：<em>Apache Maven is a software project management and comprehension tool. Based on the concept of a project object model (POM), Maven can manage a project’s build, reporting and documentation from a central piece of information.</em>   翻译过来的基本意思就是：<strong>Maven是基于项目对象模型(POM)，可以通过一小段描述信息来管理项目的构建，报告和文档的软件项目管理工 具。</strong></p>
       
         <div class="readmore">
           <a href="/p/maven-project-structure.html" class="flat-box">
@@ -1038,15 +1006,31 @@ Git 使用实战情景说明
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      连读
- 1.  You’re gonna wanna get more experiences before you apply 
-     
-     before 可以读成 /b fɔr/， you和apply之间加w的音
-     
-     
- 2.  I just wanted to have a look at her resume before you hired her 
-     
-     wanted to 读成 /wa nI tə/， nt+vowel,省t wanted=/wɑntɪd/=/wɑnɪd/, at her 读成/æ dər/ hired her 同理不发
+      <h3 id="连读"><a href="#连读" class="headerlink" title="连读"></a>连读</h3><ol>
+<li><p><strong>You’re gonna wanna get more experiences before you apply</strong>    </p>
+<blockquote>
+<p>before 可以读成 /b fɔr/， you和apply之间加w的音</p>
+</blockquote>
+</li>
+<li><p><strong>I just wanted to have a look at her resume before you hired her</strong>     </p>
+<blockquote>
+<p>wanted to 读成 /wa nI tə/， nt+vowel,省t wanted=/wɑntɪd/=/wɑnɪd/,  at her 读成/æ dər/   hired her 同理不发h的音</p>
+</blockquote>
+</li>
+<li><p>*<em>Give up or make decision because you can’t have it both ways *</em></p>
+<blockquote>
+<p>give up or 读成/gɪ vʌ pər/ , because 读成/kɔz/, 同时注意 can’t和can的读音区别</p>
+</blockquote>
+</li>
+<li><p><strong>Didn’t it <em>seem</em> kinda cold last night</strong></p>
+<blockquote>
+<p>Didn’t it /dɪ dɪn nɪ/</p>
+</blockquote>
+</li>
+<li><p><strong>And your daddy didn’t understand？</strong></p>
+<blockquote>
+<p>/ ə njər dæ di dɪ ‘ə nʌn dər sdænd?/</p>
+</blockquote>
       
         <div class="readmore">
           <a href="/p/spoken-english.html" class="flat-box">
@@ -1147,15 +1131,39 @@ Git 使用实战情景说明
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      引言
-长时间在某平台上写博客记录些什么，但是近期该平台陆陆续续出现一些小问题，让写博客这么愉快的事情总是充斥着各种插曲，稍稍不爽，于是乎开始准备搭建自己的的博客，通过查阅资料用了两天时间初步搭建起来，收获颇丰，所以趁热打铁记录整个过程，搭建过程参考了非常多前辈们的blog，先真诚的道一声“感谢”，文章末尾会给出相关的参考链接。可搭建博客的框架很多，参考静态博客框架对比，选择你看上眼的，本文选择Hexo，为什么选择它，我只能说对比之后喜欢.
-
-为什么选择github平台？
-为什么选择github平台，我们通过下面的两组问题就可以得到答案了.
-
-博友们是否在编写博客的时候遇到过以下问题：
-
- 1.
+      <h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><p>长时间在某平台上写博客记录些什么，但是近期该平台陆陆续续出现一些小问题，让写博客这么愉快的事情总是充斥着各种插曲，稍稍不爽，于是乎开始准备搭建自己的的博客，通过查阅资料用了两天时间初步搭建起来，收获颇丰，所以趁热打铁记录整个过程，搭建过程参考了非常多前辈们的blog，先真诚的道一声<strong>“感谢”</strong>，文章末尾会给出相关的参考链接。可搭建博客的框架很多，参考<a href="http://www.chinaz.com/special/static-blog/index.html?qq-pf-to=pcqq.c2c" target="_blank" rel="noopener">静态博客框架对比</a>，选择你看上眼的，本文选择<a href="https://hexo.io/docs/" target="_blank" rel="noopener">Hexo</a>，为什么选择它，我只能说对比之后喜欢.</p>
+<h2 id="为什么选择github平台？"><a href="#为什么选择github平台？" class="headerlink" title="为什么选择github平台？"></a>为什么选择github平台？</h2><p>为什么选择<strong>github</strong>平台，我们通过下面的两组问题就可以得到答案了.</p>
+<blockquote>
+<p>博友们是否在编写博客的时候遇到过以下问题：</p>
+</blockquote>
+<blockquote>
+<ol>
+<li>博客平台升级维护</li>
+<li>没有网络（比博客升级和维护还惨）</li>
+<li>不够定制化</li>
+</ol>
+</blockquote>
+<hr>
+<blockquote>
+<p>github上搭建自己的博客当然是有很多好处的：</p>
+</blockquote>
+<blockquote>
+<ol>
+<li>学着用github，享受github的便利，上面有很多大牛，眼界会开阔很多</li>
+<li>顺便看看github工作原理，最好的团队协作流程</li>
+<li>自我认为开源是一种趋势，github上有良好的开源氛围与精神</li>
+<li>定制化的博客，可以按照自己的喜好来做更改</li>
+<li>即便离线我也可以按照Markdown语法来编写博客，有网络时上传即可</li>
+<li>一份使用 Markdown 格式撰写的文件应该可以直接以纯文本发布，并且看起来不会像是由许多标签或是格式指令所构成，可读性强</li>
+</ol>
+</blockquote>
+<h2 id="搭建过程"><a href="#搭建过程" class="headerlink" title="搭建过程"></a>搭建过程</h2><p>按照下面的过程逐步进行，细心理解领会，你会发现搭建过程很简单, 下文都是在Windows 环境进行搭建。</p>
+<h3 id="前期准备工作"><a href="#前期准备工作" class="headerlink" title="前期准备工作"></a>前期准备工作</h3><p>安装Hexo很简单，但是需要下面两样东东的支持：</p>
+<ul>
+<li>Node.js</li>
+<li>Git</li>
+</ul>
+<p>在Windows 环境安装真的是太简单了，基本上是无脑<strong>下一步</strong></p>
       
         <div class="readmore">
           <a href="/p/build-github-pages-blog.html" class="flat-box">

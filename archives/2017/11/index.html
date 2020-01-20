@@ -480,21 +480,9 @@
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      容器是镜像的一个运行实例，所不同的是，它有额外的可写文件层上一篇文章Docker学习(三)——镜像介绍了Docker的镜像，
-包括 获取镜像，查看镜像信息，搜寻镜像，删除镜像，创建镜像，存储和载入镜像，上传镜像，接下来逐步拆分讲解Docker的核心内容之一——容器.
+      <blockquote class="blockquote-center">容器是镜像的一个运行实例，所不同的是，它有额外的可写文件层</blockquote>
 
-Docker的容器十分轻量级，用户可以随时创建或删除容器
-
-创建容器
-单纯创建容器
-语法: docker create [OPTIONS] IMAGE [COMMAND] [ARG…]
-
- 1. 为本地Ubuntu镜像创建容器
-    
-    1
-    
-    
-    $ docker create -it ubuntu
+<p>上一篇文章<a href="http://fraserlife.com/2017/11/06/Docker%E5%AD%A6%E4%B9%A0-%E4%B8%89-%E2%80%94%E2%80%94%E9%95%9C%E5%83%8F/#more" target="_blank" rel="noopener">Docker学习(三)——镜像</a>介绍了Docker的镜像，<br>包括 <em>获取镜像，查看镜像信息，搜寻镜像，删除镜像，创建镜像，存储和载入镜像，上传镜像</em>，接下来逐步拆分讲解Docker的核心内容之一——<strong>容器</strong>.</p>
       
         <div class="readmore">
           <a href="/p/docker-container.html" class="flat-box">
@@ -595,12 +583,12 @@ Docker的容器十分轻量级，用户可以随时创建或删除容器
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      镜像是Docker运行容器的前提上一篇文章Docker学习(二)——Docker架构讲述了Docker的基本架构，接下来逐步拆分讲解Docker的核心内容之一——镜像.
+      <blockquote class="blockquote-center">镜像是Docker运行容器的前提</blockquote>
 
-Docker 运行容器前需要本地存有对应的镜像，如果镜像不存在，Docker会尝试先从默认（Docker Hub公共注册服务器中的仓库）镜像仓库下载，用户也可以配置使用自己的仓库. 本章内容主要有：获取镜像，查看镜像信息，搜寻镜像，删除镜像，创建镜像，存储和载入镜像，上传镜像. 看着内容很多，其实熟悉Git的朋友，分分钟就可以理解上面的这些内容， 操作方式都是相通的, 话不多说，看命令说话.
-
-获取镜像
-语法: docker
+<p>上一篇文章<a href="http://fraserlife.com/2017/11/03/Docker%E5%AD%A6%E4%B9%A0-%E4%BA%8C-%E2%80%94%E2%80%94Docker%E6%9E%B6%E6%9E%84/#more" target="_blank" rel="noopener">Docker学习(二)——Docker架构</a>讲述了Docker的基本架构，接下来逐步拆分讲解Docker的核心内容之一——<strong>镜像</strong>.</p>
+<blockquote>
+<p>Docker 运行容器前需要本地存有对应的镜像，如果镜像不存在，Docker会尝试先从默认（Docker Hub公共注册服务器中的仓库）镜像仓库下载，用户也可以配置使用自己的仓库. 本章内容主要有：<em>获取镜像，查看镜像信息，搜寻镜像，删除镜像，创建镜像，存储和载入镜像，上传镜像</em>. 看着内容很多，其实熟悉Git的朋友，分分钟就可以理解上面的这些内容， 操作方式都是相通的, 话不多说，看命令说话.</p>
+</blockquote>
       
         <div class="readmore">
           <a href="/p/docker-image.html" class="flat-box">
@@ -701,13 +689,13 @@ Docker 运行容器前需要本地存有对应的镜像，如果镜像不存在�
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      像面向对象编程一样理解Docker镜像与容器上一篇文章Docker学习(一)——Docker安装讲述了在Ubuntu下安装，安装完了要了解一下Docker架构与一些名词解释，这样对Docker后续的操作会有更好的理解.
+      <blockquote class="blockquote-center">像面向对象编程一样理解Docker镜像与容器</blockquote>
 
-Docker 使用客户端-服务器 (C/S) 架构模式，使用远程API来管理和创建Docker容器, 也就是说我们通过Docker客户端来完成对镜像以及容器的一系列操作
+<p>上一篇文章<a href="http://fraserlife.com/2017/11/01/Docker%E5%AD%A6%E4%B9%A0-%E4%B8%80-%E2%80%94%E2%80%94Docker%E5%AE%89%E8%A3%85/#more" target="_blank" rel="noopener">Docker学习(一)——Docker安装</a>讲述了在Ubuntu下安装，安装完了要了解一下Docker架构与一些名词解释，这样对Docker后续的操作会有更好的理解.</p>
+<p>Docker 使用客户端-服务器 (C/S) 架构模式，使用远程API来管理和创建Docker容器, 也就是说我们通过Docker客户端来完成对镜像以及容器的一系列操作</p>
+<img itemprop="url image" src="/uploads/architecture.jpg" class="full-image" />
 
-对于上面的图片出现的一系列名词可以这样理解：
-
-名词术语解释Docker 镜像(Images)Docker 镜像是用于创建 Docker 容器的模板Docker 容器(Container)容器是独立运行的一
+<p>对于上面的图片出现的一系列名词可以这样理解：</p>
       
         <div class="readmore">
           <a href="/p/docker-architect.html" class="flat-box">
@@ -808,11 +796,18 @@ Docker 使用客户端-服务器 (C/S) 架构模式，使用远程API来管理�
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      Docker, incredible virtual machine什么是Docker
-按照惯例，介绍一些历史，说明一下来龙去脉，至少知道它是怎么来的，又为什么会来，能干什么
+      <blockquote class="blockquote-center">Docker, incredible virtual machine</blockquote>
 
- 1. Docker 是一个开源项目，诞生于 2013 年初，最初是 dotCloud 公司内部的一个业余项目。它基于 Google 公司推出的 Go 语言实现。 项目后来加入了 Linux 基金会，遵从了 Apache 2.0 协议，项目代码在 GitHub 上进行维护
- 2. Docker 自开源后受到广泛的关注和讨论，以至于 dotCloud 公司后来都改名为 Docker Inc。Redhat 已经在其 RHE
+<img itemprop="url image" src="/uploads/dockerIs.png" class="full-image" />
+
+<h3 id="什么是Docker"><a href="#什么是Docker" class="headerlink" title="什么是Docker"></a>什么是Docker</h3><p>按照惯例，介绍一些历史，说明一下来龙去脉，至少知道它是怎么来的，又为什么会来，能干什么</p>
+<blockquote>
+<ol>
+<li>Docker 是一个开源项目，诞生于 2013 年初，最初是 dotCloud 公司内部的一个业余项目。它基于 Google 公司推出的 Go 语言实现。 项目后来加入了 Linux 基金会，遵从了 Apache 2.0 协议，项目代码在 GitHub 上进行维护</li>
+<li>Docker 自开源后受到广泛的关注和讨论，以至于 dotCloud 公司后来都改名为 Docker Inc。Redhat 已经在其 RHEL6.5 中集中支持 Docker；Google 也在其 PaaS 产品中广泛应用。</li>
+<li>Docker 项目的目标是实现轻量级的操作系统虚拟化解决方案。 Docker 的基础是 Linux 容器（LXC）等技术。在 LXC 的基础上 Docker 进行了进一步的封装，让用户不需要去关心容器的管理，使得操作更为简便。用户操作 Docker 的容器就像操作一个快速轻量级的虚拟机一样简单。</li>
+</ol>
+</blockquote>
       
         <div class="readmore">
           <a href="/p/docker-install.html" class="flat-box">

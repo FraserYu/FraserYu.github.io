@@ -472,14 +472,7 @@
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      写在前面
-红黑树，对很多童鞋来说，是既熟悉又陌生。学校中学过，只了解大概；工作中不怎么使用，但面试又是重点。每次需要查看红黑树内容时都很难以更生动形象的方式来理解其内容。没错，本文内容就是要解决这个问题，用简单的语言，搭配静图和动图(利用大脑图形记忆方式)，让你对红黑树有更深入的了解和更清晰的记忆，希望小伙伴们再次遇到红黑树的问题不至于头大，建议读该文章姿势: 打开两个页面，一个页面看图片和内容，一个页面看公式，像玩魔方一样，多玩几次就明白了
-
-通过工具 (公众号回复「工具」—>那些可以提高效率的工具—>红黑树) 动态感受红黑树的转换过程
-
-
-
-俺家司令买完东西后，我俩经常会发生这样的一段对话
+      红黑树解决了二叉树遍历深度的问题，极大的增加了索引效率,Java8 HashMap也从链表转化到了红黑树
       
         <div class="readmore">
           <a href="/p/redblack-tree.html" class="flat-box">
@@ -584,16 +577,7 @@
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      现状
-现阶段的开发模式多以前后端分离形式存在，前后端开发人员需要通过大量 API 来进行数据交互，如果在交互过程中前后端人员经常遭遇如下问题：
-
- * 前端人员不能快速理解接口字段含义及接口字段变化
- * 后端人员想复用某些接口，但是不能快速从接口 URL 的定义中明确该接口的含义，需要进一步读代码确认
- * URL中的英文单词使用五花八门，搜索某个接口不知道具体的关键字
- * 请求方法动词如 POST GET 随意使用
- * 完成当前业务接口对接，前端人员经常会询问下一步业务流程的接口定义在哪里，对接形式是什么样的
-
-以上只是前后端人员通过接口交互的一小部分问题，这些问题就好比”牙痛”，不致
+      微服务与前后端分离的当下，如何设计好的 RESTful API至关重要
       
         <div class="readmore">
           <a href="/p/restful-api-design.html" class="flat-box">
@@ -696,16 +680,7 @@
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      前言
-最近在做基础数据的整理，数据存放在 Word 表格中，要将大量的数据整理好并导入到数据库中着实需要费些力气，于是需要笨方法和巧方法一起用
-
-整理过程
-首先应用笨方法，将 Word 中的数据表格拷贝到 Excel 中，貌似这是必须的，由于拷贝过来的表格有合并单元格的情况，所以我们要将 Excel 中的表格标准化
-
-Excel通过公式拼接字符串换行
-我们通常都会通过Excel公式=CONCATENATE(Text1,[Text2])来拼接字符串，当我们需要拼接的字符串中需要换行时我们可以使用CHAR(10)来完成拼接换行符，请看如下例子
-
-=CONCATENATE("hello",CHAR(
+      Excel强大的办公工具，学习基本的公式增加工作效率
       
         <div class="readmore">
           <a href="/p/excel-formula.html" class="flat-box">
@@ -808,21 +783,19 @@ Excel通过公式拼接字符串换行
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      双亲委派模型
-在介绍这个Java技术点之前，先试着思考以下几个问题：
-
- 1. 为什么我们不能定义同名的 String 的 java 文件？
-    
-    
- 2. 多线程的情况下，类的加载为什么不会出现重复加载的情况？
-    
-    
- 3. 下面代码，虚拟机是怎样初始化注册 Mysql 连接驱动(Driver)的？
-    
-    1
-    
-    
-    Connection conn= DriverManager.getConnection("jdbc:mysql://localhost:3306/mydb?characterEncoding=GBK", "root",
+      <h2 id="双亲委派模型"><a href="#双亲委派模型" class="headerlink" title="双亲委派模型"></a>双亲委派模型</h2><p>在介绍这个Java技术点之前，先试着思考以下几个问题：</p>
+<ol>
+<li><p>为什么我们不能定义同名的 <strong>String</strong> 的 java 文件？</p>
+</li>
+<li><p>多线程的情况下，类的加载为什么不会出现重复加载的情况？</p>
+</li>
+<li><p>下面代码，虚拟机是怎样初始化注册 Mysql 连接驱动(Driver)的？</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Connection conn= DriverManager.getConnection(&quot;jdbc:mysql://localhost:3306/mydb?characterEncoding=GBK&quot;, &quot;root&quot;, &quot;000000&quot;);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>热部署的原理是什么？</p>
+</li>
+</ol>
+<p>想理解以上几个问题的前提是了解类加载时机与过程, 这篇文章将会以非常详细的解读方式来回答以上几个问题</p>
       
         <div class="readmore">
           <a href="/p/java-parents-delegation-model.html" class="flat-box">
@@ -925,30 +898,7 @@ Excel通过公式拼接字符串换行
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      阿里的开源Java诊断工具Arthas可以在线调整log等级
-
- 1. 查找当前类的classloader hashcode
-
-1
-
-
-sc -d com.example.demo.arthas.user.UserController | grep classLoaderHash
-
-
- 2. 用OGNL获取logger
-
-1
-
-
-ognl -c 1be6f5c3 '@com.example.demo.arthas.user.UserController@logger'
-
-
- 3. 单独设置UserController的logger level
-
-1
-
-
-ognl -c 1be6f5c3 '@c
+      Arthas动态调节日志等级/level，大大方便查看日志效率
       
         <div class="readmore">
           <a href="/p/arthas-log-level.html" class="flat-box">
@@ -1049,55 +999,9 @@ ognl -c 1be6f5c3 '@c
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      改造MappingJackson2HttpMessageConverter前言
-项目组提出要求，Springboot项目中，@ResquestBody标记的bean传入的字符串类型的值要去掉前后空格
+      <blockquote class="blockquote-center">改造MappingJackson2HttpMessageConverter</blockquote>
 
-实现
-因为项目默认使用 MappingJackson2HttpMessageConverter 作为 Json转换器， 于是乎重写一些方法做文章，具体实现如下：
-
-1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-32
-33
-34
-35
-36
-37
-38
-39
-40
-41
-42
-
+<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>项目组提出要求，Springboot项目中，@ResquestBody标记的bean传入的字符串类型的值要去掉前后空格</p>
       
         <div class="readmore">
           <a href="/p/spring-boot-request-body-space.html" class="flat-box">
@@ -1200,8 +1104,29 @@ ognl -c 1be6f5c3 '@c
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      IO流，网络编程的基础背景
-最近在做Springboot分布式微服务项目，用到了文件上传和下载，文件上传是既有的功能，将文件或图片上传到S3服务器上，将生成的文件URL地址和截取的文件名存储到DB中，正常我们只需要给前端URL，通过浏览器就可以实现文件的下载了，但是我们在将文件上传到S3服务器之前是将文件名称进行转码的，如：文件test.docx上传到S3服务器之后的URL地址是： http://www.S3.xxx.com/files/abRsdf.docx, 这样我们下载下来的文件文件名就是 abRsdf.docx, 显然这是不符合我们要求的，下载的文件名应该是test.docx, 并且需
+      <blockquote class="blockquote-center">IO流，网络编程的基础</blockquote>
+
+<h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>最近在做Springboot分布式微服务项目，用到了文件上传和下载，文件上传是既有的功能，将文件或图片上传到S3服务器上，将生成的文件URL地址和截取的文件名存储到DB中，正常我们只需要给前端URL，通过浏览器就可以实现文件的下载了，但是我们在将文件上传到S3服务器之前是将文件名称进行转码的，如：文件test.docx上传到S3服务器之后的URL地址是： <em><a href="http://www.S3.xxx.com/files/abRsdf.docx" target="_blank" rel="noopener">http://www.S3.xxx.com/files/abRsdf.docx</a></em>, 这样我们下载下来的文件文件名就是 <em>abRsdf.docx</em>, 显然这是不符合我们要求的，下载的文件名应该是test.docx, 并且需要多个文件压缩成zip文件打包下载. 所以需要在response中做一些文章，修改文件名，以及做多文件的压缩。</p>
+<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><p>因为DB中存储了文件的URL和文件名称，大概数据形式如下：</p>
+<table>
+<thead>
+<tr>
+<th align="left">序号</th>
+<th align="left">url</th>
+<th align="left">name</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">1</td>
+<td align="left"><a href="http://www.S3.xxx.com/files/abRsdf.docx" target="_blank" rel="noopener">http://www.S3.xxx.com/files/abRsdf.docx</a></td>
+<td align="left">test.docx</td>
+</tr>
+<tr>
+<td align="left">2</td>
+<td align="left"><a href="http://www.S3.xxx.com/files/lsdTew.docx" target="_blank" rel="noopener">http://www.S3.xxx.com/files/lsdTew.docx</a></td>
+<td align="left">test1.docx</td>
+</tr>
+</tbody></table>
       
         <div class="readmore">
           <a href="/p/java-download-file-zip.html" class="flat-box">
@@ -1302,14 +1227,12 @@ ognl -c 1be6f5c3 '@c
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      Spring ResponseBody without null field通常Restful返回的Json格式数据，里面包含很多为空值null的字段，我们没必要将这些字段返回给前端，应该给出更多的有效字段，所以我们需要在Converter Message的时候将这些null值字段给过滤掉
+      <blockquote class="blockquote-center">Spring ResponseBody without null field</blockquote>
 
-方法一
-添加 @JsonInclude(JsonInclude.Include.NON_NULL) 注解
-该方法很简单，但是我们有太多的返回类型，一一添加也是很大的工作量，所以我们需要在转换的源头进行控制
-
-方法二
-实现 WebMvcConfigurer 接口，添加 @EnableWebMvc 和 @Co
+<blockquote>
+<p>通常Restful返回的Json格式数据，里面包含很多为空值null的字段，我们没必要将这些字段返回给前端，应该给出更多的有效字段，所以我们需要在Converter Message的时候将这些null值字段给过滤掉</p>
+</blockquote>
+<h4 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h4><p>添加 <strong>@JsonInclude(JsonInclude.Include.NON_NULL)</strong> 注解<br>该方法很简单，但是我们有太多的返回类型，一一添加也是很大的工作量，所以我们需要在转换的源头进行控制</p>
       
         <div class="readmore">
           <a href="/p/spring-boot-json-return-non-null.html" class="flat-box">
@@ -1412,14 +1335,7 @@ ognl -c 1be6f5c3 '@c
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      前言
-最近陆续在通过SpringBoot搭建项目，往里面逐渐添加功能，项目地址SpringBootLearning, 当总结Docker部署SpringBoot的时候，我遇到了一些问题，加以总结
-
-问题汇总
-文章主要参考Spring Boot 2.0(四)：使用 Docker 部署 Spring Boot, 因为我是已有的SpringBoot项目，不是简单的SpringBoot项目，所以使用Docker部署SpringBoot的时候遇到了一些问题，现总结如下：
-
- 1. mvn package 打包命令不能生成jar包到target目录下
-    因为Docker会用到jar包，所以在用Doc
+      <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>最近陆续在通过SpringBoot搭建项目，往里面逐渐添加功能，项目地址<a href="https://github.com/FraserYu/springbootlearning.git" target="_blank" rel="noopener">SpringBootLearning</a>, 当总结Docker部署SpringBoot的时候，我遇到了一些问题，加以总结</p>
       
         <div class="readmore">
           <a href="/p/docker-deploy-spring-boot.html" class="flat-box">
@@ -1522,21 +1438,9 @@ ognl -c 1be6f5c3 '@c
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      容器是镜像的一个运行实例，所不同的是，它有额外的可写文件层上一篇文章Docker学习(三)——镜像介绍了Docker的镜像，
-包括 获取镜像，查看镜像信息，搜寻镜像，删除镜像，创建镜像，存储和载入镜像，上传镜像，接下来逐步拆分讲解Docker的核心内容之一——容器.
+      <blockquote class="blockquote-center">容器是镜像的一个运行实例，所不同的是，它有额外的可写文件层</blockquote>
 
-Docker的容器十分轻量级，用户可以随时创建或删除容器
-
-创建容器
-单纯创建容器
-语法: docker create [OPTIONS] IMAGE [COMMAND] [ARG…]
-
- 1. 为本地Ubuntu镜像创建容器
-    
-    1
-    
-    
-    $ docker create -it ubuntu
+<p>上一篇文章<a href="http://fraserlife.com/2017/11/06/Docker%E5%AD%A6%E4%B9%A0-%E4%B8%89-%E2%80%94%E2%80%94%E9%95%9C%E5%83%8F/#more" target="_blank" rel="noopener">Docker学习(三)——镜像</a>介绍了Docker的镜像，<br>包括 <em>获取镜像，查看镜像信息，搜寻镜像，删除镜像，创建镜像，存储和载入镜像，上传镜像</em>，接下来逐步拆分讲解Docker的核心内容之一——<strong>容器</strong>.</p>
       
         <div class="readmore">
           <a href="/p/docker-container.html" class="flat-box">

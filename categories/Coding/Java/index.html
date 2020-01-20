@@ -496,21 +496,7 @@
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      前言
-上一篇文章 如何妙用 Spring 数据绑定？ ，灵魂追问 环节留下了一个有关 equals 和 hashcode 问题 。基础面试经常会碰到与之相关的问题，这不是一个复杂的问题，但很多朋友都苦于说明他们二者的关系和约束，于是写本文做单独说明，本篇文章将循序渐进 ( 通过举例，让记忆与理解更轻松 ) 说明这些让你有些苦恼的问题，Let’s go …….
-
-面试问题
-1. Java 里面有了 == 运算符，为什么还需要 equals ？
- == 比较的是对象地址，equals 比较的是对象值
-
-先来看一看 Object 类中 equals 方法:
-
-1
-2
-3
-
-
-public boole
+      Java基础面试中经常会被问到 equals 和 hashcode 之间的关系及他们的约束，其实这些内容不是通过死记硬背的，我们可以通过渐进明细的形式分析其背后的道理
       
         <div class="readmore">
           <a href="/p/java-equals-hashcode.html" class="flat-box">
@@ -615,18 +601,7 @@ public boole
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      前言
-在 Java 应用程序中存在许多重复相似的、生成之后几乎不对其做更改的代码，但是我们还不得不花费很多精力编写它们来满足 Java 的编译需求
-
-比如，在 Java 应用程序开发中，我们几乎要为所有 Bean 的成员变量添加 get() ,set() 等方法，这些相对固定但又不得不编写的代码浪费程序员很多精力，同时让类内容看着更杂乱，我们希望将有限的精力关注在更重要的地方。
-
-Lombok 已经诞生很久了，甚至在 Spring Boot Initalizr 中都已加入了 Lombok 选项，
-
-
-这里我们将 Lombok 做一下详细说明:
-
-Lombok
-官网的介绍：Project Lom
+      Lombok 是一种 Java™ 实用工具，可用来帮助开发人员消除 Java 的冗长，尤其是对于简单的 Java 对象（POJO）
       
         <div class="readmore">
           <a href="/p/lombok-usage.html" class="flat-box">
@@ -731,11 +706,7 @@ Lombok
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      近两年，Java 版本升级频繁，感觉刚刚掌握 Java8，写本文时，已听到 java14 的消息，无论是尝鲜新特性(Java12 中超级香的一个功能)，还是由于项目升级/兼容需要，我们可能都要面临管理多个 Java 版本的情
-
-另外 Oracle 自 Java11 开始，更改了用户协议，任何商用都会收费。在写本文时，得到消息「微软宣布加入 OpenJDK」，打不过就选择 OpenJDK。随便 G 一下，当个故事了解就可以
-
-配置单个 Java 环境变量本身没什么技术含量可言，但当需要管理多个 Java 版本，重复配置环境变量显然是非常枯燥的，按照传统的配置方式我们又不能灵活的切换 Java 版
+      面对快速升级的Java，我们应该灵活的管理多个Java版本，不再去做枯燥的Java环境变量的配置
       
         <div class="readmore">
           <a href="/p/multiple-java-management.html" class="flat-box">
@@ -840,16 +811,7 @@ Lombok
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      前言
-在 Java 12 里面有个非常好用但在官方 JEP 没有公布的功能，因为它只是 Collector 中的一个小改动，它的作用是 merge 两个 collector 的结果，这句话显得很抽象，老规矩，我们先来看个图:
-
-
-管道改造经常会用这个小东西，通常我们叫它「三通」，它的主要作用就是将 downstream1 和 downstream2 的流入合并，然后从 merger 流出
-
-有了这个形象的说明我们就进入正题吧
-
-Collectors.teeing
-上面提到的小功能就是 Collectors.teeing API, 先来看一下 JDK 关于该 API 的说明，看着觉得难受的直接忽
+      Java12新特性teeing的使用，merge合并两个集合的内容，提高了编程效率
       
         <div class="readmore">
           <a href="/p/jdk12-collectors-teeing-api-usage.html" class="flat-box">
@@ -954,10 +916,7 @@ Collectors.teeing
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      写在前面
-Java 后端程序员应该会遇到读取 Excel 信息到 DB 等相关需求，脑海中可能突然间想起 Apache POI 这个技术解决方案，但是当 Excel 的数据量非常大的时候，你也许发现，POI 是将整个 Excel 的内容全部读出来放入到内存中，所以内存消耗非常严重，如果同时进行包含大数据量的 Excel 读操作，很容易造成内存溢出问题
-
-但 EasyExcel 的出现很好的解决了 POI 相关问题，原本一个 3M 的 Excel 用 POI 需要100M左右内存, 而 EasyExcel 可以将其降低到几 M，同时再大的 Excel 都不会出现内存溢出的情况，因为是逐行读取 E
+      通过EasyExcel读写Excel，极大的增加了业务灵活性，同时降低了内存溢出的风险
       
         <div class="readmore">
           <a href="/p/easyexcel-read.html" class="flat-box">
@@ -1064,34 +1023,7 @@ Java 后端程序员应该会遇到读取 Excel 信息到 DB 等相关需求，�
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      关于 Java String，这是面试的基础，但是还有很多童鞋不能说清楚，所以本文将简单而又透彻的说明一下那个让你迷惑的 String
-
-
-
-在 Java 中，我们有两种方式创建一个字符串
-
-1
-2
-
-
-String x = "abc";
-String y = new String("abc");
-
-
-你常见也常写第一种，很少见第二种，但面试还总问这类问题，双引号和构造器两种形式创建字符串到底有什么差别呢？
-
-先来看例子
-
-例子 1
-1
-2
-3
-4
-
-
-String a = "abcd";
-String b = "abcd";
-System.out.println(a == b);  // T
+      Java String面试内容基本上都在这里
       
         <div class="readmore">
           <a href="/p/java-string-interview.html" class="flat-box">
@@ -1196,14 +1128,7 @@ System.out.println(a == b);  // T
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      写在前面
-红黑树，对很多童鞋来说，是既熟悉又陌生。学校中学过，只了解大概；工作中不怎么使用，但面试又是重点。每次需要查看红黑树内容时都很难以更生动形象的方式来理解其内容。没错，本文内容就是要解决这个问题，用简单的语言，搭配静图和动图(利用大脑图形记忆方式)，让你对红黑树有更深入的了解和更清晰的记忆，希望小伙伴们再次遇到红黑树的问题不至于头大，建议读该文章姿势: 打开两个页面，一个页面看图片和内容，一个页面看公式，像玩魔方一样，多玩几次就明白了
-
-通过工具 (公众号回复「工具」—>那些可以提高效率的工具—>红黑树) 动态感受红黑树的转换过程
-
-
-
-俺家司令买完东西后，我俩经常会发生这样的一段对话
+      红黑树解决了二叉树遍历深度的问题，极大的增加了索引效率,Java8 HashMap也从链表转化到了红黑树
       
         <div class="readmore">
           <a href="/p/redblack-tree.html" class="flat-box">
@@ -1308,21 +1233,19 @@ System.out.println(a == b);  // T
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      双亲委派模型
-在介绍这个Java技术点之前，先试着思考以下几个问题：
-
- 1. 为什么我们不能定义同名的 String 的 java 文件？
-    
-    
- 2. 多线程的情况下，类的加载为什么不会出现重复加载的情况？
-    
-    
- 3. 下面代码，虚拟机是怎样初始化注册 Mysql 连接驱动(Driver)的？
-    
-    1
-    
-    
-    Connection conn= DriverManager.getConnection("jdbc:mysql://localhost:3306/mydb?characterEncoding=GBK", "root",
+      <h2 id="双亲委派模型"><a href="#双亲委派模型" class="headerlink" title="双亲委派模型"></a>双亲委派模型</h2><p>在介绍这个Java技术点之前，先试着思考以下几个问题：</p>
+<ol>
+<li><p>为什么我们不能定义同名的 <strong>String</strong> 的 java 文件？</p>
+</li>
+<li><p>多线程的情况下，类的加载为什么不会出现重复加载的情况？</p>
+</li>
+<li><p>下面代码，虚拟机是怎样初始化注册 Mysql 连接驱动(Driver)的？</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Connection conn= DriverManager.getConnection(&quot;jdbc:mysql://localhost:3306/mydb?characterEncoding=GBK&quot;, &quot;root&quot;, &quot;000000&quot;);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>热部署的原理是什么？</p>
+</li>
+</ol>
+<p>想理解以上几个问题的前提是了解类加载时机与过程, 这篇文章将会以非常详细的解读方式来回答以上几个问题</p>
       
         <div class="readmore">
           <a href="/p/java-parents-delegation-model.html" class="flat-box">
@@ -1425,8 +1348,29 @@ System.out.println(a == b);  // T
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      IO流，网络编程的基础背景
-最近在做Springboot分布式微服务项目，用到了文件上传和下载，文件上传是既有的功能，将文件或图片上传到S3服务器上，将生成的文件URL地址和截取的文件名存储到DB中，正常我们只需要给前端URL，通过浏览器就可以实现文件的下载了，但是我们在将文件上传到S3服务器之前是将文件名称进行转码的，如：文件test.docx上传到S3服务器之后的URL地址是： http://www.S3.xxx.com/files/abRsdf.docx, 这样我们下载下来的文件文件名就是 abRsdf.docx, 显然这是不符合我们要求的，下载的文件名应该是test.docx, 并且需
+      <blockquote class="blockquote-center">IO流，网络编程的基础</blockquote>
+
+<h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>最近在做Springboot分布式微服务项目，用到了文件上传和下载，文件上传是既有的功能，将文件或图片上传到S3服务器上，将生成的文件URL地址和截取的文件名存储到DB中，正常我们只需要给前端URL，通过浏览器就可以实现文件的下载了，但是我们在将文件上传到S3服务器之前是将文件名称进行转码的，如：文件test.docx上传到S3服务器之后的URL地址是： <em><a href="http://www.S3.xxx.com/files/abRsdf.docx" target="_blank" rel="noopener">http://www.S3.xxx.com/files/abRsdf.docx</a></em>, 这样我们下载下来的文件文件名就是 <em>abRsdf.docx</em>, 显然这是不符合我们要求的，下载的文件名应该是test.docx, 并且需要多个文件压缩成zip文件打包下载. 所以需要在response中做一些文章，修改文件名，以及做多文件的压缩。</p>
+<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><p>因为DB中存储了文件的URL和文件名称，大概数据形式如下：</p>
+<table>
+<thead>
+<tr>
+<th align="left">序号</th>
+<th align="left">url</th>
+<th align="left">name</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">1</td>
+<td align="left"><a href="http://www.S3.xxx.com/files/abRsdf.docx" target="_blank" rel="noopener">http://www.S3.xxx.com/files/abRsdf.docx</a></td>
+<td align="left">test.docx</td>
+</tr>
+<tr>
+<td align="left">2</td>
+<td align="left"><a href="http://www.S3.xxx.com/files/lsdTew.docx" target="_blank" rel="noopener">http://www.S3.xxx.com/files/lsdTew.docx</a></td>
+<td align="left">test1.docx</td>
+</tr>
+</tbody></table>
       
         <div class="readmore">
           <a href="/p/java-download-file-zip.html" class="flat-box">
@@ -1527,66 +1471,8 @@ System.out.println(a == b);  // T
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      Java多态调用该案例
-大家先看自行测试如下程序的输出结果是什么？
-
-1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-32
-33
-34
-35
-36
-37
-38
-39
-40
-41
-42
-43
-44
-45
-46
-47
-48
-
-
-public class A {  
-    public String show(D obj) {  
-        return ("A and D");  
-    }  
-
-    public String show(A obj) {  
-  
+      <h3 id="Java多态调用该案例"><a href="#Java多态调用该案例" class="headerlink" title="Java多态调用该案例"></a>Java多态调用该案例</h3><p>大家先看自行测试如下程序的输出结果是什么？</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">A</span> </span>&#123;  </span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">show</span><span class="params">(D obj)</span> </span>&#123;  </span><br><span class="line">        <span class="keyword">return</span> (<span class="string">"A and D"</span>);  </span><br><span class="line">    &#125;  </span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">show</span><span class="params">(A obj)</span> </span>&#123;  </span><br><span class="line">        <span class="keyword">return</span> (<span class="string">"A and A"</span>);  </span><br><span class="line">    &#125;   </span><br><span class="line"></span><br><span class="line">&#125;  </span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">B</span> <span class="keyword">extends</span> <span class="title">A</span></span>&#123;  </span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">show</span><span class="params">(B obj)</span></span>&#123;  </span><br><span class="line">        <span class="keyword">return</span> (<span class="string">"B and B"</span>);  </span><br><span class="line">    &#125;  </span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">show</span><span class="params">(A obj)</span></span>&#123;  </span><br><span class="line">        <span class="keyword">return</span> (<span class="string">"B and A"</span>);  </span><br><span class="line">    &#125;   </span><br><span class="line">&#125;  </span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">C</span> <span class="keyword">extends</span> <span class="title">B</span></span>&#123;  </span><br><span class="line"></span><br><span class="line">&#125;  </span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">D</span> <span class="keyword">extends</span> <span class="title">B</span></span>&#123;  </span><br><span class="line"></span><br><span class="line">&#125;  </span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;  </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;  </span><br><span class="line">        A a1 = <span class="keyword">new</span> A();  </span><br><span class="line">        A a2 = <span class="keyword">new</span> B();  </span><br><span class="line">        B b = <span class="keyword">new</span> B();  </span><br><span class="line">        C c = <span class="keyword">new</span> C();  </span><br><span class="line">        D d = <span class="keyword">new</span> D();  </span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">"1--"</span> + a1.show(b));  </span><br><span class="line">        System.out.println(<span class="string">"2--"</span> + a1.show(c));  </span><br><span class="line">        System.out.println(<span class="string">"3--"</span> + a1.show(d));  </span><br><span class="line">        System.out.println(<span class="string">"4--"</span> + a2.show(b));  </span><br><span class="line">        System.out.println(<span class="string">"5--"</span> + a2.show(c));  </span><br><span class="line">        System.out.println(<span class="string">"6--"</span> + a2.show(d));  </span><br><span class="line">        System.out.println(<span class="string">"7--"</span> + b.show(b));  </span><br><span class="line">        System.out.println(<span class="string">"8--"</span> + b.show(c));  </span><br><span class="line">        System.out.println(<span class="string">"9--"</span> + b.show(d));        </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
         <div class="readmore">
           <a href="/p/java-polymorphism-order.html" class="flat-box">

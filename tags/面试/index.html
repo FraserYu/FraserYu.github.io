@@ -482,27 +482,7 @@
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      前言
-接口 BeanFactory 和 ApplicationContext 都是用来从容器中获取 Spring beans 的，但是，他们二者有很大不同
-
-我看到过很多问 BeanFactory 和 ApplicationContext 不同点的问题，考虑到这，我应该使用前者还是后者从 Spring 容器中获取 beans 呢？请向下看
-
-什么是 Spring Bean
-这是一个非常简单而又很复杂的问题，通常来说，Spring beans 就是被 Spring 容器所管理的 Java 对象，来看一个简单的例子
-
-1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-
-
-package com.zolta
+      BeanFactory和ApplicationContext是Sring容器的核心，面试经常会问二者区别，本文会透彻说明
       
         <div class="readmore">
           <a href="/p/difference-between-beanfactory-and-applicationcontext.html" class="flat-box">
@@ -607,21 +587,7 @@ package com.zolta
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      前言
-上一篇文章 如何妙用 Spring 数据绑定？ ，灵魂追问 环节留下了一个有关 equals 和 hashcode 问题 。基础面试经常会碰到与之相关的问题，这不是一个复杂的问题，但很多朋友都苦于说明他们二者的关系和约束，于是写本文做单独说明，本篇文章将循序渐进 ( 通过举例，让记忆与理解更轻松 ) 说明这些让你有些苦恼的问题，Let’s go …….
-
-面试问题
-1. Java 里面有了 == 运算符，为什么还需要 equals ？
- == 比较的是对象地址，equals 比较的是对象值
-
-先来看一看 Object 类中 equals 方法:
-
-1
-2
-3
-
-
-public boole
+      Java基础面试中经常会被问到 equals 和 hashcode 之间的关系及他们的约束，其实这些内容不是通过死记硬背的，我们可以通过渐进明细的形式分析其背后的道理
       
         <div class="readmore">
           <a href="/p/java-equals-hashcode.html" class="flat-box">
@@ -724,34 +690,7 @@ public boole
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      关于 Java String，这是面试的基础，但是还有很多童鞋不能说清楚，所以本文将简单而又透彻的说明一下那个让你迷惑的 String
-
-
-
-在 Java 中，我们有两种方式创建一个字符串
-
-1
-2
-
-
-String x = "abc";
-String y = new String("abc");
-
-
-你常见也常写第一种，很少见第二种，但面试还总问这类问题，双引号和构造器两种形式创建字符串到底有什么差别呢？
-
-先来看例子
-
-例子 1
-1
-2
-3
-4
-
-
-String a = "abcd";
-String b = "abcd";
-System.out.println(a == b);  // T
+      Java String面试内容基本上都在这里
       
         <div class="readmore">
           <a href="/p/java-string-interview.html" class="flat-box">

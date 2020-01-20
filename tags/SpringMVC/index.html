@@ -478,11 +478,8 @@
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      背景
-在Web项目中，太多需要提交表单或者在请求URL中添加参数信息的操作，无论是前者还是后者，SpringMVC都将每个元素当做String来处理， 如果前台传入格式化为字符串的日期或这数值类型的时候就会报错（在SpringMVC中，bean中定义了Date，double等类型，如果没有做任何处理的话，日期以及double都无法绑定），我们手动来强制转型很是麻烦，SpringMVC 提供的@initbinder 就是解决这个问题
-
-@initbinder
-在我的项目中是在BaseController中增加方法initBinder，并使用注解@InitBinder标注，那么spring mvc
+      <h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>在Web项目中，太多需要提交表单或者在请求URL中添加参数信息的操作，无论是前者还是后者，SpringMVC都将每个元素当做String来处理， 如果前台传入格式化为字符串的日期或这数值类型的时候就会报错（在SpringMVC中，bean中定义了Date，double等类型，如果没有做任何处理的话，日期以及double都无法绑定），我们手动来强制转型很是麻烦，SpringMVC 提供的@initbinder 就是解决这个问题</p>
+<h3 id="initbinder"><a href="#initbinder" class="headerlink" title="@initbinder"></a>@initbinder</h3><p>在我的项目中是在BaseController中增加方法initBinder，并使用注解@InitBinder标注，那么spring mvc在绑定表单之前，都会先注册这些编辑器, Spring自己提供了大量的实现类，诸如CustomDateEditor ，CustomBooleanEditor，CustomNumberEditor等许多，基本上够用, 当然我们也可以自己来写这些编辑器.</p>
       
         <div class="readmore">
           <a href="/p/springmvc-init-binder.html" class="flat-box">

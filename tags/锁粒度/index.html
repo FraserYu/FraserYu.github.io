@@ -478,19 +478,7 @@
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      写在前面
-上一篇文章共享资源那么多，如何用一把锁保护多个资源？ 文章我们谈到了银行转账经典案例，其中有两个问题:
-
- 1. 单纯的用 synchronized 方法起不到保护作用(不能保护 target)
- 2. 用 Account.class 锁方案，锁的粒度又过大，导致涉及到账户的所有操作(取款，转账，修改密码等)都会变成串行操作
-
-如何解决这两个问题呢？咱们先换好衣服穿越回到过去寻找一下钱庄，一起透过现象看本质，dengdeng deng…….
-
-
-
-来到钱庄，告诉柜员你要给铁蛋儿转 100 铜钱，这时柜员转身在墙上寻找你和铁蛋儿的账本，此时柜员可能面临三种情况:
-
- 1. 理想状态: 
+      避免死锁，只需要打破Coffman所说的三个条件即可
       
         <div class="readmore">
           <a href="/p/java-concurrency-dead-lock.html" class="flat-box">

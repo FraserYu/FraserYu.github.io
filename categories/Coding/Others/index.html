@@ -486,16 +486,7 @@
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      前言
-最近在做基础数据的整理，数据存放在 Word 表格中，要将大量的数据整理好并导入到数据库中着实需要费些力气，于是需要笨方法和巧方法一起用
-
-整理过程
-首先应用笨方法，将 Word 中的数据表格拷贝到 Excel 中，貌似这是必须的，由于拷贝过来的表格有合并单元格的情况，所以我们要将 Excel 中的表格标准化
-
-Excel通过公式拼接字符串换行
-我们通常都会通过Excel公式=CONCATENATE(Text1,[Text2])来拼接字符串，当我们需要拼接的字符串中需要换行时我们可以使用CHAR(10)来完成拼接换行符，请看如下例子
-
-=CONCATENATE("hello",CHAR(
+      Excel强大的办公工具，学习基本的公式增加工作效率
       
         <div class="readmore">
           <a href="/p/excel-formula.html" class="flat-box">
@@ -596,17 +587,8 @@ Excel通过公式拼接字符串换行
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      背景
-Jrebel是非常强大的实现项目热部署的软件，当然也比较消耗电脑的性能，当如Hybris的这种启动需要一段时间的项目，对于后端开发人员来说，改动一些东西就要重启服务真的是一种折磨，浪费时间，接下来说明一下Jrebel在Hybris项目中的配置
-
-配置Jrebel
-Jrebel可以通过IntelliJ IDEA来下载安装集成好的插件，也可以单独下载Jrebel的包 （请支持正版）
-
-方法一：通过IntelliJ IDEA 插件
-如下图下载安装InteliJ IDEA 插件
-
-
-安装好之后我们就可以在IntelliJ IDEA的安装目录中看到该插件，接下来在Hybris的local.prop
+      <h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>Jrebel是非常强大的实现项目热部署的软件，当然也比较消耗电脑的性能，当如Hybris的这种启动需要一段时间的项目，对于后端开发人员来说，改动一些东西就要重启服务真的是一种折磨，浪费时间，接下来说明一下Jrebel在Hybris项目中的配置</p>
+<h3 id="配置Jrebel"><a href="#配置Jrebel" class="headerlink" title="配置Jrebel"></a>配置Jrebel</h3><p>Jrebel可以通过IntelliJ IDEA来下载安装集成好的插件，也可以单独下载Jrebel的包 （请支持正版）</p>
       
         <div class="readmore">
           <a href="/p/hybris-jrebel.html" class="flat-box">
@@ -709,27 +691,8 @@ Jrebel可以通过IntelliJ IDEA来下载安装集成好的插件，也可以单�
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      现在越发的认识到巧用工具提高工作效率的重要性，接下来看一下PostMan带来的便利
-
-业务情景
-在实际工作中，当App或其他渠道来调用Java后台接口的时候，我们通常会用到PostMan这个工具来模拟调用，当需要token来作为验证的时候，当每次请求的token发生变化的时候我们同时要改变其他请求URL中的token内容，这样很麻烦，降低工作效率，PostMan的环境变量解决了这个问题
-
-配置环境变量
-
-and
-
-and
-
-and
-
-and
-
-and
-
-and
-
-
-至此设置环境变量结束，其他功能会陆续补充.
+      <p>现在越发的认识到巧用工具提高工作效率的重要性，接下来看一下PostMan带来的便利</p>
+<h3 id="业务情景"><a href="#业务情景" class="headerlink" title="业务情景"></a>业务情景</h3><p>在实际工作中，当App或其他渠道来调用Java后台接口的时候，我们通常会用到PostMan这个工具来模拟调用，当需要token来作为验证的时候，当每次请求的token发生变化的时候我们同时要改变其他请求URL中的token内容，这样很麻烦，降低工作效率，PostMan的环境变量解决了这个问题</p>
       
         <div class="readmore">
           <a href="/p/postman-advanced-usage.html" class="flat-box">
@@ -830,23 +793,11 @@ and
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      在Windows下，删除文件时报错”文件路径太长或者文件名太长”，无论是Shift+Del、进入子目录一点点删除都不可以以及使用Windows内置命令都不可以，但是我电脑中装有node，于是安装【rimraf】——是专门用于删除模块的插件
-
-官方描述：A deep deletion module for node (like rm -rf)
-
-npm install -g rimraf
-
-使用方法：
-
- 1. 进入project目录
-    
-    cd project/
-    
-    
- 2. 删除hybris目录及目录下所有文件
-    
-    rimraf hybris
-    
+      <p>在Windows下，删除文件时报错”文件路径太长或者文件名太长”，无论是Shift+Del、进入子目录一点点删除都不可以以及使用Windows内置命令都不可以，但是我电脑中装有node，于是安装<strong>【rimraf】</strong>——是专门用于删除模块的插件</p>
+<blockquote>
+<p>官方描述：A deep deletion module for node (like rm -rf)</p>
+</blockquote>
+<pre><code>npm install -g rimraf</code></pre><p>使用方法：</p>
       
         <div class="readmore">
           <a href="/p/delete-long-name-file-in-windows.html" class="flat-box">
@@ -949,24 +900,19 @@ npm install -g rimraf
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      Chrome 浏览器保存网页为脱机文件
-我们经常需要将一些网页保存为脱机文件，这样即便没有网络我们也可以正常的浏览，IE浏览器将网页另存为在选择文件类型的地方会有选择*.mht, 可是Chrome 却没有这个选项，接下来教大家如何通过Chrome来保存网页为mht文件
-
- 1. 打开浏览器输入 chrome://flags/
-    
-    
- 2. 通过关键字搜索save 或 另存为如下图：
-    
-    
-    
- 3. 点击Enable或使用，重新启动浏览器
-    
-    
- 4. 鼠标右键另存为选择类型和保存路径如下图：
-    
-    
-    
- 5. 等待下载完成即
+      <h2 id="Chrome-浏览器保存网页为脱机文件"><a href="#Chrome-浏览器保存网页为脱机文件" class="headerlink" title="Chrome 浏览器保存网页为脱机文件"></a>Chrome 浏览器保存网页为脱机文件</h2><p>我们经常需要将一些网页保存为脱机文件，这样即便没有网络我们也可以正常的浏览，IE浏览器将网页另存为在选择文件类型的地方会有选择*.mht, 可是Chrome 却没有这个选项，接下来教大家如何通过Chrome来保存网页为mht文件</p>
+<ol>
+<li><p>打开浏览器输入 <strong>chrome://flags/</strong></p>
+</li>
+<li><p>通过关键字搜索<strong>save</strong> 或 <strong>另存为</strong>如下图：<br><img src="http://7xkyc7.com1.z0.glb.clouddn.com/chrome_mht.png" alt="mht"></p>
+</li>
+<li><p>点击<strong>Enable</strong>或<strong>使用</strong>，重新启动浏览器</p>
+</li>
+<li><p>鼠标右键另存为选择类型和保存路径如下图：<br><img src="http://7xkyc7.com1.z0.glb.clouddn.com/chrome_save.png" alt="save"></p>
+</li>
+<li><p>等待下载完成即可</p>
+</li>
+</ol>
       
         <div class="readmore">
           <a href="/p/chrome-save-offline-file.html" class="flat-box">
@@ -1067,15 +1013,39 @@ npm install -g rimraf
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      引言
-长时间在某平台上写博客记录些什么，但是近期该平台陆陆续续出现一些小问题，让写博客这么愉快的事情总是充斥着各种插曲，稍稍不爽，于是乎开始准备搭建自己的的博客，通过查阅资料用了两天时间初步搭建起来，收获颇丰，所以趁热打铁记录整个过程，搭建过程参考了非常多前辈们的blog，先真诚的道一声“感谢”，文章末尾会给出相关的参考链接。可搭建博客的框架很多，参考静态博客框架对比，选择你看上眼的，本文选择Hexo，为什么选择它，我只能说对比之后喜欢.
-
-为什么选择github平台？
-为什么选择github平台，我们通过下面的两组问题就可以得到答案了.
-
-博友们是否在编写博客的时候遇到过以下问题：
-
- 1.
+      <h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><p>长时间在某平台上写博客记录些什么，但是近期该平台陆陆续续出现一些小问题，让写博客这么愉快的事情总是充斥着各种插曲，稍稍不爽，于是乎开始准备搭建自己的的博客，通过查阅资料用了两天时间初步搭建起来，收获颇丰，所以趁热打铁记录整个过程，搭建过程参考了非常多前辈们的blog，先真诚的道一声<strong>“感谢”</strong>，文章末尾会给出相关的参考链接。可搭建博客的框架很多，参考<a href="http://www.chinaz.com/special/static-blog/index.html?qq-pf-to=pcqq.c2c" target="_blank" rel="noopener">静态博客框架对比</a>，选择你看上眼的，本文选择<a href="https://hexo.io/docs/" target="_blank" rel="noopener">Hexo</a>，为什么选择它，我只能说对比之后喜欢.</p>
+<h2 id="为什么选择github平台？"><a href="#为什么选择github平台？" class="headerlink" title="为什么选择github平台？"></a>为什么选择github平台？</h2><p>为什么选择<strong>github</strong>平台，我们通过下面的两组问题就可以得到答案了.</p>
+<blockquote>
+<p>博友们是否在编写博客的时候遇到过以下问题：</p>
+</blockquote>
+<blockquote>
+<ol>
+<li>博客平台升级维护</li>
+<li>没有网络（比博客升级和维护还惨）</li>
+<li>不够定制化</li>
+</ol>
+</blockquote>
+<hr>
+<blockquote>
+<p>github上搭建自己的博客当然是有很多好处的：</p>
+</blockquote>
+<blockquote>
+<ol>
+<li>学着用github，享受github的便利，上面有很多大牛，眼界会开阔很多</li>
+<li>顺便看看github工作原理，最好的团队协作流程</li>
+<li>自我认为开源是一种趋势，github上有良好的开源氛围与精神</li>
+<li>定制化的博客，可以按照自己的喜好来做更改</li>
+<li>即便离线我也可以按照Markdown语法来编写博客，有网络时上传即可</li>
+<li>一份使用 Markdown 格式撰写的文件应该可以直接以纯文本发布，并且看起来不会像是由许多标签或是格式指令所构成，可读性强</li>
+</ol>
+</blockquote>
+<h2 id="搭建过程"><a href="#搭建过程" class="headerlink" title="搭建过程"></a>搭建过程</h2><p>按照下面的过程逐步进行，细心理解领会，你会发现搭建过程很简单, 下文都是在Windows 环境进行搭建。</p>
+<h3 id="前期准备工作"><a href="#前期准备工作" class="headerlink" title="前期准备工作"></a>前期准备工作</h3><p>安装Hexo很简单，但是需要下面两样东东的支持：</p>
+<ul>
+<li>Node.js</li>
+<li>Git</li>
+</ul>
+<p>在Windows 环境安装真的是太简单了，基本上是无脑<strong>下一步</strong></p>
       
         <div class="readmore">
           <a href="/p/build-github-pages-blog.html" class="flat-box">

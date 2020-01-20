@@ -476,25 +476,7 @@
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      拦截器介绍
-Mybatis Interceptor 在 Mybatis 中被当作 Plugin(插件)，不知道为什么，但确实是在 org.apache.ibatis.plugin 包下面
-
-
-
-既然是拦截器，可以拦截哪些内容呢？试想一下…… 当程序写到持久层时，Mybatis 会 执行 指定 SQL 语句，并处理 请求参数 和 返回值。没错，Mybatis 拦截器可以帮助我们处理上述内容，请看官网的 Plugins 的片段, 内容不多
-
-1
-2
-3
-4
-5
-6
-7
-8
-
-
-// 执行
-Executor (update, query, flushStatements, commit, rollb
+      Mybatis拦截器实现数据加密与解密，全局处理需要在数据库中敏感数据
       
         <div class="readmore">
           <a href="/p/mybatis-interceptor-encrypt-decrypt.html" class="flat-box">

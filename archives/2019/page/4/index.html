@@ -470,16 +470,7 @@
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      现状
-现阶段的开发模式多以前后端分离形式存在，前后端开发人员需要通过大量 API 来进行数据交互，如果在交互过程中前后端人员经常遭遇如下问题：
-
- * 前端人员不能快速理解接口字段含义及接口字段变化
- * 后端人员想复用某些接口，但是不能快速从接口 URL 的定义中明确该接口的含义，需要进一步读代码确认
- * URL中的英文单词使用五花八门，搜索某个接口不知道具体的关键字
- * 请求方法动词如 POST GET 随意使用
- * 完成当前业务接口对接，前端人员经常会询问下一步业务流程的接口定义在哪里，对接形式是什么样的
-
-以上只是前后端人员通过接口交互的一小部分问题，这些问题就好比”牙痛”，不致
+      微服务与前后端分离的当下，如何设计好的 RESTful API至关重要
       
         <div class="readmore">
           <a href="/p/restful-api-design.html" class="flat-box">
@@ -582,16 +573,7 @@
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      前言
-最近在做基础数据的整理，数据存放在 Word 表格中，要将大量的数据整理好并导入到数据库中着实需要费些力气，于是需要笨方法和巧方法一起用
-
-整理过程
-首先应用笨方法，将 Word 中的数据表格拷贝到 Excel 中，貌似这是必须的，由于拷贝过来的表格有合并单元格的情况，所以我们要将 Excel 中的表格标准化
-
-Excel通过公式拼接字符串换行
-我们通常都会通过Excel公式=CONCATENATE(Text1,[Text2])来拼接字符串，当我们需要拼接的字符串中需要换行时我们可以使用CHAR(10)来完成拼接换行符，请看如下例子
-
-=CONCATENATE("hello",CHAR(
+      Excel强大的办公工具，学习基本的公式增加工作效率
       
         <div class="readmore">
           <a href="/p/excel-formula.html" class="flat-box">
@@ -694,21 +676,19 @@ Excel通过公式拼接字符串换行
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      双亲委派模型
-在介绍这个Java技术点之前，先试着思考以下几个问题：
-
- 1. 为什么我们不能定义同名的 String 的 java 文件？
-    
-    
- 2. 多线程的情况下，类的加载为什么不会出现重复加载的情况？
-    
-    
- 3. 下面代码，虚拟机是怎样初始化注册 Mysql 连接驱动(Driver)的？
-    
-    1
-    
-    
-    Connection conn= DriverManager.getConnection("jdbc:mysql://localhost:3306/mydb?characterEncoding=GBK", "root",
+      <h2 id="双亲委派模型"><a href="#双亲委派模型" class="headerlink" title="双亲委派模型"></a>双亲委派模型</h2><p>在介绍这个Java技术点之前，先试着思考以下几个问题：</p>
+<ol>
+<li><p>为什么我们不能定义同名的 <strong>String</strong> 的 java 文件？</p>
+</li>
+<li><p>多线程的情况下，类的加载为什么不会出现重复加载的情况？</p>
+</li>
+<li><p>下面代码，虚拟机是怎样初始化注册 Mysql 连接驱动(Driver)的？</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Connection conn= DriverManager.getConnection(&quot;jdbc:mysql://localhost:3306/mydb?characterEncoding=GBK&quot;, &quot;root&quot;, &quot;000000&quot;);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>热部署的原理是什么？</p>
+</li>
+</ol>
+<p>想理解以上几个问题的前提是了解类加载时机与过程, 这篇文章将会以非常详细的解读方式来回答以上几个问题</p>
       
         <div class="readmore">
           <a href="/p/java-parents-delegation-model.html" class="flat-box">
@@ -803,17 +783,7 @@ Excel通过公式拼接字符串换行
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      通过理解SSL握手过程解决客户端证书问题最近做项目，调用远程服务器突然出现如下错误：
-
-1
-
-
-PKIX path building failed: sun.security.provider.certpath.SunCertPathBuilderException: unable to find valid certification path to requested target
-
-
-很明显，客户端找不到服务器端返回的public certificate，所以我们需要拿到服务器给客户端的证书，并且存放到Keystore中，这就涉及到SSL握手（handshake）获取信任的过程。
-
-图解
+      
       
         <div class="readmore">
           <a href="/p/pkix-certificate-import.html" class="flat-box">
@@ -914,30 +884,7 @@ PKIX path building failed: sun.security.provider.certpath.SunCertPathBuilderExce
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      阿里的开源Java诊断工具Arthas可以在线调整log等级
-
- 1. 查找当前类的classloader hashcode
-
-1
-
-
-sc -d com.example.demo.arthas.user.UserController | grep classLoaderHash
-
-
- 2. 用OGNL获取logger
-
-1
-
-
-ognl -c 1be6f5c3 '@com.example.demo.arthas.user.UserController@logger'
-
-
- 3. 单独设置UserController的logger level
-
-1
-
-
-ognl -c 1be6f5c3 '@c
+      Arthas动态调节日志等级/level，大大方便查看日志效率
       
         <div class="readmore">
           <a href="/p/arthas-log-level.html" class="flat-box">

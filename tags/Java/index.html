@@ -484,21 +484,7 @@
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      前言
-上一篇文章 如何妙用 Spring 数据绑定？ ，灵魂追问 环节留下了一个有关 equals 和 hashcode 问题 。基础面试经常会碰到与之相关的问题，这不是一个复杂的问题，但很多朋友都苦于说明他们二者的关系和约束，于是写本文做单独说明，本篇文章将循序渐进 ( 通过举例，让记忆与理解更轻松 ) 说明这些让你有些苦恼的问题，Let’s go …….
-
-面试问题
-1. Java 里面有了 == 运算符，为什么还需要 equals ？
- == 比较的是对象地址，equals 比较的是对象值
-
-先来看一看 Object 类中 equals 方法:
-
-1
-2
-3
-
-
-public boole
+      Java基础面试中经常会被问到 equals 和 hashcode 之间的关系及他们的约束，其实这些内容不是通过死记硬背的，我们可以通过渐进明细的形式分析其背后的道理
       
         <div class="readmore">
           <a href="/p/java-equals-hashcode.html" class="flat-box">
@@ -603,18 +589,7 @@ public boole
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      前言
-在 Java 应用程序中存在许多重复相似的、生成之后几乎不对其做更改的代码，但是我们还不得不花费很多精力编写它们来满足 Java 的编译需求
-
-比如，在 Java 应用程序开发中，我们几乎要为所有 Bean 的成员变量添加 get() ,set() 等方法，这些相对固定但又不得不编写的代码浪费程序员很多精力，同时让类内容看着更杂乱，我们希望将有限的精力关注在更重要的地方。
-
-Lombok 已经诞生很久了，甚至在 Spring Boot Initalizr 中都已加入了 Lombok 选项，
-
-
-这里我们将 Lombok 做一下详细说明:
-
-Lombok
-官网的介绍：Project Lom
+      Lombok 是一种 Java™ 实用工具，可用来帮助开发人员消除 Java 的冗长，尤其是对于简单的 Java 对象（POJO）
       
         <div class="readmore">
           <a href="/p/lombok-usage.html" class="flat-box">
@@ -719,11 +694,7 @@ Lombok
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      近两年，Java 版本升级频繁，感觉刚刚掌握 Java8，写本文时，已听到 java14 的消息，无论是尝鲜新特性(Java12 中超级香的一个功能)，还是由于项目升级/兼容需要，我们可能都要面临管理多个 Java 版本的情
-
-另外 Oracle 自 Java11 开始，更改了用户协议，任何商用都会收费。在写本文时，得到消息「微软宣布加入 OpenJDK」，打不过就选择 OpenJDK。随便 G 一下，当个故事了解就可以
-
-配置单个 Java 环境变量本身没什么技术含量可言，但当需要管理多个 Java 版本，重复配置环境变量显然是非常枯燥的，按照传统的配置方式我们又不能灵活的切换 Java 版
+      面对快速升级的Java，我们应该灵活的管理多个Java版本，不再去做枯燥的Java环境变量的配置
       
         <div class="readmore">
           <a href="/p/multiple-java-management.html" class="flat-box">
@@ -828,16 +799,7 @@ Lombok
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      前言
-在 Java 12 里面有个非常好用但在官方 JEP 没有公布的功能，因为它只是 Collector 中的一个小改动，它的作用是 merge 两个 collector 的结果，这句话显得很抽象，老规矩，我们先来看个图:
-
-
-管道改造经常会用这个小东西，通常我们叫它「三通」，它的主要作用就是将 downstream1 和 downstream2 的流入合并，然后从 merger 流出
-
-有了这个形象的说明我们就进入正题吧
-
-Collectors.teeing
-上面提到的小功能就是 Collectors.teeing API, 先来看一下 JDK 关于该 API 的说明，看着觉得难受的直接忽
+      Java12新特性teeing的使用，merge合并两个集合的内容，提高了编程效率
       
         <div class="readmore">
           <a href="/p/jdk12-collectors-teeing-api-usage.html" class="flat-box">
