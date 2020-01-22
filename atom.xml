@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://dayarch.top/"/>
-  <updated>2020-01-19T14:17:14.057Z</updated>
+  <updated>2020-01-22T02:15:16.900Z</updated>
   <id>https://dayarch.top/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>跨表更新，看到自己写的SQL像个憨憨</title>
+    <link href="https://dayarch.top//p/mysql-cross-table-update.html"/>
+    <id>https://dayarch.top//p/mysql-cross-table-update.html</id>
+    <published>2020-01-22T02:09:02.000Z</published>
+    <updated>2020-01-22T02:15:16.900Z</updated>
+    
+    <summary type="html">
+    
+      跨表查询我们经常食用，其实类似的语法也可以用到跨表更新上面，如果你有类似从一张表的数据更新到另一张表的数据需求时，了解这个知识点还是非常有用的
+    
+    </summary>
+    
+    
+      <category term="Coding" scheme="https://dayarch.top/categories/Coding/"/>
+    
+      <category term="数据库-持久层-SQL" scheme="https://dayarch.top/categories/Coding/%E6%95%B0%E6%8D%AE%E5%BA%93-%E6%8C%81%E4%B9%85%E5%B1%82-SQL/"/>
+    
+    
+      <category term="Mysql" scheme="https://dayarch.top/tags/Mysql/"/>
+    
+  </entry>
   
   <entry>
     <title>微信上线了10款默认新表情</title>
@@ -517,35 +540,6 @@
     
     
       <category term="锁" scheme="https://dayarch.top/tags/%E9%94%81/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>EasyExcel读取Excel实际应用</title>
-    <link href="https://dayarch.top//p/easyexcel-read.html"/>
-    <id>https://dayarch.top//p/easyexcel-read.html</id>
-    <published>2019-10-07T10:32:34.000Z</published>
-    <updated>2019-12-15T13:04:40.165Z</updated>
-    
-    <summary type="html">
-    
-      通过EasyExcel读写Excel，极大的增加了业务灵活性，同时降低了内存溢出的风险
-    
-    </summary>
-    
-    
-      <category term="Coding" scheme="https://dayarch.top/categories/Coding/"/>
-    
-      <category term="Java" scheme="https://dayarch.top/categories/Coding/Java/"/>
-    
-    
-      <category term="Excel" scheme="https://dayarch.top/tags/Excel/"/>
-    
-      <category term="Spring Boot" scheme="https://dayarch.top/tags/Spring-Boot/"/>
-    
-      <category term="EasyExcel" scheme="https://dayarch.top/tags/EasyExcel/"/>
-    
-      <category term="POI" scheme="https://dayarch.top/tags/POI/"/>
     
   </entry>
   

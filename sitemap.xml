@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://dayarch.top/p/mybatis-interceptor-encrypt-decrypt.html</loc>
+    
+    <lastmod>2020-01-22T02:16:08.745Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://dayarch.top/p/mysql-cross-table-update.html</loc>
+    
+    <lastmod>2020-01-22T02:15:16.900Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://dayarch.top/p/2019-summary.html</loc>
     
     <lastmod>2020-01-20T00:57:18.086Z</lastmod>
@@ -257,13 +271,6 @@
     <loc>https://dayarch.top/p/shiro-in-practice.html</loc>
     
     <lastmod>2019-11-07T06:36:52.166Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://dayarch.top/p/mybatis-interceptor-encrypt-decrypt.html</loc>
-    
-    <lastmod>2019-11-07T06:36:44.351Z</lastmod>
     
   </url>
   

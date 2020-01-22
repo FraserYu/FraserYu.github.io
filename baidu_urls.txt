@@ -1,5 +1,5 @@
+https://dayarch.top/p/mysql-cross-table-update.html
 https://dayarch.top/p/wechat-new-expression.html
 https://dayarch.top/p/2019-summary.html
 https://dayarch.top/p/how-to-use-todo-feature.html
 https://dayarch.top/p/spring-boot-execute-on-startup.html
-https://dayarch.top/p/spring-boot-configurationProperties-usage.html
