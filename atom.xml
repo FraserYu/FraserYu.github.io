@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://dayarch.top/"/>
-  <updated>2020-02-03T13:11:01.676Z</updated>
+  <updated>2020-02-05T03:48:31.038Z</updated>
   <id>https://dayarch.top/</id>
   
   <author>
@@ -17,11 +17,34 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>读《Clean Code 代码整洁之道》之感悟</title>
+    <link href="https://dayarch.top//p/book-reviews-clean-code.html"/>
+    <id>https://dayarch.top//p/book-reviews-clean-code.html</id>
+    <published>2020-02-05T03:35:46.000Z</published>
+    <updated>2020-02-05T03:48:31.038Z</updated>
+    
+    <summary type="html">
+    
+      代码质量与其整洁程度成正比。干净的代码，既在质量上较为可靠，也为后期维护，升级奠定了良好的基础。每个公司的规范不一样，但是我们写代码要有自己的态度
+    
+    </summary>
+    
+    
+      <category term="Life" scheme="https://dayarch.top/categories/Life/"/>
+    
+      <category term="读书笔记" scheme="https://dayarch.top/categories/Life/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="TODO" scheme="https://dayarch.top/tags/TODO/"/>
+    
+  </entry>
+  
+  <entry>
     <title>MySQL group_concat 函数详解</title>
     <link href="https://dayarch.top//p/mysql-group-concat-function-usage.html"/>
     <id>https://dayarch.top//p/mysql-group-concat-function-usage.html</id>
     <published>2020-02-03T13:03:27.000Z</published>
-    <updated>2020-02-03T13:11:01.676Z</updated>
+    <updated>2020-02-03T13:14:01.495Z</updated>
     
     <summary type="html">
     
@@ -181,11 +204,11 @@
       <category term="Spring-Boot" scheme="https://dayarch.top/categories/Coding/Spring-Boot/"/>
     
     
-      <category term="Spring Boot" scheme="https://dayarch.top/tags/Spring-Boot/"/>
-    
       <category term="Spring Bean" scheme="https://dayarch.top/tags/Spring-Bean/"/>
     
       <category term="生命周期" scheme="https://dayarch.top/tags/%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/"/>
+    
+      <category term="Spring Boot" scheme="https://dayarch.top/tags/Spring-Boot/"/>
     
   </entry>
   
@@ -231,11 +254,11 @@
       <category term="Spring-Boot" scheme="https://dayarch.top/categories/Coding/Spring-Boot/"/>
     
     
+      <category term="Spring Aware" scheme="https://dayarch.top/tags/Spring-Aware/"/>
+    
       <category term="Spring Bean" scheme="https://dayarch.top/tags/Spring-Bean/"/>
     
       <category term="生命周期" scheme="https://dayarch.top/tags/%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/"/>
-    
-      <category term="Spring Aware" scheme="https://dayarch.top/tags/Spring-Aware/"/>
     
   </entry>
   
@@ -258,11 +281,11 @@
       <category term="Spring-Boot" scheme="https://dayarch.top/categories/Coding/Spring-Boot/"/>
     
     
-      <category term="Spring Boot" scheme="https://dayarch.top/tags/Spring-Boot/"/>
-    
       <category term="Spring Bean" scheme="https://dayarch.top/tags/Spring-Bean/"/>
     
       <category term="生命周期" scheme="https://dayarch.top/tags/%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/"/>
+    
+      <category term="Spring Boot" scheme="https://dayarch.top/tags/Spring-Boot/"/>
     
   </entry>
   
@@ -285,11 +308,11 @@
       <category term="Spring-Boot" scheme="https://dayarch.top/categories/Coding/Spring-Boot/"/>
     
     
-      <category term="Spring Boot" scheme="https://dayarch.top/tags/Spring-Boot/"/>
-    
       <category term="Spring Bean" scheme="https://dayarch.top/tags/Spring-Bean/"/>
     
       <category term="生命周期" scheme="https://dayarch.top/tags/%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/"/>
+    
+      <category term="Spring Boot" scheme="https://dayarch.top/tags/Spring-Boot/"/>
     
   </entry>
   
@@ -517,29 +540,6 @@
       <category term="Spring Boot" scheme="https://dayarch.top/tags/Spring-Boot/"/>
     
       <category term="Starter" scheme="https://dayarch.top/tags/Starter/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Maven 依赖传递性透彻理解</title>
-    <link href="https://dayarch.top//p/maven-dependency-optional-transitive.html"/>
-    <id>https://dayarch.top//p/maven-dependency-optional-transitive.html</id>
-    <published>2019-10-11T07:36:38.000Z</published>
-    <updated>2019-11-07T06:36:38.010Z</updated>
-    
-    <summary type="html">
-    
-      通过图形了解Maven Optional传递性背后的道理
-    
-    </summary>
-    
-    
-      <category term="Coding" scheme="https://dayarch.top/categories/Coding/"/>
-    
-      <category term="DevOps" scheme="https://dayarch.top/categories/Coding/DevOps/"/>
-    
-    
-      <category term="Maven" scheme="https://dayarch.top/tags/Maven/"/>
     
   </entry>
   
