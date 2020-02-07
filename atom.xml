@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://dayarch.top/"/>
-  <updated>2020-02-05T05:52:58.026Z</updated>
+  <updated>2020-02-07T02:49:38.357Z</updated>
   <id>https://dayarch.top/</id>
   
   <author>
@@ -17,11 +17,30 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>IntelliJ IDEA HTTP Client高级使用详解</title>
+    <link href="https://dayarch.top//p/http-client-advanced-usage.html"/>
+    <id>https://dayarch.top//p/http-client-advanced-usage.html</id>
+    <published>2020-02-07T02:30:15.000Z</published>
+    <updated>2020-02-07T02:49:38.357Z</updated>
+    
+    <summary type="html">
+    
+      后端程序员经常要编写RESTful API，一个好用的测试工具可以大大提高工作效率，甚至整个项目组的效率，IntelliJ IDEA 本身提供了 HTTP Client 这个工具，但是鲜有人知，本文要说明该工具的高级用法，一定能解决项目中的调试痛点
+    
+    </summary>
+    
+    
+    
+      <category term="IntelliJ IDEA" scheme="https://dayarch.top/tags/IntelliJ-IDEA/"/>
+    
+  </entry>
+  
+  <entry>
     <title>读《Clean Code 代码整洁之道》之感悟</title>
     <link href="https://dayarch.top//p/book-reviews-clean-code.html"/>
     <id>https://dayarch.top//p/book-reviews-clean-code.html</id>
     <published>2020-02-05T03:35:46.000Z</published>
-    <updated>2020-02-05T05:52:58.026Z</updated>
+    <updated>2020-02-07T02:32:22.250Z</updated>
     
     <summary type="html">
     
@@ -35,7 +54,7 @@
       <category term="读书笔记" scheme="https://dayarch.top/categories/Life/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
     
     
-      <category term="TODO" scheme="https://dayarch.top/tags/TODO/"/>
+      <category term="IntelliJ IDEA" scheme="https://dayarch.top/tags/IntelliJ-IDEA/"/>
     
   </entry>
   
@@ -167,7 +186,7 @@
     <link href="https://dayarch.top//p/how-to-use-todo-feature.html"/>
     <id>https://dayarch.top//p/how-to-use-todo-feature.html</id>
     <published>2020-01-09T02:50:07.000Z</published>
-    <updated>2020-01-09T03:12:53.983Z</updated>
+    <updated>2020-02-07T02:31:08.756Z</updated>
     
     <summary type="html">
     
@@ -181,7 +200,7 @@
       <category term="安全-协议-规范" scheme="https://dayarch.top/categories/Coding/%E5%AE%89%E5%85%A8-%E5%8D%8F%E8%AE%AE-%E8%A7%84%E8%8C%83/"/>
     
     
-      <category term="TODO" scheme="https://dayarch.top/tags/TODO/"/>
+      <category term="IntelliJ IDEA" scheme="https://dayarch.top/tags/IntelliJ-IDEA/"/>
     
   </entry>
   
@@ -515,31 +534,6 @@
       <category term="死锁" scheme="https://dayarch.top/tags/%E6%AD%BB%E9%94%81/"/>
     
       <category term="锁粒度" scheme="https://dayarch.top/tags/%E9%94%81%E7%B2%92%E5%BA%A6/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Spring Boot 自定义starter 全面教程</title>
-    <link href="https://dayarch.top//p/spring-boot-starter-custom.html"/>
-    <id>https://dayarch.top//p/spring-boot-starter-custom.html</id>
-    <published>2019-10-15T11:35:53.000Z</published>
-    <updated>2019-11-07T06:24:19.750Z</updated>
-    
-    <summary type="html">
-    
-      Spring Boot 自定义starter 全面教程，模仿官方标准构建属于自己的starter
-    
-    </summary>
-    
-    
-      <category term="Coding" scheme="https://dayarch.top/categories/Coding/"/>
-    
-      <category term="Spring-Boot" scheme="https://dayarch.top/categories/Coding/Spring-Boot/"/>
-    
-    
-      <category term="Spring Boot" scheme="https://dayarch.top/tags/Spring-Boot/"/>
-    
-      <category term="Starter" scheme="https://dayarch.top/tags/Starter/"/>
     
   </entry>
   

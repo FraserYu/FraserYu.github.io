@@ -4,12 +4,12 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   
-  <title>Linux 根据关键字查看集群服务器的log | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享</title>
+  <title>IntelliJ IDEA HTTP Client高级使用详解 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享</title>
   
-  <meta name="keywords" content="Java,SpringBoot,并发编程, ElasticSearch, 日拱一兵">
+  <meta name="keywords" content="HTTP Client, RESTful, 调试接口工具, Java,SpringBoot,并发编程, ElasticSearch, 日拱一兵">
   
   
-  <meta name="description" content="本站是日拱一兵的技术分享博客，内容涵盖Java后端技术、Spring Boot、Java并发编程等技术研究与分享，用有趣的方式解读技术">
+  <meta name="description" content="后端程序员经常要编写RESTful API，一个好用的测试工具可以大大提高工作效率，甚至整个项目组的效率，IntelliJ IDEA 本身提供了 HTTP Client 这个工具，但是鲜有人知，本文要说明该工具的高级用法，一定能解决项目中的调试痛点, 本站是日拱一兵的技术分享博客，内容涵盖Java后端技术、Spring Boot、Java并发编程等技术研究与分享，用有趣的方式解读技术">
   
 
   
@@ -393,13 +393,15 @@
   <section class='meta'>
     
     
+      <a title='IntelliJ IDEA HTTP Client高级使用详解' href='/p/http-client-advanced-usage.html'><img class='thumbnail' src='https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200207104108.png'></a>
+    
     <div class="meta" id="header-meta">
       
         
   
     <h1 class="title">
-      <a href="/p/linux-search-keyword-script.html">
-        Linux 根据关键字查看集群服务器的log
+      <a href="/p/http-client-advanced-usage.html">
+        IntelliJ IDEA HTTP Client高级使用详解
       </a>
     </h1>
   
@@ -430,7 +432,7 @@
             <div class="new-meta-item date">
   <a class='notlink'>
     <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-    <p>2017-03-29</p>
+    <p>2020-02-07</p>
   </a>
 </div>
 
@@ -438,14 +440,6 @@
         
           
             
-  
-  <div class='new-meta-item category'>
-    <a href='/categories/Coding/Linux/' rel="nofollow">
-      <i class="fas fa-folder-open" aria-hidden="true"></i>
-      <p>Coding&nbsp;/&nbsp;Linux</p>
-    </a>
-  </div>
-
 
           
         
@@ -482,47 +476,144 @@
 
     <section class="article typo">
       <div class="article-entry" itemprop="articleBody">
-        <h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>现在项目多数会采用集群部署的形式，进行负载均衡，来分担客户端大量请求的压力，当客户端请求发生异常，异常log只能在某一个服务器节点上产生，当服务器节点比较少时候，我们可以根据log的关键字来单个查找，但是当服务器节点多的时候我们还这么查找真的有些浪费时间而且不准确.</p>
-<a id="more"></a>
+        <blockquote>
+<ul>
+<li><p>你有一个思想，我有一个思想，我们交换后，一个人就有两个思想</p>
+</li>
+<li><p>If you can NOT explain it simply, you do NOT understand it well enough</p>
+</li>
+</ul>
+</blockquote>
+<p>陆续将Demo代码和技术文章整理在一起 <a href="https://github.com/FraserYu/learnings" target="_blank" rel="noopener">Github实践精选</a>，方便大家阅读查看，觉得不错，还请Star🌟🌟🌟🌟🌟🌟</p>
+<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgfenge.gif" alt=""></p>
+<p>抗击疫情，在家办公。工作照常干，领导需要几个新功能接口开发。以前在公司办公，通常开发完的功能没什么问题，暴露出 Swagger 接口文档，直接找旁边的前端大人联调测试了</p>
+<p>当下，君在长江头，我在长江尾，夜夜思君不敢出门见君啊，一切测试全交给自己吧，</p>
+<img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200206102942.png" style="zoom:50%;" />
 
-<h3 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h3><p>在某一台release 服务器上执行下面脚本即可完成多个节点的log信息的查询<br><strong>check_log_in_console.sh</strong>脚本内容如下</p>
-<pre><code>#!/bin/bash
+<p>虽然想念前端，但是在家办公也绝对是和在公司办公一样一样的，高效不（qu）摸鱼</p>
+<h2 id="插播背景"><a href="#插播背景" class="headerlink" title="插播背景"></a>插播背景</h2><p>在多个产品线上来回穿切换着开发功能，以前用Postman的场景是这样的:</p>
+<p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200206110455.png" alt=""></fancybox></p>
+<p>实际远远不止这几个文件夹来归类多个产品线的接口，Postman的功能非常强大，但是面对以下这些状况时，我觉得调试一个接口太麻烦了 （这里不讨论工具的好坏，工具是帮助我们提高效率的，每个人的需求也不一样，我只说明我个人遇到的一些情况，不喜请勿喷）</p>
+<ul>
+<li>查找配置多数要通过鼠标点来点去, 与习惯文本和快捷键操作的便捷方式违背</li>
+<li>调试别人接口要导入他们的一些数据，比较麻烦</li>
+<li>多个产品线环境变量查看不直观</li>
+<li>写完接口要来回切换应用进行测试，比如（IDEA &lt;——&gt; Postman）</li>
+<li>快速定位接口比较麻烦</li>
+<li>……</li>
+</ul>
+<p>无意间发现 IntelliJ IDEA 的 <code>HTTP Client</code> 工具刚好能解决我上面提到的一些问题，简单的说就是能直接在 IDEA 的代码编辑器中 <code>创建，编辑，执行</code> HTTP请求，就像这样(如果你心动了，请继续向下看吧)：</p>
+<p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img97483310-4556-42b8-ac61-9b127c9aaf05.gif" alt=""></fancybox></p>
+<p>于是，去官网查看一番作出如下整理：</p>
+<h2 id="走进-Http-Client"><a href="#走进-Http-Client" class="headerlink" title="走进 Http Client"></a>走进 Http Client</h2><p>HTTP Client 是 IDEA 默认绑定好并启用的插件，如果你那里没有启用，按照下图启用就好</p>
+<p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200206115605.png" alt=""></fancybox></p>
+<p>点击菜单：<code>Tools</code> — <code>HTTP Client</code> — <code>Test RESTful Web Service</code></p>
+<p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200206112908.png" alt=""></fancybox></p>
+<p>接下来进入下面的界面：</p>
+<p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200206125806.png" alt=""></fancybox></p>
+<p>上图已给出提示，REST Client 是被弃用的，点击右侧的 <code>Convert request to new format</code> , 进到下面界面：</p>
+<p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200206132014.png" alt=""></fancybox></p>
+<p>默认会创建一个名为 <code>rest-api.http</code> 的文件，该文件被存储在 Scratches 文件夹下，为了突出主角光环，关于 <a href="https://www.jetbrains.com/help/idea/scratches.html" target="_blank" rel="noopener">Scratch Files</a> 请官网自行查看 （<strong>继续向下看不影响理解的</strong>），黄色框线的功能也非常有用，继续向下看</p>
+<h2 id="创建-HTTP-request-文件"><a href="#创建-HTTP-request-文件" class="headerlink" title="创建 HTTP request 文件"></a>创建 HTTP request 文件</h2><p>刚刚提到的 <code>rest-api.http</code> 就是 HTTP request 文件，可以通过两种方式创建：</p>
+<ol>
+<li>通过快捷键  <code>⇧⌘N</code>  然后选择 <strong>HTTP Request</strong>. （文件存放在Scratches 文件夹）</li>
+<li>通过菜单操作 File—New—HTTP Request （文件存放在我们指定的目录下，就和我们平时创建class/package是一样一样滴）</li>
+</ol>
+<p>如果在项目中使用，这里推荐使用第二种方式，因为它可以作为项目文件，通过 Git 提交到仓库，大家共享文件，共同维护接口请求数据，自然就不会出现调试别人接口还要导入他人数据的情况啦</p>
+<h2 id="编辑-HTTP-request-文件"><a href="#编辑-HTTP-request-文件" class="headerlink" title="编辑 HTTP request 文件"></a>编辑 HTTP request 文件</h2><p>我们模拟实际项目中场景来编辑文件</p>
+<ol>
+<li>用户登录，成功后获取 Token，通常是 POST 请求</li>
+<li>用户后续访问行为都要在请求头中携带登录成功返回的 Token</li>
+</ol>
+<p>通过点击 Add Request，选择相应的方法就可以编写啦</p>
+<p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200206140641.png" alt=""></fancybox></p>
+<p>都知道，通常写一个完整的请求需要写好多内容，贴心的 IDEA 给我们提供了模版，我们只需要在 Examples 中找模版就可以啦，比如找 POST 请求的模版，选取合适的拷贝过去就可以，so easy～～～</p>
+<p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200206142611.png" alt=""></fancybox></p>
+<p>到这里，就可以发送基本的请求了，但是，一个项目中接口众多，如何快速生成参数？如何快速切换端口？如何让登录之后的每个请求自动携带成功返回的 Token？我们需要更高级的玩法</p>
+<h2 id="HTTP-Client-进阶玩法"><a href="#HTTP-Client-进阶玩法" class="headerlink" title="HTTP Client 进阶玩法"></a>HTTP Client 进阶玩法</h2><h3 id="使用环境变量"><a href="#使用环境变量" class="headerlink" title="使用环境变量"></a>使用环境变量</h3><p>在编写HTTP请求时，可以使用变量对其元素进行参数化。变量可以保存请求的host、port和path、查询参数或值、请求头值或请求体值等.</p>
+<p>使用变量的方式非常简单，就用两个大括号包围定义好的变量就可以了，就像这样：</p>
+<p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200206145933.png" alt=""></fancybox></p>
+<p>当然我们也要有地方定义变量</p>
+<h3 id="定义环境变量"><a href="#定义环境变量" class="headerlink" title="定义环境变量"></a>定义环境变量</h3><p>环境变量需要定义在环境文件中，环境文件有两种：</p>
+<ol>
+<li>创建名为 <code>rest-client.env.json</code> 或者 <code>http-client.env.json</code> 的环境文件(其实里面就是保存 JSON 数据)，该文件里可以定义用在整个项目上的所有常规变量</li>
+<li>创建名为<code>rest-client.private.env.json</code> 或者 <code>http-client.private.env.json</code>， 看文件名你应该也猜到这是保存敏感数据的，比如密码，token等，该文件默认是被加入到 VCS 的 ignore文件中的，同时优先级高于其他环境文件， 也就是说，该文件的变量会覆盖其他环境文件中的变量值</li>
+</ol>
+<p>里面的文件内容就像这样</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"dev"</span>: &#123;</span><br><span class="line">    <span class="attr">"host"</span>: <span class="string">"localhost"</span>,</span><br><span class="line">    <span class="attr">"port"</span>: <span class="number">8081</span>,</span><br><span class="line">    <span class="attr">"identifier"</span>: <span class="string">"tanrgyb"</span>,</span><br><span class="line">    <span class="attr">"password"</span>: <span class="string">"iloveu"</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">"prod"</span>: &#123;</span><br><span class="line">    <span class="attr">"host"</span>: <span class="string">"dayarch.top"</span>,</span><br><span class="line">    <span class="attr">"port"</span>: <span class="number">8080</span>,</span><br><span class="line">    <span class="attr">"identifier"</span>: <span class="string">"admin"</span>,</span><br><span class="line">    <span class="attr">"password"</span>: <span class="string">"admin"</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-if [ $# -lt 1 ]; then
-  echo &quot;please provide the content you want to find&quot;
-  echo &quot;usage: $0 [content] [date in yyyymmdd format]&quot;
-  exit 0
-fi
 
-if [ &quot;$2&quot; == &quot;&quot; ]; then
-  d=`date +%Y%m%d`
-else
-  d=$2
-fi
 
-s=prd-hybris-pad
+<p>运行一下我们编写的请求吧：</p>
+<p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200206153120.png" alt=""></fancybox></p>
+<p>IDEA自动识别多个环境，这样就可以轻而易举的切换环境，使用不同的变量值了（这皮鞋，你说亮不亮，还有更亮的）</p>
+<h3 id="巧用-response-handler-脚本"><a href="#巧用-response-handler-脚本" class="headerlink" title="巧用 response handler 脚本"></a>巧用 response handler 脚本</h3><p>上面提到，我们要让登录成功后的所有请求都自动携带成功返回的 Token，这样不用我们每次都手动将其添加到header中，同样有两种方式将脚本插入到请求中</p>
+<ul>
+<li>内嵌方式</li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">GET host/api/test</span><br><span class="line"></span><br><span class="line">&gt; &#123;%</span><br><span class="line">response 脚本</span><br><span class="line">%&#125;</span><br></pre></td></tr></table></figure>
 
-for((i=1;i&lt;=4;i++))
-do
-    server=$s$i.bb.com
-    echo &quot;============check logs on $server====================&quot;
+<ul>
+<li>外部文件方式（就是将内嵌的脚本抽离出到文件中）</li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">GET host/api/test</span><br><span class="line"></span><br><span class="line">&gt; scripts/my-script.js</span><br></pre></td></tr></table></figure>
 
-    ssh app@$server &quot;grep &apos;$1&apos; /data/workspace/hybris/hybris/log/tomcat/console-$d.log&quot;
-        sleep 1
-done
 
-echo &quot;done&quot;
-#exit 0</code></pre><p>这样我们只需要在该文件目录中执行</p>
-<pre><code>./check_log_in_console.sh &quot;你要搜索的关键字&quot;  [回车]</code></pre><p>就会去以上节点中四个服务器中去查找你要搜索的关键字，打印出类似如下的log信息：</p>
-<pre><code>============check logs on prd-hybris-pad1.bb.com==========
-============check logs on prd-hybris-pad2.bb.com==========
-============check logs on prd-hybris-pad3.bb.com==========
-============check logs on prd-hybris-pad4.bb.com==========</code></pre>
+
+<p>以登录返回获取的token设置到变量中为例，看代码：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">POST http://&#123;&#123;host&#125;&#125;:&#123;&#123;port&#125;&#125;/login</span><br><span class="line"><span class="attribute">Content-Type</span>: application/json</span><br><span class="line"><span class="attribute">Accept</span>: application/json</span><br><span class="line"></span><br><span class="line">&gt; &#123;%</span><br><span class="line">client.global.set("auth_token", response.body.result.token);</span><br><span class="line"> %&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<blockquote>
+<h4 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h4><p><code>response.body.result.token</code> 是我按照我登录返回的数据结构写的，不同结构不一样，你也可以是这样的 <code>response.body.token</code> , response.body 之后根据你的数据结构发挥吧</p>
+</blockquote>
+<p>我还是不放心，把我的登录返回结构（项目中怎样设计这种结构，可以参考之前写的<a href="https://dayarch.top/p/spring-boot-global-return.html">Springboot返回统一JSON数据格式是怎么实现的？</a> )粘贴在此处吧，这回理解了吧？</p>
+<p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200206155455.png" alt=""></fancybox></p>
+<p>接下来我们就可以愉快的在其他请求上携带这个 Token 了</p>
+<p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200206161327.png" alt=""></fancybox></p>
+<blockquote>
+<h4 id="注意-1"><a href="#注意-1" class="headerlink" title="注意"></a>注意</h4><p>这里的Authorization 类型，大家根据自己的实际情况做修改，比如：Authorization:  Bearer </p>
+</blockquote>
+<p>以上这些已经满足我的日常使用，没有进一步了解更多，更多关于 Response 脚本的用法请大家查看官网 <a href="https://www.jetbrains.com/help/idea/http-response-reference.html" target="_blank" rel="noopener">HTTP Response reference</a>吧 </p>
+<p>你以为到这里结束了（OMG），还有香料需要和大家分享，搭配上面功能使用更棒哦</p>
+<h2 id="辅助功能说明"><a href="#辅助功能说明" class="headerlink" title="辅助功能说明"></a>辅助功能说明</h2><h3 id="RestfulToolkit"><a href="#RestfulToolkit" class="headerlink" title="RestfulToolkit"></a>RestfulToolkit</h3><p>RestfulToolkit 同样是个插件，在插件市场搜索安装即可</p>
+<p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200206163158.png" alt=""></fancybox></p>
+<p>安装了这个插件后，打开侧边栏，项目的所有接口信息都会展现在此处：</p>
+<p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200206163719.png" alt=""></fancybox></p>
+<p>我常用的功能就是把指定接口生成的JSON数据拷贝到 HTTP request 文件中，免去手写的麻烦了，你说方便不？</p>
+<p>除此之外，使用快捷键 <code>cmd+\</code>, 可以根据关键字快速找到接口，回车迅速到达代码接口位置，这也是带来了极大的便利</p>
+<p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200206164118.png" alt=""></fancybox></p>
+<h3 id="Live-Template"><a href="#Live-Template" class="headerlink" title="Live Template"></a>Live Template</h3><p>项目中请求内容各有不同，IDEA标准提供的GET POST 请求案例可能还不能满足我们的需求，这时我们就可以利用 Live Template 定制自己的模版，迅速生成request 内容，像这样：</p>
+<p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgb9bb5b55-737f-40f2-aedc-24096909ff26.gif" alt=""></fancybox></p>
+<h3 id="JSON-Viewer"><a href="#JSON-Viewer" class="headerlink" title="JSON Viewer"></a>JSON Viewer</h3><p>JSON Viewer是一款 Chrome浏览器插件，在浏览器 Omini-box 中输入 <code>json-viewer</code> + <code>Tab</code>, 粘贴json在此处，就可以对json数据进行格式化了</p>
+<p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200206164811.png" alt=""></fancybox></p>
+<p>打开开发者工具，在Network下双击某个HTTP请求，会自动在 new tab下格式化返回的json数据，免去了粘贴数据然后格式化的烦恼</p>
+<p>关于自测接口的干货我抖的差不多了，抖抖更健康</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>再次重申，不做工具党，也没有任何批判之意，工具只是为了让我们更高效的工作，选择适合自己的。从上面的介绍中来看，IDEA HTTP client 搭配我说的几个辅助功能很好的解决了文章开头说明的几个问题，对我个人情况来说，足矣！！</p>
+<p><strong>截图码字不易</strong></p>
+<ul>
+<li><p>如果你认为本文对你有帮助，还请「在看/转发/赞」（这就是送我的大火箭🚀，大跑车🚗，大灰机✈️）</p>
+</li>
+<li><p>如果你还发现了更好的功能还请补充在留言区，我回头继续补充这块内容，万分感谢</p>
+</li>
+<li><p>公众号回复「工具」，还有更精彩的等着你</p>
+</li>
+</ul>
+<h2 id="灵魂追问"><a href="#灵魂追问" class="headerlink" title="灵魂追问"></a>灵魂追问</h2><ol>
+<li>Kibana的Dev Tools用来调试ES接口，可以延伸了解一下</li>
+<li>你在项目中如何高效测试接口与联调的呢？还请大方赐教</li>
+<li>在家办公和公司办公对你有什么影响？</li>
+</ol>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
+<li><a href="https://www.jetbrains.com/help/idea/testing-restful-web-services.html" target="_blank" rel="noopener">Testing RESTful web services﻿</a></li>
+</ul>
+
       </div>
       <!-- <div class="tuijian">
         <br><br>
         📚相关文章
-        
+        <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/how-to-use-todo-feature.html" title="小小TODO也有大道理" rel="bookmark">小小TODO也有大道理</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/book-reviews-clean-code.html" title="读《Clean Code 代码整洁之道》之感悟" rel="bookmark">读《Clean Code 代码整洁之道》之感悟</a></h3></div></li></ul>
       </div> -->
       <div class="personalweixin">
         <br><br>
@@ -542,10 +633,10 @@ echo &quot;done&quot;
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2019-11-01T16:46:43+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-02-07T10:49:38+08:00">
   <a class='notlink'>
     <i class="fas fa-clock" aria-hidden="true"></i>
-    <p>更新于 2019年11月1日</p>
+    <p>更新于 2020年2月7日</p>
   </a>
 </div>
 
@@ -554,7 +645,7 @@ echo &quot;done&quot;
         
           
   
-  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/Linux/" rel="nofollow"><i class="fas fa-tag" aria-hidden="true"></i><p>Linux</p></a></div>
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/IntelliJ-IDEA/" rel="nofollow"><i class="fas fa-tag" aria-hidden="true"></i><p>IntelliJ IDEA</p></a></div>
 
 
         
@@ -567,17 +658,20 @@ echo &quot;done&quot;
       
         <a class="-mob-share-qq" title="QQ好友" rel="external nofollow noopener noreferrer"
           
-          href="http://connect.qq.com/widget/shareqq/index.html?url=https://dayarch.top/p/linux-search-keyword-script.html&title=Linux 根据关键字查看集群服务器的log | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=背景
-现在项目多数会采用集群部署的形式，进行负载均衡，来分担客户端大量请求的压力，当客户端请求发生异常，异常log只能在某一个服务器节点上产生，当服务器节点比较少时候，我们可以根据log的关键字来单个查找，但是当服务器节点多的时候我们还这么查找真的有些浪费时间而且不准确.
+          href="http://connect.qq.com/widget/shareqq/index.html?url=https://dayarch.top/p/http-client-advanced-usage.html&title=IntelliJ IDEA HTTP Client高级使用详解 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=* 你有一个思想，我有一个思想，我们交换后，一个人就有两个思想
+   
+   
+ * If you can NOT explain it simply, you do NOT understand it well enough
+   
+   
 
-解决方案
-在某一台release 服务器上执行下面脚本即可完成多个节点的log信息的查询
-check_log_in_console.sh脚本内容如下
+陆续将Demo代码和技术文章整理在一起 Github实践精选，方便大家阅读查看，觉得不错，还请Star🌟🌟🌟🌟🌟🌟
 
-#!/bin/bash
 
-if [ $# -lt 1 ]; then
-  echo "please provide the content you want to find"
+
+抗击疫情，在家办公。工作照常干，领导需要几个新功能接口开发。以前在公司办公，通常开发完的功能没什么问题，暴露出 Swagger 接口文档，直接找旁边的前端大人联调测试了
+
+当下，君在长江头，我在长江尾，夜夜思君不敢出门见"
           
           >
           
@@ -589,17 +683,20 @@ if [ $# -lt 1 ]; then
       
         <a class="-mob-share-qzone" title="QQ空间" rel="external nofollow noopener noreferrer"
           
-          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://dayarch.top/p/linux-search-keyword-script.html&title=Linux 根据关键字查看集群服务器的log | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=背景
-现在项目多数会采用集群部署的形式，进行负载均衡，来分担客户端大量请求的压力，当客户端请求发生异常，异常log只能在某一个服务器节点上产生，当服务器节点比较少时候，我们可以根据log的关键字来单个查找，但是当服务器节点多的时候我们还这么查找真的有些浪费时间而且不准确.
+          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://dayarch.top/p/http-client-advanced-usage.html&title=IntelliJ IDEA HTTP Client高级使用详解 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=* 你有一个思想，我有一个思想，我们交换后，一个人就有两个思想
+   
+   
+ * If you can NOT explain it simply, you do NOT understand it well enough
+   
+   
 
-解决方案
-在某一台release 服务器上执行下面脚本即可完成多个节点的log信息的查询
-check_log_in_console.sh脚本内容如下
+陆续将Demo代码和技术文章整理在一起 Github实践精选，方便大家阅读查看，觉得不错，还请Star🌟🌟🌟🌟🌟🌟
 
-#!/bin/bash
 
-if [ $# -lt 1 ]; then
-  echo "please provide the content you want to find"
+
+抗击疫情，在家办公。工作照常干，领导需要几个新功能接口开发。以前在公司办公，通常开发完的功能没什么问题，暴露出 Swagger 接口文档，直接找旁边的前端大人联调测试了
+
+当下，君在长江头，我在长江尾，夜夜思君不敢出门见"
           
           >
           
@@ -611,17 +708,20 @@ if [ $# -lt 1 ]; then
       
         <a class="-mob-share-weibo" title="微博" rel="external nofollow noopener noreferrer"
           
-          href="http://service.weibo.com/share/share.php?url=https://dayarch.top/p/linux-search-keyword-script.html&title=Linux 根据关键字查看集群服务器的log | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=背景
-现在项目多数会采用集群部署的形式，进行负载均衡，来分担客户端大量请求的压力，当客户端请求发生异常，异常log只能在某一个服务器节点上产生，当服务器节点比较少时候，我们可以根据log的关键字来单个查找，但是当服务器节点多的时候我们还这么查找真的有些浪费时间而且不准确.
+          href="http://service.weibo.com/share/share.php?url=https://dayarch.top/p/http-client-advanced-usage.html&title=IntelliJ IDEA HTTP Client高级使用详解 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=* 你有一个思想，我有一个思想，我们交换后，一个人就有两个思想
+   
+   
+ * If you can NOT explain it simply, you do NOT understand it well enough
+   
+   
 
-解决方案
-在某一台release 服务器上执行下面脚本即可完成多个节点的log信息的查询
-check_log_in_console.sh脚本内容如下
+陆续将Demo代码和技术文章整理在一起 Github实践精选，方便大家阅读查看，觉得不错，还请Star🌟🌟🌟🌟🌟🌟
 
-#!/bin/bash
 
-if [ $# -lt 1 ]; then
-  echo "please provide the content you want to find"
+
+抗击疫情，在家办公。工作照常干，领导需要几个新功能接口开发。以前在公司办公，通常开发完的功能没什么问题，暴露出 Swagger 接口文档，直接找旁边的前端大人联调测试了
+
+当下，君在长江头，我在长江尾，夜夜思君不敢出门见"
           
           >
           
@@ -645,40 +745,21 @@ if [ $# -lt 1 ]; then
       
           <div class="prev-next">
               
-                  <section class="prev">
-                      <span class="art-item-left">
-                          <h6><i class="fas fa-chevron-left" aria-hidden="true"></i>&nbsp;上一页</h6>
-                          <h4>
-                              <a href="/p/hybris-jrebel.html" rel="prev" title="Hybris tomcat Jrebel热部署配置">
-                                
-                                    Hybris tomcat Jrebel热部署配置
-                                
-                              </a>
-                          </h4>
-                          
-                              
-                              <h6 class="tags">
-                                  <a class="tag" href="/tags/Hybris/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> Hybris</a> <a class="tag" href="/tags/Jrebel/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> Jrebel</a>
-                              </h6>
-                          
-                      </span>
-                  </section>
-              
               
                   <section class="next">
                       <span class="art-item-right" aria-hidden="true">
                           <h6>下一页&nbsp;<i class="fas fa-chevron-right" aria-hidden="true"></i></h6>
                           <h4>
-                              <a href="/p/springmvc-response-status.html" rel="prev" title="Spring MVC 之 @ResponseStatus">
+                              <a href="/p/book-reviews-clean-code.html" rel="prev" title="读《Clean Code 代码整洁之道》之感悟">
                                   
-                                      Spring MVC 之 @ResponseStatus
+                                      读《Clean Code 代码整洁之道》之感悟
                                   
                               </a>
                           </h4>
                           
                               
                               <h6 class="tags">
-                                  <a class="tag" href="/tags/Spring/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> Spring</a>
+                                  <a class="tag" href="/tags/IntelliJ-IDEA/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> IntelliJ IDEA</a>
                               </h6>
                           
                       </span>
@@ -705,7 +786,7 @@ if [ $# -lt 1 ]; then
 </header>
 
     <div class="content pure">
-      
+      <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/how-to-use-todo-feature.html" title="小小TODO也有大道理" rel="bookmark">小小TODO也有大道理</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/book-reviews-clean-code.html" title="读《Clean Code 代码整洁之道》之感悟" rel="bookmark">读《Clean Code 代码整洁之道》之感悟</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/arthas-log-level.html" title="Arthas调整log日志等级" rel="bookmark">Arthas调整log日志等级</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/docker-container.html" title="Docker学习(四)——容器" rel="bookmark">Docker学习(四)——容器</a></h3></div></li></ul>
     </div>
   </section>
 
@@ -761,7 +842,7 @@ if [ $# -lt 1 ]; then
 
   <script>
     window.subData = {
-      title: 'Linux 根据关键字查看集群服务器的log',
+      title: 'IntelliJ IDEA HTTP Client高级使用详解',
       tools: true
     }
   </script>
@@ -913,7 +994,7 @@ if [ $# -lt 1 ]; then
 </header>
 
     <div class='content pure'>
-      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#背景"><span class="toc-text">背景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#解决方案"><span class="toc-text">解决方案</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#插播背景"><span class="toc-text">插播背景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#走进-Http-Client"><span class="toc-text">走进 Http Client</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#创建-HTTP-request-文件"><span class="toc-text">创建 HTTP request 文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#编辑-HTTP-request-文件"><span class="toc-text">编辑 HTTP request 文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#HTTP-Client-进阶玩法"><span class="toc-text">HTTP Client 进阶玩法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#使用环境变量"><span class="toc-text">使用环境变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#定义环境变量"><span class="toc-text">定义环境变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#巧用-response-handler-脚本"><span class="toc-text">巧用 response handler 脚本</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#注意"><span class="toc-text">注意</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#注意-1"><span class="toc-text">注意</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#辅助功能说明"><span class="toc-text">辅助功能说明</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#RestfulToolkit"><span class="toc-text">RestfulToolkit</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Live-Template"><span class="toc-text">Live Template</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JSON-Viewer"><span class="toc-text">JSON Viewer</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-text">总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#灵魂追问"><span class="toc-text">灵魂追问</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考"><span class="toc-text">参考</span></a></li></ol>
     </div>
   </section>
 

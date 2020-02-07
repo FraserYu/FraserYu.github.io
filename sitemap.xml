@@ -2,9 +2,23 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://dayarch.top/p/http-client-advanced-usage.html</loc>
+    
+    <lastmod>2020-02-07T02:49:38.357Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://dayarch.top/p/book-reviews-clean-code.html</loc>
     
-    <lastmod>2020-02-05T05:52:58.026Z</lastmod>
+    <lastmod>2020-02-07T02:32:22.250Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://dayarch.top/p/how-to-use-todo-feature.html</loc>
+    
+    <lastmod>2020-02-07T02:31:08.756Z</lastmod>
     
   </url>
   
@@ -47,13 +61,6 @@
     <loc>https://dayarch.top/website/index.html</loc>
     
     <lastmod>2020-01-16T03:14:15.415Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://dayarch.top/p/how-to-use-todo-feature.html</loc>
-    
-    <lastmod>2020-01-09T03:12:53.983Z</lastmod>
     
   </url>
   

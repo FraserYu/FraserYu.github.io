@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://dayarch.top//p/http-client-advanced-usage.html</loc>
+    <lastmod>2020-02-07</lastmod>
+  </url>  <url>
     <loc>https://dayarch.top//p/book-reviews-clean-code.html</loc>
-    <lastmod>2020-02-05</lastmod>
+    <lastmod>2020-02-07</lastmod>
+  </url>  <url>
+    <loc>https://dayarch.top//p/how-to-use-todo-feature.html</loc>
+    <lastmod>2020-02-07</lastmod>
   </url>  <url>
     <loc>https://dayarch.top//p/mysql-group-concat-function-usage.html</loc>
     <lastmod>2020-02-03</lastmod>
@@ -18,9 +24,6 @@
   </url>  <url>
     <loc>https://dayarch.top//p/wechat-new-expression.html</loc>
     <lastmod>2020-01-19</lastmod>
-  </url>  <url>
-    <loc>https://dayarch.top//p/how-to-use-todo-feature.html</loc>
-    <lastmod>2020-01-09</lastmod>
   </url>  <url>
     <loc>https://dayarch.top//p/java-concurrency-dead-lock.html</loc>
     <lastmod>2019-12-31</lastmod>
