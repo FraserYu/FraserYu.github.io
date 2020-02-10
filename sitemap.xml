@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://dayarch.top/p/2019-summary.html</loc>
+    
+    <lastmod>2020-02-10T12:05:52.745Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://dayarch.top/p/jdk12-new-feature-overview.html</loc>
     
     <lastmod>2020-02-10T06:45:45.751Z</lastmod>
@@ -47,13 +54,6 @@
     <loc>https://dayarch.top/p/mybatis-interceptor-encrypt-decrypt.html</loc>
     
     <lastmod>2020-01-22T02:16:08.745Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://dayarch.top/p/2019-summary.html</loc>
-    
-    <lastmod>2020-01-20T00:57:18.086Z</lastmod>
     
   </url>
   
