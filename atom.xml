@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://dayarch.top/"/>
-  <updated>2020-02-07T02:49:38.357Z</updated>
+  <updated>2020-02-10T06:41:15.018Z</updated>
   <id>https://dayarch.top/</id>
   
   <author>
@@ -17,11 +17,34 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Java 12 新特性一览</title>
+    <link href="https://dayarch.top//p/jdk12-new-feature-overview.html"/>
+    <id>https://dayarch.top//p/jdk12-new-feature-overview.html</id>
+    <published>2020-02-10T06:30:27.000Z</published>
+    <updated>2020-02-10T06:41:15.018Z</updated>
+    
+    <summary type="html">
+    
+      本文介绍了几个比较常见，又方便使用的Java12新特性，包括String API的更改，文件的比较，Switch语句的扩展等
+    
+    </summary>
+    
+    
+      <category term="Coding" scheme="https://dayarch.top/categories/Coding/"/>
+    
+      <category term="Java" scheme="https://dayarch.top/categories/Coding/Java/"/>
+    
+    
+      <category term="Java" scheme="https://dayarch.top/tags/Java/"/>
+    
+  </entry>
+  
+  <entry>
     <title>IntelliJ IDEA HTTP Client高级使用详解</title>
     <link href="https://dayarch.top//p/http-client-advanced-usage.html"/>
     <id>https://dayarch.top//p/http-client-advanced-usage.html</id>
     <published>2020-02-07T02:30:15.000Z</published>
-    <updated>2020-02-07T02:49:38.357Z</updated>
+    <updated>2020-02-07T10:52:01.376Z</updated>
     
     <summary type="html">
     
@@ -86,7 +109,7 @@
     <link href="https://dayarch.top//p/mysql-cross-table-update.html"/>
     <id>https://dayarch.top//p/mysql-cross-table-update.html</id>
     <published>2020-01-22T02:09:02.000Z</published>
-    <updated>2020-01-22T03:05:43.527Z</updated>
+    <updated>2020-02-07T03:12:30.203Z</updated>
     
     <summary type="html">
     
@@ -100,7 +123,7 @@
       <category term="数据库-持久层-SQL" scheme="https://dayarch.top/categories/Coding/%E6%95%B0%E6%8D%AE%E5%BA%93-%E6%8C%81%E4%B9%85%E5%B1%82-SQL/"/>
     
     
-      <category term="Mysql" scheme="https://dayarch.top/tags/Mysql/"/>
+      <category term="MySQL" scheme="https://dayarch.top/tags/MySQL/"/>
     
   </entry>
   
@@ -223,11 +246,11 @@
       <category term="Spring-Boot" scheme="https://dayarch.top/categories/Coding/Spring-Boot/"/>
     
     
-      <category term="Spring Boot" scheme="https://dayarch.top/tags/Spring-Boot/"/>
-    
       <category term="Spring Bean" scheme="https://dayarch.top/tags/Spring-Bean/"/>
     
       <category term="生命周期" scheme="https://dayarch.top/tags/%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/"/>
+    
+      <category term="Spring Boot" scheme="https://dayarch.top/tags/Spring-Boot/"/>
     
   </entry>
   
@@ -273,11 +296,11 @@
       <category term="Spring-Boot" scheme="https://dayarch.top/categories/Coding/Spring-Boot/"/>
     
     
+      <category term="Spring Aware" scheme="https://dayarch.top/tags/Spring-Aware/"/>
+    
       <category term="Spring Bean" scheme="https://dayarch.top/tags/Spring-Bean/"/>
     
       <category term="生命周期" scheme="https://dayarch.top/tags/%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/"/>
-    
-      <category term="Spring Aware" scheme="https://dayarch.top/tags/Spring-Aware/"/>
     
   </entry>
   
@@ -300,11 +323,11 @@
       <category term="Spring-Boot" scheme="https://dayarch.top/categories/Coding/Spring-Boot/"/>
     
     
-      <category term="Spring Boot" scheme="https://dayarch.top/tags/Spring-Boot/"/>
-    
       <category term="Spring Bean" scheme="https://dayarch.top/tags/Spring-Bean/"/>
     
       <category term="生命周期" scheme="https://dayarch.top/tags/%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/"/>
+    
+      <category term="Spring Boot" scheme="https://dayarch.top/tags/Spring-Boot/"/>
     
   </entry>
   
@@ -327,11 +350,11 @@
       <category term="Spring-Boot" scheme="https://dayarch.top/categories/Coding/Spring-Boot/"/>
     
     
-      <category term="Spring Boot" scheme="https://dayarch.top/tags/Spring-Boot/"/>
-    
       <category term="Spring Bean" scheme="https://dayarch.top/tags/Spring-Bean/"/>
     
       <category term="生命周期" scheme="https://dayarch.top/tags/%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/"/>
+    
+      <category term="Spring Boot" scheme="https://dayarch.top/tags/Spring-Boot/"/>
     
   </entry>
   
@@ -509,31 +532,6 @@
       <category term="Java" scheme="https://dayarch.top/tags/Java/"/>
     
       <category term="JDK源码" scheme="https://dayarch.top/tags/JDK%E6%BA%90%E7%A0%81/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Java并发死锁解决思路</title>
-    <link href="https://dayarch.top//p/java-concurrency-dead-lock.html"/>
-    <id>https://dayarch.top//p/java-concurrency-dead-lock.html</id>
-    <published>2019-10-18T06:01:20.000Z</published>
-    <updated>2019-12-31T03:09:05.244Z</updated>
-    
-    <summary type="html">
-    
-      避免死锁，只需要打破Coffman所说的三个条件即可
-    
-    </summary>
-    
-    
-      <category term="Coding" scheme="https://dayarch.top/categories/Coding/"/>
-    
-      <category term="Java-Concurrency" scheme="https://dayarch.top/categories/Coding/Java-Concurrency/"/>
-    
-    
-      <category term="死锁" scheme="https://dayarch.top/tags/%E6%AD%BB%E9%94%81/"/>
-    
-      <category term="锁粒度" scheme="https://dayarch.top/tags/%E9%94%81%E7%B2%92%E5%BA%A6/"/>
     
   </entry>
   

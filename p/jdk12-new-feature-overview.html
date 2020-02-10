@@ -4,12 +4,12 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   
-  <title>Docker学习(一)——Docker安装 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享</title>
+  <title>Java 12 新特性一览 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享</title>
   
-  <meta name="keywords" content="Docker, Docker安装, Java,SpringBoot,并发编程, ElasticSearch, 日拱一兵">
+  <meta name="keywords" content="Java12,Java12 Switch, JDK12,Lambda, Java,SpringBoot,并发编程, ElasticSearch, 日拱一兵">
   
   
-  <meta name="description" content="Docker安装详细教程, 本站是日拱一兵的技术分享博客，内容涵盖Java后端技术、Spring Boot、Java并发编程等技术研究与分享，用有趣的方式解读技术">
+  <meta name="description" content="本文介绍了几个比较常见，又方便使用的Java12新特性，包括String API的更改，文件的比较，Switch语句的扩展等, 本站是日拱一兵的技术分享博客，内容涵盖Java后端技术、Spring Boot、Java并发编程等技术研究与分享，用有趣的方式解读技术">
   
 
   
@@ -393,13 +393,15 @@
   <section class='meta'>
     
     
+      <a title='Java 12 新特性一览' href='/p/jdk12-new-feature-overview.html'><img class='thumbnail' src='https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgjava.png'></a>
+    
     <div class="meta" id="header-meta">
       
         
   
     <h1 class="title">
-      <a href="/p/docker-install.html">
-        Docker学习(一)——Docker安装
+      <a href="/p/jdk12-new-feature-overview.html">
+        Java 12 新特性一览
       </a>
     </h1>
   
@@ -430,7 +432,7 @@
             <div class="new-meta-item date">
   <a class='notlink'>
     <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-    <p>2017-11-01</p>
+    <p>2020-02-10</p>
   </a>
 </div>
 
@@ -440,9 +442,9 @@
             
   
   <div class='new-meta-item category'>
-    <a href='/categories/Coding/Docker/' rel="nofollow">
+    <a href='/categories/Coding/Java/' rel="nofollow">
       <i class="fas fa-folder-open" aria-hidden="true"></i>
-      <p>Coding&nbsp;/&nbsp;Docker</p>
+      <p>Coding&nbsp;/&nbsp;Java</p>
     </a>
   </div>
 
@@ -482,77 +484,95 @@
 
     <section class="article typo">
       <div class="article-entry" itemprop="articleBody">
-        <blockquote class="blockquote-center">Docker, incredible virtual machine</blockquote>
-
-<img itemprop="url image" src="/uploads/dockerIs.png" class="full-image" />
-
-<h3 id="什么是Docker"><a href="#什么是Docker" class="headerlink" title="什么是Docker"></a>什么是Docker</h3><p>按照惯例，介绍一些历史，说明一下来龙去脉，至少知道它是怎么来的，又为什么会来，能干什么</p>
-<blockquote>
-<ol>
-<li>Docker 是一个开源项目，诞生于 2013 年初，最初是 dotCloud 公司内部的一个业余项目。它基于 Google 公司推出的 Go 语言实现。 项目后来加入了 Linux 基金会，遵从了 Apache 2.0 协议，项目代码在 GitHub 上进行维护</li>
-<li>Docker 自开源后受到广泛的关注和讨论，以至于 dotCloud 公司后来都改名为 Docker Inc。Redhat 已经在其 RHEL6.5 中集中支持 Docker；Google 也在其 PaaS 产品中广泛应用。</li>
-<li>Docker 项目的目标是实现轻量级的操作系统虚拟化解决方案。 Docker 的基础是 Linux 容器（LXC）等技术。在 LXC 的基础上 Docker 进行了进一步的封装，让用户不需要去关心容器的管理，使得操作更为简便。用户操作 Docker 的容器就像操作一个快速轻量级的虚拟机一样简单。</li>
-</ol>
+        <blockquote>
+<ul>
+<li><p>你有一个思想，我有一个思想，我们交换后，一个人就有两个思想</p>
+</li>
+<li><p>If you can NOT explain it simply, you do NOT understand it well enough</p>
+</li>
+</ul>
 </blockquote>
-<a id="more"></a>
+<p>现陆续将Demo代码和技术文章整理在一起 <a href="https://github.com/FraserYu/learnings" target="_blank" rel="noopener">Github实践精选</a>，<strong>本文同样收录在此</strong>，方便大家阅读查看，觉得不错，还请Star🌟</p>
+<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgfenge.gif" alt=""></p>
+<p>日常工作对集合操作真的太频繁了，前端时间就写过一篇关于Java 12 集合的文章 <a href="https://dayarch.top/p/jdk12-collectors-teeing-api-usage.html">Java12 Collectors.teeing 的使用详解</a> ， 有朋友留言说这个功能比较好用。个人觉得 Java12还有几个特性可以尝试使用，这篇文章就出炉了</p>
+<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgJava12_new_feature.png" alt=""></p>
+<p>如果你目前使用的Java版本不是12，也没有关系，早已为你准备好良方，<a href="https://dayarch.top/p/multiple-java-management.html">SDKMAN 统一灵活管理多版本Java</a> ，可以让你快速各种尝鲜新特性</p>
+<h2 id="String-API-变化"><a href="#String-API-变化" class="headerlink" title="String API 变化"></a>String API 变化</h2><h3 id="String-indent"><a href="#String-indent" class="headerlink" title="String.indent()"></a>String.indent()</h3><p><code>indent</code> 「缩进」这个单词大家很熟悉了，这是Java12处理字符串的新功能，先来看方法定义：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200209135336.png" alt=""></p>
+<p>该方法很简单，只接收一个 <code>int</code> 类型的参数表示缩进值，这里的 n 既可以是正数，也可以是负数，只不过是增加空格 <code>space</code> 和移除空格的差别，来看个例子：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">String result = <span class="string">"foo\nbar\nbar2"</span>.indent(<span class="number">4</span>);</span><br><span class="line">System.out.println(result);</span><br></pre></td></tr></table></figure>
 
-<h3 id="Docker与传统虚拟机的对比"><a href="#Docker与传统虚拟机的对比" class="headerlink" title="Docker与传统虚拟机的对比"></a>Docker与传统虚拟机的对比</h3><p>通过两张图，来理解一下Docker与传统虚拟机的对比，通过下面两张图能看出来Docker节省了哪些资源即可,其他的好处在后面的学习过程中陆续介绍<br><img itemprop="url image" src="/uploads/virtualization.png"/><br><img itemprop="url image" src="/uploads/docker.png"/></p>
-<p>Docker目前分为两个版本</p>
-<ol>
-<li>Docker Enterprise Edition (Docker EE) 专为企业开发和IT团队设计，用于在大规模生产中构建，运送和运行关键业务应用程序Docker EE集成，认证和支持，为企业提供业界最安全的容器平台，使所有应用程序现代化</li>
-<li>Docker Community Edition (Docker CE) 是开发人员和小团队的理想选择，希望开始使用Docker并尝试基于容器的应用程序Docker CE可在许多平台上使用，从桌面到云到服务器</li>
-</ol>
-<h3 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h3><p>Docker系列学习主要通过 VirtualBox 在 Ubuntu16.04 中完成安装以及后续进阶课程的学习, Docker版本为DockerCE</p>
-<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><h4 id="安装Ubuntu16-04"><a href="#安装Ubuntu16-04" class="headerlink" title="安装Ubuntu16.04"></a>安装Ubuntu16.04</h4><p>VirtualBox 安装Ubuntu1604请参考<a href="http://blog.csdn.net/liaolu2999/article/details/52081438" target="_blank" rel="noopener">在virtualbox下安装ubuntu server 16.04</a></p>
-<h4 id="安装docker"><a href="#安装docker" class="headerlink" title="安装docker"></a>安装docker</h4><p>按照Docker官网<a href="https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/" target="_blank" rel="noopener">Get Docker CE for Ubuntu</a>描述安装DockerCE</p>
-<h5 id="检查安装条件"><a href="#检查安装条件" class="headerlink" title="检查安装条件"></a>检查安装条件</h5><p>Docker 要求 Ubuntu 系统的内核版本高于 3.10 ，查看本页面的前提条件来验证你的 Ubuntu 版本是否支持 Docker。<br>通过 uname -r 命令查看你当前的内核版本</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ uname -r</span><br></pre></td></tr></table></figure>
 
-<h5 id="卸载旧的版本"><a href="#卸载旧的版本" class="headerlink" title="卸载旧的版本"></a>卸载旧的版本</h5><p>老的Docker版本我们叫做<strong>docker</strong>或<strong>docker-engine</strong>, 如果之前安装过，这里需要先卸载, Docker CE package现在叫做docker-ce</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get remove docker docker-engine docker.io</span><br></pre></td></tr></table></figure>
-<h5 id="搭建Docker仓库"><a href="#搭建Docker仓库" class="headerlink" title="搭建Docker仓库"></a>搭建Docker仓库</h5><p>首次在宿主机上安装DockerCE，需要搭建Docker repository,搭建完成后，可以通过repository安装或更新Docker.</p>
-<ol>
-<li>更新apt package<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get update</span><br></pre></td></tr></table></figure></li>
-<li>允许apt用https方式访问Docker仓库（命令太长可以用 <strong>\</strong> 符号换行）<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get install \</span><br><span class="line">  apt-transport-https \</span><br><span class="line">  ca-certificates \</span><br><span class="line">  curl \</span><br><span class="line">  software-properties-common</span><br></pre></td></tr></table></figure></li>
-<li>添加Docker的官方GPG密钥<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -</span><br></pre></td></tr></table></figure></li>
-<li>验证fingerprint</li>
-</ol>
-<p><strong>9DC8 5822 9FC7 DD38 854A E2D8 8D81 803C 0EBF CD88</strong>, 用后八位字符即可</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-key fingerprint 0EBFCD88</span><br></pre></td></tr></table></figure>
-<ol start="5">
-<li>设置稳定版Repository<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ sudo add-apt-repository \</span><br><span class="line">  <span class="string">"deb [arch=amd64] https://download.docker.com/linux/ubuntu \</span></span><br><span class="line"><span class="string">  <span class="variable">$(lsb_release -cs)</span> \</span></span><br><span class="line"><span class="string">  stable"</span></span><br></pre></td></tr></table></figure>
 
-</li>
-</ol>
-<h5 id="安装Docker-CE"><a href="#安装Docker-CE" class="headerlink" title="安装Docker CE"></a>安装Docker CE</h5><ol>
-<li>更新apt索引<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get update</span><br></pre></td></tr></table></figure></li>
-<li>安装最新版本的Docker CE<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get install docker-ce</span><br></pre></td></tr></table></figure></li>
-<li>生产环境指定Docker版本<br>生产环境为了稳定性会选择指定版本，而不是Dokcer的最新版本，查看可用版本：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ apt-cache madison docker-ce</span><br><span class="line"></span><br><span class="line">docker-ce | 17.09.0~ce-0~ubuntu | https://download.docker.com/linux/ubuntu xenial/stable amd64 Packages</span><br></pre></td></tr></table></figure></li>
-<li>安装指定Docker CE 版本<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get install docker-ce=&lt;VERSION&gt;</span><br></pre></td></tr></table></figure></li>
-<li>确认Docker CE 是否安装成功</li>
-</ol>
-<p><strong>仔细阅读docker run hello-world的输出内容，对于理解docker的工作原理有帮助</strong></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ sudo docker run hello-world</span><br><span class="line">$ sudo docker version</span><br></pre></td></tr></table></figure>
-<ol start="6">
-<li>启动Docker<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ systemctl start docker</span><br></pre></td></tr></table></figure></li>
-<li>重新启动Docker<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ systemctl restart docker</span><br></pre></td></tr></table></figure>
+<p>打印结果是这样的（考验眼力的时候到了，仔细看截图在IDE中设置的缩进小点点😜）：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200209141352.png" alt=""></p>
+<p>调用 indent 方法会自动添加一个换行符号 <code>\n</code> ，在该方法的实现中也明确给了注释说明，目的是为了行终结符的规范化</p>
+<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200209153328.png" alt=""></p>
+<p><strong>注意：</strong>对于 <code>Tab</code> 就是当成一个字符来看到，比如我们把上面的例子稍作修改：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">String result = <span class="string">"foo\nbar\n\tbar2"</span>.indent(<span class="number">4</span>);</span><br><span class="line">System.out.println(result);</span><br></pre></td></tr></table></figure>
 
-</li>
-</ol>
-<h5 id="Docker命令去掉sudo"><a href="#Docker命令去掉sudo" class="headerlink" title="Docker命令去掉sudo"></a>Docker命令去掉sudo</h5><p>默认情况下，我们每次敲docker命令都需要sudo权限，下面的方法可以省去sudo方便很多.</p>
-<ol>
-<li>创建docker组<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo groupadd docker</span><br></pre></td></tr></table></figure></li>
-<li>添加当前用户到docker组<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo usermod -aG docker <span class="variable">$USER</span></span><br></pre></td></tr></table></figure></li>
-<li>登出，重新登录shell</li>
-<li>验证docker命令是否可以运行（注意没有sudo）<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker run hello-world</span><br></pre></td></tr></table></figure>
-</li>
+<p>来看打印结果，注意和上面的不同：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200209153700.png" alt=""></p>
+<p>就是这么简单，我们继续向下看</p>
+<h3 id="String-transform"><a href="#String-transform" class="headerlink" title="String.transform()"></a>String.transform()</h3><p><code>transform</code> 「转换」，我们经常会遇到字符串形势转换的需求，transform方法接收一个 Function 类型的参数， 生成一个全新形式的字符串</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">List&lt;String&gt; names = List.of( <span class="string">"   Alex"</span>, <span class="string">"brian"</span>);</span><br><span class="line"></span><br><span class="line">List&lt;String&gt; transformedNames = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (String name : names)&#123;</span><br><span class="line">	String transformedName = name.transform(String::strip)</span><br><span class="line">															 .transform(StringUtils::toCamelCase);</span><br><span class="line"></span><br><span class="line">	transformedNames.add(transformedName);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>有朋友可能会说，这个和单纯的对字符串 trim 或者其他操作有什么区别啊？因为接受的参数是 Function类型，当Function类型作为入参时，内部的<strong>处理逻辑</strong>将增加更多灵活性</p>
+<h2 id="Files-mismatch-Path-Path"><a href="#Files-mismatch-Path-Path" class="headerlink" title="Files.mismatch(Path, Path)"></a>Files.mismatch(Path, Path)</h2><p>有时候，我们需要比较两个文件的内容是否相同，这个API就派上用场了，该方法比较两个 path 下的文件，并且返回一个 long 值，这个值表示第一处不匹配的字节位置。如果返回-1，说明两个文件相等，还是来看个例子：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Path file1 = Paths.get(<span class="string">"/Users/fraser/Documents/projects/personal/learning-demo-collection/jdk12-demo/src/file1.txt"</span>);</span><br><span class="line">		Path file2 = Paths.get(<span class="string">"/Users/fraser/Documents/projects/personal/learning-demo-collection/jdk12-demo/src/file2.txt"</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			<span class="keyword">long</span> mismatch = Files.mismatch(file1, file2);</span><br><span class="line">			System.out.println(mismatch);</span><br><span class="line">		&#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>两个文件内容分别是：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">//file1.txt</span><br><span class="line">大家好，我是日拱一兵，叫我拱哥就好</span><br><span class="line">//file2.txt</span><br><span class="line">大家好，我是日拱一兵，叫我兵兵就好</span><br></pre></td></tr></table></figure>
+
+
+
+<p>查看运行结果：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200209203347.png" alt=""></p>
+<blockquote>
+<p>建议大家查看一下 <code>mismatch</code> 的实现逻辑，有个小算法在里面的</p>
+</blockquote>
+<h2 id="Support-for-Unicode-11-（当个了解就好了）"><a href="#Support-for-Unicode-11-（当个了解就好了）" class="headerlink" title="Support for Unicode 11 （当个了解就好了）"></a>Support for Unicode 11 （当个了解就好了）</h2><p>当下，Emoji 表情符号在社交媒体渠道上扮演着重要角色，所以支持最新的 Unicode 规范比以往任何时候都更重要。Java 12保持了同步并支持Unicode 11。Unicode 11增加了684个字符，共137,374个字符，增加了7个新脚本，共146个脚本。</p>
+<h2 id="Switch-Expressions-Preview"><a href="#Switch-Expressions-Preview" class="headerlink" title="Switch Expressions(Preview)"></a>Switch Expressions(Preview)</h2><p>这个更改扩展了switch语句。为什么这么说？</p>
+<ul>
+<li>语句（我们原来那样使用）</li>
+<li>表达式（不必为每个case块定义一个break语句，我们可以简单地使用箭头语法）</li>
+<li>变量赋值（使用新的switch表达式，我们可以直接将switch语句分配给一个变量）</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">boolean</span> isWeekend = <span class="keyword">switch</span> (day) </span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">case</span> MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY -&gt; <span class="keyword">false</span>;</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">case</span> SATURDAY, SUNDAY -&gt; <span class="keyword">true</span>;</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">default</span> -&gt; <span class="keyword">throw</span> <span class="keyword">new</span> IllegalStateException(<span class="string">"Illegal day entry :: "</span> + day);</span><br><span class="line">&#125;;</span><br><span class="line"> </span><br><span class="line">System.out.println(isWeekend);</span><br></pre></td></tr></table></figure>
+
+
+
+<blockquote>
+<p> <strong>注意：</strong> 要使用此预览特性，请记住，我们必须在应用程序启动期间使用-enable-preview标志显式地指示JVM。</p>
+</blockquote>
+<h2 id="Compact-Number-Formatting-紧凑的数据格式"><a href="#Compact-Number-Formatting-紧凑的数据格式" class="headerlink" title="Compact Number Formatting (紧凑的数据格式)"></a>Compact Number Formatting (紧凑的数据格式)</h2><p>由用户界面或命令行工具呈现的大数字总是很难展现。使用数字的缩写形式则要直观很多。前端为了更有好的数据展现形式，很早就有相应的组件实现了。现在后端小伙伴也可以在java12中应用这个特性了</p>
+<p>紧凑的数字表示更易于阅读，并且在不丢失原始含义的情况下，在屏幕上需要更少的空间。</p>
+<blockquote>
+<p>例子：<code>3.6M</code> 比 <code>3,600,000</code> 容易读得多</p>
+</blockquote>
+<p>Java 12 引入了一个叫做 NumberFormat.getCompactNumberInstance(Locale, NumberFormat.Style)的静态方法。用于创建紧凑数字表示形式，来看例子：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">NumberFormat formatter = NumberFormat.getCompactNumberInstance(Locale.US, NumberFormat.Style.SHORT);</span><br><span class="line"></span><br><span class="line">String formattedString = formatter.format(<span class="number">25000L</span>);</span><br><span class="line">System.out.println(formattedString);</span><br></pre></td></tr></table></figure>
+
+
+
+<p>来看运行结果：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200210132355.png" alt=""></p>
+<p>另外，CompactNumberFormat 是 NumberFormat的子类，我们可以自定义它的实例（其实就是格式化样式等），很简单，这个大家自行查看吧</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>Java近两年升级真是太快了，了解一些新功能总是没错的，大家动手实践试试吧，以后遇到类似的需求至少能避免我们重复造轮子了…..</p>
+<h2 id="灵魂追问"><a href="#灵魂追问" class="headerlink" title="灵魂追问"></a>灵魂追问</h2><ol>
+<li>你们项目中Java的版本是多少？</li>
+<li>项目中你会怎样建议某些工具的升级？</li>
 </ol>
 
       </div>
       <!-- <div class="tuijian">
         <br><br>
         📚相关文章
-        <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/docker-architect.html" title="Docker学习(二)——Docker架构" rel="bookmark">Docker学习(二)——Docker架构</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/docker-image.html" title="Docker学习(三)——镜像" rel="bookmark">Docker学习(三)——镜像</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/docker-container.html" title="Docker学习(四)——容器" rel="bookmark">Docker学习(四)——容器</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/docker-deploy-spring-boot.html" title="使用 Docker 部署 Spring Boot" rel="bookmark">使用 Docker 部署 Spring Boot</a></h3></div></li></ul>
+        <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/multiple-java-management.html" title="SDKMAN 统一灵活管理多版本Java" rel="bookmark">SDKMAN 统一灵活管理多版本Java</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/jdk12-collectors-teeing-api-usage.html" title="Java12 Collectors.teeing 的使用详解" rel="bookmark">Java12 Collectors.teeing 的使用详解</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-equals-hashcode.html" title="Java equals 和 hashCode 面试那点事" rel="bookmark">Java equals 和 hashCode 面试那点事</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/lombok-usage.html" title="Lombok 使用教程详解" rel="bookmark">Lombok 使用教程详解</a></h3></div></li></ul>
       </div> -->
       <div class="personalweixin">
         <br><br>
@@ -572,10 +592,10 @@
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2019-11-07T13:18:34+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-02-10T14:41:15+08:00">
   <a class='notlink'>
     <i class="fas fa-clock" aria-hidden="true"></i>
-    <p>更新于 2019年11月7日</p>
+    <p>更新于 2020年2月10日</p>
   </a>
 </div>
 
@@ -584,7 +604,7 @@
         
           
   
-  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/Docker/" rel="nofollow"><i class="fas fa-tag" aria-hidden="true"></i><p>Docker</p></a></div>
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/Java/" rel="nofollow"><i class="fas fa-tag" aria-hidden="true"></i><p>Java</p></a></div>
 
 
         
@@ -597,11 +617,18 @@
       
         <a class="-mob-share-qq" title="QQ好友" rel="external nofollow noopener noreferrer"
           
-          href="http://connect.qq.com/widget/shareqq/index.html?url=https://dayarch.top/p/docker-install.html&title=Docker学习(一)——Docker安装 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=Docker, incredible virtual machine什么是Docker
-按照惯例，介绍一些历史，说明一下来龙去脉，至少知道它是怎么来的，又为什么会来，能干什么
+          href="http://connect.qq.com/widget/shareqq/index.html?url=https://dayarch.top/p/jdk12-new-feature-overview.html&title=Java 12 新特性一览 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=* 你有一个思想，我有一个思想，我们交换后，一个人就有两个思想
+   
+   
+ * If you can NOT explain it simply, you do NOT understand it well enough
+   
+   
 
- 1. Docker 是一个开源项目，诞生于 2013 年初，最初是 dotCloud 公司内部的一个业余项目。它基于 Google 公司推出的 Go 语言实现。 项目后来加入了 Linux 基金会，遵从了 Apache 2.0 协议，项目代码在 GitHub 上进行维护
- 2. Docker 自开源后受到广泛的关注和讨论，以至于 dotCloud 公司后来都改名为 Docker Inc。Redhat 已经在其 RHE"
+现陆续将Demo代码和技术文章整理在一起 Github实践精选，本文同样收录在此，方便大家阅读查看，觉得不错，还请Star🌟
+
+
+
+日常工作对集合操作真的太频繁了，前端时间就写过一篇关于Java 12 集合的文章 Java12 Collectors.teeing 的使用详解 ， 有朋友留言说这个功能比较好用。个人觉得 Java12还有几个特性可以尝试"
           
           >
           
@@ -613,11 +640,18 @@
       
         <a class="-mob-share-qzone" title="QQ空间" rel="external nofollow noopener noreferrer"
           
-          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://dayarch.top/p/docker-install.html&title=Docker学习(一)——Docker安装 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=Docker, incredible virtual machine什么是Docker
-按照惯例，介绍一些历史，说明一下来龙去脉，至少知道它是怎么来的，又为什么会来，能干什么
+          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://dayarch.top/p/jdk12-new-feature-overview.html&title=Java 12 新特性一览 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=* 你有一个思想，我有一个思想，我们交换后，一个人就有两个思想
+   
+   
+ * If you can NOT explain it simply, you do NOT understand it well enough
+   
+   
 
- 1. Docker 是一个开源项目，诞生于 2013 年初，最初是 dotCloud 公司内部的一个业余项目。它基于 Google 公司推出的 Go 语言实现。 项目后来加入了 Linux 基金会，遵从了 Apache 2.0 协议，项目代码在 GitHub 上进行维护
- 2. Docker 自开源后受到广泛的关注和讨论，以至于 dotCloud 公司后来都改名为 Docker Inc。Redhat 已经在其 RHE"
+现陆续将Demo代码和技术文章整理在一起 Github实践精选，本文同样收录在此，方便大家阅读查看，觉得不错，还请Star🌟
+
+
+
+日常工作对集合操作真的太频繁了，前端时间就写过一篇关于Java 12 集合的文章 Java12 Collectors.teeing 的使用详解 ， 有朋友留言说这个功能比较好用。个人觉得 Java12还有几个特性可以尝试"
           
           >
           
@@ -629,11 +663,18 @@
       
         <a class="-mob-share-weibo" title="微博" rel="external nofollow noopener noreferrer"
           
-          href="http://service.weibo.com/share/share.php?url=https://dayarch.top/p/docker-install.html&title=Docker学习(一)——Docker安装 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=Docker, incredible virtual machine什么是Docker
-按照惯例，介绍一些历史，说明一下来龙去脉，至少知道它是怎么来的，又为什么会来，能干什么
+          href="http://service.weibo.com/share/share.php?url=https://dayarch.top/p/jdk12-new-feature-overview.html&title=Java 12 新特性一览 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=* 你有一个思想，我有一个思想，我们交换后，一个人就有两个思想
+   
+   
+ * If you can NOT explain it simply, you do NOT understand it well enough
+   
+   
 
- 1. Docker 是一个开源项目，诞生于 2013 年初，最初是 dotCloud 公司内部的一个业余项目。它基于 Google 公司推出的 Go 语言实现。 项目后来加入了 Linux 基金会，遵从了 Apache 2.0 协议，项目代码在 GitHub 上进行维护
- 2. Docker 自开源后受到广泛的关注和讨论，以至于 dotCloud 公司后来都改名为 Docker Inc。Redhat 已经在其 RHE"
+现陆续将Demo代码和技术文章整理在一起 Github实践精选，本文同样收录在此，方便大家阅读查看，觉得不错，还请Star🌟
+
+
+
+日常工作对集合操作真的太频繁了，前端时间就写过一篇关于Java 12 集合的文章 Java12 Collectors.teeing 的使用详解 ， 有朋友留言说这个功能比较好用。个人觉得 Java12还有几个特性可以尝试"
           
           >
           
@@ -657,40 +698,21 @@
       
           <div class="prev-next">
               
-                  <section class="prev">
-                      <span class="art-item-left">
-                          <h6><i class="fas fa-chevron-left" aria-hidden="true"></i>&nbsp;上一页</h6>
-                          <h4>
-                              <a href="/p/docker-architect.html" rel="prev" title="Docker学习(二)——Docker架构">
-                                
-                                    Docker学习(二)——Docker架构
-                                
-                              </a>
-                          </h4>
-                          
-                              
-                              <h6 class="tags">
-                                  <a class="tag" href="/tags/Docker/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> Docker</a>
-                              </h6>
-                          
-                      </span>
-                  </section>
-              
               
                   <section class="next">
                       <span class="art-item-right" aria-hidden="true">
                           <h6>下一页&nbsp;<i class="fas fa-chevron-right" aria-hidden="true"></i></h6>
                           <h4>
-                              <a href="/p/investment-index-fee.html" rel="prev" title="指数基金交易会产生哪些费用">
+                              <a href="/p/http-client-advanced-usage.html" rel="prev" title="IntelliJ IDEA HTTP Client高级使用详解">
                                   
-                                      指数基金交易会产生哪些费用
+                                      IntelliJ IDEA HTTP Client高级使用详解
                                   
                               </a>
                           </h4>
                           
                               
                               <h6 class="tags">
-                                  <a class="tag" href="/tags/%E8%B4%B9%E7%94%A8/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> 费用</a> <a class="tag" href="/tags/%E6%8C%87%E6%95%B0%E5%9F%BA%E9%87%91/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> 指数基金</a>
+                                  <a class="tag" href="/tags/IntelliJ-IDEA/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> IntelliJ IDEA</a>
                               </h6>
                           
                       </span>
@@ -717,7 +739,7 @@
 </header>
 
     <div class="content pure">
-      <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/docker-architect.html" title="Docker学习(二)——Docker架构" rel="bookmark">Docker学习(二)——Docker架构</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/docker-image.html" title="Docker学习(三)——镜像" rel="bookmark">Docker学习(三)——镜像</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/docker-container.html" title="Docker学习(四)——容器" rel="bookmark">Docker学习(四)——容器</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/docker-deploy-spring-boot.html" title="使用 Docker 部署 Spring Boot" rel="bookmark">使用 Docker 部署 Spring Boot</a></h3></div></li></ul>
+      <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/multiple-java-management.html" title="SDKMAN 统一灵活管理多版本Java" rel="bookmark">SDKMAN 统一灵活管理多版本Java</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/jdk12-collectors-teeing-api-usage.html" title="Java12 Collectors.teeing 的使用详解" rel="bookmark">Java12 Collectors.teeing 的使用详解</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-equals-hashcode.html" title="Java equals 和 hashCode 面试那点事" rel="bookmark">Java equals 和 hashCode 面试那点事</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/lombok-usage.html" title="Lombok 使用教程详解" rel="bookmark">Lombok 使用教程详解</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-polymorphism-order.html" title="Java多态调用顺序" rel="bookmark">Java多态调用顺序</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-arraylist-capacity.html" title="Java中的ArrayList的容量" rel="bookmark">Java中的ArrayList的容量</a></h3></div></li></ul>
     </div>
   </section>
 
@@ -773,7 +795,7 @@
 
   <script>
     window.subData = {
-      title: 'Docker学习(一)——Docker安装',
+      title: 'Java 12 新特性一览',
       tools: true
     }
   </script>
@@ -925,7 +947,7 @@
 </header>
 
     <div class='content pure'>
-      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#什么是Docker"><span class="toc-text">什么是Docker</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Docker与传统虚拟机的对比"><span class="toc-text">Docker与传统虚拟机的对比</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#环境"><span class="toc-text">环境</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安装"><span class="toc-text">安装</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#安装Ubuntu16-04"><span class="toc-text">安装Ubuntu16.04</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#安装docker"><span class="toc-text">安装docker</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#检查安装条件"><span class="toc-text">检查安装条件</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#卸载旧的版本"><span class="toc-text">卸载旧的版本</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#搭建Docker仓库"><span class="toc-text">搭建Docker仓库</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#安装Docker-CE"><span class="toc-text">安装Docker CE</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Docker命令去掉sudo"><span class="toc-text">Docker命令去掉sudo</span></a></li></ol></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#String-API-变化"><span class="toc-text">String API 变化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#String-indent"><span class="toc-text">String.indent()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#String-transform"><span class="toc-text">String.transform()</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Files-mismatch-Path-Path"><span class="toc-text">Files.mismatch(Path, Path)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Support-for-Unicode-11-（当个了解就好了）"><span class="toc-text">Support for Unicode 11 （当个了解就好了）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Switch-Expressions-Preview"><span class="toc-text">Switch Expressions(Preview)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Compact-Number-Formatting-紧凑的数据格式"><span class="toc-text">Compact Number Formatting (紧凑的数据格式)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-text">总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#灵魂追问"><span class="toc-text">灵魂追问</span></a></li></ol>
     </div>
   </section>
 

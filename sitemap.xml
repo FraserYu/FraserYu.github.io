@@ -2,9 +2,23 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://dayarch.top/p/jdk12-new-feature-overview.html</loc>
+    
+    <lastmod>2020-02-10T06:41:15.018Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://dayarch.top/p/http-client-advanced-usage.html</loc>
     
-    <lastmod>2020-02-07T02:49:38.357Z</lastmod>
+    <lastmod>2020-02-07T10:52:01.376Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://dayarch.top/p/mysql-cross-table-update.html</loc>
+    
+    <lastmod>2020-02-07T03:12:30.203Z</lastmod>
     
   </url>
   
@@ -26,13 +40,6 @@
     <loc>https://dayarch.top/p/mysql-group-concat-function-usage.html</loc>
     
     <lastmod>2020-02-03T13:14:01.495Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://dayarch.top/p/mysql-cross-table-update.html</loc>
-    
-    <lastmod>2020-01-22T03:05:43.527Z</lastmod>
     
   </url>
   
