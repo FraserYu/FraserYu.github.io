@@ -3,7 +3,7 @@ title: 小小TODO也有大道理
 date: 2020-01-09 10:50:07
 categories: [Coding, 安全-协议-规范]
 tags:
-  - TODO
+  - IntelliJ IDEA
 id: how-to-use-todo-feature
 description: 有时，我们需要标记部分代码以供将来参考，比如:优化，改进，可能的更改，要讨论的问题等。通常我们会在代码中加入TODO作为标识，但是在团队中协同工作，TODO的背后也蕴藏着一些道理
 keywords: TODO, Intellij IDEA, IDEA, 注释, comment

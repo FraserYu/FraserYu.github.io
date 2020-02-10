@@ -2,7 +2,7 @@
 title: Mybatis拦截器实现数据加密与解密
 tags:
   - MyBatis
-categories: [Coding, Mybatis]
+categories: [Coding, 数据库-持久层-SQL]
 id: mybatis-interceptor-encrypt-decrypt
 date: 2019-09-02 08:40:51
 description: Mybatis拦截器实现数据加密与解密，全局处理需要在数据库中敏感数据
