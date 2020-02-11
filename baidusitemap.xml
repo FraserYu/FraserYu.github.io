@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://dayarch.top//p/http-client-advanced-usage.html</loc>
+    <lastmod>2020-02-11</lastmod>
+  </url>  <url>
     <loc>https://dayarch.top//p/pmp-certificate.html</loc>
     <lastmod>2020-02-11</lastmod>
   </url>  <url>
@@ -9,9 +12,6 @@
   </url>  <url>
     <loc>https://dayarch.top//p/jdk12-new-feature-overview.html</loc>
     <lastmod>2020-02-10</lastmod>
-  </url>  <url>
-    <loc>https://dayarch.top//p/http-client-advanced-usage.html</loc>
-    <lastmod>2020-02-07</lastmod>
   </url>  <url>
     <loc>https://dayarch.top//p/mysql-cross-table-update.html</loc>
     <lastmod>2020-02-07</lastmod>
