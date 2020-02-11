@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://dayarch.top/"/>
-  <updated>2020-02-10T06:45:45.751Z</updated>
+  <updated>2020-02-11T03:18:15.436Z</updated>
   <id>https://dayarch.top/</id>
   
   <author>
@@ -15,6 +15,37 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>闲着无聊考个PMP玩玩</title>
+    <link href="https://dayarch.top//p/pmp-certificate.html"/>
+    <id>https://dayarch.top//p/pmp-certificate.html</id>
+    <published>2020-02-11T03:17:05.000Z</published>
+    <updated>2020-02-11T03:18:15.436Z</updated>
+    
+    <summary type="html">
+    
+      本已将PMP考试记录在2019年年终总结的事件之一里了，春节有朋友问我，想让我分享一下，我回想了整个过程还是挺有趣的，于是本文就以纪实的形式写写考PMP的那点事，有兴趣的可以私聊，避免说广告
+
+PMP（Project Management Professional）学名「项目管理专家」，我叫它「拍马屁」。2019年4月的时候在朋友圈看到有两位朋友先后【注意是先后，有埋伏】晒出来PMP的证件出来，看着挺好看的（文末有，还是纪念版，这个理由好牵强），就果断去骚扰了他们询问具体情况
+
+朋友A：有的公司认可这个证件，没事考个还挺有用的。
+
+朋友B：考试险过，不知道有没有用，有朋友考，一起跟着考了
+
+心
+    
+    </summary>
+    
+    
+      <category term="Life" scheme="https://dayarch.top/categories/Life/"/>
+    
+      <category term="其他" scheme="https://dayarch.top/categories/Life/%E5%85%B6%E4%BB%96/"/>
+    
+    
+      <category term="总结" scheme="https://dayarch.top/tags/%E6%80%BB%E7%BB%93/"/>
+    
+  </entry>
   
   <entry>
     <title>Java 12 新特性一览</title>
@@ -246,11 +277,11 @@
       <category term="Spring-Boot" scheme="https://dayarch.top/categories/Coding/Spring-Boot/"/>
     
     
-      <category term="Spring Boot" scheme="https://dayarch.top/tags/Spring-Boot/"/>
-    
       <category term="Spring Bean" scheme="https://dayarch.top/tags/Spring-Bean/"/>
     
       <category term="生命周期" scheme="https://dayarch.top/tags/%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/"/>
+    
+      <category term="Spring Boot" scheme="https://dayarch.top/tags/Spring-Boot/"/>
     
   </entry>
   
@@ -296,11 +327,11 @@
       <category term="Spring-Boot" scheme="https://dayarch.top/categories/Coding/Spring-Boot/"/>
     
     
+      <category term="Spring Aware" scheme="https://dayarch.top/tags/Spring-Aware/"/>
+    
       <category term="Spring Bean" scheme="https://dayarch.top/tags/Spring-Bean/"/>
     
       <category term="生命周期" scheme="https://dayarch.top/tags/%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/"/>
-    
-      <category term="Spring Aware" scheme="https://dayarch.top/tags/Spring-Aware/"/>
     
   </entry>
   
@@ -323,11 +354,11 @@
       <category term="Spring-Boot" scheme="https://dayarch.top/categories/Coding/Spring-Boot/"/>
     
     
-      <category term="Spring Boot" scheme="https://dayarch.top/tags/Spring-Boot/"/>
-    
       <category term="Spring Bean" scheme="https://dayarch.top/tags/Spring-Bean/"/>
     
       <category term="生命周期" scheme="https://dayarch.top/tags/%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/"/>
+    
+      <category term="Spring Boot" scheme="https://dayarch.top/tags/Spring-Boot/"/>
     
   </entry>
   
@@ -350,11 +381,11 @@
       <category term="Spring-Boot" scheme="https://dayarch.top/categories/Coding/Spring-Boot/"/>
     
     
-      <category term="Spring Boot" scheme="https://dayarch.top/tags/Spring-Boot/"/>
-    
       <category term="Spring Bean" scheme="https://dayarch.top/tags/Spring-Bean/"/>
     
       <category term="生命周期" scheme="https://dayarch.top/tags/%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/"/>
+    
+      <category term="Spring Boot" scheme="https://dayarch.top/tags/Spring-Boot/"/>
     
   </entry>
   
@@ -507,31 +538,6 @@
       <category term="HTTP" scheme="https://dayarch.top/tags/HTTP/"/>
     
       <category term="MessageConverter" scheme="https://dayarch.top/tags/MessageConverter/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Java12 Collectors.teeing 的使用详解</title>
-    <link href="https://dayarch.top//p/jdk12-collectors-teeing-api-usage.html"/>
-    <id>https://dayarch.top//p/jdk12-collectors-teeing-api-usage.html</id>
-    <published>2019-11-05T08:43:32.000Z</published>
-    <updated>2019-11-07T06:36:13.203Z</updated>
-    
-    <summary type="html">
-    
-      Java12新特性teeing的使用，merge合并两个集合的内容，提高了编程效率
-    
-    </summary>
-    
-    
-      <category term="Coding" scheme="https://dayarch.top/categories/Coding/"/>
-    
-      <category term="Java" scheme="https://dayarch.top/categories/Coding/Java/"/>
-    
-    
-      <category term="Java" scheme="https://dayarch.top/tags/Java/"/>
-    
-      <category term="JDK源码" scheme="https://dayarch.top/tags/JDK%E6%BA%90%E7%A0%81/"/>
     
   </entry>
   
