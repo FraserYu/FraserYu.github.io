@@ -1,8 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://dayarch.top//p/difference-between-volatile-and-synchronized-keyword.html</loc>
+    <lastmod>2020-03-04</lastmod>
+  </url>  <url>
+    <loc>https://dayarch.top//p/java-concurrency-core.html</loc>
+    <lastmod>2020-03-04</lastmod>
+  </url>  <url>
+    <loc>https://dayarch.top//p/java-concurrency-three-questions.html</loc>
+    <lastmod>2020-03-04</lastmod>
+  </url>  <url>
+    <loc>https://dayarch.top//p/java-concurrency-metaphor.html</loc>
+    <lastmod>2020-03-04</lastmod>
+  </url>  <url>
+    <loc>https://dayarch.top//p/java-concurrency-happens-before-rule.html</loc>
+    <lastmod>2020-03-04</lastmod>
+  </url>  <url>
+    <loc>https://dayarch.top//p/java-concurrency-atomic.html</loc>
+    <lastmod>2020-03-04</lastmod>
+  </url>  <url>
+    <loc>https://dayarch.top//p/java-concurrency-volatile.html</loc>
+    <lastmod>2020-03-04</lastmod>
+  </url>  <url>
+    <loc>https://dayarch.top//p/java-concurrency-lock-resource.html</loc>
+    <lastmod>2020-03-04</lastmod>
+  </url>  <url>
+    <loc>https://dayarch.top//p/start-to-learn-nodejs.html</loc>
+    <lastmod>2020-02-27</lastmod>
+  </url>  <url>
     <loc>https://dayarch.top//p/http-client-advanced-usage.html</loc>
-    <lastmod>2020-02-11</lastmod>
+    <lastmod>2020-02-27</lastmod>
   </url>  <url>
     <loc>https://dayarch.top//p/pmp-certificate.html</loc>
     <lastmod>2020-02-11</lastmod>
@@ -33,9 +60,6 @@
   </url>  <url>
     <loc>https://dayarch.top//p/java-concurrency-dead-lock.html</loc>
     <lastmod>2019-12-31</lastmod>
-  </url>  <url>
-    <loc>https://dayarch.top//p/java-concurrency-lock-resource.html</loc>
-    <lastmod>2019-12-29</lastmod>
   </url>  <url>
     <loc>https://dayarch.top//p/spring-boot-execute-on-startup.html</loc>
     <lastmod>2019-12-26</lastmod>
@@ -91,31 +115,13 @@
     <loc>https://dayarch.top//p/spring-boot-messageconverter.html</loc>
     <lastmod>2019-11-08</lastmod>
   </url>  <url>
-    <loc>https://dayarch.top//p/java-concurrency-happens-before-rule.html</loc>
-    <lastmod>2019-11-08</lastmod>
-  </url>  <url>
-    <loc>https://dayarch.top//p/java-concurrency-atomic.html</loc>
-    <lastmod>2019-11-07</lastmod>
-  </url>  <url>
-    <loc>https://dayarch.top//p/java-concurrency-volatile.html</loc>
-    <lastmod>2019-11-07</lastmod>
-  </url>  <url>
     <loc>https://dayarch.top//p/spring-boot-global-return.html</loc>
-    <lastmod>2019-11-07</lastmod>
-  </url>  <url>
-    <loc>https://dayarch.top//p/java-concurrency-metaphor.html</loc>
-    <lastmod>2019-11-07</lastmod>
-  </url>  <url>
-    <loc>https://dayarch.top//p/java-concurrency-three-questions.html</loc>
     <lastmod>2019-11-07</lastmod>
   </url>  <url>
     <loc>https://dayarch.top//p/java-parents-delegation-model.html</loc>
     <lastmod>2019-11-07</lastmod>
   </url>  <url>
     <loc>https://dayarch.top//p/restful-api-design.html</loc>
-    <lastmod>2019-11-07</lastmod>
-  </url>  <url>
-    <loc>https://dayarch.top//p/java-concurrency-core.html</loc>
     <lastmod>2019-11-07</lastmod>
   </url>  <url>
     <loc>https://dayarch.top//p/spring-boot-global-exception.html</loc>

@@ -2,9 +2,72 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://dayarch.top/p/difference-between-volatile-and-synchronized-keyword.html</loc>
+    
+    <lastmod>2020-03-04T03:51:00.887Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://dayarch.top/p/java-concurrency-core.html</loc>
+    
+    <lastmod>2020-03-04T03:44:25.415Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://dayarch.top/p/java-concurrency-three-questions.html</loc>
+    
+    <lastmod>2020-03-04T03:44:16.419Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://dayarch.top/p/java-concurrency-metaphor.html</loc>
+    
+    <lastmod>2020-03-04T03:44:11.512Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://dayarch.top/p/java-concurrency-happens-before-rule.html</loc>
+    
+    <lastmod>2020-03-04T03:44:04.638Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://dayarch.top/p/java-concurrency-atomic.html</loc>
+    
+    <lastmod>2020-03-04T03:43:57.834Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://dayarch.top/p/java-concurrency-volatile.html</loc>
+    
+    <lastmod>2020-03-04T03:43:49.265Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://dayarch.top/p/java-concurrency-lock-resource.html</loc>
+    
+    <lastmod>2020-03-04T03:43:42.706Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://dayarch.top/p/start-to-learn-nodejs.html</loc>
+    
+    <lastmod>2020-02-27T01:01:23.540Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://dayarch.top/p/http-client-advanced-usage.html</loc>
     
-    <lastmod>2020-02-11T05:06:46.802Z</lastmod>
+    <lastmod>2020-02-27T00:54:29.557Z</lastmod>
     
   </url>
   
@@ -82,13 +145,6 @@
     <loc>https://dayarch.top/p/java-concurrency-dead-lock.html</loc>
     
     <lastmod>2019-12-31T03:09:05.244Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://dayarch.top/p/java-concurrency-lock-resource.html</loc>
-    
-    <lastmod>2019-12-29T09:49:34.396Z</lastmod>
     
   </url>
   
@@ -233,44 +289,9 @@
   </url>
   
   <url>
-    <loc>https://dayarch.top/p/java-concurrency-happens-before-rule.html</loc>
-    
-    <lastmod>2019-11-08T08:51:44.745Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://dayarch.top/p/java-concurrency-atomic.html</loc>
-    
-    <lastmod>2019-11-07T06:47:16.338Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://dayarch.top/p/java-concurrency-volatile.html</loc>
-    
-    <lastmod>2019-11-07T06:38:33.111Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://dayarch.top/p/spring-boot-global-return.html</loc>
     
     <lastmod>2019-11-07T06:38:17.571Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://dayarch.top/p/java-concurrency-metaphor.html</loc>
-    
-    <lastmod>2019-11-07T06:38:05.265Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://dayarch.top/p/java-concurrency-three-questions.html</loc>
-    
-    <lastmod>2019-11-07T06:38:00.676Z</lastmod>
     
   </url>
   
@@ -285,13 +306,6 @@
     <loc>https://dayarch.top/p/restful-api-design.html</loc>
     
     <lastmod>2019-11-07T06:37:47.212Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://dayarch.top/p/java-concurrency-core.html</loc>
-    
-    <lastmod>2019-11-07T06:37:29.576Z</lastmod>
     
   </url>
   

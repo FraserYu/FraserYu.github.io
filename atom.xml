@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://dayarch.top/"/>
-  <updated>2020-02-11T03:18:15.436Z</updated>
+  <updated>2020-03-04T03:51:00.887Z</updated>
   <id>https://dayarch.top/</id>
   
   <author>
@@ -15,6 +15,54 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>volatile和synchronized图文透彻讲解</title>
+    <link href="https://dayarch.top//p/difference-between-volatile-and-synchronized-keyword.html"/>
+    <id>https://dayarch.top//p/difference-between-volatile-and-synchronized-keyword.html</id>
+    <published>2020-03-04T03:37:38.000Z</published>
+    <updated>2020-03-04T03:51:00.887Z</updated>
+    
+    <summary type="html">
+    
+      volatile 和 synchronized 是并发编程中非常常见的两个关键字，但是很多人却很难区分二者的区别以及如何准确的使用，本文就通过图问的形式，带你一步一步剖析二者的差别
+    
+    </summary>
+    
+    
+      <category term="Coding" scheme="https://dayarch.top/categories/Coding/"/>
+    
+      <category term="Java-Concurrency" scheme="https://dayarch.top/categories/Coding/Java-Concurrency/"/>
+    
+    
+      <category term="Java-Concurrency" scheme="https://dayarch.top/tags/Java-Concurrency/"/>
+    
+      <category term="volatile" scheme="https://dayarch.top/tags/volatile/"/>
+    
+      <category term="synchronized" scheme="https://dayarch.top/tags/synchronized/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Java后端的我在学Node.js 你敢信？</title>
+    <link href="https://dayarch.top//p/start-to-learn-nodejs.html"/>
+    <id>https://dayarch.top//p/start-to-learn-nodejs.html</id>
+    <published>2020-02-27T00:40:40.482Z</published>
+    <updated>2020-02-27T01:01:23.540Z</updated>
+    
+    <summary type="html">
+    
+      作为一名纯java后端的人员，由于项目需要，我要开始学Node.js 了，对于要接触陌生的东西，内心其实是抗拒的，但是我提醒自己要跳出舒适区，多学一些东西，本文就是记录我是如何开始接触和学习Node.js 的
+    
+    </summary>
+    
+    
+      <category term="Coding" scheme="https://dayarch.top/categories/Coding/"/>
+    
+      <category term="Node.js" scheme="https://dayarch.top/categories/Coding/Node-js/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>闲着无聊考个PMP玩玩</title>
@@ -75,7 +123,7 @@ PMP（Project Management Professional）学名「项目管理专家」，我叫�
     <link href="https://dayarch.top//p/http-client-advanced-usage.html"/>
     <id>https://dayarch.top//p/http-client-advanced-usage.html</id>
     <published>2020-02-07T02:30:15.000Z</published>
-    <updated>2020-02-11T05:06:46.802Z</updated>
+    <updated>2020-02-27T00:54:29.557Z</updated>
     
     <summary type="html">
     
@@ -83,6 +131,10 @@ PMP（Project Management Professional）学名「项目管理专家」，我叫�
     
     </summary>
     
+    
+      <category term="Coding" scheme="https://dayarch.top/categories/Coding/"/>
+    
+      <category term="Java" scheme="https://dayarch.top/categories/Coding/Java/"/>
     
     
       <category term="IntelliJ IDEA" scheme="https://dayarch.top/tags/IntelliJ-IDEA/"/>
@@ -486,58 +538,6 @@ PMP（Project Management Professional）学名「项目管理专家」，我叫�
       <category term="Java" scheme="https://dayarch.top/tags/Java/"/>
     
       <category term="Lombok" scheme="https://dayarch.top/tags/Lombok/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>SDKMAN 统一灵活管理多版本Java</title>
-    <link href="https://dayarch.top//p/multiple-java-management.html"/>
-    <id>https://dayarch.top//p/multiple-java-management.html</id>
-    <published>2019-11-14T00:51:02.000Z</published>
-    <updated>2019-11-14T01:24:50.504Z</updated>
-    
-    <summary type="html">
-    
-      面对快速升级的Java，我们应该灵活的管理多个Java版本，不再去做枯燥的Java环境变量的配置
-    
-    </summary>
-    
-    
-      <category term="Coding" scheme="https://dayarch.top/categories/Coding/"/>
-    
-      <category term="Java" scheme="https://dayarch.top/categories/Coding/Java/"/>
-    
-    
-      <category term="Java" scheme="https://dayarch.top/tags/Java/"/>
-    
-      <category term="JDK" scheme="https://dayarch.top/tags/JDK/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>HttpMessageConverter转换原理解析</title>
-    <link href="https://dayarch.top//p/spring-boot-messageconverter.html"/>
-    <id>https://dayarch.top//p/spring-boot-messageconverter.html</id>
-    <published>2019-11-07T10:15:50.000Z</published>
-    <updated>2019-11-08T09:01:22.470Z</updated>
-    
-    <summary type="html">
-    
-      透彻了解Spring是如何应用MessageConverter来转换请求和响应数据的
-    
-    </summary>
-    
-    
-      <category term="Coding" scheme="https://dayarch.top/categories/Coding/"/>
-    
-      <category term="Spring-Boot" scheme="https://dayarch.top/categories/Coding/Spring-Boot/"/>
-    
-    
-      <category term="Spring Boot" scheme="https://dayarch.top/tags/Spring-Boot/"/>
-    
-      <category term="HTTP" scheme="https://dayarch.top/tags/HTTP/"/>
-    
-      <category term="MessageConverter" scheme="https://dayarch.top/tags/MessageConverter/"/>
     
   </entry>
   
