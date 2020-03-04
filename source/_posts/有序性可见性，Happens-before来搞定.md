@@ -2,6 +2,7 @@
 title: 有序性可见性，Happens-before来搞定
 tags:
   - Happens-before
+  - Java-Concurrency
 category: [Coding, Java-Concurrency]
 summary: 'Happens-before是解决并发编程可见性有有序性的核心约束，图形与代码展示将不再抽象,让你透过现象看本质'
 id: java-concurrency-happens-before-rule

@@ -2,6 +2,7 @@
 title: 面试volatile关键字时，我们应该具备哪些谈资？
 tags:
   - volatile
+  - Java-Concurrency
 category: [Coding, Java-Concurrency]
 summary: 透彻理解 volatile 的内存语义与读-写语义，会为你的面试带来很多谈资，这也会为面试带来更多加分，其实很简单
 id: java-concurrency-volatile

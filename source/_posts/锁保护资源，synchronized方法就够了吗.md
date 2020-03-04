@@ -2,6 +2,7 @@
 title: 锁保护资源，synchronized方法就够了吗
 tags:
   - 锁
+  - Java-Concurrency
 categories: [Coding, Java-Concurrency]
 id: java-concurrency-lock-resource
 date: 2019-10-10 14:17:23
