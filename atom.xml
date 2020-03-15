@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://dayarch.top/"/>
-  <updated>2020-03-04T03:51:00.887Z</updated>
+  <updated>2020-03-15T08:07:45.452Z</updated>
   <id>https://dayarch.top/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>并发编程之等待通知机制</title>
+    <link href="https://dayarch.top//p/waiting-notification-mechanism.html"/>
+    <id>https://dayarch.top//p/waiting-notification-mechanism.html</id>
+    <published>2020-03-15T07:47:24.000Z</published>
+    <updated>2020-03-15T08:07:45.452Z</updated>
+    
+    <summary type="html">
+    
+      等待通知机制可以人为是一种设计模式，不只应用在并发编程领域，但是懂得如何使用这个机制是并发编程必不可少的技能
+    
+    </summary>
+    
+    
+      <category term="Coding" scheme="https://dayarch.top/categories/Coding/"/>
+    
+      <category term="Java-Concurrency" scheme="https://dayarch.top/categories/Coding/Java-Concurrency/"/>
+    
+    
+      <category term="Java-Concurrency" scheme="https://dayarch.top/tags/Java-Concurrency/"/>
+    
+  </entry>
   
   <entry>
     <title>volatile和synchronized图文透彻讲解</title>
@@ -513,31 +536,6 @@ PMP（Project Management Professional）学名「项目管理专家」，我叫�
       <category term="Spring Boot" scheme="https://dayarch.top/tags/Spring-Boot/"/>
     
       <category term="Spring Data Binding" scheme="https://dayarch.top/tags/Spring-Data-Binding/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Lombok 使用教程详解</title>
-    <link href="https://dayarch.top//p/lombok-usage.html"/>
-    <id>https://dayarch.top//p/lombok-usage.html</id>
-    <published>2019-11-25T05:34:12.000Z</published>
-    <updated>2019-11-25T05:41:24.129Z</updated>
-    
-    <summary type="html">
-    
-      Lombok 是一种 Java™ 实用工具，可用来帮助开发人员消除 Java 的冗长，尤其是对于简单的 Java 对象（POJO）
-    
-    </summary>
-    
-    
-      <category term="Coding" scheme="https://dayarch.top/categories/Coding/"/>
-    
-      <category term="Java" scheme="https://dayarch.top/categories/Coding/Java/"/>
-    
-    
-      <category term="Java" scheme="https://dayarch.top/tags/Java/"/>
-    
-      <category term="Lombok" scheme="https://dayarch.top/tags/Lombok/"/>
     
   </entry>
   

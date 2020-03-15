@@ -1,0 +1,1441 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  
+  <title>并发编程之等待通知机制 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享</title>
+  
+  <meta name="keywords" content="wait,notify, notifyAll, notify和notifyAll的不同, 等待通知机制, 并发编程, Java,SpringBoot,并发编程, ElasticSearch, 日拱一兵">
+  
+  
+  <meta name="description" content="等待通知机制可以人为是一种设计模式，不只应用在并发编程领域，但是懂得如何使用这个机制是并发编程必不可少的技能, 本站是日拱一兵的技术分享博客，内容涵盖Java后端技术、Spring Boot、Java并发编程等技术研究与分享，用有趣的方式解读技术">
+  
+
+  
+  <link rel="alternate" href="/atom.xml" title="日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享">
+  
+
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <!-- meta -->
+  
+
+  <!-- link -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-waves@0.7.6/dist/waves.min.css">
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.10.1/css/all.min.css">
+  
+
+  
+  <link rel="shortcut icon" type='image/x-icon' href="https://cdn.jsdelivr.net/gh/xaoxuu/assets@master/favicon/favicon.ico">
+  
+
+  
+    <link rel="stylesheet" href="/style.css">
+  
+
+  <script>
+    function setLoadingBarProgress(num) {
+      document.getElementById('loading-bar').style.width=num+"%";
+    }
+  </script>
+
+  
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-147539283-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-147539283-1');
+    </script>
+  
+  
+    <!-- ba -->
+    <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?f553477a3dc5ab3837e9a4dead4e0bc7";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+    </script>
+  
+
+
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-1774278264048334",
+        enable_page_level_ads: true
+      });
+    </script>
+
+    
+        <script>
+        (function(i,s,o,g,r,a,m){i["DaoVoiceObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;a.charset="utf-8";m.parentNode.insertBefore(a,m)})(window,document,"script",('https:' == document.location.protocol ? 'https:' : 'http:') + "//widget.daovoice.io/widget/0f81ff2f.js","daovoice")
+        daovoice('init', {
+            app_id: "8a3d6849"
+        });
+        daovoice('update');
+        </script>
+    
+</head>
+
+<body>
+  
+  
+  <div class="cover-wrapper">
+    <cover class='cover post half'>
+      
+        
+  <img class='logo' src='/assets/logo.png'/>
+
+
+  <div class="m_search">
+    <form name="searchform" class="form u-search-form">
+      <input type="text" class="input u-search-input" placeholder="世界很大，搜索一下" />
+      <i class="icon fas fa-search fa-fw"></i>
+    </form>
+  </div>
+
+<div class='menu navgation'>
+  <ul class='h-list'>
+    
+      
+        <li>
+          <a class="nav home" href="/"
+            
+              rel="nofollow"
+            
+            
+            id="home">
+            <i class='fas fa-home fa-fw'></i>&nbsp;主页
+          </a>
+        </li>
+      
+        <li>
+          <a class="nav home" href="/categories/"
+            
+              rel="nofollow"
+            
+            
+            id="categories">
+            <i class='fas fa-folder-open fa-fw'></i>&nbsp;分类
+          </a>
+        </li>
+      
+        <li>
+          <a class="nav home" href="/tags/"
+            
+              rel="nofollow"
+            
+            
+            id="tags">
+            <i class='fas fa-tags fa-fw'></i>&nbsp;标签
+          </a>
+        </li>
+      
+        <li>
+          <a class="nav home" href="/archives/"
+            
+              rel="nofollow"
+            
+            
+            id="archives">
+            <i class='fas fa-archive fa-fw'></i>&nbsp;归档
+          </a>
+        </li>
+      
+        <li>
+          <a class="nav home" href="/comments/"
+            
+              rel="nofollow"
+            
+            
+            id="comments">
+            <i class='fas fa-comments fa-fw'></i>&nbsp;留言板
+          </a>
+        </li>
+      
+    
+  </ul>
+</div>
+
+<br>
+<div class="description center-align">
+    
+    <span id="typed"></span>
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.9"></script>
+    <script>
+        var typed = new Typed("#typed", {
+            strings: ['从来没有真正的绝境, 只有心灵的迷途', 'Never really desperate, only the lost of the soul'],
+            startDelay: 300,
+            typeSpeed: 100,
+            loop: true,
+            backSpeed: 50,
+            showCursor: true
+        });
+    </script>
+    
+</div>
+
+      
+    </cover>
+    <header class="l_header pure">
+  <div id="loading-bar-wrapper">
+    <div id="loading-bar" class="pure"></div>
+  </div>
+
+	<div class='wrapper'>		
+		<div class="nav-main container container--flex">
+      <a class="logo flat-box" href='/' >
+        
+          日拱一兵
+        
+      </a>
+		<div class='menu navgation'>
+				<ul class='h-list'>
+          
+  					
+  						<li>
+								<a class="nav flat-box" href="/"
+                  
+                    rel="nofollow"
+                  
+                  
+                  id="home">
+									<i class='fas fa-home fa-fw'></i>&nbsp;主页
+								</a>
+							</li>
+      			
+  						<li>
+								<a class="nav flat-box" href="/categories/"
+                  
+                    rel="nofollow"
+                  
+                  
+                  id="categories">
+									<i class='fas fa-folder-open fa-fw'></i>&nbsp;分类
+								</a>
+							</li>
+      			
+  						<li>
+								<a class="nav flat-box" href="/tags/"
+                  
+                    rel="nofollow"
+                  
+                  
+                  id="tags">
+									<i class='fas fa-tags fa-fw'></i>&nbsp;标签
+								</a>
+							</li>
+      			
+  						<li>
+								<a class="nav flat-box" href="/archives/"
+                  
+                    rel="nofollow"
+                  
+                  
+                  id="archives">
+									<i class='fas fa-archive fa-fw'></i>&nbsp;归档
+								</a>
+							</li>
+      			
+  						<li>
+								<a class="nav flat-box" href="/friends/"
+                  
+                    rel="nofollow"
+                  
+                  
+                  id="friends">
+									<i class='fas fa-link fa-fw'></i>&nbsp;友链
+								</a>
+							</li>
+      			
+  						<li>
+								<a class="nav flat-box" href="/comments/"
+                  
+                    rel="nofollow"
+                  
+                  
+                  id="comments">
+									<i class='fas fa-comments fa-fw'></i>&nbsp;留言板
+								</a>
+							</li>
+      			
+      		
+				</ul>
+			</div>
+
+			
+				<div class="m_search">
+					<form name="searchform" class="form u-search-form">
+						<input type="text" class="input u-search-input" placeholder="搜索" />
+						<i class="icon fas fa-search fa-fw"></i>
+					</form>
+				</div>
+			
+			<ul class='switcher h-list'>
+				
+					<li class='s-search'><a class="fas fa-search fa-fw" href='javascript:void(0)'></a></li>
+				
+				<li class='s-menu'><a class="fas fa-bars fa-fw" href='javascript:void(0)'></a></li>
+			</ul>
+		</div>
+		<div class='nav-sub container container--flex'>
+			<a class="logo flat-box"></a>
+			<ul class='switcher h-list'>
+				<li class='s-comment'><a class="flat-btn fas fa-comments fa-fw" href='javascript:void(0)'></a></li>
+        
+          <li class='s-toc'><a class="flat-btn fas fa-list fa-fw" href='javascript:void(0)'></a></li>
+        
+			</ul>
+		</div>
+	</div>
+</header>
+	<aside class="menu-phone">
+    <header>
+		<nav class="menu navgation">
+      <ul>
+        
+          
+            <li>
+							<a class="nav flat-box" href="/"
+                
+                  rel="nofollow"
+                
+                
+                id="home">
+								<i class='fas fa-clock fa-fw'></i>&nbsp;近期文章
+							</a>
+            </li>
+          
+            <li>
+							<a class="nav flat-box" href="/categories/"
+                
+                  rel="nofollow"
+                
+                
+                id="categories">
+								<i class='fas fa-folder-open fa-fw'></i>&nbsp;分类
+							</a>
+            </li>
+          
+            <li>
+							<a class="nav flat-box" href="/tags/"
+                
+                  rel="nofollow"
+                
+                
+                id="tags">
+								<i class='fas fa-tags fa-fw'></i>&nbsp;标签
+							</a>
+            </li>
+          
+            <li>
+							<a class="nav flat-box" href="/archives/"
+                
+                  rel="nofollow"
+                
+                
+                id="archives">
+								<i class='fas fa-archive fa-fw'></i>&nbsp;归档
+							</a>
+            </li>
+          
+            <li>
+							<a class="nav flat-box" href="/friends/"
+                
+                  rel="nofollow"
+                
+                
+                id="friends">
+								<i class='fas fa-link fa-fw'></i>&nbsp;友链
+							</a>
+            </li>
+          
+            <li>
+							<a class="nav flat-box" href="/comments/"
+                
+                  rel="nofollow"
+                
+                
+                id="comments">
+								<i class='fas fa-comments fa-fw'></i>&nbsp;留言板
+							</a>
+            </li>
+          
+       
+      </ul>
+		</nav>
+    </header>
+	</aside>
+<script>setLoadingBarProgress(40);</script>
+
+  </div>
+
+
+  <div class="l_body">
+    <div class='body-wrapper'>
+      <div class='l_main'>
+  
+
+  <article id="post" class="post white-box article-type-post" itemscope itemprop="blogPost">
+    
+
+
+  <section class='meta'>
+    
+    
+      <a title='并发编程之等待通知机制' href='/p/waiting-notification-mechanism.html'><img class='thumbnail' src='https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgconcurrency.png'></a>
+    
+    <div class="meta" id="header-meta">
+      
+        
+  
+    <h1 class="title">
+      <a href="/p/waiting-notification-mechanism.html">
+        并发编程之等待通知机制
+      </a>
+    </h1>
+  
+
+
+      
+      <div class='new-meta-box'>
+        
+          
+        
+          
+            
+  <div class='new-meta-item author'>
+    
+      <a href="https://dayarch.top" rel="nofollow">
+        
+          <img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png">
+        
+        <p>tanθ</p>
+      </a>
+    
+  </div>
+
+
+          
+        
+          
+            <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+    <p>2020-03-15</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+  
+  <div class='new-meta-item category'>
+    <a href='/categories/Coding/Java-Concurrency/' rel="nofollow">
+      <i class="fas fa-folder-open" aria-hidden="true"></i>
+      <p>Coding&nbsp;/&nbsp;Java-Concurrency</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            
+  
+    <div class="new-meta-item browse busuanzi">
+      <a class='notlink'>
+        <i class="fas fa-eye" aria-hidden="true"></i>
+        <p>
+          <span id="busuanzi_value_page_pv">
+            <i class="fas fa-spinner fa-spin fa-fw" aria-hidden="true"></i>
+          </span>
+        </p>
+      </a>
+    </div>
+  
+
+
+          
+        
+          
+            
+
+          
+        
+      </div>
+      
+        <hr>
+      
+    </div>
+  </section>
+
+
+    <section class="article typo">
+      <div class="article-entry" itemprop="articleBody">
+        <p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200315160153.png" alt=""></fancybox></p>
+<h2 id="并发编程为什么会有等待通知机制"><a href="#并发编程为什么会有等待通知机制" class="headerlink" title="并发编程为什么会有等待通知机制"></a>并发编程为什么会有等待通知机制</h2><p>上一篇文章说明了 <a href="https://dayarch.top/p/java-concurrency-dead-lock.html">Java并发死锁解决思路</a> ， 解决死锁的思路之一就是 <code>破坏请求和保持条件</code>, 所有柜员都要通过<strong>唯一</strong>的账本管理员一次性拿到所有转账业务需要的账本，就像下面这样： </p>
+<p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgaccountmananger.png" alt=""></fancybox></p>
+<p>没有等待/通知机制之前，所有柜员都通过死循环的方式不断向账本管理员申请所有账本，程序的体现就是这样：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span>(!accountBookManager.getAllRequiredAccountBook(<span class="keyword">this</span>, target)) </span><br><span class="line">；</span><br></pre></td></tr></table></figure>
+
+
+
+<p>假如账本管理员是年轻小伙，腿脚利落（即执行 getAllRequiredAccountBook方法耗时短），并且多个柜员转账的业务冲突量不大，这个方案简单粗暴且有效，柜员只需要尝试几次就可以成功（即通过少量的循环可以实现）</p>
+<p>过了好多年，年轻的账本管理员变成了年迈的老人，行动迟缓（即执行 getAllRequiredAccountBook 耗时长），同时，多个柜员转账的业务冲突量也变大，之前几十次循环能做到的，现在可能就要申请成千上百，甚至上万次才能完成一次转账</p>
+<p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200311103256.png" alt=""></fancybox></p>
+<p> <strong>人工无限申请浪费口舌， 程序无限申请浪费CPU。聪明的人就想到了 <code>等待/通知</code> 机制</strong></p>
+<h2 id="等待-通知机制"><a href="#等待-通知机制" class="headerlink" title="等待/通知机制"></a>等待/通知机制</h2><p>无限循环实在太浪费CPU，而理想情况应该是这样：</p>
+<ul>
+<li>柜员A如果拿不到所有账本，就傲娇的不再继续问了（线程阻塞自己 wait）</li>
+<li>柜员B归还了柜员A需要的账本之后就主动通知柜员A账本可用（通知等待的线程 notify/notifyAll）</li>
+</ul>
+<p>做到这样，就能避免循环等待消耗CPU的问题了</p>
+<hr>
+<p>现实中有太多场景都在应用等待/通知机制。欢迎观临红浪漫，比如去XX办证，去医院就医/体检。</p>
+<p>下面请自行脑补一下去医院就医或体检的画面, 整体流程类似这样：</p>
+<table>
+<thead>
+<tr>
+<th>序号</th>
+<th align="left">就医</th>
+<th>程序解释（自己的视角）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td align="left">挂号成功，到诊室门口排号候诊</td>
+<td>排号的患者（线程）尝试获取【互斥锁】</td>
+</tr>
+<tr>
+<td>2</td>
+<td align="left">大夫叫到自己，进入诊室就诊</td>
+<td>自己【获取到互斥锁】</td>
+</tr>
+<tr>
+<td>3</td>
+<td align="left">大夫简单询问，要求做检查（患者缺乏报告不能诊断病因）</td>
+<td>进行【条件判断】，线程要求的条件【没满足】</td>
+</tr>
+<tr>
+<td>4</td>
+<td align="left">自己出去做检查</td>
+<td>线程【主动释放】持有的互斥锁</td>
+</tr>
+<tr>
+<td>5</td>
+<td align="left">大夫叫下一位患者</td>
+<td>另一位患者（线程）获取到互斥锁</td>
+</tr>
+<tr>
+<td>6</td>
+<td align="left">自己拿到检测报告</td>
+<td>线程【曾经】要求的条件得到满足（实则【被通知】）</td>
+</tr>
+<tr>
+<td>7</td>
+<td align="left">再次在诊室门口排号候诊</td>
+<td>再次尝试获取互斥锁</td>
+</tr>
+<tr>
+<td>8</td>
+<td align="left">…</td>
+<td>…</td>
+</tr>
+</tbody></table>
+<p>在【程序解释】一列，我将关键字（排队、锁、等待、释放….）已经用 <code>【】</code> 框了起来。Java 语言中，其内置的关键字 <code>synchronized</code> 和 方法<code>wait()，notify()/notifyAll()</code>  就能实现上面提到的等待/通知机制，我们将这几个关键字实现流程现形象化的表示一下：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200312141043.png" alt="等待队列图"></fancybox></p>
+<p>这可不是一个简单的图，下面还要围绕这个图做很多文章，不过这里我必须要插播几个面试基础知识点了：</p>
+<ol>
+<li>一个锁对应一个【入口等待队列】，不同锁的入口等待队列没任何关系，说白了他们就不存在竞争关系。你想呀，不同患者进入眼科和耳鼻喉科看大夫一点冲突都没有</li>
+<li><code>wait(), notify()/notifyAll()</code>  要在 synchronized 内部被使用，并且，如果锁的对象是this，就要 <code>this.wait()，this.notify()/this.notifyAll()</code> , 否则JVM就会抛出 <code>java.lang.IllegalMonitorStateException</code> 的。你想呀，等待/通知机制就是从【竞争】环境逐渐衍生出来的策略，不在锁竞争内部使用或等待/通知错了对象， 自然是不符合常理的</li>
+</ol>
+<p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200312143352.png" alt=""></fancybox></p>
+<p>有了上面知识的铺垫，要想将无限循环策略改为等待通知策略，你还需要问自己四个问题：</p>
+<h3 id="灵魂-4-问"><a href="#灵魂-4-问" class="headerlink" title="灵魂 4 问"></a>灵魂 4 问</h3><p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200312144436.png" alt=""></fancybox></p>
+<p>我们拿钱庄账本管理员的例子依依做以上回答：</p>
+<p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200315160059.png" alt=""></fancybox></p>
+<p>我们优化钱庄转账的程序：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AccountBookManager</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	List&lt;Object&gt; accounts = <span class="keyword">new</span> ArrayList&lt;&gt;(<span class="number">2</span>);</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">synchronized</span> <span class="keyword">boolean</span> <span class="title">getAllRequiredAccountBook</span><span class="params">( Object from, Object to)</span></span>&#123;</span><br><span class="line">		<span class="keyword">if</span>(accounts.contains(from) || accounts.contains(to))&#123;</span><br><span class="line">			<span class="keyword">try</span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.wait();</span><br><span class="line">      &#125;<span class="keyword">catch</span>(Exception e)&#123;</span><br><span class="line">        </span><br><span class="line">      &#125;</span><br><span class="line">		&#125; <span class="keyword">else</span>&#123;</span><br><span class="line">			accounts.add(from);</span><br><span class="line">			accounts.add(to);</span><br><span class="line"></span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">// 归还资源</span></span><br><span class="line">	<span class="function"><span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">releaseObtainedAccountBook</span><span class="params">(Object from, Object to)</span></span>&#123;</span><br><span class="line">		accounts.remove(from);</span><br><span class="line">		accounts.remove(to);</span><br><span class="line">    notify();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>就这样【看】 【似】 【完】 【美】的解决了，其实上面的程序有两个大坑：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imge18d20c94006dfe0-3cdd6892e1ea4e8e-3668d8ad5f1cfd4ddcc222610ebc14e7.gif" alt=""></p>
+<h3 id="坑一"><a href="#坑一" class="headerlink" title="坑一"></a>坑一</h3><p>在上面 <code>this.wait()</code> 处，使用了 if 条件判断，会出现天大的麻烦，来看下图（从下往上看）：</p>
+<p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200312151758.png" alt=""></fancybox></p>
+<p>notify 唤醒的那一刻，线程<strong>【曾经/曾经/曾经】</strong>要求的条件得到了满足，从这一刻开始，到去条件等队列中唤醒线程，再到再次尝试获取锁是<code>有时间差</code>的，当再次获取到锁时，线程曾经要求的条件是<strong>不一定</strong>满足，所以需要<strong>重新</strong>进行条件判断，所以需要将 <code>if</code> 判断改成 <code>while</code> 判断</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">synchronized</span> <span class="keyword">boolean</span> <span class="title">getAllRequiredAccountBook</span><span class="params">( Object from, Object to)</span></span>&#123;</span><br><span class="line">		<span class="keyword">while</span>(accounts.contains(from) || accounts.contains(to))&#123;</span><br><span class="line">			<span class="keyword">try</span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.wait();</span><br><span class="line">      &#125;<span class="keyword">catch</span>(Exception e)&#123;</span><br><span class="line">        </span><br><span class="line">      &#125;</span><br><span class="line">		&#125; <span class="keyword">else</span>&#123;</span><br><span class="line">			accounts.add(from);</span><br><span class="line">			accounts.add(to);</span><br><span class="line"></span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">		&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<blockquote>
+<p>一个线程可以从挂起状态变为可运行状态（也就是被唤醒），即使线程没有被其他线程调用<code>notify()/notifyAll()</code> 方法进行通知，或被中断，或者等待超时，这就是所谓的【<strong>虚假唤醒</strong>】。虽然虚假唤醒很少发生，但要防患于未然，<strong>做法就是不停的去测试该线程被唤醒条件是否满足</strong></p>
+<p>——摘自《Java并发编程之美》</p>
+</blockquote>
+<hr>
+<p>有同学可能还会产生疑问，为什么while就可以？</p>
+<p>因为被唤醒的线程再次获取到锁之后是<strong>从原来的 wait 之后开始执行的</strong>，wait在循环里面，所以会再次进入循环条件重新进行条件判断。</p>
+<p>如果不理解这个道理就记住一句话：</p>
+<blockquote>
+<p>从哪里跌倒就从哪里爬起来；在哪里wait，就从wait那里继续向后执行</p>
+</blockquote>
+<p>所以，这也就成了使用wait()的标准范式</p>
+<p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200312154011.png" alt=""></fancybox></p>
+<p>至于坑二，是线程归还所使用的账户之后使用 notify 而不是 notifyAll 进行通知，由于坑很大，需要一些知识铺垫来说明</p>
+<h2 id="为什么说尽量使用-notifyAll"><a href="#为什么说尽量使用-notifyAll" class="headerlink" title="为什么说尽量使用 notifyAll()"></a>为什么说尽量使用 notifyAll()</h2><p>notify() 和 notifyAll() 到底啥区别？</p>
+<p><code>notify()</code> 函数</p>
+<h3 id=""><a href="#" class="headerlink" title=""></a></h3><blockquote>
+<p><strong>随机唤醒一个：</strong>一个线程调用共享对象的 notify() 方法，会唤醒<strong>一个</strong>在该共享变量上调用 wait() 方法后被挂起的线程，一个共享变量上可能有多个线程在等待，具体唤醒那一个，是<strong>随机的</strong></p>
+</blockquote>
+<p><code>notifyAll()</code> 函数</p>
+<blockquote>
+<p><strong>唤醒所有：</strong> 与notify() 不同，notifyAll() 会唤醒在该共享变量上由于调用wait() 方法而被挂起的<strong>所有线程</strong></p>
+</blockquote>
+<p>看个非常简单的程序例子吧</p>
+<p><strong>示例程序一</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Slf</span>4j</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">NotifyTest</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">volatile</span> Object resourceA = <span class="keyword">new</span> Object();</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line">		Thread threadA = <span class="keyword">new</span> Thread(() -&gt; &#123;</span><br><span class="line">				<span class="keyword">synchronized</span> (resourceA)&#123;</span><br><span class="line">					log.info(<span class="string">"threadA get resourceA lock"</span>);</span><br><span class="line"></span><br><span class="line">					<span class="keyword">try</span>&#123;</span><br><span class="line">						log.info(<span class="string">"threadA begins to wait"</span>);</span><br><span class="line">						resourceA.wait();</span><br><span class="line">						log.info(<span class="string">"threadA ends wait"</span>);</span><br><span class="line">					&#125;<span class="keyword">catch</span> (InterruptedException e)&#123;</span><br><span class="line">						log.error(e.getMessage());</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line">		&#125;);</span><br><span class="line"></span><br><span class="line">		Thread threadB = <span class="keyword">new</span> Thread(() -&gt; &#123;</span><br><span class="line">			<span class="keyword">synchronized</span> (resourceA)&#123;</span><br><span class="line">				log.info(<span class="string">"threadB get resourceA lock"</span>);</span><br><span class="line"></span><br><span class="line">				<span class="keyword">try</span>&#123;</span><br><span class="line">					log.info(<span class="string">"threadB begins to wait"</span>);</span><br><span class="line">					resourceA.wait();</span><br><span class="line">					log.info(<span class="string">"threadB ends wait"</span>);</span><br><span class="line">				&#125;<span class="keyword">catch</span> (InterruptedException e)&#123;</span><br><span class="line">					log.error(e.getMessage());</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;);</span><br><span class="line"></span><br><span class="line">		Thread threadC = <span class="keyword">new</span> Thread(() -&gt; &#123;</span><br><span class="line">			<span class="keyword">synchronized</span> (resourceA)&#123;</span><br><span class="line">				log.info(<span class="string">"threadC begin to notify"</span>);</span><br><span class="line">				resourceA.notify();</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;);</span><br><span class="line"></span><br><span class="line">		threadA.start();</span><br><span class="line">		threadB.start();</span><br><span class="line"></span><br><span class="line">		Thread.sleep(<span class="number">1000</span>);</span><br><span class="line"></span><br><span class="line">		threadC.start();</span><br><span class="line"></span><br><span class="line">		threadA.join();</span><br><span class="line">		threadB.join();</span><br><span class="line">		threadC.join();</span><br><span class="line"></span><br><span class="line">		log.info(<span class="string">"main thread over now"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>来看运行结果</p>
+<p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200312204947.png" alt=""></fancybox></p>
+<p>程序中我们使用notify()随机通知resourceA的等待队列的一个线程，threadA被唤醒，threadB却没有打印出 <code>threadB ends wait</code> 这句话，遗憾的死掉了</p>
+<p>将 notify() 换成 notifyAll() 的结果想必你已经知道了</p>
+<p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200312205605.png" alt=""></fancybox></p>
+<p>使用 notifyAll() 确实不会遗落等待队列中的线程，但也产生了比较强烈的竞争，如果notify() 设计的本身就是 bug，那么这个函数应该早就从 JDK 中移除了，它随机通知一个线程的形式必定是有用武之地的</p>
+<h2 id="什么时候可以使用-notify"><a href="#什么时候可以使用-notify" class="headerlink" title="什么时候可以使用 notify()"></a>什么时候可以使用 notify()</h2><p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200312210340.png" alt=""></fancybox></p>
+<p>notify() 的典型的应用就是线程池（按照上面的三个条件你自问自答验证一下是这样吗？）</p>
+<p>这里我们拿一个 JUC 下的类来看看 notify() 的用处</p>
+<blockquote>
+<p><strong>Tips:</strong></p>
+<ul>
+<li><code>notify()</code> 等同于 <code>signal()</code> </li>
+<li><code>wait()</code> 等同于 <code>await()</code></li>
+</ul>
+</blockquote>
+<p>在IDE中，打开 <code>ArrayBlockingQueue.java</code> </p>
+<p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200315101013.png" alt=""></fancybox></p>
+<p>所有的入队 public 方法<code>offer()/put()</code> 内部都调用了 private 的 <code>enqueue()</code> 方法</p>
+<p>所有的出队 public 方法<code>poll()/take()</code> 内部都调用了 private 的 <code>dequeue()</code> 方法</p>
+<p>将这个模型进行精简就是下面这个样子：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SimpleBlockingQueue</span>&lt;<span class="title">T</span>&gt; </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">final</span> Lock lock = <span class="keyword">new</span> ReentrantLock();</span><br><span class="line">	<span class="comment">// 条件变量：队列不满</span></span><br><span class="line">	<span class="keyword">final</span> Condition notFull = lock.newCondition();</span><br><span class="line">	<span class="comment">// 条件变量：队列不空</span></span><br><span class="line">	<span class="keyword">final</span> Condition notEmpty = lock.newCondition();</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 入队</span></span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">enq</span><span class="params">(T x)</span> </span>&#123;</span><br><span class="line">		lock.lock();</span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			<span class="keyword">while</span> (队列已满)&#123;</span><br><span class="line">				<span class="comment">// 等待队列不满</span></span><br><span class="line">				notFull.await();</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="comment">// 省略入队操作...</span></span><br><span class="line">			<span class="comment">//入队后,通知可出队</span></span><br><span class="line">			notEmpty.signal();</span><br><span class="line">		&#125;<span class="keyword">finally</span> &#123;</span><br><span class="line">			lock.unlock();</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">// 出队</span></span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">deq</span><span class="params">()</span></span>&#123;</span><br><span class="line">		lock.lock();</span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			<span class="keyword">while</span> (队列已空)&#123;</span><br><span class="line">				<span class="comment">// 等待队列不空</span></span><br><span class="line">				notEmpty.await();</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="comment">// 省略出队操作...</span></span><br><span class="line">			<span class="comment">//出队后，通知可入队</span></span><br><span class="line">			notFull.signal();</span><br><span class="line">		&#125;<span class="keyword">finally</span> &#123;</span><br><span class="line">			lock.unlock();</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>如果满足上面这三个条件，notify() 的使用就恰到好处；我们用使用 <code>notify()</code>的条件进行验证</p>
+<p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200315104007.png" alt=""></fancybox></p>
+<p>有的同学看到这里可能会稍稍有一些疑惑，<code>await()/signal()</code> 和 <code>wait()/notify()</code> 组合的玩法看着不太一样呢，你疑惑的没有错</p>
+<p>因为 Java 内置的监视器锁模型是 MESA 模型的精简版</p>
+<h2 id="MESA模型"><a href="#MESA模型" class="headerlink" title="MESA模型"></a>MESA模型</h2><p>MESA 监视器模型中说，每一个条件变量都对应一个条件等待队列</p>
+<p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200315110223.png" alt=""></fancybox></p>
+<p>对应到上面程序：</p>
+<ul>
+<li>队列已满是前提条件，条件变量A就是notFull，也就是notFull.await; notFull.signal</li>
+<li>队列已空是前提条件，条件变量B就是notEmpty，也就是notEmpty.await; notEmpty.signal/sign</li>
+</ul>
+<p><strong>即便notFull.signalAll, 也和await在notEmpty 条件变量队列的线程没半毛钱关系</strong></p>
+<p>而Java内置监视器模型就只会有一个【隐形的】条件变量</p>
+<ul>
+<li>如果是synchronized修饰的普通方法，条件变量就是 this</li>
+<li>如果是synchronized修饰的静态方法，条件变量就是类</li>
+<li>如果是synchronized块，条件变量就是块中的内容了 </li>
+</ul>
+<p>说完了这些，你有没有恍然大悟的感觉呢</p>
+<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200315115553.png" alt=""></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>如果业务冲突不大，循环等待是一种简单粗暴且有效的方式；但是当业务冲突大之后，通知/等待机制是必不可少的使用策略</p>
+<p>通过这篇文章，相信你已经可以通过灵魂4问，知道如何将循环等待改善成通知/等待模型了；另外也知道如何正确的使用通知/等待机制了</p>
+<h2 id="灵魂追问"><a href="#灵魂追问" class="headerlink" title="灵魂追问"></a>灵魂追问</h2><ol>
+<li>钱庄转账的业务，条件都是判断账户是否被支配，都是执行相同的转账业务，为什么就不可以用notify() 而只能用notifyAll() 呢</li>
+<li>ResourceA的例子，为什么使用notify通知，程序没有打印出 <code>main thread over now</code>， 而使用notifyAll() 却打印出来了呢？</li>
+</ol>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>感谢前辈们总结的精华，自己所写的并发系列好多都参考了以下资料</p>
+<ul>
+<li>Java 并发编程实战</li>
+<li>Java 并发编程之美</li>
+<li>码出高效</li>
+<li>Java 并发编程的艺术</li>
+<li><a href="https://www.geeksforgeeks.org/difference-notify-notifyall-java/" target="_blank" rel="noopener">https://www.geeksforgeeks.org/difference-notify-notifyall-java/</a></li>
+<li>…</li>
+</ul>
+<hr>
+<p>下面的文章，就需要聊聊【线程的生命周期】了，只有熟知线程的生命周期，你才能更好的编写并发程序。</p>
+<p>我这面也在逐步总结常见的并发面试问题（总结ing……）答案整理好后会通知大家，请持续关注</p>
+<p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200315120104.png" alt=""></fancybox></p>
+<p>同时，这里也整理了一点 Java 硬核资料，有需要的就公众号回复【资料】/【666】吧</p>
+<p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200310160835.png" alt=""></fancybox></p>
+<hr>
+
+      </div>
+      <!-- <div class="tuijian">
+        <br><br>
+        📚相关文章
+        <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-core.html" title="并发编程三大核心" rel="bookmark">并发编程三大核心</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-lock-resource.html" title="锁保护资源，synchronized方法就够了吗" rel="bookmark">锁保护资源，synchronized方法就够了吗</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/difference-between-volatile-and-synchronized-keyword.html" title="volatile和synchronized图文透彻讲解" rel="bookmark">volatile和synchronized图文透彻讲解</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-three-questions.html" title="并发编程三大问题" rel="bookmark">并发编程三大问题</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-metaphor.html" title="并发编程之初探" rel="bookmark">并发编程之初探</a></h3></div></li></ul>
+      </div> -->
+      <div class="personalweixin">
+        <br><br>
+        <blockquote>
+          <a href="https://mp.weixin.qq.com/s/G7BXuZh0Qh1-mE6ts4LJqQ" target="_blank" rel="noopener">加我微信</a>，咱们交流技术与思想，共同成长
+        </blockquote>
+        <br>
+
+      </div>
+      
+      
+        <br>
+        
+
+
+  <section class='meta' id="footer-meta">
+    <div class='new-meta-box'>
+      
+        
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-03-15T16:07:45+08:00">
+  <a class='notlink'>
+    <i class="fas fa-clock" aria-hidden="true"></i>
+    <p>更新于 2020年3月15日</p>
+  </a>
+</div>
+
+        
+      
+        
+          
+  
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/Java-Concurrency/" rel="nofollow"><i class="fas fa-tag" aria-hidden="true"></i><p>Java-Concurrency</p></a></div>
+
+
+        
+      
+        
+          
+  <div class="new-meta-item share -mob-share-list">
+  <div class="-mob-share-list share-body">
+    
+      
+        <a class="-mob-share-qq" title="QQ好友" rel="external nofollow noopener noreferrer"
+          
+          href="http://connect.qq.com/widget/shareqq/index.html?url=https://dayarch.top/p/waiting-notification-mechanism.html&title=并发编程之等待通知机制 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=并发编程为什么会有等待通知机制
+上一篇文章说明了 Java并发死锁解决思路 ， 解决死锁的思路之一就是 破坏请求和保持条件, 所有柜员都要通过唯一的账本管理员一次性拿到所有转账业务需要的账本，就像下面这样： 
+
+
+
+没有等待/通知机制之前，所有柜员都通过死循环的方式不断向账本管理员申请所有账本，程序的体现就是这样：
+
+1
+2
+
+
+while(!accountBookManager.getAllRequiredAccountBook(this, target)) 
+；
+
+
+假如账本管理员是年轻小伙，腿脚利落（即执行 getAllRequiredAccountBook方法耗时短），并且多个柜员转账"
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/assets@19.1.9/logo/128/qq.png">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-qzone" title="QQ空间" rel="external nofollow noopener noreferrer"
+          
+          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://dayarch.top/p/waiting-notification-mechanism.html&title=并发编程之等待通知机制 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=并发编程为什么会有等待通知机制
+上一篇文章说明了 Java并发死锁解决思路 ， 解决死锁的思路之一就是 破坏请求和保持条件, 所有柜员都要通过唯一的账本管理员一次性拿到所有转账业务需要的账本，就像下面这样： 
+
+
+
+没有等待/通知机制之前，所有柜员都通过死循环的方式不断向账本管理员申请所有账本，程序的体现就是这样：
+
+1
+2
+
+
+while(!accountBookManager.getAllRequiredAccountBook(this, target)) 
+；
+
+
+假如账本管理员是年轻小伙，腿脚利落（即执行 getAllRequiredAccountBook方法耗时短），并且多个柜员转账"
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/assets@19.1.9/logo/128/qzone.png">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-weibo" title="微博" rel="external nofollow noopener noreferrer"
+          
+          href="http://service.weibo.com/share/share.php?url=https://dayarch.top/p/waiting-notification-mechanism.html&title=并发编程之等待通知机制 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=并发编程为什么会有等待通知机制
+上一篇文章说明了 Java并发死锁解决思路 ， 解决死锁的思路之一就是 破坏请求和保持条件, 所有柜员都要通过唯一的账本管理员一次性拿到所有转账业务需要的账本，就像下面这样： 
+
+
+
+没有等待/通知机制之前，所有柜员都通过死循环的方式不断向账本管理员申请所有账本，程序的体现就是这样：
+
+1
+2
+
+
+while(!accountBookManager.getAllRequiredAccountBook(this, target)) 
+；
+
+
+假如账本管理员是年轻小伙，腿脚利落（即执行 getAllRequiredAccountBook方法耗时短），并且多个柜员转账"
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/assets@19.1.9/logo/128/weibo.png">
+          
+        </a>
+      
+    
+  </div>
+</div>
+
+
+
+        
+      
+    </div>
+  </section>
+
+
+      
+      
+          <div class="prev-next">
+              
+              
+                  <section class="next">
+                      <span class="art-item-right" aria-hidden="true">
+                          <h6>下一页&nbsp;<i class="fas fa-chevron-right" aria-hidden="true"></i></h6>
+                          <h4>
+                              <a href="/p/difference-between-volatile-and-synchronized-keyword.html" rel="prev" title="volatile和synchronized图文透彻讲解">
+                                  
+                                      volatile和synchronized图文透彻讲解
+                                  
+                              </a>
+                          </h4>
+                          
+                              
+                              <h6 class="tags">
+                                  <a class="tag" href="/tags/Java-Concurrency/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> Java-Concurrency</a> <a class="tag" href="/tags/volatile/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> volatile</a> <a class="tag" href="/tags/synchronized/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> synchronized</a>
+                              </h6>
+                          
+                      </span>
+                  </section>
+              
+          </div>
+      
+    </section>
+  </article>
+
+
+  
+    
+  
+    
+      
+        
+          
+  <section class='widget related_posts'>
+    
+<header class='pure'>
+  <div><i class="fas fa-bookmark fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;相关文章</div>
+  
+</header>
+
+    <div class="content pure">
+      <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-core.html" title="并发编程三大核心" rel="bookmark">并发编程三大核心</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-lock-resource.html" title="锁保护资源，synchronized方法就够了吗" rel="bookmark">锁保护资源，synchronized方法就够了吗</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/difference-between-volatile-and-synchronized-keyword.html" title="volatile和synchronized图文透彻讲解" rel="bookmark">volatile和synchronized图文透彻讲解</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-three-questions.html" title="并发编程三大问题" rel="bookmark">并发编程三大问题</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-metaphor.html" title="并发编程之初探" rel="bookmark">并发编程之初探</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-happens-before-rule.html" title="有序性可见性，Happens-before来搞定" rel="bookmark">有序性可见性，Happens-before来搞定</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-atomic.html" title="解决原子性问题？你首先需要的是宏观理解" rel="bookmark">解决原子性问题？你首先需要的是宏观理解</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-volatile.html" title="面试volatile关键字时，我们应该具备哪些谈资？" rel="bookmark">面试volatile关键字时，我们应该具备哪些谈资？</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-dead-lock.html" title="Java并发死锁解决思路" rel="bookmark">Java并发死锁解决思路</a></h3></div></li></ul>
+    </div>
+  </section>
+
+
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+  
+    
+  
+
+
+  <!-- 显示推荐文章和评论 -->
+
+
+
+  <article class="post white-box comments">
+    <section class="article typo">
+      <h4><i class="fas fa-comments fa-fw" aria-hidden="true"></i>&nbsp;评论</h4>
+      
+      
+      
+        <section id="comments">
+          <div id="gitalk-container"></div>
+        </section>
+      
+      
+    </section>
+  </article>
+
+
+
+
+
+
+<!-- 根据页面mathjax变量决定是否加载MathJax数学公式js -->
+
+
+
+  <script>
+    window.subData = {
+      title: '并发编程之等待通知机制',
+      tools: true
+    }
+  </script>
+
+
+
+  <script src="https://my.openwrite.cn/js/readmore.js" type="text/javascript"></script>
+  <script>
+      const btw = new BTWPlugin();
+      btw.init({
+          id: 'post',
+          blogId: '10015-1569397635991-668',
+          name: '日拱一兵',
+          qrcode: 'https://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E6%84%9F%E6%83%B3%E4%B8%8E%E6%80%BB%E7%BB%93/_image/2019-07-25/qrcode.jpg',
+          keyword: 'tanrgyb',
+      });
+  </script>
+  
+
+</div>
+<aside class='l_side'>
+  
+    
+    
+      
+      
+        
+          
+          
+        
+          
+          
+            
+              <section class='widget author'>
+  <div class='content pure'>
+    
+      <div class='avatar'>
+        <img class='avatar' src='https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgqrcode.jpg'/>
+      </div>
+    
+    
+      <div class='text'>
+        
+        
+        
+          <p><span id="jinrishici-sentence">从来没有真正的绝境，只有心灵的迷途</span></p>
+          <script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
+        
+      </div>
+    
+    
+      <div class="social-wrapper">
+        
+          
+            <a href="/atom.xml"
+              class="social fas fa-rss flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="mailto:dayarch@126.com"
+              class="social fas fa-envelope flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="https://github.com/FraserYu"
+              class="social fab fa-github flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+      </div>
+    
+  </div>
+</section>
+
+            
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+      
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+      
+        
+          
+          
+        
+          
+          
+        
+          
+          
+            
+              
+  <section class='widget toc-wrapper'>
+    
+<header class='pure'>
+  <div><i class="fas fa-list fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;本文目录</div>
+  
+    <!-- <div class='wrapper'><a class="s-toc rightBtn" rel="external nofollow noopener noreferrer" href="javascript:void(0)"><i class="fas fa-thumbtack fa-fw"></i></a></div> -->
+  
+</header>
+
+    <div class='content pure'>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#并发编程为什么会有等待通知机制"><span class="toc-text">并发编程为什么会有等待通知机制</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#等待-通知机制"><span class="toc-text">等待/通知机制</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#灵魂-4-问"><span class="toc-text">灵魂 4 问</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#坑一"><span class="toc-text">坑一</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#为什么说尽量使用-notifyAll"><span class="toc-text">为什么说尽量使用 notifyAll()</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#null"><span class="toc-text"></span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#什么时候可以使用-notify"><span class="toc-text">什么时候可以使用 notify()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MESA模型"><span class="toc-text">MESA模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-text">总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#灵魂追问"><span class="toc-text">灵魂追问</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考"><span class="toc-text">参考</span></a></li></ol>
+    </div>
+  </section>
+
+
+            
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+      
+    
+
+  
+</aside>
+
+<footer id="footer" class="clearfix">
+  
+    <div class="footer">
+      <p><strong>If you can NOT explain it simply, you do NOT understand it well enough</strong></p>
+
+    </div>
+    <br>
+  
+  
+    <div class="social-wrapper">
+      
+        
+          <a href="/atom.xml"
+            class="social fas fa-rss flat-btn"
+            target="_blank"
+            rel="external nofollow noopener noreferrer">
+          </a>
+        
+      
+        
+          <a href="mailto:dayarch@126.com"
+            class="social fas fa-envelope flat-btn"
+            target="_blank"
+            rel="external nofollow noopener noreferrer">
+          </a>
+        
+      
+        
+          <a href="https://github.com/FraserYu"
+            class="social fab fa-github flat-btn"
+            target="_blank"
+            rel="external nofollow noopener noreferrer">
+          </a>
+        
+      
+    </div>
+  
+  <br>
+  Copyright <i class="far fa-copyright"></i>  2018-2019 
+  <a href="https://www.itrhx.com/" target="_blank"> Tanθ's Blog </a>
+  &nbsp;&nbsp;|&nbsp;&nbsp;<img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgicp.png">
+  <a href="http://www.beian.miit.gov.cn/" target="_blank">辽ICP备19017651号-1</a>
+
+  &nbsp;&nbsp;|&nbsp;&nbsp;  
+  
+    &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+        class="white-color">169.8k</span>&nbsp;字
+    
+
+  &nbsp;&nbsp;|&nbsp;&nbsp;  
+  
+    <span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+    <script>
+        var now = new Date(); 
+        function createtime() { 
+            var grt= new Date("05/22/2019 09:09:06");//在此处修改你的建站时间
+            now.setTime(now.getTime()+250); 
+            days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+            hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+            if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+            mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+            seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+            snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+            document.getElementById("timeDate").innerHTML = "本站已运行 "+dnum+" 天 "; 
+            document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+        } 
+    setInterval("createtime()",250);
+    </script>
+    
+  &nbsp;&nbsp;|&nbsp;&nbsp;<a href="https://dayarch.top/sitemap.xml" target="_blank">站点地图</a>
+  &nbsp;&nbsp;|&nbsp;&nbsp;<a href="https://tongji.baidu.com/web/welcome/ico?s=f553477a3dc5ab3837e9a4dead4e0bc7" target="_blank">站长统计</a>
+  
+  
+
+
+
+
+  <div>
+    <!-- 本站使用
+    <a href="https://xaoxuu.com/wiki/material-x/" target="_blank" class="codename">Material X</a>
+    作为主题 -->
+    
+      <!-- ， -->
+      <!-- 总访问量为
+      <span id="busuanzi_value_site_pv"><i class="fas fa-eyes" aria-hidden="true"></i></span>
+      次 -->
+      <span id="busuanzi_container_site_pv">
+        &nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;<span id="busuanzi_value_site_pv"
+            class="white-color"></span>&nbsp;次
+    </span>
+      <!-- &nbsp;&nbsp;|&nbsp;&nbsp; -->
+      <!-- 总访客量 -->
+      <!-- <span id="busuanzi_container_site_uv"><i class="fas fa-eyes" aria-hidden="true"></i></span> -->
+      <span id="busuanzi_container_site_uv">
+        |&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;<span id="busuanzi_value_site_uv"
+            class="white-color"></span>&nbsp;人
+    </span>
+      <!-- 人 -->
+    
+    。
+  </div>
+  <div><p>博客内容遵循 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
+</div>
+  <!-- <div class="github-badge">
+      <a style="color: #fff" rel="license" href="https://hexo.io/" target="_blank" title="由 Hexo 强力驱动">
+      <span class="badge-subject">Powered</span><span class="badge-value bg-blue">Hexo</span></a>
+    </div> -->
+</footer>
+<script>setLoadingBarProgress(80);</script>
+
+
+<script>
+    (function(){
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        }
+        else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+   
+
+      <script>setLoadingBarProgress(60);</script>
+    </div>
+    <a class="s-top fas fa-arrow-up fa-fw" href='javascript:void(0)'></a>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+
+  <script>
+    var GOOGLE_CUSTOM_SEARCH_API_KEY = "";
+    var GOOGLE_CUSTOM_SEARCH_ENGINE_ID = "";
+    var ALGOLIA_API_KEY = "";
+    var ALGOLIA_APP_ID = "";
+    var ALGOLIA_INDEX_NAME = "";
+    var AZURE_SERVICE_NAME = "";
+    var AZURE_INDEX_NAME = "";
+    var AZURE_QUERY_KEY = "";
+    var BAIDU_API_ID = "";
+    var SEARCH_SERVICE = "hexo" || "hexo";
+    var ROOT = "/"||"/";
+    if(!ROOT.endsWith('/'))ROOT += '/';
+  </script>
+
+<script src="//instant.page/1.2.2" type="module" integrity="sha384-2xV8M5griQmzyiY3CDqh1dn4z3llDVqZDqzjzcY+jCBCk/a5fXJmuZ/40JJAPeoU"></script>
+
+
+  <script async src="https://cdn.jsdelivr.net/npm/scrollreveal@4.0.5/dist/scrollreveal.min.js"></script>
+  <script type="text/javascript">
+    $(function() {
+      const $reveal = $('.reveal');
+      if ($reveal.length === 0) return;
+      const sr = ScrollReveal({ distance: 0 });
+      sr.reveal('.reveal');
+    });
+  </script>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/node-waves@0.7.6/dist/waves.min.js"></script>
+  <script type="text/javascript">
+    $(function() {
+      Waves.attach('.flat-btn', ['waves-button']);
+      Waves.attach('.float-btn', ['waves-button', 'waves-float']);
+      Waves.attach('.float-btn-light', ['waves-button', 'waves-float', 'waves-light']);
+      Waves.attach('.flat-box', ['waves-block']);
+      Waves.attach('.float-box', ['waves-block', 'waves-float']);
+      Waves.attach('.waves-image');
+      Waves.init();
+    });
+  </script>
+
+
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <!-- <script async src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-busuanzi@2.3/js/busuanzi.pure.mini.js"></script> -->
+
+
+
+
+
+
+
+
+
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+  <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+  <script type="text/javascript">
+    var gitalk = new Gitalk({
+      clientID: "57bd3ce366ba25a73a1a",
+      clientSecret: "bab4a248180b9ac85b16fb44bf4ba171648f9cab",
+      repo: "myBlogTalk",
+      owner: "FraserYu",
+      admin: "FraserYu",
+      
+        id: location.pathname,      // Ensure uniqueness and length less than 50
+      
+      distractionFreeMode: false  // Facebook-like distraction free mode
+    });
+    gitalk.render('gitalk-container');
+  </script>
+
+
+
+
+
+  <script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/app.js"></script>
+
+
+  <script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/search.js"></script>
+
+
+
+
+<!-- 复制 -->
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  let COPY_SUCCESS = "复制成功";
+  let COPY_FAILURE = "复制失败";
+  /*页面载入完成后，创建复制按钮*/
+  !function (e, t, a) {
+    /* code */
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '  <i class="fa fa-copy"></i><span>复制</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+
+      clipboard.on('success', function(e) {
+        //您可以加入成功提示
+        console.info('Action:', e.action);
+        console.info('Text:', e.text);
+        console.info('Trigger:', e.trigger);
+        success_prompt(COPY_SUCCESS);
+        e.clearSelection();
+      });
+      clipboard.on('error', function(e) {
+        //您可以加入失败提示
+        console.error('Action:', e.action);
+        console.error('Trigger:', e.trigger);
+        fail_prompt(COPY_FAILURE);
+      });
+    }
+    initCopyCode();
+
+  }(window, document);
+
+  /**
+   * 弹出式提示框，默认1.5秒自动消失
+   * @param message 提示信息
+   * @param style 提示样式，有alert-success、alert-danger、alert-warning、alert-info
+   * @param time 消失时间
+   */
+  var prompt = function (message, style, time)
+  {
+      style = (style === undefined) ? 'alert-success' : style;
+      time = (time === undefined) ? 1500 : time*1000;
+      $('<div>')
+          .appendTo('body')
+          .addClass('alert ' + style)
+          .html(message)
+          .show()
+          .delay(time)
+          .fadeOut();
+  };
+
+  // 成功提示
+  var success_prompt = function(message, time)
+  {
+      prompt(message, 'alert-success', time);
+  };
+
+  // 失败提示
+  var fail_prompt = function(message, time)
+  {
+      prompt(message, 'alert-danger', time);
+  };
+
+  // 提醒
+  var warning_prompt = function(message, time)
+  {
+      prompt(message, 'alert-warning', time);
+  };
+
+  // 信息提示
+  var info_prompt = function(message, time)
+  {
+      prompt(message, 'alert-info', time);
+  };
+
+</script>
+
+
+<!-- fancybox -->
+<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+<script>
+  let LAZY_LOAD_IMAGE = "";
+  $(".article-entry").find("fancybox").find("img").each(function () {
+      var element = document.createElement("a");
+      $(element).attr("data-fancybox", "gallery");
+      $(element).attr("href", $(this).attr("src"));
+      /* 图片采用懒加载处理时,
+       * 一般图片标签内会有个属性名来存放图片的真实地址，比如 data-original,
+       * 那么此处将原本的属性名src替换为对应属性名data-original,
+       * 修改如下
+       */
+       if (LAZY_LOAD_IMAGE) {
+         $(element).attr("href", $(this).attr("data-original"));
+       }
+      $(this).wrap(element);
+  });
+</script>
+
+
+
+
+
+  <script>setLoadingBarProgress(100);</script>
+
+<!-- 鼠标点击火花效果 -->
+<!-- <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+<script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+<script type="text/javascript" src="/js/fireworks.js"></script> -->
+
+<!-- 腾讯分析代码 -->
+<!-- <script type="text/javascript" src="http://tajs.qq.com/stats?sId=66485661" charset="UTF-8"></script> -->
+
+  <!--动态线条背景-->
+<!-- <script type="text/javascript" color="100,220,220" opacity='0.8' zIndex="-2" count="400" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script> -->
+<!-- 样式二（飘动的彩带） -->
+<!-- <script src="https://g.joyinshare.com/hc/piao.js" type="text/javascript"></script> -->
+<!-- 样式一（鼠标点击更换样式） -->
+<!-- <script src="https://g.joyinshare.com/hc/ribbon.min.js" type="text/javascript"></script> -->
+</body>
+</html>
