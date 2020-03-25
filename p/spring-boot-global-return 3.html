@@ -1,0 +1,1389 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  
+  <title>Springboot返回统一JSON数据格式是怎么实现的？ | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享</title>
+  
+  <meta name="keywords" content="SpringBoot,统一返回,JSON,HttpMessageConverter, Java,SpringBoot,并发编程, ElasticSearch, 日拱一兵">
+  
+  
+  <meta name="description" content="SpringBoot RESTful API 返回统一数据格式，这是一种非常简单的方式，透过本文，你更能了解这种简单实现方式背后的秘密, 本站是日拱一兵的技术分享博客，内容涵盖Java后端技术、Spring Boot、Java并发编程等技术研究与分享，用有趣的方式解读技术">
+  
+
+  
+  <link rel="alternate" href="/atom.xml" title="日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享">
+  
+
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <!-- meta -->
+  
+
+  <!-- link -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-waves@0.7.6/dist/waves.min.css">
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.10.1/css/all.min.css">
+  
+
+  
+  <link rel="shortcut icon" type='image/x-icon' href="https://cdn.jsdelivr.net/gh/xaoxuu/assets@master/favicon/favicon.ico">
+  
+
+  
+    <link rel="stylesheet" href="/style.css">
+  
+
+  <script>
+    function setLoadingBarProgress(num) {
+      document.getElementById('loading-bar').style.width=num+"%";
+    }
+  </script>
+
+  
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-147539283-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-147539283-1');
+    </script>
+  
+  
+    <!-- ba -->
+    <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?f553477a3dc5ab3837e9a4dead4e0bc7";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+    </script>
+  
+
+
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-1774278264048334",
+        enable_page_level_ads: true
+      });
+    </script>
+
+    
+        <script>
+        (function(i,s,o,g,r,a,m){i["DaoVoiceObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;a.charset="utf-8";m.parentNode.insertBefore(a,m)})(window,document,"script",('https:' == document.location.protocol ? 'https:' : 'http:') + "//widget.daovoice.io/widget/0f81ff2f.js","daovoice")
+        daovoice('init', {
+            app_id: "8a3d6849"
+        });
+        daovoice('update');
+        </script>
+    
+</head>
+
+<body>
+  
+  
+  <div class="cover-wrapper">
+    <cover class='cover post half'>
+      
+        
+  <img class='logo' src='/assets/logo.png'/>
+
+
+  <div class="m_search">
+    <form name="searchform" class="form u-search-form">
+      <input type="text" class="input u-search-input" placeholder="世界很大，搜索一下" />
+      <i class="icon fas fa-search fa-fw"></i>
+    </form>
+  </div>
+
+<div class='menu navgation'>
+  <ul class='h-list'>
+    
+      
+        <li>
+          <a class="nav home" href="/"
+            
+              rel="nofollow"
+            
+            
+            id="home">
+            <i class='fas fa-home fa-fw'></i>&nbsp;主页
+          </a>
+        </li>
+      
+        <li>
+          <a class="nav home" href="/categories/"
+            
+              rel="nofollow"
+            
+            
+            id="categories">
+            <i class='fas fa-folder-open fa-fw'></i>&nbsp;分类
+          </a>
+        </li>
+      
+        <li>
+          <a class="nav home" href="/tags/"
+            
+              rel="nofollow"
+            
+            
+            id="tags">
+            <i class='fas fa-tags fa-fw'></i>&nbsp;标签
+          </a>
+        </li>
+      
+        <li>
+          <a class="nav home" href="/archives/"
+            
+              rel="nofollow"
+            
+            
+            id="archives">
+            <i class='fas fa-archive fa-fw'></i>&nbsp;归档
+          </a>
+        </li>
+      
+        <li>
+          <a class="nav home" href="/comments/"
+            
+              rel="nofollow"
+            
+            
+            id="comments">
+            <i class='fas fa-comments fa-fw'></i>&nbsp;留言板
+          </a>
+        </li>
+      
+    
+  </ul>
+</div>
+
+<br>
+<div class="description center-align">
+    
+    <span id="typed"></span>
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.9"></script>
+    <script>
+        var typed = new Typed("#typed", {
+            strings: ['从来没有真正的绝境, 只有心灵的迷途', 'Never really desperate, only the lost of the soul'],
+            startDelay: 300,
+            typeSpeed: 100,
+            loop: true,
+            backSpeed: 50,
+            showCursor: true
+        });
+    </script>
+    
+</div>
+
+      
+    </cover>
+    <header class="l_header pure">
+  <div id="loading-bar-wrapper">
+    <div id="loading-bar" class="pure"></div>
+  </div>
+
+	<div class='wrapper'>		
+		<div class="nav-main container container--flex">
+      <a class="logo flat-box" href='/' >
+        
+          日拱一兵
+        
+      </a>
+		<div class='menu navgation'>
+				<ul class='h-list'>
+          
+  					
+  						<li>
+								<a class="nav flat-box" href="/"
+                  
+                    rel="nofollow"
+                  
+                  
+                  id="home">
+									<i class='fas fa-home fa-fw'></i>&nbsp;主页
+								</a>
+							</li>
+      			
+  						<li>
+								<a class="nav flat-box" href="/categories/"
+                  
+                    rel="nofollow"
+                  
+                  
+                  id="categories">
+									<i class='fas fa-folder-open fa-fw'></i>&nbsp;分类
+								</a>
+							</li>
+      			
+  						<li>
+								<a class="nav flat-box" href="/tags/"
+                  
+                    rel="nofollow"
+                  
+                  
+                  id="tags">
+									<i class='fas fa-tags fa-fw'></i>&nbsp;标签
+								</a>
+							</li>
+      			
+  						<li>
+								<a class="nav flat-box" href="/archives/"
+                  
+                    rel="nofollow"
+                  
+                  
+                  id="archives">
+									<i class='fas fa-archive fa-fw'></i>&nbsp;归档
+								</a>
+							</li>
+      			
+  						<li>
+								<a class="nav flat-box" href="/friends/"
+                  
+                    rel="nofollow"
+                  
+                  
+                  id="friends">
+									<i class='fas fa-link fa-fw'></i>&nbsp;友链
+								</a>
+							</li>
+      			
+  						<li>
+								<a class="nav flat-box" href="/comments/"
+                  
+                    rel="nofollow"
+                  
+                  
+                  id="comments">
+									<i class='fas fa-comments fa-fw'></i>&nbsp;留言板
+								</a>
+							</li>
+      			
+      		
+				</ul>
+			</div>
+
+			
+				<div class="m_search">
+					<form name="searchform" class="form u-search-form">
+						<input type="text" class="input u-search-input" placeholder="搜索" />
+						<i class="icon fas fa-search fa-fw"></i>
+					</form>
+				</div>
+			
+			<ul class='switcher h-list'>
+				
+					<li class='s-search'><a class="fas fa-search fa-fw" href='javascript:void(0)'></a></li>
+				
+				<li class='s-menu'><a class="fas fa-bars fa-fw" href='javascript:void(0)'></a></li>
+			</ul>
+		</div>
+		<div class='nav-sub container container--flex'>
+			<a class="logo flat-box"></a>
+			<ul class='switcher h-list'>
+				<li class='s-comment'><a class="flat-btn fas fa-comments fa-fw" href='javascript:void(0)'></a></li>
+        
+          <li class='s-toc'><a class="flat-btn fas fa-list fa-fw" href='javascript:void(0)'></a></li>
+        
+			</ul>
+		</div>
+	</div>
+</header>
+	<aside class="menu-phone">
+    <header>
+		<nav class="menu navgation">
+      <ul>
+        
+          
+            <li>
+							<a class="nav flat-box" href="/"
+                
+                  rel="nofollow"
+                
+                
+                id="home">
+								<i class='fas fa-clock fa-fw'></i>&nbsp;近期文章
+							</a>
+            </li>
+          
+            <li>
+							<a class="nav flat-box" href="/categories/"
+                
+                  rel="nofollow"
+                
+                
+                id="categories">
+								<i class='fas fa-folder-open fa-fw'></i>&nbsp;分类
+							</a>
+            </li>
+          
+            <li>
+							<a class="nav flat-box" href="/tags/"
+                
+                  rel="nofollow"
+                
+                
+                id="tags">
+								<i class='fas fa-tags fa-fw'></i>&nbsp;标签
+							</a>
+            </li>
+          
+            <li>
+							<a class="nav flat-box" href="/archives/"
+                
+                  rel="nofollow"
+                
+                
+                id="archives">
+								<i class='fas fa-archive fa-fw'></i>&nbsp;归档
+							</a>
+            </li>
+          
+            <li>
+							<a class="nav flat-box" href="/friends/"
+                
+                  rel="nofollow"
+                
+                
+                id="friends">
+								<i class='fas fa-link fa-fw'></i>&nbsp;友链
+							</a>
+            </li>
+          
+            <li>
+							<a class="nav flat-box" href="/comments/"
+                
+                  rel="nofollow"
+                
+                
+                id="comments">
+								<i class='fas fa-comments fa-fw'></i>&nbsp;留言板
+							</a>
+            </li>
+          
+       
+      </ul>
+		</nav>
+    </header>
+	</aside>
+<script>setLoadingBarProgress(40);</script>
+
+  </div>
+
+
+  <div class="l_body">
+    <div class='body-wrapper'>
+      <div class='l_main'>
+  
+
+  <article id="post" class="post white-box article-type-post" itemscope itemprop="blogPost">
+    
+
+
+  <section class='meta'>
+    
+    
+      <a title='Springboot返回统一JSON数据格式是怎么实现的？' href='/p/spring-boot-global-return.html'><img class='thumbnail' src='https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgspringbootjson.png'></a>
+    
+    <div class="meta" id="header-meta">
+      
+        
+  
+    <h1 class="title">
+      <a href="/p/spring-boot-global-return.html">
+        Springboot返回统一JSON数据格式是怎么实现的？
+      </a>
+    </h1>
+  
+
+
+      
+      <div class='new-meta-box'>
+        
+          
+        
+          
+            
+  <div class='new-meta-item author'>
+    
+      <a href="https://dayarch.top" rel="nofollow">
+        
+          <img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png">
+        
+        <p>tanθ</p>
+      </a>
+    
+  </div>
+
+
+          
+        
+          
+            <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+    <p>2019-08-08</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+  
+  <div class='new-meta-item category'>
+    <a href='/categories/Coding/Spring-Boot/' rel="nofollow">
+      <i class="fas fa-folder-open" aria-hidden="true"></i>
+      <p>Coding&nbsp;/&nbsp;Spring-Boot</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            
+  
+    <div class="new-meta-item browse busuanzi">
+      <a class='notlink'>
+        <i class="fas fa-eye" aria-hidden="true"></i>
+        <p>
+          <span id="busuanzi_value_page_pv">
+            <i class="fas fa-spinner fa-spin fa-fw" aria-hidden="true"></i>
+          </span>
+        </p>
+      </a>
+    </div>
+  
+
+
+          
+        
+          
+            
+
+          
+        
+      </div>
+      
+        <hr>
+      
+    </div>
+  </section>
+
+
+    <section class="article typo">
+      <div class="article-entry" itemprop="articleBody">
+        <p>关于 Spring 的全局处理，我有两方面要说:</p>
+<ol>
+<li>统一数据返回格式</li>
+<li>统一异常处理<br>为了将两个问题说明清楚，将分两个章节分别说明，本章主要说第一点</li>
+</ol>
+<p><img src="https://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E6%84%9F%E6%83%B3%E4%B8%8E%E6%80%BB%E7%BB%93/_image/2019-07-25/landscape-615429_1920.jpg" alt=""></p>
+<p>有童鞋说，我们项目都做了这种处理，就是在每个 API 都单独工具类将返回值进行封装，但这种不够优雅；我想写最少的代码完成这件事，也许有童鞋说，加几个注解就解决问题了，说的没错，<strong>但这篇文章主要是为了说明为什么加了几个注解就解决问题了，目的是希望大家知其所以然</strong>。</p>
+<p><img src="https://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/Spring/_image/2019-08-08/comic-4388763_1920.png" alt=""></p>
+<p>为了更好的说明问题，本文先说明如何实现，然后再详细剖析实现原理(这很关键)</p>
+<h2 id="为什么要做统一数据返回格式"><a href="#为什么要做统一数据返回格式" class="headerlink" title="为什么要做统一数据返回格式"></a>为什么要做统一数据返回格式</h2><p>前后端分离是当今服务形式的主流，<a href="https://mp.weixin.qq.com/s/hR1TqkVzwZ_T8fuMnsM4hQ" target="_blank" rel="noopener">如何设计一个好的 RESTful API</a> ，以及如何让前端小伙伴可以处理标准的 response JSON 数据结构都至关重要，为了让前端有更好的逻辑展示与页面交互处理，每一次 RESTful 请求都应该包含以下几个信息:</p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>status</td>
+<td>状态码，标识请求成功与否，如 [1:成功；-1:失败]</td>
+</tr>
+<tr>
+<td>errorCode</td>
+<td>错误码，给出明确错误码，更好的应对业务异常；请求成功该值可为空</td>
+</tr>
+<tr>
+<td>errorMsg</td>
+<td>错误消息，与错误码相对应，更具体的描述异常信息</td>
+</tr>
+<tr>
+<td>resultBody</td>
+<td>返回结果，通常是 Bean 对象对应的 JSON 数据, 通常为了应对不同返回值类型，将其声明为泛型类型</td>
+</tr>
+</tbody></table>
+<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><h3 id="通用返回值类定义"><a href="#通用返回值类定义" class="headerlink" title="通用返回值类定义"></a>通用返回值类定义</h3><p>根据上面的描述，用 Java Bean 来体现这个结构就是这样:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">CommonResult</span>&lt;<span class="title">T</span>&gt; </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">int</span> status = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">private</span> String errorCode = <span class="string">""</span>;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">private</span> String errorMsg = <span class="string">""</span>;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">private</span> T resultBody;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">CommonResult</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">CommonResult</span><span class="params">(T resultBody)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.resultBody = resultBody;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><p>没错，我们需要借助几个关键注解来完成一下相关配置:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@EnableWebMvc</span></span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UnifiedReturnConfig</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@RestControllerAdvice</span>(<span class="string">"com.example.unifiedreturn.api"</span>)</span><br><span class="line">	<span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">CommonResultResponseAdvice</span> <span class="keyword">implements</span> <span class="title">ResponseBodyAdvice</span>&lt;<span class="title">Object</span>&gt;</span>&#123;</span><br><span class="line">		<span class="meta">@Override</span></span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">supports</span><span class="params">(MethodParameter methodParameter, Class&lt;? extends HttpMessageConverter&lt;?&gt;&gt; aClass)</span> </span>&#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="meta">@Override</span></span><br><span class="line">		<span class="function"><span class="keyword">public</span> Object <span class="title">beforeBodyWrite</span><span class="params">(Object body, MethodParameter methodParameter, MediaType mediaType, Class&lt;? extends HttpMessageConverter&lt;?&gt;&gt; aClass, ServerHttpRequest serverHttpRequest, ServerHttpResponse serverHttpResponse)</span> </span>&#123;</span><br><span class="line">			<span class="keyword">if</span> (body <span class="keyword">instanceof</span> CommonResult)&#123;</span><br><span class="line">				<span class="keyword">return</span> body;</span><br><span class="line">			&#125;</span><br><span class="line"></span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">new</span> CommonResult&lt;Object&gt;(body);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>到这里就结束了，我们就可以纵情的写任何 RESTful API 了，所有的返回值都会有统一的 JSON 结构</p>
+<h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><p>新建 UserController，添加相应的 RESTful API，测试用例写的比较简单，只为了说明返回值的处理</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/users"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserController</span> </span>&#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	<span class="meta">@GetMapping</span>(<span class="string">""</span>)</span><br><span class="line">	<span class="function"><span class="keyword">public</span> List&lt;UserVo&gt; <span class="title">getUserList</span><span class="params">()</span></span>&#123;</span><br><span class="line">		List&lt;UserVo&gt; userVoList = Lists.newArrayListWithCapacity(<span class="number">2</span>);</span><br><span class="line">		userVoList.add(UserVo.builder().id(<span class="number">1L</span>).name(<span class="string">"日拱一兵"</span>).age(<span class="number">18</span>).build());</span><br><span class="line">		userVoList.add(UserVo.builder().id(<span class="number">2L</span>).name(<span class="string">"tan"</span>).age(<span class="number">19</span>).build());</span><br><span class="line">		<span class="keyword">return</span> userVoList;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>打开浏览器输入地址测试:  <em><a href="http://localhost:8080/users/" target="_blank" rel="noopener">http://localhost:8080/users/</a></em> ，我们可以看到返回了 List JSON 数据</p>
+<p><img src="https://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/Spring/_image/2019-08-08/2019-08-08-20-16-04.png" alt=""></p>
+<p>继续添加 RESTful API，根据用户 ID 查询用户信息</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@GetMapping</span>(<span class="string">"/&#123;id&#125;"</span>)</span><br><span class="line"><span class="function"><span class="keyword">public</span> UserVo <span class="title">getUserByName</span><span class="params">(@PathVariable Long id)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> UserVo.builder().id(<span class="number">1L</span>).name(<span class="string">"日拱一兵"</span>).age(<span class="number">18</span>).build();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>打开浏览器输入地址测试:  <em><a href="http://localhost:8080/users/1" target="_blank" rel="noopener">http://localhost:8080/users/1</a></em> ，我们可以看到返回了单个 User JSON 数据</p>
+<p><img src="https://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/Spring/_image/2019-08-08/2019-08-08-20-16-32.png" alt=""></p>
+<p>添加一个返回值类型为 ResponseEntity 的 API</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@GetMapping</span>(<span class="string">"/testResponseEntity"</span>)</span><br><span class="line"><span class="function"><span class="keyword">public</span> ResponseEntity <span class="title">getUserByAge</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> ResponseEntity(UserVo.builder().id(<span class="number">1L</span>).name(<span class="string">"日拱一兵"</span>).age(<span class="number">18</span>).build(), HttpStatus.OK);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>打开浏览器输入地址测试:  <em><a href="http://localhost:8080/users/testResponseEntity" target="_blank" rel="noopener">http://localhost:8080/users/testResponseEntity</a></em> ，我们可以看到同样返回了单个 User JSON 数据</p>
+<p><img src="https://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/Spring/_image/2019-08-08/2019-08-08-20-17-07.png" alt=""></p>
+<h2 id="解剖实现过程"><a href="#解剖实现过程" class="headerlink" title="解剖实现过程"></a>解剖实现过程</h2><p>我会将关键部分一一说明清楚，断案还需小伙伴自己去案发现场(打开自己的 IDE 查看)</p>
+<p>故事要从 <code>@EnableWebMvc</code> 这个注解说起，打开该注解看:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Retention</span>(RetentionPolicy.RUNTIME)</span><br><span class="line"><span class="meta">@Target</span>(ElementType.TYPE)</span><br><span class="line"><span class="meta">@Documented</span></span><br><span class="line"><span class="meta">@Import</span>(DelegatingWebMvcConfiguration.class)</span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> EnableWebMvc &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>通过 <code>@Import</code> 注解引入了 <code>DelegatingWebMvcConfiguration.class</code>，那来看这个类吧:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DelegatingWebMvcConfiguration</span> <span class="keyword">extends</span> <span class="title">WebMvcConfigurationSupport</span> </span>&#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>有 <code>@Configuration</code> 注解，你应该很熟悉了，该类的父类 <code>WebMvcConfigurationSupport</code> 中却隐藏着一段关键代码:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Bean</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> RequestMappingHandlerAdapter <span class="title">requestMappingHandlerAdapter</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    RequestMappingHandlerAdapter adapter = createRequestMappingHandlerAdapter();</span><br><span class="line">    ...</span><br><span class="line">    <span class="keyword">return</span> adapter;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>RequestMappingHandlerAdapter 是每一次请求处理的关键，来看该类的定义:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RequestMappingHandlerAdapter</span> <span class="keyword">extends</span> <span class="title">AbstractHandlerMethodAdapter</span></span></span><br><span class="line"><span class="class">		<span class="keyword">implements</span> <span class="title">BeanFactoryAware</span>, <span class="title">InitializingBean</span> </span>&#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>该类实现了 InitializingBean 接口，我在 <a href="https://mp.weixin.qq.com/s/I7zgbOoCgAUnRFy4avipiQ" target="_blank" rel="noopener">Spring Bean 生命周期之“我从哪里来”？</a> 这篇文章中明确说明了 Spring Bean 初始化的几个关键，其中 InitializingBean 接口的<br><code>afterPropertiesSet</code> 方法就是关键之一，在 RequestMappingHandlerAdapter 类中同样重写了该方法:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">afterPropertiesSet</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">// Do this first, it may add ResponseBody advice beans</span></span><br><span class="line">    initControllerAdviceCache();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">this</span>.argumentResolvers == <span class="keyword">null</span>) &#123;</span><br><span class="line">        List&lt;HandlerMethodArgumentResolver&gt; resolvers = getDefaultArgumentResolvers();</span><br><span class="line">        <span class="keyword">this</span>.argumentResolvers = <span class="keyword">new</span> HandlerMethodArgumentResolverComposite().addResolvers(resolvers);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">this</span>.initBinderArgumentResolvers == <span class="keyword">null</span>) &#123;</span><br><span class="line">        List&lt;HandlerMethodArgumentResolver&gt; resolvers = getDefaultInitBinderArgumentResolvers();</span><br><span class="line">        <span class="keyword">this</span>.initBinderArgumentResolvers = <span class="keyword">new</span> HandlerMethodArgumentResolverComposite().addResolvers(resolvers);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">this</span>.returnValueHandlers == <span class="keyword">null</span>) &#123;</span><br><span class="line">        List&lt;HandlerMethodReturnValueHandler&gt; handlers = getDefaultReturnValueHandlers();</span><br><span class="line">        <span class="keyword">this</span>.returnValueHandlers = <span class="keyword">new</span> HandlerMethodReturnValueHandlerComposite().addHandlers(handlers);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>该方法内容都非常关键，但我们先来看 <code>initControllerAdviceCache</code> 方法，其他内容后续再单独说明:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">initControllerAdviceCache</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        ...</span><br><span class="line">    <span class="keyword">if</span> (logger.isInfoEnabled()) &#123;</span><br><span class="line">        logger.info(<span class="string">"Looking for @ControllerAdvice: "</span> + getApplicationContext());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    List&lt;ControllerAdviceBean&gt; beans = ControllerAdviceBean.findAnnotatedBeans(getApplicationContext());</span><br><span class="line">    AnnotationAwareOrderComparator.sort(beans);</span><br><span class="line"></span><br><span class="line">    List&lt;Object&gt; requestResponseBodyAdviceBeans = <span class="keyword">new</span> ArrayList&lt;Object&gt;();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (ControllerAdviceBean bean : beans) &#123;</span><br><span class="line">        ...</span><br><span class="line">        <span class="keyword">if</span> (ResponseBodyAdvice.class.isAssignableFrom(bean.getBeanType())) &#123;</span><br><span class="line">            requestResponseBodyAdviceBeans.add(bean);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>通过 ControllerAdviceBean 静态方法扫描 <code>ControllerAdvice</code> 注解，可是我们在实现上使用的是 <code>@RestControllerAdvice</code> 注解，打开看该注解:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Target</span>(ElementType.TYPE)</span><br><span class="line"><span class="meta">@Retention</span>(RetentionPolicy.RUNTIME)</span><br><span class="line"><span class="meta">@Documented</span></span><br><span class="line"><span class="meta">@ControllerAdvice</span></span><br><span class="line"><span class="meta">@ResponseBody</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> RestControllerAdvice &#123;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>该注解由 <code>@ControllerAdvice</code> 和 <code>@ResponseBody</code> 标记，就好比你熟悉的 <code>@RestController</code> 注解由 <code>@Controller</code> 和 <code>@ResponseBody</code>  标记是一样的</p>
+</blockquote>
+<p>到这里你已经知道我们用 <code>@RestControllerAdvice</code> 标记的 Bean 是如何被加载到 Spring 上下文的，接下来就要知道是 Spring 是如何使用我们的 bean 以及对返回 body 做处理的</p>
+<p>其实在 <a href="https://mp.weixin.qq.com/s/wWj8M46EmxRRgBWdch2Big" target="_blank" rel="noopener">HttpMessageConverter是如何转换数据的？</a> 这篇文章中已经说明了一部分，希望小伙伴先看这篇文章，下面的部分就会秒懂了，我们在这里做进一步的说明</p>
+<p>在 AbstractMessageConverterMethodProcessor 的 <code>writeWithMessageConverters</code> 方法中，有一段核心代码:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (messageConverter <span class="keyword">instanceof</span> GenericHttpMessageConverter) &#123;</span><br><span class="line">    <span class="keyword">if</span> (((GenericHttpMessageConverter) messageConverter).canWrite(</span><br><span class="line">            declaredType, valueType, selectedMediaType)) &#123;</span><br><span class="line">        outputValue = (T) getAdvice().beforeBodyWrite(outputValue, returnType, selectedMediaType,</span><br><span class="line">                (Class&lt;? extends HttpMessageConverter&lt;?&gt;&gt;) messageConverter.getClass(),</span><br><span class="line">                inputMessage, outputMessage);</span><br><span class="line">            ...</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>可以看到通过 getAdvice() 调用了 <code>beforeBodyWrite</code> 方法，我们已经接近真相了</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">protected</span> RequestResponseBodyAdviceChain <span class="title">getAdvice</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.advice;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>RequestResponseBodyAdviceChain，看名字带有 Chain，很明显用到了「责任链设计模式」，这些内容在 <a href="https://mp.weixin.qq.com/s/SqIkX01JwR6QXKTa6Kqp4Q" target="_blank" rel="noopener">不得不知的责任链设计模式</a> 文章中明确说明过，只不过它传递责任链以循环的方式完成:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">RequestResponseBodyAdviceChain</span> <span class="keyword">implements</span> <span class="title">RequestBodyAdvice</span>, <span class="title">ResponseBodyAdvice</span>&lt;<span class="title">Object</span>&gt; </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> Object <span class="title">beforeBodyWrite</span><span class="params">(Object body, MethodParameter returnType, MediaType contentType,</span></span></span><br><span class="line"><span class="function"><span class="params">			Class&lt;? extends HttpMessageConverter&lt;?&gt;&gt; converterType,</span></span></span><br><span class="line"><span class="function"><span class="params">			ServerHttpRequest request, ServerHttpResponse response)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">return</span> processBody(body, returnType, contentType, converterType, request, response);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@SuppressWarnings</span>(<span class="string">"unchecked"</span>)</span><br><span class="line">	<span class="keyword">private</span> &lt;T&gt; <span class="function">Object <span class="title">processBody</span><span class="params">(Object body, MethodParameter returnType, MediaType contentType,</span></span></span><br><span class="line"><span class="function"><span class="params">			Class&lt;? extends HttpMessageConverter&lt;?&gt;&gt; converterType,</span></span></span><br><span class="line"><span class="function"><span class="params">			ServerHttpRequest request, ServerHttpResponse response)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">for</span> (ResponseBodyAdvice&lt;?&gt; advice : getMatchingAdvice(returnType, ResponseBodyAdvice.class)) &#123;</span><br><span class="line">			<span class="keyword">if</span> (advice.supports(returnType, converterType)) &#123;</span><br><span class="line">				body = ((ResponseBodyAdvice&lt;T&gt;) advice).beforeBodyWrite((T) body, returnType,</span><br><span class="line">						contentType, converterType, request, response);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> body;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我们重写的 <code>beforeBodyWrite</code> 方法终究会被调用到，真相就是这样了!!!</p>
+<p>其实还没完，你有没有想过，如果我们的 API 方法返回值是 <code>org.springframework.http.ResponseEntity&lt;T&gt;</code> 类型，我们可以指定 HTTP 返回状态码，但是这个返回值会直接放到我们的 beforeBodyWrite 方法的 body 参数中吗？如果这样做很明显是错误的，因为 ResponseEntity 包含很多我们非业务数据在里面，那 Spring 是怎么帮我们处理的呢？</p>
+<p>在我们方法取得返回值并且在调用 <code>beforeBodyWrite</code> 方法之前，还要选择 HandlerMethodReturnValueHandler 用于处理不同的 Handler 来处理返回值</p>
+<p>在类 HandlerMethodReturnValueHandlerComposite 中的 handleReturnValue 方法中</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">handleReturnValue</span><span class="params">(Object returnValue, MethodParameter returnType,</span></span></span><br><span class="line"><span class="function"><span class="params">        ModelAndViewContainer mavContainer, NativeWebRequest webRequest)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line"></span><br><span class="line">    HandlerMethodReturnValueHandler handler = selectHandler(returnValue, returnType);</span><br><span class="line">    <span class="keyword">if</span> (handler == <span class="keyword">null</span>) &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(<span class="string">"Unknown return value type: "</span> + returnType.getParameterType().getName());</span><br><span class="line">    &#125;</span><br><span class="line">    handler.handleReturnValue(returnValue, returnType, mavContainer, webRequest);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>通过调用 selectHandler 方法来选择合适的 handler，Spring 内置了很多个 Handler，我们来看类图:</p>
+<p><img src="https://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/Spring/_image/2019-08-08/2019-08-08-16-36-31.png" alt=""></p>
+<p>HttpEntityMethodProcessor 就是其中之一，它重写了 supportsParameter 方法，支持 HttpEntity 类型，即支持 ResponseEntity 类型:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">supportsParameter</span><span class="params">(MethodParameter parameter)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> (HttpEntity.class == parameter.getParameterType() ||</span><br><span class="line">            RequestEntity.class == parameter.getParameterType());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>所以当我们返回的类型为 ResponseEntity 时，就要通过 HttpEntityMethodProcessor 的 handleReturnValue 方法来处理我们的结果:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">handleReturnValue</span><span class="params">(Object returnValue, MethodParameter returnType,</span></span></span><br><span class="line"><span class="function"><span class="params">        ModelAndViewContainer mavContainer, NativeWebRequest webRequest)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line"></span><br><span class="line">    ...</span><br><span class="line">    <span class="keyword">if</span> (responseEntity <span class="keyword">instanceof</span> ResponseEntity) &#123;</span><br><span class="line">        <span class="keyword">int</span> returnStatus = ((ResponseEntity&lt;?&gt;) responseEntity).getStatusCodeValue();</span><br><span class="line">        outputMessage.getServletResponse().setStatus(returnStatus);</span><br><span class="line">        <span class="keyword">if</span> (returnStatus == <span class="number">200</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (SAFE_METHODS.contains(inputMessage.getMethod())</span><br><span class="line">                    &amp;&amp; isResourceNotModified(inputMessage, outputMessage)) &#123;</span><br><span class="line">                <span class="comment">// Ensure headers are flushed, no body should be written.</span></span><br><span class="line">                outputMessage.flush();</span><br><span class="line">                <span class="comment">// Skip call to converters, as they may update the body.</span></span><br><span class="line">                <span class="keyword">return</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Try even with null body. ResponseBodyAdvice could get involved.</span></span><br><span class="line">    writeWithMessageConverters(responseEntity.getBody(), returnType, inputMessage, outputMessage);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Ensure headers are flushed even if no body was written.</span></span><br><span class="line">    outputMessage.flush();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>该方法提取出 responseEntity.getBody()，并传递个 MessageConverter，然后再继续调用 <code>beforeBodyWrite</code> 方法，这才是真相!!!</p>
+<p><strong>这是 RESTful API 正常返回内容的情况，下一篇文章，让我们来侦查一下统一异常情况的处理以及实现原理</strong></p>
+<h2 id="灵魂追问"><a href="#灵魂追问" class="headerlink" title="灵魂追问"></a>灵魂追问</h2><ol>
+<li>返回值是非 ResponseEntity 类型时，用的是什么 handler？它支持的返回值类型是什么？看过你也许就知道为什么要用 <code>@ResponseBody</code> 注解了</li>
+<li>你有追踪过 DispatchServlet 的整个请求过程吗？</li>
+</ol>
+<h2 id="提高效率工具"><a href="#提高效率工具" class="headerlink" title="提高效率工具"></a>提高效率工具</h2><p><img src="https://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E6%84%9F%E6%83%B3%E4%B8%8E%E6%80%BB%E7%BB%93/_image/2019-06-18/b.png" alt=""></p>
+<hr>
+<h2 id="推荐阅读"><a href="#推荐阅读" class="headerlink" title="推荐阅读"></a>推荐阅读</h2><ul>
+<li><a href="https://mp.weixin.qq.com/s/6dg3u2PkcTSQHu_3T_QYnA" target="_blank" rel="noopener">只会用 git pull ？有时候你可以尝试更优雅的处理方式 </a></li>
+<li><a href="https://mp.weixin.qq.com/s/Dnr1jLebvBUHnziZzSfcrA" target="_blank" rel="noopener">双亲委派模型：大厂高频面试题，轻松搞定</a></li>
+<li><a href="https://mp.weixin.qq.com/s/YBQB086ADBjHUmwrFQrWew" target="_blank" rel="noopener">面试还不知道BeanFactory和ApplicationContext的区别？</a></li>
+<li><a href="https://mp.weixin.qq.com/s/hR1TqkVzwZ_T8fuMnsM4hQ" target="_blank" rel="noopener">如何设计好的RESTful API</a></li>
+<li><a href="https://mp.weixin.qq.com/s/V7h8O6pVFQ-nr_iA2SNqtw" target="_blank" rel="noopener">程序猿为什么要看源码？</a></li>
+</ul>
+<hr>
+<blockquote>
+<h3 id="欢迎持续关注公众号：「日拱一兵」"><a href="#欢迎持续关注公众号：「日拱一兵」" class="headerlink" title="欢迎持续关注公众号：「日拱一兵」"></a>欢迎持续关注公众号：「日拱一兵」</h3><ul>
+<li>前沿 Java 技术干货分享</li>
+<li>高效工具汇总 | 回复「工具」</li>
+<li>面试问题分析与解答</li>
+<li>技术资料领取 | 回复「资料」</li>
+</ul>
+</blockquote>
+<blockquote>
+<p>以读侦探小说思维轻松趣味学习 Java 技术栈相关知识，本着将复杂问题简单化，抽象问题具体化和图形化原则逐步分解技术问题，技术持续更新，请持续关注……</p>
+</blockquote>
+<p><img src="https://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E6%84%9F%E6%83%B3%E4%B8%8E%E6%80%BB%E7%BB%93/_image/2019-06-18/a%20%281%29.png" alt=""></p>
+
+      </div>
+      <!-- <div class="tuijian">
+        <br><br>
+        📚相关文章
+        <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/spring-bean-lifecycle-destroy.html" title="Spring Bean生命周期之缘尽" rel="bookmark">Spring Bean生命周期之缘尽</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/spring-bean-lifecycle-creation.html" title="Spring Bean生命周期之缘起" rel="bookmark">Spring Bean生命周期之缘起</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/spring-boot-json-return-non-null.html" title="Springboot Json格式数据不返回null值属性" rel="bookmark">Springboot Json格式数据不返回null值属性</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/docker-deploy-spring-boot.html" title="使用 Docker 部署 Spring Boot" rel="bookmark">使用 Docker 部署 Spring Boot</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/difference-between-beanfactory-and-applicationcontext.html" title="面试还不知道BeanFactory和ApplicationContext的区别？" rel="bookmark">面试还不知道BeanFactory和ApplicationContext的区别？</a></h3></div></li></ul>
+      </div> -->
+      <div class="personalweixin">
+        <br><br>
+        <blockquote>
+          <a href="https://mp.weixin.qq.com/s/G7BXuZh0Qh1-mE6ts4LJqQ" target="_blank" rel="noopener">加我微信</a>，咱们交流技术与思想，共同成长
+        </blockquote>
+        <br>
+
+      </div>
+      
+      
+        <br>
+        
+
+
+  <section class='meta' id="footer-meta">
+    <div class='new-meta-box'>
+      
+        
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2019-11-07T14:38:17+08:00">
+  <a class='notlink'>
+    <i class="fas fa-clock" aria-hidden="true"></i>
+    <p>更新于 2019年11月7日</p>
+  </a>
+</div>
+
+        
+      
+        
+          
+  
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/Spring-Boot/" rel="nofollow"><i class="fas fa-tag" aria-hidden="true"></i><p>Spring Boot</p></a></div>
+
+
+        
+      
+        
+          
+  <div class="new-meta-item share -mob-share-list">
+  <div class="-mob-share-list share-body">
+    
+      
+        <a class="-mob-share-qq" title="QQ好友" rel="external nofollow noopener noreferrer"
+          
+          href="http://connect.qq.com/widget/shareqq/index.html?url=https://dayarch.top/p/spring-boot-global-return.html&title=Springboot返回统一JSON数据格式是怎么实现的？ | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=关于 Spring 的全局处理，我有两方面要说:
+
+ 1. 统一数据返回格式
+ 2. 统一异常处理
+    为了将两个问题说明清楚，将分两个章节分别说明，本章主要说第一点
+
+
+
+有童鞋说，我们项目都做了这种处理，就是在每个 API 都单独工具类将返回值进行封装，但这种不够优雅；我想写最少的代码完成这件事，也许有童鞋说，加几个注解就解决问题了，说的没错，但这篇文章主要是为了说明为什么加了几个注解就解决问题了，目的是希望大家知其所以然。
+
+
+
+为了更好的说明问题，本文先说明如何实现，然后再详细剖析实现原理(这很关键)
+
+为什么要做统一数据返回格式
+前后端分离是当今服务形式的主流，如何设计一个好的 "
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/assets@19.1.9/logo/128/qq.png">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-qzone" title="QQ空间" rel="external nofollow noopener noreferrer"
+          
+          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://dayarch.top/p/spring-boot-global-return.html&title=Springboot返回统一JSON数据格式是怎么实现的？ | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=关于 Spring 的全局处理，我有两方面要说:
+
+ 1. 统一数据返回格式
+ 2. 统一异常处理
+    为了将两个问题说明清楚，将分两个章节分别说明，本章主要说第一点
+
+
+
+有童鞋说，我们项目都做了这种处理，就是在每个 API 都单独工具类将返回值进行封装，但这种不够优雅；我想写最少的代码完成这件事，也许有童鞋说，加几个注解就解决问题了，说的没错，但这篇文章主要是为了说明为什么加了几个注解就解决问题了，目的是希望大家知其所以然。
+
+
+
+为了更好的说明问题，本文先说明如何实现，然后再详细剖析实现原理(这很关键)
+
+为什么要做统一数据返回格式
+前后端分离是当今服务形式的主流，如何设计一个好的 "
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/assets@19.1.9/logo/128/qzone.png">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-weibo" title="微博" rel="external nofollow noopener noreferrer"
+          
+          href="http://service.weibo.com/share/share.php?url=https://dayarch.top/p/spring-boot-global-return.html&title=Springboot返回统一JSON数据格式是怎么实现的？ | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=关于 Spring 的全局处理，我有两方面要说:
+
+ 1. 统一数据返回格式
+ 2. 统一异常处理
+    为了将两个问题说明清楚，将分两个章节分别说明，本章主要说第一点
+
+
+
+有童鞋说，我们项目都做了这种处理，就是在每个 API 都单独工具类将返回值进行封装，但这种不够优雅；我想写最少的代码完成这件事，也许有童鞋说，加几个注解就解决问题了，说的没错，但这篇文章主要是为了说明为什么加了几个注解就解决问题了，目的是希望大家知其所以然。
+
+
+
+为了更好的说明问题，本文先说明如何实现，然后再详细剖析实现原理(这很关键)
+
+为什么要做统一数据返回格式
+前后端分离是当今服务形式的主流，如何设计一个好的 "
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/assets@19.1.9/logo/128/weibo.png">
+          
+        </a>
+      
+    
+  </div>
+</div>
+
+
+
+        
+      
+    </div>
+  </section>
+
+
+      
+      
+          <div class="prev-next">
+              
+                  <section class="prev">
+                      <span class="art-item-left">
+                          <h6><i class="fas fa-chevron-left" aria-hidden="true"></i>&nbsp;上一页</h6>
+                          <h4>
+                              <a href="/p/spring-boot-global-exception.html" rel="prev" title="SpringBoot统一异常处理">
+                                
+                                    SpringBoot统一异常处理
+                                
+                              </a>
+                          </h4>
+                          
+                              
+                              <h6 class="tags">
+                                  <a class="tag" href="/tags/Exception/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> Exception</a>
+                              </h6>
+                          
+                      </span>
+                  </section>
+              
+              
+                  <section class="next">
+                      <span class="art-item-right" aria-hidden="true">
+                          <h6>下一页&nbsp;<i class="fas fa-chevron-right" aria-hidden="true"></i></h6>
+                          <h4>
+                              <a href="/p/shiro-in-practice.html" rel="prev" title="Shiro—小而美的安全框架">
+                                  
+                                      Shiro—小而美的安全框架
+                                  
+                              </a>
+                          </h4>
+                          
+                              
+                              <h6 class="tags">
+                                  <a class="tag" href="/tags/Shiro/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> Shiro</a>
+                              </h6>
+                          
+                      </span>
+                  </section>
+              
+          </div>
+      
+    </section>
+  </article>
+
+
+  
+    
+  
+    
+      
+        
+          
+  <section class='widget related_posts'>
+    
+<header class='pure'>
+  <div><i class="fas fa-bookmark fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;相关文章</div>
+  
+</header>
+
+    <div class="content pure">
+      <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/spring-bean-lifecycle-destroy.html" title="Spring Bean生命周期之缘尽" rel="bookmark">Spring Bean生命周期之缘尽</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/spring-bean-lifecycle-creation.html" title="Spring Bean生命周期之缘起" rel="bookmark">Spring Bean生命周期之缘起</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/spring-boot-json-return-non-null.html" title="Springboot Json格式数据不返回null值属性" rel="bookmark">Springboot Json格式数据不返回null值属性</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/docker-deploy-spring-boot.html" title="使用 Docker 部署 Spring Boot" rel="bookmark">使用 Docker 部署 Spring Boot</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/difference-between-beanfactory-and-applicationcontext.html" title="面试还不知道BeanFactory和ApplicationContext的区别？" rel="bookmark">面试还不知道BeanFactory和ApplicationContext的区别？</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/spring-boot-condition-annotation.html" title="@Conditional注解，Spring Boot 的灵活配置" rel="bookmark">@Conditional注解，Spring Boot 的灵活配置</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/spring-boot-starter-custom.html" title="Spring Boot 自定义starter 全面教程" rel="bookmark">Spring Boot 自定义starter 全面教程</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/spring-data-binding-mechanism.html" title="Spring 数据绑定剖析" rel="bookmark">Spring 数据绑定剖析</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/spring-aware.html" title="Spring Aware 到底是什么？" rel="bookmark">Spring Aware 到底是什么？</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/springmvc-response-status.html" title="Spring MVC 之 @ResponseStatus" rel="bookmark">Spring MVC 之 @ResponseStatus</a></h3></div></li></ul>
+    </div>
+  </section>
+
+
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+  
+    
+  
+
+
+  <!-- 显示推荐文章和评论 -->
+
+
+
+  <article class="post white-box comments">
+    <section class="article typo">
+      <h4><i class="fas fa-comments fa-fw" aria-hidden="true"></i>&nbsp;评论</h4>
+      
+      
+      
+        <section id="comments">
+          <div id="gitalk-container"></div>
+        </section>
+      
+      
+    </section>
+  </article>
+
+
+
+
+
+
+<!-- 根据页面mathjax变量决定是否加载MathJax数学公式js -->
+
+
+
+  <script>
+    window.subData = {
+      title: 'Springboot返回统一JSON数据格式是怎么实现的？',
+      tools: true
+    }
+  </script>
+
+
+
+  <script src="https://my.openwrite.cn/js/readmore.js" type="text/javascript"></script>
+  <script>
+      const btw = new BTWPlugin();
+      btw.init({
+          id: 'post',
+          blogId: '10015-1569397635991-668',
+          name: '日拱一兵',
+          qrcode: 'https://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E6%84%9F%E6%83%B3%E4%B8%8E%E6%80%BB%E7%BB%93/_image/2019-07-25/qrcode.jpg',
+          keyword: 'tanrgyb',
+      });
+  </script>
+  
+
+</div>
+<aside class='l_side'>
+  
+    
+    
+      
+      
+        
+          
+          
+        
+          
+          
+            
+              <section class='widget author'>
+  <div class='content pure'>
+    
+      <div class='avatar'>
+        <img class='avatar' src='https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgqrcode.jpg'/>
+      </div>
+    
+    
+      <div class='text'>
+        
+        
+        
+          <p><span id="jinrishici-sentence">从来没有真正的绝境，只有心灵的迷途</span></p>
+          <script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
+        
+      </div>
+    
+    
+      <div class="social-wrapper">
+        
+          
+            <a href="/atom.xml"
+              class="social fas fa-rss flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="mailto:dayarch@126.com"
+              class="social fas fa-envelope flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="https://github.com/FraserYu"
+              class="social fab fa-github flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+      </div>
+    
+  </div>
+</section>
+
+            
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+      
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+      
+        
+          
+          
+        
+          
+          
+        
+          
+          
+            
+              
+  <section class='widget toc-wrapper'>
+    
+<header class='pure'>
+  <div><i class="fas fa-list fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;本文目录</div>
+  
+    <!-- <div class='wrapper'><a class="s-toc rightBtn" rel="external nofollow noopener noreferrer" href="javascript:void(0)"><i class="fas fa-thumbtack fa-fw"></i></a></div> -->
+  
+</header>
+
+    <div class='content pure'>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#为什么要做统一数据返回格式"><span class="toc-text">为什么要做统一数据返回格式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#实现"><span class="toc-text">实现</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#通用返回值类定义"><span class="toc-text">通用返回值类定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#配置"><span class="toc-text">配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#测试"><span class="toc-text">测试</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#解剖实现过程"><span class="toc-text">解剖实现过程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#灵魂追问"><span class="toc-text">灵魂追问</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#提高效率工具"><span class="toc-text">提高效率工具</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#推荐阅读"><span class="toc-text">推荐阅读</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#欢迎持续关注公众号：「日拱一兵」"><span class="toc-text">欢迎持续关注公众号：「日拱一兵」</span></a></li></ol></li></ol>
+    </div>
+  </section>
+
+
+            
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+      
+    
+
+  
+</aside>
+
+<footer id="footer" class="clearfix">
+  
+    <div class="footer">
+      <p><strong>If you can NOT explain it simply, you do NOT understand it well enough</strong></p>
+
+    </div>
+    <br>
+  
+  
+    <div class="social-wrapper">
+      
+        
+          <a href="/atom.xml"
+            class="social fas fa-rss flat-btn"
+            target="_blank"
+            rel="external nofollow noopener noreferrer">
+          </a>
+        
+      
+        
+          <a href="mailto:dayarch@126.com"
+            class="social fas fa-envelope flat-btn"
+            target="_blank"
+            rel="external nofollow noopener noreferrer">
+          </a>
+        
+      
+        
+          <a href="https://github.com/FraserYu"
+            class="social fab fa-github flat-btn"
+            target="_blank"
+            rel="external nofollow noopener noreferrer">
+          </a>
+        
+      
+    </div>
+  
+  <br>
+  Copyright <i class="far fa-copyright"></i>  2018-2019 
+  <a href="https://www.itrhx.com/" target="_blank"> Tanθ's Blog </a>
+  &nbsp;&nbsp;|&nbsp;&nbsp;<img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgicp.png">
+  <a href="http://www.beian.miit.gov.cn/" target="_blank">辽ICP备19017651号-1</a>
+
+  &nbsp;&nbsp;|&nbsp;&nbsp;  
+  
+    &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+        class="white-color">166.8k</span>&nbsp;字
+    
+
+  &nbsp;&nbsp;|&nbsp;&nbsp;  
+  
+    <span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+    <script>
+        var now = new Date(); 
+        function createtime() { 
+            var grt= new Date("05/22/2019 09:09:06");//在此处修改你的建站时间
+            now.setTime(now.getTime()+250); 
+            days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+            hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+            if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+            mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+            seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+            snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+            document.getElementById("timeDate").innerHTML = "本站已运行 "+dnum+" 天 "; 
+            document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+        } 
+    setInterval("createtime()",250);
+    </script>
+    
+  &nbsp;&nbsp;|&nbsp;&nbsp;<a href="https://dayarch.top/sitemap.xml" target="_blank">站点地图</a>
+  &nbsp;&nbsp;|&nbsp;&nbsp;<a href="https://tongji.baidu.com/web/welcome/ico?s=f553477a3dc5ab3837e9a4dead4e0bc7" target="_blank">站长统计</a>
+  
+  
+
+
+
+
+  <div>
+    <!-- 本站使用
+    <a href="https://xaoxuu.com/wiki/material-x/" target="_blank" class="codename">Material X</a>
+    作为主题 -->
+    
+      <!-- ， -->
+      <!-- 总访问量为
+      <span id="busuanzi_value_site_pv"><i class="fas fa-eyes" aria-hidden="true"></i></span>
+      次 -->
+      <span id="busuanzi_container_site_pv">
+        &nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;<span id="busuanzi_value_site_pv"
+            class="white-color"></span>&nbsp;次
+    </span>
+      <!-- &nbsp;&nbsp;|&nbsp;&nbsp; -->
+      <!-- 总访客量 -->
+      <!-- <span id="busuanzi_container_site_uv"><i class="fas fa-eyes" aria-hidden="true"></i></span> -->
+      <span id="busuanzi_container_site_uv">
+        |&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;<span id="busuanzi_value_site_uv"
+            class="white-color"></span>&nbsp;人
+    </span>
+      <!-- 人 -->
+    
+    。
+  </div>
+  <div><p>博客内容遵循 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
+</div>
+  <!-- <div class="github-badge">
+      <a style="color: #fff" rel="license" href="https://hexo.io/" target="_blank" title="由 Hexo 强力驱动">
+      <span class="badge-subject">Powered</span><span class="badge-value bg-blue">Hexo</span></a>
+    </div> -->
+</footer>
+<script>setLoadingBarProgress(80);</script>
+
+
+<script>
+    (function(){
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        }
+        else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+   
+
+      <script>setLoadingBarProgress(60);</script>
+    </div>
+    <a class="s-top fas fa-arrow-up fa-fw" href='javascript:void(0)'></a>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+
+  <script>
+    var GOOGLE_CUSTOM_SEARCH_API_KEY = "";
+    var GOOGLE_CUSTOM_SEARCH_ENGINE_ID = "";
+    var ALGOLIA_API_KEY = "";
+    var ALGOLIA_APP_ID = "";
+    var ALGOLIA_INDEX_NAME = "";
+    var AZURE_SERVICE_NAME = "";
+    var AZURE_INDEX_NAME = "";
+    var AZURE_QUERY_KEY = "";
+    var BAIDU_API_ID = "";
+    var SEARCH_SERVICE = "hexo" || "hexo";
+    var ROOT = "/"||"/";
+    if(!ROOT.endsWith('/'))ROOT += '/';
+  </script>
+
+<script src="//instant.page/1.2.2" type="module" integrity="sha384-2xV8M5griQmzyiY3CDqh1dn4z3llDVqZDqzjzcY+jCBCk/a5fXJmuZ/40JJAPeoU"></script>
+
+
+  <script async src="https://cdn.jsdelivr.net/npm/scrollreveal@4.0.5/dist/scrollreveal.min.js"></script>
+  <script type="text/javascript">
+    $(function() {
+      const $reveal = $('.reveal');
+      if ($reveal.length === 0) return;
+      const sr = ScrollReveal({ distance: 0 });
+      sr.reveal('.reveal');
+    });
+  </script>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/node-waves@0.7.6/dist/waves.min.js"></script>
+  <script type="text/javascript">
+    $(function() {
+      Waves.attach('.flat-btn', ['waves-button']);
+      Waves.attach('.float-btn', ['waves-button', 'waves-float']);
+      Waves.attach('.float-btn-light', ['waves-button', 'waves-float', 'waves-light']);
+      Waves.attach('.flat-box', ['waves-block']);
+      Waves.attach('.float-box', ['waves-block', 'waves-float']);
+      Waves.attach('.waves-image');
+      Waves.init();
+    });
+  </script>
+
+
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <!-- <script async src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-busuanzi@2.3/js/busuanzi.pure.mini.js"></script> -->
+
+
+
+
+
+
+
+
+
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+  <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+  <script type="text/javascript">
+    var gitalk = new Gitalk({
+      clientID: "57bd3ce366ba25a73a1a",
+      clientSecret: "bab4a248180b9ac85b16fb44bf4ba171648f9cab",
+      repo: "myBlogTalk",
+      owner: "FraserYu",
+      admin: "FraserYu",
+      
+        id: location.pathname,      // Ensure uniqueness and length less than 50
+      
+      distractionFreeMode: false  // Facebook-like distraction free mode
+    });
+    gitalk.render('gitalk-container');
+  </script>
+
+
+
+
+
+  <script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/app.js"></script>
+
+
+  <script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/search.js"></script>
+
+
+
+
+<!-- 复制 -->
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  let COPY_SUCCESS = "复制成功";
+  let COPY_FAILURE = "复制失败";
+  /*页面载入完成后，创建复制按钮*/
+  !function (e, t, a) {
+    /* code */
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '  <i class="fa fa-copy"></i><span>复制</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+
+      clipboard.on('success', function(e) {
+        //您可以加入成功提示
+        console.info('Action:', e.action);
+        console.info('Text:', e.text);
+        console.info('Trigger:', e.trigger);
+        success_prompt(COPY_SUCCESS);
+        e.clearSelection();
+      });
+      clipboard.on('error', function(e) {
+        //您可以加入失败提示
+        console.error('Action:', e.action);
+        console.error('Trigger:', e.trigger);
+        fail_prompt(COPY_FAILURE);
+      });
+    }
+    initCopyCode();
+
+  }(window, document);
+
+  /**
+   * 弹出式提示框，默认1.5秒自动消失
+   * @param message 提示信息
+   * @param style 提示样式，有alert-success、alert-danger、alert-warning、alert-info
+   * @param time 消失时间
+   */
+  var prompt = function (message, style, time)
+  {
+      style = (style === undefined) ? 'alert-success' : style;
+      time = (time === undefined) ? 1500 : time*1000;
+      $('<div>')
+          .appendTo('body')
+          .addClass('alert ' + style)
+          .html(message)
+          .show()
+          .delay(time)
+          .fadeOut();
+  };
+
+  // 成功提示
+  var success_prompt = function(message, time)
+  {
+      prompt(message, 'alert-success', time);
+  };
+
+  // 失败提示
+  var fail_prompt = function(message, time)
+  {
+      prompt(message, 'alert-danger', time);
+  };
+
+  // 提醒
+  var warning_prompt = function(message, time)
+  {
+      prompt(message, 'alert-warning', time);
+  };
+
+  // 信息提示
+  var info_prompt = function(message, time)
+  {
+      prompt(message, 'alert-info', time);
+  };
+
+</script>
+
+
+<!-- fancybox -->
+<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+<script>
+  let LAZY_LOAD_IMAGE = "";
+  $(".article-entry").find("fancybox").find("img").each(function () {
+      var element = document.createElement("a");
+      $(element).attr("data-fancybox", "gallery");
+      $(element).attr("href", $(this).attr("src"));
+      /* 图片采用懒加载处理时,
+       * 一般图片标签内会有个属性名来存放图片的真实地址，比如 data-original,
+       * 那么此处将原本的属性名src替换为对应属性名data-original,
+       * 修改如下
+       */
+       if (LAZY_LOAD_IMAGE) {
+         $(element).attr("href", $(this).attr("data-original"));
+       }
+      $(this).wrap(element);
+  });
+</script>
+
+
+
+
+
+  <script>setLoadingBarProgress(100);</script>
+
+<!-- 鼠标点击火花效果 -->
+<!-- <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+<script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+<script type="text/javascript" src="/js/fireworks.js"></script> -->
+
+<!-- 腾讯分析代码 -->
+<!-- <script type="text/javascript" src="http://tajs.qq.com/stats?sId=66485661" charset="UTF-8"></script> -->
+
+  <!--动态线条背景-->
+<!-- <script type="text/javascript" color="100,220,220" opacity='0.8' zIndex="-2" count="400" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script> -->
+<!-- 样式二（飘动的彩带） -->
+<!-- <script src="https://g.joyinshare.com/hc/piao.js" type="text/javascript"></script> -->
+<!-- 样式一（鼠标点击更换样式） -->
+<!-- <script src="https://g.joyinshare.com/hc/ribbon.min.js" type="text/javascript"></script> -->
+</body>
+</html>

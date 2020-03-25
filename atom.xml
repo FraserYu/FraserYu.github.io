@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://dayarch.top/"/>
-  <updated>2020-03-15T08:07:45.452Z</updated>
+  <updated>2020-03-25T06:38:33.216Z</updated>
   <id>https://dayarch.top/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Java线程生命周期这样理解挺简单的</title>
+    <link href="https://dayarch.top//p/java-thread-life-cycle.html"/>
+    <id>https://dayarch.top//p/java-thread-life-cycle.html</id>
+    <published>2020-03-25T06:32:03.000Z</published>
+    <updated>2020-03-25T06:38:33.216Z</updated>
+    
+    <summary type="html">
+    
+      了解Java线程的生命周期是编写并发程序的基础，如何透彻的理解，它们的状态如何转换，如果你始终不能理解或记忆这些问题，相信这篇文章会帮你解惑
+    
+    </summary>
+    
+    
+      <category term="Coding" scheme="https://dayarch.top/categories/Coding/"/>
+    
+      <category term="Java-Concurrency" scheme="https://dayarch.top/categories/Coding/Java-Concurrency/"/>
+    
+    
+      <category term="Java-Concurrency" scheme="https://dayarch.top/tags/Java-Concurrency/"/>
+    
+  </entry>
   
   <entry>
     <title>并发编程之等待通知机制</title>
@@ -352,11 +375,11 @@ PMP（Project Management Professional）学名「项目管理专家」，我叫�
       <category term="Spring-Boot" scheme="https://dayarch.top/categories/Coding/Spring-Boot/"/>
     
     
+      <category term="Spring Boot" scheme="https://dayarch.top/tags/Spring-Boot/"/>
+    
       <category term="Spring Bean" scheme="https://dayarch.top/tags/Spring-Bean/"/>
     
       <category term="生命周期" scheme="https://dayarch.top/tags/%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/"/>
-    
-      <category term="Spring Boot" scheme="https://dayarch.top/tags/Spring-Boot/"/>
     
   </entry>
   
@@ -402,11 +425,11 @@ PMP（Project Management Professional）学名「项目管理专家」，我叫�
       <category term="Spring-Boot" scheme="https://dayarch.top/categories/Coding/Spring-Boot/"/>
     
     
-      <category term="Spring Aware" scheme="https://dayarch.top/tags/Spring-Aware/"/>
-    
       <category term="Spring Bean" scheme="https://dayarch.top/tags/Spring-Bean/"/>
     
       <category term="生命周期" scheme="https://dayarch.top/tags/%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/"/>
+    
+      <category term="Spring Aware" scheme="https://dayarch.top/tags/Spring-Aware/"/>
     
   </entry>
   
@@ -429,11 +452,11 @@ PMP（Project Management Professional）学名「项目管理专家」，我叫�
       <category term="Spring-Boot" scheme="https://dayarch.top/categories/Coding/Spring-Boot/"/>
     
     
+      <category term="Spring Boot" scheme="https://dayarch.top/tags/Spring-Boot/"/>
+    
       <category term="Spring Bean" scheme="https://dayarch.top/tags/Spring-Bean/"/>
     
       <category term="生命周期" scheme="https://dayarch.top/tags/%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/"/>
-    
-      <category term="Spring Boot" scheme="https://dayarch.top/tags/Spring-Boot/"/>
     
   </entry>
   
@@ -456,11 +479,11 @@ PMP（Project Management Professional）学名「项目管理专家」，我叫�
       <category term="Spring-Boot" scheme="https://dayarch.top/categories/Coding/Spring-Boot/"/>
     
     
+      <category term="Spring Boot" scheme="https://dayarch.top/tags/Spring-Boot/"/>
+    
       <category term="Spring Bean" scheme="https://dayarch.top/tags/Spring-Bean/"/>
     
       <category term="生命周期" scheme="https://dayarch.top/tags/%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/"/>
-    
-      <category term="Spring Boot" scheme="https://dayarch.top/tags/Spring-Boot/"/>
     
   </entry>
   
@@ -511,31 +534,6 @@ PMP（Project Management Professional）学名「项目管理专家」，我叫�
       <category term="Java" scheme="https://dayarch.top/tags/Java/"/>
     
       <category term="面试" scheme="https://dayarch.top/tags/%E9%9D%A2%E8%AF%95/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Spring 数据绑定剖析</title>
-    <link href="https://dayarch.top//p/spring-data-binding-mechanism.html"/>
-    <id>https://dayarch.top//p/spring-data-binding-mechanism.html</id>
-    <published>2019-12-12T11:59:04.000Z</published>
-    <updated>2019-12-16T04:30:41.731Z</updated>
-    
-    <summary type="html">
-    
-      Spring Boot的整个请求过程，都离不开Spring 数据绑定机制，透彻理解该机制，可以让我们的编码更加整洁清晰，同时可以应对更多特殊请求处理
-    
-    </summary>
-    
-    
-      <category term="Coding" scheme="https://dayarch.top/categories/Coding/"/>
-    
-      <category term="Spring-Boot" scheme="https://dayarch.top/categories/Coding/Spring-Boot/"/>
-    
-    
-      <category term="Spring Boot" scheme="https://dayarch.top/tags/Spring-Boot/"/>
-    
-      <category term="Spring Data Binding" scheme="https://dayarch.top/tags/Spring-Data-Binding/"/>
     
   </entry>
   

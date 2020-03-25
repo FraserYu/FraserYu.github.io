@@ -1,0 +1,1371 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  
+  <title>面试volatile关键字时，我们应该具备哪些谈资？ | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享</title>
+  
+  <meta name="keywords" content="volatile,内存屏障,Java并发,面试, Java,SpringBoot,并发编程, ElasticSearch, 日拱一兵">
+  
+  
+  <meta name="description" content="透彻理解 volatile 的内存语义与读-写语义，会为你的面试带来很多谈资，这也会为面试带来更多加分，其实很简单, 本站是日拱一兵的技术分享博客，内容涵盖Java后端技术、Spring Boot、Java并发编程等技术研究与分享，用有趣的方式解读技术">
+  
+
+  
+  <link rel="alternate" href="/atom.xml" title="日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享">
+  
+
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <!-- meta -->
+  
+
+  <!-- link -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-waves@0.7.6/dist/waves.min.css">
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.10.1/css/all.min.css">
+  
+
+  
+  <link rel="shortcut icon" type='image/x-icon' href="https://cdn.jsdelivr.net/gh/xaoxuu/assets@master/favicon/favicon.ico">
+  
+
+  
+    <link rel="stylesheet" href="/style.css">
+  
+
+  <script>
+    function setLoadingBarProgress(num) {
+      document.getElementById('loading-bar').style.width=num+"%";
+    }
+  </script>
+
+  
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-147539283-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-147539283-1');
+    </script>
+  
+  
+    <!-- ba -->
+    <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?f553477a3dc5ab3837e9a4dead4e0bc7";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+    </script>
+  
+
+
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-1774278264048334",
+        enable_page_level_ads: true
+      });
+    </script>
+
+    
+        <script>
+        (function(i,s,o,g,r,a,m){i["DaoVoiceObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;a.charset="utf-8";m.parentNode.insertBefore(a,m)})(window,document,"script",('https:' == document.location.protocol ? 'https:' : 'http:') + "//widget.daovoice.io/widget/0f81ff2f.js","daovoice")
+        daovoice('init', {
+            app_id: "8a3d6849"
+        });
+        daovoice('update');
+        </script>
+    
+</head>
+
+<body>
+  
+  
+  <div class="cover-wrapper">
+    <cover class='cover post half'>
+      
+        
+  <img class='logo' src='/assets/logo.png'/>
+
+
+  <div class="m_search">
+    <form name="searchform" class="form u-search-form">
+      <input type="text" class="input u-search-input" placeholder="世界很大，搜索一下" />
+      <i class="icon fas fa-search fa-fw"></i>
+    </form>
+  </div>
+
+<div class='menu navgation'>
+  <ul class='h-list'>
+    
+      
+        <li>
+          <a class="nav home" href="/"
+            
+              rel="nofollow"
+            
+            
+            id="home">
+            <i class='fas fa-home fa-fw'></i>&nbsp;主页
+          </a>
+        </li>
+      
+        <li>
+          <a class="nav home" href="/categories/"
+            
+              rel="nofollow"
+            
+            
+            id="categories">
+            <i class='fas fa-folder-open fa-fw'></i>&nbsp;分类
+          </a>
+        </li>
+      
+        <li>
+          <a class="nav home" href="/tags/"
+            
+              rel="nofollow"
+            
+            
+            id="tags">
+            <i class='fas fa-tags fa-fw'></i>&nbsp;标签
+          </a>
+        </li>
+      
+        <li>
+          <a class="nav home" href="/archives/"
+            
+              rel="nofollow"
+            
+            
+            id="archives">
+            <i class='fas fa-archive fa-fw'></i>&nbsp;归档
+          </a>
+        </li>
+      
+        <li>
+          <a class="nav home" href="/comments/"
+            
+              rel="nofollow"
+            
+            
+            id="comments">
+            <i class='fas fa-comments fa-fw'></i>&nbsp;留言板
+          </a>
+        </li>
+      
+    
+  </ul>
+</div>
+
+<br>
+<div class="description center-align">
+    
+    <span id="typed"></span>
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.9"></script>
+    <script>
+        var typed = new Typed("#typed", {
+            strings: ['从来没有真正的绝境, 只有心灵的迷途', 'Never really desperate, only the lost of the soul'],
+            startDelay: 300,
+            typeSpeed: 100,
+            loop: true,
+            backSpeed: 50,
+            showCursor: true
+        });
+    </script>
+    
+</div>
+
+      
+    </cover>
+    <header class="l_header pure">
+  <div id="loading-bar-wrapper">
+    <div id="loading-bar" class="pure"></div>
+  </div>
+
+	<div class='wrapper'>		
+		<div class="nav-main container container--flex">
+      <a class="logo flat-box" href='/' >
+        
+          日拱一兵
+        
+      </a>
+		<div class='menu navgation'>
+				<ul class='h-list'>
+          
+  					
+  						<li>
+								<a class="nav flat-box" href="/"
+                  
+                    rel="nofollow"
+                  
+                  
+                  id="home">
+									<i class='fas fa-home fa-fw'></i>&nbsp;主页
+								</a>
+							</li>
+      			
+  						<li>
+								<a class="nav flat-box" href="/categories/"
+                  
+                    rel="nofollow"
+                  
+                  
+                  id="categories">
+									<i class='fas fa-folder-open fa-fw'></i>&nbsp;分类
+								</a>
+							</li>
+      			
+  						<li>
+								<a class="nav flat-box" href="/tags/"
+                  
+                    rel="nofollow"
+                  
+                  
+                  id="tags">
+									<i class='fas fa-tags fa-fw'></i>&nbsp;标签
+								</a>
+							</li>
+      			
+  						<li>
+								<a class="nav flat-box" href="/archives/"
+                  
+                    rel="nofollow"
+                  
+                  
+                  id="archives">
+									<i class='fas fa-archive fa-fw'></i>&nbsp;归档
+								</a>
+							</li>
+      			
+  						<li>
+								<a class="nav flat-box" href="/friends/"
+                  
+                    rel="nofollow"
+                  
+                  
+                  id="friends">
+									<i class='fas fa-link fa-fw'></i>&nbsp;友链
+								</a>
+							</li>
+      			
+  						<li>
+								<a class="nav flat-box" href="/comments/"
+                  
+                    rel="nofollow"
+                  
+                  
+                  id="comments">
+									<i class='fas fa-comments fa-fw'></i>&nbsp;留言板
+								</a>
+							</li>
+      			
+      		
+				</ul>
+			</div>
+
+			
+				<div class="m_search">
+					<form name="searchform" class="form u-search-form">
+						<input type="text" class="input u-search-input" placeholder="搜索" />
+						<i class="icon fas fa-search fa-fw"></i>
+					</form>
+				</div>
+			
+			<ul class='switcher h-list'>
+				
+					<li class='s-search'><a class="fas fa-search fa-fw" href='javascript:void(0)'></a></li>
+				
+				<li class='s-menu'><a class="fas fa-bars fa-fw" href='javascript:void(0)'></a></li>
+			</ul>
+		</div>
+		<div class='nav-sub container container--flex'>
+			<a class="logo flat-box"></a>
+			<ul class='switcher h-list'>
+				<li class='s-comment'><a class="flat-btn fas fa-comments fa-fw" href='javascript:void(0)'></a></li>
+        
+          <li class='s-toc'><a class="flat-btn fas fa-list fa-fw" href='javascript:void(0)'></a></li>
+        
+			</ul>
+		</div>
+	</div>
+</header>
+	<aside class="menu-phone">
+    <header>
+		<nav class="menu navgation">
+      <ul>
+        
+          
+            <li>
+							<a class="nav flat-box" href="/"
+                
+                  rel="nofollow"
+                
+                
+                id="home">
+								<i class='fas fa-clock fa-fw'></i>&nbsp;近期文章
+							</a>
+            </li>
+          
+            <li>
+							<a class="nav flat-box" href="/categories/"
+                
+                  rel="nofollow"
+                
+                
+                id="categories">
+								<i class='fas fa-folder-open fa-fw'></i>&nbsp;分类
+							</a>
+            </li>
+          
+            <li>
+							<a class="nav flat-box" href="/tags/"
+                
+                  rel="nofollow"
+                
+                
+                id="tags">
+								<i class='fas fa-tags fa-fw'></i>&nbsp;标签
+							</a>
+            </li>
+          
+            <li>
+							<a class="nav flat-box" href="/archives/"
+                
+                  rel="nofollow"
+                
+                
+                id="archives">
+								<i class='fas fa-archive fa-fw'></i>&nbsp;归档
+							</a>
+            </li>
+          
+            <li>
+							<a class="nav flat-box" href="/friends/"
+                
+                  rel="nofollow"
+                
+                
+                id="friends">
+								<i class='fas fa-link fa-fw'></i>&nbsp;友链
+							</a>
+            </li>
+          
+            <li>
+							<a class="nav flat-box" href="/comments/"
+                
+                  rel="nofollow"
+                
+                
+                id="comments">
+								<i class='fas fa-comments fa-fw'></i>&nbsp;留言板
+							</a>
+            </li>
+          
+       
+      </ul>
+		</nav>
+    </header>
+	</aside>
+<script>setLoadingBarProgress(40);</script>
+
+  </div>
+
+
+  <div class="l_body">
+    <div class='body-wrapper'>
+      <div class='l_main'>
+  
+
+  <article id="post" class="post white-box article-type-post" itemscope itemprop="blogPost">
+    
+
+
+  <section class='meta'>
+    
+    
+      <a title='面试volatile关键字时，我们应该具备哪些谈资？' href='/p/java-concurrency-volatile.html'><img class='thumbnail' src='https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgconcurrency.png'></a>
+    
+    <div class="meta" id="header-meta">
+      
+        
+  
+    <h1 class="title">
+      <a href="/p/java-concurrency-volatile.html">
+        面试volatile关键字时，我们应该具备哪些谈资？
+      </a>
+    </h1>
+  
+
+
+      
+      <div class='new-meta-box'>
+        
+          
+        
+          
+            
+  <div class='new-meta-item author'>
+    
+      <a href="https://dayarch.top" rel="nofollow">
+        
+          <img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png">
+        
+        <p>tanθ</p>
+      </a>
+    
+  </div>
+
+
+          
+        
+          
+            <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+    <p>2019-09-29</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+  
+  <div class='new-meta-item category'>
+    <a href='/categories/Coding/Java-Concurrency/' rel="nofollow">
+      <i class="fas fa-folder-open" aria-hidden="true"></i>
+      <p>Coding&nbsp;/&nbsp;Java-Concurrency</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            
+  
+    <div class="new-meta-item browse busuanzi">
+      <a class='notlink'>
+        <i class="fas fa-eye" aria-hidden="true"></i>
+        <p>
+          <span id="busuanzi_value_page_pv">
+            <i class="fas fa-spinner fa-spin fa-fw" aria-hidden="true"></i>
+          </span>
+        </p>
+      </a>
+    </div>
+  
+
+
+          
+        
+          
+            
+
+          
+        
+      </div>
+      
+        <hr>
+      
+    </div>
+  </section>
+
+
+    <section class="article typo">
+      <div class="article-entry" itemprop="articleBody">
+        <h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>在 <a href="https://dayarch.top/2019/09/12/you-xu-xing-ke-jian-xing-happens-before-lai-gao-ding/">可见性有序性，Happens-before来搞定</a> 文章中，happens-before 的原则之一: volatile变量规则</p>
+<blockquote>
+<p> 对一个 volatile 域的写, happens-before 于任意后续对这个 volatile 域的读</p>
+</blockquote>
+<p>按理说了解了这个规则，对 volatile 的使用就已经足够了，但是面试官可是喜欢刨根问到底的，为了更透彻的了解 volatile 的内存语义与读写语义，为了面试多一些谈资进而获得一些加分项，同时尽早填补前序文章留下的坑，于是乎这篇文章就这样尴尬的诞生了</p>
+<h2 id="happens-before-之-volatile-变量规则"><a href="#happens-before-之-volatile-变量规则" class="headerlink" title="happens-before 之 volatile 变量规则"></a>happens-before 之 volatile 变量规则</h2><p>下面的表格你还记得吗？(是的，你记得😂)</p>
+<table>
+<thead>
+<tr>
+<th>能否重排序</th>
+<th>第二个操作</th>
+<th>第二个操作</th>
+<th>第二个操作</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>第一个操作</td>
+<td>普通读/写</td>
+<td>volatile 读</td>
+<td>volatile 写</td>
+</tr>
+<tr>
+<td>普通读/写</td>
+<td>-</td>
+<td>-</td>
+<td>NO</td>
+</tr>
+<tr>
+<td>volatile 读</td>
+<td>NO</td>
+<td>NO</td>
+<td>NO</td>
+</tr>
+<tr>
+<td>volatile 写</td>
+<td>-</td>
+<td>NO</td>
+<td>NO</td>
+</tr>
+</tbody></table>
+<p>上面的表格是 JMM 针对编译器定制的 volatile 重排序的规则，那 JMM 是怎样禁止重排序的呢？答案是<strong>内存屏障</strong></p>
+<h2 id="内存屏障-Memory-Barriers-Fences"><a href="#内存屏障-Memory-Barriers-Fences" class="headerlink" title="内存屏障 (Memory Barriers / Fences)"></a>内存屏障 (Memory Barriers / Fences)</h2><p>无论你听过这个名词与否都没关系，很简单，且看</p>
+<blockquote>
+<p>为了实现 volatile 的内存语义，编译器在生成字节码时，会在指令序列中插入内存屏障来禁止特定类型的处理器重排序</p>
+</blockquote>
+<p>这句话有点抽象，试着想象内存屏障是一面高墙，如果两个变量之间有这个屏障，那么他们就不能互换位置(重排序)了，变量有读(Load)有写(Store)，操作有前有后，JMM 就将内存屏障插入策略分为 4 种:</p>
+<ol>
+<li>在每个 volatile 写操作的前面插入一个 StoreStore 屏障</li>
+<li>在每个 volatile 写操作的后面插入一个 StoreLoad 屏障</li>
+<li>在每个 volatile 读操作的后面插入一个 LoadLoad 屏障</li>
+<li>在每个 volatile 读操作的后面插入一个 LoadStore 屏障</li>
+</ol>
+<p>1 和 2 用图形描述以及对应表格规则就是下面这个样子了:</p>
+<p><img src="http://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E5%A4%9A%E7%BA%BF%E7%A8%8B/_image/2019-09-24/volatilepingzhang12.png" alt=""></p>
+<p>3 和 4 用图形描述以及对应表格规则就是下面这个样子了:</p>
+<p><img src="http://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E5%A4%9A%E7%BA%BF%E7%A8%8B/_image/2019-09-24/volatilepingzhang34.png" alt=""></p>
+<blockquote>
+<p>其实图形也是表格内容的体现，只不过告诉大家内存屏障是如何禁止指令重排序的，所以大家只要牢记表格内容即可</p>
+</blockquote>
+<p>一段程序的读写通常不会像上面两种情况这样简单，这些屏障组合起来如何使用呢？其实一点都不难，我们只需要将这些指令带入到文章开头的表格中，然后再按照程序顺序拼接指令就好了</p>
+<p>来看一小段程序:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">VolatileBarrierExample</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">int</span> a;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">volatile</span> <span class="keyword">int</span> v1 = <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">volatile</span> <span class="keyword">int</span> v2 = <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">readAndWrite</span><span class="params">()</span></span>&#123;</span><br><span class="line">		<span class="keyword">int</span> i = v1; <span class="comment">//第一个volatile读</span></span><br><span class="line">		<span class="keyword">int</span> j = v2;	<span class="comment">//第二个volatile读</span></span><br><span class="line">		a = i + j;	<span class="comment">//普通写</span></span><br><span class="line">		v1 = i + <span class="number">1</span>;	<span class="comment">//第一个volatile写</span></span><br><span class="line">		v2 = j * <span class="number">2</span>;	<span class="comment">//第二个volatile写</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>将屏障指令带入到程序就是这个样子:</p>
+<p><img src="http://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E5%A4%9A%E7%BA%BF%E7%A8%8B/_image/2019-09-24/volatile1234.png" alt=""></p>
+<p>我们将上图分几个角度来看:</p>
+<ol>
+<li>彩色是将屏障指令带入到程序中生成的全部内容，也就是编译器生成的<strong>「最稳妥」</strong>的方案</li>
+<li>显然有很多屏障是重复多余的，右侧虚线框指向的屏障是可以被<strong>「优化」</strong>删除掉的屏障</li>
+</ol>
+<p>到这里你应该了解了 volatile 是如何通过内存屏障保证程序不被”擅自”排序的，那 volatile 是如何保证可见性的呢？</p>
+<h2 id="volatile-写-读的内存语义"><a href="#volatile-写-读的内存语义" class="headerlink" title="volatile 写-读的内存语义"></a>volatile 写-读的内存语义</h2><p>回顾一下之前文章内容中的程序，假定线程 A 先执行 writer 方法，随后线程 B 执行 reader 方法，:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ReorderExample</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">int</span> x = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">int</span> y = <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">volatile</span> <span class="keyword">boolean</span> flag = <span class="keyword">false</span>;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">writer</span><span class="params">()</span></span>&#123;</span><br><span class="line">		x = <span class="number">42</span>;	<span class="comment">//1</span></span><br><span class="line">		y = <span class="number">50</span>;	<span class="comment">//2</span></span><br><span class="line">		flag = <span class="keyword">true</span>;	<span class="comment">//3</span></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">reader</span><span class="params">()</span></span>&#123;</span><br><span class="line">		<span class="keyword">if</span> (flag)&#123;	<span class="comment">//4</span></span><br><span class="line">			System.out.println(<span class="string">"x:"</span> + x);	<span class="comment">//5</span></span><br><span class="line">			System.out.println(<span class="string">"y:"</span> + y);	<span class="comment">//6</span></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>到这里你是否还记得之前说过的 JMM，是的，你还记得😂，当线程 A 执行 writer 方法时，且看下图:</p>
+<p><img src="http://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E5%A4%9A%E7%BA%BF%E7%A8%8B/_image/2019-09-24/volatile%E5%8F%AF%E8%A7%81%E6%80%A7.png" alt=""></p>
+<p>线程 A 将本地内存更改的变量写回到主内存中</p>
+<blockquote>
+<h3 id="volatile-读的内存语义"><a href="#volatile-读的内存语义" class="headerlink" title="volatile 读的内存语义:"></a>volatile 读的内存语义:</h3><p>当读一个 volatile 变量时, JMM 会把该线程对应的本地内存置为无效。线程接下来将从主内存中读取共享变量。</p>
+</blockquote>
+<p>所以当线程 B 执行 reader 方法时，图形结构就变成了这个样子:</p>
+<p><img src="http://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E5%A4%9A%E7%BA%BF%E7%A8%8B/_image/2019-09-24/volatile%E5%8F%AF%E8%A7%81%E6%80%A7%E8%AF%BB.png" alt=""></p>
+<p>线程 B 本地内存变量无效，从主内存中读取变量到本地内存中，也就得到了线程 A 更改后的结果，这就是 volatile 是如何保证可见性的</p>
+<p>如果你看过前面的文章你就不难理解上面的两张图了，综合起来说:</p>
+<ol>
+<li>线程 A 写一个volatile变量, 实质上是线程 A 向接下来将要读这个 volatile 变量的某个线程发出了(其对共享变量所做修改的)消息</li>
+<li>线程 B 读一个 volatile 变量,实质上是线程 B 接收了之前某个线程发出的(在写这个 volatile 变量之前对共享变量所做修改的)消息。</li>
+<li>线程 A 写一个 volatile 变量, 随后线程 B 读这个 volatile 变量, 这个过程实质上是线程 A 通过主内存向线程B 发送消息。</li>
+</ol>
+<p>到这里，面试 volatile 时，你应该有一些谈资了，同时也对 volatile 的语义有了更深层次的了解</p>
+<h2 id="彩蛋"><a href="#彩蛋" class="headerlink" title="彩蛋"></a>彩蛋</h2><p>之前的文章提到过这样一句话:</p>
+<blockquote>
+<p> 从内存语义的角度来说, volatile 的<code>写-读</code>与锁的<code>释放-获取</code>有相同的内存效果；volatile 写和锁的释放有相同的内存语义; volatile 读与锁的获取有相同的内存语义</p>
+</blockquote>
+<p>记住文中最后两张图， 当我们说到 synchronized 的时候，你就会猛的理解这句话的含义了, 感兴趣的可以自己先了解 synchronized 的写-读语义</p>
+<p>接下来我们就聊一聊锁相关的内容了，敬请期待…</p>
+<h2 id="灵魂追问"><a href="#灵魂追问" class="headerlink" title="灵魂追问"></a>灵魂追问</h2><ol>
+<li>如果 volatile 写之后直接 return，那还会生成 StoreLoad 指令吗？</li>
+<li>synchronized 是怎样逐步被优化的？</li>
+</ol>
+<h2 id="提高效率工具"><a href="#提高效率工具" class="headerlink" title="提高效率工具"></a>提高效率工具</h2><p><img src="http://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E6%84%9F%E6%83%B3%E4%B8%8E%E6%80%BB%E7%BB%93/_image/2019-06-18/b.png" alt=""> </p>
+<h3 id="tool-lu"><a href="#tool-lu" class="headerlink" title="tool.lu"></a>tool.lu</h3><p><a href="https://tool.lu" target="_blank" rel="noopener">https://tool.lu</a> 是一款集成了非常多功能的在线工具，基本满足日常开发所需</p>
+<p><img src="http://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E5%A4%9A%E7%BA%BF%E7%A8%8B/_image/2019-09-24/2019-09-29-19-28-22.png" alt=""></p>
+<hr>
+<h2 id="推荐阅读"><a href="#推荐阅读" class="headerlink" title="推荐阅读"></a>推荐阅读</h2><ul>
+<li><a href="https://mp.weixin.qq.com/s/I53l5W_Wl-lMc-_FAeJ6WQ" target="_blank" rel="noopener">这次走进并发的世界，请不要错过 </a></li>
+<li><a href="https://mp.weixin.qq.com/s/SrNsvp2NjhAEqYugx6c-3Q" target="_blank" rel="noopener">学并发编程，透彻理解这三个核心是关键</a></li>
+<li><a href="https://mp.weixin.qq.com/s/fQcozKziqMxFMBkptpnuTw" target="_blank" rel="noopener">并发Bug之源有三，请睁大眼睛看清它们</a></li>
+<li><a href="https://mp.weixin.qq.com/s/074jYZWZODJ5Z2qXyWy4gw" target="_blank" rel="noopener">可见性有序性，Happens-before来搞定</a></li>
+<li><a href="https://mp.weixin.qq.com/s/SSfs_kz60MjfrvtwNhY7pg" target="_blank" rel="noopener">解决原子性问题？你首先需要的是宏观理解</a></li>
+</ul>
+<hr>
+<blockquote>
+<h3 id="欢迎持续关注公众号：「日拱一兵」"><a href="#欢迎持续关注公众号：「日拱一兵」" class="headerlink" title="欢迎持续关注公众号：「日拱一兵」"></a>欢迎持续关注公众号：「日拱一兵」</h3><ul>
+<li>前沿 Java 技术干货分享 </li>
+<li>高效工具汇总 | 回复「工具」</li>
+<li>面试问题分析与解答 </li>
+<li>技术资料领取 | 回复「资料」</li>
+</ul>
+</blockquote>
+<blockquote>
+<p>以读侦探小说思维轻松趣味学习 Java 技术栈相关知识，本着将复杂问题简单化，抽象问题具体化和图形化原则逐步分解技术问题，技术持续更新，请持续关注……</p>
+</blockquote>
+
+      </div>
+      <!-- <div class="tuijian">
+        <br><br>
+        📚相关文章
+        <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/difference-between-volatile-and-synchronized-keyword.html" title="volatile和synchronized图文透彻讲解" rel="bookmark">volatile和synchronized图文透彻讲解</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-core.html" title="并发编程三大核心" rel="bookmark">并发编程三大核心</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-lock-resource.html" title="锁保护资源，synchronized方法就够了吗" rel="bookmark">锁保护资源，synchronized方法就够了吗</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-three-questions.html" title="并发编程三大问题" rel="bookmark">并发编程三大问题</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-metaphor.html" title="并发编程之初探" rel="bookmark">并发编程之初探</a></h3></div></li></ul>
+      </div> -->
+      <div class="personalweixin">
+        <br><br>
+        <blockquote>
+          <a href="https://mp.weixin.qq.com/s/G7BXuZh0Qh1-mE6ts4LJqQ" target="_blank" rel="noopener">加我微信</a>，咱们交流技术与思想，共同成长
+        </blockquote>
+        <br>
+
+      </div>
+      
+      
+        <br>
+        
+
+
+  <section class='meta' id="footer-meta">
+    <div class='new-meta-box'>
+      
+        
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-03-04T11:43:49+08:00">
+  <a class='notlink'>
+    <i class="fas fa-clock" aria-hidden="true"></i>
+    <p>更新于 2020年3月4日</p>
+  </a>
+</div>
+
+        
+      
+        
+          
+  
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/Java-Concurrency/" rel="nofollow"><i class="fas fa-tag" aria-hidden="true"></i><p>Java-Concurrency</p></a></div> <div class="new-meta-item meta-tags"><a class="tag" href="/tags/volatile/" rel="nofollow"><i class="fas fa-tag" aria-hidden="true"></i><p>volatile</p></a></div>
+
+
+        
+      
+        
+          
+  <div class="new-meta-item share -mob-share-list">
+  <div class="-mob-share-list share-body">
+    
+      
+        <a class="-mob-share-qq" title="QQ好友" rel="external nofollow noopener noreferrer"
+          
+          href="http://connect.qq.com/widget/shareqq/index.html?url=https://dayarch.top/p/java-concurrency-volatile.html&title=面试volatile关键字时，我们应该具备哪些谈资？ | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=写在前面
+在 可见性有序性，Happens-before来搞定 文章中，happens-before 的原则之一: volatile变量规则
+
+ 对一个 volatile 域的写, happens-before 于任意后续对这个 volatile 域的读
+
+按理说了解了这个规则，对 volatile 的使用就已经足够了，但是面试官可是喜欢刨根问到底的，为了更透彻的了解 volatile 的内存语义与读写语义，为了面试多一些谈资进而获得一些加分项，同时尽早填补前序文章留下的坑，于是乎这篇文章就这样尴尬的诞生了
+
+happens-before 之 volatile 变量规则
+下面的表格你还记得吗？"
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/assets@19.1.9/logo/128/qq.png">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-qzone" title="QQ空间" rel="external nofollow noopener noreferrer"
+          
+          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://dayarch.top/p/java-concurrency-volatile.html&title=面试volatile关键字时，我们应该具备哪些谈资？ | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=写在前面
+在 可见性有序性，Happens-before来搞定 文章中，happens-before 的原则之一: volatile变量规则
+
+ 对一个 volatile 域的写, happens-before 于任意后续对这个 volatile 域的读
+
+按理说了解了这个规则，对 volatile 的使用就已经足够了，但是面试官可是喜欢刨根问到底的，为了更透彻的了解 volatile 的内存语义与读写语义，为了面试多一些谈资进而获得一些加分项，同时尽早填补前序文章留下的坑，于是乎这篇文章就这样尴尬的诞生了
+
+happens-before 之 volatile 变量规则
+下面的表格你还记得吗？"
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/assets@19.1.9/logo/128/qzone.png">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-weibo" title="微博" rel="external nofollow noopener noreferrer"
+          
+          href="http://service.weibo.com/share/share.php?url=https://dayarch.top/p/java-concurrency-volatile.html&title=面试volatile关键字时，我们应该具备哪些谈资？ | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=写在前面
+在 可见性有序性，Happens-before来搞定 文章中，happens-before 的原则之一: volatile变量规则
+
+ 对一个 volatile 域的写, happens-before 于任意后续对这个 volatile 域的读
+
+按理说了解了这个规则，对 volatile 的使用就已经足够了，但是面试官可是喜欢刨根问到底的，为了更透彻的了解 volatile 的内存语义与读写语义，为了面试多一些谈资进而获得一些加分项，同时尽早填补前序文章留下的坑，于是乎这篇文章就这样尴尬的诞生了
+
+happens-before 之 volatile 变量规则
+下面的表格你还记得吗？"
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/assets@19.1.9/logo/128/weibo.png">
+          
+        </a>
+      
+    
+  </div>
+</div>
+
+
+
+        
+      
+    </div>
+  </section>
+
+
+      
+      
+          <div class="prev-next">
+              
+                  <section class="prev">
+                      <span class="art-item-left">
+                          <h6><i class="fas fa-chevron-left" aria-hidden="true"></i>&nbsp;上一页</h6>
+                          <h4>
+                              <a href="/p/easyexcel-read.html" rel="prev" title="EasyExcel读取Excel实际应用">
+                                
+                                    EasyExcel读取Excel实际应用
+                                
+                              </a>
+                          </h4>
+                          
+                              
+                              <h6 class="tags">
+                                  <a class="tag" href="/tags/Excel/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> Excel</a> <a class="tag" href="/tags/Spring-Boot/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> Spring Boot</a> <a class="tag" href="/tags/EasyExcel/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> EasyExcel</a> <a class="tag" href="/tags/POI/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> POI</a>
+                              </h6>
+                          
+                      </span>
+                  </section>
+              
+              
+                  <section class="next">
+                      <span class="art-item-right" aria-hidden="true">
+                          <h6>下一页&nbsp;<i class="fas fa-chevron-right" aria-hidden="true"></i></h6>
+                          <h4>
+                              <a href="/p/java-concurrency-atomic.html" rel="prev" title="解决原子性问题？你首先需要的是宏观理解">
+                                  
+                                      解决原子性问题？你首先需要的是宏观理解
+                                  
+                              </a>
+                          </h4>
+                          
+                              
+                              <h6 class="tags">
+                                  <a class="tag" href="/tags/Java-Concurrency/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> Java-Concurrency</a> <a class="tag" href="/tags/%E9%94%81/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> 锁</a>
+                              </h6>
+                          
+                      </span>
+                  </section>
+              
+          </div>
+      
+    </section>
+  </article>
+
+
+  
+    
+  
+    
+      
+        
+          
+  <section class='widget related_posts'>
+    
+<header class='pure'>
+  <div><i class="fas fa-bookmark fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;相关文章</div>
+  
+</header>
+
+    <div class="content pure">
+      <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/difference-between-volatile-and-synchronized-keyword.html" title="volatile和synchronized图文透彻讲解" rel="bookmark">volatile和synchronized图文透彻讲解</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-core.html" title="并发编程三大核心" rel="bookmark">并发编程三大核心</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-lock-resource.html" title="锁保护资源，synchronized方法就够了吗" rel="bookmark">锁保护资源，synchronized方法就够了吗</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-three-questions.html" title="并发编程三大问题" rel="bookmark">并发编程三大问题</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-metaphor.html" title="并发编程之初探" rel="bookmark">并发编程之初探</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-happens-before-rule.html" title="有序性可见性，Happens-before来搞定" rel="bookmark">有序性可见性，Happens-before来搞定</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-atomic.html" title="解决原子性问题？你首先需要的是宏观理解" rel="bookmark">解决原子性问题？你首先需要的是宏观理解</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-dead-lock.html" title="Java并发死锁解决思路" rel="bookmark">Java并发死锁解决思路</a></h3></div></li></ul>
+    </div>
+  </section>
+
+
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+  
+    
+  
+
+
+  <!-- 显示推荐文章和评论 -->
+
+
+
+  <article class="post white-box comments">
+    <section class="article typo">
+      <h4><i class="fas fa-comments fa-fw" aria-hidden="true"></i>&nbsp;评论</h4>
+      
+      
+      
+        <section id="comments">
+          <div id="gitalk-container"></div>
+        </section>
+      
+      
+    </section>
+  </article>
+
+
+
+
+
+
+<!-- 根据页面mathjax变量决定是否加载MathJax数学公式js -->
+
+
+
+  <script>
+    window.subData = {
+      title: '面试volatile关键字时，我们应该具备哪些谈资？',
+      tools: true
+    }
+  </script>
+
+
+
+  <script src="https://my.openwrite.cn/js/readmore.js" type="text/javascript"></script>
+  <script>
+      const btw = new BTWPlugin();
+      btw.init({
+          id: 'post',
+          blogId: '10015-1569397635991-668',
+          name: '日拱一兵',
+          qrcode: 'https://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E6%84%9F%E6%83%B3%E4%B8%8E%E6%80%BB%E7%BB%93/_image/2019-07-25/qrcode.jpg',
+          keyword: 'tanrgyb',
+      });
+  </script>
+  
+
+</div>
+<aside class='l_side'>
+  
+    
+    
+      
+      
+        
+          
+          
+        
+          
+          
+            
+              <section class='widget author'>
+  <div class='content pure'>
+    
+      <div class='avatar'>
+        <img class='avatar' src='https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgqrcode.jpg'/>
+      </div>
+    
+    
+      <div class='text'>
+        
+        
+        
+          <p><span id="jinrishici-sentence">从来没有真正的绝境，只有心灵的迷途</span></p>
+          <script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
+        
+      </div>
+    
+    
+      <div class="social-wrapper">
+        
+          
+            <a href="/atom.xml"
+              class="social fas fa-rss flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="mailto:dayarch@126.com"
+              class="social fas fa-envelope flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="https://github.com/FraserYu"
+              class="social fab fa-github flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+      </div>
+    
+  </div>
+</section>
+
+            
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+      
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+      
+        
+          
+          
+        
+          
+          
+        
+          
+          
+            
+              
+  <section class='widget toc-wrapper'>
+    
+<header class='pure'>
+  <div><i class="fas fa-list fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;本文目录</div>
+  
+    <!-- <div class='wrapper'><a class="s-toc rightBtn" rel="external nofollow noopener noreferrer" href="javascript:void(0)"><i class="fas fa-thumbtack fa-fw"></i></a></div> -->
+  
+</header>
+
+    <div class='content pure'>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#写在前面"><span class="toc-text">写在前面</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#happens-before-之-volatile-变量规则"><span class="toc-text">happens-before 之 volatile 变量规则</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#内存屏障-Memory-Barriers-Fences"><span class="toc-text">内存屏障 (Memory Barriers / Fences)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#volatile-写-读的内存语义"><span class="toc-text">volatile 写-读的内存语义</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#volatile-读的内存语义"><span class="toc-text">volatile 读的内存语义:</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#彩蛋"><span class="toc-text">彩蛋</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#灵魂追问"><span class="toc-text">灵魂追问</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#提高效率工具"><span class="toc-text">提高效率工具</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#tool-lu"><span class="toc-text">tool.lu</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#推荐阅读"><span class="toc-text">推荐阅读</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#欢迎持续关注公众号：「日拱一兵」"><span class="toc-text">欢迎持续关注公众号：「日拱一兵」</span></a></li></ol></li></ol>
+    </div>
+  </section>
+
+
+            
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+      
+    
+
+  
+</aside>
+
+<footer id="footer" class="clearfix">
+  
+    <div class="footer">
+      <p><strong>If you can NOT explain it simply, you do NOT understand it well enough</strong></p>
+
+    </div>
+    <br>
+  
+  
+    <div class="social-wrapper">
+      
+        
+          <a href="/atom.xml"
+            class="social fas fa-rss flat-btn"
+            target="_blank"
+            rel="external nofollow noopener noreferrer">
+          </a>
+        
+      
+        
+          <a href="mailto:dayarch@126.com"
+            class="social fas fa-envelope flat-btn"
+            target="_blank"
+            rel="external nofollow noopener noreferrer">
+          </a>
+        
+      
+        
+          <a href="https://github.com/FraserYu"
+            class="social fab fa-github flat-btn"
+            target="_blank"
+            rel="external nofollow noopener noreferrer">
+          </a>
+        
+      
+    </div>
+  
+  <br>
+  Copyright <i class="far fa-copyright"></i>  2018-2019 
+  <a href="https://www.itrhx.com/" target="_blank"> Tanθ's Blog </a>
+  &nbsp;&nbsp;|&nbsp;&nbsp;<img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgicp.png">
+  <a href="http://www.beian.miit.gov.cn/" target="_blank">辽ICP备19017651号-1</a>
+
+  &nbsp;&nbsp;|&nbsp;&nbsp;  
+  
+    &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+        class="white-color">166.8k</span>&nbsp;字
+    
+
+  &nbsp;&nbsp;|&nbsp;&nbsp;  
+  
+    <span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+    <script>
+        var now = new Date(); 
+        function createtime() { 
+            var grt= new Date("05/22/2019 09:09:06");//在此处修改你的建站时间
+            now.setTime(now.getTime()+250); 
+            days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+            hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+            if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+            mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+            seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+            snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+            document.getElementById("timeDate").innerHTML = "本站已运行 "+dnum+" 天 "; 
+            document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+        } 
+    setInterval("createtime()",250);
+    </script>
+    
+  &nbsp;&nbsp;|&nbsp;&nbsp;<a href="https://dayarch.top/sitemap.xml" target="_blank">站点地图</a>
+  &nbsp;&nbsp;|&nbsp;&nbsp;<a href="https://tongji.baidu.com/web/welcome/ico?s=f553477a3dc5ab3837e9a4dead4e0bc7" target="_blank">站长统计</a>
+  
+  
+
+
+
+
+  <div>
+    <!-- 本站使用
+    <a href="https://xaoxuu.com/wiki/material-x/" target="_blank" class="codename">Material X</a>
+    作为主题 -->
+    
+      <!-- ， -->
+      <!-- 总访问量为
+      <span id="busuanzi_value_site_pv"><i class="fas fa-eyes" aria-hidden="true"></i></span>
+      次 -->
+      <span id="busuanzi_container_site_pv">
+        &nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;<span id="busuanzi_value_site_pv"
+            class="white-color"></span>&nbsp;次
+    </span>
+      <!-- &nbsp;&nbsp;|&nbsp;&nbsp; -->
+      <!-- 总访客量 -->
+      <!-- <span id="busuanzi_container_site_uv"><i class="fas fa-eyes" aria-hidden="true"></i></span> -->
+      <span id="busuanzi_container_site_uv">
+        |&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;<span id="busuanzi_value_site_uv"
+            class="white-color"></span>&nbsp;人
+    </span>
+      <!-- 人 -->
+    
+    。
+  </div>
+  <div><p>博客内容遵循 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
+</div>
+  <!-- <div class="github-badge">
+      <a style="color: #fff" rel="license" href="https://hexo.io/" target="_blank" title="由 Hexo 强力驱动">
+      <span class="badge-subject">Powered</span><span class="badge-value bg-blue">Hexo</span></a>
+    </div> -->
+</footer>
+<script>setLoadingBarProgress(80);</script>
+
+
+<script>
+    (function(){
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        }
+        else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+   
+
+      <script>setLoadingBarProgress(60);</script>
+    </div>
+    <a class="s-top fas fa-arrow-up fa-fw" href='javascript:void(0)'></a>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+
+  <script>
+    var GOOGLE_CUSTOM_SEARCH_API_KEY = "";
+    var GOOGLE_CUSTOM_SEARCH_ENGINE_ID = "";
+    var ALGOLIA_API_KEY = "";
+    var ALGOLIA_APP_ID = "";
+    var ALGOLIA_INDEX_NAME = "";
+    var AZURE_SERVICE_NAME = "";
+    var AZURE_INDEX_NAME = "";
+    var AZURE_QUERY_KEY = "";
+    var BAIDU_API_ID = "";
+    var SEARCH_SERVICE = "hexo" || "hexo";
+    var ROOT = "/"||"/";
+    if(!ROOT.endsWith('/'))ROOT += '/';
+  </script>
+
+<script src="//instant.page/1.2.2" type="module" integrity="sha384-2xV8M5griQmzyiY3CDqh1dn4z3llDVqZDqzjzcY+jCBCk/a5fXJmuZ/40JJAPeoU"></script>
+
+
+  <script async src="https://cdn.jsdelivr.net/npm/scrollreveal@4.0.5/dist/scrollreveal.min.js"></script>
+  <script type="text/javascript">
+    $(function() {
+      const $reveal = $('.reveal');
+      if ($reveal.length === 0) return;
+      const sr = ScrollReveal({ distance: 0 });
+      sr.reveal('.reveal');
+    });
+  </script>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/node-waves@0.7.6/dist/waves.min.js"></script>
+  <script type="text/javascript">
+    $(function() {
+      Waves.attach('.flat-btn', ['waves-button']);
+      Waves.attach('.float-btn', ['waves-button', 'waves-float']);
+      Waves.attach('.float-btn-light', ['waves-button', 'waves-float', 'waves-light']);
+      Waves.attach('.flat-box', ['waves-block']);
+      Waves.attach('.float-box', ['waves-block', 'waves-float']);
+      Waves.attach('.waves-image');
+      Waves.init();
+    });
+  </script>
+
+
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <!-- <script async src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-busuanzi@2.3/js/busuanzi.pure.mini.js"></script> -->
+
+
+
+
+
+
+
+
+
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+  <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+  <script type="text/javascript">
+    var gitalk = new Gitalk({
+      clientID: "57bd3ce366ba25a73a1a",
+      clientSecret: "bab4a248180b9ac85b16fb44bf4ba171648f9cab",
+      repo: "myBlogTalk",
+      owner: "FraserYu",
+      admin: "FraserYu",
+      
+        id: location.pathname,      // Ensure uniqueness and length less than 50
+      
+      distractionFreeMode: false  // Facebook-like distraction free mode
+    });
+    gitalk.render('gitalk-container');
+  </script>
+
+
+
+
+
+  <script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/app.js"></script>
+
+
+  <script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/search.js"></script>
+
+
+
+
+<!-- 复制 -->
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  let COPY_SUCCESS = "复制成功";
+  let COPY_FAILURE = "复制失败";
+  /*页面载入完成后，创建复制按钮*/
+  !function (e, t, a) {
+    /* code */
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '  <i class="fa fa-copy"></i><span>复制</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+
+      clipboard.on('success', function(e) {
+        //您可以加入成功提示
+        console.info('Action:', e.action);
+        console.info('Text:', e.text);
+        console.info('Trigger:', e.trigger);
+        success_prompt(COPY_SUCCESS);
+        e.clearSelection();
+      });
+      clipboard.on('error', function(e) {
+        //您可以加入失败提示
+        console.error('Action:', e.action);
+        console.error('Trigger:', e.trigger);
+        fail_prompt(COPY_FAILURE);
+      });
+    }
+    initCopyCode();
+
+  }(window, document);
+
+  /**
+   * 弹出式提示框，默认1.5秒自动消失
+   * @param message 提示信息
+   * @param style 提示样式，有alert-success、alert-danger、alert-warning、alert-info
+   * @param time 消失时间
+   */
+  var prompt = function (message, style, time)
+  {
+      style = (style === undefined) ? 'alert-success' : style;
+      time = (time === undefined) ? 1500 : time*1000;
+      $('<div>')
+          .appendTo('body')
+          .addClass('alert ' + style)
+          .html(message)
+          .show()
+          .delay(time)
+          .fadeOut();
+  };
+
+  // 成功提示
+  var success_prompt = function(message, time)
+  {
+      prompt(message, 'alert-success', time);
+  };
+
+  // 失败提示
+  var fail_prompt = function(message, time)
+  {
+      prompt(message, 'alert-danger', time);
+  };
+
+  // 提醒
+  var warning_prompt = function(message, time)
+  {
+      prompt(message, 'alert-warning', time);
+  };
+
+  // 信息提示
+  var info_prompt = function(message, time)
+  {
+      prompt(message, 'alert-info', time);
+  };
+
+</script>
+
+
+<!-- fancybox -->
+<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+<script>
+  let LAZY_LOAD_IMAGE = "";
+  $(".article-entry").find("fancybox").find("img").each(function () {
+      var element = document.createElement("a");
+      $(element).attr("data-fancybox", "gallery");
+      $(element).attr("href", $(this).attr("src"));
+      /* 图片采用懒加载处理时,
+       * 一般图片标签内会有个属性名来存放图片的真实地址，比如 data-original,
+       * 那么此处将原本的属性名src替换为对应属性名data-original,
+       * 修改如下
+       */
+       if (LAZY_LOAD_IMAGE) {
+         $(element).attr("href", $(this).attr("data-original"));
+       }
+      $(this).wrap(element);
+  });
+</script>
+
+
+
+
+
+  <script>setLoadingBarProgress(100);</script>
+
+<!-- 鼠标点击火花效果 -->
+<!-- <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+<script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+<script type="text/javascript" src="/js/fireworks.js"></script> -->
+
+<!-- 腾讯分析代码 -->
+<!-- <script type="text/javascript" src="http://tajs.qq.com/stats?sId=66485661" charset="UTF-8"></script> -->
+
+  <!--动态线条背景-->
+<!-- <script type="text/javascript" color="100,220,220" opacity='0.8' zIndex="-2" count="400" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script> -->
+<!-- 样式二（飘动的彩带） -->
+<!-- <script src="https://g.joyinshare.com/hc/piao.js" type="text/javascript"></script> -->
+<!-- 样式一（鼠标点击更换样式） -->
+<!-- <script src="https://g.joyinshare.com/hc/ribbon.min.js" type="text/javascript"></script> -->
+</body>
+</html>

@@ -1,0 +1,542 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享</title>
+  <icon>https://dayarch.top/icon.png</icon>
+  <subtitle>日拱一兵</subtitle>
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="https://dayarch.top/"/>
+  <updated>2020-03-15T08:07:45.452Z</updated>
+  <id>https://dayarch.top/</id>
+  
+  <author>
+    <name>tanθ</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>并发编程之等待通知机制</title>
+    <link href="https://dayarch.top//p/waiting-notification-mechanism.html"/>
+    <id>https://dayarch.top//p/waiting-notification-mechanism.html</id>
+    <published>2020-03-15T07:47:24.000Z</published>
+    <updated>2020-03-15T08:07:45.452Z</updated>
+    
+    <summary type="html">
+    
+      等待通知机制可以人为是一种设计模式，不只应用在并发编程领域，但是懂得如何使用这个机制是并发编程必不可少的技能
+    
+    </summary>
+    
+    
+      <category term="Coding" scheme="https://dayarch.top/categories/Coding/"/>
+    
+      <category term="Java-Concurrency" scheme="https://dayarch.top/categories/Coding/Java-Concurrency/"/>
+    
+    
+      <category term="Java-Concurrency" scheme="https://dayarch.top/tags/Java-Concurrency/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>volatile和synchronized图文透彻讲解</title>
+    <link href="https://dayarch.top//p/difference-between-volatile-and-synchronized-keyword.html"/>
+    <id>https://dayarch.top//p/difference-between-volatile-and-synchronized-keyword.html</id>
+    <published>2020-03-04T03:37:38.000Z</published>
+    <updated>2020-03-04T03:51:00.887Z</updated>
+    
+    <summary type="html">
+    
+      volatile 和 synchronized 是并发编程中非常常见的两个关键字，但是很多人却很难区分二者的区别以及如何准确的使用，本文就通过图问的形式，带你一步一步剖析二者的差别
+    
+    </summary>
+    
+    
+      <category term="Coding" scheme="https://dayarch.top/categories/Coding/"/>
+    
+      <category term="Java-Concurrency" scheme="https://dayarch.top/categories/Coding/Java-Concurrency/"/>
+    
+    
+      <category term="Java-Concurrency" scheme="https://dayarch.top/tags/Java-Concurrency/"/>
+    
+      <category term="volatile" scheme="https://dayarch.top/tags/volatile/"/>
+    
+      <category term="synchronized" scheme="https://dayarch.top/tags/synchronized/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Java后端的我在学Node.js 你敢信？</title>
+    <link href="https://dayarch.top//p/start-to-learn-nodejs.html"/>
+    <id>https://dayarch.top//p/start-to-learn-nodejs.html</id>
+    <published>2020-02-27T00:40:40.482Z</published>
+    <updated>2020-02-27T01:01:23.540Z</updated>
+    
+    <summary type="html">
+    
+      作为一名纯java后端的人员，由于项目需要，我要开始学Node.js 了，对于要接触陌生的东西，内心其实是抗拒的，但是我提醒自己要跳出舒适区，多学一些东西，本文就是记录我是如何开始接触和学习Node.js 的
+    
+    </summary>
+    
+    
+      <category term="Coding" scheme="https://dayarch.top/categories/Coding/"/>
+    
+      <category term="Node.js" scheme="https://dayarch.top/categories/Coding/Node-js/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>闲着无聊考个PMP玩玩</title>
+    <link href="https://dayarch.top//p/pmp-certificate.html"/>
+    <id>https://dayarch.top//p/pmp-certificate.html</id>
+    <published>2020-02-11T03:17:05.000Z</published>
+    <updated>2020-02-11T03:18:15.436Z</updated>
+    
+    <summary type="html">
+    
+      本已将PMP考试记录在2019年年终总结的事件之一里了，春节有朋友问我，想让我分享一下，我回想了整个过程还是挺有趣的，于是本文就以纪实的形式写写考PMP的那点事，有兴趣的可以私聊，避免说广告
+
+PMP（Project Management Professional）学名「项目管理专家」，我叫它「拍马屁」。2019年4月的时候在朋友圈看到有两位朋友先后【注意是先后，有埋伏】晒出来PMP的证件出来，看着挺好看的（文末有，还是纪念版，这个理由好牵强），就果断去骚扰了他们询问具体情况
+
+朋友A：有的公司认可这个证件，没事考个还挺有用的。
+
+朋友B：考试险过，不知道有没有用，有朋友考，一起跟着考了
+
+心
+    
+    </summary>
+    
+    
+      <category term="Life" scheme="https://dayarch.top/categories/Life/"/>
+    
+      <category term="其他" scheme="https://dayarch.top/categories/Life/%E5%85%B6%E4%BB%96/"/>
+    
+    
+      <category term="总结" scheme="https://dayarch.top/tags/%E6%80%BB%E7%BB%93/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Java 12 新特性一览</title>
+    <link href="https://dayarch.top//p/jdk12-new-feature-overview.html"/>
+    <id>https://dayarch.top//p/jdk12-new-feature-overview.html</id>
+    <published>2020-02-10T06:30:27.000Z</published>
+    <updated>2020-02-10T06:45:45.751Z</updated>
+    
+    <summary type="html">
+    
+      本文介绍了几个比较常见，又方便使用的Java12新特性，包括String API的更改，文件的比较，Switch语句的扩展等
+    
+    </summary>
+    
+    
+      <category term="Coding" scheme="https://dayarch.top/categories/Coding/"/>
+    
+      <category term="Java" scheme="https://dayarch.top/categories/Coding/Java/"/>
+    
+    
+      <category term="Java" scheme="https://dayarch.top/tags/Java/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>IntelliJ IDEA HTTP Client高级使用详解</title>
+    <link href="https://dayarch.top//p/http-client-advanced-usage.html"/>
+    <id>https://dayarch.top//p/http-client-advanced-usage.html</id>
+    <published>2020-02-07T02:30:15.000Z</published>
+    <updated>2020-02-27T00:54:29.557Z</updated>
+    
+    <summary type="html">
+    
+      后端程序员经常要编写RESTful API，一个好用的测试工具可以大大提高工作效率，甚至整个项目组的效率，IntelliJ IDEA 本身提供了 HTTP Client 这个工具，但是鲜有人知，本文要说明该工具的高级用法，一定能解决项目中的调试痛点
+    
+    </summary>
+    
+    
+      <category term="Coding" scheme="https://dayarch.top/categories/Coding/"/>
+    
+      <category term="Java" scheme="https://dayarch.top/categories/Coding/Java/"/>
+    
+    
+      <category term="IntelliJ IDEA" scheme="https://dayarch.top/tags/IntelliJ-IDEA/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>读《Clean Code 代码整洁之道》之感悟</title>
+    <link href="https://dayarch.top//p/book-reviews-clean-code.html"/>
+    <id>https://dayarch.top//p/book-reviews-clean-code.html</id>
+    <published>2020-02-05T03:35:46.000Z</published>
+    <updated>2020-02-07T02:32:22.250Z</updated>
+    
+    <summary type="html">
+    
+      代码质量与其整洁程度成正比。干净的代码，既在质量上较为可靠，也为后期维护，升级奠定了良好的基础。每个公司的规范不一样，但是我们写代码要有自己的态度
+    
+    </summary>
+    
+    
+      <category term="Life" scheme="https://dayarch.top/categories/Life/"/>
+    
+      <category term="读书笔记" scheme="https://dayarch.top/categories/Life/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="IntelliJ IDEA" scheme="https://dayarch.top/tags/IntelliJ-IDEA/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>MySQL group_concat 函数详解</title>
+    <link href="https://dayarch.top//p/mysql-group-concat-function-usage.html"/>
+    <id>https://dayarch.top//p/mysql-group-concat-function-usage.html</id>
+    <published>2020-02-03T13:03:27.000Z</published>
+    <updated>2020-02-03T13:14:01.495Z</updated>
+    
+    <summary type="html">
+    
+      在SQL语句中字符串拼接我们都知道，但是如何分组拼接字符串呢？MySQL提供了内置的函数group_concat来解决日常的很多业务问题，熟练使用该函数，将会轻松解决许多所谓的难题
+    
+    </summary>
+    
+    
+      <category term="Coding" scheme="https://dayarch.top/categories/Coding/"/>
+    
+      <category term="数据库-持久层-SQL" scheme="https://dayarch.top/categories/Coding/%E6%95%B0%E6%8D%AE%E5%BA%93-%E6%8C%81%E4%B9%85%E5%B1%82-SQL/"/>
+    
+    
+      <category term="MySQL" scheme="https://dayarch.top/tags/MySQL/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>跨表更新，看到自己写的SQL像个憨憨</title>
+    <link href="https://dayarch.top//p/mysql-cross-table-update.html"/>
+    <id>https://dayarch.top//p/mysql-cross-table-update.html</id>
+    <published>2020-01-22T02:09:02.000Z</published>
+    <updated>2020-02-07T03:12:30.203Z</updated>
+    
+    <summary type="html">
+    
+      跨表查询我们经常食用，其实类似的语法也可以用到跨表更新上面，如果你有类似从一张表的数据更新到另一张表的数据需求时，了解这个知识点还是非常有用的
+    
+    </summary>
+    
+    
+      <category term="Coding" scheme="https://dayarch.top/categories/Coding/"/>
+    
+      <category term="数据库-持久层-SQL" scheme="https://dayarch.top/categories/Coding/%E6%95%B0%E6%8D%AE%E5%BA%93-%E6%8C%81%E4%B9%85%E5%B1%82-SQL/"/>
+    
+    
+      <category term="MySQL" scheme="https://dayarch.top/tags/MySQL/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>微信上线了10款默认新表情</title>
+    <link href="https://dayarch.top//p/wechat-new-expression.html"/>
+    <id>https://dayarch.top//p/wechat-new-expression.html</id>
+    <published>2020-01-14T07:33:22.000Z</published>
+    <updated>2020-01-19T14:17:14.057Z</updated>
+    
+    <summary type="html">
+    
+      微信新增表情
+微信新增十款默认表情！
+微信新增十款默认表情！
+微信新增十款默认表情！
+
+
+
+
+微信今日悄然上线了十款新默认表情， 其中包含了
+
+
+ 1.  吃瓜
+ 2.  加油
+ 3.  汗
+ 4.  天啊
+ 5.  Emm
+ 6.  社会社会
+ 7.  旺柴
+ 8.  好的
+ 9.  打脸
+ 10. 哇
+
+感觉比用了表情包还激动。据悉，目前这十款新默认表情正在进行灰度测试，部分微信用户可能无法正常显示
+
+一图胜千言，对于喜欢使用表情的你，快快打开你的微信看看吧
+    
+    </summary>
+    
+    
+      <category term="Life" scheme="https://dayarch.top/categories/Life/"/>
+    
+      <category term="其他" scheme="https://dayarch.top/categories/Life/%E5%85%B6%E4%BB%96/"/>
+    
+    
+      <category term="微信" scheme="https://dayarch.top/tags/%E5%BE%AE%E4%BF%A1/"/>
+    
+      <category term="表情" scheme="https://dayarch.top/tags/%E8%A1%A8%E6%83%85/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>2019归零，2020走你</title>
+    <link href="https://dayarch.top//p/2019-summary.html"/>
+    <id>https://dayarch.top//p/2019-summary.html</id>
+    <published>2020-01-10T05:35:55.000Z</published>
+    <updated>2020-02-10T12:07:59.784Z</updated>
+    
+    <summary type="html">
+    
+      作为生长在内蒙的，不会套马的，酒精过敏的，不吃羊肉的，也不魁梧的奇葩，单曲循环听着腾格尔大爷的翻唱歌曲「可能否」，还是开始写了 2019 年总结，这个总结比 2002 😆 年来的更晚一些，因为在等待 2019 年末的一个 PMP(拍马屁)的成绩，赶不上各个平台的总结比赛了，写下来给自己个答复
+
+年初的一次旅行之后，回来倍感惶恐，总觉得应该做点什么继续充实自己的生活。写博客记录和维护公众号的想法也就随之浮现在脑海中
+
+
+翻看历史记录，在 2015 年就已经尝试搭建自己的博客了，奈何没有坚持分享，中途夭折。「种一棵树最好的时间是十年前，其次是现在」。这一刻，我要种一棵树，陪她长大，我变老，她茁壮
+    
+    </summary>
+    
+    
+      <category term="Life" scheme="https://dayarch.top/categories/Life/"/>
+    
+      <category term="其他" scheme="https://dayarch.top/categories/Life/%E5%85%B6%E4%BB%96/"/>
+    
+    
+      <category term="总结" scheme="https://dayarch.top/tags/%E6%80%BB%E7%BB%93/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>小小TODO也有大道理</title>
+    <link href="https://dayarch.top//p/how-to-use-todo-feature.html"/>
+    <id>https://dayarch.top//p/how-to-use-todo-feature.html</id>
+    <published>2020-01-09T02:50:07.000Z</published>
+    <updated>2020-02-07T02:31:08.756Z</updated>
+    
+    <summary type="html">
+    
+      有时，我们需要标记部分代码以供将来参考，比如:优化，改进，可能的更改，要讨论的问题等。通常我们会在代码中加入TODO作为标识，但是在团队中协同工作，TODO的背后也蕴藏着一些道理
+    
+    </summary>
+    
+    
+      <category term="Coding" scheme="https://dayarch.top/categories/Coding/"/>
+    
+      <category term="安全-协议-规范" scheme="https://dayarch.top/categories/Coding/%E5%AE%89%E5%85%A8-%E5%8D%8F%E8%AE%AE-%E8%A7%84%E8%8C%83/"/>
+    
+    
+      <category term="IntelliJ IDEA" scheme="https://dayarch.top/tags/IntelliJ-IDEA/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>在Spring Boot启动时执行代码的几种方法</title>
+    <link href="https://dayarch.top//p/spring-boot-execute-on-startup.html"/>
+    <id>https://dayarch.top//p/spring-boot-execute-on-startup.html</id>
+    <published>2019-12-25T08:13:15.000Z</published>
+    <updated>2019-12-26T06:43:01.889Z</updated>
+    
+    <summary type="html">
+    
+      我们经常会碰到在Spring Boot启动阶段执行一些代码片段需求，Spring 为我们提供了至少五种方式，比如：MyCommandLineRunner，ApplicationRunner， ApplicationListener， PostConstruct， afterPropertiesSet，但是他们之间还是有很大区别的，本文将带你透彻理解他们的区别，在实战中选择最适合你的那一个
+    
+    </summary>
+    
+    
+      <category term="Coding" scheme="https://dayarch.top/categories/Coding/"/>
+    
+      <category term="Spring-Boot" scheme="https://dayarch.top/categories/Coding/Spring-Boot/"/>
+    
+    
+      <category term="Spring Bean" scheme="https://dayarch.top/tags/Spring-Bean/"/>
+    
+      <category term="生命周期" scheme="https://dayarch.top/tags/%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/"/>
+    
+      <category term="Spring Boot" scheme="https://dayarch.top/tags/Spring-Boot/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Spring Boot @ConfigurationProperties 注解最强使用详解</title>
+    <link href="https://dayarch.top//p/spring-boot-configurationProperties-usage.html"/>
+    <id>https://dayarch.top//p/spring-boot-configurationProperties-usage.html</id>
+    <published>2019-12-23T13:43:55.000Z</published>
+    <updated>2019-12-23T13:56:35.162Z</updated>
+    
+    <summary type="html">
+    
+      在编写项目代码时，我们要求更灵活的配置，更好的模块化整合。在 Spring Boot 项目中，为满足以上要求，就要用到ConfigurationProperties注解
+    
+    </summary>
+    
+    
+      <category term="Coding" scheme="https://dayarch.top/categories/Coding/"/>
+    
+      <category term="Spring-Boot" scheme="https://dayarch.top/categories/Coding/Spring-Boot/"/>
+    
+    
+      <category term="Spring Boot" scheme="https://dayarch.top/tags/Spring-Boot/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Spring Aware 到底是什么？</title>
+    <link href="https://dayarch.top//p/spring-aware.html"/>
+    <id>https://dayarch.top//p/spring-aware.html</id>
+    <published>2019-12-22T11:20:52.000Z</published>
+    <updated>2019-12-23T13:57:39.955Z</updated>
+    
+    <summary type="html">
+    
+      Spring 源码中大量应用Aware，通过本文你将透彻理解 Spring Aware背后的道理，以及如何应用它
+    
+    </summary>
+    
+    
+      <category term="Coding" scheme="https://dayarch.top/categories/Coding/"/>
+    
+      <category term="Spring-Boot" scheme="https://dayarch.top/categories/Coding/Spring-Boot/"/>
+    
+    
+      <category term="Spring Aware" scheme="https://dayarch.top/tags/Spring-Aware/"/>
+    
+      <category term="Spring Bean" scheme="https://dayarch.top/tags/Spring-Bean/"/>
+    
+      <category term="生命周期" scheme="https://dayarch.top/tags/%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Spring Bean生命周期之缘尽</title>
+    <link href="https://dayarch.top//p/spring-bean-lifecycle-destroy.html"/>
+    <id>https://dayarch.top//p/spring-bean-lifecycle-destroy.html</id>
+    <published>2019-12-21T09:23:42.000Z</published>
+    <updated>2019-12-21T10:12:36.099Z</updated>
+    
+    <summary type="html">
+    
+      透彻的理解Spring Bean 生命周期是掌握Spring Bean依赖的前提，了解它也可以让我们在特定的节点做特定的事情满足业务需要
+    
+    </summary>
+    
+    
+      <category term="Coding" scheme="https://dayarch.top/categories/Coding/"/>
+    
+      <category term="Spring-Boot" scheme="https://dayarch.top/categories/Coding/Spring-Boot/"/>
+    
+    
+      <category term="Spring Bean" scheme="https://dayarch.top/tags/Spring-Bean/"/>
+    
+      <category term="生命周期" scheme="https://dayarch.top/tags/%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/"/>
+    
+      <category term="Spring Boot" scheme="https://dayarch.top/tags/Spring-Boot/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Spring Bean生命周期之缘起</title>
+    <link href="https://dayarch.top//p/spring-bean-lifecycle-creation.html"/>
+    <id>https://dayarch.top//p/spring-bean-lifecycle-creation.html</id>
+    <published>2019-12-20T01:04:56.000Z</published>
+    <updated>2019-12-21T10:12:29.078Z</updated>
+    
+    <summary type="html">
+    
+      透彻的理解Spring Bean 生命周期是掌握Spring Bean依赖的前提，了解它也可以让我们在特定的节点做特定的事情满足业务需要
+    
+    </summary>
+    
+    
+      <category term="Coding" scheme="https://dayarch.top/categories/Coding/"/>
+    
+      <category term="Spring-Boot" scheme="https://dayarch.top/categories/Coding/Spring-Boot/"/>
+    
+    
+      <category term="Spring Bean" scheme="https://dayarch.top/tags/Spring-Bean/"/>
+    
+      <category term="生命周期" scheme="https://dayarch.top/tags/%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/"/>
+    
+      <category term="Spring Boot" scheme="https://dayarch.top/tags/Spring-Boot/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>面试还不知道BeanFactory和ApplicationContext的区别？</title>
+    <link href="https://dayarch.top//p/difference-between-beanfactory-and-applicationcontext.html"/>
+    <id>https://dayarch.top//p/difference-between-beanfactory-and-applicationcontext.html</id>
+    <published>2019-12-19T13:37:30.000Z</published>
+    <updated>2019-12-19T13:45:38.771Z</updated>
+    
+    <summary type="html">
+    
+      BeanFactory和ApplicationContext是Sring容器的核心，面试经常会问二者区别，本文会透彻说明
+    
+    </summary>
+    
+    
+      <category term="Coding" scheme="https://dayarch.top/categories/Coding/"/>
+    
+      <category term="Spring-Boot" scheme="https://dayarch.top/categories/Coding/Spring-Boot/"/>
+    
+    
+      <category term="Spring Boot" scheme="https://dayarch.top/tags/Spring-Boot/"/>
+    
+      <category term="面试" scheme="https://dayarch.top/tags/%E9%9D%A2%E8%AF%95/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Java equals 和 hashCode 面试那点事</title>
+    <link href="https://dayarch.top//p/java-equals-hashcode.html"/>
+    <id>https://dayarch.top//p/java-equals-hashcode.html</id>
+    <published>2019-12-17T12:41:51.000Z</published>
+    <updated>2019-12-22T11:48:22.310Z</updated>
+    
+    <summary type="html">
+    
+      Java基础面试中经常会被问到 equals 和 hashcode 之间的关系及他们的约束，其实这些内容不是通过死记硬背的，我们可以通过渐进明细的形式分析其背后的道理
+    
+    </summary>
+    
+    
+      <category term="Coding" scheme="https://dayarch.top/categories/Coding/"/>
+    
+      <category term="Java" scheme="https://dayarch.top/categories/Coding/Java/"/>
+    
+    
+      <category term="Java" scheme="https://dayarch.top/tags/Java/"/>
+    
+      <category term="面试" scheme="https://dayarch.top/tags/%E9%9D%A2%E8%AF%95/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Spring 数据绑定剖析</title>
+    <link href="https://dayarch.top//p/spring-data-binding-mechanism.html"/>
+    <id>https://dayarch.top//p/spring-data-binding-mechanism.html</id>
+    <published>2019-12-12T11:59:04.000Z</published>
+    <updated>2019-12-16T04:30:41.731Z</updated>
+    
+    <summary type="html">
+    
+      Spring Boot的整个请求过程，都离不开Spring 数据绑定机制，透彻理解该机制，可以让我们的编码更加整洁清晰，同时可以应对更多特殊请求处理
+    
+    </summary>
+    
+    
+      <category term="Coding" scheme="https://dayarch.top/categories/Coding/"/>
+    
+      <category term="Spring-Boot" scheme="https://dayarch.top/categories/Coding/Spring-Boot/"/>
+    
+    
+      <category term="Spring Boot" scheme="https://dayarch.top/tags/Spring-Boot/"/>
+    
+      <category term="Spring Data Binding" scheme="https://dayarch.top/tags/Spring-Data-Binding/"/>
+    
+  </entry>
+  
+</feed>
