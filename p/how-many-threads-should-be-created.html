@@ -547,7 +547,7 @@
 <h3 id="CPU-密集型程序创建多少个线程合适？"><a href="#CPU-密集型程序创建多少个线程合适？" class="headerlink" title="CPU 密集型程序创建多少个线程合适？"></a>CPU 密集型程序创建多少个线程合适？</h3><p>有些同学早已经发现，对于 CPU 密集型来说，理论上 <code>线程数量 = CPU 核数（逻辑）</code> 就可以了，但是实际上，数量一般会设置为 <code>CPU 核数（逻辑）+ 1</code>， 为什么呢？</p>
 <p>《Java并发编程实战》这么说：</p>
 <blockquote>
-<p>计算密（CPU）集型的线程恰好在某时因为发生一个页错误或者因其他原因而暂停，刚好有一个“额外”的线程，可以确保在这种情况下CPU周期不会中断工作。</p>
+<p>计算（CPU）密集型的线程恰好在某时因为发生一个页错误或者因其他原因而暂停，刚好有一个“额外”的线程，可以确保在这种情况下CPU周期不会中断工作。</p>
 </blockquote>
 <p>所以对于CPU密集型程序，  <code>CPU 核数（逻辑）+ 1</code> 个线程数是比较好的经验值的原因了</p>
 <h3 id="I-O密集型程序创建多少个线程合适？"><a href="#I-O密集型程序创建多少个线程合适？" class="headerlink" title="I/O密集型程序创建多少个线程合适？"></a>I/O密集型程序创建多少个线程合适？</h3><p>上面已经让大家按照图多画几个周期（你可以动手将I/O耗时与CPU耗时比例调大，比如6倍或7倍），这样你就会得到一个结论，对于 I/O 密集型程序：</p>
@@ -558,7 +558,7 @@
 <p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200402220324.png" alt=""></fancybox></p>
 <p>这是一个CPU核心的最佳线程数，如果多个核心，那么 I/O 密集型程序的最佳线程数就是：</p>
 <blockquote>
-<p>最佳线程数 = <code>CPU核心数</code> *  <code>(1/CPU利用率)</code> =  <code>CPU核心数</code> * <code>1 + (I/O耗时/CPU耗时)</code></p>
+<p>最佳线程数 = <code>CPU核心数</code> *  <code>(1/CPU利用率)</code> =  <code>CPU核心数</code> * <code>（1 + （I/O耗时/CPU耗时)）</code></p>
 </blockquote>
 <p>说到这，有些同学可能有疑问了，要计算 I/O 密集型程序，是要知道 CPU 利用率的，如果我不知道这些，那要怎样给出一个初始值呢？</p>
 <p>按照上面公式，假如几乎全是 I/O耗时，所以纯理论你就可以说是 <strong>2N（N=CPU核数），当然也有说 2N + 1的</strong>，（我猜这个 1 也是 backup），没有找到具体的推倒过程，在【并发编程实战-8.2章节】截图在此，大家有兴趣的可以自己看看</p>
@@ -592,7 +592,7 @@
 <blockquote>
 <p>那如果DB的 QPS（Query Per Second）上限是1000，此时这个线程数又该设置为多大呢？</p>
 </blockquote>
-<p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200402230229.png" alt=""></fancybox></p>
+<p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200408165804.png" alt=""></fancybox></p>
 <p>同样，这是没有考虑 CPU 数目，接下来就又是细节调优的阶段了</p>
 <p>因为一次请求不仅仅包括 CPU 和 I/O操作，具体的调优过程还要考虑内存资源，网络等具体内容</p>
 <h2 id="增加-CPU-核数一定能解决问题吗？"><a href="#增加-CPU-核数一定能解决问题吗？" class="headerlink" title="增加 CPU 核数一定能解决问题吗？"></a>增加 CPU 核数一定能解决问题吗？</h2><p>看到这，有些同学可能会认为，即便我算出了理论线程数，但实际CPU核数不够，会带来线程上下文切换的开销，所以下一步就需要增加 CPU 核数，那我们盲目的增加 CPU 核数就一定能解决问题吗？</p>
@@ -609,7 +609,7 @@
 <blockquote>
 <p>最小化临界区范围，因为临界区的大小往往就是瓶颈问题的所在，不要像乱用try catch那样一锅端</p>
 </blockquote>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>多线程不一定就比但线程高效，比如大名鼎鼎的 Redis （后面会分析），因为它是基于内存操作，这种情况下，单线程可以很高效的利用CPU。而多线程的使用场景一般时存在相当比例的I/O或网络操作</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>多线程不一定就比单线程高效，比如大名鼎鼎的 Redis （后面会分析），因为它是基于内存操作，这种情况下，单线程可以很高效的利用CPU。而多线程的使用场景一般时存在相当比例的I/O或网络操作</p>
 <p>另外，结合小学数学题，我们已经了解了如何从定性到定量的分析的过程，在开始没有任何数据之前，我们可以使用上文提到的经验值作为一个伪标准，其次就是结合实际来逐步的调优（综合 CPU，内存，硬盘读写速度，网络状况等）了</p>
 <p>最后，盲目的增加 CPU 核数也不一定能解决我们的问题，这就要求我们严格的编写并发程序代码了</p>
 <h2 id="灵魂追问"><a href="#灵魂追问" class="headerlink" title="灵魂追问"></a>灵魂追问</h2><ol>
@@ -633,7 +633,7 @@
       <!-- <div class="tuijian">
         <br><br>
         📚相关文章
-        <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-core.html" title="并发编程三大核心" rel="bookmark">并发编程三大核心</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-lock-resource.html" title="锁保护资源，synchronized方法就够了吗" rel="bookmark">锁保护资源，synchronized方法就够了吗</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-thread-life-cycle.html" title="Java线程生命周期这样理解挺简单的" rel="bookmark">Java线程生命周期这样理解挺简单的</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/difference-between-volatile-and-synchronized-keyword.html" title="volatile和synchronized图文透彻讲解" rel="bookmark">volatile和synchronized图文透彻讲解</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-three-questions.html" title="并发编程三大问题" rel="bookmark">并发编程三大问题</a></h3></div></li></ul>
+        <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-core.html" title="并发编程三大核心" rel="bookmark">并发编程三大核心</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-lock-resource.html" title="锁保护资源，synchronized方法就够了吗" rel="bookmark">锁保护资源，synchronized方法就够了吗</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-thread-life-cycle.html" title="Java线程生命周期这样理解挺简单的" rel="bookmark">Java线程生命周期这样理解挺简单的</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/difference-between-volatile-and-synchronized-keyword.html" title="volatile和synchronized图文透彻讲解" rel="bookmark">volatile和synchronized图文透彻讲解</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-metaphor.html" title="并发编程之初探" rel="bookmark">并发编程之初探</a></h3></div></li></ul>
       </div> -->
       <div class="personalweixin">
         <br><br>
@@ -653,10 +653,10 @@
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-04-06T21:12:10+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-04-08T16:58:56+08:00">
   <a class='notlink'>
     <i class="fas fa-clock" aria-hidden="true"></i>
-    <p>更新于 2020年4月6日</p>
+    <p>更新于 2020年4月8日</p>
   </a>
 </div>
 
@@ -824,7 +824,7 @@ A：那还用说，肯定在某些方面有特长呗，比如你知道的【它�
 </header>
 
     <div class="content pure">
-      <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-core.html" title="并发编程三大核心" rel="bookmark">并发编程三大核心</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-lock-resource.html" title="锁保护资源，synchronized方法就够了吗" rel="bookmark">锁保护资源，synchronized方法就够了吗</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-thread-life-cycle.html" title="Java线程生命周期这样理解挺简单的" rel="bookmark">Java线程生命周期这样理解挺简单的</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/difference-between-volatile-and-synchronized-keyword.html" title="volatile和synchronized图文透彻讲解" rel="bookmark">volatile和synchronized图文透彻讲解</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-three-questions.html" title="并发编程三大问题" rel="bookmark">并发编程三大问题</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-metaphor.html" title="并发编程之初探" rel="bookmark">并发编程之初探</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-happens-before-rule.html" title="有序性可见性，Happens-before来搞定" rel="bookmark">有序性可见性，Happens-before来搞定</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/waiting-notification-mechanism.html" title="并发编程之等待通知机制" rel="bookmark">并发编程之等待通知机制</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-dead-lock.html" title="Java并发死锁解决思路" rel="bookmark">Java并发死锁解决思路</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-atomic.html" title="解决原子性问题？你首先需要的是宏观理解" rel="bookmark">解决原子性问题？你首先需要的是宏观理解</a></h3></div></li></ul>
+      <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-core.html" title="并发编程三大核心" rel="bookmark">并发编程三大核心</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-lock-resource.html" title="锁保护资源，synchronized方法就够了吗" rel="bookmark">锁保护资源，synchronized方法就够了吗</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-thread-life-cycle.html" title="Java线程生命周期这样理解挺简单的" rel="bookmark">Java线程生命周期这样理解挺简单的</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/difference-between-volatile-and-synchronized-keyword.html" title="volatile和synchronized图文透彻讲解" rel="bookmark">volatile和synchronized图文透彻讲解</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-metaphor.html" title="并发编程之初探" rel="bookmark">并发编程之初探</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-three-questions.html" title="并发编程三大问题" rel="bookmark">并发编程三大问题</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-happens-before-rule.html" title="有序性可见性，Happens-before来搞定" rel="bookmark">有序性可见性，Happens-before来搞定</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-atomic.html" title="解决原子性问题？你首先需要的是宏观理解" rel="bookmark">解决原子性问题？你首先需要的是宏观理解</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-dead-lock.html" title="Java并发死锁解决思路" rel="bookmark">Java并发死锁解决思路</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/waiting-notification-mechanism.html" title="并发编程之等待通知机制" rel="bookmark">并发编程之等待通知机制</a></h3></div></li></ul>
     </div>
   </section>
 
