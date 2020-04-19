@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   
-  <title>Tag: 互斥 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享</title>
+  <title>日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享</title>
   
   <meta name="keywords" content="Java,SpringBoot,并发编程, ElasticSearch, 日拱一兵">
   
@@ -90,104 +90,7 @@
 <body>
   
   
-  <div class="cover-wrapper">
-    <cover class='cover  half'>
-      
-        
-  <img class='logo' src='/assets/logo.png'/>
-
-
-  <div class="m_search">
-    <form name="searchform" class="form u-search-form">
-      <input type="text" class="input u-search-input" placeholder="世界很大，搜索一下" />
-      <i class="icon fas fa-search fa-fw"></i>
-    </form>
-  </div>
-
-<div class='menu navgation'>
-  <ul class='h-list'>
-    
-      
-        <li>
-          <a class="nav home" href="/"
-            
-              rel="nofollow"
-            
-            
-            id="home">
-            <i class='fas fa-home fa-fw'></i>&nbsp;主页
-          </a>
-        </li>
-      
-        <li>
-          <a class="nav home" href="/categories/"
-            
-              rel="nofollow"
-            
-            
-            id="categories">
-            <i class='fas fa-folder-open fa-fw'></i>&nbsp;分类
-          </a>
-        </li>
-      
-        <li>
-          <a class="nav home" href="/tags/"
-            
-              rel="nofollow"
-            
-            
-            id="tags">
-            <i class='fas fa-tags fa-fw'></i>&nbsp;标签
-          </a>
-        </li>
-      
-        <li>
-          <a class="nav home" href="/archives/"
-            
-              rel="nofollow"
-            
-            
-            id="archives">
-            <i class='fas fa-archive fa-fw'></i>&nbsp;归档
-          </a>
-        </li>
-      
-        <li>
-          <a class="nav home" href="/comments/"
-            
-              rel="nofollow"
-            
-            
-            id="comments">
-            <i class='fas fa-comments fa-fw'></i>&nbsp;留言板
-          </a>
-        </li>
-      
-    
-  </ul>
-</div>
-
-<br>
-<div class="description center-align">
-    
-    <span id="typed"></span>
-    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.9"></script>
-    <script>
-        var typed = new Typed("#typed", {
-            strings: ['从来没有真正的绝境, 只有心灵的迷途', 'Never really desperate, only the lost of the soul'],
-            startDelay: 300,
-            typeSpeed: 100,
-            loop: true,
-            backSpeed: 50,
-            showCursor: true
-        });
-    </script>
-    
-</div>
-
-      
-    </cover>
-    <header class="l_header pure">
+  <header class="l_header pure">
   <div id="loading-bar-wrapper">
     <div id="loading-bar" class="pure"></div>
   </div>
@@ -378,23 +281,13 @@
 	</aside>
 <script>setLoadingBarProgress(40);</script>
 
-  </div>
 
 
-  <div class="l_body">
+  <div class="l_body nocover">
     <div class='body-wrapper'>
-      
-<div class='l_main'>
+      <div class='l_main'>
   
-    
-      
   <section class="post-list">
-    
-      
-        
-          
-        
-      
     
     
       
@@ -407,14 +300,12 @@
   <section class='meta'>
     
     
-      <a title='并发编程三大核心' href='/p/java-concurrency-core.html'><img class='thumbnail' src='https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgconcurrency.png'></a>
-    
     <div class="meta" id="header-meta">
       
         
   <h2 class="title">
-    <a href="/p/java-concurrency-core.html">
-      并发编程三大核心
+    <a href="/p/build-github-pages-blog.html">
+      Hexo在github上搭建自己的博客
     </a>
   </h2>
 
@@ -444,7 +335,7 @@
             <div class="new-meta-item date">
   <a class='notlink'>
     <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-    <p>2019-08-28</p>
+    <p>2015-08-09</p>
   </a>
 </div>
 
@@ -454,9 +345,9 @@
             
   
   <div class='new-meta-item category'>
-    <a href='/categories/Coding/Java-Concurrency/' rel="nofollow">
+    <a href='/categories/Coding/Others/' rel="nofollow">
       <i class="fas fa-folder-open" aria-hidden="true"></i>
-      <p>Coding&nbsp;/&nbsp;Java-Concurrency</p>
+      <p>Coding&nbsp;/&nbsp;Others</p>
     </a>
   </div>
 
@@ -478,22 +369,18 @@
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      写在前面
-上一篇文章这次走进并发的世界，请不要错过 给大家带了并发编程的开胃菜，接下来我们逐步上正餐，在吃正餐之前，我还要引用那首诗词: 「横看成岭侧成峰，远近高低各不同」，远看看轮廓，近看看细节，不断切换思维或视角来学习
+      引言
+长时间在某平台上写博客记录些什么，但是近期该平台陆陆续续出现一些小问题，让写博客这么愉快的事情总是充斥着各种插曲，稍稍不爽，于是乎开始准备搭建自己的的博客，通过查阅资料用了两天时间初步搭建起来，收获颇丰，所以趁热打铁记录整个过程，搭建过程参考了非常多前辈们的blog，先真诚的道一声“感谢”，文章末尾会给出相关的参考链接。可搭建博客的框架很多，参考静态博客框架对比，选择你看上眼的，本文选择Hexo，为什么选择它，我只能说对比之后喜欢.
 
+为什么选择github平台？
+为什么选择github平台，我们通过下面的两组问题就可以得到答案了.
 
+博友们是否在编写博客的时候遇到过以下问题：
 
-远看并发，并发编程可以抽象成三个核心问题: 分工、同步/协作、互斥
-
-如果你已经工作了，那么你一定听说过或者正在应用敏捷开发模式来交付日常的工作任务，我们就用你熟悉的流程来解释这三个核心问题
-
-分工
-将当前 Sprint 的 Story 拆分成「合适」大小的 Task，并且安排给「合适」的 Team Member 去完成
-
-这里面用了两个「合适」，将 Story 拆分
+ 1.
       
         <div class="readmore">
-          <a href="/p/java-concurrency-core.html" class="flat-box">
+          <a href="/p/build-github-pages-blog.html" class="flat-box">
             <i class="fas fa-book-open fa-fw" aria-hidden="true"></i>
             阅读全文
           </a>
@@ -503,13 +390,7 @@
     
       <div class="full-width auto-padding tags">
         
-          <a href="/tags/%E5%88%86%E5%B7%A5/" rel="nofollow"><i class="fas fa-tag fa-fw"></i> 分工</a>
-        
-          <a href="/tags/%E5%90%8C%E6%AD%A5/" rel="nofollow"><i class="fas fa-tag fa-fw"></i> 同步</a>
-        
-          <a href="/tags/%E4%BA%92%E6%96%A5/" rel="nofollow"><i class="fas fa-tag fa-fw"></i> 互斥</a>
-        
-          <a href="/tags/Java-Concurrency/" rel="nofollow"><i class="fas fa-tag fa-fw"></i> Java-Concurrency</a>
+          <a href="/tags/GitHub-Pages/" rel="nofollow"><i class="fas fa-tag fa-fw"></i> GitHub Pages</a>
         
       </div>
     
@@ -523,6 +404,24 @@
   </section>
   
     
+      <br>
+      <div class="prev-next">
+        <div class="prev-next">
+          
+            <a class="prev" rel="prev" href="/page/8/">
+              <section class="post prev" >
+                <i class="fas fa-chevron-left" aria-hidden="true"></i>&nbsp;上一页&nbsp;
+              </section>
+            </a>
+          
+          <p class="current">
+            9 / 9
+          </p>
+          
+        </div>
+      </div>
+
+    
     <!-- 根据主题中的设置决定是否在archive中针对摘要部分的MathJax公式加载mathjax.js文件 -->
     
     
@@ -530,8 +429,6 @@
   
 
 
-    
-  
 </div>
 <aside class='l_side'>
   

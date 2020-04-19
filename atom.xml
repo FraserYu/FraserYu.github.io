@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://dayarch.top/"/>
-  <updated>2020-04-15T00:16:02.641Z</updated>
+  <updated>2020-04-19T07:25:13.345Z</updated>
   <id>https://dayarch.top/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>为什么要使用线程池?</title>
+    <link href="https://dayarch.top//p/why-we-need-to-use-threadpool.html"/>
+    <id>https://dayarch.top//p/why-we-need-to-use-threadpool.html</id>
+    <published>2020-04-19T07:17:38.000Z</published>
+    <updated>2020-04-19T07:25:13.345Z</updated>
+    
+    <summary type="html">
+    
+      我们会使用三种方式手动创建线程，为什么不允许随意创建线程，而要求使用线程池呢？因为手动创建线程的不可控风险和大的开销是我们不能承受的，所以需要线程池，通过最大化收益，同时最小化风险，将线程资源统一管理起来
+    
+    </summary>
+    
+    
+      <category term="Coding" scheme="https://dayarch.top/categories/Coding/"/>
+    
+      <category term="Java-Concurrency" scheme="https://dayarch.top/categories/Coding/Java-Concurrency/"/>
+    
+    
+      <category term="Java-Concurrency" scheme="https://dayarch.top/tags/Java-Concurrency/"/>
+    
+  </entry>
   
   <entry>
     <title>如何清爽的安排日常？</title>
@@ -434,11 +457,11 @@ PMP（Project Management Professional）学名「项目管理专家」，我叫�
       <category term="Spring-Boot" scheme="https://dayarch.top/categories/Coding/Spring-Boot/"/>
     
     
+      <category term="Spring Boot" scheme="https://dayarch.top/tags/Spring-Boot/"/>
+    
       <category term="Spring Bean" scheme="https://dayarch.top/tags/Spring-Bean/"/>
     
       <category term="生命周期" scheme="https://dayarch.top/tags/%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/"/>
-    
-      <category term="Spring Boot" scheme="https://dayarch.top/tags/Spring-Boot/"/>
     
   </entry>
   
@@ -484,11 +507,11 @@ PMP（Project Management Professional）学名「项目管理专家」，我叫�
       <category term="Spring-Boot" scheme="https://dayarch.top/categories/Coding/Spring-Boot/"/>
     
     
-      <category term="Spring Aware" scheme="https://dayarch.top/tags/Spring-Aware/"/>
-    
       <category term="Spring Bean" scheme="https://dayarch.top/tags/Spring-Bean/"/>
     
       <category term="生命周期" scheme="https://dayarch.top/tags/%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/"/>
+    
+      <category term="Spring Aware" scheme="https://dayarch.top/tags/Spring-Aware/"/>
     
   </entry>
   
@@ -511,38 +534,11 @@ PMP（Project Management Professional）学名「项目管理专家」，我叫�
       <category term="Spring-Boot" scheme="https://dayarch.top/categories/Coding/Spring-Boot/"/>
     
     
-      <category term="Spring Bean" scheme="https://dayarch.top/tags/Spring-Bean/"/>
-    
-      <category term="生命周期" scheme="https://dayarch.top/tags/%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/"/>
-    
       <category term="Spring Boot" scheme="https://dayarch.top/tags/Spring-Boot/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Spring Bean生命周期之缘起</title>
-    <link href="https://dayarch.top//p/spring-bean-lifecycle-creation.html"/>
-    <id>https://dayarch.top//p/spring-bean-lifecycle-creation.html</id>
-    <published>2019-12-20T01:04:56.000Z</published>
-    <updated>2019-12-21T10:12:29.078Z</updated>
-    
-    <summary type="html">
-    
-      透彻的理解Spring Bean 生命周期是掌握Spring Bean依赖的前提，了解它也可以让我们在特定的节点做特定的事情满足业务需要
-    
-    </summary>
-    
-    
-      <category term="Coding" scheme="https://dayarch.top/categories/Coding/"/>
-    
-      <category term="Spring-Boot" scheme="https://dayarch.top/categories/Coding/Spring-Boot/"/>
-    
     
       <category term="Spring Bean" scheme="https://dayarch.top/tags/Spring-Bean/"/>
     
       <category term="生命周期" scheme="https://dayarch.top/tags/%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/"/>
-    
-      <category term="Spring Boot" scheme="https://dayarch.top/tags/Spring-Boot/"/>
     
   </entry>
   
