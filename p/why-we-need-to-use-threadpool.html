@@ -566,7 +566,7 @@
 <td>2</td>
 <td>maximumPoolSize</td>
 <td>表示线程池能够容纳可同时执行的最大线程数</td>
-<td>春运客流量大，临时加车，加车后，总列车次数不能超过这个最大值，否则就会出现调度不开等问题</td>
+<td>春运客流量大，临时加车，加车后，总列车次数不能超过这个最大值，否则就会出现调度不开等问题 （结合workqueue）</td>
 </tr>
 <tr>
 <td>3</td>
@@ -583,8 +583,8 @@
 <tr>
 <td>5</td>
 <td>workQueue</td>
-<td>当请求的线程数大于 <code>maximumPoolSize</code> 时，线程进入该阻塞队列</td>
-<td>春运压力异常大，即便加车后（达到<code>maximumPoolSize</code>）也不能满足要求，所有乘坐请求都会进入该阻塞队列中排队</td>
+<td>当请求的线程数大于 <code>corePoolSize</code> 时，线程进入该阻塞队列</td>
+<td>春运压力异常大，（达到<code>corePoolSize</code>）也不能满足要求，所有乘坐请求都会进入该阻塞队列中排队, 队列满，还有额外请求，就需要加车了</td>
 </tr>
 <tr>
 <td>6</td>
@@ -595,8 +595,8 @@
 <tr>
 <td>7</td>
 <td>handler</td>
-<td>执行拒绝策略，当 <code>workQueue</code> 达到上限，就要通过这个来处理，比如拒绝，丢弃等，这是一种限流的保护措施</td>
-<td>当<code>workQueue</code>排队也达到队列最大上线，就要提示无票等拒绝策略了,因为我们不能加车了，当前所有车次已经满负载</td>
+<td>执行拒绝策略，当 <code>workQueue</code> 达到上限，同时也达到 <code>maximumPoolSize</code> 就要通过这个来处理，比如拒绝，丢弃等，这是一种限流的保护措施</td>
+<td>当<code>workQueue</code>排队也达到队列最大上线，<code>maximumPoolSize</code> 就要提示无票等拒绝策略了,因为我们不能加车了，当前所有车次已经满负载</td>
 </tr>
 </tbody></table>
 <p>试想，如果有请求就新建一趟列车，请求结束就“销毁”这趟列车，频繁往复这样操作，这样的代价肯定是不能接受的。</p>
@@ -648,7 +648,7 @@
       <!-- <div class="tuijian">
         <br><br>
         📚相关文章
-        <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-core.html" title="并发编程三大核心" rel="bookmark">并发编程三大核心</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-lock-resource.html" title="锁保护资源，synchronized方法就够了吗" rel="bookmark">锁保护资源，synchronized方法就够了吗</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-thread-life-cycle.html" title="Java线程生命周期这样理解挺简单的" rel="bookmark">Java线程生命周期这样理解挺简单的</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/difference-between-volatile-and-synchronized-keyword.html" title="volatile和synchronized图文透彻讲解" rel="bookmark">volatile和synchronized图文透彻讲解</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-metaphor.html" title="并发编程之初探" rel="bookmark">并发编程之初探</a></h3></div></li></ul>
+        <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-core.html" title="并发编程三大核心" rel="bookmark">并发编程三大核心</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-lock-resource.html" title="锁保护资源，synchronized方法就够了吗" rel="bookmark">锁保护资源，synchronized方法就够了吗</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-thread-life-cycle.html" title="Java线程生命周期这样理解挺简单的" rel="bookmark">Java线程生命周期这样理解挺简单的</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/difference-between-volatile-and-synchronized-keyword.html" title="volatile和synchronized图文透彻讲解" rel="bookmark">volatile和synchronized图文透彻讲解</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-three-questions.html" title="并发编程三大问题" rel="bookmark">并发编程三大问题</a></h3></div></li></ul>
       </div> -->
       <div class="personalweixin">
         <br><br>
@@ -668,10 +668,10 @@
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-04-19T17:07:52+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-04-20T23:57:57+08:00">
   <a class='notlink'>
     <i class="fas fa-clock" aria-hidden="true"></i>
-    <p>更新于 2020年4月19日</p>
+    <p>更新于 2020年4月20日</p>
   </a>
 </div>
 
@@ -827,7 +827,7 @@
 </header>
 
     <div class="content pure">
-      <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-core.html" title="并发编程三大核心" rel="bookmark">并发编程三大核心</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-lock-resource.html" title="锁保护资源，synchronized方法就够了吗" rel="bookmark">锁保护资源，synchronized方法就够了吗</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-thread-life-cycle.html" title="Java线程生命周期这样理解挺简单的" rel="bookmark">Java线程生命周期这样理解挺简单的</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/difference-between-volatile-and-synchronized-keyword.html" title="volatile和synchronized图文透彻讲解" rel="bookmark">volatile和synchronized图文透彻讲解</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-metaphor.html" title="并发编程之初探" rel="bookmark">并发编程之初探</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-three-questions.html" title="并发编程三大问题" rel="bookmark">并发编程三大问题</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/waiting-notification-mechanism.html" title="并发编程之等待通知机制" rel="bookmark">并发编程之等待通知机制</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-happens-before-rule.html" title="有序性可见性，Happens-before来搞定" rel="bookmark">有序性可见性，Happens-before来搞定</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-dead-lock.html" title="Java并发死锁解决思路" rel="bookmark">Java并发死锁解决思路</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-atomic.html" title="解决原子性问题？你首先需要的是宏观理解" rel="bookmark">解决原子性问题？你首先需要的是宏观理解</a></h3></div></li></ul>
+      <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-core.html" title="并发编程三大核心" rel="bookmark">并发编程三大核心</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-lock-resource.html" title="锁保护资源，synchronized方法就够了吗" rel="bookmark">锁保护资源，synchronized方法就够了吗</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-thread-life-cycle.html" title="Java线程生命周期这样理解挺简单的" rel="bookmark">Java线程生命周期这样理解挺简单的</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/difference-between-volatile-and-synchronized-keyword.html" title="volatile和synchronized图文透彻讲解" rel="bookmark">volatile和synchronized图文透彻讲解</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-three-questions.html" title="并发编程三大问题" rel="bookmark">并发编程三大问题</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-metaphor.html" title="并发编程之初探" rel="bookmark">并发编程之初探</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-happens-before-rule.html" title="有序性可见性，Happens-before来搞定" rel="bookmark">有序性可见性，Happens-before来搞定</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/waiting-notification-mechanism.html" title="并发编程之等待通知机制" rel="bookmark">并发编程之等待通知机制</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-dead-lock.html" title="Java并发死锁解决思路" rel="bookmark">Java并发死锁解决思路</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-atomic.html" title="解决原子性问题？你首先需要的是宏观理解" rel="bookmark">解决原子性问题？你首先需要的是宏观理解</a></h3></div></li></ul>
     </div>
   </section>
 
@@ -1110,7 +1110,7 @@
   &nbsp;&nbsp;|&nbsp;&nbsp;  
   
     &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-        class="white-color">180k</span>&nbsp;字
+        class="white-color">180.1k</span>&nbsp;字
     
 
   &nbsp;&nbsp;|&nbsp;&nbsp;  
