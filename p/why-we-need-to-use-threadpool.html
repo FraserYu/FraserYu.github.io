@@ -599,7 +599,7 @@
 <td>当<code>workQueue</code>排队也达到队列最大上线，<code>maximumPoolSize</code> 就要提示无票等拒绝策略了,因为我们不能加车了，当前所有车次已经满负载</td>
 </tr>
 </tbody></table>
-<p>整体来看就是这样：<br><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200421065412.png" alt=""></p>
+<p>整体来看就是这样：<br><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200421065412.png" alt=""></fancybox></p>
 <p>试想，如果有请求就新建一趟列车，请求结束就“销毁”这趟列车，频繁往复这样操作，这样的代价肯定是不能接受的。</p>
 <p>可以看到，使用线程池不但能完成手动创建线程可以做到的工作，同时也填补了手动线程不能做到的空白。归纳起来说，线程池的作用包括：</p>
 <ol>
@@ -669,7 +669,7 @@
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-04-21T06:54:34+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-04-21T06:55:38+08:00">
   <a class='notlink'>
     <i class="fas fa-clock" aria-hidden="true"></i>
     <p>更新于 2020年4月21日</p>
