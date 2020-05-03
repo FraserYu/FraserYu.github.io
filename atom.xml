@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://dayarch.top/"/>
-  <updated>2020-04-22T00:29:08.547Z</updated>
+  <updated>2020-05-03T02:12:55.833Z</updated>
   <id>https://dayarch.top/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Intellij IDEA 配置和插件合集</title>
+    <link href="https://dayarch.top//p/intellij-idea-configuration-and-plugins.html"/>
+    <id>https://dayarch.top//p/intellij-idea-configuration-and-plugins.html</id>
+    <published>2020-05-03T01:43:47.000Z</published>
+    <updated>2020-05-03T02:12:55.833Z</updated>
+    
+    <summary type="html">
+    
+      高效的使用 IDEA 进行开发离不开好的配置和插件，本文会陆续更新和整理那些可以大大提高编码效率的配置
+    
+    </summary>
+    
+    
+      <category term="Coding" scheme="https://dayarch.top/categories/Coding/"/>
+    
+      <category term="Java" scheme="https://dayarch.top/categories/Coding/Java/"/>
+    
+    
+      <category term="IntelliJ IDEA" scheme="https://dayarch.top/tags/IntelliJ-IDEA/"/>
+    
+  </entry>
   
   <entry>
     <title>为什么要使用线程池?</title>
@@ -512,33 +535,6 @@ PMP（Project Management Professional）学名「项目管理专家」，我叫�
       <category term="生命周期" scheme="https://dayarch.top/tags/%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/"/>
     
       <category term="Spring Aware" scheme="https://dayarch.top/tags/Spring-Aware/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Spring Bean生命周期之缘尽</title>
-    <link href="https://dayarch.top//p/spring-bean-lifecycle-destroy.html"/>
-    <id>https://dayarch.top//p/spring-bean-lifecycle-destroy.html</id>
-    <published>2019-12-21T09:23:42.000Z</published>
-    <updated>2019-12-21T10:12:36.099Z</updated>
-    
-    <summary type="html">
-    
-      透彻的理解Spring Bean 生命周期是掌握Spring Bean依赖的前提，了解它也可以让我们在特定的节点做特定的事情满足业务需要
-    
-    </summary>
-    
-    
-      <category term="Coding" scheme="https://dayarch.top/categories/Coding/"/>
-    
-      <category term="Spring-Boot" scheme="https://dayarch.top/categories/Coding/Spring-Boot/"/>
-    
-    
-      <category term="Spring Boot" scheme="https://dayarch.top/tags/Spring-Boot/"/>
-    
-      <category term="Spring Bean" scheme="https://dayarch.top/tags/Spring-Bean/"/>
-    
-      <category term="生命周期" scheme="https://dayarch.top/tags/%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/"/>
     
   </entry>
   
