@@ -4,12 +4,12 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   
-  <title>解决原子性问题？你首先需要的是宏观理解 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享</title>
+  <title>Java多线程中断机制 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享</title>
   
-  <meta name="keywords" content="原子性,Java并发, Java,SpringBoot,并发编程, ElasticSearch, 日拱一兵">
+  <meta name="keywords" content="中断,interrupt,Java中断机制,Java并发编程, Java,SpringBoot,并发编程, ElasticSearch, 日拱一兵">
   
   
-  <meta name="description" content="Java并发解决原子性问题，原子性问题解决方案, 本站是日拱一兵的技术分享博客，内容涵盖Java后端技术、Spring Boot、Java并发编程等技术研究与分享，用有趣的方式解读技术">
+  <meta name="description" content="Java并发编程中断机制贯穿并发编程整个环节，其实它是一种协同机制，为我们提供了更优雅以及更灵活的处理方式，理解中断机制也会对阅读源码有更大的帮助, 本站是日拱一兵的技术分享博客，内容涵盖Java后端技术、Spring Boot、Java并发编程等技术研究与分享，用有趣的方式解读技术">
   
 
   
@@ -393,15 +393,15 @@
   <section class='meta'>
     
     
-      <a title='解决原子性问题？你首先需要的是宏观理解' href='/p/java-concurrency-atomic.html'><img class='thumbnail' src='https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgconcurrency.png'></a>
+      <a title='Java多线程中断机制' href='/p/java-concurrency-interrupt-mechnism.html'><img class='thumbnail' src='https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgconcurrency.png'></a>
     
     <div class="meta" id="header-meta">
       
         
   
     <h1 class="title">
-      <a href="/p/java-concurrency-atomic.html">
-        解决原子性问题？你首先需要的是宏观理解
+      <a href="/p/java-concurrency-interrupt-mechnism.html">
+        Java多线程中断机制
       </a>
     </h1>
   
@@ -432,7 +432,7 @@
             <div class="new-meta-item date">
   <a class='notlink'>
     <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-    <p>2019-09-19</p>
+    <p>2020-05-17</p>
   </a>
 </div>
 
@@ -484,112 +484,151 @@
 
     <section class="article typo">
       <div class="article-entry" itemprop="articleBody">
-        <p>上一篇文章 <a href="https://mp.weixin.qq.com/s/074jYZWZODJ5Z2qXyWy4gw" target="_blank" rel="noopener">可见性有序性，Happens-before来搞定</a>，解决了并发三大问题中的两个，今天我们就聊聊如何解决原子性问题</p>
-<p><img src="https://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E5%A4%9A%E7%BA%BF%E7%A8%8B/_image/2019-09-17/prairie-679014.jpg" alt=""></p>
-<p>原子性问题的源头就是 <strong>线程切换</strong>，但在多核 CPU 的大背景下，不允许线程切换是不可能的，正所谓「魔高一尺，道高一丈」，新规矩来了:</p>
+        <p>| <strong>好看请赞，养成习惯</strong></p>
 <blockquote>
-<p> 互斥: 同一时刻只有一个线程执行</p>
-</blockquote>
-<p>实际上，上面这句话的意思是: 对共享变量的修改是互斥的，也就是说线程 A 修改共享变量时其他线程不能修改，这就不存在操作被打断的问题了，那么如何实现互斥呢？</p>
-<h2 id="锁"><a href="#锁" class="headerlink" title="锁"></a>锁</h2><p>对并发有所了解的小伙伴马上就能想到 <strong>锁</strong> 这个概念，并且你的第一反应很可能就是使用 synchronized，这里列出来你常见的 synchronized 的三种用法:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ThreeSync</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Object object = <span class="keyword">new</span> Object();</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">normalSyncMethod</span><span class="params">()</span></span>&#123;</span><br><span class="line">		<span class="comment">//临界区</span></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">staticSyncMethod</span><span class="params">()</span></span>&#123;</span><br><span class="line">		<span class="comment">//临界区</span></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">syncBlockMethod</span><span class="params">()</span></span>&#123;</span><br><span class="line">		<span class="keyword">synchronized</span> (object)&#123;</span><br><span class="line">			<span class="comment">//临界区</span></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>三种 synchronized 锁的内容有一些差别:</p>
 <ul>
-<li>对于普通同步方法，锁的是当前实例对象，通常指 this</li>
-<li>对于静态同步方法，锁的是当前类的 Class 对象，如 ThreeSync.class</li>
-<li>对于同步方法块，锁的是 synchronized 括号内的对象</li>
+<li><p>你有一个思想，我有一个思想，我们交换后，一个人就有两个思想</p>
+</li>
+<li><p>If you can NOT explain it simply, you do NOT understand it well enough</p>
+</li>
 </ul>
-<p>我特意在三种 synchronized 代码里面添加了「临界区」字样的注释，那什么是临界区呢？</p>
-<blockquote>
-<p> 临界区: 我们把需要互斥执行的代码看成为临界区</p>
 </blockquote>
-<p>说到这里，和大家串的知识都是表层认知，<strong>如何用锁保护有效的临界区才是关键</strong>，这直接关系到你是否会写出并发的 bug，了解过本章内容后，你会发现无论是隐式锁/内置锁 (synchronized) 还是显示锁 (Lock) 的使用都是在找寻这种关系，关系对了，一切就对了，且看</p>
-<p>上面锁的三种方式都可以用下图来表达:</p>
-<p><img src="https://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E5%A4%9A%E7%BA%BF%E7%A8%8B/_image/2019-09-17/%E7%AE%80%E6%98%93%E9%94%81%E6%A8%A1%E5%9E%8B.png" alt=""></p>
-<p>线程进入临界区之前，尝试加锁 lock()， 加锁成功，则进入临界区(对共享变量进行修改)，持有锁的线程执行完临界区代码后，执行 unlock()，释放锁。针对这个模型，大家经常用抢占厕所坑位来形容:</p>
-<p><img src="https://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E5%A4%9A%E7%BA%BF%E7%A8%8B/_image/2019-09-17/ABUIABADGAAg5Jf5yAUouJmMgAEw7gU4pAM.gif" alt=""></p>
-<p>在学习 Java 早期我就是这样记忆与理解锁的，但落实到代码上，我们很容易忽略两点:</p>
+<p>现陆续将Demo代码和技术文章整理在一起 <a href="https://github.com/FraserYu/learnings" target="_blank" rel="noopener">Github实践精选</a> ，方便大家阅读查看，本文同样收录在此，觉得不错，还请Star🌟</p>
+<hr>
+<p>横看成岭侧成峰，远近高低各不同，<a href="https://dayarch.top/categories/Coding/Java-Concurrency/">并发编程理论系列</a>基本已经结束，相信大家有了理论的铺垫，近看源码才能发现其设计之美，不会一头雾水</p>
+<hr>
+<p>本来是要介绍 AQS 作为我们走进并发编程源码环节的第一步，但 AQS 涉及的知识点也还真有点多，每一个都够单独拿出来说一说，恰巧有朋友私信我“不理解线程的中断机制”，中断机制又恰巧是 AQS API实现的一部分，更贯穿于整个并发编程内容中。于是就打算单独说一说这个小机制，先让大家做到心中有 number </p>
+<p>在学习/编写并发程序时，总会听到/看到如下词汇：</p>
+<ul>
+<li>线程被中断或抛出InterruptedException</li>
+<li>设置了中断标识</li>
+<li>清空了中断标识</li>
+<li>判断线程是否被中断</li>
+</ul>
+<p>在 Java Thread 类又提供了长相酷似，让人傻傻分不清的三个方法来处理并发中断问题： </p>
+<ul>
+<li><code>interrupt()</code></li>
+<li><code>interrupted()</code></li>
+<li><code>isInterrupted()</code></li>
+</ul>
+<p><fancybox><img src="https://rgyb.sunluomeng.top/20200513160945.png" alt=""></fancybox></p>
+<p>看到这我不禁会问自己：</p>
+<p><img src="https://rgyb.sunluomeng.top/20200517135855.png" alt=""></p>
+<h2 id="什么是中断机制？"><a href="#什么是中断机制？" class="headerlink" title="什么是中断机制？"></a>什么是中断机制？</h2><p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200516202432.png" alt=""></fancybox></p>
+<p>刚刚接触【中断】这个词时，先入为主的概念就是“直接中断/打断”正在做的事，使其停止。我的理解是这样的：</p>
+<blockquote>
+<p>你：在打游戏</p>
+<p>女朋友：别打游戏了，赶快过来吃饭</p>
+<p>你：听到女朋友招呼之后立马中断手中的游戏乖乖过去吃饭</p>
+</blockquote>
+<p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200516203009.png" alt=""></fancybox></p>
+<p>在多线程编程中，中断是一种【协同】机制，怎么理解这么高大上的词呢？就是女朋友叫你吃饭，你收到了中断游戏通知，<strong>但是否马上放下手中的游戏去吃饭看你心情</strong> 。在程序中怎样演绎这个心情就看具体的业务逻辑了，Java 的中断机制就是这么简单</p>
+<p>如果还没改变这个先入为主的概念，我怀你你没有女朋友（😭）我们拥抱一下</p>
+<h2 id="为什么会有中断机制？"><a href="#为什么会有中断机制？" class="headerlink" title="为什么会有中断机制？"></a>为什么会有中断机制？</h2><p>中断是一种协同机制，我觉得就是解决【当局者迷】的状况</p>
+<p>现实中，你努力忘我没有昼夜的工作，如果再没有人告知你中断，你身体是吃不消的。</p>
+<p>在多线程的场景中，有的线程可能迷失在怪圈无法自拔（自旋浪费资源），这时就可以用其他线程在<strong>恰当</strong>的时机给它个中断通知，被“中断”的线程可以选择在<strong>恰当</strong>的时机选择跳出怪圈，最大化的利用资源</p>
+<p>那程序中如何中断？怎样识别是否中断？又如何处理中断呢？这就与上文提到的三个方法有关了</p>
+<h2 id="interrupt-VS-isInterrupted-VS-interrupted"><a href="#interrupt-VS-isInterrupted-VS-interrupted" class="headerlink" title="interrupt() VS isInterrupted() VS interrupted()"></a><code>interrupt()</code> VS <code>isInterrupted()</code> VS <code>interrupted()</code></h2><p>Java 的每个线程对象里都有一个 boolean 类型的标识，代表是否有中断请求，可你寻遍 Thread 类你也不会找到这个标识，因为这是通过底层 native 方法实现的。</p>
+<h3 id="interrupt"><a href="#interrupt" class="headerlink" title="interrupt()"></a>interrupt()</h3><p>interrupt() 方法是 <strong>唯一一个</strong> 可以将上面提到中断标志设置为 true 的方法，从这里可以看出，这是一个 Thread 类 public 的对象方法，所以可以推断出任何线程对象都可以调用该方法，进一步说明就是可以一个线程 interrupt 其他线程，也可以 interrupt 自己。其中，中断标识的设置是通过 native 方法 <code>interrupt0</code> 完成的</p>
+<p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200516213303.png" alt=""></fancybox></p>
+<p>在 Java 中，线程被中断的反应是不一样的，脾气不好的直接就抛出了 <code>InterruptedException()</code> ，</p>
+<p><fancybox><img src="https://rgyb.sunluomeng.top/20200516215134.png" alt=""></fancybox></p>
+<p>该方法注释上写的很清楚，当线程被阻塞在：</p>
 <ol>
-<li>我们锁的是什么？</li>
-<li>我们保护的又是什么？</li>
+<li>wait()</li>
+<li>join()</li>
+<li>sleep()</li>
 </ol>
-<p>将这两句话联合起来就是你的锁能否对临界区的资源起到保护的作用？所以我们要将上面的模型进一步细化</p>
-<p><img src="https://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E5%A4%9A%E7%BA%BF%E7%A8%8B/_image/2019-09-17/%E5%8E%9F%E5%AD%90%E6%80%A7%EF%BC%8C%E6%9C%89%E6%95%88%E4%B8%B4%E7%95%8C%E5%8C%BA%20%281%29%20%281%29.png" alt=""></p>
-<p>现实中，<strong>我们都知道自己的锁来锁自己需要保护的东西</strong> ，这句话翻译成你的行动语言之后你已经明确知道了:</p>
+<p>这些方法时，如果被中断，就会抛出 InterruptedException 受检异常（也就是必须要求我们 catch 进行处理的）</p>
+<p>熟悉 JUC 的朋友可能知道，其实被中断抛出 InterruptedException 的远远不止这几个方法，比如：</p>
+<p><fancybox><img src="https://rgyb.sunluomeng.top/20200516215615.png" alt=""></fancybox></p>
+<p>反向推理，这些可能阻塞的方法如果声明有 <code>throws InterruptedException</code> ， 也就暗示我们它们是可中断的</p>
+<p>调用 interrput() 方法后，中断标识就被设置为 true 了，那我们怎么利用这个中断标识，来判断某个线程中断标识到底什么状态呢？</p>
+<h3 id="isInterrupted"><a href="#isInterrupted" class="headerlink" title="isInterrupted()"></a>isInterrupted()</h3><p><fancybox><img src="https://rgyb.sunluomeng.top/20200516221434.png" alt=""></fancybox></p>
+<p>这个方法名起的非常好，因为比较符合我们 bean boolean 类型字段的 get 方法规范，没错，该方法就是返回中断标识的结果：</p>
+<ul>
+<li>true：线程被中断，</li>
+<li>false：线程没被中断或被清空了中断标识（如何清空我们一会看）</li>
+</ul>
+<p>拿到这个标识后，线程就可以判断这个标识来执行后续的逻辑了。有起名好的，也有起名不好的，就是下面这个方法：</p>
+<h3 id="interrupted"><a href="#interrupted" class="headerlink" title="interrupted()"></a>interrupted()</h3><p>按照常规翻译，过去时时态，这就是“被打断了/被打断的”，其实和上面的 isInterrupted() 方法差不多，两个方法都是调用 <code>private</code> 的 isInterrupted() 方法， 唯一差别就是会清空中断标识（这是从方法名中怎么也看不出来的）</p>
+<p><fancybox><img src="https://rgyb.sunluomeng.top/20200516223926.png" alt=""></fancybox></p>
+<p>因为调用该方法，会返回当前中断标识，同时会清空中断标识，就有了那一段有点让人迷惑的方法注释：</p>
+<p><fancybox><img src="https://rgyb.sunluomeng.top/20200516224422.png" alt=""></fancybox></p>
+<p>来段程序你就会明白上面注释的意思了：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Thread.currentThread().isInterrupted(); <span class="comment">// true</span></span><br><span class="line">Thread.interrupted() <span class="comment">// true，返回true后清空了中断标识将其置为 false</span></span><br><span class="line">Thread.currentThread().isInterrupted(); <span class="comment">// false</span></span><br><span class="line">Thread.interrupted() <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>这个方法总觉得很奇怪，现实中有什么用呢？</p>
+<blockquote>
+<p>当你可能要被大量中断并且你想确保只处理一次中断时，就可以使用这个方法了</p>
+</blockquote>
+<p>该方法在 JDK 源码中应用也非常多，比如（后续文章会具体分析，这里知道该方法的作用和使用场景就好）：</p>
+<p><fancybox><img src="https://rgyb.sunluomeng.top/20200517124752.png" alt=""></fancybox></p>
+<p>相信到这里你已经能明确分辨三胞胎都是谁，并发挥怎样的作用了，那么有哪些场景我们可以使用中断机制呢？</p>
+<h2 id="中断机制的使用场景"><a href="#中断机制的使用场景" class="headerlink" title="中断机制的使用场景"></a>中断机制的使用场景</h2><p>通常，中断的使用场景有以下几个</p>
+<ul>
+<li>点击某个桌面应用中的关闭按钮时（比如你关闭 IDEA，不保存数据直接中断好吗？）；</li>
+<li>某个操作超过了一定的执行时间限制需要中止时；</li>
+<li>多个线程做相同的事情，只要一个线程成功其它线程都可以取消时；</li>
+<li>一组线程中的一个或多个出现错误导致整组都无法继续时；</li>
+</ul>
+<p>因为中断是一种协同机制，提供了更优雅中断方式，也提供了更多的灵活性，所以当遇到如上场景等，我们就可以考虑使用中断机制了</p>
+<h2 id="使用中断机制有哪些注意事项"><a href="#使用中断机制有哪些注意事项" class="headerlink" title="使用中断机制有哪些注意事项"></a>使用中断机制有哪些注意事项</h2><p>其实使用中断机制无非就是注意上面说的两项内容：</p>
 <ol>
-<li>你锁的是什么</li>
-<li>你保护的资源是什么</li>
+<li>中断标识</li>
+<li>InterruptedException</li>
 </ol>
-<p>CPU 可不像我们大脑这么智能，我们要明确说明我们锁的是什么，我们要保护的资源是什么，它才会用锁保护我们想要保护的资源(共享变量)</p>
-<p>拿上图来说，资源 R (共享变量) 就是我们要保护的资源，所以我们就要创建资源 R 的锁来保护资源 R，细心的朋友可能发现上图几个问题:</p>
-<blockquote>
-<p> LR 和 R 之间有明确的指向关系<br>我们编写程序时，往往脑子中的模型是对的，但是忽略了这个指向关系，导致自己的锁不能起到保护资源 R 的作用(用别人家的锁保护自己家的东西或用自己家的锁保护别人家的东西)，最终引发并发 bug，<strong>所以在你勾画草图时，要明确找到这个关系</strong></p>
+<p>前浪已经将其总结为两个通用原则，我们后浪直接站在肩膀上用就可以了，来看一下这两个原则是什么：</p>
+<h3 id="原则-1"><a href="#原则-1" class="headerlink" title="原则-1"></a>原则-1</h3><blockquote>
+<p>如果遇到的是可中断的阻塞方法, 并抛出 InterruptedException，可以继续向方法调用栈的上层抛出该异常；如果检测到中断，则可清除中断状态并抛出 InterruptedException，使当前方法也成为一个可中断的方法</p>
 </blockquote>
-<blockquote>
-<p> 左图 LR 虚线指向了非共享变量<br>我们写程序的时候很容易这么做，不确定哪个是要保护的资源，直接大杂烩，用 LR 将要保护的资源 R 和没必要保护的非共享变量一起保护起来了，举两个例子来说你就明白这么做的坏处了</p>
+<h3 id="原则-2"><a href="#原则-2" class="headerlink" title="原则-2"></a>原则-2</h3><blockquote>
+<p>若有时候不太方便在方法上抛出 InterruptedException，比如要实现的某个接口中的方法签名上没有 throws InterruptedException，这时就可以捕获可中断方法的 InterruptedException 并通过 Thread.currentThread.interrupt() 来重新设置中断状态。</p>
 </blockquote>
-<ol>
-<li>编写串行程序时，是不建议 try…catch 整个方法的，这样如果出现问是很难定位的，道理一样，我们要用锁精确的锁住我们要保护的资源就够了，其他无意义的资源是不要锁的</li>
-<li>锁保护的东西越多，临界区就越大，一个线程从走入临界区到走出临界区的时间就越长，这就让其他线程等待的时间越久，这样并发的效率就有所下降，其实这是涉及到锁粒度的问题，后续也都会做相关说明</li>
-</ol>
-<p>作为程序猿还是简单拿代码说明一下心里比较踏实，且看:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ValidLock</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Object object = <span class="keyword">new</span> Object();</span><br><span class="line"></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">int</span> count;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">badSync</span><span class="params">()</span></span>&#123;</span><br><span class="line">		<span class="comment">//其他与共享变量count无关的业务逻辑</span></span><br><span class="line">		count++;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">goodSync</span><span class="params">()</span></span>&#123;</span><br><span class="line">		<span class="comment">//其他与共享变量count无关的业务逻辑</span></span><br><span class="line">		<span class="keyword">synchronized</span> (object)&#123;</span><br><span class="line">			count++;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><em>这里并不是说 synchronized 放在方法上不好，只是提醒大家用合适的锁的粒度才会更高效</em></p>
-<p>在计数器程序例子中，我们会经常这么写:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SafeCounter</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">int</span> count;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">counter</span><span class="params">()</span></span>&#123;</span><br><span class="line">		count++;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">int</span> <span class="title">getCount</span><span class="params">()</span></span>&#123;</span><br><span class="line">		<span class="keyword">return</span> count;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>下图就是上面程序的模型展示:</p>
-<p><img src="https://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E5%A4%9A%E7%BA%BF%E7%A8%8B/_image/2019-09-17/%E5%8E%9F%E5%AD%90%E6%80%A7%EF%BC%8C%E4%B8%80%E9%94%81%E5%A4%9A%E4%B8%AA%E8%B5%84%E6%BA%90%20%281%29.png" alt=""></p>
-<p>这里我们锁的是 this，可以保护 this.count。但有些同学认为 getCount 方法没必要加 synchronized 关键字，因为是读的操作，不会对共享变量做修改，如果不加上 synchronized 关键字，就违背了我们上一篇文章 happens-before 规则中的监视器锁规则:</p>
+<p>再通过个例子来加深一下理解：</p>
 <blockquote>
-<p> 对一个锁的解锁 happens-before 于随后对这个锁的加锁<br>也就是说对 count 的写很可能对 count 的读不可见，也就导致脏读</p>
+<p>本意是当前线程被中断之后，退出while(true),  你觉得代码有问题吗？（先不要向下看）</p>
 </blockquote>
-<p>上面我们看到一个 this 锁是可以保护多个资源的，那用多个不同的锁保护一个资源可以吗？来看一段程序:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UnsafeCounter</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> count;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">counter</span><span class="params">()</span></span>&#123;</span><br><span class="line">		count++;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">synchronized</span> <span class="keyword">int</span> <span class="title">calc</span><span class="params">()</span></span>&#123;</span><br><span class="line">		<span class="keyword">return</span> count++;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>睁大眼睛仔细看，一个锁的是 this，一个锁的是 UnsafeCounter.class, 他们都想保护共享变量 count，你觉得如何？下图就是行面程序的模型展示:</p>
-<p><img src="https://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E5%A4%9A%E7%BA%BF%E7%A8%8B/_image/2019-09-17/%E5%8E%9F%E5%AD%90%E6%80%A7%EF%BC%8C%E5%A4%9A%E9%94%81%E4%B8%80%E4%B8%AA%E8%B5%84%E6%BA%90-2.png" alt=""></p>
-<p>两个临界区是用两个不同的锁来保护的，所以临界区没有互斥关系，也就不能保护 count，所以这样加锁是无意义的</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ol>
-<li>解决原子性问题，就是要互斥，就是要保证中间状态对外不可见</li>
-<li>锁是解决原子性问题的关键，明确知道我们锁的是什么，要保护的资源是什么，更重要的要知道你的锁能否保护这个受保护的资源(图中的箭头指向)</li>
-<li>有效的临界区是一个入口和一个出口，多个临界区保护一个资源，也就是一个资源有多个并行的入口和多个出口，这就没有起到互斥的保护作用，临界区形同虚设</li>
-<li>锁自己家门能保护资源就没必要锁整个小区，如果锁了整个小区，这严重影响其他业主的活动(锁粒度的问题)</li>
-</ol>
-<p>本文以 synchronized 锁举例来说明如何解决原子性问题，主要是帮助大家建立宏观的理念，用于解决原子性问题，这样后续你看到无论什么锁，只要脑海中回想起本节说明的模型，你会发现都是换汤不换药，学习起来就非常轻松了.</p>
-<p>到这里并发的三大问题 有序性，可见性，原子性都有了解决方案，这是远看并发，让大家有了宏观的概念；但面试和实战都是讲求细节的，接下来我们由远及近，逐步看并发的细节，顺带说明那些面试官经常会问到的问题</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">Thread th = Thread.currentThread();</span><br><span class="line"><span class="keyword">while</span>(<span class="keyword">true</span>) &#123;</span><br><span class="line">  <span class="keyword">if</span>(th.isInterrupted()) &#123;</span><br><span class="line">    <span class="keyword">break</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 省略业务代码</span></span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    Thread.sleep(<span class="number">100</span>);</span><br><span class="line">  &#125;<span class="keyword">catch</span> (InterruptedException e)&#123;</span><br><span class="line">    e.printStackTrace();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>打开 Thread.sleep 方法：</p>
+<p><fancybox><img src="https://rgyb.sunluomeng.top/20200516231654.png" alt=""></fancybox></p>
+<p>sleep 方法抛出 InterruptedException后，中断标识也被清空置为 false，我们在catch 没有通过调用 th.interrupt() 方法再次将中断标识置为 true，这就导致无限循环了</p>
+<p>这两个原则很好理解。总的来说，我们应该留意 InterruptedException，当我们捕获到该异常时，绝不可以默默的吞掉它，什么也不做，因为这会导致上层调用栈什么信息也获取不到。其实在编写程序时，捕获的任何受检异常我们都不应该吞掉</p>
+<h2 id="JDK-中有哪些使用中断机制的地方呢？"><a href="#JDK-中有哪些使用中断机制的地方呢？" class="headerlink" title="JDK 中有哪些使用中断机制的地方呢？"></a>JDK 中有哪些使用中断机制的地方呢？</h2><p>中断机制贯穿整个并发编程中，这里只简单列觉大家经常会使用的，我们可以通过阅读JDK源码来进一步了解中断机制以及学习如何使用中断机制</p>
+<h3 id="ThreadPoolExecutor"><a href="#ThreadPoolExecutor" class="headerlink" title="ThreadPoolExecutor"></a>ThreadPoolExecutor</h3><p>ThreadPoolExecutor 中的 shutdownNow 方法会遍历线程池中的工作线程并调用线程的 interrupt 方法来中断线程</p>
+<p><fancybox><img src="https://rgyb.sunluomeng.top/20200517125410.png" alt=""></fancybox></p>
+<p><fancybox><img src="https://rgyb.sunluomeng.top/20200517125513.png" alt=""></fancybox></p>
+<h3 id="FutureTask"><a href="#FutureTask" class="headerlink" title="FutureTask"></a>FutureTask</h3><p>FutureTask 中的 cancel 方法，如果传入的参数为 true，它将会在正在运行异步任务的线程上调用 interrupt 方法，如果正在执行的异步任务中的代码没有对中断做出响应，那么 cancel 方法中的参数将不会起到什么效果</p>
+<p><fancybox><img src="https://rgyb.sunluomeng.top/20200517125655.png" alt=""></fancybox></p>
+<h2 id=""><a href="#" class="headerlink" title=""></a></h2><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>到这里你应该理解Java 并发编程中断机制的含义了，它是一种协同机制，和你先入为主的概念完全不一样。区分了三个相近方法，说明了使用场景以及使用原则，同时又给出JDK源码一些常见案例，相信你已经胸中有沟壑了，接下来，跟上节奏，我们陆续走进源码吧</p>
 <h2 id="灵魂追问"><a href="#灵魂追问" class="headerlink" title="灵魂追问"></a>灵魂追问</h2><ol>
-<li>多个锁锁一个资源一定会有问题吗？</li>
-<li>什么时候需要锁小区，而不能锁某一户呢？</li>
-<li>银行转账，两人互转和别人给自己转，用什么样的锁粒度合适呢？</li>
+<li>抛出 InterruptedException 后，中断标识就一定被清空吗？</li>
+<li>处在死锁状态的线程是否可以被中断呢？</li>
+<li>进入临界区的线程能否被中断呢？如果不能有什么办法能响应中断吗？</li>
+<li>个人感觉interrupted这个方法名称不是特别好，如果你也觉得不好，让你设计这个地方，你有什么想法？</li>
 </ol>
-<h2 id="提高效率工具"><a href="#提高效率工具" class="headerlink" title="提高效率工具"></a>提高效率工具</h2><p><img src="https://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E6%84%9F%E6%83%B3%E4%B8%8E%E6%80%BB%E7%BB%93/_image/2019-06-18/b.png" alt=""></p>
-<hr>
-<h2 id="推荐阅读"><a href="#推荐阅读" class="headerlink" title="推荐阅读"></a>推荐阅读</h2><ul>
-<li><a href="https://mp.weixin.qq.com/s/I53l5W_Wl-lMc-_FAeJ6WQ" target="_blank" rel="noopener">这次走进并发的世界，请不要错过 </a></li>
-<li><a href="https://mp.weixin.qq.com/s/SrNsvp2NjhAEqYugx6c-3Q" target="_blank" rel="noopener">学并发编程，透彻理解这三个核心是关键</a></li>
-<li><a href="https://mp.weixin.qq.com/s/fQcozKziqMxFMBkptpnuTw" target="_blank" rel="noopener">并发Bug之源有三，请睁大眼睛看清它们</a></li>
-<li><a href="https://mp.weixin.qq.com/s/074jYZWZODJ5Z2qXyWy4gw" target="_blank" rel="noopener">可见性有序性，Happens-before来搞定</a></li>
-<li><a href="https://mp.weixin.qq.com/s/VEWMz9XW95_syiHInUnI0w" target="_blank" rel="noopener">基础面试，为什么面试官总喜欢问String？</a></li>
-</ul>
-<hr>
 <blockquote>
-<h3 id="欢迎持续关注公众号：「日拱一兵」"><a href="#欢迎持续关注公众号：「日拱一兵」" class="headerlink" title="欢迎持续关注公众号：「日拱一兵」"></a>欢迎持续关注公众号：「日拱一兵」</h3><ul>
-<li>前沿 Java 技术干货分享</li>
-<li>高效工具汇总 | 回复「工具」</li>
-<li>面试问题分析与解答</li>
-<li>技术资料领取 | 回复「资料」</li>
-</ul>
+<p>有朋友可能会问文章开头的图，同时看一个类的不同部分怎么实现的？不等您开口，我就全盘的招了，其实就是屏幕分割（在文件上鼠标右键-&gt;选择水平/垂直分割），这样在同时查看某些代码时还是很方便的（带鱼屏垂直分割真是爽翻天），保姆式演示如下：</p>
 </blockquote>
-<blockquote>
-<p>以读侦探小说思维轻松趣味学习 Java 技术栈相关知识，本着将复杂问题简单化，抽象问题具体化和图形化原则逐步分解技术问题，技术持续更新，请持续关注……</p>
-</blockquote>
-<p><img src="https://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E6%84%9F%E6%83%B3%E4%B8%8E%E6%80%BB%E7%BB%93/_image/2019-06-18/a%20%281%29.png" alt=""></p>
+<p><fancybox><img src="https://rgyb.sunluomeng.top/2020-05-14at22.09.53.gif" alt=""></fancybox></p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ol>
+<li>Java 并发编程实战</li>
+<li>Java并发编程的艺术</li>
+<li><a href="https://www.infoq.cn/article/java-interrupt-mechanism" target="_blank" rel="noopener">https://www.infoq.cn/article/java-interrupt-mechanism</a></li>
+<li><a href="https://coderanch.com/t/237332/certification/explain-interrupt-isInterrupted-interrupted-method" target="_blank" rel="noopener">https://coderanch.com/t/237332/certification/explain-interrupt-isInterrupted-interrupted-method</a></li>
+<li><a href="https://dzone.com/articles/waiting-for-coroutines" target="_blank" rel="noopener">https://dzone.com/articles/waiting-for-coroutines</a></li>
+</ol>
 
       </div>
       <!-- <div class="tuijian">
         <br><br>
         📚相关文章
-        <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-lock-resource.html" title="锁保护资源，synchronized方法就够了吗" rel="bookmark">锁保护资源，synchronized方法就够了吗</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-core.html" title="并发编程三大核心" rel="bookmark">并发编程三大核心</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-interrupt-mechnism.html" title="Java多线程中断机制" rel="bookmark">Java多线程中断机制</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-thread-life-cycle.html" title="Java线程生命周期这样理解挺简单的" rel="bookmark">Java线程生命周期这样理解挺简单的</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/why-we-need-to-use-threadpool.html" title="为什么要使用线程池?" rel="bookmark">为什么要使用线程池?</a></h3></div></li></ul>
+        <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-core.html" title="并发编程三大核心" rel="bookmark">并发编程三大核心</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-lock-resource.html" title="锁保护资源，synchronized方法就够了吗" rel="bookmark">锁保护资源，synchronized方法就够了吗</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-thread-life-cycle.html" title="Java线程生命周期这样理解挺简单的" rel="bookmark">Java线程生命周期这样理解挺简单的</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/why-we-need-to-use-threadpool.html" title="为什么要使用线程池?" rel="bookmark">为什么要使用线程池?</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/difference-between-volatile-and-synchronized-keyword.html" title="volatile和synchronized图文透彻讲解" rel="bookmark">volatile和synchronized图文透彻讲解</a></h3></div></li></ul>
       </div> -->
       <div class="personalweixin">
         <br><br>
@@ -609,10 +648,10 @@
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-03-04T11:43:57+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-05-17T13:59:39+08:00">
   <a class='notlink'>
     <i class="fas fa-clock" aria-hidden="true"></i>
-    <p>更新于 2020年3月4日</p>
+    <p>更新于 2020年5月17日</p>
   </a>
 </div>
 
@@ -621,7 +660,7 @@
         
           
   
-  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/Java-Concurrency/" rel="nofollow"><i class="fas fa-tag" aria-hidden="true"></i><p>Java-Concurrency</p></a></div> <div class="new-meta-item meta-tags"><a class="tag" href="/tags/%E9%94%81/" rel="nofollow"><i class="fas fa-tag" aria-hidden="true"></i><p>锁</p></a></div>
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/Java-Concurrency/" rel="nofollow"><i class="fas fa-tag" aria-hidden="true"></i><p>Java-Concurrency</p></a></div>
 
 
         
@@ -634,18 +673,26 @@
       
         <a class="-mob-share-qq" title="QQ好友" rel="external nofollow noopener noreferrer"
           
-          href="http://connect.qq.com/widget/shareqq/index.html?url=https://dayarch.top/p/java-concurrency-atomic.html&title=解决原子性问题？你首先需要的是宏观理解 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=上一篇文章 可见性有序性，Happens-before来搞定，解决了并发三大问题中的两个，今天我们就聊聊如何解决原子性问题
+          href="http://connect.qq.com/widget/shareqq/index.html?url=https://dayarch.top/p/java-concurrency-interrupt-mechnism.html&title=Java多线程中断机制 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=| 好看请赞，养成习惯
+
+ * 你有一个思想，我有一个思想，我们交换后，一个人就有两个思想
+   
+   
+ * If you can NOT explain it simply, you do NOT understand it well enough
+   
+   
+
+现陆续将Demo代码和技术文章整理在一起 Github实践精选 ，方便大家阅读查看，本文同样收录在此，觉得不错，还请Star🌟
 
 
 
-原子性问题的源头就是 线程切换，但在多核 CPU 的大背景下，不允许线程切换是不可能的，正所谓「魔高一尺，道高一丈」，新规矩来了:
 
- 互斥: 同一时刻只有一个线程执行
+横看成岭侧成峰，远近高低各不同，并发编程理论系列基本已经结束，相信大家有了理论的铺垫，近看源码才能发现其设计之美，不会一头雾水
 
-实际上，上面这句话的意思是: 对共享变量的修改是互斥的，也就是说线程 A 修改共享变量时其他线程不能修改，这就不存在操作被打断的问题了，那么如何实现互斥呢？
 
-锁
-对并发有所了解的小伙伴马上就能想到 锁 这个概念，并且你的第一反应很可能就是使用 synchronized，这里列出来你常见的 syn"
+
+
+本来是要介绍 AQS 作为我们走进并发编程源码环节的"
           
           >
           
@@ -657,18 +704,26 @@
       
         <a class="-mob-share-qzone" title="QQ空间" rel="external nofollow noopener noreferrer"
           
-          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://dayarch.top/p/java-concurrency-atomic.html&title=解决原子性问题？你首先需要的是宏观理解 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=上一篇文章 可见性有序性，Happens-before来搞定，解决了并发三大问题中的两个，今天我们就聊聊如何解决原子性问题
+          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://dayarch.top/p/java-concurrency-interrupt-mechnism.html&title=Java多线程中断机制 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=| 好看请赞，养成习惯
+
+ * 你有一个思想，我有一个思想，我们交换后，一个人就有两个思想
+   
+   
+ * If you can NOT explain it simply, you do NOT understand it well enough
+   
+   
+
+现陆续将Demo代码和技术文章整理在一起 Github实践精选 ，方便大家阅读查看，本文同样收录在此，觉得不错，还请Star🌟
 
 
 
-原子性问题的源头就是 线程切换，但在多核 CPU 的大背景下，不允许线程切换是不可能的，正所谓「魔高一尺，道高一丈」，新规矩来了:
 
- 互斥: 同一时刻只有一个线程执行
+横看成岭侧成峰，远近高低各不同，并发编程理论系列基本已经结束，相信大家有了理论的铺垫，近看源码才能发现其设计之美，不会一头雾水
 
-实际上，上面这句话的意思是: 对共享变量的修改是互斥的，也就是说线程 A 修改共享变量时其他线程不能修改，这就不存在操作被打断的问题了，那么如何实现互斥呢？
 
-锁
-对并发有所了解的小伙伴马上就能想到 锁 这个概念，并且你的第一反应很可能就是使用 synchronized，这里列出来你常见的 syn"
+
+
+本来是要介绍 AQS 作为我们走进并发编程源码环节的"
           
           >
           
@@ -680,18 +735,26 @@
       
         <a class="-mob-share-weibo" title="微博" rel="external nofollow noopener noreferrer"
           
-          href="http://service.weibo.com/share/share.php?url=https://dayarch.top/p/java-concurrency-atomic.html&title=解决原子性问题？你首先需要的是宏观理解 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=上一篇文章 可见性有序性，Happens-before来搞定，解决了并发三大问题中的两个，今天我们就聊聊如何解决原子性问题
+          href="http://service.weibo.com/share/share.php?url=https://dayarch.top/p/java-concurrency-interrupt-mechnism.html&title=Java多线程中断机制 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=| 好看请赞，养成习惯
+
+ * 你有一个思想，我有一个思想，我们交换后，一个人就有两个思想
+   
+   
+ * If you can NOT explain it simply, you do NOT understand it well enough
+   
+   
+
+现陆续将Demo代码和技术文章整理在一起 Github实践精选 ，方便大家阅读查看，本文同样收录在此，觉得不错，还请Star🌟
 
 
 
-原子性问题的源头就是 线程切换，但在多核 CPU 的大背景下，不允许线程切换是不可能的，正所谓「魔高一尺，道高一丈」，新规矩来了:
 
- 互斥: 同一时刻只有一个线程执行
+横看成岭侧成峰，远近高低各不同，并发编程理论系列基本已经结束，相信大家有了理论的铺垫，近看源码才能发现其设计之美，不会一头雾水
 
-实际上，上面这句话的意思是: 对共享变量的修改是互斥的，也就是说线程 A 修改共享变量时其他线程不能修改，这就不存在操作被打断的问题了，那么如何实现互斥呢？
 
-锁
-对并发有所了解的小伙伴马上就能想到 锁 这个概念，并且你的第一反应很可能就是使用 synchronized，这里列出来你常见的 syn"
+
+
+本来是要介绍 AQS 作为我们走进并发编程源码环节的"
           
           >
           
@@ -715,40 +778,21 @@
       
           <div class="prev-next">
               
-                  <section class="prev">
-                      <span class="art-item-left">
-                          <h6><i class="fas fa-chevron-left" aria-hidden="true"></i>&nbsp;上一页</h6>
-                          <h4>
-                              <a href="/p/java-concurrency-volatile.html" rel="prev" title="面试volatile关键字时，我们应该具备哪些谈资？">
-                                
-                                    面试volatile关键字时，我们应该具备哪些谈资？
-                                
-                              </a>
-                          </h4>
-                          
-                              
-                              <h6 class="tags">
-                                  <a class="tag" href="/tags/Java-Concurrency/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> Java-Concurrency</a> <a class="tag" href="/tags/volatile/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> volatile</a>
-                              </h6>
-                          
-                      </span>
-                  </section>
-              
               
                   <section class="next">
                       <span class="art-item-right" aria-hidden="true">
                           <h6>下一页&nbsp;<i class="fas fa-chevron-right" aria-hidden="true"></i></h6>
                           <h4>
-                              <a href="/p/java-concurrency-happens-before-rule.html" rel="prev" title="有序性可见性，Happens-before来搞定">
+                              <a href="/p/intellij-idea-configuration-and-plugins.html" rel="prev" title="Intellij IDEA 配置和插件合集">
                                   
-                                      有序性可见性，Happens-before来搞定
+                                      Intellij IDEA 配置和插件合集
                                   
                               </a>
                           </h4>
                           
                               
                               <h6 class="tags">
-                                  <a class="tag" href="/tags/Java-Concurrency/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> Java-Concurrency</a> <a class="tag" href="/tags/Happens-before/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> Happens-before</a>
+                                  <a class="tag" href="/tags/IntelliJ-IDEA/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> IntelliJ IDEA</a>
                               </h6>
                           
                       </span>
@@ -775,7 +819,7 @@
 </header>
 
     <div class="content pure">
-      <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-lock-resource.html" title="锁保护资源，synchronized方法就够了吗" rel="bookmark">锁保护资源，synchronized方法就够了吗</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-core.html" title="并发编程三大核心" rel="bookmark">并发编程三大核心</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-interrupt-mechnism.html" title="Java多线程中断机制" rel="bookmark">Java多线程中断机制</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-thread-life-cycle.html" title="Java线程生命周期这样理解挺简单的" rel="bookmark">Java线程生命周期这样理解挺简单的</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/why-we-need-to-use-threadpool.html" title="为什么要使用线程池?" rel="bookmark">为什么要使用线程池?</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/difference-between-volatile-and-synchronized-keyword.html" title="volatile和synchronized图文透彻讲解" rel="bookmark">volatile和synchronized图文透彻讲解</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-metaphor.html" title="并发编程之初探" rel="bookmark">并发编程之初探</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-three-questions.html" title="并发编程三大问题" rel="bookmark">并发编程三大问题</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-dead-lock.html" title="Java并发死锁解决思路" rel="bookmark">Java并发死锁解决思路</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-happens-before-rule.html" title="有序性可见性，Happens-before来搞定" rel="bookmark">有序性可见性，Happens-before来搞定</a></h3></div></li></ul>
+      <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-core.html" title="并发编程三大核心" rel="bookmark">并发编程三大核心</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-lock-resource.html" title="锁保护资源，synchronized方法就够了吗" rel="bookmark">锁保护资源，synchronized方法就够了吗</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-thread-life-cycle.html" title="Java线程生命周期这样理解挺简单的" rel="bookmark">Java线程生命周期这样理解挺简单的</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/why-we-need-to-use-threadpool.html" title="为什么要使用线程池?" rel="bookmark">为什么要使用线程池?</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/difference-between-volatile-and-synchronized-keyword.html" title="volatile和synchronized图文透彻讲解" rel="bookmark">volatile和synchronized图文透彻讲解</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-metaphor.html" title="并发编程之初探" rel="bookmark">并发编程之初探</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-three-questions.html" title="并发编程三大问题" rel="bookmark">并发编程三大问题</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-happens-before-rule.html" title="有序性可见性，Happens-before来搞定" rel="bookmark">有序性可见性，Happens-before来搞定</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-dead-lock.html" title="Java并发死锁解决思路" rel="bookmark">Java并发死锁解决思路</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-atomic.html" title="解决原子性问题？你首先需要的是宏观理解" rel="bookmark">解决原子性问题？你首先需要的是宏观理解</a></h3></div></li></ul>
     </div>
   </section>
 
@@ -831,7 +875,7 @@
 
   <script>
     window.subData = {
-      title: '解决原子性问题？你首先需要的是宏观理解',
+      title: 'Java多线程中断机制',
       tools: true
     }
   </script>
@@ -983,7 +1027,7 @@
 </header>
 
     <div class='content pure'>
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#锁"><span class="toc-text">锁</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-text">总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#灵魂追问"><span class="toc-text">灵魂追问</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#提高效率工具"><span class="toc-text">提高效率工具</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#推荐阅读"><span class="toc-text">推荐阅读</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#欢迎持续关注公众号：「日拱一兵」"><span class="toc-text">欢迎持续关注公众号：「日拱一兵」</span></a></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#什么是中断机制？"><span class="toc-text">什么是中断机制？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#为什么会有中断机制？"><span class="toc-text">为什么会有中断机制？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#interrupt-VS-isInterrupted-VS-interrupted"><span class="toc-text">interrupt() VS isInterrupted() VS interrupted()</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#interrupt"><span class="toc-text">interrupt()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#isInterrupted"><span class="toc-text">isInterrupted()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#interrupted"><span class="toc-text">interrupted()</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#中断机制的使用场景"><span class="toc-text">中断机制的使用场景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用中断机制有哪些注意事项"><span class="toc-text">使用中断机制有哪些注意事项</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#原则-1"><span class="toc-text">原则-1</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#原则-2"><span class="toc-text">原则-2</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JDK-中有哪些使用中断机制的地方呢？"><span class="toc-text">JDK 中有哪些使用中断机制的地方呢？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#ThreadPoolExecutor"><span class="toc-text">ThreadPoolExecutor</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#FutureTask"><span class="toc-text">FutureTask</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#null"><span class="toc-text"></span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-text">总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#灵魂追问"><span class="toc-text">灵魂追问</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考"><span class="toc-text">参考</span></a></li></ol>
     </div>
   </section>
 
