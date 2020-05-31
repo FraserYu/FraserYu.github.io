@@ -1,5 +1,5 @@
+https://dayarch.top/p/java-aqs-and-reentrantlock.html
 https://dayarch.top/p/java-concurrency-interrupt-mechnism.html
 https://dayarch.top/p/intellij-idea-configuration-and-plugins.html
 https://dayarch.top/p/why-we-need-to-use-threadpool.html
 https://dayarch.top/p/how-to-organize-your-day.html
-https://dayarch.top/p/how-many-threads-should-be-created.html

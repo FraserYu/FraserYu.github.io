@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://dayarch.top/"/>
-  <updated>2020-05-17T06:09:50.249Z</updated>
+  <updated>2020-05-31T12:32:57.140Z</updated>
   <id>https://dayarch.top/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Java AQS队列同步器以及ReentrantLock的应用</title>
+    <link href="https://dayarch.top//p/java-aqs-and-reentrantlock.html"/>
+    <id>https://dayarch.top//p/java-aqs-and-reentrantlock.html</id>
+    <published>2020-05-31T12:26:08.000Z</published>
+    <updated>2020-05-31T12:32:57.140Z</updated>
+    
+    <summary type="html">
+    
+      想要很好的理解 JUC 的源码和其设计思想，个人觉得第一步是了解 AQS，里面提供了大量的锁实现，常见的ReentrantLock, Semphore, CountLatch 等都是在其基础上做了定制，所以了解 AQS 才不会丢失主线，阅读源码会越发轻松
+    
+    </summary>
+    
+    
+      <category term="Coding" scheme="https://dayarch.top/categories/Coding/"/>
+    
+      <category term="Java-Concurrency" scheme="https://dayarch.top/categories/Coding/Java-Concurrency/"/>
+    
+    
+      <category term="Java-Concurrency" scheme="https://dayarch.top/tags/Java-Concurrency/"/>
+    
+  </entry>
   
   <entry>
     <title>Java多线程中断机制</title>
@@ -503,32 +526,9 @@ PMP（Project Management Professional）学名「项目管理专家」，我叫�
       <category term="Spring-Boot" scheme="https://dayarch.top/categories/Coding/Spring-Boot/"/>
     
     
-      <category term="Spring Boot" scheme="https://dayarch.top/tags/Spring-Boot/"/>
-    
       <category term="Spring Bean" scheme="https://dayarch.top/tags/Spring-Bean/"/>
     
       <category term="生命周期" scheme="https://dayarch.top/tags/%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Spring Boot @ConfigurationProperties 注解最强使用详解</title>
-    <link href="https://dayarch.top//p/spring-boot-configurationProperties-usage.html"/>
-    <id>https://dayarch.top//p/spring-boot-configurationProperties-usage.html</id>
-    <published>2019-12-23T13:43:55.000Z</published>
-    <updated>2019-12-23T13:56:35.162Z</updated>
-    
-    <summary type="html">
-    
-      在编写项目代码时，我们要求更灵活的配置，更好的模块化整合。在 Spring Boot 项目中，为满足以上要求，就要用到ConfigurationProperties注解
-    
-    </summary>
-    
-    
-      <category term="Coding" scheme="https://dayarch.top/categories/Coding/"/>
-    
-      <category term="Spring-Boot" scheme="https://dayarch.top/categories/Coding/Spring-Boot/"/>
-    
     
       <category term="Spring Boot" scheme="https://dayarch.top/tags/Spring-Boot/"/>
     
