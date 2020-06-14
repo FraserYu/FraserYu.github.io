@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://dayarch.top/"/>
-  <updated>2020-06-02T11:41:19.518Z</updated>
+  <updated>2020-06-14T04:20:57.507Z</updated>
   <id>https://dayarch.top/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Java AQS共享式获取同步状态及Semaphore的应用分析</title>
+    <link href="https://dayarch.top//p/java-aqs-acquireshared-and-semaphore.html"/>
+    <id>https://dayarch.top//p/java-aqs-acquireshared-and-semaphore.html</id>
+    <published>2020-06-13T07:05:28.000Z</published>
+    <updated>2020-06-14T04:20:57.507Z</updated>
+    
+    <summary type="html">
+    
+      本文详细讲述了 Java AQS 中共享式获取同步状态的过程，通过该过程了解 Semaphore 的经典应用
+    
+    </summary>
+    
+    
+      <category term="Coding" scheme="https://dayarch.top/categories/Coding/"/>
+    
+      <category term="Java-Concurrency" scheme="https://dayarch.top/categories/Coding/Java-Concurrency/"/>
+    
+    
+      <category term="Java-Concurrency" scheme="https://dayarch.top/tags/Java-Concurrency/"/>
+    
+  </entry>
   
   <entry>
     <title>Java AQS队列同步器以及ReentrantLock的应用</title>
@@ -504,33 +527,6 @@ PMP（Project Management Professional）学名「项目管理专家」，我叫�
     
     
       <category term="IntelliJ IDEA" scheme="https://dayarch.top/tags/IntelliJ-IDEA/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>在Spring Boot启动时执行代码的几种方法</title>
-    <link href="https://dayarch.top//p/spring-boot-execute-on-startup.html"/>
-    <id>https://dayarch.top//p/spring-boot-execute-on-startup.html</id>
-    <published>2019-12-25T08:13:15.000Z</published>
-    <updated>2019-12-26T06:43:01.889Z</updated>
-    
-    <summary type="html">
-    
-      我们经常会碰到在Spring Boot启动阶段执行一些代码片段需求，Spring 为我们提供了至少五种方式，比如：MyCommandLineRunner，ApplicationRunner， ApplicationListener， PostConstruct， afterPropertiesSet，但是他们之间还是有很大区别的，本文将带你透彻理解他们的区别，在实战中选择最适合你的那一个
-    
-    </summary>
-    
-    
-      <category term="Coding" scheme="https://dayarch.top/categories/Coding/"/>
-    
-      <category term="Spring-Boot" scheme="https://dayarch.top/categories/Coding/Spring-Boot/"/>
-    
-    
-      <category term="Spring Bean" scheme="https://dayarch.top/tags/Spring-Bean/"/>
-    
-      <category term="生命周期" scheme="https://dayarch.top/tags/%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/"/>
-    
-      <category term="Spring Boot" scheme="https://dayarch.top/tags/Spring-Boot/"/>
     
   </entry>
   
