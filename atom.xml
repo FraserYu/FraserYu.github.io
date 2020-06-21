@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://dayarch.top/"/>
-  <updated>2020-06-14T04:23:39.525Z</updated>
+  <updated>2020-06-21T11:26:27.269Z</updated>
   <id>https://dayarch.top/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>搞定ReentrantReadWriteLock 几个小小数学题就够了</title>
+    <link href="https://dayarch.top//p/java-reentrant-read-write-lock.html"/>
+    <id>https://dayarch.top//p/java-reentrant-read-write-lock.html</id>
+    <published>2020-06-21T11:20:28.000Z</published>
+    <updated>2020-06-21T11:26:27.269Z</updated>
+    
+    <summary type="html">
+    
+      读写锁解决了传统互斥锁应对读多写少低效的场景，它同样是应用AQS的同步器，但是既有独占式获取同步状态，又有共享式获取同步状态，本文主要描述了它是如何应用一个state做到计算两种同步状态的，以及他们获取同步状态的过程
+    
+    </summary>
+    
+    
+      <category term="Coding" scheme="https://dayarch.top/categories/Coding/"/>
+    
+      <category term="Java-Concurrency" scheme="https://dayarch.top/categories/Coding/Java-Concurrency/"/>
+    
+    
+      <category term="Java-Concurrency" scheme="https://dayarch.top/tags/Java-Concurrency/"/>
+    
+  </entry>
   
   <entry>
     <title>Java AQS共享式获取同步状态及Semaphore的应用分析</title>
@@ -504,29 +527,6 @@ PMP（Project Management Professional）学名「项目管理专家」，我叫�
     
     
       <category term="总结" scheme="https://dayarch.top/tags/%E6%80%BB%E7%BB%93/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>小小TODO也有大道理</title>
-    <link href="https://dayarch.top//p/how-to-use-todo-feature.html"/>
-    <id>https://dayarch.top//p/how-to-use-todo-feature.html</id>
-    <published>2020-01-09T02:50:07.000Z</published>
-    <updated>2020-02-07T02:31:08.756Z</updated>
-    
-    <summary type="html">
-    
-      有时，我们需要标记部分代码以供将来参考，比如:优化，改进，可能的更改，要讨论的问题等。通常我们会在代码中加入TODO作为标识，但是在团队中协同工作，TODO的背后也蕴藏着一些道理
-    
-    </summary>
-    
-    
-      <category term="Coding" scheme="https://dayarch.top/categories/Coding/"/>
-    
-      <category term="安全-协议-规范" scheme="https://dayarch.top/categories/Coding/%E5%AE%89%E5%85%A8-%E5%8D%8F%E8%AE%AE-%E8%A7%84%E8%8C%83/"/>
-    
-    
-      <category term="IntelliJ IDEA" scheme="https://dayarch.top/tags/IntelliJ-IDEA/"/>
     
   </entry>
   

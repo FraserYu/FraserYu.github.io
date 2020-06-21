@@ -1,5 +1,5 @@
+https://dayarch.top/p/java-reentrant-read-write-lock.html
 https://dayarch.top/p/java-aqs-acquireshared-and-semaphore.html
 https://dayarch.top/p/java-aqs-and-reentrantlock.html
 https://dayarch.top/p/java-concurrency-interrupt-mechnism.html
 https://dayarch.top/p/intellij-idea-configuration-and-plugins.html
-https://dayarch.top/p/why-we-need-to-use-threadpool.html
