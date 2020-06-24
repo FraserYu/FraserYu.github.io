@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://dayarch.top/"/>
-  <updated>2020-06-22T12:46:05.571Z</updated>
+  <updated>2020-06-24T08:13:24.997Z</updated>
   <id>https://dayarch.top/</id>
   
   <author>
@@ -17,11 +17,51 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Github UI 布局设计更新了，你发现了吗？</title>
+    <link href="https://dayarch.top//p/github-new-ui.html"/>
+    <id>https://dayarch.top//p/github-new-ui.html</id>
+    <published>2020-06-24T08:10:04.000Z</published>
+    <updated>2020-06-24T08:13:24.997Z</updated>
+    
+    <summary type="html">
+    
+      话不多说，先看图，你一眼应该就能看出变化了
+
+
+
+Github 主要对 UI 设计以及 Repository 布局进行了更新，改善了访问和维护 Repository 的体验，其实主要有以下几点更新：
+
+ 1. 响应式的布局以及改进了移动端 Web 的体验
+ 2. 通过 Repository 侧边栏显示更多内容
+ 3. 能够在 Repository 侧边栏现实/隐藏 Release 版本以及 Packages 和 Environments
+
+
+
+目前整体改动虽然不大，但这些更改会为将来的渐进式改进奠定基础，接下来也会推出暗黑模式等内容
+
+
+
+
+顺便要说一下，浏览 Github 必须要有的神器 O
+    
+    </summary>
+    
+    
+      <category term="Coding" scheme="https://dayarch.top/categories/Coding/"/>
+    
+      <category term="Others" scheme="https://dayarch.top/categories/Coding/Others/"/>
+    
+    
+      <category term="Github" scheme="https://dayarch.top/tags/Github/"/>
+    
+  </entry>
+  
+  <entry>
     <title>搞定ReentrantReadWriteLock 几道小小数学题就够了</title>
     <link href="https://dayarch.top//p/java-reentrant-read-write-lock.html"/>
     <id>https://dayarch.top//p/java-reentrant-read-write-lock.html</id>
     <published>2020-06-21T11:20:28.000Z</published>
-    <updated>2020-06-22T12:46:05.571Z</updated>
+    <updated>2020-06-24T08:12:56.938Z</updated>
     
     <summary type="html">
     
@@ -499,34 +539,6 @@ PMP（Project Management Professional）学名「项目管理专家」，我叫�
       <category term="微信" scheme="https://dayarch.top/tags/%E5%BE%AE%E4%BF%A1/"/>
     
       <category term="表情" scheme="https://dayarch.top/tags/%E8%A1%A8%E6%83%85/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>2019归零，2020走你</title>
-    <link href="https://dayarch.top//p/2019-summary.html"/>
-    <id>https://dayarch.top//p/2019-summary.html</id>
-    <published>2020-01-10T05:35:55.000Z</published>
-    <updated>2020-02-10T12:07:59.784Z</updated>
-    
-    <summary type="html">
-    
-      作为生长在内蒙的，不会套马的，酒精过敏的，不吃羊肉的，也不魁梧的奇葩，单曲循环听着腾格尔大爷的翻唱歌曲「可能否」，还是开始写了 2019 年总结，这个总结比 2002 😆 年来的更晚一些，因为在等待 2019 年末的一个 PMP(拍马屁)的成绩，赶不上各个平台的总结比赛了，写下来给自己个答复
-
-年初的一次旅行之后，回来倍感惶恐，总觉得应该做点什么继续充实自己的生活。写博客记录和维护公众号的想法也就随之浮现在脑海中
-
-
-翻看历史记录，在 2015 年就已经尝试搭建自己的博客了，奈何没有坚持分享，中途夭折。「种一棵树最好的时间是十年前，其次是现在」。这一刻，我要种一棵树，陪她长大，我变老，她茁壮
-    
-    </summary>
-    
-    
-      <category term="Life" scheme="https://dayarch.top/categories/Life/"/>
-    
-      <category term="其他" scheme="https://dayarch.top/categories/Life/%E5%85%B6%E4%BB%96/"/>
-    
-    
-      <category term="总结" scheme="https://dayarch.top/tags/%E6%80%BB%E7%BB%93/"/>
     
   </entry>
   
