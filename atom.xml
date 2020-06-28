@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://dayarch.top/"/>
-  <updated>2020-06-24T08:13:24.997Z</updated>
+  <updated>2020-06-28T08:13:26.945Z</updated>
   <id>https://dayarch.top/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>CountDownLatch 和 CyclicBarrier 傻傻的分不清楚？</title>
+    <link href="https://dayarch.top//p/java-countdownlatch-vs-cyclicbarrier.html"/>
+    <id>https://dayarch.top//p/java-countdownlatch-vs-cyclicbarrier.html</id>
+    <published>2020-06-28T08:07:57.000Z</published>
+    <updated>2020-06-28T08:13:26.945Z</updated>
+    
+    <summary type="html">
+    
+      并发编程的三大核心是`分工`，`同步`和`互斥`。在日常开发中，经常会碰到需要在主线程中开启多个子线程去并行的执行任务，并且主线程需要等待所有子线程执行完毕再进行汇总的场景，这就涉及到分工与同步的内容了, 分工与同步离不开 CountDownLatch 与 CyclicBarrier 的使用，本文结合精美图文以及源码分析带你彻底搞定
+    
+    </summary>
+    
+    
+      <category term="Coding" scheme="https://dayarch.top/categories/Coding/"/>
+    
+      <category term="Java-Concurrency" scheme="https://dayarch.top/categories/Coding/Java-Concurrency/"/>
+    
+    
+      <category term="Java-Concurrency" scheme="https://dayarch.top/tags/Java-Concurrency/"/>
+    
+  </entry>
   
   <entry>
     <title>Github UI 布局设计更新了，你发现了吗？</title>
@@ -490,55 +513,6 @@ PMP（Project Management Professional）学名「项目管理专家」，我叫�
     
     
       <category term="MySQL" scheme="https://dayarch.top/tags/MySQL/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>微信上线了10款默认新表情</title>
-    <link href="https://dayarch.top//p/wechat-new-expression.html"/>
-    <id>https://dayarch.top//p/wechat-new-expression.html</id>
-    <published>2020-01-14T07:33:22.000Z</published>
-    <updated>2020-01-19T14:17:14.057Z</updated>
-    
-    <summary type="html">
-    
-      微信新增表情
-微信新增十款默认表情！
-微信新增十款默认表情！
-微信新增十款默认表情！
-
-
-
-
-微信今日悄然上线了十款新默认表情， 其中包含了
-
-
- 1.  吃瓜
- 2.  加油
- 3.  汗
- 4.  天啊
- 5.  Emm
- 6.  社会社会
- 7.  旺柴
- 8.  好的
- 9.  打脸
- 10. 哇
-
-感觉比用了表情包还激动。据悉，目前这十款新默认表情正在进行灰度测试，部分微信用户可能无法正常显示
-
-一图胜千言，对于喜欢使用表情的你，快快打开你的微信看看吧
-    
-    </summary>
-    
-    
-      <category term="Life" scheme="https://dayarch.top/categories/Life/"/>
-    
-      <category term="其他" scheme="https://dayarch.top/categories/Life/%E5%85%B6%E4%BB%96/"/>
-    
-    
-      <category term="微信" scheme="https://dayarch.top/tags/%E5%BE%AE%E4%BF%A1/"/>
-    
-      <category term="表情" scheme="https://dayarch.top/tags/%E8%A1%A8%E6%83%85/"/>
     
   </entry>
   
