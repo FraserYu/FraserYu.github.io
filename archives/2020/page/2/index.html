@@ -399,6 +399,128 @@
   <section class='meta'>
     
     
+      <a title='面试问，创建多少个线程合适？' href='/p/how-many-threads-should-be-created.html'><img class='thumbnail' src='https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgconcurrency.png'></a>
+    
+    <div class="meta" id="header-meta">
+      
+        
+  <h2 class="title">
+    <a href="/p/how-many-threads-should-be-created.html">
+      面试问，创建多少个线程合适？
+    </a>
+  </h2>
+
+
+      
+      <div class='new-meta-box'>
+        
+          
+        
+          
+            
+  <div class='new-meta-item author'>
+    
+      <a href="https://dayarch.top" rel="nofollow">
+        
+          <img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png">
+        
+        <p>tanθ</p>
+      </a>
+    
+  </div>
+
+
+          
+        
+          
+            <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+    <p>2020-04-06</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+  
+  <div class='new-meta-item category'>
+    <a href='/categories/Coding/Java-Concurrency/' rel="nofollow">
+      <i class="fas fa-folder-open" aria-hidden="true"></i>
+      <p>Coding&nbsp;/&nbsp;Java-Concurrency</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            
+
+          
+        
+      </div>
+      
+        <hr>
+      
+    </div>
+  </section>
+
+
+  <section class="article typo">
+    <div class="article-entry" itemprop="articleBody">
+      为什么要使用多线程？
+防止并发编程出错最好的办法就是不写并发程序
+
+
+
+既然多线程编程容易出错，为什么它还经久不衰呢？
+
+A：那还用说，肯定在某些方面有特长呗，比如你知道的【它很快，非常快】
+
+我也很赞同这个答案，但说的不够具体
+
+并发编程适用于什么场景？
+如果问你选择多线程的原因就是一个【快】字，面试也就不会出那么多幺蛾子了。你有没有问过你自己
+
+ 1. 并发编程在所有场景下都是快的吗？ 
+ 2. 知道它很快，何为快？怎样度量？
+
+想知道这两个问题的答案，我们需要一个从【定性】到【定量】的分析过程
+
+使用多线程就是在正确的场景下通过设置正确个数的线程来最大化程序的运行速度（我感觉你还是啥也没
+      
+        <div class="readmore">
+          <a href="/p/how-many-threads-should-be-created.html" class="flat-box">
+            <i class="fas fa-book-open fa-fw" aria-hidden="true"></i>
+            阅读全文
+          </a>
+        </div>
+      
+    </div>
+    
+      <div class="full-width auto-padding tags">
+        
+          <a href="/tags/Java-Concurrency/" rel="nofollow"><i class="fas fa-tag fa-fw"></i> Java-Concurrency</a>
+        
+      </div>
+    
+  </section>
+</article>
+
+          </div>
+        
+      
+        
+          <div class='post-wrapper'>
+            <article class="post reveal ">
+  
+
+
+  <section class='meta'>
+    
+    
       <a title='Java线程生命周期这样理解挺简单的' href='/p/java-thread-life-cycle.html'><img class='thumbnail' src='https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgconcurrency.png'></a>
     
     <div class="meta" id="header-meta">
@@ -1304,125 +1426,6 @@ GROUP_CONCAT(expr)
           </div>
         
       
-        
-          <div class='post-wrapper'>
-            <article class="post reveal ">
-  
-
-
-  <section class='meta'>
-    
-    
-    <div class="meta" id="header-meta">
-      
-        
-  <h2 class="title">
-    <a href="/p/mysql-cross-table-update.html">
-      跨表更新，看到自己写的SQL像个憨憨
-    </a>
-  </h2>
-
-
-      
-      <div class='new-meta-box'>
-        
-          
-        
-          
-            
-  <div class='new-meta-item author'>
-    
-      <a href="https://dayarch.top" rel="nofollow">
-        
-          <img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png">
-        
-        <p>tanθ</p>
-      </a>
-    
-  </div>
-
-
-          
-        
-          
-            <div class="new-meta-item date">
-  <a class='notlink'>
-    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-    <p>2020-01-22</p>
-  </a>
-</div>
-
-          
-        
-          
-            
-  
-  <div class='new-meta-item category'>
-    <a href='/categories/Coding/%E6%95%B0%E6%8D%AE%E5%BA%93-%E6%8C%81%E4%B9%85%E5%B1%82-SQL/' rel="nofollow">
-      <i class="fas fa-folder-open" aria-hidden="true"></i>
-      <p>Coding&nbsp;/&nbsp;数据库-持久层-SQL</p>
-    </a>
-  </div>
-
-
-          
-        
-          
-            
-
-          
-        
-      </div>
-      
-        <hr>
-      
-    </div>
-  </section>
-
-
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      有点 SQL 基础的朋友肯定听过 「跨表查询」，那啥是跨表更新啊？
-
-背景
-项目新导入了一批人员数据，这些人的有的部门名称发生了变化，有的联系方式发生了变化，暂且称该表为 
-
-t_dept_members, 系统中有另外一张表 t_user_info 记录了人员信息。要求将 t_dept_members 中有变化的信息更新到 t_user 表中，这个需求就是「跨表更新」啦
-
-憨B SQL 直接被秒杀
-不带脑子出门的就写出了下面的 SQL 
-
-
-
-看到身后 DBA 小段总在修仙，想着让他帮润色一下😜，于是发给了他，然后甩手回来就是这个样子：
-
-
-
-​ 
-
-看到这个 SQL 语句我都惊呆了，还能
-      
-        <div class="readmore">
-          <a href="/p/mysql-cross-table-update.html" class="flat-box">
-            <i class="fas fa-book-open fa-fw" aria-hidden="true"></i>
-            阅读全文
-          </a>
-        </div>
-      
-    </div>
-    
-      <div class="full-width auto-padding tags">
-        
-          <a href="/tags/MySQL/" rel="nofollow"><i class="fas fa-tag fa-fw"></i> MySQL</a>
-        
-      </div>
-    
-  </section>
-</article>
-
-          </div>
-        
-      
     
   </section>
   
@@ -1768,7 +1771,7 @@ t_dept_members, 系统中有另外一张表 t_user_info 记录了人员信息。
     <div class='content pure'>
       <ul class="entry">
         
-          <li><a class="flat-box" title="/categories/Coding/" href="/categories/Coding/"><div class='name'>Coding</div><div class='badge'>(79)</div></a></li>
+          <li><a class="flat-box" title="/categories/Coding/" href="/categories/Coding/"><div class='name'>Coding</div><div class='badge'>(80)</div></a></li>
         
           <li><a class="flat-box child" title="/categories/Coding/Arthas/" href="/categories/Coding/Arthas/"><div class='name'>Arthas</div><div class='badge'>(1)</div></a></li>
         
@@ -1776,7 +1779,7 @@ t_dept_members, 系统中有另外一张表 t_user_info 记录了人员信息。
         
           <li><a class="flat-box child" title="/categories/Coding/Docker/" href="/categories/Coding/Docker/"><div class='name'>Docker</div><div class='badge'>(5)</div></a></li>
         
-          <li><a class="flat-box child" title="/categories/Coding/Java-Concurrency/" href="/categories/Coding/Java-Concurrency/"><div class='name'>Java-Concurrency</div><div class='badge'>(18)</div></a></li>
+          <li><a class="flat-box child" title="/categories/Coding/Java-Concurrency/" href="/categories/Coding/Java-Concurrency/"><div class='name'>Java-Concurrency</div><div class='badge'>(19)</div></a></li>
         
           <li><a class="flat-box child" title="/categories/Coding/Java/" href="/categories/Coding/Java/"><div class='name'>Java</div><div class='badge'>(14)</div></a></li>
         
@@ -1995,7 +1998,7 @@ t_dept_members, 系统中有另外一张表 t_user_info 记录了人员信息。
   &nbsp;&nbsp;|&nbsp;&nbsp;  
   
     &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-        class="white-color">207k</span>&nbsp;字
+        class="white-color">212.5k</span>&nbsp;字
     
 
   &nbsp;&nbsp;|&nbsp;&nbsp;  

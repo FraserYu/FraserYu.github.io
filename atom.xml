@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://dayarch.top/"/>
-  <updated>2020-06-28T08:13:26.945Z</updated>
+  <updated>2020-07-07T00:06:28.205Z</updated>
   <id>https://dayarch.top/</id>
   
   <author>
@@ -17,11 +17,34 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Java Future详解与使用</title>
+    <link href="https://dayarch.top//p/java-future-and-callable.html"/>
+    <id>https://dayarch.top//p/java-future-and-callable.html</id>
+    <published>2020-07-07T00:00:28.000Z</published>
+    <updated>2020-07-07T00:06:28.205Z</updated>
+    
+    <summary type="html">
+    
+      并发编程中分工是一种常见的提升效率的编程手段，拆分任务后，如何获取子线程的执行结果，本文结合Callable的诞生以及Future 的使用以及FutureTask的源码分析，帮助大家在实际工作中提升程序运行效率
+    
+    </summary>
+    
+    
+      <category term="Coding" scheme="https://dayarch.top/categories/Coding/"/>
+    
+      <category term="Java-Concurrency" scheme="https://dayarch.top/categories/Coding/Java-Concurrency/"/>
+    
+    
+      <category term="Java-Concurrency" scheme="https://dayarch.top/tags/Java-Concurrency/"/>
+    
+  </entry>
+  
+  <entry>
     <title>CountDownLatch 和 CyclicBarrier 傻傻的分不清楚？</title>
     <link href="https://dayarch.top//p/java-countdownlatch-vs-cyclicbarrier.html"/>
     <id>https://dayarch.top//p/java-countdownlatch-vs-cyclicbarrier.html</id>
     <published>2020-06-28T08:07:57.000Z</published>
-    <updated>2020-06-28T08:13:26.945Z</updated>
+    <updated>2020-06-28T08:22:00.998Z</updated>
     
     <summary type="html">
     
@@ -480,29 +503,6 @@ PMP（Project Management Professional）学名「项目管理专家」，我叫�
     <summary type="html">
     
       在SQL语句中字符串拼接我们都知道，但是如何分组拼接字符串呢？MySQL提供了内置的函数group_concat来解决日常的很多业务问题，熟练使用该函数，将会轻松解决许多所谓的难题
-    
-    </summary>
-    
-    
-      <category term="Coding" scheme="https://dayarch.top/categories/Coding/"/>
-    
-      <category term="数据库-持久层-SQL" scheme="https://dayarch.top/categories/Coding/%E6%95%B0%E6%8D%AE%E5%BA%93-%E6%8C%81%E4%B9%85%E5%B1%82-SQL/"/>
-    
-    
-      <category term="MySQL" scheme="https://dayarch.top/tags/MySQL/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>跨表更新，看到自己写的SQL像个憨憨</title>
-    <link href="https://dayarch.top//p/mysql-cross-table-update.html"/>
-    <id>https://dayarch.top//p/mysql-cross-table-update.html</id>
-    <published>2020-01-22T02:09:02.000Z</published>
-    <updated>2020-02-07T03:12:30.203Z</updated>
-    
-    <summary type="html">
-    
-      跨表查询我们经常食用，其实类似的语法也可以用到跨表更新上面，如果你有类似从一张表的数据更新到另一张表的数据需求时，了解这个知识点还是非常有用的
     
     </summary>
     
