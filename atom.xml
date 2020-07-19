@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://dayarch.top/"/>
-  <updated>2020-07-07T11:34:11.916Z</updated>
+  <updated>2020-07-19T13:23:33.658Z</updated>
   <id>https://dayarch.top/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>java8 CompletableFuture 使用详解</title>
+    <link href="https://dayarch.top//p/java8-completablefuture-tutorial.html"/>
+    <id>https://dayarch.top//p/java8-completablefuture-tutorial.html</id>
+    <published>2020-07-19T13:17:30.000Z</published>
+    <updated>2020-07-19T13:23:33.658Z</updated>
+    
+    <summary type="html">
+    
+      Future 已经为获取多线程执行结果带来了很好的帮助，但是它依旧存在很多短板，在java1.8的版本中，CompletableFuture 的出现彻底改变了这一情况，结合Lambda的使用，让异步编程，分分钟就可以起飞
+    
+    </summary>
+    
+    
+      <category term="Coding" scheme="https://dayarch.top/categories/Coding/"/>
+    
+      <category term="Java-Concurrency" scheme="https://dayarch.top/categories/Coding/Java-Concurrency/"/>
+    
+    
+      <category term="Java-Concurrency" scheme="https://dayarch.top/tags/Java-Concurrency/"/>
+    
+  </entry>
   
   <entry>
     <title>Java Future详解与使用</title>
@@ -490,29 +513,6 @@ PMP（Project Management Professional）学名「项目管理专家」，我叫�
     
     
       <category term="IntelliJ IDEA" scheme="https://dayarch.top/tags/IntelliJ-IDEA/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>MySQL group_concat 函数详解</title>
-    <link href="https://dayarch.top//p/mysql-group-concat-function-usage.html"/>
-    <id>https://dayarch.top//p/mysql-group-concat-function-usage.html</id>
-    <published>2020-02-03T13:03:27.000Z</published>
-    <updated>2020-02-03T13:14:01.495Z</updated>
-    
-    <summary type="html">
-    
-      在SQL语句中字符串拼接我们都知道，但是如何分组拼接字符串呢？MySQL提供了内置的函数group_concat来解决日常的很多业务问题，熟练使用该函数，将会轻松解决许多所谓的难题
-    
-    </summary>
-    
-    
-      <category term="Coding" scheme="https://dayarch.top/categories/Coding/"/>
-    
-      <category term="数据库-持久层-SQL" scheme="https://dayarch.top/categories/Coding/%E6%95%B0%E6%8D%AE%E5%BA%93-%E6%8C%81%E4%B9%85%E5%B1%82-SQL/"/>
-    
-    
-      <category term="MySQL" scheme="https://dayarch.top/tags/MySQL/"/>
     
   </entry>
   

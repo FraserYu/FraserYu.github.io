@@ -1,5 +1,5 @@
+https://dayarch.top/p/java8-completablefuture-tutorial.html
 https://dayarch.top/p/java-future-and-callable.html
 https://dayarch.top/p/java-countdownlatch-vs-cyclicbarrier.html
 https://dayarch.top/p/github-new-ui.html
 https://dayarch.top/p/java-reentrant-read-write-lock.html
-https://dayarch.top/p/java-aqs-acquireshared-and-semaphore.html
