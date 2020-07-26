@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>SQLECTRON-超轻量级SQL客户端</title>
+      <link href="//p/SQLECTRON-sql-client.html"/>
+      <url>//p/SQLECTRON-sql-client.html</url>
+      
+        <content type="html"><![CDATA[<p>无意间看到这个SQL客户端，瞬间被它简洁的页面吸引了， 启动画面可能是它最复杂的呈现了，爱没？</p><p><fancybox><img src="https://rgyb.sunluomeng.top/2020-07-22at10.58.56.gif" alt=""></fancybox></p><h2 id="SQLECTRON"><a href="#SQLECTRON" class="headerlink" title="SQLECTRON"></a>SQLECTRON</h2><p>按照<a href="https://sqlectron.github.io/" target="_blank" rel="noopener">官网</a> (<a href="https://sqlectron.github.io/" target="_blank" rel="noopener">https://sqlectron.github.io/</a>,  看 URL 发现，SQLECTRON官网都是用 Github Pages 搭建的) 的说明：</p><blockquote><p>一个简单的轻量级SQL客户端桌面/终端，具有跨数据库和跨平台的支持</p></blockquote><p>看到这你应该放心了，无论你使用的是  <code>Linux</code>， <code>Mac</code> 还是 <code>Windows</code>，都可以试一试。那它支持哪些数据库呢？一会到安装界面你就会发现了</p><p>这里我用 MAC 演示一下整个使用过程</p><h2 id="安装与使用"><a href="#安装与使用" class="headerlink" title="安装与使用"></a>安装与使用</h2><p>写本文时的版本为 <code>v1.30.0</code>, 直接下载安装包——&gt;拖拽, 一步安装完成</p><p><fancybox><img src="https://rgyb.sunluomeng.top/20200722103040.png" alt=""></fancybox></p><p>添加 Server</p><p><fancybox><img src="https://rgyb.sunluomeng.top/2020-07-22at11.23.19.gif" alt=""></fancybox></p><p>填写相关信息，从Database Type 中你应该已经看到了，目前支持的数据库类型有：</p><ul><li>MySQL</li><li>PostgreSQL</li><li>Microsoft SQL Server</li><li>SQLite</li><li>Cassandra</li></ul><p><fancybox><img src="https://rgyb.sunluomeng.top/20200722104013.png" alt=""></fancybox></p><p>测试连接 ——&gt; Save 即可</p><p><fancybox><img src="https://rgyb.sunluomeng.top/20200722104034.png" alt=""></fancybox></p><p>选择相应的 Server， 然后 Connect，执行个 SQL 试一试</p><p><fancybox><img src="https://rgyb.sunluomeng.top/2020-07-22at11.32.40.gif" alt=""></fancybox></p><p>获取执行结果后，可以快速粘贴为 JSON 或 CSV 格式，当然也可以导出相应格式文件，非常方便</p><p><fancybox><img src="https://rgyb.sunluomeng.top/20200722113741.png" alt=""></fancybox></p><p>日常 explain 个 SQL， 画风都不一样了</p><p><fancybox><img src="https://rgyb.sunluomeng.top/20200722114118.png" alt=""></fancybox></p><p>说它很轻量级，我们和DataGrip 来做个比较<strong>（这么比真是没有人性，DataGrip 的功能有多少怎么不说呢）</strong> 如果不是重度客户端依赖的同学，SQLECTRON 还是满足基本要求的</p><p><fancybox><img src="https://rgyb.sunluomeng.top/20200722105551.png" alt=""></fancybox></p><p><fancybox><img src="https://rgyb.sunluomeng.top/20200722105628.png" alt=""></fancybox></p><p>由于客户端提供的功能并不复杂，所以<a href="https://github.com/sqlectron/sqlectron-gui/wiki/Keyboard-Shortcuts" target="_blank" rel="noopener">快捷键</a> (<a href="https://github.com/sqlectron/sqlectron-gui/wiki/Keyboard-Shortcuts)也少的可怜，大家可以自行查阅" target="_blank" rel="noopener">https://github.com/sqlectron/sqlectron-gui/wiki/Keyboard-Shortcuts)也少的可怜，大家可以自行查阅</a></p><p>如果你更喜欢终端形式，SQLECTRON 还有一个 <code>SQLECTRON-TERM</code>  (<a href="https://github.com/sqlectron/sqlectron-term" target="_blank" rel="noopener">https://github.com/sqlectron/sqlectron-term</a>) 客户端支持，就像这样，浓浓的 BIOS 风</p><p><fancybox><img src="https://rgyb.sunluomeng.top/sqlectron-demo-term-v1.0.0.gif" alt=""></fancybox></p><p>只需一条命令安装即可（前提是安装 Node）</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g sqlectron-term</span><br></pre></td></tr></table></figure><p>Bu<del>~</del>t</p><p>先别盲目追逐，这是一个用 Javascript 语言实现的，并且在 github 上的星标并不多</p><p><fancybox><img src="https://rgyb.sunluomeng.top/20200722115846.png" alt=""></fancybox></p><p>因为 Owner 出于兴趣维护这个项目，但是现在兴趣没了</p><p><fancybox><img src="https://rgyb.sunluomeng.top/20200722115950.png" alt=""></fancybox></p><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>如果你只是做日常的基本 SQL 执行，那么 SQLECTRON 完全可以满足你的需求，你不用再找 DataGrip 或 Navicat 的注册码，同时也不会让电脑发热太多发生卡顿</p><p>如果你有兴趣看一看，并且想尝试维护这个项目，这又是一个很好的锻炼机会</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Coding </category>
+          
+          <category> 数据库-持久层-SQL </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> MySQL </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>java8 CompletableFuture 使用详解</title>
       <link href="//p/java8-completablefuture-tutorial.html"/>
       <url>//p/java8-completablefuture-tutorial.html</url>

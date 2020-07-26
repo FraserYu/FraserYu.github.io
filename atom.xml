@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://dayarch.top/"/>
-  <updated>2020-07-19T13:23:33.658Z</updated>
+  <updated>2020-07-26T13:44:30.713Z</updated>
   <id>https://dayarch.top/</id>
   
   <author>
@@ -17,11 +17,34 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>SQLECTRON-超轻量级SQL客户端</title>
+    <link href="https://dayarch.top//p/SQLECTRON-sql-client.html"/>
+    <id>https://dayarch.top//p/SQLECTRON-sql-client.html</id>
+    <published>2020-07-26T13:36:47.000Z</published>
+    <updated>2020-07-26T13:44:30.713Z</updated>
+    
+    <summary type="html">
+    
+      SQLECTRON 是一款用 Javascript 来编写的非常轻量级的 SQL client
+    
+    </summary>
+    
+    
+      <category term="Coding" scheme="https://dayarch.top/categories/Coding/"/>
+    
+      <category term="数据库-持久层-SQL" scheme="https://dayarch.top/categories/Coding/%E6%95%B0%E6%8D%AE%E5%BA%93-%E6%8C%81%E4%B9%85%E5%B1%82-SQL/"/>
+    
+    
+      <category term="MySQL" scheme="https://dayarch.top/tags/MySQL/"/>
+    
+  </entry>
+  
+  <entry>
     <title>java8 CompletableFuture 使用详解</title>
     <link href="https://dayarch.top//p/java8-completablefuture-tutorial.html"/>
     <id>https://dayarch.top//p/java8-completablefuture-tutorial.html</id>
     <published>2020-07-19T13:17:30.000Z</published>
-    <updated>2020-07-19T13:23:33.658Z</updated>
+    <updated>2020-07-19T13:24:29.255Z</updated>
     
     <summary type="html">
     
@@ -487,29 +510,6 @@ PMP（Project Management Professional）学名「项目管理专家」，我叫�
       <category term="Coding" scheme="https://dayarch.top/categories/Coding/"/>
     
       <category term="Java" scheme="https://dayarch.top/categories/Coding/Java/"/>
-    
-    
-      <category term="IntelliJ IDEA" scheme="https://dayarch.top/tags/IntelliJ-IDEA/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>读《Clean Code 代码整洁之道》之感悟</title>
-    <link href="https://dayarch.top//p/book-reviews-clean-code.html"/>
-    <id>https://dayarch.top//p/book-reviews-clean-code.html</id>
-    <published>2020-02-05T03:35:46.000Z</published>
-    <updated>2020-02-07T02:32:22.250Z</updated>
-    
-    <summary type="html">
-    
-      代码质量与其整洁程度成正比。干净的代码，既在质量上较为可靠，也为后期维护，升级奠定了良好的基础。每个公司的规范不一样，但是我们写代码要有自己的态度
-    
-    </summary>
-    
-    
-      <category term="Life" scheme="https://dayarch.top/categories/Life/"/>
-    
-      <category term="读书笔记" scheme="https://dayarch.top/categories/Life/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
     
     
       <category term="IntelliJ IDEA" scheme="https://dayarch.top/tags/IntelliJ-IDEA/"/>
