@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://dayarch.top//p/java8-completablefuture-tutorial.html</loc>
+    <lastmod>2020-07-29</lastmod>
+  </url>  <url>
     <loc>https://dayarch.top//p/SQLECTRON-sql-client.html</loc>
     <lastmod>2020-07-26</lastmod>
-  </url>  <url>
-    <loc>https://dayarch.top//p/java8-completablefuture-tutorial.html</loc>
-    <lastmod>2020-07-19</lastmod>
   </url>  <url>
     <loc>https://dayarch.top//p/java-future-and-callable.html</loc>
     <lastmod>2020-07-07</lastmod>
