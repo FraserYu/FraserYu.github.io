@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://dayarch.top/"/>
-  <updated>2020-07-26T13:44:30.713Z</updated>
+  <updated>2020-08-02T01:53:59.284Z</updated>
   <id>https://dayarch.top/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>hashCode是根据对象内存地址生成的？</title>
+    <link href="https://dayarch.top//p/out-of-memory-vs-memory-leak-and-hashcode.html"/>
+    <id>https://dayarch.top//p/out-of-memory-vs-memory-leak-and-hashcode.html</id>
+    <published>2020-08-01T11:47:46.000Z</published>
+    <updated>2020-08-02T01:53:59.284Z</updated>
+    
+    <summary type="html">
+    
+      都说要重写hashcode，为什么要重写，重写与否有多大影响，内存溢出是否有hashcode的锅，hashcode是根据对象内存地址生成的？本文就给你全部答案
+    
+    </summary>
+    
+    
+      <category term="Coding" scheme="https://dayarch.top/categories/Coding/"/>
+    
+      <category term="Java" scheme="https://dayarch.top/categories/Coding/Java/"/>
+    
+    
+      <category term="面试" scheme="https://dayarch.top/tags/%E9%9D%A2%E8%AF%95/"/>
+    
+      <category term="JVM" scheme="https://dayarch.top/tags/JVM/"/>
+    
+  </entry>
   
   <entry>
     <title>SQLECTRON-超轻量级SQL客户端</title>
@@ -490,29 +515,6 @@ PMP（Project Management Professional）学名「项目管理专家」，我叫�
     
     
       <category term="Java" scheme="https://dayarch.top/tags/Java/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>IntelliJ IDEA HTTP Client高级使用详解</title>
-    <link href="https://dayarch.top//p/http-client-advanced-usage.html"/>
-    <id>https://dayarch.top//p/http-client-advanced-usage.html</id>
-    <published>2020-02-07T02:30:15.000Z</published>
-    <updated>2020-02-27T00:54:29.557Z</updated>
-    
-    <summary type="html">
-    
-      后端程序员经常要编写RESTful API，一个好用的测试工具可以大大提高工作效率，甚至整个项目组的效率，IntelliJ IDEA 本身提供了 HTTP Client 这个工具，但是鲜有人知，本文要说明该工具的高级用法，一定能解决项目中的调试痛点
-    
-    </summary>
-    
-    
-      <category term="Coding" scheme="https://dayarch.top/categories/Coding/"/>
-    
-      <category term="Java" scheme="https://dayarch.top/categories/Coding/Java/"/>
-    
-    
-      <category term="IntelliJ IDEA" scheme="https://dayarch.top/tags/IntelliJ-IDEA/"/>
     
   </entry>
   
