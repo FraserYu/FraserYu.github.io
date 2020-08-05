@@ -613,7 +613,7 @@
 <li><strong>5（else）:</strong> Thread state combined with xorshift<a href="https://wiki.openjdk.java.net/display/HotSpot/Synchronization" target="_blank" rel="noopener">^1</a></li>
 </ul>
 <p>那在 JDK1.8 种用的哪一种呢？</p>
-<p><fancybox>![](<a href="https://rgyb.sunluomeng.top/Screen" target="_blank" rel="noopener">https://rgyb.sunluomeng.top/Screen</a> Shot 2020-08-01 at 1.35.29 PM.png)</fancybox></p>
+<p><fancybox><img src="https://rgyb.sunluomeng.top/Screen11.png" alt=""></fancybox></p>
 <p>可以看到在 JDK1.8 中生成 hashCode 的方式是 5， 也就是走程序的 else 路径，即使用 Xorshift，并不是之前认为的对象内存地址「1」，以为老版本是采用对象内存地址的方式，所以继续查看其他版本</p>
 <p><fancybox><img src="https://rgyb.sunluomeng.top/20200801135712.png" alt=""></fancybox></p>
 <p>从图中可以看出，<strong>JDK1.6</strong><a href="http://hg.openjdk.java.net/jdk6/jdk6/hotspot/file/5cec449cc409/src/share/vm/runtime/globals.hpp#l1128" target="_blank" rel="noopener">^2</a> 和 <strong>JDK1.7</strong><a href="http://hg.openjdk.java.net/jdk7u/jdk7u/hotspot/file/5b9a416a5632/src/share/vm/runtime/globals.hpp#l1100" target="_blank" rel="noopener">^3</a> 版本生成 hashCode 的方式「1」随机数的形式，和我们原本认为的并不一样，别的版本没有继续查询，至于「流传下来」说是对象内存地址生成的 hashCode 我也木有再深入研究，有了解的同学还请留言赐教</p>
@@ -660,10 +660,10 @@
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-08-02T10:06:08+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-08-05T10:00:29+08:00">
   <a class='notlink'>
     <i class="fas fa-clock" aria-hidden="true"></i>
-    <p>更新于 2020年8月2日</p>
+    <p>更新于 2020年8月5日</p>
   </a>
 </div>
 
@@ -1111,7 +1111,7 @@
   &nbsp;&nbsp;|&nbsp;&nbsp;  
   
     &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-        class="white-color">221.3k</span>&nbsp;字
+        class="white-color">221.2k</span>&nbsp;字
     
 
   &nbsp;&nbsp;|&nbsp;&nbsp;  
