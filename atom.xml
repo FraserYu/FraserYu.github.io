@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://dayarch.top/"/>
-  <updated>2020-08-05T02:00:29.241Z</updated>
+  <updated>2020-08-10T12:55:25.668Z</updated>
   <id>https://dayarch.top/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>ExecutorService VS CompletionService</title>
+    <link href="https://dayarch.top//p/executorservice-vs-completionservice.html"/>
+    <id>https://dayarch.top//p/executorservice-vs-completionservice.html</id>
+    <published>2020-08-10T12:46:51.000Z</published>
+    <updated>2020-08-10T12:55:25.668Z</updated>
+    
+    <summary type="html">
+    
+      曾几何时以为 Executorservice 和 Future 的结合，就可以打天下了，但是在某些场景下具有致命缺陷，CompletionService 却弥补了他们的不足
+    
+    </summary>
+    
+    
+      <category term="Coding" scheme="https://dayarch.top/categories/Coding/"/>
+    
+      <category term="Java-Concurrency" scheme="https://dayarch.top/categories/Coding/Java-Concurrency/"/>
+    
+    
+      <category term="Java-Concurrency" scheme="https://dayarch.top/tags/Java-Concurrency/"/>
+    
+  </entry>
   
   <entry>
     <title>hashCode是根据对象内存地址生成的？</title>
@@ -492,29 +515,6 @@ PMP（Project Management Professional）学名「项目管理专家」，我叫�
     
     
       <category term="总结" scheme="https://dayarch.top/tags/%E6%80%BB%E7%BB%93/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Java 12 新特性一览</title>
-    <link href="https://dayarch.top//p/jdk12-new-feature-overview.html"/>
-    <id>https://dayarch.top//p/jdk12-new-feature-overview.html</id>
-    <published>2020-02-10T06:30:27.000Z</published>
-    <updated>2020-02-10T06:45:45.751Z</updated>
-    
-    <summary type="html">
-    
-      本文介绍了几个比较常见，又方便使用的Java12新特性，包括String API的更改，文件的比较，Switch语句的扩展等
-    
-    </summary>
-    
-    
-      <category term="Coding" scheme="https://dayarch.top/categories/Coding/"/>
-    
-      <category term="Java" scheme="https://dayarch.top/categories/Coding/Java/"/>
-    
-    
-      <category term="Java" scheme="https://dayarch.top/tags/Java/"/>
     
   </entry>
   

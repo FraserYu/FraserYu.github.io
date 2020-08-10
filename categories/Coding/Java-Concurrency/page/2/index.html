@@ -401,6 +401,120 @@
   <section class='meta'>
     
     
+      <a title='Java线程生命周期这样理解挺简单的' href='/p/java-thread-life-cycle.html'><img class='thumbnail' src='https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgconcurrency.png'></a>
+    
+    <div class="meta" id="header-meta">
+      
+        
+  <h2 class="title">
+    <a href="/p/java-thread-life-cycle.html">
+      Java线程生命周期这样理解挺简单的
+    </a>
+  </h2>
+
+
+      
+      <div class='new-meta-box'>
+        
+          
+        
+          
+            
+  <div class='new-meta-item author'>
+    
+      <a href="https://dayarch.top" rel="nofollow">
+        
+          <img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png">
+        
+        <p>tanθ</p>
+      </a>
+    
+  </div>
+
+
+          
+        
+          
+            <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+    <p>2020-03-25</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+  
+  <div class='new-meta-item category'>
+    <a href='/categories/Coding/Java-Concurrency/' rel="nofollow">
+      <i class="fas fa-folder-open" aria-hidden="true"></i>
+      <p>Coding&nbsp;/&nbsp;Java-Concurrency</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            
+
+          
+        
+      </div>
+      
+        <hr>
+      
+    </div>
+  </section>
+
+
+  <section class="article typo">
+    <div class="article-entry" itemprop="articleBody">
+      为什么要了解线程的生命周期？
+之前写过 Spring Bean 生命周期三部曲：
+
+ 1. Spring Bean生命周期之缘起
+ 2. Spring Bean生命周期之缘尽
+ 3. Spring Aware 到底是什么？
+
+有朋友留言说：“了解了它们的生命周期后，使用 Spring Bean 好比看到它们的行动轨迹，现在使用就一点都不慌了”。我和他一样，了解事物的生命周期目的很简单，唯【不慌】也
+
+
+
+Java 并发系列 已经写了很多，从来还没提起过那个它【Java线程生命周期】。有了前序理论图文的铺垫，在走进源码世界之前，谈论它的时机恰好到了。因为，编写并发程序的核心之一就是正确的摆弄线程
+      
+        <div class="readmore">
+          <a href="/p/java-thread-life-cycle.html" class="flat-box">
+            <i class="fas fa-book-open fa-fw" aria-hidden="true"></i>
+            阅读全文
+          </a>
+        </div>
+      
+    </div>
+    
+      <div class="full-width auto-padding tags">
+        
+          <a href="/tags/Java-Concurrency/" rel="nofollow"><i class="fas fa-tag fa-fw"></i> Java-Concurrency</a>
+        
+      </div>
+    
+  </section>
+</article>
+
+          </div>
+        
+      
+        
+          <div class='post-wrapper'>
+            <article class="post reveal ">
+  
+
+
+  <section class='meta'>
+    
+    
       <a title='并发编程之等待通知机制' href='/p/waiting-notification-mechanism.html'><img class='thumbnail' src='https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgconcurrency.png'></a>
     
     <div class="meta" id="header-meta">
@@ -1454,118 +1568,6 @@ happens-before 之 volatile 变量规则
           </div>
         
       
-        
-          <div class='post-wrapper'>
-            <article class="post reveal ">
-  
-
-
-  <section class='meta'>
-    
-    
-      <a title='并发编程之初探' href='/p/java-concurrency-metaphor.html'><img class='thumbnail' src='https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgconcurrency.png'></a>
-    
-    <div class="meta" id="header-meta">
-      
-        
-  <h2 class="title">
-    <a href="/p/java-concurrency-metaphor.html">
-      并发编程之初探
-    </a>
-  </h2>
-
-
-      
-      <div class='new-meta-box'>
-        
-          
-        
-          
-            
-  <div class='new-meta-item author'>
-    
-      <a href="https://dayarch.top" rel="nofollow">
-        
-          <img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png">
-        
-        <p>tanθ</p>
-      </a>
-    
-  </div>
-
-
-          
-        
-          
-            <div class="new-meta-item date">
-  <a class='notlink'>
-    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-    <p>2019-08-25</p>
-  </a>
-</div>
-
-          
-        
-          
-            
-  
-  <div class='new-meta-item category'>
-    <a href='/categories/Coding/Java-Concurrency/' rel="nofollow">
-      <i class="fas fa-folder-open" aria-hidden="true"></i>
-      <p>Coding&nbsp;/&nbsp;Java-Concurrency</p>
-    </a>
-  </div>
-
-
-          
-        
-          
-            
-
-          
-        
-      </div>
-      
-        <hr>
-      
-    </div>
-  </section>
-
-
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      写在前面
-Java 有进阶，其名为并发，并发知识之大，一口吃不下。那好，请您多吃几口，又没说一顿吃完，细嚼慢咽才有味. 所有 Java 书籍都将并发编程放在其高级/进阶篇章中，其重要性不言而喻，学好并发也是自身走入高级行列的必备素质之一
-
-并发/并行，进程/线程 这些概念总是显得过于抽象，因为这是与操作系统沟通用到的词汇，就像我们习惯了使用十进制算法，二进制和 16 进制就需要思维的切换；生活中，我们彼此总是不能互相理解，平静之后，我们知道要换位思考；程序的世界也一样，为了更好的理解问题，你也要站在操作系统的角度来思考问题，但当你尝试理解对方时，是违背自己认知习惯的，所以有些困难在所难免
-
-生
-      
-        <div class="readmore">
-          <a href="/p/java-concurrency-metaphor.html" class="flat-box">
-            <i class="fas fa-book-open fa-fw" aria-hidden="true"></i>
-            阅读全文
-          </a>
-        </div>
-      
-    </div>
-    
-      <div class="full-width auto-padding tags">
-        
-          <a href="/tags/Java-Concurrency/" rel="nofollow"><i class="fas fa-tag fa-fw"></i> Java-Concurrency</a>
-        
-          <a href="/tags/thread/" rel="nofollow"><i class="fas fa-tag fa-fw"></i> thread</a>
-        
-          <a href="/tags/%E5%B9%B6%E5%8F%91/" rel="nofollow"><i class="fas fa-tag fa-fw"></i> 并发</a>
-        
-      </div>
-    
-  </section>
-</article>
-
-          </div>
-        
-      
     
   </section>
   
@@ -1581,8 +1583,14 @@ Java 有进阶，其名为并发，并发知识之大，一口吃不下。那好
             </a>
           
           <p class="current">
-            2 / 2
+            2 / 3
           </p>
+          
+            <a class="next" rel="next" href="/categories/Coding/Java-Concurrency/page/3/">
+              <section class="post next">
+                &nbsp;下一页&nbsp;<i class="fas fa-chevron-right" aria-hidden="true"></i>
+              </section>
+            </a>
           
         </div>
       </div>
@@ -1907,7 +1915,7 @@ Java 有进阶，其名为并发，并发知识之大，一口吃不下。那好
     <div class='content pure'>
       <ul class="entry">
         
-          <li><a class="flat-box" title="/categories/Coding/" href="/categories/Coding/"><div class='name'>Coding</div><div class='badge'>(83)</div></a></li>
+          <li><a class="flat-box" title="/categories/Coding/" href="/categories/Coding/"><div class='name'>Coding</div><div class='badge'>(84)</div></a></li>
         
           <li><a class="flat-box child" title="/categories/Coding/Arthas/" href="/categories/Coding/Arthas/"><div class='name'>Arthas</div><div class='badge'>(1)</div></a></li>
         
@@ -1915,7 +1923,7 @@ Java 有进阶，其名为并发，并发知识之大，一口吃不下。那好
         
           <li><a class="flat-box child" title="/categories/Coding/Docker/" href="/categories/Coding/Docker/"><div class='name'>Docker</div><div class='badge'>(5)</div></a></li>
         
-          <li><a class="flat-box child" title="/categories/Coding/Java-Concurrency/" href="/categories/Coding/Java-Concurrency/"><div class='name'>Java-Concurrency</div><div class='badge'>(20)</div></a></li>
+          <li><a class="flat-box child" title="/categories/Coding/Java-Concurrency/" href="/categories/Coding/Java-Concurrency/"><div class='name'>Java-Concurrency</div><div class='badge'>(21)</div></a></li>
         
           <li><a class="flat-box child" title="/categories/Coding/Java/" href="/categories/Coding/Java/"><div class='name'>Java</div><div class='badge'>(15)</div></a></li>
         
@@ -2134,7 +2142,7 @@ Java 有进阶，其名为并发，并发知识之大，一口吃不下。那好
   &nbsp;&nbsp;|&nbsp;&nbsp;  
   
     &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-        class="white-color">221.2k</span>&nbsp;字
+        class="white-color">223.9k</span>&nbsp;字
     
 
   &nbsp;&nbsp;|&nbsp;&nbsp;  

@@ -425,6 +425,120 @@
   <section class='meta'>
     
     
+      <a title='ExecutorService VS CompletionService' href='/p/executorservice-vs-completionservice.html'><img class='thumbnail' src='https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgconcurrency.png'></a>
+    
+    <div class="meta" id="header-meta">
+      
+        
+  <h2 class="title">
+    <a href="/p/executorservice-vs-completionservice.html">
+      ExecutorService VS CompletionService
+    </a>
+  </h2>
+
+
+      
+      <div class='new-meta-box'>
+        
+          
+        
+          
+            
+  <div class='new-meta-item author'>
+    
+      <a href="https://dayarch.top" rel="nofollow">
+        
+          <img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png">
+        
+        <p>tanθ</p>
+      </a>
+    
+  </div>
+
+
+          
+        
+          
+            <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+    <p>2020-08-10</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+  
+  <div class='new-meta-item category'>
+    <a href='/categories/Coding/Java-Concurrency/' rel="nofollow">
+      <i class="fas fa-folder-open" aria-hidden="true"></i>
+      <p>Coding&nbsp;/&nbsp;Java-Concurrency</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            
+
+          
+        
+      </div>
+      
+        <hr>
+      
+    </div>
+  </section>
+
+
+  <section class="article typo">
+    <div class="article-entry" itemprop="articleBody">
+      前言
+在 我会手动创建线程，为什么要使用线程池? 中详细的介绍了 ExecutorService，可以将整块任务拆分做简单的并行处理；
+
+在 不会用Java Future，我怀疑你泡茶没我快 中又详细的介绍了 Future 的使用，填补了 Runnable 不能获取线程执行结果的空缺
+
+将二者结合起来使用看似要一招吃天下了（Java有并发，并发之大，一口吃不下）, but ～～ 是我太天真
+
+
+
+
+ExecutorService VS CompletionService
+假设我们有 4 个任务(A, B, C, D)用来执行复杂的计算，每个任务的执行时间随着输入参数的不同而不同，如果将任务提交
+      
+        <div class="readmore">
+          <a href="/p/executorservice-vs-completionservice.html" class="flat-box">
+            <i class="fas fa-book-open fa-fw" aria-hidden="true"></i>
+            阅读全文
+          </a>
+        </div>
+      
+    </div>
+    
+      <div class="full-width auto-padding tags">
+        
+          <a href="/tags/Java-Concurrency/" rel="nofollow"><i class="fas fa-tag fa-fw"></i> Java-Concurrency</a>
+        
+      </div>
+    
+  </section>
+</article>
+
+          </div>
+        
+      
+        
+          <div class='post-wrapper'>
+            <article class="post reveal ">
+  
+
+
+  <section class='meta'>
+    
+    
       <a title='java8 CompletableFuture 使用详解' href='/p/java8-completablefuture-tutorial.html'><img class='thumbnail' src='https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgconcurrency.png'></a>
     
     <div class="meta" id="header-meta">
@@ -1543,120 +1657,6 @@ A：那还用说，肯定在某些方面有特长呗，比如你知道的【它�
           </div>
         
       
-        
-          <div class='post-wrapper'>
-            <article class="post reveal ">
-  
-
-
-  <section class='meta'>
-    
-    
-      <a title='Java线程生命周期这样理解挺简单的' href='/p/java-thread-life-cycle.html'><img class='thumbnail' src='https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgconcurrency.png'></a>
-    
-    <div class="meta" id="header-meta">
-      
-        
-  <h2 class="title">
-    <a href="/p/java-thread-life-cycle.html">
-      Java线程生命周期这样理解挺简单的
-    </a>
-  </h2>
-
-
-      
-      <div class='new-meta-box'>
-        
-          
-        
-          
-            
-  <div class='new-meta-item author'>
-    
-      <a href="https://dayarch.top" rel="nofollow">
-        
-          <img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png">
-        
-        <p>tanθ</p>
-      </a>
-    
-  </div>
-
-
-          
-        
-          
-            <div class="new-meta-item date">
-  <a class='notlink'>
-    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-    <p>2020-03-25</p>
-  </a>
-</div>
-
-          
-        
-          
-            
-  
-  <div class='new-meta-item category'>
-    <a href='/categories/Coding/Java-Concurrency/' rel="nofollow">
-      <i class="fas fa-folder-open" aria-hidden="true"></i>
-      <p>Coding&nbsp;/&nbsp;Java-Concurrency</p>
-    </a>
-  </div>
-
-
-          
-        
-          
-            
-
-          
-        
-      </div>
-      
-        <hr>
-      
-    </div>
-  </section>
-
-
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      为什么要了解线程的生命周期？
-之前写过 Spring Bean 生命周期三部曲：
-
- 1. Spring Bean生命周期之缘起
- 2. Spring Bean生命周期之缘尽
- 3. Spring Aware 到底是什么？
-
-有朋友留言说：“了解了它们的生命周期后，使用 Spring Bean 好比看到它们的行动轨迹，现在使用就一点都不慌了”。我和他一样，了解事物的生命周期目的很简单，唯【不慌】也
-
-
-
-Java 并发系列 已经写了很多，从来还没提起过那个它【Java线程生命周期】。有了前序理论图文的铺垫，在走进源码世界之前，谈论它的时机恰好到了。因为，编写并发程序的核心之一就是正确的摆弄线程
-      
-        <div class="readmore">
-          <a href="/p/java-thread-life-cycle.html" class="flat-box">
-            <i class="fas fa-book-open fa-fw" aria-hidden="true"></i>
-            阅读全文
-          </a>
-        </div>
-      
-    </div>
-    
-      <div class="full-width auto-padding tags">
-        
-          <a href="/tags/Java-Concurrency/" rel="nofollow"><i class="fas fa-tag fa-fw"></i> Java-Concurrency</a>
-        
-      </div>
-    
-  </section>
-</article>
-
-          </div>
-        
-      
     
   </section>
   
@@ -1666,7 +1666,7 @@ Java 并发系列 已经写了很多，从来还没提起过那个它【Java线�
         <div class="prev-next">
           
           <p class="current">
-            1 / 2
+            1 / 3
           </p>
           
             <a class="next" rel="next" href="/categories/Coding/Java-Concurrency/page/2/">
@@ -1998,7 +1998,7 @@ Java 并发系列 已经写了很多，从来还没提起过那个它【Java线�
     <div class='content pure'>
       <ul class="entry">
         
-          <li><a class="flat-box" title="/categories/Coding/" href="/categories/Coding/"><div class='name'>Coding</div><div class='badge'>(83)</div></a></li>
+          <li><a class="flat-box" title="/categories/Coding/" href="/categories/Coding/"><div class='name'>Coding</div><div class='badge'>(84)</div></a></li>
         
           <li><a class="flat-box child" title="/categories/Coding/Arthas/" href="/categories/Coding/Arthas/"><div class='name'>Arthas</div><div class='badge'>(1)</div></a></li>
         
@@ -2006,7 +2006,7 @@ Java 并发系列 已经写了很多，从来还没提起过那个它【Java线�
         
           <li><a class="flat-box child" title="/categories/Coding/Docker/" href="/categories/Coding/Docker/"><div class='name'>Docker</div><div class='badge'>(5)</div></a></li>
         
-          <li><a class="flat-box child" title="/categories/Coding/Java-Concurrency/" href="/categories/Coding/Java-Concurrency/"><div class='name'>Java-Concurrency</div><div class='badge'>(20)</div></a></li>
+          <li><a class="flat-box child" title="/categories/Coding/Java-Concurrency/" href="/categories/Coding/Java-Concurrency/"><div class='name'>Java-Concurrency</div><div class='badge'>(21)</div></a></li>
         
           <li><a class="flat-box child" title="/categories/Coding/Java/" href="/categories/Coding/Java/"><div class='name'>Java</div><div class='badge'>(15)</div></a></li>
         
@@ -2225,7 +2225,7 @@ Java 并发系列 已经写了很多，从来还没提起过那个它【Java线�
   &nbsp;&nbsp;|&nbsp;&nbsp;  
   
     &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-        class="white-color">221.2k</span>&nbsp;字
+        class="white-color">223.9k</span>&nbsp;字
     
 
   &nbsp;&nbsp;|&nbsp;&nbsp;  
