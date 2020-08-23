@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://dayarch.top/"/>
-  <updated>2020-08-10T12:55:25.668Z</updated>
+  <updated>2020-08-23T02:38:50.417Z</updated>
   <id>https://dayarch.top/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>分分钟搞定Java 并发队列</title>
+    <link href="https://dayarch.top//p/java-concurrency-queue.html"/>
+    <id>https://dayarch.top//p/java-concurrency-queue.html</id>
+    <published>2020-08-23T02:31:08.000Z</published>
+    <updated>2020-08-23T02:38:50.417Z</updated>
+    
+    <summary type="html">
+    
+      Java 并发队列多种多样，有阻塞式和非阻塞式，乍一看眼花缭乱的队列确实不知道如何下手，以及如何快速区分他们，本文就站在更高的视角来看 Java 并发队列，以及说明他们的实际用途，快速搞定他们
+    
+    </summary>
+    
+    
+      <category term="Coding" scheme="https://dayarch.top/categories/Coding/"/>
+    
+      <category term="Java-Concurrency" scheme="https://dayarch.top/categories/Coding/Java-Concurrency/"/>
+    
+    
+      <category term="Java-Concurrency" scheme="https://dayarch.top/tags/Java-Concurrency/"/>
+    
+  </entry>
   
   <entry>
     <title>ExecutorService VS CompletionService</title>
@@ -484,37 +507,6 @@ Github 主要对 UI 设计以及 Repository 布局进行了更新，改善了访
     
       <category term="Node.js" scheme="https://dayarch.top/categories/Coding/Node-js/"/>
     
-    
-  </entry>
-  
-  <entry>
-    <title>闲着无聊考个PMP玩玩</title>
-    <link href="https://dayarch.top//p/pmp-certificate.html"/>
-    <id>https://dayarch.top//p/pmp-certificate.html</id>
-    <published>2020-02-11T03:17:05.000Z</published>
-    <updated>2020-02-11T03:18:15.436Z</updated>
-    
-    <summary type="html">
-    
-      本已将PMP考试记录在2019年年终总结的事件之一里了，春节有朋友问我，想让我分享一下，我回想了整个过程还是挺有趣的，于是本文就以纪实的形式写写考PMP的那点事，有兴趣的可以私聊，避免说广告
-
-PMP（Project Management Professional）学名「项目管理专家」，我叫它「拍马屁」。2019年4月的时候在朋友圈看到有两位朋友先后【注意是先后，有埋伏】晒出来PMP的证件出来，看着挺好看的（文末有，还是纪念版，这个理由好牵强），就果断去骚扰了他们询问具体情况
-
-朋友A：有的公司认可这个证件，没事考个还挺有用的。
-
-朋友B：考试险过，不知道有没有用，有朋友考，一起跟着考了
-
-心
-    
-    </summary>
-    
-    
-      <category term="Life" scheme="https://dayarch.top/categories/Life/"/>
-    
-      <category term="其他" scheme="https://dayarch.top/categories/Life/%E5%85%B6%E4%BB%96/"/>
-    
-    
-      <category term="总结" scheme="https://dayarch.top/tags/%E6%80%BB%E7%BB%93/"/>
     
   </entry>
   
