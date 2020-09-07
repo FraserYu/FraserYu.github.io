@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://dayarch.top/"/>
-  <updated>2020-08-23T02:38:50.417Z</updated>
+  <updated>2020-09-07T10:38:39.286Z</updated>
   <id>https://dayarch.top/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>reveal-md 写出不一样的PPT</title>
+    <link href="https://dayarch.top//p/reveal-md-ppt.html"/>
+    <id>https://dayarch.top//p/reveal-md-ppt.html</id>
+    <published>2020-09-07T10:30:25.000Z</published>
+    <updated>2020-09-07T10:38:39.286Z</updated>
+    
+    <summary type="html">
+    
+      通常程序员瞧不上写PPT抑或不愿意写PPT，其实这是一个不容被忽视的软技能，通过PPT的演示可以锻炼一个人的综合能力
+    
+    </summary>
+    
+    
+      <category term="Life" scheme="https://dayarch.top/categories/Life/"/>
+    
+      <category term="其他" scheme="https://dayarch.top/categories/Life/%E5%85%B6%E4%BB%96/"/>
+    
+    
+      <category term="总结" scheme="https://dayarch.top/tags/%E6%80%BB%E7%BB%93/"/>
+    
+  </entry>
   
   <entry>
     <title>分分钟搞定Java 并发队列</title>
@@ -81,9 +104,9 @@
       <category term="Java" scheme="https://dayarch.top/categories/Coding/Java/"/>
     
     
-      <category term="面试" scheme="https://dayarch.top/tags/%E9%9D%A2%E8%AF%95/"/>
-    
       <category term="JVM" scheme="https://dayarch.top/tags/JVM/"/>
+    
+      <category term="面试" scheme="https://dayarch.top/tags/%E9%9D%A2%E8%AF%95/"/>
     
   </entry>
   
@@ -486,27 +509,6 @@ Github 主要对 UI 设计以及 Repository 布局进行了更新，改善了访
       <category term="volatile" scheme="https://dayarch.top/tags/volatile/"/>
     
       <category term="synchronized" scheme="https://dayarch.top/tags/synchronized/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Java后端的我在学Node.js 你敢信？</title>
-    <link href="https://dayarch.top//p/start-to-learn-nodejs.html"/>
-    <id>https://dayarch.top//p/start-to-learn-nodejs.html</id>
-    <published>2020-02-27T00:40:40.482Z</published>
-    <updated>2020-02-27T01:01:23.540Z</updated>
-    
-    <summary type="html">
-    
-      作为一名纯java后端的人员，由于项目需要，我要开始学Node.js 了，对于要接触陌生的东西，内心其实是抗拒的，但是我提醒自己要跳出舒适区，多学一些东西，本文就是记录我是如何开始接触和学习Node.js 的
-    
-    </summary>
-    
-    
-      <category term="Coding" scheme="https://dayarch.top/categories/Coding/"/>
-    
-      <category term="Node.js" scheme="https://dayarch.top/categories/Coding/Node-js/"/>
-    
     
   </entry>
   

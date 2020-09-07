@@ -4,12 +4,12 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   
-  <title>Java 12 新特性一览 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享</title>
+  <title>reveal-md 写出不一样的PPT | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享</title>
   
-  <meta name="keywords" content="Java12,Java12 Switch, String indent, String transform, JDK12,Lambda, Java,SpringBoot,并发编程, ElasticSearch, 日拱一兵">
+  <meta name="keywords" content="reveal-md,ppt,reveal.js, Java,SpringBoot,并发编程, ElasticSearch, 日拱一兵">
   
   
-  <meta name="description" content="本文介绍了几个比较常见，又方便使用的Java12新特性，包括String API的更改，文件的比较，Switch语句的扩展等, 本站是日拱一兵的技术分享博客，内容涵盖Java后端技术、Spring Boot、Java并发编程等技术研究与分享，用有趣的方式解读技术">
+  <meta name="description" content="通常程序员瞧不上写PPT抑或不愿意写PPT，其实这是一个不容被忽视的软技能，通过PPT的演示可以锻炼一个人的综合能力, 本站是日拱一兵的技术分享博客，内容涵盖Java后端技术、Spring Boot、Java并发编程等技术研究与分享，用有趣的方式解读技术">
   
 
   
@@ -392,16 +392,31 @@
 
   <section class='meta'>
     
+      
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.7.0/dist/APlayer.min.css">
+  <div class="aplayer"
+    data-theme=""
+    data-mini=true 
     
-      <a title='Java 12 新特性一览' href='/p/jdk12-new-feature-overview.html'><img class='thumbnail' src='https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgjava.png'></a>
+    data-mode="circulation"
+    data-server="netease"
+    data-type="song"
+    data-id="33419765"
+    data-volume="0.7">
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/aplayer@1.7.0/dist/APlayer.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/meting@1.1.0/dist/Meting.min.js"></script>
+
+
+    
     
     <div class="meta" id="header-meta">
       
         
   
     <h1 class="title">
-      <a href="/p/jdk12-new-feature-overview.html">
-        Java 12 新特性一览
+      <a href="/p/reveal-md-ppt.html">
+        reveal-md 写出不一样的PPT
       </a>
     </h1>
   
@@ -432,7 +447,7 @@
             <div class="new-meta-item date">
   <a class='notlink'>
     <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-    <p>2020-02-10</p>
+    <p>2020-09-07</p>
   </a>
 </div>
 
@@ -442,9 +457,9 @@
             
   
   <div class='new-meta-item category'>
-    <a href='/categories/Coding/Java/' rel="nofollow">
+    <a href='/categories/Life/%E5%85%B6%E4%BB%96/' rel="nofollow">
       <i class="fas fa-folder-open" aria-hidden="true"></i>
-      <p>Coding&nbsp;/&nbsp;Java</p>
+      <p>Life&nbsp;/&nbsp;其他</p>
     </a>
   </div>
 
@@ -484,95 +499,124 @@
 
     <section class="article typo">
       <div class="article-entry" itemprop="articleBody">
-        <blockquote>
-<ul>
-<li><p>你有一个思想，我有一个思想，我们交换后，一个人就有两个思想</p>
-</li>
-<li><p>If you can NOT explain it simply, you do NOT understand it well enough</p>
-</li>
-</ul>
-</blockquote>
-<p>现陆续将Demo代码和技术文章整理在一起 <a href="https://github.com/FraserYu/learnings" target="_blank" rel="noopener">Github实践精选</a>，<strong>本文同样收录在此</strong>，方便大家阅读查看，觉得不错，还请Star🌟</p>
-<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgfenge.gif" alt=""></p>
-<p>日常工作对集合操作真的太频繁了，前端时间就写过一篇关于Java 12 集合的文章 <a href="https://dayarch.top/p/jdk12-collectors-teeing-api-usage.html">Java12 Collectors.teeing 的使用详解</a> ， 有朋友留言说这个功能比较好用。个人觉得 Java12还有几个特性可以尝试使用，这篇文章就出炉了</p>
-<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgJava12_new_feature.png" alt=""></p>
-<p>如果你目前使用的Java版本不是12，也没有关系，早已为你准备好良方，<a href="https://dayarch.top/p/multiple-java-management.html">SDKMAN 统一灵活管理多版本Java</a> ，可以让你快速各种尝鲜新特性</p>
-<h2 id="String-API-变化"><a href="#String-API-变化" class="headerlink" title="String API 变化"></a>String API 变化</h2><h3 id="String-indent"><a href="#String-indent" class="headerlink" title="String.indent()"></a>String.indent()</h3><p><code>indent</code> 「缩进」这个单词大家很熟悉了，这是Java12处理字符串的新功能，先来看方法定义：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200209135336.png" alt=""></p>
-<p>该方法很简单，只接收一个 <code>int</code> 类型的参数表示缩进值，这里的 n 既可以是正数，也可以是负数，只不过是增加空格 <code>space</code> 和移除空格的差别，来看个例子：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">String result = <span class="string">"foo\nbar\nbar2"</span>.indent(<span class="number">4</span>);</span><br><span class="line">System.out.println(result);</span><br></pre></td></tr></table></figure>
+        <p>听说程序员看不上写 PPT ？</p>
+<img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200905221047.png" style="zoom:25%;" />
 
 
 
-<p>打印结果是这样的（考验眼力的时候到了，仔细看截图在IDE中设置的缩进小点点😜）：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200209141352.png" alt=""></p>
-<p>调用 indent 方法会自动添加一个换行符号 <code>\n</code> ，在该方法的实现中也明确给了注释说明，目的是为了行终结符的规范化</p>
-<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200209153328.png" alt=""></p>
-<p><strong>注意：</strong>对于 <code>Tab</code> 就是当成一个字符来看到，比如我们把上面的例子稍作修改：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">String result = <span class="string">"foo\nbar\n\tbar2"</span>.indent(<span class="number">4</span>);</span><br><span class="line">System.out.println(result);</span><br></pre></td></tr></table></figure>
-
-<p>来看打印结果，注意和上面的不同：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200209153700.png" alt=""></p>
-<p>就是这么简单，我们继续向下看</p>
-<h3 id="String-transform"><a href="#String-transform" class="headerlink" title="String.transform()"></a>String.transform()</h3><p><code>transform</code> 「转换」，我们经常会遇到字符串形势转换的需求，transform方法接收一个 Function 类型的参数， 生成一个全新形式的字符串</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">List&lt;String&gt; names = List.of( <span class="string">"   Alex"</span>, <span class="string">"brian"</span>);</span><br><span class="line"></span><br><span class="line">List&lt;String&gt; transformedNames = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (String name : names)&#123;</span><br><span class="line">	String transformedName = name.transform(String::strip)</span><br><span class="line">															 .transform(StringUtils::toCamelCase);</span><br><span class="line"></span><br><span class="line">	transformedNames.add(transformedName);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>程序员是实干派，面对写 PPT 这事通常都是嗤之以鼻。头可断，万行代码不能乱；血可流，写PPT是真犯愁。写 PPT 着实是程序员工作中的三座大山之一</p>
+<img src="https://rgyb.sunluomeng.top/20200830215554.png" style="zoom:15%;" />
 
 
 
-<p>有朋友可能会说，这个和单纯的对字符串 trim 或者其他操作有什么区别啊？因为接受的参数是 Function类型，当Function类型作为入参时，内部的<strong>处理逻辑</strong>将增加更多灵活性</p>
-<h2 id="Files-mismatch-Path-Path"><a href="#Files-mismatch-Path-Path" class="headerlink" title="Files.mismatch(Path, Path)"></a>Files.mismatch(Path, Path)</h2><p>有时候，我们需要比较两个文件的内容是否相同，这个API就派上用场了，该方法比较两个 path 下的文件，并且返回一个 long 值，这个值表示第一处不匹配的字节位置。如果返回-1，说明两个文件相等，还是来看个例子：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Path file1 = Paths.get(<span class="string">"/Users/fraser/Documents/projects/personal/learning-demo-collection/jdk12-demo/src/file1.txt"</span>);</span><br><span class="line">		Path file2 = Paths.get(<span class="string">"/Users/fraser/Documents/projects/personal/learning-demo-collection/jdk12-demo/src/file2.txt"</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			<span class="keyword">long</span> mismatch = Files.mismatch(file1, file2);</span><br><span class="line">			System.out.println(mismatch);</span><br><span class="line">		&#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<p>两个文件内容分别是：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">//file1.txt</span><br><span class="line">大家好，我是日拱一兵，叫我拱哥就好</span><br><span class="line">//file2.txt</span><br><span class="line">大家好，我是日拱一兵，叫我兵兵就好</span><br></pre></td></tr></table></figure>
-
-
-
-<p>查看运行结果：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200209203347.png" alt=""></p>
+<p>有人做了三分，可以通过 PPT 说出七分，有人做了七分，却说不出三分，程序员的内心活动正如去年很火的新东方年会改编 「沙漠骆驼」的歌词一样：</p>
+<p><img src="https://rgyb.sunluomeng.top/20200830220950.png" alt=""></p>
+<p>为了不再经历相似的年底考评悲剧。所以，作为老实人，如果做了七分，底线至少要说出七分，没有商量的余地</p>
+<p>可是当程序员面对 <strong>PPT</strong> 或 <strong>KeyNote</strong> 总是无从下手，这要怎么办？</p>
 <blockquote>
-<p>建议大家查看一下 <code>mismatch</code> 的实现逻辑，有个小算法在里面的</p>
+<p>那咱就以程序员熟悉的方式写  PPT 呗</p>
 </blockquote>
-<h2 id="Support-for-Unicode-11-（当个了解就好了）"><a href="#Support-for-Unicode-11-（当个了解就好了）" class="headerlink" title="Support for Unicode 11 （当个了解就好了）"></a>Support for Unicode 11 （当个了解就好了）</h2><p>当下，Emoji 表情符号在社交媒体渠道上扮演着重要角色，所以支持最新的 Unicode 规范比以往任何时候都更重要。Java 12保持了同步并支持Unicode 11。Unicode 11增加了684个字符，共137,374个字符，增加了7个新脚本，共146个脚本。</p>
-<h2 id="Switch-Expressions-Preview"><a href="#Switch-Expressions-Preview" class="headerlink" title="Switch Expressions(Preview)"></a>Switch Expressions(Preview)</h2><p>这个更改扩展了switch语句。为什么这么说？</p>
-<ul>
-<li>语句（我们原来那样使用）</li>
-<li>表达式（不必为每个case块定义一个break语句，我们可以简单地使用箭头语法）</li>
-<li>变量赋值（使用新的switch表达式，我们可以直接将switch语句分配给一个变量）</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">boolean</span> isWeekend = <span class="keyword">switch</span> (day) </span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">case</span> MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY -&gt; <span class="keyword">false</span>;</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">case</span> SATURDAY, SUNDAY -&gt; <span class="keyword">true</span>;</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">default</span> -&gt; <span class="keyword">throw</span> <span class="keyword">new</span> IllegalStateException(<span class="string">"Illegal day entry :: "</span> + day);</span><br><span class="line">&#125;;</span><br><span class="line"> </span><br><span class="line">System.out.println(isWeekend);</span><br></pre></td></tr></table></figure>
+<p>这里要给大家打个预防针，以这种方式写 PPT 的门槛低到吓人，只需会基本的 Markdown 语法即可</p>
+<h2 id="reveal-md"><a href="#reveal-md" class="headerlink" title="reveal-md"></a>reveal-md</h2><blockquote>
+<p>reveal-md 可以将 Markdown 文件渲染出非常漂亮的演示文稿</p>
+</blockquote>
+<p><strong>Github 地址：</strong> <a href="https://github.com/webpro/reveal-md" target="_blank" rel="noopener">https://github.com/webpro/reveal-md</a></p>
+<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p>安装很简单，安装好 NodeJS，一条 npm 命令（全局安装）即可：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g reveal-md</span><br></pre></td></tr></table></figure>
 
+<h2 id=""><a href="#" class="headerlink" title=""></a></h2><p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200830202837.png" alt=""></p>
+<p>安装完，你需要做的就只是写 Markdown 文件了</p>
+<h3 id="写-Markdown-文件"><a href="#写-Markdown-文件" class="headerlink" title="写 Markdown 文件"></a>写 Markdown 文件</h3><p>在一个 Markdown 文件中，用 <code>\n---\n</code> 作为分隔多个 PPT 页面的标识符，如果你用 Typora，其实就是输入 <code>---</code>，然后回车就搞定了，然后在里面按照 Markdown 语法填充内容就 OK 了</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="section"># 标题</span></span><br><span class="line"></span><br><span class="line"><span class="bullet">* </span>程序员如何看待写 PPT？</span><br><span class="line"><span class="bullet">* </span>如何以技术人员的方式写 PPT？</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line"><span class="section">## 程序员如何看待写 PPT？</span></span><br><span class="line"></span><br><span class="line"><span class="quote">&gt; 世界最牛逼的语言是 「PPT」</span></span><br></pre></td></tr></table></figure>
 
+<p>这就写完了 2 页 PPT，不用调整格式，不用添加过渡效果，只需要run reveal-md 服务渲染一下你的 Markdown 文件就好了</p>
+<h3 id="渲染-Markdown-文件"><a href="#渲染-Markdown-文件" class="headerlink" title="渲染 Markdown 文件"></a>渲染 Markdown 文件</h3><p>因为我们是全局安装的 <code>reveal-md</code>， 所以只需要按照下面命令通过路径找到你的 MD 文件即可</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">reveal-md path/to/yourSlide.md</span><br></pre></td></tr></table></figure>
 
+<p>你也可以 cd 到 Markdown file 目录直接运行：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">reveal-md yourSlide.md</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200902111947.png" alt=""></p>
+<p>在运行上述命令后会自动打开你默认使用的浏览器，默认是高大上的黑色主题，如果你开启浏览器全屏，就是这个效果了 （听说，属于你的演示来要开始了？）</p>
+<p><img src="https://rgyb.sunluomeng.top/20200902105626.png" alt=""></p>
+<p>点击右下角的<code>下一页</code>图标, 会有默认翻滚的过渡效果，就到了下一页（这个效果值几毛？）</p>
+<p><img src="https://rgyb.sunluomeng.top/2020-09-06at20.09.58.gif" alt=""></p>
+<p>这种简约又简单的方式爱了没？</p>
+<p>我们都知道，PPT 或者 KeyNote 对代码的展示不是很友好，reveal-md 就不一样了（毕竟是 Markdown 嘛）</p>
+<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img9150e4e5ly1fkq92f0ughg206o06ot9b.gif" alt=""></p>
+<p>我们再通过 <code>---</code> 新建一页，按照 Markdown 语法添加代码，重新 run 上述命令，可以看到，展示出来的代码<strong>有滚动条</strong>，<strong>有代码高亮</strong>，一应俱全</p>
+<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200902111803.png" alt=""></p>
+<p>以上我们都是使用 reveal-md 的默认值，它当然也支持一些个性化设置</p>
+<h3 id="个性化设置"><a href="#个性化设置" class="headerlink" title="个性化设置"></a>个性化设置</h3><h4 id="主题"><a href="#主题" class="headerlink" title="主题"></a>主题</h4><p>上面使用的是默认主题 black （黑色主题），我们可以通过 <code>--theme xxxTheme</code> 来变更主题</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">reveal-md myTest.md --theme solarized</span><br></pre></td></tr></table></figure>
+
+<p>效果就是这个样子了（好像有点阮一峰老师博客的赶脚）</p>
+<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200903212518.png" alt=""></p>
+<p>去哪里找这些主题呢？访问 <a href="https://github.com/hakimel/reveal.js/tree/master/css/theme/source" target="_blank" rel="noopener">https://github.com/hakimel/reveal.js/tree/master/css/theme/source</a> 就可以查看 reveal-md 默认支持的所有主题，你只需要在运行命令时指定主题名字就好</p>
+<p>如果你想玩点更高级的自定义样式，只需要指定自定义的主题文件就可以了</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">reveal-md slides.md --theme theme/my-custom.css</span><br></pre></td></tr></table></figure>
+
+<p>如果你不知道怎么写自定义主题 CSS 文件，那就参照 <a href="https://rawgit.com/puzzle/pitc-revealjs-theme/master/theme/puzzle.css" target="_blank" rel="noopener">https://rawgit.com/puzzle/pitc-revealjs-theme/master/theme/puzzle.css</a> 更改一些参数值就是你自定义的了</p>
+<h4 id="代码高亮主题"><a href="#代码高亮主题" class="headerlink" title="代码高亮主题"></a>代码高亮主题</h4><p>Markdown 本身就对代码有很好的支持，上面使用的代码默认高亮主题是 <code>zenburn</code>，当然也可以使用 <code>--highlight-theme xxxTheme</code> 选择其他高亮主题，像这样：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">reveal-md slides.md --highlight-theme atom-one-dark</span><br></pre></td></tr></table></figure>
+
+<p>reveal-md 同样支持很多高亮主题，查看 <a href="https://github.com/highlightjs/highlight.js/tree/master/src/styles" target="_blank" rel="noopener">https://github.com/highlightjs/highlight.js/tree/master/src/styles</a> 同样是指定名字就好。这里更换为 atom-one-dark 高亮主题后，就是这个效果了</p>
+<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200903213345.png" alt=""></p>
+<h4 id="添加背景图片"><a href="#添加背景图片" class="headerlink" title="添加背景图片"></a>添加背景图片</h4><p>在上面演示过渡效果时你也许就注意到了，我在某一页上添加了背景图片，添加背景图片也很（四声）简单，只需要在每页 PPT 的开头添加这段代码指定图片就可以</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="xml"><span class="comment">&lt;!-- .slide: data-background="./lighthouse-5439227_1920.jpg" --&gt;</span></span></span><br></pre></td></tr></table></figure>
+
+<p>担心你在 Markdown 文件里写上述代码有些困惑，这里做个截图说明</p>
+<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200903213901.png" alt=""></p>
+<p>重新运行，就是你刚刚看到的效果</p>
+<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200903214037.png" alt=""></p>
+<p>能添加图片，当然也能添加视频</p>
+<h4 id="添加背景视频"><a href="#添加背景视频" class="headerlink" title="添加背景视频"></a>添加背景视频</h4><p>和添加背景图片类似，同样在每一页的开头添加下面代码：</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="xml"><span class="comment">&lt;!-- .slide: data-background-video="./all.mov" --&gt;</span></span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200903214514.png" alt=""></p>
 <blockquote>
-<p> <strong>注意：</strong> 要使用此预览特性，请记住，我们必须在应用程序启动期间使用-enable-preview标志显式地指示JVM。</p>
+<p>背景视频是 2020 Mac 屏保，还是非常炫酷低，有兴趣的可以访问：<em><a href="https://mp.weixin.qq.com/s/TgbF7gRWEu7DeUQdYYWYmg" target="_blank" rel="noopener">https://mp.weixin.qq.com/s/TgbF7gRWEu7DeUQdYYWYmg</a></em>  获取相应视频和安装文件就好了</p>
 </blockquote>
-<h2 id="Compact-Number-Formatting-紧凑的数据格式"><a href="#Compact-Number-Formatting-紧凑的数据格式" class="headerlink" title="Compact Number Formatting (紧凑的数据格式)"></a>Compact Number Formatting (紧凑的数据格式)</h2><p>由用户界面或命令行工具呈现的大数字总是很难展现。使用数字的缩写形式则要直观很多。前端为了更有好的数据展现形式，很早就有相应的组件实现了。现在后端小伙伴也可以在java12中应用这个特性了</p>
-<p>紧凑的数字表示更易于阅读，并且在不丢失原始含义的情况下，在屏幕上需要更少的空间。</p>
-<blockquote>
-<p>例子：<code>3.6M</code> 比 <code>3,600,000</code> 容易读得多</p>
-</blockquote>
-<p>Java 12 引入了一个叫做 NumberFormat.getCompactNumberInstance(Locale, NumberFormat.Style)的静态方法。用于创建紧凑数字表示形式，来看例子：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">NumberFormat formatter = NumberFormat.getCompactNumberInstance(Locale.US, NumberFormat.Style.SHORT);</span><br><span class="line"></span><br><span class="line">String formattedString = formatter.format(<span class="number">25000L</span>);</span><br><span class="line">System.out.println(formattedString);</span><br></pre></td></tr></table></figure>
+<h4 id="演讲人预览下一页视角"><a href="#演讲人预览下一页视角" class="headerlink" title="演讲人预览下一页视角"></a>演讲人预览下一页视角</h4><p>通常在讲演 PPT 时，会有一块小屏幕做下一页提醒，reveal-md 同样支持，只需要在 Markdown 文件开头单独页添加（别写错）：</p>
+<p><strong>Note:.</strong></p>
+<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200903215220.png" alt=""></p>
+<p>重新运行，在打开的界面按键盘 <code>s</code> 按键, 就会弹出另外一个浏览器窗口为你提供预览下一页的界面，这时我们可以将全凭浏览器页拖到公共大屏，自己查看小屏幕</p>
+<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200903215336.png" alt=""></p>
+<h4 id="自动刷新改动"><a href="#自动刷新改动" class="headerlink" title="自动刷新改动"></a>自动刷新改动</h4><p>在写演示稿如果有些改动就重新运行还挺麻烦的，所以可以通过 <strong>-w</strong> 参数来自动刷新页面内容</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">reveal-md myTest.md --theme solarized --highlight-theme atom-one-dark -w</span><br></pre></td></tr></table></figure>
+
+<p>这时我们就不用每次重新启动服务了，你来试试看？万一演示的时候发现问一些小问题，可以神不知鬼不觉的更改</p>
+<h4 id="导出-PDF"><a href="#导出-PDF" class="headerlink" title="导出 PDF"></a>导出 PDF</h4><p>精彩的演示稿，别人想拿过去学习一番，你可以直接将 Markdown 文件导出为 PDF 文件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">reveal-md myTest.md --print slides.pdf</span><br></pre></td></tr></table></figure>
 
 
 
-<p>来看运行结果：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200210132355.png" alt=""></p>
-<p>另外，CompactNumberFormat 是 NumberFormat的子类，我们可以自定义它的实例（其实就是格式化样式等），很简单，这个大家自行查看吧</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>Java近两年升级真是太快了，了解一些新功能总是没错的，大家动手实践试试吧，以后遇到类似的需求至少能避免我们重复造轮子了…..</p>
-<h2 id="灵魂追问"><a href="#灵魂追问" class="headerlink" title="灵魂追问"></a>灵魂追问</h2><ol>
-<li>你们项目中Java的版本是多少？</li>
-<li>项目中你会怎样建议某些工具的升级？</li>
-</ol>
+<h4 id="自定义模版"><a href="#自定义模版" class="headerlink" title="自定义模版"></a>自定义模版</h4><p>上面演示的这些都是在默认模版下渲染的，我们可以通过 –template xxxTemplate 来自定义自己的模版</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">reveal-md myTest.md --template my-reveal-template.html</span><br></pre></td></tr></table></figure>
+
+<p>同样，如果你不知道怎么写模版，你完全可以参考这个默认的模版内容做一些值的更改：<em><a href="https://github.com/webpro/reveal-md/blob/master/lib/template/reveal.html" target="_blank" rel="noopener">https://github.com/webpro/reveal-md/blob/master/lib/template/reveal.html</a></em></p>
+<h4 id="双列模式"><a href="#双列模式" class="headerlink" title="双列模式"></a>双列模式</h4><p>之前刚接触 reveal-md.js  时只是使用单列模式，其实在有些情况双列展示可以非常友好的展示一些对比性内容， <strong>刚好组内万能大神找到了双列解决方案，我就私下取经, 得到了解决方案</strong></p>
+<p>我们可以写个自己的 CSS 文件，比如 <code>doubleCol.css</code> 然后在里面添加这点样式就行了：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-id">#left</span> &#123;</span><br><span class="line">	<span class="attribute">margin</span>: <span class="number">10px</span> <span class="number">0</span> <span class="number">15px</span> <span class="number">20px</span>;</span><br><span class="line">	<span class="attribute">text-align</span>: left;</span><br><span class="line">	<span class="attribute">float</span>: left;</span><br><span class="line">	<span class="attribute">z-index</span>:-<span class="number">10</span>;</span><br><span class="line">	<span class="attribute">width</span>:<span class="number">48%</span>;</span><br><span class="line">	<span class="attribute">font-size</span>: <span class="number">0.85em</span>;</span><br><span class="line">	<span class="attribute">line-height</span>: <span class="number">1.5</span>; </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-id">#right</span> &#123;</span><br><span class="line">	<span class="attribute">margin</span>: <span class="number">10px</span> <span class="number">0</span> <span class="number">15px</span> <span class="number">0</span>;</span><br><span class="line">	<span class="attribute">float</span>: right;</span><br><span class="line">	<span class="attribute">text-align</span>: left;</span><br><span class="line">	<span class="attribute">z-index</span>:-<span class="number">10</span>;</span><br><span class="line">	<span class="attribute">width</span>:<span class="number">48%</span>;</span><br><span class="line">	<span class="attribute">font-size</span>: <span class="number">0.85em</span>;</span><br><span class="line">	<span class="attribute">line-height</span>: <span class="number">1.5</span>; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然后我们在 Markdown 文件里，像下面这样添加 Markdown 语法内容就好了</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"left"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">## Left column</span><br><span class="line">- Bullet 1</span><br><span class="line">- Bullet 2</span><br><span class="line">- Bullet 3 </span><br><span class="line">- Even [links](https://www.google.com)</span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"right"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">## Right colum</span><br><span class="line">1. List</span><br><span class="line">2. List</span><br><span class="line">3. ![Icon](https://cdn3.iconfinder.com/data/icons/ballicons-free/128/graph.png)</span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>通过 –css 引入咱们自定义的 CSS 文件即可，就想这样：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">reveal-md myTest.md  --css theme/doubleCol.css</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://rgyb.sunluomeng.top/20200906205645.png" alt=""></p>
+<p>到这里，这些设置基本上可以满足基本需求了，如果你听过 <a href="https://github.com/hakimel/reveal.js" target="_blank" rel="noopener">reveal.js</a> ，那你很容易就看出来了， reveal-md 只不过在上层做了 MarkDown 的渲染，这样只需要用基本的 Markdown 语法就可以代替写整个 HTML，大大简化整个过程，不建议书写大量 HTML，这与 Markdown 的设计思想时违背的，如果你有兴趣完全可以尝试一下了</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>reveal-md 只是写演示文稿的工具，不要被其过渡捆绑；另外写 PPT 也是一个不容忽视的软技能，不要产生排斥心理，它可以锻炼自己归纳总结的能力，梳理内容的逻辑思维，以及演讲表达的技巧…… 作为程序员，拓宽自己的能力总是没错的</p>
+<p><img src="https://rgyb.sunluomeng.top/20200906211702.png" alt=""></p>
 
       </div>
       <!-- <div class="tuijian">
         <br><br>
         📚相关文章
-        <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-equals-hashcode.html" title="Java equals 和 hashCode 面试那点事" rel="bookmark">Java equals 和 hashCode 面试那点事</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/jdk12-collectors-teeing-api-usage.html" title="Java12 Collectors.teeing 的使用详解" rel="bookmark">Java12 Collectors.teeing 的使用详解</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/multiple-java-management.html" title="SDKMAN 统一灵活管理多版本Java" rel="bookmark">SDKMAN 统一灵活管理多版本Java</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/lombok-usage.html" title="Lombok 使用教程详解" rel="bookmark">Lombok 使用教程详解</a></h3></div></li></ul>
+        <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/2019-summary.html" title="2019归零，2020走你" rel="bookmark">2019归零，2020走你</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/how-to-organize-your-day.html" title="如何清爽的安排日常？" rel="bookmark">如何清爽的安排日常？</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/pmp-certificate.html" title="闲着无聊考个PMP玩玩" rel="bookmark">闲着无聊考个PMP玩玩</a></h3></div></li></ul>
       </div> -->
       <div class="personalweixin">
         <br><br>
@@ -592,10 +636,10 @@
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-02-10T14:45:45+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-09-07T18:38:39+08:00">
   <a class='notlink'>
     <i class="fas fa-clock" aria-hidden="true"></i>
-    <p>更新于 2020年2月10日</p>
+    <p>更新于 2020年9月7日</p>
   </a>
 </div>
 
@@ -604,7 +648,7 @@
         
           
   
-  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/Java/" rel="nofollow"><i class="fas fa-tag" aria-hidden="true"></i><p>Java</p></a></div>
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/%E6%80%BB%E7%BB%93/" rel="nofollow"><i class="fas fa-tag" aria-hidden="true"></i><p>总结</p></a></div>
 
 
         
@@ -617,18 +661,21 @@
       
         <a class="-mob-share-qq" title="QQ好友" rel="external nofollow noopener noreferrer"
           
-          href="http://connect.qq.com/widget/shareqq/index.html?url=https://dayarch.top/p/jdk12-new-feature-overview.html&title=Java 12 新特性一览 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=* 你有一个思想，我有一个思想，我们交换后，一个人就有两个思想
-   
-   
- * If you can NOT explain it simply, you do NOT understand it well enough
-   
-   
+          href="http://connect.qq.com/widget/shareqq/index.html?url=https://dayarch.top/p/reveal-md-ppt.html&title=reveal-md 写出不一样的PPT | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=听说程序员看不上写 PPT ？
 
-现陆续将Demo代码和技术文章整理在一起 Github实践精选，本文同样收录在此，方便大家阅读查看，觉得不错，还请Star🌟
+程序员是实干派，面对写 PPT 这事通常都是嗤之以鼻。头可断，万行代码不能乱；血可流，写PPT是真犯愁。写 PPT 着实是程序员工作中的三座大山之一
+
+有人做了三分，可以通过 PPT 说出七分，有人做了七分，却说不出三分，程序员的内心活动正如去年很火的新东方年会改编 「沙漠骆驼」的歌词一样：
 
 
 
-日常工作对集合操作真的太频繁了，前端时间就写过一篇关于Java 12 集合的文章 Java12 Collectors.teeing 的使用详解 ， 有朋友留言说这个功能比较好用。个人觉得 Java12还有几个特性可以尝试"
+为了不再经历相似的年底考评悲剧。所以，作为老实人，如果做了七分，底线至少要说出七分，没有商量的余地
+
+可是当程序员面对 PPT 或 KeyNote 总是无从下手，这要怎么办？
+
+那咱就以程序员熟悉的方式写 PPT 呗
+
+这里要给大家打个预防针，以这种方式写 PPT "
           
           >
           
@@ -640,18 +687,21 @@
       
         <a class="-mob-share-qzone" title="QQ空间" rel="external nofollow noopener noreferrer"
           
-          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://dayarch.top/p/jdk12-new-feature-overview.html&title=Java 12 新特性一览 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=* 你有一个思想，我有一个思想，我们交换后，一个人就有两个思想
-   
-   
- * If you can NOT explain it simply, you do NOT understand it well enough
-   
-   
+          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://dayarch.top/p/reveal-md-ppt.html&title=reveal-md 写出不一样的PPT | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=听说程序员看不上写 PPT ？
 
-现陆续将Demo代码和技术文章整理在一起 Github实践精选，本文同样收录在此，方便大家阅读查看，觉得不错，还请Star🌟
+程序员是实干派，面对写 PPT 这事通常都是嗤之以鼻。头可断，万行代码不能乱；血可流，写PPT是真犯愁。写 PPT 着实是程序员工作中的三座大山之一
+
+有人做了三分，可以通过 PPT 说出七分，有人做了七分，却说不出三分，程序员的内心活动正如去年很火的新东方年会改编 「沙漠骆驼」的歌词一样：
 
 
 
-日常工作对集合操作真的太频繁了，前端时间就写过一篇关于Java 12 集合的文章 Java12 Collectors.teeing 的使用详解 ， 有朋友留言说这个功能比较好用。个人觉得 Java12还有几个特性可以尝试"
+为了不再经历相似的年底考评悲剧。所以，作为老实人，如果做了七分，底线至少要说出七分，没有商量的余地
+
+可是当程序员面对 PPT 或 KeyNote 总是无从下手，这要怎么办？
+
+那咱就以程序员熟悉的方式写 PPT 呗
+
+这里要给大家打个预防针，以这种方式写 PPT "
           
           >
           
@@ -663,18 +713,21 @@
       
         <a class="-mob-share-weibo" title="微博" rel="external nofollow noopener noreferrer"
           
-          href="http://service.weibo.com/share/share.php?url=https://dayarch.top/p/jdk12-new-feature-overview.html&title=Java 12 新特性一览 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=* 你有一个思想，我有一个思想，我们交换后，一个人就有两个思想
-   
-   
- * If you can NOT explain it simply, you do NOT understand it well enough
-   
-   
+          href="http://service.weibo.com/share/share.php?url=https://dayarch.top/p/reveal-md-ppt.html&title=reveal-md 写出不一样的PPT | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=听说程序员看不上写 PPT ？
 
-现陆续将Demo代码和技术文章整理在一起 Github实践精选，本文同样收录在此，方便大家阅读查看，觉得不错，还请Star🌟
+程序员是实干派，面对写 PPT 这事通常都是嗤之以鼻。头可断，万行代码不能乱；血可流，写PPT是真犯愁。写 PPT 着实是程序员工作中的三座大山之一
+
+有人做了三分，可以通过 PPT 说出七分，有人做了七分，却说不出三分，程序员的内心活动正如去年很火的新东方年会改编 「沙漠骆驼」的歌词一样：
 
 
 
-日常工作对集合操作真的太频繁了，前端时间就写过一篇关于Java 12 集合的文章 Java12 Collectors.teeing 的使用详解 ， 有朋友留言说这个功能比较好用。个人觉得 Java12还有几个特性可以尝试"
+为了不再经历相似的年底考评悲剧。所以，作为老实人，如果做了七分，底线至少要说出七分，没有商量的余地
+
+可是当程序员面对 PPT 或 KeyNote 总是无从下手，这要怎么办？
+
+那咱就以程序员熟悉的方式写 PPT 呗
+
+这里要给大家打个预防针，以这种方式写 PPT "
           
           >
           
@@ -698,40 +751,21 @@
       
           <div class="prev-next">
               
-                  <section class="prev">
-                      <span class="art-item-left">
-                          <h6><i class="fas fa-chevron-left" aria-hidden="true"></i>&nbsp;上一页</h6>
-                          <h4>
-                              <a href="/p/pmp-certificate.html" rel="prev" title="闲着无聊考个PMP玩玩">
-                                
-                                    闲着无聊考个PMP玩玩
-                                
-                              </a>
-                          </h4>
-                          
-                              
-                              <h6 class="tags">
-                                  <a class="tag" href="/tags/%E6%80%BB%E7%BB%93/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> 总结</a>
-                              </h6>
-                          
-                      </span>
-                  </section>
-              
               
                   <section class="next">
                       <span class="art-item-right" aria-hidden="true">
                           <h6>下一页&nbsp;<i class="fas fa-chevron-right" aria-hidden="true"></i></h6>
                           <h4>
-                              <a href="/p/http-client-advanced-usage.html" rel="prev" title="IntelliJ IDEA HTTP Client高级使用详解">
+                              <a href="/p/java-concurrency-queue.html" rel="prev" title="分分钟搞定Java 并发队列">
                                   
-                                      IntelliJ IDEA HTTP Client高级使用详解
+                                      分分钟搞定Java 并发队列
                                   
                               </a>
                           </h4>
                           
                               
                               <h6 class="tags">
-                                  <a class="tag" href="/tags/IntelliJ-IDEA/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> IntelliJ IDEA</a>
+                                  <a class="tag" href="/tags/Java-Concurrency/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> Java-Concurrency</a>
                               </h6>
                           
                       </span>
@@ -758,7 +792,7 @@
 </header>
 
     <div class="content pure">
-      <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-equals-hashcode.html" title="Java equals 和 hashCode 面试那点事" rel="bookmark">Java equals 和 hashCode 面试那点事</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/jdk12-collectors-teeing-api-usage.html" title="Java12 Collectors.teeing 的使用详解" rel="bookmark">Java12 Collectors.teeing 的使用详解</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/multiple-java-management.html" title="SDKMAN 统一灵活管理多版本Java" rel="bookmark">SDKMAN 统一灵活管理多版本Java</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/lombok-usage.html" title="Lombok 使用教程详解" rel="bookmark">Lombok 使用教程详解</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/intellij-idea-configuration-and-plugins.html" title="Intellij IDEA 配置和插件合集" rel="bookmark">Intellij IDEA 配置和插件合集</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-arraylist-capacity.html" title="Java中的ArrayList的容量" rel="bookmark">Java中的ArrayList的容量</a></h3></div></li></ul>
+      <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/2019-summary.html" title="2019归零，2020走你" rel="bookmark">2019归零，2020走你</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/how-to-organize-your-day.html" title="如何清爽的安排日常？" rel="bookmark">如何清爽的安排日常？</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/pmp-certificate.html" title="闲着无聊考个PMP玩玩" rel="bookmark">闲着无聊考个PMP玩玩</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/wechat-new-expression.html" title="微信上线了10款默认新表情" rel="bookmark">微信上线了10款默认新表情</a></h3></div></li></ul>
     </div>
   </section>
 
@@ -814,7 +848,7 @@
 
   <script>
     window.subData = {
-      title: 'Java 12 新特性一览',
+      title: 'reveal-md 写出不一样的PPT',
       tools: true
     }
   </script>
@@ -966,7 +1000,7 @@
 </header>
 
     <div class='content pure'>
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#String-API-变化"><span class="toc-text">String API 变化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#String-indent"><span class="toc-text">String.indent()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#String-transform"><span class="toc-text">String.transform()</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Files-mismatch-Path-Path"><span class="toc-text">Files.mismatch(Path, Path)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Support-for-Unicode-11-（当个了解就好了）"><span class="toc-text">Support for Unicode 11 （当个了解就好了）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Switch-Expressions-Preview"><span class="toc-text">Switch Expressions(Preview)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Compact-Number-Formatting-紧凑的数据格式"><span class="toc-text">Compact Number Formatting (紧凑的数据格式)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-text">总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#灵魂追问"><span class="toc-text">灵魂追问</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#reveal-md"><span class="toc-text">reveal-md</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#安装"><span class="toc-text">安装</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#null"><span class="toc-text"></span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#写-Markdown-文件"><span class="toc-text">写 Markdown 文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#渲染-Markdown-文件"><span class="toc-text">渲染 Markdown 文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#个性化设置"><span class="toc-text">个性化设置</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#主题"><span class="toc-text">主题</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#代码高亮主题"><span class="toc-text">代码高亮主题</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#添加背景图片"><span class="toc-text">添加背景图片</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#添加背景视频"><span class="toc-text">添加背景视频</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#演讲人预览下一页视角"><span class="toc-text">演讲人预览下一页视角</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#自动刷新改动"><span class="toc-text">自动刷新改动</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#导出-PDF"><span class="toc-text">导出 PDF</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#自定义模版"><span class="toc-text">自定义模版</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#双列模式"><span class="toc-text">双列模式</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-text">总结</span></a></li></ol>
     </div>
   </section>
 
