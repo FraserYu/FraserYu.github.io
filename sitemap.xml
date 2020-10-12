@@ -2,9 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://dayarch.top/p/aws-lambda-with-serverless-framework.html</loc>
+    
+    <lastmod>2020-10-12T11:34:53.647Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://dayarch.top/p/executorservice-vs-completionservice.html</loc>
     
-    <lastmod>2020-10-12T11:33:33.750Z</lastmod>
+    <lastmod>2020-10-12T11:34:36.010Z</lastmod>
     
   </url>
   
@@ -12,13 +19,6 @@
     <loc>https://dayarch.top/p/http-client-advanced-usage.html</loc>
     
     <lastmod>2020-10-12T11:33:24.614Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://dayarch.top/p/aws-lambda-with-serverless-framework.html</loc>
-    
-    <lastmod>2020-10-12T11:31:36.261Z</lastmod>
     
   </url>
   
