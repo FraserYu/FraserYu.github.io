@@ -1,14 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://dayarch.top//p/executorservice-vs-completionservice.html</loc>
+    <lastmod>2020-10-12</lastmod>
+  </url>  <url>
+    <loc>https://dayarch.top//p/http-client-advanced-usage.html</loc>
+    <lastmod>2020-10-12</lastmod>
+  </url>  <url>
+    <loc>https://dayarch.top//p/aws-lambda-with-serverless-framework.html</loc>
+    <lastmod>2020-10-12</lastmod>
+  </url>  <url>
     <loc>https://dayarch.top//p/reveal-md-ppt.html</loc>
     <lastmod>2020-09-07</lastmod>
   </url>  <url>
     <loc>https://dayarch.top//p/java-concurrency-queue.html</loc>
     <lastmod>2020-08-23</lastmod>
-  </url>  <url>
-    <loc>https://dayarch.top//p/executorservice-vs-completionservice.html</loc>
-    <lastmod>2020-08-10</lastmod>
   </url>  <url>
     <loc>https://dayarch.top//p/out-of-memory-vs-memory-leak-and-hashcode.html</loc>
     <lastmod>2020-08-05</lastmod>
@@ -83,9 +89,6 @@
     <lastmod>2020-03-04</lastmod>
   </url>  <url>
     <loc>https://dayarch.top//p/start-to-learn-nodejs.html</loc>
-    <lastmod>2020-02-27</lastmod>
-  </url>  <url>
-    <loc>https://dayarch.top//p/http-client-advanced-usage.html</loc>
     <lastmod>2020-02-27</lastmod>
   </url>  <url>
     <loc>https://dayarch.top//p/pmp-certificate.html</loc>
