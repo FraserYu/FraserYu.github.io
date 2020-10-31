@@ -4,12 +4,12 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   
-  <title>Tag: Spring Aware | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享</title>
+  <title>Intellij IDEA 创建Scratch files 和 Scratch buffers | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享</title>
   
-  <meta name="keywords" content="Java,SpringBoot,并发编程, ElasticSearch, 日拱一兵">
+  <meta name="keywords" content="Scratch files, Scratch buffers, Intellij IDEA, Java,SpringBoot,并发编程, ElasticSearch, 日拱一兵">
   
   
-  <meta name="description" content="本站是日拱一兵的技术分享博客，内容涵盖Java后端技术、Spring Boot、Java并发编程等技术研究与分享，用有趣的方式解读技术">
+  <meta name="description" content="有时候我们需要在项目之外创建一些临时文件或一些实验性代码，创建在项目中可能一不小心 Git 误提交，不创建项目里又需要切换到其他应用上来回拷贝，对于专注 coding 的我们来说，总显得不够流畅，IDEA 其实早已为我们解决了这个痛点，借助 Scratch files 和 Scratch buffers 就可以解决, 本站是日拱一兵的技术分享博客，内容涵盖Java后端技术、Spring Boot、Java并发编程等技术研究与分享，用有趣的方式解读技术">
   
 
   
@@ -91,7 +91,7 @@
   
   
   <div class="cover-wrapper">
-    <cover class='cover  half'>
+    <cover class='cover post half'>
       
         
   <img class='logo' src='/assets/logo.png'/>
@@ -383,40 +383,28 @@
 
   <div class="l_body">
     <div class='body-wrapper'>
-      
-<div class='l_main'>
+      <div class='l_main'>
   
+
+  <article id="post" class="post white-box article-type-post" itemscope itemprop="blogPost">
     
-      
-  <section class="post-list">
-    
-      
-        
-          
-        
-      
-    
-    
-      
-        
-          <div class='post-wrapper'>
-            <article class="post reveal ">
-  
 
 
   <section class='meta'>
     
     
-      <a title='Spring Aware 到底是什么？' href='/p/spring-aware.html'><img class='thumbnail' src='https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgspringbootconverter.png'></a>
+      <a title='Intellij IDEA 创建Scratch files 和 Scratch buffers' href='/p/scratch-files-and-scratch-bufferss.html'><img class='thumbnail' src='https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200207104108.png'></a>
     
     <div class="meta" id="header-meta">
       
         
-  <h2 class="title">
-    <a href="/p/spring-aware.html">
-      Spring Aware 到底是什么？
-    </a>
-  </h2>
+  
+    <h1 class="title">
+      <a href="/p/scratch-files-and-scratch-bufferss.html">
+        Intellij IDEA 创建Scratch files 和 Scratch buffers
+      </a>
+    </h1>
+  
 
 
       
@@ -444,7 +432,7 @@
             <div class="new-meta-item date">
   <a class='notlink'>
     <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-    <p>2019-12-22</p>
+    <p>2020-10-31</p>
   </a>
 </div>
 
@@ -454,11 +442,29 @@
             
   
   <div class='new-meta-item category'>
-    <a href='/categories/Coding/Spring-Boot/' rel="nofollow">
+    <a href='/categories/Coding/Java/' rel="nofollow">
       <i class="fas fa-folder-open" aria-hidden="true"></i>
-      <p>Coding&nbsp;/&nbsp;Spring-Boot</p>
+      <p>Coding&nbsp;/&nbsp;Java</p>
     </a>
   </div>
+
+
+          
+        
+          
+            
+  
+    <div class="new-meta-item browse busuanzi">
+      <a class='notlink'>
+        <i class="fas fa-eye" aria-hidden="true"></i>
+        <p>
+          <span id="busuanzi_value_page_pv">
+            <i class="fas fa-spinner fa-spin fa-fw" aria-hidden="true"></i>
+          </span>
+        </p>
+      </a>
+    </div>
+  
 
 
           
@@ -476,106 +482,308 @@
   </section>
 
 
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      通过如下前序两篇文章:
+    <section class="article typo">
+      <div class="article-entry" itemprop="articleBody">
+        <p>多数人对于 Intellij IDEA 可能始于其「颜值」，终于其「才华」，外加各种插件 buff 的加成，coding 的节奏分分钟要暴走</p>
+<p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20201030214621.png" alt=""></fancybox></p>
+<p>抛开自己安装的插件，IDEA 其实也内秀的很，在 <a href="https://dayarch.top/p/http-client-advanced-usage.html">IntelliJ IDEA HTTP Client高级使用详解</a> 中详细的介绍了开发小组内放弃 Postman 的理由，用过的小伙伴后台留言直呼爽。</p>
+<p>但今天要介绍的是另外一个秀的有些含蓄的小功能，她那么显眼的站在你面前，你却选择忽视她</p>
+<p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20201030215504.png" alt=""></fancybox></p>
+<p>有时候我们需要在项目之外创建一些临时文件或一些实验性代码，创建在项目中可能一不小心 Git 误提交，不创建项目里又需要切换到其他应用上来回拷贝，对于专注 coding 的我们来说，总显得不够流畅</p>
+<p>IDEA 其实早已为我们解决了这个痛点，借助 Scratch files 和 Scratch buffers 就可以解决</p>
+<h2 id="Scratch-files-｜-Scratch-buffers"><a href="#Scratch-files-｜-Scratch-buffers" class="headerlink" title="Scratch files ｜ Scratch buffers"></a>Scratch files ｜ Scratch buffers</h2><p>IDEA 会在项目平行目录中自动生成下面的目录结构，这就是今天主角的位置，你有正视过她们吗？</p>
+<p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20201030220217.png" alt=""></fancybox></p>
+<p>Scratch files 和 Scratch buffers 二者还是有很大差别的：</p>
+<h3 id="Scratch-files"><a href="#Scratch-files" class="headerlink" title="Scratch files"></a>Scratch files</h3><p>Scratch files 是一种功能完整的、可运行的和可调试的文件，支持语法高亮显示、代码补全和相应文件类型的所有其他特性 (说白了很像Jupyter Notebooks)</p>
+<p>Scratch file 的功能，就可以满足我们在 Coding 中的各种想法，用于快速记录。创建好的这个文件并不存储在我们的项目目录中（避免了意外 git push 的尴尬），甚至在 IDEA 中切换到其他项目中也可以看到你刚刚创建的这个文件，进一步说白一点，这是凌驾在项目之上的一个全局功能，如下图，切换到了其他项目中，Scratch files 依旧存在</p>
+<p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20201030221641.png" alt=""></fancybox></p>
+<p>创建一个 Scratch file 很简单，使用快捷键 <code>⇧⌘N</code> ，支持关键字搜索，直接创建相应类型的文件就可以，比如这里创建一个 java 文件</p>
+<p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20201030222023.png" alt=""></fancybox></p>
+<p>默认会创建名为 Scratch.java 的文件，并写好 main 函数，就像这样：</p>
+<p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20201031193921.png" alt=""></fancybox></p>
+<p>在这里和你正常在项目中写 java 代码没什么区别</p>
+<p>其实我很常用的是创建一个 scratch.sql 文件，存放一些日常 SQL 语句，同样的创建方式，搜索 <code>sql</code> 默认会创建一个 scratch.sql 的文件，文件创建之后要配置数据源</p>
+<p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20201031194800.png" alt=""></fancybox></p>
+<p>配置好后，就可以尽情的书写你日常用到的 SQL 了</p>
+<p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20201031195807.png" alt=""></fancybox></p>
+<p>光标放到 SQL 位置，使用快捷键 <code>⌘⏎</code> ，选择相应的 Session （会话） 就可以 run 这条 SQL 语句了</p>
+<p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20201031200512.png" alt=""></fancybox></p>
+<p>执行后，就看到你熟悉的画面了，因为这里的画面就是 IDEA 默认的数据库管理工具，这篇 <a href="https://mp.weixin.qq.com/s/SmjBdZAMynTndU_oTITd8Q" target="_blank" rel="noopener">IntelliJ IDEA的数据库管理工具实在太方便了</a> 文章中有过详细说明</p>
+<p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20201031200604.png" alt=""></fancybox></p>
+<p>创建 Scratch files 可选择的类型非常多，总有一个适合你的一些需要</p>
+<h3 id="Scratch-buffers"><a href="#Scratch-buffers" class="headerlink" title="Scratch buffers"></a>Scratch buffers</h3><p>和 Scratch files 类似，只不过 Scratch buffers 就是一个简单的文本文件，没有任何编码辅助功能 （说白了，可以将它理解成一个记事本），创建 Scratch buffers 没有直接的快捷键，需要用通用快捷键 <code>⇧⌘A</code> ，并输入关键字（比如 buffer）：</p>
+<p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20201031201105.png" alt=""></fancybox></p>
+<p>敲击回车键，就会创建好一个名为 scratch.txt 的文本文件。<strong>反复创建 Scratch buffers，你会发现，最多只允许创建 5 个</strong>：</p>
+<p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20201031201657.png" alt=""></fancybox></p>
+<p>因为这个操作不频繁，所以也就没有默认快捷键，如果你是个快捷键强迫症患者，那就在 KeyMap 处添加相应的快捷键就可以了</p>
+<p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20201031201344.png" alt=""></fancybox></p>
+<p>这里要说明一个<strong>注意事项</strong>：</p>
+<blockquote>
+<p>如果你在 buffer1.txt 文件中记录了一些内容，当你创建第 6 次 scratch buffer 文件时，buffer1.txt 的内容就会被清空</p>
+</blockquote>
+<p>减少应用切换，尽量保持专注，可以借助预览模式(ctrl+opt+v) 和 快捷键 （cmd+e）切换最近常用文件，戴上耳机，快告诉我，时速多少迈？</p>
+<p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20201031202406.png" alt=""></fancybox></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>这是一个很小的功能，但是在日常开发中真的可以带来很大的帮助：</p>
+<ul>
+<li>跨越项目的访问</li>
+<li>不被 Git 所跟踪，防止误提交</li>
+<li>可以临时测试各种语言的代码</li>
+</ul>
+<p>最后配合预览模式的使用，减少应用之间的切换，一切显得都很流畅</p>
+<blockquote>
+<p>当然，保持 Code Clean，减少猜测和回忆时间，我们最好给我们创建的 Scratch files 和 Scratch buffers 更友好的文件名称</p>
+</blockquote>
 
- 1. Spring Bean 生命周期之缘起
- 2. Spring Bean 生命周期之缘尽
-    我们了解了 Spring Bean 的生命周期核心内容，bean 是如何被初始化变为 Ready for Use 的状态，当资源被回收时又是如何被 destroy 的，但 Spring Bean Life Cycle图并未被全部点亮，这篇文章将点亮剩余内容，同时说说你常见的 XxxxAware 接口
+      </div>
+      <!-- <div class="tuijian">
+        <br><br>
+        📚相关文章
+        <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/intellij-idea-configuration-and-plugins.html" title="Intellij IDEA 配置和插件合集" rel="bookmark">Intellij IDEA 配置和插件合集</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/how-to-use-todo-feature.html" title="小小TODO也有大道理" rel="bookmark">小小TODO也有大道理</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/book-reviews-clean-code.html" title="读《Clean Code 代码整洁之道》之感悟" rel="bookmark">读《Clean Code 代码整洁之道》之感悟</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/http-client-advanced-usage.html" title="IntelliJ IDEA HTTP Client高级使用详解" rel="bookmark">IntelliJ IDEA HTTP Client高级使用详解</a></h3></div></li></ul>
+      </div> -->
+      <div class="personalweixin">
+        <br><br>
+        <blockquote>
+          <a href="https://mp.weixin.qq.com/s/G7BXuZh0Qh1-mE6ts4LJqQ" target="_blank" rel="noopener">加我微信</a>，咱们交流技术与思想，共同成长
+        </blockquote>
+        <br>
 
-为什么要说 Spring Bean 生命周期又说 Aware 呢？下来点亮剩下内容你也许就明白了：
-
-
-
- 1. 在 Spring Bean Ready for Us
+      </div>
       
-        <div class="readmore">
-          <a href="/p/spring-aware.html" class="flat-box">
-            <i class="fas fa-book-open fa-fw" aria-hidden="true"></i>
-            阅读全文
-          </a>
-        </div>
+      
+        <br>
+        
+
+
+  <section class='meta' id="footer-meta">
+    <div class='new-meta-box'>
+      
+        
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-10-31T21:22:33+08:00">
+  <a class='notlink'>
+    <i class="fas fa-clock" aria-hidden="true"></i>
+    <p>更新于 2020年10月31日</p>
+  </a>
+</div>
+
+        
+      
+        
+          
+  
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/IntelliJ-IDEA/" rel="nofollow"><i class="fas fa-tag" aria-hidden="true"></i><p>IntelliJ IDEA</p></a></div>
+
+
+        
+      
+        
+          
+  <div class="new-meta-item share -mob-share-list">
+  <div class="-mob-share-list share-body">
+    
+      
+        <a class="-mob-share-qq" title="QQ好友" rel="external nofollow noopener noreferrer"
+          
+          href="http://connect.qq.com/widget/shareqq/index.html?url=https://dayarch.top/p/scratch-files-and-scratch-bufferss.html&title=Intellij IDEA 创建Scratch files 和 Scratch buffers | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=多数人对于 Intellij IDEA 可能始于其「颜值」，终于其「才华」，外加各种插件 buff 的加成，coding 的节奏分分钟要暴走
+
+
+
+抛开自己安装的插件，IDEA 其实也内秀的很，在 IntelliJ IDEA HTTP Client高级使用详解 中详细的介绍了开发小组内放弃 Postman 的理由，用过的小伙伴后台留言直呼爽。
+
+但今天要介绍的是另外一个秀的有些含蓄的小功能，她那么显眼的站在你面前，你却选择忽视她
+
+
+
+有时候我们需要在项目之外创建一些临时文件或一些实验性代码，创建在项目中可能一不小心 Git 误提交，不创建项目里又需要切换到其他应用上来回拷贝，对于专注 cod"
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/assets@19.1.9/logo/128/qq.png">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-qzone" title="QQ空间" rel="external nofollow noopener noreferrer"
+          
+          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://dayarch.top/p/scratch-files-and-scratch-bufferss.html&title=Intellij IDEA 创建Scratch files 和 Scratch buffers | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=多数人对于 Intellij IDEA 可能始于其「颜值」，终于其「才华」，外加各种插件 buff 的加成，coding 的节奏分分钟要暴走
+
+
+
+抛开自己安装的插件，IDEA 其实也内秀的很，在 IntelliJ IDEA HTTP Client高级使用详解 中详细的介绍了开发小组内放弃 Postman 的理由，用过的小伙伴后台留言直呼爽。
+
+但今天要介绍的是另外一个秀的有些含蓄的小功能，她那么显眼的站在你面前，你却选择忽视她
+
+
+
+有时候我们需要在项目之外创建一些临时文件或一些实验性代码，创建在项目中可能一不小心 Git 误提交，不创建项目里又需要切换到其他应用上来回拷贝，对于专注 cod"
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/assets@19.1.9/logo/128/qzone.png">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-weibo" title="微博" rel="external nofollow noopener noreferrer"
+          
+          href="http://service.weibo.com/share/share.php?url=https://dayarch.top/p/scratch-files-and-scratch-bufferss.html&title=Intellij IDEA 创建Scratch files 和 Scratch buffers | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=多数人对于 Intellij IDEA 可能始于其「颜值」，终于其「才华」，外加各种插件 buff 的加成，coding 的节奏分分钟要暴走
+
+
+
+抛开自己安装的插件，IDEA 其实也内秀的很，在 IntelliJ IDEA HTTP Client高级使用详解 中详细的介绍了开发小组内放弃 Postman 的理由，用过的小伙伴后台留言直呼爽。
+
+但今天要介绍的是另外一个秀的有些含蓄的小功能，她那么显眼的站在你面前，你却选择忽视她
+
+
+
+有时候我们需要在项目之外创建一些临时文件或一些实验性代码，创建在项目中可能一不小心 Git 误提交，不创建项目里又需要切换到其他应用上来回拷贝，对于专注 cod"
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/assets@19.1.9/logo/128/weibo.png">
+          
+        </a>
+      
+    
+  </div>
+</div>
+
+
+
+        
       
     </div>
-    
-      <div class="full-width auto-padding tags">
-        
-          <a href="/tags/Spring-Bean/" rel="nofollow"><i class="fas fa-tag fa-fw"></i> Spring Bean</a>
-        
-          <a href="/tags/%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/" rel="nofollow"><i class="fas fa-tag fa-fw"></i> 生命周期</a>
-        
-          <a href="/tags/Spring-Aware/" rel="nofollow"><i class="fas fa-tag fa-fw"></i> Spring Aware</a>
-        
-      </div>
-    
   </section>
-</article>
 
+
+      
+      
+          <div class="prev-next">
+              
+              
+                  <section class="next">
+                      <span class="art-item-right" aria-hidden="true">
+                          <h6>下一页&nbsp;<i class="fas fa-chevron-right" aria-hidden="true"></i></h6>
+                          <h4>
+                              <a href="/p/aws-lambda-with-serverless-framework.html" rel="prev" title="借助Serverless Framework玩转AWS Lambda">
+                                  
+                                      借助Serverless Framework玩转AWS Lambda
+                                  
+                              </a>
+                          </h4>
+                          
+                              
+                              <h6 class="tags">
+                                  <a class="tag" href="/tags/AWS/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> AWS</a> <a class="tag" href="/tags/lambda/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> lambda</a>
+                              </h6>
+                          
+                      </span>
+                  </section>
+              
           </div>
+      
+    </section>
+  </article>
+
+
+  
+    
+  
+    
+      
+        
+          
+  <section class='widget related_posts'>
+    
+<header class='pure'>
+  <div><i class="fas fa-bookmark fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;相关文章</div>
+  
+</header>
+
+    <div class="content pure">
+      <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/intellij-idea-configuration-and-plugins.html" title="Intellij IDEA 配置和插件合集" rel="bookmark">Intellij IDEA 配置和插件合集</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/how-to-use-todo-feature.html" title="小小TODO也有大道理" rel="bookmark">小小TODO也有大道理</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/book-reviews-clean-code.html" title="读《Clean Code 代码整洁之道》之感悟" rel="bookmark">读《Clean Code 代码整洁之道》之感悟</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/http-client-advanced-usage.html" title="IntelliJ IDEA HTTP Client高级使用详解" rel="bookmark">IntelliJ IDEA HTTP Client高级使用详解</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/jdk12-new-feature-overview.html" title="Java 12 新特性一览" rel="bookmark">Java 12 新特性一览</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-arraylist-capacity.html" title="Java中的ArrayList的容量" rel="bookmark">Java中的ArrayList的容量</a></h3></div></li></ul>
+    </div>
+  </section>
+
+
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
         
       
     
-  </section>
   
     
-    <!-- 根据主题中的设置决定是否在archive中针对摘要部分的MathJax公式加载mathjax.js文件 -->
-    
-    
-
   
 
 
-    
+  <!-- 显示推荐文章和评论 -->
+
+
+
+  <article class="post white-box comments">
+    <section class="article typo">
+      <h4><i class="fas fa-comments fa-fw" aria-hidden="true"></i>&nbsp;评论</h4>
+      
+      
+      
+        <section id="comments">
+          <div id="gitalk-container"></div>
+        </section>
+      
+      
+    </section>
+  </article>
+
+
+
+
+
+
+<!-- 根据页面mathjax变量决定是否加载MathJax数学公式js -->
+
+
+
+  <script>
+    window.subData = {
+      title: 'Intellij IDEA 创建Scratch files 和 Scratch buffers',
+      tools: true
+    }
+  </script>
+
+
+
+  <script src="https://my.openwrite.cn/js/readmore.js" type="text/javascript"></script>
+  <script>
+      const btw = new BTWPlugin();
+      btw.init({
+          id: 'post',
+          blogId: '10015-1569397635991-668',
+          name: '日拱一兵',
+          qrcode: 'https://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E6%84%9F%E6%83%B3%E4%B8%8E%E6%80%BB%E7%BB%93/_image/2019-07-25/qrcode.jpg',
+          keyword: 'tanrgyb',
+      });
+  </script>
   
+
 </div>
 <aside class='l_side'>
   
     
     
       
-      
-        
-          
-          
-        
-          
-          
-        
-          
-          
-        
-          
-          
-            
-              <section class='widget plain'>
-  
-<header class='pure'>
-  <div><i class="fas fa-bullhorn fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;公告</div>
-  
-</header>
-
-  <div class='content pure'>
-    <p>博客持续升级改造中… 如有问题请<a href="/comments/">留言</a>交流，也可以加我 <a href="https://mp.weixin.qq.com/s/G7BXuZh0Qh1-mE6ts4LJqQ" target="_blank" rel="noopener"">微信</a></p>
-
-  </div>
-</section>
-
-            
-          
-        
-          
-          
-        
-          
-          
-        
-          
-          
-        
-          
-          
-        
       
         
           
@@ -690,192 +898,19 @@
         
           
           
-        
-          
-          
-        
-          
-          
-            
-              <section class='widget grid'>
-  
-<header class='pure'>
-  <div><i class="fas fa-map-signs fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;站内导航</div>
-  
-</header>
-
-  <div class='content pure'>
-    <ul class="grid navgation">
-      
-        <li><a class="flat-box" title="/" href="/"
-          
-            rel="nofollow"
-          
-          
-          id="home">
-          
-            <i class="fas fa-clock fa-fw" aria-hidden="true"></i>
-          
-          近期文章
-        </a></li>
-      
-        <li><a class="flat-box" title="/archives/" href="/archives/"
-          
-            rel="nofollow"
-          
-          
-          id="archives">
-          
-            <i class="fas fa-archive fa-fw" aria-hidden="true"></i>
-          
-          文章归档
-        </a></li>
-      
-        <li><a class="flat-box" title="/categories/Coding/Java-Concurrency" href="/categories/Coding/Java-Concurrency"
-          
-            rel="nofollow"
-          
-          
-          id="categoriesCodingJava-Concurrency">
-          
-            <i class="fas fa-th-list fa-fw" aria-hidden="true"></i>
-          
-          并发系列
-        </a></li>
-      
-        <li><a class="flat-box" title="/comments/" href="/comments/"
-          
-            rel="nofollow"
-          
-          
-          id="comments">
-          
-            <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
-          
-          留言看板
-        </a></li>
-      
-        <li><a class="flat-box" title="/website/" href="/website/"
-          
-            rel="nofollow"
-          
-          
-          id="website">
-          
-            <i class="fas fa-file fa-fw" aria-hidden="true"></i>
-          
-          维护日志
-        </a></li>
-      
-        <li><a class="flat-box" title="/books/" href="/books/"
-          
-            rel="nofollow"
-          
-          
-          id="books">
-          
-            <i class="fas fa-book fa-fw" aria-hidden="true"></i>
-          
-          我的书房
-        </a></li>
-      
-    </ul>
-  </div>
-</section>
-
-            
-          
-        
-          
-          
-        
-          
-          
-        
-          
-          
-        
-      
-        
-          
-          
-        
-          
-          
-        
-          
-          
-        
-          
-          
-        
-          
-          
-        
-          
-          
             
               
-  <section class='widget category'>
+  <section class='widget toc-wrapper'>
     
 <header class='pure'>
-  <div><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;文章分类</div>
+  <div><i class="fas fa-list fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;本文目录</div>
   
-    <a class="rightBtn rotate90"
-    
-      rel="nofollow"
-    
-    
-      target="blank"
-    
-    href="/blog/categories/"
-    title="blog/categories/">
-    <i class="fas fa-expand-arrows-alt fa-fw"></i></a>
+    <!-- <div class='wrapper'><a class="s-toc rightBtn" rel="external nofollow noopener noreferrer" href="javascript:void(0)"><i class="fas fa-thumbtack fa-fw"></i></a></div> -->
   
 </header>
 
     <div class='content pure'>
-      <ul class="entry">
-        
-          <li><a class="flat-box" title="/categories/AWS/" href="/categories/AWS/"><div class='name'>AWS</div><div class='badge'>(1)</div></a></li>
-        
-          <li><a class="flat-box" title="/categories/Coding/" href="/categories/Coding/"><div class='name'>Coding</div><div class='badge'>(86)</div></a></li>
-        
-          <li><a class="flat-box child" title="/categories/Coding/Arthas/" href="/categories/Coding/Arthas/"><div class='name'>Arthas</div><div class='badge'>(1)</div></a></li>
-        
-          <li><a class="flat-box child" title="/categories/Coding/DevOps/" href="/categories/Coding/DevOps/"><div class='name'>DevOps</div><div class='badge'>(7)</div></a></li>
-        
-          <li><a class="flat-box child" title="/categories/Coding/Docker/" href="/categories/Coding/Docker/"><div class='name'>Docker</div><div class='badge'>(5)</div></a></li>
-        
-          <li><a class="flat-box child" title="/categories/Coding/Java-Concurrency/" href="/categories/Coding/Java-Concurrency/"><div class='name'>Java-Concurrency</div><div class='badge'>(22)</div></a></li>
-        
-          <li><a class="flat-box child" title="/categories/Coding/Java/" href="/categories/Coding/Java/"><div class='name'>Java</div><div class='badge'>(16)</div></a></li>
-        
-          <li><a class="flat-box child" title="/categories/Coding/Linux/" href="/categories/Coding/Linux/"><div class='name'>Linux</div><div class='badge'>(1)</div></a></li>
-        
-          <li><a class="flat-box child" title="/categories/Coding/Node-js/" href="/categories/Coding/Node-js/"><div class='name'>Node.js</div><div class='badge'>(1)</div></a></li>
-        
-          <li><a class="flat-box child" title="/categories/Coding/Others/" href="/categories/Coding/Others/"><div class='name'>Others</div><div class='badge'>(7)</div></a></li>
-        
-          <li><a class="flat-box child" title="/categories/Coding/Spring-Boot/" href="/categories/Coding/Spring-Boot/"><div class='name'>Spring-Boot</div><div class='badge'>(18)</div></a></li>
-        
-          <li><a class="flat-box child" title="/categories/Coding/Spring/" href="/categories/Coding/Spring/"><div class='name'>Spring</div><div class='badge'>(1)</div></a></li>
-        
-          <li><a class="flat-box child" title="/categories/Coding/%E5%AE%89%E5%85%A8-%E5%8D%8F%E8%AE%AE-%E8%A7%84%E8%8C%83/" href="/categories/Coding/%E5%AE%89%E5%85%A8-%E5%8D%8F%E8%AE%AE-%E8%A7%84%E8%8C%83/"><div class='name'>安全-协议-规范</div><div class='badge'>(3)</div></a></li>
-        
-          <li><a class="flat-box child" title="/categories/Coding/%E6%95%B0%E6%8D%AE%E5%BA%93-%E6%8C%81%E4%B9%85%E5%B1%82-SQL/" href="/categories/Coding/%E6%95%B0%E6%8D%AE%E5%BA%93-%E6%8C%81%E4%B9%85%E5%B1%82-SQL/"><div class='name'>数据库-持久层-SQL</div><div class='badge'>(4)</div></a></li>
-        
-          <li><a class="flat-box" title="/categories/Life/" href="/categories/Life/"><div class='name'>Life</div><div class='badge'>(9)</div></a></li>
-        
-          <li><a class="flat-box child" title="/categories/Life/English/" href="/categories/Life/English/"><div class='name'>English</div><div class='badge'>(2)</div></a></li>
-        
-          <li><a class="flat-box child" title="/categories/Life/%E5%85%B6%E4%BB%96/" href="/categories/Life/%E5%85%B6%E4%BB%96/"><div class='name'>其他</div><div class='badge'>(5)</div></a></li>
-        
-          <li><a class="flat-box child" title="/categories/Life/%E6%8A%95%E8%B5%84%E7%90%86%E8%B4%A2%E5%AD%A6%E4%B9%A0/" href="/categories/Life/%E6%8A%95%E8%B5%84%E7%90%86%E8%B4%A2%E5%AD%A6%E4%B9%A0/"><div class='name'>投资理财学习</div><div class='badge'>(1)</div></a></li>
-        
-          <li><a class="flat-box child" title="/categories/Life/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/" href="/categories/Life/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"><div class='name'>读书笔记</div><div class='badge'>(1)</div></a></li>
-        
-      </ul>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Scratch-files-｜-Scratch-buffers"><span class="toc-text">Scratch files ｜ Scratch buffers</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Scratch-files"><span class="toc-text">Scratch files</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Scratch-buffers"><span class="toc-text">Scratch buffers</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-text">总结</span></a></li></ol>
     </div>
   </section>
 
@@ -889,8 +924,6 @@
           
           
         
-      
-        
           
           
         
@@ -898,120 +931,6 @@
           
         
           
-          
-        
-          
-          
-        
-          
-          
-        
-          
-          
-        
-          
-          
-            
-              
-  <section class='widget tagcloud'>
-    
-<header class='pure'>
-  <div><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;热门标签</div>
-  
-    <a class="rightBtn rotate90"
-    
-      rel="nofollow"
-    
-    
-      target="blank"
-    
-    href="/blog/tags/"
-    title="blog/tags/">
-    <i class="fas fa-expand-arrows-alt fa-fw"></i></a>
-  
-</header>
-
-    <div class='content pure'>
-      <a href="/tags/AOP/" style="font-size: 14px; color: #999">AOP</a> <a href="/tags/AWS/" style="font-size: 14px; color: #999">AWS</a> <a href="/tags/ArrayList/" style="font-size: 14px; color: #999">ArrayList</a> <a href="/tags/Arthas/" style="font-size: 14px; color: #999">Arthas</a> <a href="/tags/Chrome/" style="font-size: 14px; color: #999">Chrome</a> <a href="/tags/ClassLoader/" style="font-size: 14px; color: #999">ClassLoader</a> <a href="/tags/Docker/" style="font-size: 20.67px; color: #6c6c6c">Docker</a> <a href="/tags/EasyExcel/" style="font-size: 14px; color: #999">EasyExcel</a> <a href="/tags/English/" style="font-size: 15.67px; color: #8e8e8e">English</a> <a href="/tags/Excel/" style="font-size: 15.67px; color: #8e8e8e">Excel</a> <a href="/tags/Exception/" style="font-size: 14px; color: #999">Exception</a> <a href="/tags/Git/" style="font-size: 17.33px; color: #828282">Git</a> <a href="/tags/GitHub-Pages/" style="font-size: 14px; color: #999">GitHub Pages</a> <a href="/tags/Github/" style="font-size: 14px; color: #999">Github</a> <a href="/tags/HTTP/" style="font-size: 15.67px; color: #8e8e8e">HTTP</a> <a href="/tags/Happens-before/" style="font-size: 14px; color: #999">Happens-before</a> <a href="/tags/Hybris/" style="font-size: 14px; color: #999">Hybris</a> <a href="/tags/IO/" style="font-size: 14px; color: #999">IO</a> <a href="/tags/IntelliJ-IDEA/" style="font-size: 20.67px; color: #6c6c6c">IntelliJ IDEA</a> <a href="/tags/JDK/" style="font-size: 14px; color: #999">JDK</a> <a href="/tags/JDK%E6%BA%90%E7%A0%81/" style="font-size: 14px; color: #999">JDK源码</a> <a href="/tags/JVM/" style="font-size: 15.67px; color: #8e8e8e">JVM</a> <a href="/tags/Java/" style="font-size: 20.67px; color: #6c6c6c">Java</a> <a href="/tags/Java-Concurrency/" style="font-size: 24px; color: #555">Java-Concurrency</a> <a href="/tags/Jenkins/" style="font-size: 15.67px; color: #8e8e8e">Jenkins</a> <a href="/tags/Jrebel/" style="font-size: 14px; color: #999">Jrebel</a> <a href="/tags/Json/" style="font-size: 15.67px; color: #8e8e8e">Json</a> <a href="/tags/Linux/" style="font-size: 14px; color: #999">Linux</a> <a href="/tags/Lombok/" style="font-size: 14px; color: #999">Lombok</a> <a href="/tags/Maven/" style="font-size: 15.67px; color: #8e8e8e">Maven</a> <a href="/tags/MessageConverter/" style="font-size: 14px; color: #999">MessageConverter</a> <a href="/tags/MyBatis/" style="font-size: 14px; color: #999">MyBatis</a> <a href="/tags/MySQL/" style="font-size: 17.33px; color: #828282">MySQL</a> <a href="/tags/Node/" style="font-size: 14px; color: #999">Node</a> <a href="/tags/OAuth2-0/" style="font-size: 14px; color: #999">OAuth2.0</a> <a href="/tags/POI/" style="font-size: 14px; color: #999">POI</a> <a href="/tags/PostMan/" style="font-size: 14px; color: #999">PostMan</a> <a href="/tags/RESTful/" style="font-size: 14px; color: #999">RESTful</a> <a href="/tags/SSL/" style="font-size: 14px; color: #999">SSL</a> <a href="/tags/Shiro/" style="font-size: 14px; color: #999">Shiro</a> <a href="/tags/Spring/" style="font-size: 15.67px; color: #8e8e8e">Spring</a> <a href="/tags/Spring-Aware/" style="font-size: 14px; color: #999">Spring Aware</a> <a href="/tags/Spring-Bean/" style="font-size: 19px; color: #777">Spring Bean</a> <a href="/tags/Spring-Boot/" style="font-size: 22.33px; color: #606060">Spring Boot</a> <a href="/tags/Spring-Data-Binding/" style="font-size: 14px; color: #999">Spring Data Binding</a> <a href="/tags/SpringMVC/" style="font-size: 14px; color: #999">SpringMVC</a> <a href="/tags/Springboot/" style="font-size: 14px; color: #999">Springboot</a> <a href="/tags/Starter/" style="font-size: 14px; color: #999">Starter</a> <a href="/tags/Windows/" style="font-size: 14px; color: #999">Windows</a> <a href="/tags/annotation/" style="font-size: 14px; color: #999">annotation</a> <a href="/tags/lambda/" style="font-size: 14px; color: #999">lambda</a> <a href="/tags/synchronized/" style="font-size: 14px; color: #999">synchronized</a> <a href="/tags/thread/" style="font-size: 14px; color: #999">thread</a> <a href="/tags/volatile/" style="font-size: 15.67px; color: #8e8e8e">volatile</a> <a href="/tags/%E4%BA%8C%E5%8F%89%E6%9F%A5%E6%89%BE%E6%A0%91/" style="font-size: 14px; color: #999">二叉查找树</a> <a href="/tags/%E4%BA%92%E6%96%A5/" style="font-size: 14px; color: #999">互斥</a> <a href="/tags/%E5%88%86%E5%B7%A5/" style="font-size: 14px; color: #999">分工</a> <a href="/tags/%E5%8E%9F%E5%AD%90%E6%80%A7/" style="font-size: 14px; color: #999">原子性</a> <a href="/tags/%E5%8F%AF%E8%A7%81%E6%80%A7/" style="font-size: 14px; color: #999">可见性</a> <a href="/tags/%E5%90%8C%E6%AD%A5/" style="font-size: 14px; color: #999">同步</a> <a href="/tags/%E5%A4%9A%E6%80%81/" style="font-size: 14px; color: #999">多态</a> <a href="/tags/%E5%B9%B6%E5%8F%91/" style="font-size: 14px; color: #999">并发</a> <a href="/tags/%E5%BE%AE%E4%BF%A1/" style="font-size: 14px; color: #999">微信</a> <a href="/tags/%E6%80%BB%E7%BB%93/" style="font-size: 19px; color: #777">总结</a> <a href="/tags/%E6%8C%87%E6%95%B0%E5%9F%BA%E9%87%91/" style="font-size: 14px; color: #999">指数基金</a> <a href="/tags/%E6%9C%89%E5%BA%8F%E6%80%A7/" style="font-size: 14px; color: #999">有序性</a> <a href="/tags/%E6%AD%BB%E9%94%81/" style="font-size: 14px; color: #999">死锁</a> <a href="/tags/%E6%B3%A8%E8%A7%A3/" style="font-size: 15.67px; color: #8e8e8e">注解</a> <a href="/tags/%E7%83%AD%E9%83%A8%E7%BD%B2/" style="font-size: 14px; color: #999">热部署</a> <a href="/tags/%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/" style="font-size: 19px; color: #777">生命周期</a> <a href="/tags/%E7%BA%A2%E9%BB%91%E6%A0%91/" style="font-size: 14px; color: #999">红黑树</a> <a href="/tags/%E8%A1%A8%E6%83%85/" style="font-size: 14px; color: #999">表情</a> <a href="/tags/%E8%B4%B9%E7%94%A8/" style="font-size: 14px; color: #999">费用</a> <a href="/tags/%E9%94%81/" style="font-size: 15.67px; color: #8e8e8e">锁</a> <a href="/tags/%E9%94%81%E7%B2%92%E5%BA%A6/" style="font-size: 14px; color: #999">锁粒度</a> <a href="/tags/%E9%9D%A2%E8%AF%95/" style="font-size: 19px; color: #777">面试</a>
-    </div>
-  </section>
-
-
-            
-          
-        
-          
-          
-        
-      
-        
-          
-          
-        
-          
-          
-        
-          
-          
-        
-          
-          
-        
-          
-          
-        
-          
-          
-        
-          
-          
-        
-          
-          
-            
-              
-
-
-  <section class='widget music'>
-    
-<header class='pure'>
-  <div><i class="fas fa-compact-disc fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;最近在听</div>
-  
-    <a class="rightBtn"
-    
-      rel="external nofollow noopener noreferrer"
-    
-    
-      target="_blank"
-    
-    href="https://music.163.com/#/my/m/music/playlist?id=2565998811"
-    title="https://music.163.com/#/my/m/music/playlist?id=2565998811">
-    <i class="far fa-heart fa-fw"></i></a>
-  
-</header>
-
-    <div class='content pure'>
-      
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.7.0/dist/APlayer.min.css">
-  <div class="aplayer"
-    data-theme="#1BCDFC"
-    
-    
-    data-mode="circulation"
-    data-server="netease"
-    data-type="playlist"
-    data-id="2565998811"
-    data-volume="0.7">
-  </div>
-  <script src="https://cdn.jsdelivr.net/npm/aplayer@1.7.0/dist/APlayer.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/meting@1.1.0/dist/Meting.min.js"></script>
-
-
-    </div>
-  </section>
-
-
-            
           
         
       
@@ -1131,6 +1050,22 @@
 <script>setLoadingBarProgress(80);</script>
 
 
+<script>
+    (function(){
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        }
+        else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+   
+
       <script>setLoadingBarProgress(60);</script>
     </div>
     <a class="s-top fas fa-arrow-up fa-fw" href='javascript:void(0)'></a>
@@ -1191,6 +1126,23 @@
 
 
 
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+  <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+  <script type="text/javascript">
+    var gitalk = new Gitalk({
+      clientID: "57bd3ce366ba25a73a1a",
+      clientSecret: "bab4a248180b9ac85b16fb44bf4ba171648f9cab",
+      repo: "myBlogTalk",
+      owner: "FraserYu",
+      admin: "FraserYu",
+      
+        id: location.pathname,      // Ensure uniqueness and length less than 50
+      
+      distractionFreeMode: false  // Facebook-like distraction free mode
+    });
+    gitalk.render('gitalk-container');
+  </script>
 
 
 

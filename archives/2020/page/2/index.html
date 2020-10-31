@@ -399,6 +399,124 @@
   <section class='meta'>
     
     
+    <div class="meta" id="header-meta">
+      
+        
+  <h2 class="title">
+    <a href="/p/github-new-ui.html">
+      Github UI 布局设计更新了，你发现了吗？
+    </a>
+  </h2>
+
+
+      
+      <div class='new-meta-box'>
+        
+          
+        
+          
+            
+  <div class='new-meta-item author'>
+    
+      <a href="https://dayarch.top" rel="nofollow">
+        
+          <img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png">
+        
+        <p>tanθ</p>
+      </a>
+    
+  </div>
+
+
+          
+        
+          
+            <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+    <p>2020-06-24</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+  
+  <div class='new-meta-item category'>
+    <a href='/categories/Coding/Others/' rel="nofollow">
+      <i class="fas fa-folder-open" aria-hidden="true"></i>
+      <p>Coding&nbsp;/&nbsp;Others</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            
+
+          
+        
+      </div>
+      
+        <hr>
+      
+    </div>
+  </section>
+
+
+  <section class="article typo">
+    <div class="article-entry" itemprop="articleBody">
+      话不多说，先看图，你一眼应该就能看出变化了
+
+
+
+Github 主要对 UI 设计以及 Repository 布局进行了更新，改善了访问和维护 Repository 的体验，其实主要有以下几点更新：
+
+ 1. 响应式的布局以及改进了移动端 Web 的体验
+ 2. 通过 Repository 侧边栏显示更多内容
+ 3. 能够在 Repository 侧边栏现实/隐藏 Release 版本以及 Packages 和 Environments
+
+
+
+目前整体改动虽然不大，但这些更改会为将来的渐进式改进奠定基础，接下来也会推出暗黑模式等内容
+
+
+
+
+顺便要说一下，浏览 Github 必须要有的神器 O
+      
+        <div class="readmore">
+          <a href="/p/github-new-ui.html" class="flat-box">
+            <i class="fas fa-book-open fa-fw" aria-hidden="true"></i>
+            阅读全文
+          </a>
+        </div>
+      
+    </div>
+    
+      <div class="full-width auto-padding tags">
+        
+          <a href="/tags/Github/" rel="nofollow"><i class="fas fa-tag fa-fw"></i> Github</a>
+        
+      </div>
+    
+  </section>
+</article>
+
+          </div>
+        
+      
+        
+          <div class='post-wrapper'>
+            <article class="post reveal ">
+  
+
+
+  <section class='meta'>
+    
+    
       <a title='搞定ReentrantReadWriteLock 几道小小数学题就够了' href='/p/java-reentrant-read-write-lock.html'><img class='thumbnail' src='https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgconcurrency.png'></a>
     
     <div class="meta" id="header-meta">
@@ -1480,124 +1598,6 @@ Java 并发系列 已经写了很多，从来还没提起过那个它【Java线�
           </div>
         
       
-        
-          <div class='post-wrapper'>
-            <article class="post reveal ">
-  
-
-
-  <section class='meta'>
-    
-    
-      <a title='并发编程之等待通知机制' href='/p/waiting-notification-mechanism.html'><img class='thumbnail' src='https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgconcurrency.png'></a>
-    
-    <div class="meta" id="header-meta">
-      
-        
-  <h2 class="title">
-    <a href="/p/waiting-notification-mechanism.html">
-      并发编程之等待通知机制
-    </a>
-  </h2>
-
-
-      
-      <div class='new-meta-box'>
-        
-          
-        
-          
-            
-  <div class='new-meta-item author'>
-    
-      <a href="https://dayarch.top" rel="nofollow">
-        
-          <img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png">
-        
-        <p>tanθ</p>
-      </a>
-    
-  </div>
-
-
-          
-        
-          
-            <div class="new-meta-item date">
-  <a class='notlink'>
-    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-    <p>2020-03-15</p>
-  </a>
-</div>
-
-          
-        
-          
-            
-  
-  <div class='new-meta-item category'>
-    <a href='/categories/Coding/Java-Concurrency/' rel="nofollow">
-      <i class="fas fa-folder-open" aria-hidden="true"></i>
-      <p>Coding&nbsp;/&nbsp;Java-Concurrency</p>
-    </a>
-  </div>
-
-
-          
-        
-          
-            
-
-          
-        
-      </div>
-      
-        <hr>
-      
-    </div>
-  </section>
-
-
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      并发编程为什么会有等待通知机制
-上一篇文章说明了 Java并发死锁解决思路 ， 解决死锁的思路之一就是 破坏请求和保持条件, 所有柜员都要通过唯一的账本管理员一次性拿到所有转账业务需要的账本，就像下面这样： 
-
-
-
-没有等待/通知机制之前，所有柜员都通过死循环的方式不断向账本管理员申请所有账本，程序的体现就是这样：
-
-1
-2
-
-
-while(!accountBookManager.getAllRequiredAccountBook(this, target)) 
-；
-
-
-假如账本管理员是年轻小伙，腿脚利落（即执行 getAllRequiredAccountBook方法耗时短），并且多个柜员转账
-      
-        <div class="readmore">
-          <a href="/p/waiting-notification-mechanism.html" class="flat-box">
-            <i class="fas fa-book-open fa-fw" aria-hidden="true"></i>
-            阅读全文
-          </a>
-        </div>
-      
-    </div>
-    
-      <div class="full-width auto-padding tags">
-        
-          <a href="/tags/Java-Concurrency/" rel="nofollow"><i class="fas fa-tag fa-fw"></i> Java-Concurrency</a>
-        
-      </div>
-    
-  </section>
-</article>
-
-          </div>
-        
-      
     
   </section>
   
@@ -1945,7 +1945,7 @@ while(!accountBookManager.getAllRequiredAccountBook(this, target))
         
           <li><a class="flat-box" title="/categories/AWS/" href="/categories/AWS/"><div class='name'>AWS</div><div class='badge'>(1)</div></a></li>
         
-          <li><a class="flat-box" title="/categories/Coding/" href="/categories/Coding/"><div class='name'>Coding</div><div class='badge'>(85)</div></a></li>
+          <li><a class="flat-box" title="/categories/Coding/" href="/categories/Coding/"><div class='name'>Coding</div><div class='badge'>(86)</div></a></li>
         
           <li><a class="flat-box child" title="/categories/Coding/Arthas/" href="/categories/Coding/Arthas/"><div class='name'>Arthas</div><div class='badge'>(1)</div></a></li>
         
@@ -1955,7 +1955,7 @@ while(!accountBookManager.getAllRequiredAccountBook(this, target))
         
           <li><a class="flat-box child" title="/categories/Coding/Java-Concurrency/" href="/categories/Coding/Java-Concurrency/"><div class='name'>Java-Concurrency</div><div class='badge'>(22)</div></a></li>
         
-          <li><a class="flat-box child" title="/categories/Coding/Java/" href="/categories/Coding/Java/"><div class='name'>Java</div><div class='badge'>(15)</div></a></li>
+          <li><a class="flat-box child" title="/categories/Coding/Java/" href="/categories/Coding/Java/"><div class='name'>Java</div><div class='badge'>(16)</div></a></li>
         
           <li><a class="flat-box child" title="/categories/Coding/Linux/" href="/categories/Coding/Linux/"><div class='name'>Linux</div><div class='badge'>(1)</div></a></li>
         
@@ -2038,7 +2038,7 @@ while(!accountBookManager.getAllRequiredAccountBook(this, target))
 </header>
 
     <div class='content pure'>
-      <a href="/tags/AOP/" style="font-size: 14px; color: #999">AOP</a> <a href="/tags/AWS/" style="font-size: 14px; color: #999">AWS</a> <a href="/tags/ArrayList/" style="font-size: 14px; color: #999">ArrayList</a> <a href="/tags/Arthas/" style="font-size: 14px; color: #999">Arthas</a> <a href="/tags/Chrome/" style="font-size: 14px; color: #999">Chrome</a> <a href="/tags/ClassLoader/" style="font-size: 14px; color: #999">ClassLoader</a> <a href="/tags/Docker/" style="font-size: 20.67px; color: #6c6c6c">Docker</a> <a href="/tags/EasyExcel/" style="font-size: 14px; color: #999">EasyExcel</a> <a href="/tags/English/" style="font-size: 15.67px; color: #8e8e8e">English</a> <a href="/tags/Excel/" style="font-size: 15.67px; color: #8e8e8e">Excel</a> <a href="/tags/Exception/" style="font-size: 14px; color: #999">Exception</a> <a href="/tags/Git/" style="font-size: 17.33px; color: #828282">Git</a> <a href="/tags/GitHub-Pages/" style="font-size: 14px; color: #999">GitHub Pages</a> <a href="/tags/Github/" style="font-size: 14px; color: #999">Github</a> <a href="/tags/HTTP/" style="font-size: 15.67px; color: #8e8e8e">HTTP</a> <a href="/tags/Happens-before/" style="font-size: 14px; color: #999">Happens-before</a> <a href="/tags/Hybris/" style="font-size: 14px; color: #999">Hybris</a> <a href="/tags/IO/" style="font-size: 14px; color: #999">IO</a> <a href="/tags/IntelliJ-IDEA/" style="font-size: 19px; color: #777">IntelliJ IDEA</a> <a href="/tags/JDK/" style="font-size: 14px; color: #999">JDK</a> <a href="/tags/JDK%E6%BA%90%E7%A0%81/" style="font-size: 14px; color: #999">JDK源码</a> <a href="/tags/JVM/" style="font-size: 15.67px; color: #8e8e8e">JVM</a> <a href="/tags/Java/" style="font-size: 20.67px; color: #6c6c6c">Java</a> <a href="/tags/Java-Concurrency/" style="font-size: 24px; color: #555">Java-Concurrency</a> <a href="/tags/Jenkins/" style="font-size: 15.67px; color: #8e8e8e">Jenkins</a> <a href="/tags/Jrebel/" style="font-size: 14px; color: #999">Jrebel</a> <a href="/tags/Json/" style="font-size: 15.67px; color: #8e8e8e">Json</a> <a href="/tags/Linux/" style="font-size: 14px; color: #999">Linux</a> <a href="/tags/Lombok/" style="font-size: 14px; color: #999">Lombok</a> <a href="/tags/Maven/" style="font-size: 15.67px; color: #8e8e8e">Maven</a> <a href="/tags/MessageConverter/" style="font-size: 14px; color: #999">MessageConverter</a> <a href="/tags/MyBatis/" style="font-size: 14px; color: #999">MyBatis</a> <a href="/tags/MySQL/" style="font-size: 17.33px; color: #828282">MySQL</a> <a href="/tags/Node/" style="font-size: 14px; color: #999">Node</a> <a href="/tags/OAuth2-0/" style="font-size: 14px; color: #999">OAuth2.0</a> <a href="/tags/POI/" style="font-size: 14px; color: #999">POI</a> <a href="/tags/PostMan/" style="font-size: 14px; color: #999">PostMan</a> <a href="/tags/RESTful/" style="font-size: 14px; color: #999">RESTful</a> <a href="/tags/SSL/" style="font-size: 14px; color: #999">SSL</a> <a href="/tags/Shiro/" style="font-size: 14px; color: #999">Shiro</a> <a href="/tags/Spring/" style="font-size: 15.67px; color: #8e8e8e">Spring</a> <a href="/tags/Spring-Aware/" style="font-size: 14px; color: #999">Spring Aware</a> <a href="/tags/Spring-Bean/" style="font-size: 19px; color: #777">Spring Bean</a> <a href="/tags/Spring-Boot/" style="font-size: 22.33px; color: #606060">Spring Boot</a> <a href="/tags/Spring-Data-Binding/" style="font-size: 14px; color: #999">Spring Data Binding</a> <a href="/tags/SpringMVC/" style="font-size: 14px; color: #999">SpringMVC</a> <a href="/tags/Springboot/" style="font-size: 14px; color: #999">Springboot</a> <a href="/tags/Starter/" style="font-size: 14px; color: #999">Starter</a> <a href="/tags/Windows/" style="font-size: 14px; color: #999">Windows</a> <a href="/tags/annotation/" style="font-size: 14px; color: #999">annotation</a> <a href="/tags/lambda/" style="font-size: 14px; color: #999">lambda</a> <a href="/tags/synchronized/" style="font-size: 14px; color: #999">synchronized</a> <a href="/tags/thread/" style="font-size: 14px; color: #999">thread</a> <a href="/tags/volatile/" style="font-size: 15.67px; color: #8e8e8e">volatile</a> <a href="/tags/%E4%BA%8C%E5%8F%89%E6%9F%A5%E6%89%BE%E6%A0%91/" style="font-size: 14px; color: #999">二叉查找树</a> <a href="/tags/%E4%BA%92%E6%96%A5/" style="font-size: 14px; color: #999">互斥</a> <a href="/tags/%E5%88%86%E5%B7%A5/" style="font-size: 14px; color: #999">分工</a> <a href="/tags/%E5%8E%9F%E5%AD%90%E6%80%A7/" style="font-size: 14px; color: #999">原子性</a> <a href="/tags/%E5%8F%AF%E8%A7%81%E6%80%A7/" style="font-size: 14px; color: #999">可见性</a> <a href="/tags/%E5%90%8C%E6%AD%A5/" style="font-size: 14px; color: #999">同步</a> <a href="/tags/%E5%A4%9A%E6%80%81/" style="font-size: 14px; color: #999">多态</a> <a href="/tags/%E5%B9%B6%E5%8F%91/" style="font-size: 14px; color: #999">并发</a> <a href="/tags/%E5%BE%AE%E4%BF%A1/" style="font-size: 14px; color: #999">微信</a> <a href="/tags/%E6%80%BB%E7%BB%93/" style="font-size: 19px; color: #777">总结</a> <a href="/tags/%E6%8C%87%E6%95%B0%E5%9F%BA%E9%87%91/" style="font-size: 14px; color: #999">指数基金</a> <a href="/tags/%E6%9C%89%E5%BA%8F%E6%80%A7/" style="font-size: 14px; color: #999">有序性</a> <a href="/tags/%E6%AD%BB%E9%94%81/" style="font-size: 14px; color: #999">死锁</a> <a href="/tags/%E6%B3%A8%E8%A7%A3/" style="font-size: 15.67px; color: #8e8e8e">注解</a> <a href="/tags/%E7%83%AD%E9%83%A8%E7%BD%B2/" style="font-size: 14px; color: #999">热部署</a> <a href="/tags/%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/" style="font-size: 19px; color: #777">生命周期</a> <a href="/tags/%E7%BA%A2%E9%BB%91%E6%A0%91/" style="font-size: 14px; color: #999">红黑树</a> <a href="/tags/%E8%A1%A8%E6%83%85/" style="font-size: 14px; color: #999">表情</a> <a href="/tags/%E8%B4%B9%E7%94%A8/" style="font-size: 14px; color: #999">费用</a> <a href="/tags/%E9%94%81/" style="font-size: 15.67px; color: #8e8e8e">锁</a> <a href="/tags/%E9%94%81%E7%B2%92%E5%BA%A6/" style="font-size: 14px; color: #999">锁粒度</a> <a href="/tags/%E9%9D%A2%E8%AF%95/" style="font-size: 19px; color: #777">面试</a>
+      <a href="/tags/AOP/" style="font-size: 14px; color: #999">AOP</a> <a href="/tags/AWS/" style="font-size: 14px; color: #999">AWS</a> <a href="/tags/ArrayList/" style="font-size: 14px; color: #999">ArrayList</a> <a href="/tags/Arthas/" style="font-size: 14px; color: #999">Arthas</a> <a href="/tags/Chrome/" style="font-size: 14px; color: #999">Chrome</a> <a href="/tags/ClassLoader/" style="font-size: 14px; color: #999">ClassLoader</a> <a href="/tags/Docker/" style="font-size: 20.67px; color: #6c6c6c">Docker</a> <a href="/tags/EasyExcel/" style="font-size: 14px; color: #999">EasyExcel</a> <a href="/tags/English/" style="font-size: 15.67px; color: #8e8e8e">English</a> <a href="/tags/Excel/" style="font-size: 15.67px; color: #8e8e8e">Excel</a> <a href="/tags/Exception/" style="font-size: 14px; color: #999">Exception</a> <a href="/tags/Git/" style="font-size: 17.33px; color: #828282">Git</a> <a href="/tags/GitHub-Pages/" style="font-size: 14px; color: #999">GitHub Pages</a> <a href="/tags/Github/" style="font-size: 14px; color: #999">Github</a> <a href="/tags/HTTP/" style="font-size: 15.67px; color: #8e8e8e">HTTP</a> <a href="/tags/Happens-before/" style="font-size: 14px; color: #999">Happens-before</a> <a href="/tags/Hybris/" style="font-size: 14px; color: #999">Hybris</a> <a href="/tags/IO/" style="font-size: 14px; color: #999">IO</a> <a href="/tags/IntelliJ-IDEA/" style="font-size: 20.67px; color: #6c6c6c">IntelliJ IDEA</a> <a href="/tags/JDK/" style="font-size: 14px; color: #999">JDK</a> <a href="/tags/JDK%E6%BA%90%E7%A0%81/" style="font-size: 14px; color: #999">JDK源码</a> <a href="/tags/JVM/" style="font-size: 15.67px; color: #8e8e8e">JVM</a> <a href="/tags/Java/" style="font-size: 20.67px; color: #6c6c6c">Java</a> <a href="/tags/Java-Concurrency/" style="font-size: 24px; color: #555">Java-Concurrency</a> <a href="/tags/Jenkins/" style="font-size: 15.67px; color: #8e8e8e">Jenkins</a> <a href="/tags/Jrebel/" style="font-size: 14px; color: #999">Jrebel</a> <a href="/tags/Json/" style="font-size: 15.67px; color: #8e8e8e">Json</a> <a href="/tags/Linux/" style="font-size: 14px; color: #999">Linux</a> <a href="/tags/Lombok/" style="font-size: 14px; color: #999">Lombok</a> <a href="/tags/Maven/" style="font-size: 15.67px; color: #8e8e8e">Maven</a> <a href="/tags/MessageConverter/" style="font-size: 14px; color: #999">MessageConverter</a> <a href="/tags/MyBatis/" style="font-size: 14px; color: #999">MyBatis</a> <a href="/tags/MySQL/" style="font-size: 17.33px; color: #828282">MySQL</a> <a href="/tags/Node/" style="font-size: 14px; color: #999">Node</a> <a href="/tags/OAuth2-0/" style="font-size: 14px; color: #999">OAuth2.0</a> <a href="/tags/POI/" style="font-size: 14px; color: #999">POI</a> <a href="/tags/PostMan/" style="font-size: 14px; color: #999">PostMan</a> <a href="/tags/RESTful/" style="font-size: 14px; color: #999">RESTful</a> <a href="/tags/SSL/" style="font-size: 14px; color: #999">SSL</a> <a href="/tags/Shiro/" style="font-size: 14px; color: #999">Shiro</a> <a href="/tags/Spring/" style="font-size: 15.67px; color: #8e8e8e">Spring</a> <a href="/tags/Spring-Aware/" style="font-size: 14px; color: #999">Spring Aware</a> <a href="/tags/Spring-Bean/" style="font-size: 19px; color: #777">Spring Bean</a> <a href="/tags/Spring-Boot/" style="font-size: 22.33px; color: #606060">Spring Boot</a> <a href="/tags/Spring-Data-Binding/" style="font-size: 14px; color: #999">Spring Data Binding</a> <a href="/tags/SpringMVC/" style="font-size: 14px; color: #999">SpringMVC</a> <a href="/tags/Springboot/" style="font-size: 14px; color: #999">Springboot</a> <a href="/tags/Starter/" style="font-size: 14px; color: #999">Starter</a> <a href="/tags/Windows/" style="font-size: 14px; color: #999">Windows</a> <a href="/tags/annotation/" style="font-size: 14px; color: #999">annotation</a> <a href="/tags/lambda/" style="font-size: 14px; color: #999">lambda</a> <a href="/tags/synchronized/" style="font-size: 14px; color: #999">synchronized</a> <a href="/tags/thread/" style="font-size: 14px; color: #999">thread</a> <a href="/tags/volatile/" style="font-size: 15.67px; color: #8e8e8e">volatile</a> <a href="/tags/%E4%BA%8C%E5%8F%89%E6%9F%A5%E6%89%BE%E6%A0%91/" style="font-size: 14px; color: #999">二叉查找树</a> <a href="/tags/%E4%BA%92%E6%96%A5/" style="font-size: 14px; color: #999">互斥</a> <a href="/tags/%E5%88%86%E5%B7%A5/" style="font-size: 14px; color: #999">分工</a> <a href="/tags/%E5%8E%9F%E5%AD%90%E6%80%A7/" style="font-size: 14px; color: #999">原子性</a> <a href="/tags/%E5%8F%AF%E8%A7%81%E6%80%A7/" style="font-size: 14px; color: #999">可见性</a> <a href="/tags/%E5%90%8C%E6%AD%A5/" style="font-size: 14px; color: #999">同步</a> <a href="/tags/%E5%A4%9A%E6%80%81/" style="font-size: 14px; color: #999">多态</a> <a href="/tags/%E5%B9%B6%E5%8F%91/" style="font-size: 14px; color: #999">并发</a> <a href="/tags/%E5%BE%AE%E4%BF%A1/" style="font-size: 14px; color: #999">微信</a> <a href="/tags/%E6%80%BB%E7%BB%93/" style="font-size: 19px; color: #777">总结</a> <a href="/tags/%E6%8C%87%E6%95%B0%E5%9F%BA%E9%87%91/" style="font-size: 14px; color: #999">指数基金</a> <a href="/tags/%E6%9C%89%E5%BA%8F%E6%80%A7/" style="font-size: 14px; color: #999">有序性</a> <a href="/tags/%E6%AD%BB%E9%94%81/" style="font-size: 14px; color: #999">死锁</a> <a href="/tags/%E6%B3%A8%E8%A7%A3/" style="font-size: 15.67px; color: #8e8e8e">注解</a> <a href="/tags/%E7%83%AD%E9%83%A8%E7%BD%B2/" style="font-size: 14px; color: #999">热部署</a> <a href="/tags/%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/" style="font-size: 19px; color: #777">生命周期</a> <a href="/tags/%E7%BA%A2%E9%BB%91%E6%A0%91/" style="font-size: 14px; color: #999">红黑树</a> <a href="/tags/%E8%A1%A8%E6%83%85/" style="font-size: 14px; color: #999">表情</a> <a href="/tags/%E8%B4%B9%E7%94%A8/" style="font-size: 14px; color: #999">费用</a> <a href="/tags/%E9%94%81/" style="font-size: 15.67px; color: #8e8e8e">锁</a> <a href="/tags/%E9%94%81%E7%B2%92%E5%BA%A6/" style="font-size: 14px; color: #999">锁粒度</a> <a href="/tags/%E9%9D%A2%E8%AF%95/" style="font-size: 19px; color: #777">面试</a>
     </div>
   </section>
 
@@ -2172,7 +2172,7 @@ while(!accountBookManager.getAllRequiredAccountBook(this, target))
   &nbsp;&nbsp;|&nbsp;&nbsp;  
   
     &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-        class="white-color">233.5k</span>&nbsp;字
+        class="white-color">234.6k</span>&nbsp;字
     
 
   &nbsp;&nbsp;|&nbsp;&nbsp;  

@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://dayarch.top/"/>
-  <updated>2020-10-12T11:34:53.647Z</updated>
+  <updated>2020-10-31T13:22:33.095Z</updated>
   <id>https://dayarch.top/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Intellij IDEA 创建Scratch files 和 Scratch buffers</title>
+    <link href="https://dayarch.top//p/scratch-files-and-scratch-bufferss.html"/>
+    <id>https://dayarch.top//p/scratch-files-and-scratch-bufferss.html</id>
+    <published>2020-10-31T13:18:28.000Z</published>
+    <updated>2020-10-31T13:22:33.095Z</updated>
+    
+    <summary type="html">
+    
+      有时候我们需要在项目之外创建一些临时文件或一些实验性代码，创建在项目中可能一不小心 Git 误提交，不创建项目里又需要切换到其他应用上来回拷贝，对于专注 coding 的我们来说，总显得不够流畅，IDEA 其实早已为我们解决了这个痛点，借助 Scratch files 和 Scratch buffers 就可以解决
+    
+    </summary>
+    
+    
+      <category term="Coding" scheme="https://dayarch.top/categories/Coding/"/>
+    
+      <category term="Java" scheme="https://dayarch.top/categories/Coding/Java/"/>
+    
+    
+      <category term="IntelliJ IDEA" scheme="https://dayarch.top/tags/IntelliJ-IDEA/"/>
+    
+  </entry>
   
   <entry>
     <title>借助Serverless Framework玩转AWS Lambda</title>
@@ -127,9 +150,9 @@
       <category term="Java" scheme="https://dayarch.top/categories/Coding/Java/"/>
     
     
-      <category term="面试" scheme="https://dayarch.top/tags/%E9%9D%A2%E8%AF%95/"/>
-    
       <category term="JVM" scheme="https://dayarch.top/tags/JVM/"/>
+    
+      <category term="面试" scheme="https://dayarch.top/tags/%E9%9D%A2%E8%AF%95/"/>
     
   </entry>
   
@@ -472,29 +495,6 @@ Github 主要对 UI 设计以及 Repository 布局进行了更新，改善了访
     <summary type="html">
     
       了解Java线程的生命周期是编写并发程序的基础，如何透彻的理解，它们的状态如何转换，如果你始终不能理解或记忆这些问题，相信这篇文章会帮你解惑
-    
-    </summary>
-    
-    
-      <category term="Coding" scheme="https://dayarch.top/categories/Coding/"/>
-    
-      <category term="Java-Concurrency" scheme="https://dayarch.top/categories/Coding/Java-Concurrency/"/>
-    
-    
-      <category term="Java-Concurrency" scheme="https://dayarch.top/tags/Java-Concurrency/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>并发编程之等待通知机制</title>
-    <link href="https://dayarch.top//p/waiting-notification-mechanism.html"/>
-    <id>https://dayarch.top//p/waiting-notification-mechanism.html</id>
-    <published>2020-03-15T07:47:24.000Z</published>
-    <updated>2020-03-15T08:07:45.452Z</updated>
-    
-    <summary type="html">
-    
-      等待通知机制可以人为是一种设计模式，不只应用在并发编程领域，但是懂得如何使用这个机制是并发编程必不可少的技能
     
     </summary>
     
