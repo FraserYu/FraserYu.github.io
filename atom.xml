@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://dayarch.top/"/>
-  <updated>2020-11-29T13:30:41.739Z</updated>
+  <updated>2020-12-04T14:26:50.135Z</updated>
   <id>https://dayarch.top/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Docker命令自动补全</title>
+    <link href="https://dayarch.top//p/docker-install-command-completion.html"/>
+    <id>https://dayarch.top//p/docker-install-command-completion.html</id>
+    <published>2020-12-04T14:23:44.000Z</published>
+    <updated>2020-12-04T14:26:50.135Z</updated>
+    
+    <summary type="html">
+    
+      安装Docker命令补全，加速学习
+    
+    </summary>
+    
+    
+      <category term="Coding" scheme="https://dayarch.top/categories/Coding/"/>
+    
+      <category term="Docker" scheme="https://dayarch.top/categories/Coding/Docker/"/>
+    
+    
+      <category term="Docker" scheme="https://dayarch.top/tags/Docker/"/>
+    
+  </entry>
   
   <entry>
     <title>PowerToys,一款强大的Windows工具</title>
@@ -469,42 +492,6 @@ Github 主要对 UI 设计以及 Repository 布局进行了更新，改善了访
     
     
       <category term="Java-Concurrency" scheme="https://dayarch.top/tags/Java-Concurrency/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>如何清爽的安排日常？</title>
-    <link href="https://dayarch.top//p/how-to-organize-your-day.html"/>
-    <id>https://dayarch.top//p/how-to-organize-your-day.html</id>
-    <published>2020-04-12T08:01:18.000Z</published>
-    <updated>2020-04-15T00:16:02.641Z</updated>
-    
-    <summary type="html">
-    
-      有朋友私信问我如何安排日常，以及相对高效的写东西？我觉得有必要单独写一篇文章来和大家交流这个事
-
-不做没有灵魂的 TODO List
-我们都是上进的好青年，大家手里应该都有自己的 TODO list，我通常会用 Microsoft To Do 这款软件做简单的日常安排
-
-
-
-求学期间，每个寒暑假临近，我都可以把做各种 plan，立各种 flag 的气质拿捏的死死的。如你所料，假期过后一个 plan 都没有做，一个 flag 都没有完成。
-
-这种表面风光，实则没有了灵魂TODO list 只是短期心理慰藉，当需要验证结果时，情绪轻则低落一会，重则焦虑半天
-
-造成这种问题的原因很简单
-
- * 大杂
-    
-    </summary>
-    
-    
-      <category term="Life" scheme="https://dayarch.top/categories/Life/"/>
-    
-      <category term="其他" scheme="https://dayarch.top/categories/Life/%E5%85%B6%E4%BB%96/"/>
-    
-    
-      <category term="总结" scheme="https://dayarch.top/tags/%E6%80%BB%E7%BB%93/"/>
     
   </entry>
   
