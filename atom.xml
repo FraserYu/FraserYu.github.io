@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://dayarch.top/"/>
-  <updated>2020-12-04T14:26:50.135Z</updated>
+  <updated>2020-12-22T09:20:39.067Z</updated>
   <id>https://dayarch.top/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Docker Container就是个进程</title>
+    <link href="https://dayarch.top//p/docker-container-is-a-process.html"/>
+    <id>https://dayarch.top//p/docker-container-is-a-process.html</id>
+    <published>2020-12-22T09:16:18.000Z</published>
+    <updated>2020-12-22T09:20:39.067Z</updated>
+    
+    <summary type="html">
+    
+      学习新内容有门槛，降低门槛的办法就是贴近我们已有知识，Docker Container 其实就是一个进程，进程是可以获取操作系统资源的，Container 亦是如此，只不过具体的方式在上层做了封装略有不同
+    
+    </summary>
+    
+    
+      <category term="Coding" scheme="https://dayarch.top/categories/Coding/"/>
+    
+      <category term="Docker" scheme="https://dayarch.top/categories/Coding/Docker/"/>
+    
+    
+      <category term="Docker" scheme="https://dayarch.top/tags/Docker/"/>
+    
+  </entry>
   
   <entry>
     <title>Docker命令自动补全</title>
@@ -469,29 +492,6 @@ Github 主要对 UI 设计以及 Repository 布局进行了更新，改善了访
     
     
       <category term="IntelliJ IDEA" scheme="https://dayarch.top/tags/IntelliJ-IDEA/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>为什么要使用线程池?</title>
-    <link href="https://dayarch.top//p/why-we-need-to-use-threadpool.html"/>
-    <id>https://dayarch.top//p/why-we-need-to-use-threadpool.html</id>
-    <published>2020-04-19T07:17:38.000Z</published>
-    <updated>2020-04-22T00:29:08.547Z</updated>
-    
-    <summary type="html">
-    
-      我们会使用三种方式手动创建线程，为什么不允许随意创建线程，而要求使用线程池呢？因为手动创建线程的不可控风险和大的开销是我们不能承受的，所以需要线程池，通过最大化收益，同时最小化风险，将线程资源统一管理起来
-    
-    </summary>
-    
-    
-      <category term="Coding" scheme="https://dayarch.top/categories/Coding/"/>
-    
-      <category term="Java-Concurrency" scheme="https://dayarch.top/categories/Coding/Java-Concurrency/"/>
-    
-    
-      <category term="Java-Concurrency" scheme="https://dayarch.top/tags/Java-Concurrency/"/>
     
   </entry>
   

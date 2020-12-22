@@ -401,6 +401,116 @@
   <section class='meta'>
     
     
+      <a title='HttpMessageConverter转换原理解析' href='/p/spring-boot-messageconverter.html'><img class='thumbnail' src='https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgspringbootconverter.png'></a>
+    
+    <div class="meta" id="header-meta">
+      
+        
+  <h2 class="title">
+    <a href="/p/spring-boot-messageconverter.html">
+      HttpMessageConverter转换原理解析
+    </a>
+  </h2>
+
+
+      
+      <div class='new-meta-box'>
+        
+          
+        
+          
+            
+  <div class='new-meta-item author'>
+    
+      <a href="https://dayarch.top" rel="nofollow">
+        
+          <img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png">
+        
+        <p>tanθ</p>
+      </a>
+    
+  </div>
+
+
+          
+        
+          
+            <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+    <p>2019-11-07</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+  
+  <div class='new-meta-item category'>
+    <a href='/categories/Coding/Spring-Boot/' rel="nofollow">
+      <i class="fas fa-folder-open" aria-hidden="true"></i>
+      <p>Coding&nbsp;/&nbsp;Spring-Boot</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            
+
+          
+        
+      </div>
+      
+        <hr>
+      
+    </div>
+  </section>
+
+
+  <section class="article typo">
+    <div class="article-entry" itemprop="articleBody">
+      Java Web 人员经常要设计 RESTful API（如何设计好的RESTful API），通过 json 数据进行交互。那么前端传入的 json 数据如何被解析成 Java 对象作为 API入参，API 返回结果又如何将 Java 对象解析成 json 格式数据返回给前端，其实在整个数据流转过程中，HttpMessageConverter 起到了重要作用；另外在转换的过程我们可以加入哪些定制化内容？
+
+HttpMessageConverter 介绍
+org.springframework.http.converter.HttpMessageConverter 是一个策略接口，接口说明如下
+      
+        <div class="readmore">
+          <a href="/p/spring-boot-messageconverter.html" class="flat-box">
+            <i class="fas fa-book-open fa-fw" aria-hidden="true"></i>
+            阅读全文
+          </a>
+        </div>
+      
+    </div>
+    
+      <div class="full-width auto-padding tags">
+        
+          <a href="/tags/Spring-Boot/" rel="nofollow"><i class="fas fa-tag fa-fw"></i> Spring Boot</a>
+        
+          <a href="/tags/MessageConverter/" rel="nofollow"><i class="fas fa-tag fa-fw"></i> MessageConverter</a>
+        
+          <a href="/tags/HTTP/" rel="nofollow"><i class="fas fa-tag fa-fw"></i> HTTP</a>
+        
+      </div>
+    
+  </section>
+</article>
+
+          </div>
+        
+      
+        
+          <div class='post-wrapper'>
+            <article class="post reveal ">
+  
+
+
+  <section class='meta'>
+    
+    
       <a title='Java12 Collectors.teeing 的使用详解' href='/p/jdk12-collectors-teeing-api-usage.html'><img class='thumbnail' src='https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgjava.png'></a>
     
     <div class="meta" id="header-meta">
@@ -1082,11 +1192,11 @@ Java 后端程序员应该会遇到读取 Excel 信息到 DB 等相关需求，�
         
           <a href="/tags/Spring-Boot/" rel="nofollow"><i class="fas fa-tag fa-fw"></i> Spring Boot</a>
         
+          <a href="/tags/Excel/" rel="nofollow"><i class="fas fa-tag fa-fw"></i> Excel</a>
+        
           <a href="/tags/EasyExcel/" rel="nofollow"><i class="fas fa-tag fa-fw"></i> EasyExcel</a>
         
           <a href="/tags/POI/" rel="nofollow"><i class="fas fa-tag fa-fw"></i> POI</a>
-        
-          <a href="/tags/Excel/" rel="nofollow"><i class="fas fa-tag fa-fw"></i> Excel</a>
         
       </div>
     
@@ -1436,125 +1546,6 @@ happens-before 之 volatile 变量规则
           </div>
         
       
-        
-          <div class='post-wrapper'>
-            <article class="post reveal ">
-  
-
-
-  <section class='meta'>
-    
-    
-      <a title='并发编程三大问题' href='/p/java-concurrency-three-questions.html'><img class='thumbnail' src='https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgconcurrency.png'></a>
-    
-    <div class="meta" id="header-meta">
-      
-        
-  <h2 class="title">
-    <a href="/p/java-concurrency-three-questions.html">
-      并发编程三大问题
-    </a>
-  </h2>
-
-
-      
-      <div class='new-meta-box'>
-        
-          
-        
-          
-            
-  <div class='new-meta-item author'>
-    
-      <a href="https://dayarch.top" rel="nofollow">
-        
-          <img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png">
-        
-        <p>tanθ</p>
-      </a>
-    
-  </div>
-
-
-          
-        
-          
-            <div class="new-meta-item date">
-  <a class='notlink'>
-    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-    <p>2019-09-04</p>
-  </a>
-</div>
-
-          
-        
-          
-            
-  
-  <div class='new-meta-item category'>
-    <a href='/categories/Coding/Java-Concurrency/' rel="nofollow">
-      <i class="fas fa-folder-open" aria-hidden="true"></i>
-      <p>Coding&nbsp;/&nbsp;Java-Concurrency</p>
-    </a>
-  </div>
-
-
-          
-        
-          
-            
-
-          
-        
-      </div>
-      
-        <hr>
-      
-    </div>
-  </section>
-
-
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      写在前面
- * 生活中你一定听说过——能者多劳
- * 作为 Java 程序员，你一定听过——这个功能请求慢，能加一层缓存或优化一下 SQL 吗？
- * 看过中国古代神话故事的也一定听过——天上一天，地上一年
-
-
-
-一切设计来源于生活，上一章 学并发编程，透彻理解这三个核心是关键 中有讲过，作为”资本家”，你要尽可能的榨取 CPU，内存与 IO 的剩余价值，但三者完成任务的速度相差很大，CPU > 内存 > IO分，CPU 是天，那内存就是地，内存是天，那 IO 就是地，那怎样平衡三者，提升整体速度呢？
-
- 1. CPU 增加缓存，还不止一层缓存，平衡内存的慢
- 2. CPU 能者多劳，通过分时
-      
-        <div class="readmore">
-          <a href="/p/java-concurrency-three-questions.html" class="flat-box">
-            <i class="fas fa-book-open fa-fw" aria-hidden="true"></i>
-            阅读全文
-          </a>
-        </div>
-      
-    </div>
-    
-      <div class="full-width auto-padding tags">
-        
-          <a href="/tags/Java-Concurrency/" rel="nofollow"><i class="fas fa-tag fa-fw"></i> Java-Concurrency</a>
-        
-          <a href="/tags/%E5%8F%AF%E8%A7%81%E6%80%A7/" rel="nofollow"><i class="fas fa-tag fa-fw"></i> 可见性</a>
-        
-          <a href="/tags/%E5%8E%9F%E5%AD%90%E6%80%A7/" rel="nofollow"><i class="fas fa-tag fa-fw"></i> 原子性</a>
-        
-          <a href="/tags/%E6%9C%89%E5%BA%8F%E6%80%A7/" rel="nofollow"><i class="fas fa-tag fa-fw"></i> 有序性</a>
-        
-      </div>
-    
-  </section>
-</article>
-
-          </div>
-        
-      
     
   </section>
   
@@ -1570,7 +1561,7 @@ happens-before 之 volatile 变量规则
             </a>
           
           <p class="current">
-            5 / 9
+            5 / 10
           </p>
           
             <a class="next" rel="next" href="/categories/Coding/page/6/">
@@ -1904,13 +1895,13 @@ happens-before 之 volatile 变量规则
         
           <li><a class="flat-box" title="/categories/AWS/" href="/categories/AWS/"><div class='name'>AWS</div><div class='badge'>(1)</div></a></li>
         
-          <li><a class="flat-box" title="/categories/Coding/" href="/categories/Coding/"><div class='name'>Coding</div><div class='badge'>(90)</div></a></li>
+          <li><a class="flat-box" title="/categories/Coding/" href="/categories/Coding/"><div class='name'>Coding</div><div class='badge'>(91)</div></a></li>
         
           <li><a class="flat-box child" title="/categories/Coding/Arthas/" href="/categories/Coding/Arthas/"><div class='name'>Arthas</div><div class='badge'>(1)</div></a></li>
         
           <li><a class="flat-box child" title="/categories/Coding/DevOps/" href="/categories/Coding/DevOps/"><div class='name'>DevOps</div><div class='badge'>(7)</div></a></li>
         
-          <li><a class="flat-box child" title="/categories/Coding/Docker/" href="/categories/Coding/Docker/"><div class='name'>Docker</div><div class='badge'>(6)</div></a></li>
+          <li><a class="flat-box child" title="/categories/Coding/Docker/" href="/categories/Coding/Docker/"><div class='name'>Docker</div><div class='badge'>(7)</div></a></li>
         
           <li><a class="flat-box child" title="/categories/Coding/Java-Concurrency/" href="/categories/Coding/Java-Concurrency/"><div class='name'>Java-Concurrency</div><div class='badge'>(22)</div></a></li>
         
@@ -2133,7 +2124,7 @@ happens-before 之 volatile 变量规则
   &nbsp;&nbsp;|&nbsp;&nbsp;  
   
     &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-        class="white-color">238.4k</span>&nbsp;字
+        class="white-color">239.4k</span>&nbsp;字
     
 
   &nbsp;&nbsp;|&nbsp;&nbsp;  

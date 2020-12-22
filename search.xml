@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>Docker Container就是个进程</title>
+      <link href="//p/docker-container-is-a-process.html"/>
+      <url>//p/docker-container-is-a-process.html</url>
+      
+        <content type="html"><![CDATA[<p>大家对 Docker 都应该有了或多或少的认识了，相信大家都是从这两张图来粗旷的理解 Docker 及容器概念的</p><p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20201221212233.png" alt=""></p><p>那我们如何更轻松的理解容器 <code>Container</code> 呢？说白了</p><h2 id="Container-就是一个进程"><a href="#Container-就是一个进程" class="headerlink" title="Container 就是一个进程"></a>Container 就是一个进程</h2><p>比如我们 <code>run</code> 一个 <code>mongo</code> 的镜像 <code>image</code></p><p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img2020-12-21at21.39.19.gif" alt=""></p><p>然后我们通过下面命令列举出正在运行的容器 (以下两个命令等同)</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 旧命令</span></span><br><span class="line">docker ps</span><br><span class="line"><span class="meta">#</span><span class="bash"> 新命令</span></span><br><span class="line">docker container ls</span><br></pre></td></tr></table></figure><p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20201221214553.png" alt=""></p><p>个人建议使用新命令</p><blockquote><p>如果你对上述等同命令有所疑惑，或者好奇动图中的命令自动补全是怎么实现的，以及为什么建议使用新命令，请看 <a href="https://dayarch.top/p/docker-install-command-completion.html">Docker 命令自动补全</a>，在不熟悉命令之前，建议充分利用 TAB 键来查看每个命令的含义，然后结合实际使用场景，慢慢记忆，这样才根深蒂固</p></blockquote><p>我们 run 下面命令：</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> top      -- Display the running processes of a container （这是 TAB 补全给的命令提示说明）</span></span><br><span class="line">docker container top mongo</span><br></pre></td></tr></table></figure><p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20201222160406.png" alt=""></p><p>从上图中可以看到，PID 为 2292，command 为 <code>mongod</code>。既然我们说 container 是一个进程，那我们就应该在 Host 中找得到，执行下面命令</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps aux | grep mongod</span><br></pre></td></tr></table></figure><p>查看执行结果：</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rgyb           49927   0.0  0.0  4277516    708 s000  S+    4:06PM   0:00.00 grep --color=auto --exclude-dir=.bzr --exclude-dir=CVS --exclude-dir=.git --exclude-dir=.hg --exclude-dir=.svn mongod</span><br></pre></td></tr></table></figure><p>关于 mongod 只有我们刚刚执行的 <code>grep mongod</code> 的操作，并没有上面说的 container，这是为什么？</p><p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20201222161238.png" alt=""></p><p>细心的朋友可能已经从动图中发现我是用 Mac 做的测试，Docker Platform 原生运行在 Linux 上（在 Linux 操作系统中就不会有上述问题，大家可以自行尝试）。我是用 Docker for Mac，其实使用的是在macOS上一个特殊的 xhyve VM中运行的小型(定制)Alpine Linux，所以如果想看到这个进程，我们需要进入到 Mac 的这个 Docker VM</p><p>执行下述命令：</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -it --rm --privileged --pid=host justincormack/nsenter1</span><br></pre></td></tr></table></figure><p>（这里暂不展开说明，有兴趣的可以看看这个 <a href="https://github.com/justincormack/nsenter1" target="_blank" rel="noopener">justincormack/nsenter1 image</a> 到底做了什么，Docker for Windows 也可以用这种方式进入 Docker VM）</p><p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20201222162637.png" alt=""></p><p>到这，Container 是个进程算是证明完了，但是老gong，你证明这个有什么用呢？</p><blockquote><p>程序员都对进程有基本了解，证明 Container 是个进程，只不过是将一个“新”东西剥开看看本质，并挂靠到你熟悉的内容上</p></blockquote><p>进程就是它可以获取操作系统的哪些资源（网络/磁盘/文件等），当停止进程，也就会自动退出，释放相应资源。所以，接下来只要慢慢探索，一个 Container 中使用了哪些资源，是如何获取资源的。了解了这些，也就慢慢了解了 Docker</p><p>大家可以通过下面两个命令了解 Container 的更多详情</p><ul><li><code>docker container inspect mongo</code> 查看Container 的详细信息（JSON 的数据形式）</li></ul><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Usage:docker container inspect [OPTIONS] CONTAINER [CONTAINER...]</span><br><span class="line"></span><br><span class="line">Display detailed information on one or more containers</span><br><span class="line"></span><br><span class="line">Options:</span><br><span class="line">  -f, --format string   Format the output using the given Go template</span><br><span class="line">  -s, --size            Display total file sizes</span><br><span class="line">------------------------------</span><br><span class="line">docker container inspect mongo</span><br></pre></td></tr></table></figure><p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20201222164416.png" alt=""></p><p>细节内容非常多，可以简单的看一看（一定有你一眼就能看明白的信息），暂不用深究</p><ul><li><code>docker container stats mongo</code> 查看资源是用情况（动态统计）</li></ul><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Usage:docker container stats [OPTIONS] [CONTAINER...]</span><br><span class="line"></span><br><span class="line">Display a live stream of container(s) resource usage statistics</span><br><span class="line"></span><br><span class="line">Options:</span><br><span class="line">  -a, --all             Show all containers (default shows just running)</span><br><span class="line">      --format string   Pretty-print images using a Go template</span><br><span class="line">      --no-stream       Disable streaming stats and only pull the first result</span><br><span class="line">      --no-trunc        Do not truncate output</span><br><span class="line">----------------------------      </span><br><span class="line">docker container stats mongo</span><br></pre></td></tr></table></figure><p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img2020-12-22at16.48.57.gif" alt=""></p><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>这里没有上来就和大家死背命令，现在不会，将来也不会。而是通过实际目的，结合命令补全自行查看的方式逐步认识与了解。强烈建议大家安装命令补全，可以尽情使用 TAB，也可以在每个命令后面添加 <code>--help</code> 的方式随时查看使用方式</p><p>证明 Container 就是一个进程，这样贴近我们已有知识后，学习门槛至少矮了半截吧。最后做个游戏吧，你记住了本文的多少个命令？</p><h2 id="灵魂追问"><a href="#灵魂追问" class="headerlink" title="灵魂追问"></a>灵魂追问</h2><ol><li>为什么资源动态统计 Mem LIMIT 是 1.941GB，这个是在哪里设置的？</li></ol>]]></content>
+      
+      
+      <categories>
+          
+          <category> Coding </category>
+          
+          <category> Docker </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Docker </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Docker命令自动补全</title>
       <link href="//p/docker-install-command-completion.html"/>
       <url>//p/docker-install-command-completion.html</url>
@@ -1027,11 +1054,11 @@
       
         <tags>
             
+            <tag> Spring Aware </tag>
+            
             <tag> Spring Bean </tag>
             
             <tag> 生命周期 </tag>
-            
-            <tag> Spring Aware </tag>
             
         </tags>
       
@@ -1149,9 +1176,9 @@
       
         <tags>
             
-            <tag> Java </tag>
-            
             <tag> 面试 </tag>
+            
+            <tag> Java </tag>
             
         </tags>
       
@@ -1441,11 +1468,11 @@
             
             <tag> Spring Boot </tag>
             
+            <tag> Excel </tag>
+            
             <tag> EasyExcel </tag>
             
             <tag> POI </tag>
-            
-            <tag> Excel </tag>
             
         </tags>
       
