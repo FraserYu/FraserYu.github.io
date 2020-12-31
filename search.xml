@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>2020归零，2021走你</title>
+      <link href="//p/2020-summary.html"/>
+      <url>//p/2020-summary.html</url>
+      
+        <content type="html"><![CDATA[<p>评论区留下你 2021 敢于公开被大家监督的 flag，年底检查作业，你想留级吗？</p><p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host@master/blog-imgyear-5026133_640.jpg" alt=""></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Life </category>
+          
+          <category> 其他 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 总结 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Docker Container就是个进程</title>
       <link href="//p/docker-container-is-a-process.html"/>
       <url>//p/docker-container-is-a-process.html</url>
@@ -1054,11 +1081,11 @@
       
         <tags>
             
-            <tag> Spring Aware </tag>
-            
             <tag> Spring Bean </tag>
             
             <tag> 生命周期 </tag>
+            
+            <tag> Spring Aware </tag>
             
         </tags>
       
@@ -2094,9 +2121,9 @@
       
         <tags>
             
-            <tag> Docker </tag>
-            
             <tag> Spring Boot </tag>
+            
+            <tag> Docker </tag>
             
         </tags>
       

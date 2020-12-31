@@ -4,12 +4,12 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   
-  <title>Spring Bean生命周期之缘起 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享</title>
+  <title>2020归零，2021走你 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享</title>
   
-  <meta name="keywords" content="Spring Bean生命周期, InitializingBean, @PostConstruct, init-method, Java,SpringBoot,并发编程, ElasticSearch, 日拱一兵">
+  <meta name="keywords" content="Java,SpringBoot,并发编程, ElasticSearch, 日拱一兵">
   
   
-  <meta name="description" content="透彻的理解Spring Bean 生命周期是掌握Spring Bean依赖的前提，了解它也可以让我们在特定的节点做特定的事情满足业务需要, 本站是日拱一兵的技术分享博客，内容涵盖Java后端技术、Spring Boot、Java并发编程等技术研究与分享，用有趣的方式解读技术">
+  <meta name="description" content="本站是日拱一兵的技术分享博客，内容涵盖Java后端技术、Spring Boot、Java并发编程等技术研究与分享，用有趣的方式解读技术">
   
 
   
@@ -392,16 +392,31 @@
 
   <section class='meta'>
     
+      
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.7.0/dist/APlayer.min.css">
+  <div class="aplayer"
+    data-theme=""
+    data-mini=true 
     
-      <a title='Spring Bean生命周期之缘起' href='/p/spring-bean-lifecycle-creation.html'><img class='thumbnail' src='https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgspringbootconverter.png'></a>
+    data-mode="circulation"
+    data-server="netease"
+    data-type="song"
+    data-id="33035611"
+    data-volume="0.7">
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/aplayer@1.7.0/dist/APlayer.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/meting@1.1.0/dist/Meting.min.js"></script>
+
+
+    
     
     <div class="meta" id="header-meta">
       
         
   
     <h1 class="title">
-      <a href="/p/spring-bean-lifecycle-creation.html">
-        Spring Bean生命周期之缘起
+      <a href="/p/2020-summary.html">
+        2020归零，2021走你
       </a>
     </h1>
   
@@ -432,7 +447,7 @@
             <div class="new-meta-item date">
   <a class='notlink'>
     <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-    <p>2019-12-20</p>
+    <p>2020-12-31</p>
   </a>
 </div>
 
@@ -442,9 +457,9 @@
             
   
   <div class='new-meta-item category'>
-    <a href='/categories/Coding/Spring-Boot/' rel="nofollow">
+    <a href='/categories/Life/%E5%85%B6%E4%BB%96/' rel="nofollow">
       <i class="fas fa-folder-open" aria-hidden="true"></i>
-      <p>Coding&nbsp;/&nbsp;Spring-Boot</p>
+      <p>Life&nbsp;/&nbsp;其他</p>
     </a>
   </div>
 
@@ -484,67 +499,14 @@
 
     <section class="article typo">
       <div class="article-entry" itemprop="articleBody">
-        <p>Spring bean 的生命周期很容易理解。实例化 bean 时，可能需要执行一些初始化以使其进入可用 （Ready for Use）状态。类似地，当不再需要 bean 并将其从容器中移除时，可能需要进行一些清理，这就是它的生命周期</p>
-<p>上一篇文章 <a href="https://dayarch.top/p/difference-between-beanfactory-and-applicationcontext.html">面试还不知道BeanFactory和ApplicationContext的区别？</a> 中说明了接口 Beanfactory 和 Applicationcontext 可以通过 <code>T getBean(String name, Class&lt;T&gt; requiredType)</code> 方法从 Spring 容器中获取bean，区别是，前者是懒加载形式，后者是预加载的形式。那么问题来了：</p>
-<blockquote>
-<p>这些 Spring Beans 是怎么生成出来的呢？ </p>
-</blockquote>
-<p>在正式回答这个问题之前，先解答一些有关 Java Bean， Spring Bean 和 Spring IoC 容器这些概念性的疑惑，我希望通过下面这个例子形象说明这些问题：</p>
-<blockquote>
-<p>小学生 （Java Bean）通过提交资料申请（元数据配置）加入了少先队（Spring Ioc 容器），学习了一些精神与规定之后，变成了少先队员（Spring Bean）</p>
-</blockquote>
-<p>从这里可以看出，Java Bean 和 Spring Bean 都是具有特定功能的对象，小学生还是那个小学生，只不过加入了少先队之后有了新的身份，新的身份要按照组织 （Spring Ioc）的规定履行特定义务</p>
-<p>来看下图加深一下了解<br><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgXnip2019-07-01_20-14-05.jpg" alt=""></fancybox></p>
-<p>首先要有容器，实例化 Spring Ioc 容器是非常简单的，接口 <code>org.springframework.context.ApplicationContext</code> 表示Spring IoC容器，负责实例化，配置和组装上述 bean。 容器通过读取配置元数据获取有关要实例化，配置和组装的对象的指令。 配置元数据通常以XML，Java 注解或代码的形式表示。 它允许你自己表达组成应用程序的对象以及这些对象之间丰富的相互依赖性，比如这样：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ApplicationContext context = <span class="keyword">new</span> ClassPathXmlApplicationContext(<span class="keyword">new</span> String[] &#123;<span class="string">"spring.xml"</span>, <span class="string">"spring1.xml"</span>&#125;);</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>有了容器，我们需要做哪些处理，使其内部对象变为 <code>Ready for Use</code> 的状态?  </p>
-</blockquote>
-<p>我们需要通过 Spring 容器实例化它们，Spring 为我们提供了三种方式：</p>
-<h2 id="三种初始化方式"><a href="#三种初始化方式" class="headerlink" title="三种初始化方式"></a>三种初始化方式</h2><h3 id="InitializingBean"><a href="#InitializingBean" class="headerlink" title="InitializingBean"></a>InitializingBean</h3><p>Spring 为我们提供了 <code>InitializingBean</code> 接口</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">InitializingBean</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">afterPropertiesSet</span><span class="params">()</span> <span class="keyword">throws</span> Exception</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>我们可以通过实现 <code>InitializingBean</code> 接口，在其唯一方法 <code>afterPropertiesSet</code> 内完成实例化的工作，但是 Spring Framework 官方并不建议我们通过这种方法来完成 Bean 的实例化，这是一种强耦合的方式，我们看到框架层面才会用到这个方法。</p>
-<h3 id="PostConstruct"><a href="#PostConstruct" class="headerlink" title="@PostConstruct"></a>@PostConstruct</h3><p>这种方式是 Spring 非常提倡的一种方式，我们通常将其标记在方法上即可，通常习惯将这个方法起名为 <code>init()</code></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@PostConstruct</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  System.out.println(<span class="string">"Inside init() method..."</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="init-method"><a href="#init-method" class="headerlink" title="init-method"></a>init-method</h3><p>你应该见过这种初始化方式：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyClass</span> </span>&#123;</span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">()</span> </span>&#123;</span><br><span class="line">      <span class="comment">// perform post-creation logic here</span></span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AppConfig</span> </span>&#123;</span><br><span class="line">   <span class="meta">@Bean</span>(initMethod = <span class="string">"init"</span>)</span><br><span class="line">   <span class="function"><span class="keyword">public</span> MyClass <span class="title">myclass</span><span class="params">()</span> </span>&#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">new</span> MyClass ();</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>你也应该见过这种配置方式：</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"myClass"</span> <span class="attr">class</span>=<span class="string">"com.demo.MyClass"</span> <span class="attr">init-method</span>=<span class="string">"init"</span>/&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>没错，这只是同样功能的不同实现方式罢了<br>以上就是三种初始化 Spring Beans 的方式，我们在框架中看到过三种方式在组合使用，那么组合使用的调用顺序是什么呢？</p>
-<ol>
-<li>首先@PostConstruct 会被最先调用</li>
-<li>其次 <code>InitializingBean.afterPropertiesSet()</code> 方法将会被调用 </li>
-<li>最后调用通过 XML 配置的 init-method 方法或通过设置 @Bean 注解 设置 initMethod 属性的方法</li>
-</ol>
-<p>了解了这些，你也就了解了 Spring Bean 是怎么来的了</p>
-<p>通过图示来说明一下：</p>
-<p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgXnip2019-07-01_21-46-24.jpg" alt=""></fancybox></p>
-<p>这个调用顺序很难记忆吗吗？ </p>
-<blockquote>
-<p>PostConstruct <code>(P)</code>，afterPropertiesSet <code>(A)</code>，init-method <code>(I)</code> —&gt; <code>PAI （圆周率π）</code></p>
-</blockquote>
-<h2 id="BeanPostProcessor"><a href="#BeanPostProcessor" class="headerlink" title="BeanPostProcessor"></a>BeanPostProcessor</h2><p>BeanPostProcessor 接口，大家也应该有印象，里面只有两个方法：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">BeanPostProcessor</span> </span>&#123;</span><br><span class="line">    <span class="function">Object <span class="title">postProcessBeforeInitialization</span><span class="params">(Object var1, String var2)</span> <span class="keyword">throws</span> BeansException</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function">Object <span class="title">postProcessAfterInitialization</span><span class="params">(Object var1, String var2)</span> <span class="keyword">throws</span> BeansException</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>看方法名，BeforeInitialization 和 AfterInitialization，我们应该猜得出，这是在上述三种方式的前和后，算是一种全局的切面思想，我们经常会使用 <code>postProcessAfterInitialization</code> 方法，通过读取 Bean 的注解完成一些后续逻辑编写与属性的设定，现在 <code>Ready for Use</code>之前是这样：</p>
-<p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgXnip2019-07-02_08-38-03.jpg" alt=""></fancybox></p>
-<p>在 <code>Ready for Use</code> 之前，了解这些内容，已可以基本满足日常的工作内容，但这并不是 Ready for Use 的全部内容，Spring Bean 整个生命周期的流程应该是这样的，后续文章会逐步点亮：<br><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgXnip2019-07-02_09-34-02.jpg" alt=""></fancybox></p>
-<h2 id="灵魂追问"><a href="#灵魂追问" class="headerlink" title="灵魂追问"></a>灵魂追问</h2><ol>
-<li>了解了 Spring Bean 是怎么来的？那它是怎么没的呢？什么时候需要销毁他们呢？</li>
-<li>Spring 框架中 XxxxAware，这些类有什么作用，能在 <code>Ready for Use</code> 之前有用处吗？</li>
-<li>你日常的工作中有充分利用今天说明的这些内容吗？懂得这些会大大方便你的编程</li>
-</ol>
-<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><ol>
-<li>虽然当下流行以注解声明方式进行编程，甚至高版本 Spring 会将一些方法标记为过时，但文章说明依旧会使用 <code>XMLBeanFactory</code> 这类方法，包括 XML 配置。这样做，只不过为了更清晰的说明问题。</li>
-<li>另外将 Spring Bean 声明周期的讲解，进行拆分，是为了让大家有独立的思考空间，带着问题去思考、时间，而不是被动的填充，最终串联起自己的学习网络，这样理解的更深刻，具体请看之前写的文章  <a href="https://mp.weixin.qq.com/s/V7h8O6pVFQ-nr_iA2SNqtw" target="_blank" rel="noopener">程序猿为什么要看源码</a>, 后续内容请持续关注</li>
-</ol>
+        <p>评论区留下你 2021 敢于公开被大家监督的 flag，年底检查作业，你想留级吗？</p>
+<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host@master/blog-imgyear-5026133_640.jpg" alt=""></p>
 
       </div>
       <!-- <div class="tuijian">
         <br><br>
         📚相关文章
-        <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/spring-bean-lifecycle-destroy.html" title="Spring Bean生命周期之缘尽" rel="bookmark">Spring Bean生命周期之缘尽</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/spring-boot-execute-on-startup.html" title="在Spring Boot启动时执行代码的几种方法" rel="bookmark">在Spring Boot启动时执行代码的几种方法</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/spring-aware.html" title="Spring Aware 到底是什么？" rel="bookmark">Spring Aware 到底是什么？</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/spring-boot-condition-annotation.html" title="@Conditional注解，Spring Boot 的灵活配置" rel="bookmark">@Conditional注解，Spring Boot 的灵活配置</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/spring-boot-messageconverter.html" title="HttpMessageConverter转换原理解析" rel="bookmark">HttpMessageConverter转换原理解析</a></h3></div></li></ul>
+        <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/2019-summary.html" title="2019归零，2020走你" rel="bookmark">2019归零，2020走你</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/reveal-md-ppt.html" title="reveal-md 写出不一样的PPT" rel="bookmark">reveal-md 写出不一样的PPT</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/how-to-organize-your-day.html" title="如何清爽的安排日常？" rel="bookmark">如何清爽的安排日常？</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/pmp-certificate.html" title="闲着无聊考个PMP玩玩" rel="bookmark">闲着无聊考个PMP玩玩</a></h3></div></li></ul>
       </div> -->
       <div class="personalweixin">
         <br><br>
@@ -564,10 +526,10 @@
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2019-12-21T18:12:29+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-12-31T20:56:09+08:00">
   <a class='notlink'>
     <i class="fas fa-clock" aria-hidden="true"></i>
-    <p>更新于 2019年12月21日</p>
+    <p>更新于 2020年12月31日</p>
   </a>
 </div>
 
@@ -576,7 +538,7 @@
         
           
   
-  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/Spring-Boot/" rel="nofollow"><i class="fas fa-tag" aria-hidden="true"></i><p>Spring Boot</p></a></div> <div class="new-meta-item meta-tags"><a class="tag" href="/tags/Spring-Bean/" rel="nofollow"><i class="fas fa-tag" aria-hidden="true"></i><p>Spring Bean</p></a></div> <div class="new-meta-item meta-tags"><a class="tag" href="/tags/%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/" rel="nofollow"><i class="fas fa-tag" aria-hidden="true"></i><p>生命周期</p></a></div>
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/%E6%80%BB%E7%BB%93/" rel="nofollow"><i class="fas fa-tag" aria-hidden="true"></i><p>总结</p></a></div>
 
 
         
@@ -589,9 +551,7 @@
       
         <a class="-mob-share-qq" title="QQ好友" rel="external nofollow noopener noreferrer"
           
-          href="http://connect.qq.com/widget/shareqq/index.html?url=https://dayarch.top/p/spring-bean-lifecycle-creation.html&title=Spring Bean生命周期之缘起 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=Spring bean 的生命周期很容易理解。实例化 bean 时，可能需要执行一些初始化以使其进入可用 （Ready for Use）状态。类似地，当不再需要 bean 并将其从容器中移除时，可能需要进行一些清理，这就是它的生命周期
-
-上一篇文章 面试还不知道BeanFactory和ApplicationContext的区别？ 中说明了接口 Beanfactory 和 Applicationcontext 可以通过 T getBean(String name, Class requiredType) 方法从 Spring 容器中获取bean，区别是，前者是懒加载形式，后者是预加载的形式"
+          href="http://connect.qq.com/widget/shareqq/index.html?url=https://dayarch.top/p/2020-summary.html&title=2020归零，2021走你 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=评论区留下你 2021 敢于公开被大家监督的 flag，年底检查作业，你想留级吗？"
           
           >
           
@@ -603,9 +563,7 @@
       
         <a class="-mob-share-qzone" title="QQ空间" rel="external nofollow noopener noreferrer"
           
-          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://dayarch.top/p/spring-bean-lifecycle-creation.html&title=Spring Bean生命周期之缘起 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=Spring bean 的生命周期很容易理解。实例化 bean 时，可能需要执行一些初始化以使其进入可用 （Ready for Use）状态。类似地，当不再需要 bean 并将其从容器中移除时，可能需要进行一些清理，这就是它的生命周期
-
-上一篇文章 面试还不知道BeanFactory和ApplicationContext的区别？ 中说明了接口 Beanfactory 和 Applicationcontext 可以通过 T getBean(String name, Class requiredType) 方法从 Spring 容器中获取bean，区别是，前者是懒加载形式，后者是预加载的形式"
+          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://dayarch.top/p/2020-summary.html&title=2020归零，2021走你 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=评论区留下你 2021 敢于公开被大家监督的 flag，年底检查作业，你想留级吗？"
           
           >
           
@@ -617,9 +575,7 @@
       
         <a class="-mob-share-weibo" title="微博" rel="external nofollow noopener noreferrer"
           
-          href="http://service.weibo.com/share/share.php?url=https://dayarch.top/p/spring-bean-lifecycle-creation.html&title=Spring Bean生命周期之缘起 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=Spring bean 的生命周期很容易理解。实例化 bean 时，可能需要执行一些初始化以使其进入可用 （Ready for Use）状态。类似地，当不再需要 bean 并将其从容器中移除时，可能需要进行一些清理，这就是它的生命周期
-
-上一篇文章 面试还不知道BeanFactory和ApplicationContext的区别？ 中说明了接口 Beanfactory 和 Applicationcontext 可以通过 T getBean(String name, Class requiredType) 方法从 Spring 容器中获取bean，区别是，前者是懒加载形式，后者是预加载的形式"
+          href="http://service.weibo.com/share/share.php?url=https://dayarch.top/p/2020-summary.html&title=2020归零，2021走你 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=评论区留下你 2021 敢于公开被大家监督的 flag，年底检查作业，你想留级吗？"
           
           >
           
@@ -643,40 +599,21 @@
       
           <div class="prev-next">
               
-                  <section class="prev">
-                      <span class="art-item-left">
-                          <h6><i class="fas fa-chevron-left" aria-hidden="true"></i>&nbsp;上一页</h6>
-                          <h4>
-                              <a href="/p/spring-bean-lifecycle-destroy.html" rel="prev" title="Spring Bean生命周期之缘尽">
-                                
-                                    Spring Bean生命周期之缘尽
-                                
-                              </a>
-                          </h4>
-                          
-                              
-                              <h6 class="tags">
-                                  <a class="tag" href="/tags/Spring-Boot/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> Spring Boot</a> <a class="tag" href="/tags/Spring-Bean/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> Spring Bean</a> <a class="tag" href="/tags/%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> 生命周期</a>
-                              </h6>
-                          
-                      </span>
-                  </section>
-              
               
                   <section class="next">
                       <span class="art-item-right" aria-hidden="true">
                           <h6>下一页&nbsp;<i class="fas fa-chevron-right" aria-hidden="true"></i></h6>
                           <h4>
-                              <a href="/p/difference-between-beanfactory-and-applicationcontext.html" rel="prev" title="面试还不知道BeanFactory和ApplicationContext的区别？">
+                              <a href="/p/docker-container-is-a-process.html" rel="prev" title="Docker Container就是个进程">
                                   
-                                      面试还不知道BeanFactory和ApplicationContext的区别？
+                                      Docker Container就是个进程
                                   
                               </a>
                           </h4>
                           
                               
                               <h6 class="tags">
-                                  <a class="tag" href="/tags/Spring-Boot/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> Spring Boot</a> <a class="tag" href="/tags/%E9%9D%A2%E8%AF%95/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> 面试</a>
+                                  <a class="tag" href="/tags/Docker/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> Docker</a>
                               </h6>
                           
                       </span>
@@ -703,7 +640,7 @@
 </header>
 
     <div class="content pure">
-      <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/spring-bean-lifecycle-destroy.html" title="Spring Bean生命周期之缘尽" rel="bookmark">Spring Bean生命周期之缘尽</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/spring-boot-execute-on-startup.html" title="在Spring Boot启动时执行代码的几种方法" rel="bookmark">在Spring Boot启动时执行代码的几种方法</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/spring-aware.html" title="Spring Aware 到底是什么？" rel="bookmark">Spring Aware 到底是什么？</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/spring-boot-condition-annotation.html" title="@Conditional注解，Spring Boot 的灵活配置" rel="bookmark">@Conditional注解，Spring Boot 的灵活配置</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/spring-boot-messageconverter.html" title="HttpMessageConverter转换原理解析" rel="bookmark">HttpMessageConverter转换原理解析</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/easyexcel-read.html" title="EasyExcel读取Excel实际应用" rel="bookmark">EasyExcel读取Excel实际应用</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/spring-boot-starter-custom.html" title="Spring Boot 自定义starter 全面教程" rel="bookmark">Spring Boot 自定义starter 全面教程</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/spring-boot-configurationProperties-usage.html" title="Spring Boot @ConfigurationProperties 注解最强使用详解" rel="bookmark">Spring Boot @ConfigurationProperties 注解最强使用详解</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/shiro-in-practice.html" title="Shiro—小而美的安全框架" rel="bookmark">Shiro—小而美的安全框架</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/springmvc-response-status.html" title="Spring MVC 之 @ResponseStatus" rel="bookmark">Spring MVC 之 @ResponseStatus</a></h3></div></li></ul>
+      <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/2019-summary.html" title="2019归零，2020走你" rel="bookmark">2019归零，2020走你</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/reveal-md-ppt.html" title="reveal-md 写出不一样的PPT" rel="bookmark">reveal-md 写出不一样的PPT</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/how-to-organize-your-day.html" title="如何清爽的安排日常？" rel="bookmark">如何清爽的安排日常？</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/pmp-certificate.html" title="闲着无聊考个PMP玩玩" rel="bookmark">闲着无聊考个PMP玩玩</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/wechat-new-expression.html" title="微信上线了10款默认新表情" rel="bookmark">微信上线了10款默认新表情</a></h3></div></li></ul>
     </div>
   </section>
 
@@ -759,7 +696,7 @@
 
   <script>
     window.subData = {
-      title: 'Spring Bean生命周期之缘起',
+      title: '2020归零，2021走你',
       tools: true
     }
   </script>
@@ -901,20 +838,6 @@
           
             
               
-  <section class='widget toc-wrapper'>
-    
-<header class='pure'>
-  <div><i class="fas fa-list fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;本文目录</div>
-  
-    <!-- <div class='wrapper'><a class="s-toc rightBtn" rel="external nofollow noopener noreferrer" href="javascript:void(0)"><i class="fas fa-thumbtack fa-fw"></i></a></div> -->
-  
-</header>
-
-    <div class='content pure'>
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#三种初始化方式"><span class="toc-text">三种初始化方式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#InitializingBean"><span class="toc-text">InitializingBean</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PostConstruct"><span class="toc-text">@PostConstruct</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#init-method"><span class="toc-text">init-method</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#BeanPostProcessor"><span class="toc-text">BeanPostProcessor</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#灵魂追问"><span class="toc-text">灵魂追问</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#补充说明"><span class="toc-text">补充说明</span></a></li></ol>
-    </div>
-  </section>
-
 
             
           
