@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://dayarch.top/"/>
-  <updated>2020-12-31T12:58:13.072Z</updated>
+  <updated>2021-01-06T13:08:59.548Z</updated>
   <id>https://dayarch.top/</id>
   
   <author>
@@ -17,11 +17,47 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Jenkins 使用环境变量</title>
+    <link href="https://dayarch.top//p/jenkins-environment-variables.html"/>
+    <id>https://dayarch.top//p/jenkins-environment-variables.html</id>
+    <published>2021-01-06T13:04:20.000Z</published>
+    <updated>2021-01-06T13:08:59.548Z</updated>
+    
+    <summary type="html">
+    
+      前言
+Jenkins， DevOps 技术栈的核心之一，CI/CD 离不开编写 Pipeline 脚本，上手 Jenkins ，简单查一下文档，你就应该不会被 agent，stages，step 这类关键词弄懵，也能很快构建出 pipeline 的骨架
+
+但是当向骨架中填充内容的时候，尤其如何利用环境变量（系统内置 ｜ 自定义），多数人都会变得比较混乱，浪费很多时间，本文就帮助大家快速通关环境变量
+
+
+
+准备
+如果你想一边阅读本文，一边实践，但是没有 Jenkins 服务可用，又想快速尝试，可以应用 Docker 一个命令快速搭建 Jenkins 服务
+
+1
+
+
+docker containe
+    
+    </summary>
+    
+    
+      <category term="Coding" scheme="https://dayarch.top/categories/Coding/"/>
+    
+      <category term="DevOps" scheme="https://dayarch.top/categories/Coding/DevOps/"/>
+    
+    
+      <category term="Jenkins" scheme="https://dayarch.top/tags/Jenkins/"/>
+    
+  </entry>
+  
+  <entry>
     <title>2020归零，2021走你</title>
     <link href="https://dayarch.top//p/2020-to-2021.html"/>
     <id>https://dayarch.top//p/2020-to-2021.html</id>
     <published>2020-12-31T12:46:10.000Z</published>
-    <updated>2020-12-31T12:58:13.072Z</updated>
+    <updated>2021-01-06T13:08:12.370Z</updated>
     
     <summary type="html">
     
@@ -459,29 +495,6 @@ Github 主要对 UI 设计以及 Repository 布局进行了更新，改善了访
     <summary type="html">
     
       想要很好的理解 JUC 的源码和其设计思想，个人觉得第一步是了解 AQS，里面提供了大量的锁实现，常见的ReentrantLock, Semphore, CountLatch 等都是在其基础上做了定制，所以了解 AQS 才不会丢失主线，阅读源码会越发轻松
-    
-    </summary>
-    
-    
-      <category term="Coding" scheme="https://dayarch.top/categories/Coding/"/>
-    
-      <category term="Java-Concurrency" scheme="https://dayarch.top/categories/Coding/Java-Concurrency/"/>
-    
-    
-      <category term="Java-Concurrency" scheme="https://dayarch.top/tags/Java-Concurrency/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Java多线程中断机制</title>
-    <link href="https://dayarch.top//p/java-concurrency-interrupt-mechnism.html"/>
-    <id>https://dayarch.top//p/java-concurrency-interrupt-mechnism.html</id>
-    <published>2020-05-17T05:50:15.000Z</published>
-    <updated>2020-05-17T06:09:50.249Z</updated>
-    
-    <summary type="html">
-    
-      Java并发编程中断机制贯穿并发编程整个环节，其实它是一种协同机制，为我们提供了更优雅以及更灵活的处理方式，理解中断机制也会对阅读源码有更大的帮助
     
     </summary>
     
