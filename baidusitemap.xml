@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://dayarch.top//p/java-fork-join-pool.html</loc>
+    <lastmod>2021-02-17</lastmod>
+  </url>  <url>
+    <loc>https://dayarch.top//p/aws-lambda-with-serverless-framework.html</loc>
+    <lastmod>2021-02-17</lastmod>
+  </url>  <url>
     <loc>https://dayarch.top//p/jenkins-environment-variables.html</loc>
     <lastmod>2021-01-06</lastmod>
   </url>  <url>
@@ -24,9 +30,6 @@
   </url>  <url>
     <loc>https://dayarch.top//p/scratch-files-and-scratch-bufferss.html</loc>
     <lastmod>2020-10-31</lastmod>
-  </url>  <url>
-    <loc>https://dayarch.top//p/aws-lambda-with-serverless-framework.html</loc>
-    <lastmod>2020-10-12</lastmod>
   </url>  <url>
     <loc>https://dayarch.top//p/executorservice-vs-completionservice.html</loc>
     <lastmod>2020-10-12</lastmod>

@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://dayarch.top/"/>
-  <updated>2021-01-06T13:13:27.777Z</updated>
+  <updated>2021-02-17T07:03:07.141Z</updated>
   <id>https://dayarch.top/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>ForkJoinPool大剖析</title>
+    <link href="https://dayarch.top//p/java-fork-join-pool.html"/>
+    <id>https://dayarch.top//p/java-fork-join-pool.html</id>
+    <published>2021-02-17T06:45:52.000Z</published>
+    <updated>2021-02-17T07:03:07.141Z</updated>
+    
+    <summary type="html">
+    
+      ForkJoinPool 是分治算法 Java 的典型应用，这是一个效率更高的线程池，但是理解它的原理还是相对困难，本文就从源码剖析的角度来理解 ForkJoinPool
+    
+    </summary>
+    
+    
+      <category term="Coding" scheme="https://dayarch.top/categories/Coding/"/>
+    
+      <category term="Java-Concurrency" scheme="https://dayarch.top/categories/Coding/Java-Concurrency/"/>
+    
+    
+      <category term="Java-Concurrency" scheme="https://dayarch.top/tags/Java-Concurrency/"/>
+    
+  </entry>
   
   <entry>
     <title>Jenkins 使用环境变量</title>
@@ -195,7 +218,7 @@ docker containe
     <link href="https://dayarch.top//p/aws-lambda-with-serverless-framework.html"/>
     <id>https://dayarch.top//p/aws-lambda-with-serverless-framework.html</id>
     <published>2020-10-12T11:13:44.000Z</published>
-    <updated>2020-10-12T11:34:53.647Z</updated>
+    <updated>2021-02-17T07:02:52.090Z</updated>
     
     <summary type="html">
     
@@ -472,29 +495,6 @@ Github 主要对 UI 设计以及 Repository 布局进行了更新，改善了访
     <summary type="html">
     
       本文详细讲述了 Java AQS 中共享式获取同步状态的过程，通过该过程了解 Semaphore 的经典应用
-    
-    </summary>
-    
-    
-      <category term="Coding" scheme="https://dayarch.top/categories/Coding/"/>
-    
-      <category term="Java-Concurrency" scheme="https://dayarch.top/categories/Coding/Java-Concurrency/"/>
-    
-    
-      <category term="Java-Concurrency" scheme="https://dayarch.top/tags/Java-Concurrency/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Java AQS队列同步器以及ReentrantLock的应用</title>
-    <link href="https://dayarch.top//p/java-aqs-and-reentrantlock.html"/>
-    <id>https://dayarch.top//p/java-aqs-and-reentrantlock.html</id>
-    <published>2020-05-31T12:26:08.000Z</published>
-    <updated>2020-06-02T11:41:19.518Z</updated>
-    
-    <summary type="html">
-    
-      想要很好的理解 JUC 的源码和其设计思想，个人觉得第一步是了解 AQS，里面提供了大量的锁实现，常见的ReentrantLock, Semphore, CountLatch 等都是在其基础上做了定制，所以了解 AQS 才不会丢失主线，阅读源码会越发轻松
     
     </summary>
     

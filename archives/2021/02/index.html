@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   
-  <title>Tag: synchronized | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享</title>
+  <title>Archives: 2021/2 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享</title>
   
   <meta name="keywords" content="Java,SpringBoot,并发编程, ElasticSearch, 日拱一兵">
   
@@ -383,38 +383,30 @@
 
   <div class="l_body">
     <div class='body-wrapper'>
-      
-<div class='l_main'>
-  
-    
-      
+      <div class='l_main'>
+	
+		
   <section class="post-list">
     
       
         
           
-        
-      
-    
-    
-      
-        
-          <div class='post-wrapper'>
-            <article class="post reveal ">
+            <div class='post-wrapper'>
+              <article class="post reveal ">
   
 
 
   <section class='meta'>
     
     
-      <a title='volatile和synchronized图文透彻讲解' href='/p/difference-between-volatile-and-synchronized-keyword.html'><img class='thumbnail' src='https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgconcurrency.png'></a>
+      <a title='ForkJoinPool大剖析' href='/p/java-fork-join-pool.html'><img class='thumbnail' src='https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgconcurrency.png'></a>
     
     <div class="meta" id="header-meta">
       
         
   <h2 class="title">
-    <a href="/p/difference-between-volatile-and-synchronized-keyword.html">
-      volatile和synchronized图文透彻讲解
+    <a href="/p/java-fork-join-pool.html">
+      ForkJoinPool大剖析
     </a>
   </h2>
 
@@ -444,7 +436,7 @@
             <div class="new-meta-item date">
   <a class='notlink'>
     <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-    <p>2020-03-04</p>
+    <p>2021-02-17</p>
   </a>
 </div>
 
@@ -465,6 +457,13 @@
         
           
             
+  <div class="new-meta-item top-post">
+    <a class='notlink'>
+      <i class="fas fa-angle-double-up" aria-hidden="true"></i>
+      <p>置顶</p>
+    </a>
+  </div>
+
 
           
         
@@ -478,23 +477,14 @@
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      * 你有一个思想，我有一个思想，我们交换后，一个人就有两个思想
-   
-   
- * If you can NOT explain it simply, you do NOT understand it well enough
-   
-   
+      知识回顾
+并发工具类我们已经讲了很多，这些工具类的「目标」是让我们只关注任务本身，并且忽视线程间合作细节，简化了并发编程难度的同时，也增加了很多安全性。工具类的对使用者的「目标」虽然一致，但每一个工具类本身都有它独特的应用场景，比如：
 
-现陆续将Demo代码和技术文章整理在一起 Github实践精选 ，方便大家阅读查看，本文同样收录在此，觉得不错，还请Star🌟
-
-
-
-之前写了几篇 Java并发编程的系列 文章，有个朋友微群里问我，还是不能理解 volatile 和 synchronized 二者的区别, 他的问题主要可以归纳为这几个：
-
- * volatile 与 synchron
+ * 我会手动创建线程，为什么要使用线程池? 介绍了使用线程池管理线程将一个大任务分解成多个子任务来简单执行，借助 不会用Java Future，我怀疑你泡茶没我快, 又是超长图文！！ 的 Future 特性获取子任务执行结果——二者结合使用就可以处理简单的并行任务
+ * 搞定 CompletableFuture，并发异步编程和编写串行程序还有什么区别？ 借助
       
         <div class="readmore">
-          <a href="/p/difference-between-volatile-and-synchronized-keyword.html" class="flat-box">
+          <a href="/p/java-fork-join-pool.html" class="flat-box">
             <i class="fas fa-book-open fa-fw" aria-hidden="true"></i>
             阅读全文
           </a>
@@ -506,16 +496,18 @@
         
           <a href="/tags/Java-Concurrency/" rel="nofollow"><i class="fas fa-tag fa-fw"></i> Java-Concurrency</a>
         
-          <a href="/tags/volatile/" rel="nofollow"><i class="fas fa-tag fa-fw"></i> volatile</a>
-        
-          <a href="/tags/synchronized/" rel="nofollow"><i class="fas fa-tag fa-fw"></i> synchronized</a>
-        
       </div>
     
   </section>
 </article>
 
-          </div>
+            </div>
+          
+        
+      
+    
+    
+      
         
       
     
@@ -529,8 +521,7 @@
   
 
 
-    
-  
+	
 </div>
 <aside class='l_side'>
   
@@ -1134,6 +1125,14 @@
     </div> -->
 </footer>
 <script>setLoadingBarProgress(80);</script>
+
+
+
+
+	<!-- 根据主题中的设置决定是否在archive中针对摘要部分的MathJax公式加载mathjax.js文件 -->
+	
+
+	
 
 
       <script>setLoadingBarProgress(60);</script>

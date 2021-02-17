@@ -538,6 +538,62 @@
           
         
           
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
             
               <div class='post-wrapper'>
                 <article class="post reveal ">
@@ -547,14 +603,14 @@
   <section class='meta'>
     
     
-      <a title='借助Serverless Framework玩转AWS Lambda' href='/p/aws-lambda-with-serverless-framework.html'><img class='thumbnail' src='https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20201012192901.png'></a>
+      <a title='ForkJoinPool大剖析' href='/p/java-fork-join-pool.html'><img class='thumbnail' src='https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgconcurrency.png'></a>
     
     <div class="meta" id="header-meta">
       
         
   <h2 class="title">
-    <a href="/p/aws-lambda-with-serverless-framework.html">
-      借助Serverless Framework玩转AWS Lambda
+    <a href="/p/java-fork-join-pool.html">
+      ForkJoinPool大剖析
     </a>
   </h2>
 
@@ -584,7 +640,7 @@
             <div class="new-meta-item date">
   <a class='notlink'>
     <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-    <p>2020-10-12</p>
+    <p>2021-02-17</p>
   </a>
 </div>
 
@@ -594,9 +650,9 @@
             
   
   <div class='new-meta-item category'>
-    <a href='/categories/AWS/' rel="nofollow">
+    <a href='/categories/Coding/Java-Concurrency/' rel="nofollow">
       <i class="fas fa-folder-open" aria-hidden="true"></i>
-      <p>AWS</p>
+      <p>Coding&nbsp;/&nbsp;Java-Concurrency</p>
     </a>
   </div>
 
@@ -625,18 +681,14 @@
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      前言
-微服务架构有别于传统的单体式应用方案，我们可将单体应用拆分成多个核心功能。每个功能都被称为一项服务，可以单独构建和部署，这意味着各项服务在工作时不会互相影响
+      知识回顾
+并发工具类我们已经讲了很多，这些工具类的「目标」是让我们只关注任务本身，并且忽视线程间合作细节，简化了并发编程难度的同时，也增加了很多安全性。工具类的对使用者的「目标」虽然一致，但每一个工具类本身都有它独特的应用场景，比如：
 
-这种设计理念被进一步应用，就变成了无服务（Serverless）。「无服务」看似挺荒唐的，其实服务器依旧存在，只是我们不需要关注或预置服务器。这让开发人员的精力更集中——只关注功能实现
-
-Serverless 的典型便是 AWS Lambda
-
-AWS Lambda
-如果你是 Java 开发人员，你应该听说过或使用过 JDK 1.8 里面的 Lambda，但是 AWS 中的 Lambda 和 JDK 中的 Lambda 没有任何关
+ * 我会手动创建线程，为什么要使用线程池? 介绍了使用线程池管理线程将一个大任务分解成多个子任务来简单执行，借助 不会用Java Future，我怀疑你泡茶没我快, 又是超长图文！！ 的 Future 特性获取子任务执行结果——二者结合使用就可以处理简单的并行任务
+ * 搞定 CompletableFuture，并发异步编程和编写串行程序还有什么区别？ 借助
       
         <div class="readmore">
-          <a href="/p/aws-lambda-with-serverless-framework.html" class="flat-box">
+          <a href="/p/java-fork-join-pool.html" class="flat-box">
             <i class="fas fa-book-open fa-fw" aria-hidden="true"></i>
             阅读全文
           </a>
@@ -646,9 +698,7 @@ AWS Lambda
     
       <div class="full-width auto-padding tags">
         
-          <a href="/tags/AWS/" rel="nofollow"><i class="fas fa-tag fa-fw"></i> AWS</a>
-        
-          <a href="/tags/lambda/" rel="nofollow"><i class="fas fa-tag fa-fw"></i> lambda</a>
+          <a href="/tags/Java-Concurrency/" rel="nofollow"><i class="fas fa-tag fa-fw"></i> Java-Concurrency</a>
         
       </div>
     
@@ -661,63 +711,11 @@ AWS Lambda
         
           
         
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
       
     
     
+      
+        
       
         
           <div class='post-wrapper'>
@@ -1554,6 +1552,117 @@ PowerToys 就是这么一款有 Power 的工具，使用的前置要求很简单
         
       
         
+          <div class='post-wrapper'>
+            <article class="post reveal ">
+  
+
+
+  <section class='meta'>
+    
+    
+      <a title='借助Serverless Framework玩转AWS Lambda' href='/p/aws-lambda-with-serverless-framework.html'><img class='thumbnail' src='https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20201012192901.png'></a>
+    
+    <div class="meta" id="header-meta">
+      
+        
+  <h2 class="title">
+    <a href="/p/aws-lambda-with-serverless-framework.html">
+      借助Serverless Framework玩转AWS Lambda
+    </a>
+  </h2>
+
+
+      
+      <div class='new-meta-box'>
+        
+          
+        
+          
+            
+  <div class='new-meta-item author'>
+    
+      <a href="https://dayarch.top" rel="nofollow">
+        
+          <img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png">
+        
+        <p>tanθ</p>
+      </a>
+    
+  </div>
+
+
+          
+        
+          
+            <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+    <p>2020-10-12</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+  
+  <div class='new-meta-item category'>
+    <a href='/categories/AWS/' rel="nofollow">
+      <i class="fas fa-folder-open" aria-hidden="true"></i>
+      <p>AWS</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            
+
+          
+        
+      </div>
+      
+        <hr>
+      
+    </div>
+  </section>
+
+
+  <section class="article typo">
+    <div class="article-entry" itemprop="articleBody">
+      前言
+微服务架构有别于传统的单体式应用方案，我们可将单体应用拆分成多个核心功能。每个功能都被称为一项服务，可以单独构建和部署，这意味着各项服务在工作时不会互相影响
+
+这种设计理念被进一步应用，就变成了无服务（Serverless）。「无服务」看似挺荒唐的，其实服务器依旧存在，只是我们不需要关注或预置服务器。这让开发人员的精力更集中——只关注功能实现
+
+Serverless 的典型便是 AWS Lambda
+
+AWS Lambda
+如果你是 Java 开发人员，你应该听说过或使用过 JDK 1.8 里面的 Lambda，但是 AWS 中的 Lambda 和 JDK 中的 Lambda 没有任何关
+      
+        <div class="readmore">
+          <a href="/p/aws-lambda-with-serverless-framework.html" class="flat-box">
+            <i class="fas fa-book-open fa-fw" aria-hidden="true"></i>
+            阅读全文
+          </a>
+        </div>
+      
+    </div>
+    
+      <div class="full-width auto-padding tags">
+        
+          <a href="/tags/AWS/" rel="nofollow"><i class="fas fa-tag fa-fw"></i> AWS</a>
+        
+          <a href="/tags/lambda/" rel="nofollow"><i class="fas fa-tag fa-fw"></i> lambda</a>
+        
+      </div>
+    
+  </section>
+</article>
+
+          </div>
+        
       
         
           <div class='post-wrapper'>
@@ -1678,129 +1787,6 @@ PowerToys 就是这么一款有 Power 的工具，使用的前置要求很简单
       <div class="full-width auto-padding tags">
         
           <a href="/tags/%E6%80%BB%E7%BB%93/" rel="nofollow"><i class="fas fa-tag fa-fw"></i> 总结</a>
-        
-      </div>
-    
-  </section>
-</article>
-
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <article class="post reveal ">
-  
-
-
-  <section class='meta'>
-    
-    
-      <a title='分分钟搞定Java 并发队列' href='/p/java-concurrency-queue.html'><img class='thumbnail' src='https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgconcurrency.png'></a>
-    
-    <div class="meta" id="header-meta">
-      
-        
-  <h2 class="title">
-    <a href="/p/java-concurrency-queue.html">
-      分分钟搞定Java 并发队列
-    </a>
-  </h2>
-
-
-      
-      <div class='new-meta-box'>
-        
-          
-        
-          
-            
-  <div class='new-meta-item author'>
-    
-      <a href="https://dayarch.top" rel="nofollow">
-        
-          <img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png">
-        
-        <p>tanθ</p>
-      </a>
-    
-  </div>
-
-
-          
-        
-          
-            <div class="new-meta-item date">
-  <a class='notlink'>
-    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-    <p>2020-08-23</p>
-  </a>
-</div>
-
-          
-        
-          
-            
-  
-  <div class='new-meta-item category'>
-    <a href='/categories/Coding/Java-Concurrency/' rel="nofollow">
-      <i class="fas fa-folder-open" aria-hidden="true"></i>
-      <p>Coding&nbsp;/&nbsp;Java-Concurrency</p>
-    </a>
-  </div>
-
-
-          
-        
-          
-            
-
-          
-        
-      </div>
-      
-        <hr>
-      
-    </div>
-  </section>
-
-
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      前言
-如果按照用途与特性进行粗略的划分，JUC 包中包含的工具大体可以分为 6 类：
-
- 1. 执行者与线程池 
- 2. 并发队列 
- 3. 同步工具 
- 4. 并发集合
- 5. 锁
- 6. 原子变量
-
-在并发系列中，主要讲解了 执行者与线程池，同步工具，锁 ， 在分析源码时，或多或少的提及到了「队列」，队列在 JUC 中也是多种多样存在，所以本文就以「远看」视角，帮助大家快速了解与区分这些看似「杂乱」的队列
-
-并发队列
-Java 并发队列按照实现方式来进行划分可以分为 2 种：
-
- 1. 阻塞队列
- 2. 非阻塞队列
-
-如果你已经看完并发系列锁的实现，你已经能够知道他们实现的区别：
-
-前者就
-      
-        <div class="readmore">
-          <a href="/p/java-concurrency-queue.html" class="flat-box">
-            <i class="fas fa-book-open fa-fw" aria-hidden="true"></i>
-            阅读全文
-          </a>
-        </div>
-      
-    </div>
-    
-      <div class="full-width auto-padding tags">
-        
-          <a href="/tags/Java-Concurrency/" rel="nofollow"><i class="fas fa-tag fa-fw"></i> Java-Concurrency</a>
         
       </div>
     
@@ -2150,7 +2136,7 @@ Java 并发队列按照实现方式来进行划分可以分为 2 种：
         
           <li><a class="flat-box" title="/categories/AWS/" href="/categories/AWS/"><div class='name'>AWS</div><div class='badge'>(1)</div></a></li>
         
-          <li><a class="flat-box" title="/categories/Coding/" href="/categories/Coding/"><div class='name'>Coding</div><div class='badge'>(92)</div></a></li>
+          <li><a class="flat-box" title="/categories/Coding/" href="/categories/Coding/"><div class='name'>Coding</div><div class='badge'>(93)</div></a></li>
         
           <li><a class="flat-box child" title="/categories/Coding/Arthas/" href="/categories/Coding/Arthas/"><div class='name'>Arthas</div><div class='badge'>(1)</div></a></li>
         
@@ -2158,7 +2144,7 @@ Java 并发队列按照实现方式来进行划分可以分为 2 种：
         
           <li><a class="flat-box child" title="/categories/Coding/Docker/" href="/categories/Coding/Docker/"><div class='name'>Docker</div><div class='badge'>(7)</div></a></li>
         
-          <li><a class="flat-box child" title="/categories/Coding/Java-Concurrency/" href="/categories/Coding/Java-Concurrency/"><div class='name'>Java-Concurrency</div><div class='badge'>(22)</div></a></li>
+          <li><a class="flat-box child" title="/categories/Coding/Java-Concurrency/" href="/categories/Coding/Java-Concurrency/"><div class='name'>Java-Concurrency</div><div class='badge'>(23)</div></a></li>
         
           <li><a class="flat-box child" title="/categories/Coding/Java/" href="/categories/Coding/Java/"><div class='name'>Java</div><div class='badge'>(16)</div></a></li>
         
@@ -2379,7 +2365,7 @@ Java 并发队列按照实现方式来进行划分可以分为 2 种：
   &nbsp;&nbsp;|&nbsp;&nbsp;  
   
     &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-        class="white-color">241.3k</span>&nbsp;字
+        class="white-color">255k</span>&nbsp;字
     
 
   &nbsp;&nbsp;|&nbsp;&nbsp;  

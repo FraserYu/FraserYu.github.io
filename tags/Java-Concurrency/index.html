@@ -393,6 +393,118 @@
       
         
           
+            <div class='post-wrapper'>
+              <article class="post reveal ">
+  
+
+
+  <section class='meta'>
+    
+    
+      <a title='ForkJoinPool大剖析' href='/p/java-fork-join-pool.html'><img class='thumbnail' src='https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgconcurrency.png'></a>
+    
+    <div class="meta" id="header-meta">
+      
+        
+  <h2 class="title">
+    <a href="/p/java-fork-join-pool.html">
+      ForkJoinPool大剖析
+    </a>
+  </h2>
+
+
+      
+      <div class='new-meta-box'>
+        
+          
+        
+          
+            
+  <div class='new-meta-item author'>
+    
+      <a href="https://dayarch.top" rel="nofollow">
+        
+          <img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png">
+        
+        <p>tanθ</p>
+      </a>
+    
+  </div>
+
+
+          
+        
+          
+            <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+    <p>2021-02-17</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+  
+  <div class='new-meta-item category'>
+    <a href='/categories/Coding/Java-Concurrency/' rel="nofollow">
+      <i class="fas fa-folder-open" aria-hidden="true"></i>
+      <p>Coding&nbsp;/&nbsp;Java-Concurrency</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            
+  <div class="new-meta-item top-post">
+    <a class='notlink'>
+      <i class="fas fa-angle-double-up" aria-hidden="true"></i>
+      <p>置顶</p>
+    </a>
+  </div>
+
+
+          
+        
+      </div>
+      
+        <hr>
+      
+    </div>
+  </section>
+
+
+  <section class="article typo">
+    <div class="article-entry" itemprop="articleBody">
+      知识回顾
+并发工具类我们已经讲了很多，这些工具类的「目标」是让我们只关注任务本身，并且忽视线程间合作细节，简化了并发编程难度的同时，也增加了很多安全性。工具类的对使用者的「目标」虽然一致，但每一个工具类本身都有它独特的应用场景，比如：
+
+ * 我会手动创建线程，为什么要使用线程池? 介绍了使用线程池管理线程将一个大任务分解成多个子任务来简单执行，借助 不会用Java Future，我怀疑你泡茶没我快, 又是超长图文！！ 的 Future 特性获取子任务执行结果——二者结合使用就可以处理简单的并行任务
+ * 搞定 CompletableFuture，并发异步编程和编写串行程序还有什么区别？ 借助
+      
+        <div class="readmore">
+          <a href="/p/java-fork-join-pool.html" class="flat-box">
+            <i class="fas fa-book-open fa-fw" aria-hidden="true"></i>
+            阅读全文
+          </a>
+        </div>
+      
+    </div>
+    
+      <div class="full-width auto-padding tags">
+        
+          <a href="/tags/Java-Concurrency/" rel="nofollow"><i class="fas fa-tag fa-fw"></i> Java-Concurrency</a>
+        
+      </div>
+    
+  </section>
+</article>
+
+            </div>
+          
         
           
         
@@ -415,6 +527,8 @@
       
     
     
+      
+        
       
         
           <div class='post-wrapper'>
@@ -1540,124 +1654,6 @@ public class ThreeSync {
           </div>
         
       
-        
-          <div class='post-wrapper'>
-            <article class="post reveal ">
-  
-
-
-  <section class='meta'>
-    
-    
-      <a title='为什么要使用线程池?' href='/p/why-we-need-to-use-threadpool.html'><img class='thumbnail' src='https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgconcurrency.png'></a>
-    
-    <div class="meta" id="header-meta">
-      
-        
-  <h2 class="title">
-    <a href="/p/why-we-need-to-use-threadpool.html">
-      为什么要使用线程池?
-    </a>
-  </h2>
-
-
-      
-      <div class='new-meta-box'>
-        
-          
-        
-          
-            
-  <div class='new-meta-item author'>
-    
-      <a href="https://dayarch.top" rel="nofollow">
-        
-          <img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png">
-        
-        <p>tanθ</p>
-      </a>
-    
-  </div>
-
-
-          
-        
-          
-            <div class="new-meta-item date">
-  <a class='notlink'>
-    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-    <p>2020-04-19</p>
-  </a>
-</div>
-
-          
-        
-          
-            
-  
-  <div class='new-meta-item category'>
-    <a href='/categories/Coding/Java-Concurrency/' rel="nofollow">
-      <i class="fas fa-folder-open" aria-hidden="true"></i>
-      <p>Coding&nbsp;/&nbsp;Java-Concurrency</p>
-    </a>
-  </div>
-
-
-          
-        
-          
-            
-
-          
-        
-      </div>
-      
-        <hr>
-      
-    </div>
-  </section>
-
-
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      上一篇文章 面试问我，创建多少个线程合适？我该怎么说 从定性到定量的分析了如何创建正确个数的线程来最大化利用系统资源（其实就是几道小学数学题）。通常来讲，有了个这个知识点傍身，按需手动创建相应个数的线程就好
-
-但是现实中，你也许听过或者被要求：
-
-尽量避免手动创建线程，应使用线程池统一管理线程
-
-为什么会有这样的要求？背后的道理又是怎样的呢？顺着这个经验理论来推断，那肯定是手动创建线程有缺点
-
-手动创建线程有什么缺点？
- 1. 不受控风险
- 2. 频繁创建开销大
-
-不受控风险
-这个缺点，相信你也可以说出一二
-
-系统资源有限，每个人针对不同业务都可以手动创建线程，并且创建标准不一样（比如线程没有
-      
-        <div class="readmore">
-          <a href="/p/why-we-need-to-use-threadpool.html" class="flat-box">
-            <i class="fas fa-book-open fa-fw" aria-hidden="true"></i>
-            阅读全文
-          </a>
-        </div>
-      
-    </div>
-    
-      <div class="full-width auto-padding tags">
-        
-          <a href="/tags/Java-Concurrency/" rel="nofollow"><i class="fas fa-tag fa-fw"></i> Java-Concurrency</a>
-        
-      </div>
-    
-  </section>
-</article>
-
-          </div>
-        
-      
     
   </section>
   
@@ -2000,7 +1996,7 @@ public class ThreeSync {
         
           <li><a class="flat-box" title="/categories/AWS/" href="/categories/AWS/"><div class='name'>AWS</div><div class='badge'>(1)</div></a></li>
         
-          <li><a class="flat-box" title="/categories/Coding/" href="/categories/Coding/"><div class='name'>Coding</div><div class='badge'>(92)</div></a></li>
+          <li><a class="flat-box" title="/categories/Coding/" href="/categories/Coding/"><div class='name'>Coding</div><div class='badge'>(93)</div></a></li>
         
           <li><a class="flat-box child" title="/categories/Coding/Arthas/" href="/categories/Coding/Arthas/"><div class='name'>Arthas</div><div class='badge'>(1)</div></a></li>
         
@@ -2008,7 +2004,7 @@ public class ThreeSync {
         
           <li><a class="flat-box child" title="/categories/Coding/Docker/" href="/categories/Coding/Docker/"><div class='name'>Docker</div><div class='badge'>(7)</div></a></li>
         
-          <li><a class="flat-box child" title="/categories/Coding/Java-Concurrency/" href="/categories/Coding/Java-Concurrency/"><div class='name'>Java-Concurrency</div><div class='badge'>(22)</div></a></li>
+          <li><a class="flat-box child" title="/categories/Coding/Java-Concurrency/" href="/categories/Coding/Java-Concurrency/"><div class='name'>Java-Concurrency</div><div class='badge'>(23)</div></a></li>
         
           <li><a class="flat-box child" title="/categories/Coding/Java/" href="/categories/Coding/Java/"><div class='name'>Java</div><div class='badge'>(16)</div></a></li>
         
@@ -2229,7 +2225,7 @@ public class ThreeSync {
   &nbsp;&nbsp;|&nbsp;&nbsp;  
   
     &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-        class="white-color">241.3k</span>&nbsp;字
+        class="white-color">255k</span>&nbsp;字
     
 
   &nbsp;&nbsp;|&nbsp;&nbsp;  
