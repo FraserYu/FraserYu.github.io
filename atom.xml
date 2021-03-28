@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://dayarch.top/"/>
-  <updated>2021-02-17T07:35:31.618Z</updated>
+  <updated>2021-03-28T12:35:17.088Z</updated>
   <id>https://dayarch.top/</id>
   
   <author>
@@ -17,11 +17,69 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Jenkins 动态使用分支名称</title>
+    <link href="https://dayarch.top//p/jenkins-dynamic-using-git-branch.html"/>
+    <id>https://dayarch.top//p/jenkins-dynamic-using-git-branch.html</id>
+    <published>2021-03-28T12:33:56.000Z</published>
+    <updated>2021-03-28T12:35:17.088Z</updated>
+    
+    <summary type="html">
+    
+      前言
+在上一篇 Jenkins 使用环境变量 中，帮助大家使用一条 Docker 命令就可以快速玩转 Jenkins，同时用最简单的方式解释了 Jenkins 中让人混乱的环境变量，本文还是接着变量说点事情
+
+一般成熟的项目流程都会通过 Jenkins Pipeline 来做 CI 部分，在默认 Jenkins 环境配置中，Jenkins Pipeline 分为两种：
+
+ 1. Pipeline （单分支 Pipeline）
+ 2. Multibranch Pipeline （多分支 Pipeline）
+
+如下图：
+
+
+
+如果使用了多分支 Pipeline，就不会存在动态使用分支名称的问题了。
+    
+    </summary>
+    
+    
+      <category term="Coding" scheme="https://dayarch.top/categories/Coding/"/>
+    
+      <category term="DevOps" scheme="https://dayarch.top/categories/Coding/DevOps/"/>
+    
+    
+      <category term="Jenkins" scheme="https://dayarch.top/tags/Jenkins/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>120000字，你们要的Java并发编程图文小册来了</title>
+    <link href="https://dayarch.top//p/java-concurrency-book.html"/>
+    <id>https://dayarch.top//p/java-concurrency-book.html</id>
+    <published>2021-03-07T13:03:39.000Z</published>
+    <updated>2021-03-07T13:21:18.139Z</updated>
+    
+    <summary type="html">
+    
+      Java并发编程电子书小册
+    
+    </summary>
+    
+    
+      <category term="Coding" scheme="https://dayarch.top/categories/Coding/"/>
+    
+      <category term="Java-Concurrency" scheme="https://dayarch.top/categories/Coding/Java-Concurrency/"/>
+    
+    
+      <category term="Java-Concurrency" scheme="https://dayarch.top/tags/Java-Concurrency/"/>
+    
+  </entry>
+  
+  <entry>
     <title>ForkJoinPool大剖析</title>
     <link href="https://dayarch.top//p/java-fork-join-pool.html"/>
     <id>https://dayarch.top//p/java-fork-join-pool.html</id>
     <published>2021-02-17T06:45:52.000Z</published>
-    <updated>2021-02-17T07:35:31.618Z</updated>
+    <updated>2021-02-21T09:29:43.778Z</updated>
     
     <summary type="html">
     
@@ -459,52 +517,6 @@ Github 主要对 UI 设计以及 Repository 布局进行了更新，改善了访
     
     
       <category term="Github" scheme="https://dayarch.top/tags/Github/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>搞定ReentrantReadWriteLock 几道小小数学题就够了</title>
-    <link href="https://dayarch.top//p/java-reentrant-read-write-lock.html"/>
-    <id>https://dayarch.top//p/java-reentrant-read-write-lock.html</id>
-    <published>2020-06-21T11:20:28.000Z</published>
-    <updated>2020-06-24T08:12:56.938Z</updated>
-    
-    <summary type="html">
-    
-      读写锁解决了传统互斥锁应对读多写少低效的场景，它同样是应用AQS的同步器，但是既有独占式获取同步状态，又有共享式获取同步状态，本文主要描述了它是如何应用一个state做到计算两种同步状态的，以及他们获取同步状态的过程
-    
-    </summary>
-    
-    
-      <category term="Coding" scheme="https://dayarch.top/categories/Coding/"/>
-    
-      <category term="Java-Concurrency" scheme="https://dayarch.top/categories/Coding/Java-Concurrency/"/>
-    
-    
-      <category term="Java-Concurrency" scheme="https://dayarch.top/tags/Java-Concurrency/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Java AQS共享式获取同步状态及Semaphore的应用分析</title>
-    <link href="https://dayarch.top//p/java-aqs-acquireshared-and-semaphore.html"/>
-    <id>https://dayarch.top//p/java-aqs-acquireshared-and-semaphore.html</id>
-    <published>2020-06-13T07:05:28.000Z</published>
-    <updated>2020-06-14T04:23:39.525Z</updated>
-    
-    <summary type="html">
-    
-      本文详细讲述了 Java AQS 中共享式获取同步状态的过程，通过该过程了解 Semaphore 的经典应用
-    
-    </summary>
-    
-    
-      <category term="Coding" scheme="https://dayarch.top/categories/Coding/"/>
-    
-      <category term="Java-Concurrency" scheme="https://dayarch.top/categories/Coding/Java-Concurrency/"/>
-    
-    
-      <category term="Java-Concurrency" scheme="https://dayarch.top/tags/Java-Concurrency/"/>
     
   </entry>
   

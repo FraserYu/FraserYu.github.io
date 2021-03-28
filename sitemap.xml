@@ -2,9 +2,23 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://dayarch.top/p/jenkins-dynamic-using-git-branch.html</loc>
+    
+    <lastmod>2021-03-28T12:35:17.088Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://dayarch.top/p/java-concurrency-book.html</loc>
+    
+    <lastmod>2021-03-07T13:21:18.139Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://dayarch.top/p/java-fork-join-pool.html</loc>
     
-    <lastmod>2021-02-17T07:35:31.618Z</lastmod>
+    <lastmod>2021-02-21T09:29:43.778Z</lastmod>
     
   </url>
   
