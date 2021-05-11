@@ -300,6 +300,124 @@
   <section class='meta'>
     
     
+    <div class="meta" id="header-meta">
+      
+        
+  <h2 class="title">
+    <a href="/p/github-new-ui.html">
+      Github UI 布局设计更新了，你发现了吗？
+    </a>
+  </h2>
+
+
+      
+      <div class='new-meta-box'>
+        
+          
+        
+          
+            
+  <div class='new-meta-item author'>
+    
+      <a href="https://dayarch.top" rel="nofollow">
+        
+          <img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png">
+        
+        <p>tanθ</p>
+      </a>
+    
+  </div>
+
+
+          
+        
+          
+            <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+    <p>2020-06-24</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+  
+  <div class='new-meta-item category'>
+    <a href='/categories/Coding/Others/' rel="nofollow">
+      <i class="fas fa-folder-open" aria-hidden="true"></i>
+      <p>Coding&nbsp;/&nbsp;Others</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            
+
+          
+        
+      </div>
+      
+        <hr>
+      
+    </div>
+  </section>
+
+
+  <section class="article typo">
+    <div class="article-entry" itemprop="articleBody">
+      话不多说，先看图，你一眼应该就能看出变化了
+
+
+
+Github 主要对 UI 设计以及 Repository 布局进行了更新，改善了访问和维护 Repository 的体验，其实主要有以下几点更新：
+
+ 1. 响应式的布局以及改进了移动端 Web 的体验
+ 2. 通过 Repository 侧边栏显示更多内容
+ 3. 能够在 Repository 侧边栏现实/隐藏 Release 版本以及 Packages 和 Environments
+
+
+
+目前整体改动虽然不大，但这些更改会为将来的渐进式改进奠定基础，接下来也会推出暗黑模式等内容
+
+
+
+
+顺便要说一下，浏览 Github 必须要有的神器 O
+      
+        <div class="readmore">
+          <a href="/p/github-new-ui.html" class="flat-box">
+            <i class="fas fa-book-open fa-fw" aria-hidden="true"></i>
+            阅读全文
+          </a>
+        </div>
+      
+    </div>
+    
+      <div class="full-width auto-padding tags">
+        
+          <a href="/tags/Github/" rel="nofollow"><i class="fas fa-tag fa-fw"></i> Github</a>
+        
+      </div>
+    
+  </section>
+</article>
+
+          </div>
+        
+      
+        
+          <div class='post-wrapper'>
+            <article class="post reveal ">
+  
+
+
+  <section class='meta'>
+    
+    
       <a title='搞定ReentrantReadWriteLock 几道小小数学题就够了' href='/p/java-reentrant-read-write-lock.html'><img class='thumbnail' src='https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgconcurrency.png'></a>
     
     <div class="meta" id="header-meta">
@@ -1381,124 +1499,6 @@ Java 并发系列 已经写了很多，从来还没提起过那个它【Java线�
           </div>
         
       
-        
-          <div class='post-wrapper'>
-            <article class="post reveal ">
-  
-
-
-  <section class='meta'>
-    
-    
-      <a title='并发编程之等待通知机制' href='/p/waiting-notification-mechanism.html'><img class='thumbnail' src='https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgconcurrency.png'></a>
-    
-    <div class="meta" id="header-meta">
-      
-        
-  <h2 class="title">
-    <a href="/p/waiting-notification-mechanism.html">
-      并发编程之等待通知机制
-    </a>
-  </h2>
-
-
-      
-      <div class='new-meta-box'>
-        
-          
-        
-          
-            
-  <div class='new-meta-item author'>
-    
-      <a href="https://dayarch.top" rel="nofollow">
-        
-          <img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png">
-        
-        <p>tanθ</p>
-      </a>
-    
-  </div>
-
-
-          
-        
-          
-            <div class="new-meta-item date">
-  <a class='notlink'>
-    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-    <p>2020-03-15</p>
-  </a>
-</div>
-
-          
-        
-          
-            
-  
-  <div class='new-meta-item category'>
-    <a href='/categories/Coding/Java-Concurrency/' rel="nofollow">
-      <i class="fas fa-folder-open" aria-hidden="true"></i>
-      <p>Coding&nbsp;/&nbsp;Java-Concurrency</p>
-    </a>
-  </div>
-
-
-          
-        
-          
-            
-
-          
-        
-      </div>
-      
-        <hr>
-      
-    </div>
-  </section>
-
-
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      并发编程为什么会有等待通知机制
-上一篇文章说明了 Java并发死锁解决思路 ， 解决死锁的思路之一就是 破坏请求和保持条件, 所有柜员都要通过唯一的账本管理员一次性拿到所有转账业务需要的账本，就像下面这样： 
-
-
-
-没有等待/通知机制之前，所有柜员都通过死循环的方式不断向账本管理员申请所有账本，程序的体现就是这样：
-
-1
-2
-
-
-while(!accountBookManager.getAllRequiredAccountBook(this, target)) 
-；
-
-
-假如账本管理员是年轻小伙，腿脚利落（即执行 getAllRequiredAccountBook方法耗时短），并且多个柜员转账
-      
-        <div class="readmore">
-          <a href="/p/waiting-notification-mechanism.html" class="flat-box">
-            <i class="fas fa-book-open fa-fw" aria-hidden="true"></i>
-            阅读全文
-          </a>
-        </div>
-      
-    </div>
-    
-      <div class="full-width auto-padding tags">
-        
-          <a href="/tags/Java-Concurrency/" rel="nofollow"><i class="fas fa-tag fa-fw"></i> Java-Concurrency</a>
-        
-      </div>
-    
-  </section>
-</article>
-
-          </div>
-        
-      
     
   </section>
   
@@ -1845,7 +1845,7 @@ while(!accountBookManager.getAllRequiredAccountBook(this, target))
         
           <li><a class="flat-box" title="/categories/AWS/" href="/categories/AWS/"><div class='name'>AWS</div><div class='badge'>(1)</div></a></li>
         
-          <li><a class="flat-box" title="/categories/Coding/" href="/categories/Coding/"><div class='name'>Coding</div><div class='badge'>(95)</div></a></li>
+          <li><a class="flat-box" title="/categories/Coding/" href="/categories/Coding/"><div class='name'>Coding</div><div class='badge'>(96)</div></a></li>
         
           <li><a class="flat-box child" title="/categories/Coding/Arthas/" href="/categories/Coding/Arthas/"><div class='name'>Arthas</div><div class='badge'>(1)</div></a></li>
         
@@ -1855,7 +1855,7 @@ while(!accountBookManager.getAllRequiredAccountBook(this, target))
         
           <li><a class="flat-box child" title="/categories/Coding/Java-Concurrency/" href="/categories/Coding/Java-Concurrency/"><div class='name'>Java-Concurrency</div><div class='badge'>(24)</div></a></li>
         
-          <li><a class="flat-box child" title="/categories/Coding/Java/" href="/categories/Coding/Java/"><div class='name'>Java</div><div class='badge'>(16)</div></a></li>
+          <li><a class="flat-box child" title="/categories/Coding/Java/" href="/categories/Coding/Java/"><div class='name'>Java</div><div class='badge'>(17)</div></a></li>
         
           <li><a class="flat-box child" title="/categories/Coding/Linux/" href="/categories/Coding/Linux/"><div class='name'>Linux</div><div class='badge'>(1)</div></a></li>
         
@@ -2074,7 +2074,7 @@ while(!accountBookManager.getAllRequiredAccountBook(this, target))
   &nbsp;&nbsp;|&nbsp;&nbsp;  
   
     &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-        class="white-color">255.9k</span>&nbsp;字
+        class="white-color">256.3k</span>&nbsp;字
     
 
   &nbsp;&nbsp;|&nbsp;&nbsp;  

@@ -390,6 +390,8 @@
       
         
           
+        
+          
             
               <div class='post-wrapper'>
                 <article class="post reveal ">
@@ -738,23 +740,30 @@ Java 有并发，并发知识之大，一口吃不下
           
         
           
-            
-              <div class='post-wrapper'>
-                <article class="post reveal ">
+        
+          
+        
+      
+    
+    
+      
+        
+          <div class='post-wrapper'>
+            <article class="post reveal ">
   
 
 
   <section class='meta'>
     
     
-      <a title='ForkJoinPool大剖析' href='/p/java-fork-join-pool.html'><img class='thumbnail' src='https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgconcurrency.png'></a>
+      <a title='IntelliJ IDEA 高级调试之Stream Trace' href='/p/idea-stream-trace.html'><img class='thumbnail' src='https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200207104108.png'></a>
     
     <div class="meta" id="header-meta">
       
         
   <h2 class="title">
-    <a href="/p/java-fork-join-pool.html">
-      ForkJoinPool大剖析
+    <a href="/p/idea-stream-trace.html">
+      IntelliJ IDEA 高级调试之Stream Trace
     </a>
   </h2>
 
@@ -784,7 +793,7 @@ Java 有并发，并发知识之大，一口吃不下
             <div class="new-meta-item date">
   <a class='notlink'>
     <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-    <p>2021-02-17</p>
+    <p>2021-05-11</p>
   </a>
 </div>
 
@@ -794,9 +803,9 @@ Java 有并发，并发知识之大，一口吃不下
             
   
   <div class='new-meta-item category'>
-    <a href='/categories/Coding/Java-Concurrency/' rel="nofollow">
+    <a href='/categories/Coding/Java/' rel="nofollow">
       <i class="fas fa-folder-open" aria-hidden="true"></i>
-      <p>Coding&nbsp;/&nbsp;Java-Concurrency</p>
+      <p>Coding&nbsp;/&nbsp;Java</p>
     </a>
   </div>
 
@@ -805,13 +814,6 @@ Java 有并发，并发知识之大，一口吃不下
         
           
             
-  <div class="new-meta-item top-post">
-    <a class='notlink'>
-      <i class="fas fa-angle-double-up" aria-hidden="true"></i>
-      <p>置顶</p>
-    </a>
-  </div>
-
 
           
         
@@ -825,14 +827,24 @@ Java 有并发，并发知识之大，一口吃不下
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      知识回顾
-并发工具类我们已经讲了很多，这些工具类的「目标」是让我们只关注任务本身，并且忽视线程间合作细节，简化了并发编程难度的同时，也增加了很多安全性。工具类的对使用者的「目标」虽然一致，但每一个工具类本身都有它独特的应用场景，比如：
+      前言
+自从 Java 8 开始，作为程序员的我们都离不开 Stream 相关功能的使用，书写起来那叫一个流畅（这个 feel～～）。但总是有一些时候，我们对 stream 的操作所要的结果和预期不符，这就需要我们逐步调试，定位问题
 
- * 我会手动创建线程，为什么要使用线程池? 介绍了使用线程池管理线程将一个大任务分解成多个子任务来简单执行，借助 不会用Java Future，我怀疑你泡茶没我快, 又是超长图文！！ 的 Future 特性获取子任务执行结果——二者结合使用就可以处理简单的并行任务
- * 搞定 CompletableFuture，并发异步编程和编写串行程序还有什么区别？ 借助
+常规调试
+先来看下面这段代码：
+
+1
+2
+3
+4
+
+
+public static void main(String[] args) {
+  Object[] res = Stream.of(1,2,3,4,5,6,7,8).filter( i -> i%2 == 0).filter( i -> i>3).toArray();
+  System.out.printl
       
         <div class="readmore">
-          <a href="/p/java-fork-join-pool.html" class="flat-box">
+          <a href="/p/idea-stream-trace.html" class="flat-box">
             <i class="fas fa-book-open fa-fw" aria-hidden="true"></i>
             阅读全文
           </a>
@@ -840,24 +852,11 @@ Java 有并发，并发知识之大，一口吃不下
       
     </div>
     
-      <div class="full-width auto-padding tags">
-        
-          <a href="/tags/Java-Concurrency/" rel="nofollow"><i class="fas fa-tag fa-fw"></i> Java-Concurrency</a>
-        
-      </div>
-    
   </section>
 </article>
 
-              </div>
-            
-          
+          </div>
         
-          
-        
-      
-    
-    
       
         
           <div class='post-wrapper'>
@@ -991,6 +990,111 @@ Java 有并发，并发知识之大，一口吃不下
       
         
       
+        
+          <div class='post-wrapper'>
+            <article class="post reveal ">
+  
+
+
+  <section class='meta'>
+    
+    
+      <a title='ForkJoinPool大剖析' href='/p/java-fork-join-pool.html'><img class='thumbnail' src='https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgconcurrency.png'></a>
+    
+    <div class="meta" id="header-meta">
+      
+        
+  <h2 class="title">
+    <a href="/p/java-fork-join-pool.html">
+      ForkJoinPool大剖析
+    </a>
+  </h2>
+
+
+      
+      <div class='new-meta-box'>
+        
+          
+        
+          
+            
+  <div class='new-meta-item author'>
+    
+      <a href="https://dayarch.top" rel="nofollow">
+        
+          <img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png">
+        
+        <p>tanθ</p>
+      </a>
+    
+  </div>
+
+
+          
+        
+          
+            <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+    <p>2021-02-17</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+  
+  <div class='new-meta-item category'>
+    <a href='/categories/Coding/Java-Concurrency/' rel="nofollow">
+      <i class="fas fa-folder-open" aria-hidden="true"></i>
+      <p>Coding&nbsp;/&nbsp;Java-Concurrency</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            
+
+          
+        
+      </div>
+      
+        <hr>
+      
+    </div>
+  </section>
+
+
+  <section class="article typo">
+    <div class="article-entry" itemprop="articleBody">
+      知识回顾
+并发工具类我们已经讲了很多，这些工具类的「目标」是让我们只关注任务本身，并且忽视线程间合作细节，简化了并发编程难度的同时，也增加了很多安全性。工具类的对使用者的「目标」虽然一致，但每一个工具类本身都有它独特的应用场景，比如：
+
+ * 我会手动创建线程，为什么要使用线程池? 介绍了使用线程池管理线程将一个大任务分解成多个子任务来简单执行，借助 不会用Java Future，我怀疑你泡茶没我快, 又是超长图文！！ 的 Future 特性获取子任务执行结果——二者结合使用就可以处理简单的并行任务
+ * 搞定 CompletableFuture，并发异步编程和编写串行程序还有什么区别？ 借助
+      
+        <div class="readmore">
+          <a href="/p/java-fork-join-pool.html" class="flat-box">
+            <i class="fas fa-book-open fa-fw" aria-hidden="true"></i>
+            阅读全文
+          </a>
+        </div>
+      
+    </div>
+    
+      <div class="full-width auto-padding tags">
+        
+          <a href="/tags/Java-Concurrency/" rel="nofollow"><i class="fas fa-tag fa-fw"></i> Java-Concurrency</a>
+        
+      </div>
+    
+  </section>
+</article>
+
+          </div>
         
       
         
@@ -1714,119 +1818,6 @@ PowerToys 就是这么一款有 Power 的工具，使用的前置要求很简单
           </div>
         
       
-        
-          <div class='post-wrapper'>
-            <article class="post reveal ">
-  
-
-
-  <section class='meta'>
-    
-    
-      <a title='Intellij IDEA 创建Scratch files 和 Scratch buffers' href='/p/scratch-files-and-scratch-bufferss.html'><img class='thumbnail' src='https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200207104108.png'></a>
-    
-    <div class="meta" id="header-meta">
-      
-        
-  <h2 class="title">
-    <a href="/p/scratch-files-and-scratch-bufferss.html">
-      Intellij IDEA 创建Scratch files 和 Scratch buffers
-    </a>
-  </h2>
-
-
-      
-      <div class='new-meta-box'>
-        
-          
-        
-          
-            
-  <div class='new-meta-item author'>
-    
-      <a href="https://dayarch.top" rel="nofollow">
-        
-          <img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png">
-        
-        <p>tanθ</p>
-      </a>
-    
-  </div>
-
-
-          
-        
-          
-            <div class="new-meta-item date">
-  <a class='notlink'>
-    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-    <p>2020-10-31</p>
-  </a>
-</div>
-
-          
-        
-          
-            
-  
-  <div class='new-meta-item category'>
-    <a href='/categories/Coding/Java/' rel="nofollow">
-      <i class="fas fa-folder-open" aria-hidden="true"></i>
-      <p>Coding&nbsp;/&nbsp;Java</p>
-    </a>
-  </div>
-
-
-          
-        
-          
-            
-
-          
-        
-      </div>
-      
-        <hr>
-      
-    </div>
-  </section>
-
-
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      多数人对于 Intellij IDEA 可能始于其「颜值」，终于其「才华」，外加各种插件 buff 的加成，coding 的节奏分分钟要暴走
-
-
-
-抛开自己安装的插件，IDEA 其实也内秀的很，在 IntelliJ IDEA HTTP Client高级使用详解 中详细的介绍了开发小组内放弃 Postman 的理由，用过的小伙伴后台留言直呼爽。
-
-但今天要介绍的是另外一个秀的有些含蓄的小功能，她那么显眼的站在你面前，你却选择忽视她
-
-
-
-有时候我们需要在项目之外创建一些临时文件或一些实验性代码，创建在项目中可能一不小心 Git 误提交，不创建项目里又需要切换到其他应用上来回拷贝，对于专注 cod
-      
-        <div class="readmore">
-          <a href="/p/scratch-files-and-scratch-bufferss.html" class="flat-box">
-            <i class="fas fa-book-open fa-fw" aria-hidden="true"></i>
-            阅读全文
-          </a>
-        </div>
-      
-    </div>
-    
-      <div class="full-width auto-padding tags">
-        
-          <a href="/tags/IntelliJ-IDEA/" rel="nofollow"><i class="fas fa-tag fa-fw"></i> IntelliJ IDEA</a>
-        
-      </div>
-    
-  </section>
-</article>
-
-          </div>
-        
-      
     
   </section>
   
@@ -2167,7 +2158,7 @@ PowerToys 就是这么一款有 Power 的工具，使用的前置要求很简单
         
           <li><a class="flat-box" title="/categories/AWS/" href="/categories/AWS/"><div class='name'>AWS</div><div class='badge'>(1)</div></a></li>
         
-          <li><a class="flat-box" title="/categories/Coding/" href="/categories/Coding/"><div class='name'>Coding</div><div class='badge'>(95)</div></a></li>
+          <li><a class="flat-box" title="/categories/Coding/" href="/categories/Coding/"><div class='name'>Coding</div><div class='badge'>(96)</div></a></li>
         
           <li><a class="flat-box child" title="/categories/Coding/Arthas/" href="/categories/Coding/Arthas/"><div class='name'>Arthas</div><div class='badge'>(1)</div></a></li>
         
@@ -2177,7 +2168,7 @@ PowerToys 就是这么一款有 Power 的工具，使用的前置要求很简单
         
           <li><a class="flat-box child" title="/categories/Coding/Java-Concurrency/" href="/categories/Coding/Java-Concurrency/"><div class='name'>Java-Concurrency</div><div class='badge'>(24)</div></a></li>
         
-          <li><a class="flat-box child" title="/categories/Coding/Java/" href="/categories/Coding/Java/"><div class='name'>Java</div><div class='badge'>(16)</div></a></li>
+          <li><a class="flat-box child" title="/categories/Coding/Java/" href="/categories/Coding/Java/"><div class='name'>Java</div><div class='badge'>(17)</div></a></li>
         
           <li><a class="flat-box child" title="/categories/Coding/Linux/" href="/categories/Coding/Linux/"><div class='name'>Linux</div><div class='badge'>(1)</div></a></li>
         
@@ -2396,7 +2387,7 @@ PowerToys 就是这么一款有 Power 的工具，使用的前置要求很简单
   &nbsp;&nbsp;|&nbsp;&nbsp;  
   
     &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-        class="white-color">255.9k</span>&nbsp;字
+        class="white-color">256.3k</span>&nbsp;字
     
 
   &nbsp;&nbsp;|&nbsp;&nbsp;  

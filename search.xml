@@ -4,6 +4,27 @@
   
     
     <entry>
+      <title>IntelliJ IDEA 高级调试之Stream Trace</title>
+      <link href="//p/idea-stream-trace.html"/>
+      <url>//p/idea-stream-trace.html</url>
+      
+        <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>自从 Java 8 开始，作为程序员的我们都离不开 Stream 相关功能的使用，书写起来那叫一个流畅（这个 feel～～）。但总是有一些时候，我们对 stream 的操作所要的结果和预期不符，这就需要我们逐步调试，定位问题</p><h2 id="常规调试"><a href="#常规调试" class="headerlink" title="常规调试"></a>常规调试</h2><p>先来看下面这段代码：</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">  Object[] res = Stream.of(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>).filter( i -&gt; i%<span class="number">2</span> == <span class="number">0</span>).filter( i -&gt; i&gt;<span class="number">3</span>).toArray();</span><br><span class="line">  System.out.println(Arrays.toString(res));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>我们可以在 Stream 操作处打上断点，逐步查看结果，就像这样：</p><p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host@master/blog-img20210511085423.png" alt=""></p><p>我们需要各种单步调试，不是很直观，我们迫切的需要个一览视图，让我们快速查看我们的 Stream 结果</p><h2 id="可视化调试"><a href="#可视化调试" class="headerlink" title="可视化调试"></a>可视化调试</h2><p>同样先选择行断点，以 <code>Debug</code> 模式进入程序：</p><p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host@master/blog-img20210511090152.png" alt=""></p><p>接下来会弹出 <code>Stream Trace</code>，整个 Stream 操作尽显眼前</p><p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host@master/blog-img20210511090325.png" alt=""></p><p>同样可以点击左下角的 <code>Flat Mode</code> 按钮，将整个视图扁平化</p><p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host@master/blog-img20210511090630.png" alt=""></p><p>在实际业务中，我们通常对集合进行各种 Stream 操作，我们再来个复杂一些的例子：</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">List&lt;Optional&lt;Customer&gt;&gt; customers = Arrays.asList(</span><br><span class="line">Optional.of(<span class="keyword">new</span> Customer(<span class="string">"日拱一兵"</span>, <span class="number">18</span>)),</span><br><span class="line">Optional.of(<span class="keyword">new</span> Customer(<span class="string">"卑微的小开发"</span>, <span class="number">22</span>)),</span><br><span class="line">Optional.empty(),</span><br><span class="line">Optional.of(<span class="keyword">new</span> Customer(<span class="string">"OOT"</span>, <span class="number">21</span>)),</span><br><span class="line">Optional.empty(),</span><br><span class="line">Optional.of(<span class="keyword">new</span> Customer(<span class="string">"温柔一刀"</span>, <span class="number">23</span>)),</span><br><span class="line">Optional.empty()</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="keyword">long</span> numberOf65PlusCustomers = customers</span><br><span class="line">.stream()</span><br><span class="line">.flatMap(c -&gt; c</span><br><span class="line">.map(Stream::of)</span><br><span class="line">.orElseGet(Stream::empty))</span><br><span class="line">.filter(c -&gt; c.getAge() &gt; <span class="number">18</span>)</span><br><span class="line">.count();</span><br><span class="line"></span><br><span class="line">System.out.println(numberOf65PlusCustomers);</span><br></pre></td></tr></table></figure><p>同样按照上面的操作得到可视化 Stream Trace 视图，直观了解整个 Stream 流程，查看对象属性等</p><p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host@master/blog-img20210511092343.png" alt=""></p><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>这个简单的功能，看一遍就会，相信可以在日常的调试中对你有很大帮助，接下来会介绍更多的你不曾留意又很高级调试技巧</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Coding </category>
+          
+          <category> Java </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Jenkins 动态使用分支名称</title>
       <link href="//p/jenkins-dynamic-using-git-branch.html"/>
       <url>//p/jenkins-dynamic-using-git-branch.html</url>
@@ -1603,11 +1624,11 @@
             
             <tag> Spring Boot </tag>
             
+            <tag> Excel </tag>
+            
             <tag> EasyExcel </tag>
             
             <tag> POI </tag>
-            
-            <tag> Excel </tag>
             
         </tags>
       
@@ -2229,9 +2250,9 @@
       
         <tags>
             
-            <tag> Spring Boot </tag>
-            
             <tag> Docker </tag>
+            
+            <tag> Spring Boot </tag>
             
         </tags>
       

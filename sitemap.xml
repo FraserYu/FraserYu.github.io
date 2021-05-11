@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://dayarch.top/p/idea-stream-trace.html</loc>
+    
+    <lastmod>2021-05-11T01:34:13.107Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://dayarch.top/p/java-fork-join-pool.html</loc>
+    
+    <lastmod>2021-03-28T12:39:39.647Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://dayarch.top/p/jenkins-dynamic-using-git-branch.html</loc>
     
     <lastmod>2021-03-28T12:35:17.088Z</lastmod>
@@ -12,13 +26,6 @@
     <loc>https://dayarch.top/p/java-concurrency-book.html</loc>
     
     <lastmod>2021-03-07T13:21:18.139Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://dayarch.top/p/java-fork-join-pool.html</loc>
-    
-    <lastmod>2021-02-21T09:29:43.778Z</lastmod>
     
   </url>
   

@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://dayarch.top/"/>
-  <updated>2021-03-28T12:35:17.088Z</updated>
+  <updated>2021-05-11T01:34:13.107Z</updated>
   <id>https://dayarch.top/</id>
   
   <author>
@@ -15,6 +15,27 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>IntelliJ IDEA 高级调试之Stream Trace</title>
+    <link href="https://dayarch.top//p/idea-stream-trace.html"/>
+    <id>https://dayarch.top//p/idea-stream-trace.html</id>
+    <published>2021-05-11T01:32:06.056Z</published>
+    <updated>2021-05-11T01:34:13.107Z</updated>
+    
+    <summary type="html">
+    
+      自从 Java 8 开始，作为程序员的我们都离不开 Stream 相关功能的使用，书写起来那叫一个流畅（这个 feel～～）。但总是有一些时候，我们对 stream 的操作所要的结果和预期不符，这就需要我们逐步调试，定位问题, IntelliJ IDEA 的 Stream Trace 就可以轻松帮助我们可视化问题所在
+    
+    </summary>
+    
+    
+      <category term="Coding" scheme="https://dayarch.top/categories/Coding/"/>
+    
+      <category term="Java" scheme="https://dayarch.top/categories/Coding/Java/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>Jenkins 动态使用分支名称</title>
@@ -79,7 +100,7 @@
     <link href="https://dayarch.top//p/java-fork-join-pool.html"/>
     <id>https://dayarch.top//p/java-fork-join-pool.html</id>
     <published>2021-02-17T06:45:52.000Z</published>
-    <updated>2021-02-21T09:29:43.778Z</updated>
+    <updated>2021-03-28T12:39:39.647Z</updated>
     
     <summary type="html">
     
@@ -477,46 +498,6 @@ docker containe
     
     
       <category term="Java-Concurrency" scheme="https://dayarch.top/tags/Java-Concurrency/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Github UI 布局设计更新了，你发现了吗？</title>
-    <link href="https://dayarch.top//p/github-new-ui.html"/>
-    <id>https://dayarch.top//p/github-new-ui.html</id>
-    <published>2020-06-24T08:10:04.000Z</published>
-    <updated>2020-06-24T08:13:24.997Z</updated>
-    
-    <summary type="html">
-    
-      话不多说，先看图，你一眼应该就能看出变化了
-
-
-
-Github 主要对 UI 设计以及 Repository 布局进行了更新，改善了访问和维护 Repository 的体验，其实主要有以下几点更新：
-
- 1. 响应式的布局以及改进了移动端 Web 的体验
- 2. 通过 Repository 侧边栏显示更多内容
- 3. 能够在 Repository 侧边栏现实/隐藏 Release 版本以及 Packages 和 Environments
-
-
-
-目前整体改动虽然不大，但这些更改会为将来的渐进式改进奠定基础，接下来也会推出暗黑模式等内容
-
-
-
-
-顺便要说一下，浏览 Github 必须要有的神器 O
-    
-    </summary>
-    
-    
-      <category term="Coding" scheme="https://dayarch.top/categories/Coding/"/>
-    
-      <category term="Others" scheme="https://dayarch.top/categories/Coding/Others/"/>
-    
-    
-      <category term="Github" scheme="https://dayarch.top/tags/Github/"/>
     
   </entry>
   
