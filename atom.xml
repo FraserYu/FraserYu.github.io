@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://dayarch.top/"/>
-  <updated>2021-05-11T01:34:13.107Z</updated>
+  <updated>2021-05-12T07:24:04.351Z</updated>
   <id>https://dayarch.top/</id>
   
   <author>
@@ -17,11 +17,34 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>IntelliJ IDEA 高级Debug技巧，助你起飞</title>
+    <link href="https://dayarch.top//p/intellj-idea-advanced-debug.html"/>
+    <id>https://dayarch.top//p/intellj-idea-advanced-debug.html</id>
+    <published>2021-05-12T07:20:38.000Z</published>
+    <updated>2021-05-12T07:24:04.351Z</updated>
+    
+    <summary type="html">
+    
+      我们手中拿着强有力的武器，却不知道如何使用，IDEA 非常强大，痛程序猿所痛，并提供完美解决方案，但多数程序猿都不知道使用这些功能，IDEA 高级调试技巧，在工作和阅读源码上都可以提高很多效率
+    
+    </summary>
+    
+    
+      <category term="Coding" scheme="https://dayarch.top/categories/Coding/"/>
+    
+      <category term="Java" scheme="https://dayarch.top/categories/Coding/Java/"/>
+    
+    
+      <category term="IntelliJ IDEA" scheme="https://dayarch.top/tags/IntelliJ-IDEA/"/>
+    
+  </entry>
+  
+  <entry>
     <title>IntelliJ IDEA 高级调试之Stream Trace</title>
     <link href="https://dayarch.top//p/idea-stream-trace.html"/>
     <id>https://dayarch.top//p/idea-stream-trace.html</id>
-    <published>2021-05-11T01:32:06.056Z</published>
-    <updated>2021-05-11T01:34:13.107Z</updated>
+    <published>2021-05-11T01:32:06.000Z</published>
+    <updated>2021-05-12T07:21:15.818Z</updated>
     
     <summary type="html">
     
@@ -34,6 +57,8 @@
     
       <category term="Java" scheme="https://dayarch.top/categories/Coding/Java/"/>
     
+    
+      <category term="IntelliJ IDEA" scheme="https://dayarch.top/tags/IntelliJ-IDEA/"/>
     
   </entry>
   
@@ -465,29 +490,6 @@ docker containe
     <summary type="html">
     
       并发编程中分工是一种常见的提升效率的编程手段，拆分任务后，如何获取子线程的执行结果，本文结合Callable的诞生以及Future 的使用以及FutureTask的源码分析，帮助大家在实际工作中提升程序运行效率
-    
-    </summary>
-    
-    
-      <category term="Coding" scheme="https://dayarch.top/categories/Coding/"/>
-    
-      <category term="Java-Concurrency" scheme="https://dayarch.top/categories/Coding/Java-Concurrency/"/>
-    
-    
-      <category term="Java-Concurrency" scheme="https://dayarch.top/tags/Java-Concurrency/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>CountDownLatch 和 CyclicBarrier 傻傻的分不清楚？</title>
-    <link href="https://dayarch.top//p/java-countdownlatch-vs-cyclicbarrier.html"/>
-    <id>https://dayarch.top//p/java-countdownlatch-vs-cyclicbarrier.html</id>
-    <published>2020-06-28T08:07:57.000Z</published>
-    <updated>2020-06-28T08:22:00.998Z</updated>
-    
-    <summary type="html">
-    
-      并发编程的三大核心是`分工`，`同步`和`互斥`。在日常开发中，经常会碰到需要在主线程中开启多个子线程去并行的执行任务，并且主线程需要等待所有子线程执行完毕再进行汇总的场景，这就涉及到分工与同步的内容了, 分工与同步离不开 CountDownLatch 与 CyclicBarrier 的使用，本文结合精美图文以及源码分析带你彻底搞定
     
     </summary>
     

@@ -4,12 +4,12 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   
-  <title>Spring Bean生命周期之缘尽 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享</title>
+  <title>IntelliJ IDEA 高级Debug技巧，助你起飞 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享</title>
   
-  <meta name="keywords" content="Spring Bean生命周期, @PreDestroy, DisposableBean, destroy-method, Java,SpringBoot,并发编程, ElasticSearch, 日拱一兵">
+  <meta name="keywords" content="Intellij IDEA 高级调试技巧,Advanced Debug,Intellij IDEA, Java,SpringBoot,并发编程, ElasticSearch, 日拱一兵">
   
   
-  <meta name="description" content="透彻的理解Spring Bean 生命周期是掌握Spring Bean依赖的前提，了解它也可以让我们在特定的节点做特定的事情满足业务需要, 本站是日拱一兵的技术分享博客，内容涵盖Java后端技术、Spring Boot、Java并发编程等技术研究与分享，用有趣的方式解读技术">
+  <meta name="description" content="我们手中拿着强有力的武器，却不知道如何使用，IDEA 非常强大，痛程序猿所痛，并提供完美解决方案，但多数程序猿都不知道使用这些功能，IDEA 高级调试技巧，在工作和阅读源码上都可以提高很多效率, 本站是日拱一兵的技术分享博客，内容涵盖Java后端技术、Spring Boot、Java并发编程等技术研究与分享，用有趣的方式解读技术">
   
 
   
@@ -393,15 +393,15 @@
   <section class='meta'>
     
     
-      <a title='Spring Bean生命周期之缘尽' href='/p/spring-bean-lifecycle-destroy.html'><img class='thumbnail' src='https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgspringbootconverter.png'></a>
+      <a title='IntelliJ IDEA 高级Debug技巧，助你起飞' href='/p/intellj-idea-advanced-debug.html'><img class='thumbnail' src='https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200207104108.png'></a>
     
     <div class="meta" id="header-meta">
       
         
   
     <h1 class="title">
-      <a href="/p/spring-bean-lifecycle-destroy.html">
-        Spring Bean生命周期之缘尽
+      <a href="/p/intellj-idea-advanced-debug.html">
+        IntelliJ IDEA 高级Debug技巧，助你起飞
       </a>
     </h1>
   
@@ -432,7 +432,7 @@
             <div class="new-meta-item date">
   <a class='notlink'>
     <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-    <p>2019-12-21</p>
+    <p>2021-05-12</p>
   </a>
 </div>
 
@@ -442,9 +442,9 @@
             
   
   <div class='new-meta-item category'>
-    <a href='/categories/Coding/Spring-Boot/' rel="nofollow">
+    <a href='/categories/Coding/Java/' rel="nofollow">
       <i class="fas fa-folder-open" aria-hidden="true"></i>
-      <p>Coding&nbsp;/&nbsp;Spring-Boot</p>
+      <p>Coding&nbsp;/&nbsp;Java</p>
     </a>
   </div>
 
@@ -484,62 +484,63 @@
 
     <section class="article typo">
       <div class="article-entry" itemprop="articleBody">
-        <p> 上一篇文章 <a href="https://dayarch.top/p/spring-bean-lifecycle-creation.html">Spring Bean 生命周期之缘起</a> 说明了<code>我是谁？</code> 和 <code>我从哪里来?</code> 的两大哲学问题，今天我们要讨论一下终极哲学<code>我要到哪里去？</code></p>
-<p> 初始化 Spring Bean 有三种方式：</p>
-<ol>
-<li>@PostConstruct</li>
-<li>InitializingBean.afterPropertiesSet()</li>
-<li>init-method</li>
-</ol>
-<p>销毁 Spring Bean 同样有三种方式：</p>
-<ol>
-<li>@PreDestroy</li>
-<li>DisposableBean.destroy()</li>
-<li>destroy-method</li>
-</ol>
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>上一篇文章 <a href="https://dayarch.top/p/idea-stream-trace.html">IntelliJ IDEA 高级调试之Stream Trace</a> 算是 IntelliJ IDEA 高级调试技巧的开胃菜，小伙伴们被这个小技巧征服，趁热打铁，今天给大家带来几个大家<strong>日常工作</strong>以及<strong>阅读源码</strong>必备的高级调试技巧</p>
+<h2 id="断点处添加-log"><a href="#断点处添加-log" class="headerlink" title="断点处添加 log"></a>断点处添加 log</h2><p>很多程序员在调试代码时都喜欢 <code>print</code> 一些内容，这样看起来更直观，print 完之后又很容易忘记删除掉这些没用的内容，最终将代码提交到 <code>remote</code>，<strong>code review</strong> 时又不得不删减这些内容重新提交，不但增加不必要的工作量，还让 <code>log tree</code> 的一些节点没有任何价值</p>
+<p>IntelliJ IDEA 提供 <code>Evaluate and Log at Breakpoints</code> 功能恰巧可以帮助我们解决这个问题, 来看下面代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		ThreadLocalRandom random = ThreadLocalRandom.current();</span><br><span class="line">		<span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++) &#123;</span><br><span class="line">			<span class="keyword">if</span> (isInterested(random.nextInt(<span class="number">10</span>))) &#123;</span><br><span class="line">				count++;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		System.out.printf(<span class="string">"Found %d interested values%n"</span>, count);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">isInterested</span><span class="params">(<span class="keyword">int</span> i)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> i % <span class="number">2</span> == <span class="number">0</span>;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+<p>假如我们想在第 15 行查看每次调用，随即出来的 i 的值到底是多少，我们没必要在这个地方添加任何 log，在正常加断点的地方使用快捷键 <code>Shift + 鼠标左键</code>，就会弹出下面的内容</p>
+<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host@master/blog-img20210511160710.png" alt=""></p>
+<p>勾选上 <code>Evaluate and log</code>, 并自定义你想查看的 log/变量，比如这里的 <code>&quot;interested&quot; + i</code>, 这样以 Debug 模式运行程序（正常模式运行，不会打印这些 log）：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">interested 7</span><br><span class="line">interested 5</span><br><span class="line">interested 1</span><br><span class="line">interested 2</span><br><span class="line">interested 0</span><br><span class="line">Found 2 interested values</span><br></pre></td></tr></table></figure>
+
+<p>如果你在多处添加了这种断点，简单的看 log 可能偶尔还是不够直观，可以勾选上面图片绿色框线的 <code>&quot;Breakpoint hit&quot; message</code> :</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">Breakpoint reached at top.dayarch.TestDebug.isInterested(TestDebug.java:49)</span><br><span class="line">interested 6</span><br><span class="line">Breakpoint reached at top.dayarch.TestDebug.isInterested(TestDebug.java:49)</span><br><span class="line">interested 0</span><br><span class="line">Breakpoint reached at top.dayarch.TestDebug.isInterested(TestDebug.java:49)</span><br><span class="line">interested 9</span><br><span class="line">Breakpoint reached at top.dayarch.TestDebug.isInterested(TestDebug.java:49)</span><br><span class="line">interested 8</span><br><span class="line">Breakpoint reached at top.dayarch.TestDebug.isInterested(TestDebug.java:49)</span><br><span class="line">interested 1</span><br><span class="line">Found 3 interested values</span><br><span class="line">Disconnected from the target VM, address: '127.0.0.1:0', transport: 'socket'</span><br><span class="line"></span><br><span class="line">Process finished with exit code</span><br></pre></td></tr></table></figure>
+
+<p>如果你想要更详细的信息，那就勾选上 <code>Stack trace</code> (大家自己查看运行结果吧)，有了这个功能，上面说的一些问题都不复存在了</p>
+<h2 id="字段断点"><a href="#字段断点" class="headerlink" title="字段断点"></a>字段断点</h2><p>如果你阅读源码，你一定会有个困扰，类中的某个字段的值到底是在哪里改变的，你要一点点追踪调用栈，逐步排查，稍不留神，就可能有遗漏</p>
 <blockquote>
-<p>正所谓，天对地，雨对风； @PostConstruct 对 @PreDestroy；InitializingBean.afterPropertiesSet() 对 DisposableBean.destroy()； init-method 对 destroy-method；雷隐隐，雾蒙蒙；山花对海树，赤日对苍穹；平仄平仄平平仄，仄平仄平仄仄平，仄仄平……</p>
+<p>我们可以在 IntelliJ IDEA 中为某个字段添加断点，当字段值有修改时，自动跳到相应方法位置</p>
 </blockquote>
-<p><fancybox><img src="http://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E5%BA%94%E7%94%A8%E7%B1%BB%E6%96%87%E7%AB%A0/_image/2019-07-02/%E5%B2%B3%E4%BA%91%E9%B9%8F1.gif" alt=""> </fancybox></p>
-<p>感觉讲到这没必要讲下去了，一切清晰明了，但我还有话要说</p>
-<p><fancybox><img src="http://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E5%BA%94%E7%94%A8%E7%B1%BB%E6%96%87%E7%AB%A0/_image/2019-07-02/6bad7ce4875a2946.gif" alt=""> </fancybox></p>
-<p>当 Spring Ioc 容器要移除 bean 时，销毁相关回调方法将会被执行，这么做的目的时释放被 bean 持有的资源，或者去执行一些终极任务. 当 ApplicationContext 调用 registerShutdownHook 方法时，这些销毁方法就会被触发，但一般正常的业务中很少会用到这些方法</p>
-<p><fancybox><img src="http://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E5%BA%94%E7%94%A8%E7%B1%BB%E6%96%87%E7%AB%A0/_image/2019-07/2019-07-11-16-43-10%402x.png" alt=""></fancybox></p>
-<p>接下来具体的展示一下三种方法的使用方式</p>
-<h2 id="三种销毁-Spring-Bean-的方式"><a href="#三种销毁-Spring-Bean-的方式" class="headerlink" title="三种销毁 Spring Bean 的方式"></a>三种销毁 Spring Bean 的方式</h2><h3 id="DisposableBean"><a href="#DisposableBean" class="headerlink" title="DisposableBean"></a>DisposableBean</h3><p>Spring 为我们提供了 DisposableBean 接口</p>
-<p><fancybox><img src="http://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E5%BA%94%E7%94%A8%E7%B1%BB%E6%96%87%E7%AB%A0/_image/2019-07/2019-07-11-16-43-30%402x.png" alt=""></fancybox></p>
-<p>我们可以通过实现 <code>DisposableBean</code> 接口，在其唯一方法 <code>destroy</code> 内完成 bean 销毁的工作，但是 Spring Framework 官方并不建议我们通过这种方法来销毁 bean，这同样是一种强耦合的方式，我们看到框架层面才会用到这个方法。</p>
-<h3 id="PreDestroy"><a href="#PreDestroy" class="headerlink" title="@PreDestroy"></a>@PreDestroy</h3><p>这种方式是 Spring 非常提倡的一种方式，我们通常将其标记在方法上即可，通常习惯将这个方法起名为 <code>destory()</code></p>
-<p><fancybox><img src="http://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E5%BA%94%E7%94%A8%E7%B1%BB%E6%96%87%E7%AB%A0/_image/2019-07/2019-07-11-16-43-52%402x.png" alt=""></fancybox></p>
-<h3 id="destroy-method"><a href="#destroy-method" class="headerlink" title="destroy-method"></a>destroy-method</h3><p>同样是两种方式，第一种方式：</p>
-<p><fancybox><img src="http://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E5%BA%94%E7%94%A8%E7%B1%BB%E6%96%87%E7%AB%A0/_image/2019-07/2019-07-11-16-44-04%402x.png" alt=""></fancybox></p>
-<p>第二种方式</p>
-<p><fancybox><img src="http://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E5%BA%94%E7%94%A8%E7%B1%BB%E6%96%87%E7%AB%A0/_image/2019-07/2019-07-11-16-44-15%402x.png" alt=""></fancybox></p>
-<p>以上三种 Bean 的销毁方式也是可以组合使用的，那么组合在一起的调用顺序是什么呢？</p>
+<p>使用起来很简单：</p>
 <ol>
-<li>首先 @PreDestroy 会被调用</li>
-<li>其次 DisposableBean.destroy() 会被调用 </li>
-<li>最后调用通过 XML 配置的 destroy-method 方法或通过设置 @Bean 注解 设置 destroyMethod 属性的方法</li>
+<li>在字段定义处鼠标左键添加断点（会出现「眼睛」的图标）</li>
+<li>在「眼睛」图标上鼠标右键</li>
+<li>在弹框中勾选上 <code>Field access</code> 和 <code>Field modification</code> 两个选项</li>
 </ol>
-<p>用图示来说明一下调用顺序</p>
-<p><fancybox><img src="http://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E5%BA%94%E7%94%A8%E7%B1%BB%E6%96%87%E7%AB%A0/_image/2019-07-02/Xnip2019-07-02_16-00-23.jpg" alt=""> </fancybox></p>
-<p>这个调用顺序也不难记忆</p>
+<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host@master/blog-img20210511174434.png" alt=""></p>
+<p>如果修改字段值的方法比较多，也可以在 <code>Condition</code> 的地方定义断点进入条件, 有了这个功能的加成，相信你阅读源码会顺畅许多</p>
+<h2 id="异常断点"><a href="#异常断点" class="headerlink" title="异常断点"></a>异常断点</h2><p>除了阅读源码，一定是遇到了异常我们才开始调试代码，代码在抛出异常之后会自动停止，但是我们希望：</p>
 <blockquote>
-<p>PreDestroy <code>(P)</code>，destroy <code>(D)</code>，destroy-method <code>(D)</code> —&gt; <code>PDD （那个3亿人都在 pin 的那个 APP 名称，目前 3 亿人中没有我）</code></p>
+<p>代码停在抛出异常之前，方便我们查看当时的变量信息</p>
 </blockquote>
-<p>再来看看 Spring Bean 生命周期图，我们已经点亮了核心部分：</p>
-<p><fancybox><img src="http://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E5%BA%94%E7%94%A8%E7%B1%BB%E6%96%87%E7%AB%A0/_image/2019-07-02/Xnip2019-07-02_16-01-53.jpg" alt=""> </fancybox></p>
-<p>我们要注意，在销毁的过程并没有类似 BeanPostProcess 那中切面的思想，这里要注意到区别。</p>
-<h2 id="灵魂追问"><a href="#灵魂追问" class="headerlink" title="灵魂追问"></a>灵魂追问</h2><ol>
-<li>在阅读框架源码时，哪些地方用到了 bean 的销毁方法？</li>
-<li>还没有被点亮的地方，你认为还有哪些内容没有做？</li>
+<p>这时我们就用到了 <code>Exception Breakpoints</code>, 当抛出异常时，在 catch 的地方打上断点，可以通过下图的几个位置获取栈顶异常类型，比如这里的 <code>NumberFormatException</code></p>
+<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host@master/blog-img20210511185857.png" alt=""></p>
+<p>知道异常类型后，就可以按照如下步骤添加异常断点了：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host@master/blog-img20210511190620.png" alt=""></p>
+<p>然后在弹框中选择 NumberFormatException </p>
+<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host@master/blog-img20210511190840.png" alt=""></p>
+<p>重新以 Debug 模式运行程序：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host@master/blog-img20210511191018.png" alt=""></p>
+<p>程序「一路绿灯式」定位到抛出异常的位置，同时指出当时的变量信息，三个字：稳，准，狠，还有谁？</p>
+<h2 id="方法断点"><a href="#方法断点" class="headerlink" title="方法断点"></a>方法断点</h2><p>当阅读源码时，比如 Spring，一个接口的方法可能被多个子类实现，当运行时，需要查看调用栈逐步定位实现类，IDEA 同样支持在接口方法上添加断点（快捷键 <code>cmd+F8</code>/<code>ctrl+F8</code>）：</p>
+<ol>
+<li>鼠标左键在方法处点击断点（♦️形状）</li>
+<li>断点上鼠标右键</li>
 </ol>
+<p>勾选上绿色框线上的内容，同样可以自定义跳转条件 Condition</p>
+<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host@master/blog-img20210512145843.png" alt=""></p>
+<p>当以 Debug 模式运行程序的时候，会自动进入实现类的方法（<strong>注意断点形状</strong>）：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host@master/blog-img20210512150114.png" alt=""></p>
+<p>看到这你应该想到常见的 Runnable 接口中的 run 方法了，同样是有作用的，大家可以自行去尝试了</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>相信有以上四种调试技巧的加成，无论是工作debug 还是私下阅读源码，都可以轻松驾驭了。最后，来看看 IDEA 支持的各种断点调试类型，如果你只知道红色小圆点，那咱在留言区好好说说吧</p>
+<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host@master/blog-img20210512151423.png" alt=""></p>
 
       </div>
       <!-- <div class="tuijian">
         <br><br>
         📚相关文章
-        <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/spring-bean-lifecycle-creation.html" title="Spring Bean生命周期之缘起" rel="bookmark">Spring Bean生命周期之缘起</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/spring-boot-execute-on-startup.html" title="在Spring Boot启动时执行代码的几种方法" rel="bookmark">在Spring Boot启动时执行代码的几种方法</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/spring-aware.html" title="Spring Aware 到底是什么？" rel="bookmark">Spring Aware 到底是什么？</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/spring-boot-condition-annotation.html" title="@Conditional注解，Spring Boot 的灵活配置" rel="bookmark">@Conditional注解，Spring Boot 的灵活配置</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/easyexcel-read.html" title="EasyExcel读取Excel实际应用" rel="bookmark">EasyExcel读取Excel实际应用</a></h3></div></li></ul>
+        <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/idea-stream-trace.html" title="IntelliJ IDEA 高级调试之Stream Trace" rel="bookmark">IntelliJ IDEA 高级调试之Stream Trace</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/scratch-files-and-scratch-bufferss.html" title="Intellij IDEA 创建Scratch files 和 Scratch buffers" rel="bookmark">Intellij IDEA 创建Scratch files 和 Scratch buffers</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/http-client-advanced-usage.html" title="IntelliJ IDEA HTTP Client高级使用详解" rel="bookmark">IntelliJ IDEA HTTP Client高级使用详解</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/intellij-idea-configuration-and-plugins.html" title="Intellij IDEA 配置和插件合集" rel="bookmark">Intellij IDEA 配置和插件合集</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/how-to-use-todo-feature.html" title="小小TODO也有大道理" rel="bookmark">小小TODO也有大道理</a></h3></div></li></ul>
       </div> -->
       <div class="personalweixin">
         <br><br>
@@ -559,10 +560,10 @@
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2019-12-21T18:12:36+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-05-12T15:24:04+08:00">
   <a class='notlink'>
     <i class="fas fa-clock" aria-hidden="true"></i>
-    <p>更新于 2019年12月21日</p>
+    <p>更新于 2021年5月12日</p>
   </a>
 </div>
 
@@ -571,7 +572,7 @@
         
           
   
-  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/Spring-Boot/" rel="nofollow"><i class="fas fa-tag" aria-hidden="true"></i><p>Spring Boot</p></a></div> <div class="new-meta-item meta-tags"><a class="tag" href="/tags/Spring-Bean/" rel="nofollow"><i class="fas fa-tag" aria-hidden="true"></i><p>Spring Bean</p></a></div> <div class="new-meta-item meta-tags"><a class="tag" href="/tags/%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/" rel="nofollow"><i class="fas fa-tag" aria-hidden="true"></i><p>生命周期</p></a></div>
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/IntelliJ-IDEA/" rel="nofollow"><i class="fas fa-tag" aria-hidden="true"></i><p>IntelliJ IDEA</p></a></div>
 
 
         
@@ -584,21 +585,13 @@
       
         <a class="-mob-share-qq" title="QQ好友" rel="external nofollow noopener noreferrer"
           
-          href="http://connect.qq.com/widget/shareqq/index.html?url=https://dayarch.top/p/spring-bean-lifecycle-destroy.html&title=Spring Bean生命周期之缘尽 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=上一篇文章 Spring Bean 生命周期之缘起 说明了我是谁？ 和 我从哪里来? 的两大哲学问题，今天我们要讨论一下终极哲学我要到哪里去？
+          href="http://connect.qq.com/widget/shareqq/index.html?url=https://dayarch.top/p/intellj-idea-advanced-debug.html&title=IntelliJ IDEA 高级Debug技巧，助你起飞 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=前言
+上一篇文章 IntelliJ IDEA 高级调试之Stream Trace 算是 IntelliJ IDEA 高级调试技巧的开胃菜，小伙伴们被这个小技巧征服，趁热打铁，今天给大家带来几个大家日常工作以及阅读源码必备的高级调试技巧
 
- 初始化 Spring Bean 有三种方式：
+断点处添加 log
+很多程序员在调试代码时都喜欢 print 一些内容，这样看起来更直观，print 完之后又很容易忘记删除掉这些没用的内容，最终将代码提交到 remote，code review 时又不得不删减这些内容重新提交，不但增加不必要的工作量，还让 log tree 的一些节点没有任何价值
 
- 1. @PostConstruct
- 2. InitializingBean.afterPropertiesSet()
- 3. init-method
-
-销毁 Spring Bean 同样有三种方式：
-
- 1. @PreDestroy
- 2. DisposableBean.destroy()
- 3. destroy-method
-
-正所谓，天对地，雨对风； @PostConstruct 对 @Pre"
+IntelliJ IDEA 提供 Evaluate and"
           
           >
           
@@ -610,21 +603,13 @@
       
         <a class="-mob-share-qzone" title="QQ空间" rel="external nofollow noopener noreferrer"
           
-          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://dayarch.top/p/spring-bean-lifecycle-destroy.html&title=Spring Bean生命周期之缘尽 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=上一篇文章 Spring Bean 生命周期之缘起 说明了我是谁？ 和 我从哪里来? 的两大哲学问题，今天我们要讨论一下终极哲学我要到哪里去？
+          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://dayarch.top/p/intellj-idea-advanced-debug.html&title=IntelliJ IDEA 高级Debug技巧，助你起飞 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=前言
+上一篇文章 IntelliJ IDEA 高级调试之Stream Trace 算是 IntelliJ IDEA 高级调试技巧的开胃菜，小伙伴们被这个小技巧征服，趁热打铁，今天给大家带来几个大家日常工作以及阅读源码必备的高级调试技巧
 
- 初始化 Spring Bean 有三种方式：
+断点处添加 log
+很多程序员在调试代码时都喜欢 print 一些内容，这样看起来更直观，print 完之后又很容易忘记删除掉这些没用的内容，最终将代码提交到 remote，code review 时又不得不删减这些内容重新提交，不但增加不必要的工作量，还让 log tree 的一些节点没有任何价值
 
- 1. @PostConstruct
- 2. InitializingBean.afterPropertiesSet()
- 3. init-method
-
-销毁 Spring Bean 同样有三种方式：
-
- 1. @PreDestroy
- 2. DisposableBean.destroy()
- 3. destroy-method
-
-正所谓，天对地，雨对风； @PostConstruct 对 @Pre"
+IntelliJ IDEA 提供 Evaluate and"
           
           >
           
@@ -636,21 +621,13 @@
       
         <a class="-mob-share-weibo" title="微博" rel="external nofollow noopener noreferrer"
           
-          href="http://service.weibo.com/share/share.php?url=https://dayarch.top/p/spring-bean-lifecycle-destroy.html&title=Spring Bean生命周期之缘尽 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=上一篇文章 Spring Bean 生命周期之缘起 说明了我是谁？ 和 我从哪里来? 的两大哲学问题，今天我们要讨论一下终极哲学我要到哪里去？
+          href="http://service.weibo.com/share/share.php?url=https://dayarch.top/p/intellj-idea-advanced-debug.html&title=IntelliJ IDEA 高级Debug技巧，助你起飞 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=前言
+上一篇文章 IntelliJ IDEA 高级调试之Stream Trace 算是 IntelliJ IDEA 高级调试技巧的开胃菜，小伙伴们被这个小技巧征服，趁热打铁，今天给大家带来几个大家日常工作以及阅读源码必备的高级调试技巧
 
- 初始化 Spring Bean 有三种方式：
+断点处添加 log
+很多程序员在调试代码时都喜欢 print 一些内容，这样看起来更直观，print 完之后又很容易忘记删除掉这些没用的内容，最终将代码提交到 remote，code review 时又不得不删减这些内容重新提交，不但增加不必要的工作量，还让 log tree 的一些节点没有任何价值
 
- 1. @PostConstruct
- 2. InitializingBean.afterPropertiesSet()
- 3. init-method
-
-销毁 Spring Bean 同样有三种方式：
-
- 1. @PreDestroy
- 2. DisposableBean.destroy()
- 3. destroy-method
-
-正所谓，天对地，雨对风； @PostConstruct 对 @Pre"
+IntelliJ IDEA 提供 Evaluate and"
           
           >
           
@@ -674,40 +651,21 @@
       
           <div class="prev-next">
               
-                  <section class="prev">
-                      <span class="art-item-left">
-                          <h6><i class="fas fa-chevron-left" aria-hidden="true"></i>&nbsp;上一页</h6>
-                          <h4>
-                              <a href="/p/spring-aware.html" rel="prev" title="Spring Aware 到底是什么？">
-                                
-                                    Spring Aware 到底是什么？
-                                
-                              </a>
-                          </h4>
-                          
-                              
-                              <h6 class="tags">
-                                  <a class="tag" href="/tags/Spring-Aware/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> Spring Aware</a> <a class="tag" href="/tags/Spring-Bean/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> Spring Bean</a> <a class="tag" href="/tags/%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> 生命周期</a>
-                              </h6>
-                          
-                      </span>
-                  </section>
-              
               
                   <section class="next">
                       <span class="art-item-right" aria-hidden="true">
                           <h6>下一页&nbsp;<i class="fas fa-chevron-right" aria-hidden="true"></i></h6>
                           <h4>
-                              <a href="/p/spring-bean-lifecycle-creation.html" rel="prev" title="Spring Bean生命周期之缘起">
+                              <a href="/p/idea-stream-trace.html" rel="prev" title="IntelliJ IDEA 高级调试之Stream Trace">
                                   
-                                      Spring Bean生命周期之缘起
+                                      IntelliJ IDEA 高级调试之Stream Trace
                                   
                               </a>
                           </h4>
                           
                               
                               <h6 class="tags">
-                                  <a class="tag" href="/tags/Spring-Boot/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> Spring Boot</a> <a class="tag" href="/tags/Spring-Bean/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> Spring Bean</a> <a class="tag" href="/tags/%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> 生命周期</a>
+                                  <a class="tag" href="/tags/IntelliJ-IDEA/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> IntelliJ IDEA</a>
                               </h6>
                           
                       </span>
@@ -734,7 +692,7 @@
 </header>
 
     <div class="content pure">
-      <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/spring-bean-lifecycle-creation.html" title="Spring Bean生命周期之缘起" rel="bookmark">Spring Bean生命周期之缘起</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/spring-boot-execute-on-startup.html" title="在Spring Boot启动时执行代码的几种方法" rel="bookmark">在Spring Boot启动时执行代码的几种方法</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/spring-aware.html" title="Spring Aware 到底是什么？" rel="bookmark">Spring Aware 到底是什么？</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/spring-boot-condition-annotation.html" title="@Conditional注解，Spring Boot 的灵活配置" rel="bookmark">@Conditional注解，Spring Boot 的灵活配置</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/easyexcel-read.html" title="EasyExcel读取Excel实际应用" rel="bookmark">EasyExcel读取Excel实际应用</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/spring-boot-messageconverter.html" title="HttpMessageConverter转换原理解析" rel="bookmark">HttpMessageConverter转换原理解析</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/spring-boot-configurationProperties-usage.html" title="Spring Boot @ConfigurationProperties 注解最强使用详解" rel="bookmark">Spring Boot @ConfigurationProperties 注解最强使用详解</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/spring-data-binding-mechanism.html" title="Spring 数据绑定剖析" rel="bookmark">Spring 数据绑定剖析</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/shiro-in-practice.html" title="Shiro—小而美的安全框架" rel="bookmark">Shiro—小而美的安全框架</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/springmvc-init-binder.html" title="Spring MVC 之 @initbinder" rel="bookmark">Spring MVC 之 @initbinder</a></h3></div></li></ul>
+      <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/idea-stream-trace.html" title="IntelliJ IDEA 高级调试之Stream Trace" rel="bookmark">IntelliJ IDEA 高级调试之Stream Trace</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/scratch-files-and-scratch-bufferss.html" title="Intellij IDEA 创建Scratch files 和 Scratch buffers" rel="bookmark">Intellij IDEA 创建Scratch files 和 Scratch buffers</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/http-client-advanced-usage.html" title="IntelliJ IDEA HTTP Client高级使用详解" rel="bookmark">IntelliJ IDEA HTTP Client高级使用详解</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/intellij-idea-configuration-and-plugins.html" title="Intellij IDEA 配置和插件合集" rel="bookmark">Intellij IDEA 配置和插件合集</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/how-to-use-todo-feature.html" title="小小TODO也有大道理" rel="bookmark">小小TODO也有大道理</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/book-reviews-clean-code.html" title="读《Clean Code 代码整洁之道》之感悟" rel="bookmark">读《Clean Code 代码整洁之道》之感悟</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/easyexcel-read.html" title="EasyExcel读取Excel实际应用" rel="bookmark">EasyExcel读取Excel实际应用</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/jdk12-new-feature-overview.html" title="Java 12 新特性一览" rel="bookmark">Java 12 新特性一览</a></h3></div></li></ul>
     </div>
   </section>
 
@@ -790,7 +748,7 @@
 
   <script>
     window.subData = {
-      title: 'Spring Bean生命周期之缘尽',
+      title: 'IntelliJ IDEA 高级Debug技巧，助你起飞',
       tools: true
     }
   </script>
@@ -942,7 +900,7 @@
 </header>
 
     <div class='content pure'>
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#三种销毁-Spring-Bean-的方式"><span class="toc-text">三种销毁 Spring Bean 的方式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#DisposableBean"><span class="toc-text">DisposableBean</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PreDestroy"><span class="toc-text">@PreDestroy</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#destroy-method"><span class="toc-text">destroy-method</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#灵魂追问"><span class="toc-text">灵魂追问</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#断点处添加-log"><span class="toc-text">断点处添加 log</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#字段断点"><span class="toc-text">字段断点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#异常断点"><span class="toc-text">异常断点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#方法断点"><span class="toc-text">方法断点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-text">总结</span></a></li></ol>
     </div>
   </section>
 

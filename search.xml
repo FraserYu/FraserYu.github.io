@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>IntelliJ IDEA 高级Debug技巧，助你起飞</title>
+      <link href="//p/intellj-idea-advanced-debug.html"/>
+      <url>//p/intellj-idea-advanced-debug.html</url>
+      
+        <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>上一篇文章 <a href="https://dayarch.top/p/idea-stream-trace.html">IntelliJ IDEA 高级调试之Stream Trace</a> 算是 IntelliJ IDEA 高级调试技巧的开胃菜，小伙伴们被这个小技巧征服，趁热打铁，今天给大家带来几个大家<strong>日常工作</strong>以及<strong>阅读源码</strong>必备的高级调试技巧</p><h2 id="断点处添加-log"><a href="#断点处添加-log" class="headerlink" title="断点处添加 log"></a>断点处添加 log</h2><p>很多程序员在调试代码时都喜欢 <code>print</code> 一些内容，这样看起来更直观，print 完之后又很容易忘记删除掉这些没用的内容，最终将代码提交到 <code>remote</code>，<strong>code review</strong> 时又不得不删减这些内容重新提交，不但增加不必要的工作量，还让 <code>log tree</code> 的一些节点没有任何价值</p><p>IntelliJ IDEA 提供 <code>Evaluate and Log at Breakpoints</code> 功能恰巧可以帮助我们解决这个问题, 来看下面代码：</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">ThreadLocalRandom random = ThreadLocalRandom.current();</span><br><span class="line"><span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++) &#123;</span><br><span class="line"><span class="keyword">if</span> (isInterested(random.nextInt(<span class="number">10</span>))) &#123;</span><br><span class="line">count++;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">System.out.printf(<span class="string">"Found %d interested values%n"</span>, count);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">isInterested</span><span class="params">(<span class="keyword">int</span> i)</span> </span>&#123;</span><br><span class="line"><span class="keyword">return</span> i % <span class="number">2</span> == <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>假如我们想在第 15 行查看每次调用，随即出来的 i 的值到底是多少，我们没必要在这个地方添加任何 log，在正常加断点的地方使用快捷键 <code>Shift + 鼠标左键</code>，就会弹出下面的内容</p><p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host@master/blog-img20210511160710.png" alt=""></p><p>勾选上 <code>Evaluate and log</code>, 并自定义你想查看的 log/变量，比如这里的 <code>&quot;interested&quot; + i</code>, 这样以 Debug 模式运行程序（正常模式运行，不会打印这些 log）：</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">interested 7</span><br><span class="line">interested 5</span><br><span class="line">interested 1</span><br><span class="line">interested 2</span><br><span class="line">interested 0</span><br><span class="line">Found 2 interested values</span><br></pre></td></tr></table></figure><p>如果你在多处添加了这种断点，简单的看 log 可能偶尔还是不够直观，可以勾选上面图片绿色框线的 <code>&quot;Breakpoint hit&quot; message</code> :</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">Breakpoint reached at top.dayarch.TestDebug.isInterested(TestDebug.java:49)</span><br><span class="line">interested 6</span><br><span class="line">Breakpoint reached at top.dayarch.TestDebug.isInterested(TestDebug.java:49)</span><br><span class="line">interested 0</span><br><span class="line">Breakpoint reached at top.dayarch.TestDebug.isInterested(TestDebug.java:49)</span><br><span class="line">interested 9</span><br><span class="line">Breakpoint reached at top.dayarch.TestDebug.isInterested(TestDebug.java:49)</span><br><span class="line">interested 8</span><br><span class="line">Breakpoint reached at top.dayarch.TestDebug.isInterested(TestDebug.java:49)</span><br><span class="line">interested 1</span><br><span class="line">Found 3 interested values</span><br><span class="line">Disconnected from the target VM, address: '127.0.0.1:0', transport: 'socket'</span><br><span class="line"></span><br><span class="line">Process finished with exit code</span><br></pre></td></tr></table></figure><p>如果你想要更详细的信息，那就勾选上 <code>Stack trace</code> (大家自己查看运行结果吧)，有了这个功能，上面说的一些问题都不复存在了</p><h2 id="字段断点"><a href="#字段断点" class="headerlink" title="字段断点"></a>字段断点</h2><p>如果你阅读源码，你一定会有个困扰，类中的某个字段的值到底是在哪里改变的，你要一点点追踪调用栈，逐步排查，稍不留神，就可能有遗漏</p><blockquote><p>我们可以在 IntelliJ IDEA 中为某个字段添加断点，当字段值有修改时，自动跳到相应方法位置</p></blockquote><p>使用起来很简单：</p><ol><li>在字段定义处鼠标左键添加断点（会出现「眼睛」的图标）</li><li>在「眼睛」图标上鼠标右键</li><li>在弹框中勾选上 <code>Field access</code> 和 <code>Field modification</code> 两个选项</li></ol><p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host@master/blog-img20210511174434.png" alt=""></p><p>如果修改字段值的方法比较多，也可以在 <code>Condition</code> 的地方定义断点进入条件, 有了这个功能的加成，相信你阅读源码会顺畅许多</p><h2 id="异常断点"><a href="#异常断点" class="headerlink" title="异常断点"></a>异常断点</h2><p>除了阅读源码，一定是遇到了异常我们才开始调试代码，代码在抛出异常之后会自动停止，但是我们希望：</p><blockquote><p>代码停在抛出异常之前，方便我们查看当时的变量信息</p></blockquote><p>这时我们就用到了 <code>Exception Breakpoints</code>, 当抛出异常时，在 catch 的地方打上断点，可以通过下图的几个位置获取栈顶异常类型，比如这里的 <code>NumberFormatException</code></p><p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host@master/blog-img20210511185857.png" alt=""></p><p>知道异常类型后，就可以按照如下步骤添加异常断点了：</p><p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host@master/blog-img20210511190620.png" alt=""></p><p>然后在弹框中选择 NumberFormatException </p><p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host@master/blog-img20210511190840.png" alt=""></p><p>重新以 Debug 模式运行程序：</p><p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host@master/blog-img20210511191018.png" alt=""></p><p>程序「一路绿灯式」定位到抛出异常的位置，同时指出当时的变量信息，三个字：稳，准，狠，还有谁？</p><h2 id="方法断点"><a href="#方法断点" class="headerlink" title="方法断点"></a>方法断点</h2><p>当阅读源码时，比如 Spring，一个接口的方法可能被多个子类实现，当运行时，需要查看调用栈逐步定位实现类，IDEA 同样支持在接口方法上添加断点（快捷键 <code>cmd+F8</code>/<code>ctrl+F8</code>）：</p><ol><li>鼠标左键在方法处点击断点（♦️形状）</li><li>断点上鼠标右键</li></ol><p>勾选上绿色框线上的内容，同样可以自定义跳转条件 Condition</p><p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host@master/blog-img20210512145843.png" alt=""></p><p>当以 Debug 模式运行程序的时候，会自动进入实现类的方法（<strong>注意断点形状</strong>）：</p><p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host@master/blog-img20210512150114.png" alt=""></p><p>看到这你应该想到常见的 Runnable 接口中的 run 方法了，同样是有作用的，大家可以自行去尝试了</p><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>相信有以上四种调试技巧的加成，无论是工作debug 还是私下阅读源码，都可以轻松驾驭了。最后，来看看 IDEA 支持的各种断点调试类型，如果你只知道红色小圆点，那咱在留言区好好说说吧</p><p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host@master/blog-img20210512151423.png" alt=""></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Coding </category>
+          
+          <category> Java </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> IntelliJ IDEA </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>IntelliJ IDEA 高级调试之Stream Trace</title>
       <link href="//p/idea-stream-trace.html"/>
       <url>//p/idea-stream-trace.html</url>
@@ -19,6 +46,12 @@
           
       </categories>
       
+      
+        <tags>
+            
+            <tag> IntelliJ IDEA </tag>
+            
+        </tags>
       
     </entry>
     
@@ -1332,9 +1365,9 @@
       
         <tags>
             
-            <tag> 面试 </tag>
-            
             <tag> Java </tag>
+            
+            <tag> 面试 </tag>
             
         </tags>
       
@@ -2165,9 +2198,9 @@
       
         <tags>
             
-            <tag> Json </tag>
-            
             <tag> Springboot </tag>
+            
+            <tag> Json </tag>
             
         </tags>
       
@@ -2250,9 +2283,9 @@
       
         <tags>
             
-            <tag> Docker </tag>
-            
             <tag> Spring Boot </tag>
+            
+            <tag> Docker </tag>
             
         </tags>
       
