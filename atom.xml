@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://dayarch.top/"/>
-  <updated>2021-05-12T07:24:04.351Z</updated>
+  <updated>2021-07-11T08:35:00.209Z</updated>
   <id>https://dayarch.top/</id>
   
   <author>
@@ -15,6 +15,46 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Jenkins Shared Library</title>
+    <link href="https://dayarch.top//p/jenkins-shared-library.html"/>
+    <id>https://dayarch.top//p/jenkins-shared-library.html</id>
+    <published>2021-07-11T08:34:13.000Z</published>
+    <updated>2021-07-11T08:35:00.209Z</updated>
+    
+    <summary type="html">
+    
+      前言
+不知道你的 team 当中是否采用敏捷开发，总之我们的 team 贯彻敏捷方法很彻底
+
+
+
+随着敏捷方法的步伐加快，如何加快软件的交付速度变得极为重要，快速交付离不开 DevOps，而 DevOps 技术栈中，Jenkins 绝对是 CI 过程的核心角色。要充分高效的使用 Jenkins，自然离不开 Jenkinsfile
+
+什么是 Jenkinsfile？
+其实在前两篇文章中大家已经和 Jenkinsfile 照过面，只不过他们不是当时的主角：
+
+ * Jenkins 使用环境变量
+   
+   
+ * Jenkins 动态使用分支名称
+   
+   
+
+终于不用跑龙套了，在 Jenk
+    
+    </summary>
+    
+    
+      <category term="Coding" scheme="https://dayarch.top/categories/Coding/"/>
+    
+      <category term="DevOps" scheme="https://dayarch.top/categories/Coding/DevOps/"/>
+    
+    
+      <category term="Jenkins" scheme="https://dayarch.top/tags/Jenkins/"/>
+    
+  </entry>
   
   <entry>
     <title>IntelliJ IDEA 高级Debug技巧，助你起飞</title>
@@ -467,29 +507,6 @@ docker containe
     <summary type="html">
     
       Future 已经为获取多线程执行结果带来了很好的帮助，但是它依旧存在很多短板，在java1.8的版本中，CompletableFuture 的出现彻底改变了这一情况，结合Lambda的使用，让异步编程，分分钟就可以起飞
-    
-    </summary>
-    
-    
-      <category term="Coding" scheme="https://dayarch.top/categories/Coding/"/>
-    
-      <category term="Java-Concurrency" scheme="https://dayarch.top/categories/Coding/Java-Concurrency/"/>
-    
-    
-      <category term="Java-Concurrency" scheme="https://dayarch.top/tags/Java-Concurrency/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Java Future详解与使用</title>
-    <link href="https://dayarch.top//p/java-future-and-callable.html"/>
-    <id>https://dayarch.top//p/java-future-and-callable.html</id>
-    <published>2020-07-07T00:00:28.000Z</published>
-    <updated>2020-07-07T11:34:11.916Z</updated>
-    
-    <summary type="html">
-    
-      并发编程中分工是一种常见的提升效率的编程手段，拆分任务后，如何获取子线程的执行结果，本文结合Callable的诞生以及Future 的使用以及FutureTask的源码分析，帮助大家在实际工作中提升程序运行效率
     
     </summary>
     

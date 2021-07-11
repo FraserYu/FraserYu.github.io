@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   
-  <title>Archives: 2020/11 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享</title>
+  <title>Archives: 2021/7 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享</title>
   
   <meta name="keywords" content="Java,SpringBoot,并发编程, ElasticSearch, 日拱一兵">
   
@@ -392,8 +392,6 @@
         
           
         
-          
-        
       
     
     
@@ -406,13 +404,30 @@
 
   <section class='meta'>
     
+      
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.7.0/dist/APlayer.min.css">
+  <div class="aplayer"
+    data-theme=""
+    data-mini=true 
+    
+    data-mode="circulation"
+    data-server="netease"
+    data-type="song"
+    data-id="403710591"
+    data-volume="0.7">
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/aplayer@1.7.0/dist/APlayer.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/meting@1.1.0/dist/Meting.min.js"></script>
+
+
+    
     
     <div class="meta" id="header-meta">
       
         
   <h2 class="title">
-    <a href="/p/powertoys-a-powerful-tool-in-Windows.html">
-      PowerToys,一款强大的Windows工具
+    <a href="/p/jenkins-shared-library.html">
+      Jenkins Shared Library
     </a>
   </h2>
 
@@ -442,7 +457,7 @@
             <div class="new-meta-item date">
   <a class='notlink'>
     <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-    <p>2020-11-29</p>
+    <p>2021-07-11</p>
   </a>
 </div>
 
@@ -452,121 +467,9 @@
             
   
   <div class='new-meta-item category'>
-    <a href='/categories/Coding/Tools/' rel="nofollow">
+    <a href='/categories/Coding/DevOps/' rel="nofollow">
       <i class="fas fa-folder-open" aria-hidden="true"></i>
-      <p>Coding&nbsp;/&nbsp;Tools</p>
-    </a>
-  </div>
-
-
-          
-        
-          
-            
-
-          
-        
-      </div>
-      
-        <hr>
-      
-    </div>
-  </section>
-
-
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      上次写了个 cheat.sh 在手，天下我有，小伙伴们热情高涨，觉得这是一个没有杂质的好工具；也有小伙伴抱怨说对 Windows 用户不是特别友好 （其实用 curl API 是没啥问题的）。为了「雨露均沾」，今天就介绍一款对 Windows 超级 * N （N 是几，大家读完文章自己定） 友好的工具
-
-
-
-我甚至有些嫉妒，因为 Windows 的这款工具需要我在 Mac 结合好几个工具才能达到与之相媲美的效果 
-
-
-
-今天的主角就是~
-
-PowerToys
-PowerToys 就是这么一款有 Power 的工具，使用的前置要求很简单，Windows 10 操作系统，截至写本文时，PowerT
-      
-        <div class="readmore">
-          <a href="/p/powertoys-a-powerful-tool-in-Windows.html" class="flat-box">
-            <i class="fas fa-book-open fa-fw" aria-hidden="true"></i>
-            阅读全文
-          </a>
-        </div>
-      
-    </div>
-    
-      <div class="full-width auto-padding tags">
-        
-          <a href="/tags/%E5%B7%A5%E5%85%B7/" rel="nofollow"><i class="fas fa-tag fa-fw"></i> 工具</a>
-        
-      </div>
-    
-  </section>
-</article>
-
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <article class="post reveal ">
-  
-
-
-  <section class='meta'>
-    
-    
-    <div class="meta" id="header-meta">
-      
-        
-  <h2 class="title">
-    <a href="/p/cheat.sh-usage.html">
-      cheat.sh使用详解
-    </a>
-  </h2>
-
-
-      
-      <div class='new-meta-box'>
-        
-          
-        
-          
-            
-  <div class='new-meta-item author'>
-    
-      <a href="https://dayarch.top" rel="nofollow">
-        
-          <img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png">
-        
-        <p>tanθ</p>
-      </a>
-    
-  </div>
-
-
-          
-        
-          
-            <div class="new-meta-item date">
-  <a class='notlink'>
-    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-    <p>2020-11-26</p>
-  </a>
-</div>
-
-          
-        
-          
-            
-  
-  <div class='new-meta-item category'>
-    <a href='/categories/Coding/Tools/' rel="nofollow">
-      <i class="fas fa-folder-open" aria-hidden="true"></i>
-      <p>Coding&nbsp;/&nbsp;Tools</p>
+      <p>Coding&nbsp;/&nbsp;DevOps</p>
     </a>
   </div>
 
@@ -589,18 +492,26 @@ PowerToys 就是这么一款有 Power 的工具，使用的前置要求很简单
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
       前言
-作为程序员需要了解的东西有很多，日常编码和写脚本脱离不开各式语言与 Linux 命令。为了记住一些杂乱的或不被经常使用的知识点，我们迫切需要一个“小抄”/备忘录，小抄内容多了自然繁杂，所以我们希望这个小抄要：
+不知道你的 team 当中是否采用敏捷开发，总之我们的 team 贯彻敏捷方法很彻底
 
- 1. 简洁：只包含你想要的内容，没有其他「花边」内容
- 2. 快速：可以立即使用
- 3. 全面：能基本包含你所有问题的答案
- 4. 通用：它应该在任何地方、任何时间都可用，不需要任何准备
- 5. 不唐突：它不应该让你从主要任务上分心（比如减少应用切换）
- 6. 辅导：它应该帮助你学习这个科目（在答案基础上扩展知识）
- 7. 不显眼：应该可以在完全不被注意的情况下使用（就好比划词
+
+
+随着敏捷方法的步伐加快，如何加快软件的交付速度变得极为重要，快速交付离不开 DevOps，而 DevOps 技术栈中，Jenkins 绝对是 CI 过程的核心角色。要充分高效的使用 Jenkins，自然离不开 Jenkinsfile
+
+什么是 Jenkinsfile？
+其实在前两篇文章中大家已经和 Jenkinsfile 照过面，只不过他们不是当时的主角：
+
+ * Jenkins 使用环境变量
+   
+   
+ * Jenkins 动态使用分支名称
+   
+   
+
+终于不用跑龙套了，在 Jenk
       
         <div class="readmore">
-          <a href="/p/cheat.sh-usage.html" class="flat-box">
+          <a href="/p/jenkins-shared-library.html" class="flat-box">
             <i class="fas fa-book-open fa-fw" aria-hidden="true"></i>
             阅读全文
           </a>
@@ -610,7 +521,7 @@ PowerToys 就是这么一款有 Power 的工具，使用的前置要求很简单
     
       <div class="full-width auto-padding tags">
         
-          <a href="/tags/%E5%B7%A5%E5%85%B7/" rel="nofollow"><i class="fas fa-tag fa-fw"></i> 工具</a>
+          <a href="/tags/Jenkins/" rel="nofollow"><i class="fas fa-tag fa-fw"></i> Jenkins</a>
         
       </div>
     
