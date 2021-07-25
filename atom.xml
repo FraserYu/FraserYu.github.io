@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://dayarch.top/"/>
-  <updated>2021-07-11T08:45:13.756Z</updated>
+  <updated>2021-07-25T09:20:10.182Z</updated>
   <id>https://dayarch.top/</id>
   
   <author>
@@ -15,6 +15,49 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>花钱上自习，你会选择这么做吗？</title>
+    <link href="https://dayarch.top//p/room-for-individual-study.html"/>
+    <id>https://dayarch.top//p/room-for-individual-study.html</id>
+    <published>2021-07-25T09:18:22.000Z</published>
+    <updated>2021-07-25T09:20:10.182Z</updated>
+    
+    <summary type="html">
+    
+      背景
+各种事情夹杂在一起，身心疲惫，躺在床上的下一秒，就已呼呼大睡
+
+忙的杂乱无章，忙的没有方向，看似很忙，却感觉什么也没收获到。我知道我需要一点独处的空间，静静地思考
+
+寻找空间
+这个空间要去哪里找？在寻找空间之前，我梳理了一下我的需求：
+
+ * 安静 （required）
+ * 网络畅通（required）
+ * 安全（required）
+ * 方便的电源位置（optional）
+ * 距离住处近 （optional）
+ * 开销小（optional）
+
+字段结构已定，那就要将寻找到的空间 schema 带入逐一验证，寻找最优解
+
+咖啡厅
+
+
+作为都市小青年，我首先想到的是咖啡厅，路过咖啡
+    
+    </summary>
+    
+    
+      <category term="Life" scheme="https://dayarch.top/categories/Life/"/>
+    
+      <category term="其他" scheme="https://dayarch.top/categories/Life/%E5%85%B6%E4%BB%96/"/>
+    
+    
+      <category term="总结" scheme="https://dayarch.top/tags/%E6%80%BB%E7%BB%93/"/>
+    
+  </entry>
   
   <entry>
     <title>Jenkins Shared Library</title>
@@ -494,29 +537,6 @@ docker containe
     
     
       <category term="MySQL" scheme="https://dayarch.top/tags/MySQL/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>java8 CompletableFuture 使用详解</title>
-    <link href="https://dayarch.top//p/java8-completablefuture-tutorial.html"/>
-    <id>https://dayarch.top//p/java8-completablefuture-tutorial.html</id>
-    <published>2020-07-19T13:17:30.000Z</published>
-    <updated>2020-07-29T03:47:02.372Z</updated>
-    
-    <summary type="html">
-    
-      Future 已经为获取多线程执行结果带来了很好的帮助，但是它依旧存在很多短板，在java1.8的版本中，CompletableFuture 的出现彻底改变了这一情况，结合Lambda的使用，让异步编程，分分钟就可以起飞
-    
-    </summary>
-    
-    
-      <category term="Coding" scheme="https://dayarch.top/categories/Coding/"/>
-    
-      <category term="Java-Concurrency" scheme="https://dayarch.top/categories/Coding/Java-Concurrency/"/>
-    
-    
-      <category term="Java-Concurrency" scheme="https://dayarch.top/tags/Java-Concurrency/"/>
     
   </entry>
   

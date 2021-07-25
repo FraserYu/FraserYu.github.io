@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>花钱上自习，你会选择这么做吗？</title>
+      <link href="//p/room-for-individual-study.html"/>
+      <url>//p/room-for-individual-study.html</url>
+      
+        <content type="html"><![CDATA[<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>各种事情夹杂在一起，身心疲惫，躺在床上的下一秒，就已呼呼大睡</p><p>忙的杂乱无章，忙的没有方向，看似很忙，却感觉什么也没收获到。我知道我需要一点独处的空间，静静地思考</p><h2 id="寻找空间"><a href="#寻找空间" class="headerlink" title="寻找空间"></a>寻找空间</h2><p>这个空间要去哪里找？在寻找空间之前，我梳理了一下我的需求：</p><ul><li>安静 （required）</li><li>网络畅通（required）</li><li>安全（required）</li><li>方便的电源位置（optional）</li><li>距离住处近 （optional）</li><li>开销小（optional）</li></ul><p>字段结构已定，那就要将寻找到的空间 schema 带入逐一验证，寻找最优解</p><h3 id="咖啡厅"><a href="#咖啡厅" class="headerlink" title="咖啡厅"></a>咖啡厅</h3><p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host@master/blog-img20210725165015.png" alt=""></p><p>作为都市小青年，我首先想到的是咖啡厅，路过咖啡厅，总是可以看到手捧书的人，手指在键盘上飞舞的人，三三两两谈事情的人，很有气氛。戴上耳机，世界都会安静；咖啡厅的网络环境一般都没什么问题；但安全性不是很认可，毕竟人流大，总不能上个厕所，都要将桌子收拾干净，太麻烦了；如果每次去都要花三四十 RMB，还是很心疼的。心想，第一选择往往不是最优解，果断放弃这一选项，继续寻找</p><h3 id="图书馆"><a href="#图书馆" class="headerlink" title="图书馆"></a>图书馆</h3><p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host@master/blog-img20210725165149.png" alt=""></p><p>市图书馆貌似是个不错的地方，去图书馆的人都很自觉，很少会大声喧哗，很安静；在网上查询了一下网络环境，评论说不是特别好；安全性肯定是有保障的，有监控，也有管理员；可能出于馆内安全性考虑，电源位置不是很多，有电源的地方肯定很抢手；距离我的住处不是很近，公交车程一个小时左右，这是不小的开销，大热天，路上也会消耗很多精力。与咖啡厅相比较，这是一个可选项，<strong>暂时保留</strong></p><h3 id="大学"><a href="#大学" class="headerlink" title="大学"></a>大学</h3><p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host@master/blog-img20210725170226.png" alt=""></p><p>附近刚好有个大学，年轻时傍晚还可以去跑 5000 米。第一感觉，除了网络貌似都很完美，查看学校官网，正值暑假，出于安全考虑，出入需持证件，还没来得及进一步畅想，这个选项就被 pass 了</p><h3 id="公司"><a href="#公司" class="headerlink" title="公司"></a>公司</h3><p>可能有的朋友会想到公司，公司出于各方面考虑，除非有明确的加班任务，才可以在周末过去，否则不允许周末去公司，而且公司的网络不允许个人电子设备连接，这是一个安全的地方，但对我来说不是一个合适的地方</p><p>常规选项都不能很好的满足我的需求，大脑一片凌乱…… </p><p>大脑灵光一现，日常吃喝玩乐都会在某团上搜一搜，抱着试试的态度，第一次搜索学习类的关键词 <code>自习室</code> 。答案竟然出现了，<strong>果真有需求就会有服务的出现</strong>，看到这么多家自习室，显然这是一个成熟的商业模式了。马上给十八线小城老家的发小发微信：</p><blockquote><p>我：“咱老家有这种共享自习室吗？”</p><p>发小：“有啊，开了有两三年了吧，有好几家”</p></blockquote><p>原本还想炫耀一番，一问一答，把我还没燃烧起来的心就给弄的拔凉拔凉的。不过抛开这些，我感觉找到了答案，对比了距离住处较近的几个自习室，决定上门看看距离家只有 1000 米左右的那家自习室（这么近我竟然不知道）</p><p>自习室在一栋大楼二楼角落，低调的在外面没有任何标志，还是打电话问询才找到位置。看过大体的样子之后，防止打扰到自习室内的人，出自习室与管理员交谈了解一下具体内容，管理员介绍这几个人有考法学博士的，有考托福准备出国的，还有大夫准备晋级考试的，内心在想，成年人的世界竞争这么激烈吗？看来不止 IT 行业这么卷…</p><p>管理员问我是想过来学什么？我回复说就是想上自习室，静静心，学学东西，每周可能只有周末才有时间过来，说出很多我的具体要求之后，管理员推荐了全天不限时自习<code>次卡</code>，平均每次 18 元钱</p><p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host@master/blog-img20210725164231.png" alt=""></p><p>观察了一会，自习室绝对的安静，网络畅通无比，全屋监控，门口还有管理员，绝对很安全，每个座位上都有独立的电源，长时间使用电脑还是非常方便的，距离住处很近，早八点到晚八点，中午还可以回去简单吃个饭，每次 18 元钱，相较于咖啡厅，这是比较小的开销了，这里提供免费的自来水和速溶咖啡，另外还有储物柜，我的外接键盘等都可以放到这里，不用每次背过来，方便很多，满意到不能再满意</p><p>果断办卡，一天下来，真的很高效，手机静音，没有什么外界打扰，大脑多数时间处在高度集中状态，思考了很多未来的方向，以及要采取的行动</p><p>如果是你，你会选择这种花钱上自习的方式吗？</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Life </category>
+          
+          <category> 其他 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 总结 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Jenkins Shared Library</title>
       <link href="//p/jenkins-shared-library.html"/>
       <url>//p/jenkins-shared-library.html</url>
@@ -1270,11 +1297,11 @@
       
         <tags>
             
-            <tag> Spring Aware </tag>
-            
             <tag> Spring Bean </tag>
             
             <tag> 生命周期 </tag>
+            
+            <tag> Spring Aware </tag>
             
         </tags>
       
