@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://dayarch.top/"/>
-  <updated>2021-07-25T09:20:10.182Z</updated>
+  <updated>2021-11-21T02:32:56.008Z</updated>
   <id>https://dayarch.top/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>保持清洁的Git提交记录，三招就够了</title>
+    <link href="https://dayarch.top//p/three-ways-to-keep-git-log-clear.html"/>
+    <id>https://dayarch.top//p/three-ways-to-keep-git-log-clear.html</id>
+    <published>2021-11-21T02:29:52.000Z</published>
+    <updated>2021-11-21T02:32:56.008Z</updated>
+    
+    <summary type="html">
+    
+      保持Git log清洁，是程序员的基本素养
+    
+    </summary>
+    
+    
+      <category term="Coding" scheme="https://dayarch.top/categories/Coding/"/>
+    
+      <category term="DevOps" scheme="https://dayarch.top/categories/Coding/DevOps/"/>
+    
+    
+      <category term="Git" scheme="https://dayarch.top/tags/Git/"/>
+    
+  </entry>
   
   <entry>
     <title>花钱上自习，你会选择这么做吗？</title>
@@ -514,29 +537,6 @@ docker containe
       <category term="JVM" scheme="https://dayarch.top/tags/JVM/"/>
     
       <category term="面试" scheme="https://dayarch.top/tags/%E9%9D%A2%E8%AF%95/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>SQLECTRON-超轻量级SQL客户端</title>
-    <link href="https://dayarch.top//p/SQLECTRON-sql-client.html"/>
-    <id>https://dayarch.top//p/SQLECTRON-sql-client.html</id>
-    <published>2020-07-26T13:36:47.000Z</published>
-    <updated>2020-07-26T13:44:30.713Z</updated>
-    
-    <summary type="html">
-    
-      SQLECTRON 是一款用 Javascript 来编写的非常轻量级的 SQL client
-    
-    </summary>
-    
-    
-      <category term="Coding" scheme="https://dayarch.top/categories/Coding/"/>
-    
-      <category term="数据库-持久层-SQL" scheme="https://dayarch.top/categories/Coding/%E6%95%B0%E6%8D%AE%E5%BA%93-%E6%8C%81%E4%B9%85%E5%B1%82-SQL/"/>
-    
-    
-      <category term="MySQL" scheme="https://dayarch.top/tags/MySQL/"/>
     
   </entry>
   
