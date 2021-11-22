@@ -4,7 +4,6 @@ date: 2020-02-07 10:30:15
 tags:
   - IntelliJ IDEA
 id: http-client-advanced-usage
-top: true
 categories: [Coding, Java]
 description: 后端程序员经常要编写RESTful API，一个好用的测试工具可以大大提高工作效率，甚至整个项目组的效率，IntelliJ IDEA 本身提供了 HTTP Client 这个工具，但是鲜有人知，本文要说明该工具的高级用法，一定能解决项目中的调试痛点
 keywords: HTTP Client, RESTful, 调试接口工具
