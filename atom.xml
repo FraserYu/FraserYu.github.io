@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://dayarch.top/"/>
-  <updated>2021-11-21T02:45:03.729Z</updated>
+  <updated>2021-11-22T10:23:43.208Z</updated>
   <id>https://dayarch.top/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Git Worktree 大法真香</title>
+    <link href="https://dayarch.top//p/git-worktree-in-practice.html"/>
+    <id>https://dayarch.top//p/git-worktree-in-practice.html</id>
+    <published>2021-11-22T10:21:52.000Z</published>
+    <updated>2021-11-22T10:23:43.208Z</updated>
+    
+    <summary type="html">
+    
+      同时在多个 branch 上工作再也不是问题了
+    
+    </summary>
+    
+    
+      <category term="Coding" scheme="https://dayarch.top/categories/Coding/"/>
+    
+      <category term="DevOps" scheme="https://dayarch.top/categories/Coding/DevOps/"/>
+    
+    
+      <category term="Git" scheme="https://dayarch.top/tags/Git/"/>
+    
+  </entry>
   
   <entry>
     <title>保持清洁的Git提交记录，三招就够了</title>
@@ -512,31 +535,6 @@ docker containe
     
     
       <category term="Java-Concurrency" scheme="https://dayarch.top/tags/Java-Concurrency/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>hashCode是根据对象内存地址生成的？</title>
-    <link href="https://dayarch.top//p/out-of-memory-vs-memory-leak-and-hashcode.html"/>
-    <id>https://dayarch.top//p/out-of-memory-vs-memory-leak-and-hashcode.html</id>
-    <published>2020-08-01T11:47:46.000Z</published>
-    <updated>2020-08-05T02:00:29.241Z</updated>
-    
-    <summary type="html">
-    
-      都说要重写hashcode，为什么要重写，重写与否有多大影响，内存溢出是否有hashcode的锅，hashcode是根据对象内存地址生成的？本文就给你全部答案
-    
-    </summary>
-    
-    
-      <category term="Coding" scheme="https://dayarch.top/categories/Coding/"/>
-    
-      <category term="Java" scheme="https://dayarch.top/categories/Coding/Java/"/>
-    
-    
-      <category term="JVM" scheme="https://dayarch.top/tags/JVM/"/>
-    
-      <category term="面试" scheme="https://dayarch.top/tags/%E9%9D%A2%E8%AF%95/"/>
     
   </entry>
   

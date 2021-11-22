@@ -4,12 +4,12 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   
-  <title>使用 Docker 部署 Spring Boot | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享</title>
+  <title>Git Worktree 大法真香 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享</title>
   
-  <meta name="keywords" content="Java,SpringBoot,并发编程, ElasticSearch, 日拱一兵">
+  <meta name="keywords" content="Git, worktree, Java,SpringBoot,并发编程, ElasticSearch, 日拱一兵">
   
   
-  <meta name="description" content="本站是日拱一兵的技术分享博客，内容涵盖Java后端技术、Spring Boot、Java并发编程等技术研究与分享，用有趣的方式解读技术">
+  <meta name="description" content="同时在多个 branch 上工作再也不是问题了, 本站是日拱一兵的技术分享博客，内容涵盖Java后端技术、Spring Boot、Java并发编程等技术研究与分享，用有趣的方式解读技术">
   
 
   
@@ -398,8 +398,8 @@
         
   
     <h1 class="title">
-      <a href="/p/docker-deploy-spring-boot.html">
-        使用 Docker 部署 Spring Boot
+      <a href="/p/git-worktree-in-practice.html">
+        Git Worktree 大法真香
       </a>
     </h1>
   
@@ -430,7 +430,7 @@
             <div class="new-meta-item date">
   <a class='notlink'>
     <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-    <p>2018-04-09</p>
+    <p>2021-11-22</p>
   </a>
 </div>
 
@@ -440,9 +440,9 @@
             
   
   <div class='new-meta-item category'>
-    <a href='/categories/Coding/Docker/' rel="nofollow">
+    <a href='/categories/Coding/DevOps/' rel="nofollow">
       <i class="fas fa-folder-open" aria-hidden="true"></i>
-      <p>Coding&nbsp;/&nbsp;Docker</p>
+      <p>Coding&nbsp;/&nbsp;DevOps</p>
     </a>
   </div>
 
@@ -482,27 +482,115 @@
 
     <section class="article typo">
       <div class="article-entry" itemprop="articleBody">
-        <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>最近陆续在通过SpringBoot搭建项目，往里面逐渐添加功能，项目地址<a href="https://github.com/FraserYu/springbootlearning.git" target="_blank" rel="noopener">SpringBootLearning</a>, 当总结Docker部署SpringBoot的时候，我遇到了一些问题，加以总结</p>
-<a id="more"></a>
-<h3 id="问题汇总"><a href="#问题汇总" class="headerlink" title="问题汇总"></a>问题汇总</h3><p>文章主要参考<a href="http://www.spring4all.com/article/992" target="_blank" rel="noopener">Spring Boot 2.0(四)：使用 Docker 部署 Spring Boot</a>, 因为我是已有的SpringBoot项目，不是简单的SpringBoot项目，所以使用Docker部署SpringBoot的时候遇到了一些问题，现总结如下：</p>
+        <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>上一篇文章 <a href="https://dayarch.top/p/three-ways-to-keep-git-log-clear.html">保持清洁的Git提交记录，三招就够了</a> ，大家看过后有私下留言说这是非常好用的功能，我突然想到工作中用到的另外一个 Git 功能那也是相当好用，必须全盘托出</p>
+<p>作为程序员的我们应该都有一个感受，一旦进入某个项目，从开发，到发布生产，到 hotfix，到后期维护，那基本都有你的份，正在开发某个 feature，老板突然跳出来说让你做生产上的 hotfix 更是家常便饭，面对这种情况，使用 Git 的我们通常有两种解决方案：</p>
 <ol>
-<li><strong>mvn package</strong> 打包命令不能生成jar包到target目录下<br>因为Docker会用到jar包，所以在用Docker部署之前，先用Maven来进行打包，保证正确，但是使用命令并不能生成jar包，发现打包中打了我的测试用例类，测试用例有持续执行操作，当然其他持续操作也有可能出现这个问题，所以我在pom.xml中加入了plugin来过滤掉Test case.<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">properties</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!--mvn 打包时省略test用例--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">skipTests</span>&gt;</span>true<span class="tag">&lt;/<span class="name">skipTests</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">properties</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.maven.plugins<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>maven-surefire-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">skipTests</span>&gt;</span>$&#123;skipTests&#125;<span class="tag">&lt;/<span class="name">skipTests</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
-<li>通过Maven的docker插件来部署，遇到了两个问题：<blockquote>
-<ul>
-<li>[ERROR] Failed to execute goal com.spotify:docker-maven-plugin:1.0.0:build (default-cli) on project demo: Exception caught: java.util.concurrent.ExecutionException: com.spotify.docker.client.shaded.javax.ws.rs.ProcessingException: org.apache.http.conn.HttpHostConnectException: Connect to localhost:2375 [localhost/127.0.0.1, localhost/0:0:0:0:0:0:0:1] failed: Connection refused: connect -&gt; [Help 1]</li>
-<li>[ERROR] Failed to execute goal com.spotify:docker-maven-plugin:1.0.0:build (default-cli) on project demo: Exception caught: java.util.concurrent.ExecutionException: com.spotify.docker.client.shaded.javax.ws.rs.ProcessingException: javax.net.ssl.SSLHandshakeException: sun.security.validator.ValidatorException: PKIX path building failed: sun.security.provider.certpath.SunCertPathBuilderException: unable to find valid certification path to requested target -&gt; [Help 1]</li>
-</ul>
-</blockquote>
-</li>
+<li>草草提交未完成的 feature，然后切换分支到 hotfix</li>
+<li><code>git stash | git stash pop</code> 暂存工作内容，然后再切换到 hotfix</li>
 </ol>
-<p>通过查找资料在pom.xml中maven的docker插件中添加了如下内容：</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dockerHost</span>&gt;</span>https://192.168.99.100:2376<span class="tag">&lt;/<span class="name">dockerHost</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dockerCertPath</span>&gt;</span>D:/Users/fraser.yu/.docker/machine/machines/default<span class="tag">&lt;/<span class="name">dockerCertPath</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>第二种方式较第一种还好很多，可是面对下面这些场景，stash 依旧不是很好的解决方案</p>
+<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host@master/blog-img20211121205535.png" alt=""></p>
+<h2 id="我们面对的场景"><a href="#我们面对的场景" class="headerlink" title="我们面对的场景"></a>我们面对的场景</h2><ol>
+<li>正在 main 分支上跑长时间的测试，切换到 hotfix 或 feature, 测试就会中断</li>
+<li>项目非常大，频繁的切换索引，成本非常高</li>
+<li>有几年前 release 的旧版本，设置和当前不一样，IDE restructure 适配切换也会带来很大的开销</li>
+<li>切换分支，需要重新设置相应的环境变量，比如 dev/qa/prod</li>
+<li>需要切换到同事的代码，帮助调试代码复现问题</li>
+</ol>
+<p>有的同学想到，git clone 多个 repo 不就可以了吗？这是解决上述问题的一个方法，但背后同样隐藏很多问题：</p>
+<ol>
+<li>多个 repo 的状态是不好同步的，比如没办法快速 cherry-pick, 一个 repo checkout 的分支，另外一个 repo 需要重新 checkout</li>
+<li>git history/log 是重复的，当项目历史非常长，<code>.git</code> 文件夹下的内容是非常占用磁盘空间的</li>
+<li>同一个项目，多个 repo，不易管理</li>
+</ol>
+<p>那如何做才能满足这些特殊场景，又不出现这些上述这些问题呢？</p>
+<h2 id="git-worktree"><a href="#git-worktree" class="headerlink" title="git-worktree"></a>git-worktree</h2><p>其实，这是 Git 2015 年就开始支持的功能，却很少有人知道它，git-worktree 的使用非常方便，在终端输入：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git worktree --help</span><br></pre></td></tr></table></figure>
+
+<p>就可以快速看到帮助文档说明：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host@master/blog-img20211121122945.png" alt=""></p>
+<p>用简单的话来解释 git-worktree 的作用就是：</p>
+<blockquote>
+<p>仅需维护一个 repo，又可以同时在多个 branch 上工作，互不影响</p>
+</blockquote>
+<p>上面红色框线命令有很多，我们常用的其实只有下面这四个：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git worktree add [-f] [--detach] [--checkout] [--lock] [-b &lt;new-branch&gt;] &lt;path&gt; [&lt;commit-ish&gt;]</span><br><span class="line">git worktree list [--porcelain]</span><br><span class="line">git worktree remove [-f] &lt;worktree&gt;</span><br><span class="line">git worktree prune [-n] [-v] [--expire &lt;expire&gt;]</span><br></pre></td></tr></table></figure>
+
+<p>在展开说明之前，需要和大家普及两个你可能忽视的 Git 知识点：</p>
+<ol>
+<li>默认情况下， <code>git init</code> 或 <code>git clone</code> 初始化的 repo，只有一个 <code>worktree</code>，叫做 <code>main worktree</code></li>
+<li>在某一个目录下使用 Git 命令，当前目录下要么有 <code>.git</code> 文件夹；要么有 <code>.git</code> 文件，如果只有 <code>.git</code> 文件，里面的内容必须是指向 <code>.git</code> 文件夹的</li>
+</ol>
+<p>第二句话感觉挺绕的，下面用例子说明，就很容易明白了</p>
+<h3 id="git-worktree-add"><a href="#git-worktree-add" class="headerlink" title="git worktree add"></a>git worktree add</h3><p>当前项目目录结构是这样的(<code>amend-crash-demo</code> 是 repo 的 root)：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">└── amend-crash-demo</span><br><span class="line"></span><br><span class="line">1 directory</span><br></pre></td></tr></table></figure>
+
+<p><code>cd amend-crash-demo</code> 运行命令 <code>git worktree add ../feature/feature2</code></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">➜  amend-crash-demo git:(main) git worktree add ../feature/feature2</span><br><span class="line">Preparing worktree (new branch 'feature2')</span><br><span class="line">HEAD is now at 82b8711 add main file</span><br></pre></td></tr></table></figure>
+
+<p>重新看目录结构</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── amend-crash-demo</span><br><span class="line">└── feature</span><br><span class="line">    └── feature2</span><br><span class="line"></span><br><span class="line">3 directories</span><br></pre></td></tr></table></figure>
+
+<p>该命令默认会根据 HEAD 所在的 commit-ish (当然也可以指定 git log 中的任意一个 commit-ish) 创建一个名为 feature2 的分支，分支磁盘位置如上面结构所示</p>
+<p><code>cd ../feature/feature2/</code> 会发现，这个分支下并不存在 <code>.git</code> 文件夹，却存在一个 <code>.git</code> 文件，打开文件，内容如下：</p>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">gitdir</span>: <span class="string">/Users/rgyb/Documents/projects/amend-crash-demo/.git/worktrees/feature2</span></span><br></pre></td></tr></table></figure>
+
+<p>到这里，你再理解一下上面的知识点2，是不是就清晰许多了呢？</p>
+<blockquote>
+<p>接下来，你就可以在 feature2 分支上做一切你想做的内容了(add/commit/pull/push)，和 main worktree 互不干扰</p>
+</blockquote>
+<p>一般情况下，项目组都有一定的分支命名规范，比如 <code>feature/JIRAID-Title</code>, <code>hotfix/JIRAID-Title</code>, 如果仅仅按照上面命令新建 worktree，分支名称中的 <code>/</code> 会被当成文件目录来处理</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git worktree add ../hotfix/hotfix/JIRA234-fix-naming</span><br></pre></td></tr></table></figure>
+
+<p>运行完该命令，文件目录结构是这样的</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── amend-crash-demo</span><br><span class="line">├── feature</span><br><span class="line">│   └── feature2</span><br><span class="line">└── hotfix</span><br><span class="line">    └── hotfix</span><br><span class="line">        └── JIRA234-fix-naming</span><br><span class="line"></span><br><span class="line">6 directories</span><br></pre></td></tr></table></figure>
+
+<p>很显然这不是我们想要的，这时我们就需要 -b 参数的支持了，就像 <code>git checkout -b</code> 一样</p>
+<p>执行命令：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git worktree add -b "hotfix/JIRA234-fix-naming" ../hotfix/JIRA234-fix-naming</span><br></pre></td></tr></table></figure>
+
+<p>再来看一下目录结构</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── amend-crash-demo</span><br><span class="line">├── feature</span><br><span class="line">│   └── feature2</span><br><span class="line">└── hotfix</span><br><span class="line">    ├── JIRA234-fix-naming</span><br><span class="line">    └── hotfix</span><br><span class="line">        └── JIRA234-fix-naming</span><br><span class="line"></span><br><span class="line">7 directories</span><br></pre></td></tr></table></figure>
+
+<p>进入 <code>JIRA234-fix-naming</code> 目录，默认是在 <code>hotfix/JIRA234-fix-naming</code> 分支上</p>
+<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host@master/blog-img20211121201404.png" alt=""></p>
+<p>worktree 建立起来很容易，不加管理，项目目录结构肯定乱糟糟，这是我们不想看到的，所以我们需要清晰的知道某个 repo 都建立了哪些 worktree</p>
+<h2 id="git-worktree-list"><a href="#git-worktree-list" class="headerlink" title="git worktree list"></a>git worktree list</h2><p>所有的worktree 都在共用一个 repo，所以在任意一个 worktree 目录下，都可以执行如下命令来查看 worktree 列表</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git worktree list</span><br></pre></td></tr></table></figure>
+
+<p>执行完命令后，可以查看到我们上面创建的所有 worktree 信息, <code>main worktree</code> 也会显示在此处</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">/Users/rgyb/Documents/projects/amend-crash-demo                        82b8711 [main]</span><br><span class="line">/Users/rgyb/Documents/projects/chore/chore                                   8782898 (detached HEAD)</span><br><span class="line">/Users/rgyb/Documents/projects/feature/feature2                             82b8711 [feature2]</span><br><span class="line">/Users/rgyb/Documents/projects/hotfix/hotfix/JIRA234-fix-naming     82b8711 [JIRA234-fix-naming]</span><br><span class="line">/Users/rgyb/Documents/projects/hotfix/JIRA234-fix-naming              82b8711 [hotfix/JIRA234-fix-naming]</span><br></pre></td></tr></table></figure>
+
+<p>worktree 的工作做完了，也是要及时删除的，否则也会浪费很多磁盘空间</p>
+<h2 id="git-worktree-remove"><a href="#git-worktree-remove" class="headerlink" title="git worktree remove"></a>git worktree remove</h2><p>这个命令很简单了，worktree 的名字叫什么，直接就 remove 什么就好了</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git worktree remove hotfix/hotfix/JIRA234-fix-naming</span><br></pre></td></tr></table></figure>
+
+<p>此时，分支名弄错的那个 hotfix 就被删掉了</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">/Users/rgyb/Documents/projects/amend-crash-demo                        82b8711 [main]</span><br><span class="line">/Users/rgyb/Documents/projects/chore/chore                                   8782898 (detached HEAD)</span><br><span class="line">/Users/rgyb/Documents/projects/feature/feature2                             82b8711 [feature2]</span><br><span class="line">/Users/rgyb/Documents/projects/hotfix/JIRA234-fix-naming              82b8711 [hotfix/JIRA234-fix-naming]</span><br></pre></td></tr></table></figure>
+
+<p>假设你创建一个 worktree，并在里面有改动，突然间这个worktree 又不需要了，此刻你按照上述命令是不能删掉了，此时就需要 <code>-f</code> 参数来帮忙了</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git worktree remove -f hotfix/JIRA234-fix-naming</span><br></pre></td></tr></table></figure>
+
+<p>删除了 worktree，其实在 Git 的文件中，还有很多 administrative 文件是没有用的，为了保持清洁，我们还需要进一步清理</p>
+<h2 id="git-worktree-prune"><a href="#git-worktree-prune" class="headerlink" title="git worktree prune"></a>git worktree prune</h2><p>这个命令就是清洁的兜底操作，可以让我们的工作始终保持整洁</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>到这里，你应该理解，整个 git-worktree 的使用流程就是下面这四个命令：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git worktree add</span><br><span class="line">git worktree list</span><br><span class="line">git worktree remove</span><br><span class="line">git worktree prune</span><br></pre></td></tr></table></figure>
+
+<p>你也应该明白 git worktree 和 git clone 多个 repo 的区别了。只维护一个 repo，创建多个 worktree，操作间行云流水</p>
+<blockquote>
+<p><strong>我的实践</strong>：通常使用 git worktree，我会统一目录结构，比如 feature 目录下存放所有 feature 的worktree，hotfix 目录下存放所有 hotfix 的 worktree，这样整个磁盘目录结构不至于因为创建多个 worktree 而变得混乱</p>
+</blockquote>
+<p>在磁盘管理上我有些强迫症，理想情况下，某个 repo 的 worktree 最好放在这个 repo 的文件目录里面，但这就会导致 Git track 新创建的 worktree 下的所有文件，为了避免 Git track worktree 的内容，来来回回修改 gitignore 文件肯定是不合适的，<strong>下一节我会介绍一个更好的办法</strong></p>
+<h2 id="灵魂追问"><a href="#灵魂追问" class="headerlink" title="灵魂追问"></a>灵魂追问</h2><ol>
+<li>可以删除 main worktree 吗？为什么</li>
+<li>反复创建和删除worktree， repo/.git/wortree 目录的变化你能理解吗？</li>
+</ol>
 
       </div>
       <!-- <div class="tuijian">
         <br><br>
         📚相关文章
-        <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/docker-container-is-a-process.html" title="Docker Container就是个进程" rel="bookmark">Docker Container就是个进程</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/docker-install-command-completion.html" title="Docker命令自动补全" rel="bookmark">Docker命令自动补全</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/docker-image.html" title="Docker学习(三)——镜像" rel="bookmark">Docker学习(三)——镜像</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/docker-architect.html" title="Docker学习(二)——Docker架构" rel="bookmark">Docker学习(二)——Docker架构</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/docker-container.html" title="Docker学习(四)——容器" rel="bookmark">Docker学习(四)——容器</a></h3></div></li></ul>
+        <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/git-ignore.html" title="Git Ignoring Files" rel="bookmark">Git Ignoring Files</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/git-multiple-account.html" title="Git配置多个账号（GitLab和GitHub）" rel="bookmark">Git配置多个账号（GitLab和GitHub）</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/git-workflow.html" title="git 使用流程" rel="bookmark">git 使用流程</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/three-ways-to-keep-git-log-clear.html" title="保持清洁的Git提交记录，三招就够了" rel="bookmark">保持清洁的Git提交记录，三招就够了</a></h3></div></li></ul>
       </div> -->
       <div class="personalweixin">
         <br><br>
@@ -522,10 +610,10 @@
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2019-11-01T16:58:35+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-11-22T18:23:43+08:00">
   <a class='notlink'>
     <i class="fas fa-clock" aria-hidden="true"></i>
-    <p>更新于 2019年11月1日</p>
+    <p>更新于 2021年11月22日</p>
   </a>
 </div>
 
@@ -534,7 +622,7 @@
         
           
   
-  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/Docker/" rel="nofollow"><i class="fas fa-tag" aria-hidden="true"></i><p>Docker</p></a></div> <div class="new-meta-item meta-tags"><a class="tag" href="/tags/Spring-Boot/" rel="nofollow"><i class="fas fa-tag" aria-hidden="true"></i><p>Spring Boot</p></a></div>
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/Git/" rel="nofollow"><i class="fas fa-tag" aria-hidden="true"></i><p>Git</p></a></div>
 
 
         
@@ -547,14 +635,13 @@
       
         <a class="-mob-share-qq" title="QQ好友" rel="external nofollow noopener noreferrer"
           
-          href="http://connect.qq.com/widget/shareqq/index.html?url=https://dayarch.top/p/docker-deploy-spring-boot.html&title=使用 Docker 部署 Spring Boot | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=前言
-最近陆续在通过SpringBoot搭建项目，往里面逐渐添加功能，项目地址SpringBootLearning, 当总结Docker部署SpringBoot的时候，我遇到了一些问题，加以总结
+          href="http://connect.qq.com/widget/shareqq/index.html?url=https://dayarch.top/p/git-worktree-in-practice.html&title=Git Worktree 大法真香 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=背景
+上一篇文章 保持清洁的Git提交记录，三招就够了 ，大家看过后有私下留言说这是非常好用的功能，我突然想到工作中用到的另外一个 Git 功能那也是相当好用，必须全盘托出
 
-问题汇总
-文章主要参考Spring Boot 2.0(四)：使用 Docker 部署 Spring Boot, 因为我是已有的SpringBoot项目，不是简单的SpringBoot项目，所以使用Docker部署SpringBoot的时候遇到了一些问题，现总结如下：
+作为程序员的我们应该都有一个感受，一旦进入某个项目，从开发，到发布生产，到 hotfix，到后期维护，那基本都有你的份，正在开发某个 feature，老板突然跳出来说让你做生产上的 hotfix 更是家常便饭，面对这种情况，使用 Git 的我们通常有两种解决方案：
 
- 1. mvn package 打包命令不能生成jar包到target目录下
-    因为Docker会用到jar包，所以在用Doc"
+ 1. 草草提交未完成的 feature，然后切换分支到 hotfix
+ 2. git stash | git stash pop 暂存工作内容，然后再切换"
           
           >
           
@@ -566,14 +653,13 @@
       
         <a class="-mob-share-qzone" title="QQ空间" rel="external nofollow noopener noreferrer"
           
-          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://dayarch.top/p/docker-deploy-spring-boot.html&title=使用 Docker 部署 Spring Boot | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=前言
-最近陆续在通过SpringBoot搭建项目，往里面逐渐添加功能，项目地址SpringBootLearning, 当总结Docker部署SpringBoot的时候，我遇到了一些问题，加以总结
+          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://dayarch.top/p/git-worktree-in-practice.html&title=Git Worktree 大法真香 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=背景
+上一篇文章 保持清洁的Git提交记录，三招就够了 ，大家看过后有私下留言说这是非常好用的功能，我突然想到工作中用到的另外一个 Git 功能那也是相当好用，必须全盘托出
 
-问题汇总
-文章主要参考Spring Boot 2.0(四)：使用 Docker 部署 Spring Boot, 因为我是已有的SpringBoot项目，不是简单的SpringBoot项目，所以使用Docker部署SpringBoot的时候遇到了一些问题，现总结如下：
+作为程序员的我们应该都有一个感受，一旦进入某个项目，从开发，到发布生产，到 hotfix，到后期维护，那基本都有你的份，正在开发某个 feature，老板突然跳出来说让你做生产上的 hotfix 更是家常便饭，面对这种情况，使用 Git 的我们通常有两种解决方案：
 
- 1. mvn package 打包命令不能生成jar包到target目录下
-    因为Docker会用到jar包，所以在用Doc"
+ 1. 草草提交未完成的 feature，然后切换分支到 hotfix
+ 2. git stash | git stash pop 暂存工作内容，然后再切换"
           
           >
           
@@ -585,14 +671,13 @@
       
         <a class="-mob-share-weibo" title="微博" rel="external nofollow noopener noreferrer"
           
-          href="http://service.weibo.com/share/share.php?url=https://dayarch.top/p/docker-deploy-spring-boot.html&title=使用 Docker 部署 Spring Boot | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=前言
-最近陆续在通过SpringBoot搭建项目，往里面逐渐添加功能，项目地址SpringBootLearning, 当总结Docker部署SpringBoot的时候，我遇到了一些问题，加以总结
+          href="http://service.weibo.com/share/share.php?url=https://dayarch.top/p/git-worktree-in-practice.html&title=Git Worktree 大法真香 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=背景
+上一篇文章 保持清洁的Git提交记录，三招就够了 ，大家看过后有私下留言说这是非常好用的功能，我突然想到工作中用到的另外一个 Git 功能那也是相当好用，必须全盘托出
 
-问题汇总
-文章主要参考Spring Boot 2.0(四)：使用 Docker 部署 Spring Boot, 因为我是已有的SpringBoot项目，不是简单的SpringBoot项目，所以使用Docker部署SpringBoot的时候遇到了一些问题，现总结如下：
+作为程序员的我们应该都有一个感受，一旦进入某个项目，从开发，到发布生产，到 hotfix，到后期维护，那基本都有你的份，正在开发某个 feature，老板突然跳出来说让你做生产上的 hotfix 更是家常便饭，面对这种情况，使用 Git 的我们通常有两种解决方案：
 
- 1. mvn package 打包命令不能生成jar包到target目录下
-    因为Docker会用到jar包，所以在用Doc"
+ 1. 草草提交未完成的 feature，然后切换分支到 hotfix
+ 2. git stash | git stash pop 暂存工作内容，然后再切换"
           
           >
           
@@ -616,40 +701,21 @@
       
           <div class="prev-next">
               
-                  <section class="prev">
-                      <span class="art-item-left">
-                          <h6><i class="fas fa-chevron-left" aria-hidden="true"></i>&nbsp;上一页</h6>
-                          <h4>
-                              <a href="/p/spring-boot-json-return-non-null.html" rel="prev" title="Springboot Json格式数据不返回null值属性">
-                                
-                                    Springboot Json格式数据不返回null值属性
-                                
-                              </a>
-                          </h4>
-                          
-                              
-                              <h6 class="tags">
-                                  <a class="tag" href="/tags/Spring-Boot/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> Spring Boot</a> <a class="tag" href="/tags/Json/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> Json</a>
-                              </h6>
-                          
-                      </span>
-                  </section>
-              
               
                   <section class="next">
                       <span class="art-item-right" aria-hidden="true">
                           <h6>下一页&nbsp;<i class="fas fa-chevron-right" aria-hidden="true"></i></h6>
                           <h4>
-                              <a href="/p/docker-container.html" rel="prev" title="Docker学习(四)——容器">
+                              <a href="/p/three-ways-to-keep-git-log-clear.html" rel="prev" title="保持清洁的Git提交记录，三招就够了">
                                   
-                                      Docker学习(四)——容器
+                                      保持清洁的Git提交记录，三招就够了
                                   
                               </a>
                           </h4>
                           
                               
                               <h6 class="tags">
-                                  <a class="tag" href="/tags/Docker/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> Docker</a>
+                                  <a class="tag" href="/tags/Git/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> Git</a>
                               </h6>
                           
                       </span>
@@ -676,7 +742,7 @@
 </header>
 
     <div class="content pure">
-      <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/docker-container-is-a-process.html" title="Docker Container就是个进程" rel="bookmark">Docker Container就是个进程</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/docker-install-command-completion.html" title="Docker命令自动补全" rel="bookmark">Docker命令自动补全</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/docker-image.html" title="Docker学习(三)——镜像" rel="bookmark">Docker学习(三)——镜像</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/docker-architect.html" title="Docker学习(二)——Docker架构" rel="bookmark">Docker学习(二)——Docker架构</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/docker-container.html" title="Docker学习(四)——容器" rel="bookmark">Docker学习(四)——容器</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/docker-install.html" title="Docker学习(一)——Docker安装" rel="bookmark">Docker学习(一)——Docker安装</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/spring-boot-condition-annotation.html" title="@Conditional注解，Spring Boot 的灵活配置" rel="bookmark">@Conditional注解，Spring Boot 的灵活配置</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/easyexcel-read.html" title="EasyExcel读取Excel实际应用" rel="bookmark">EasyExcel读取Excel实际应用</a></h3></div></li></ul>
+      <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/git-ignore.html" title="Git Ignoring Files" rel="bookmark">Git Ignoring Files</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/git-multiple-account.html" title="Git配置多个账号（GitLab和GitHub）" rel="bookmark">Git配置多个账号（GitLab和GitHub）</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/git-workflow.html" title="git 使用流程" rel="bookmark">git 使用流程</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/three-ways-to-keep-git-log-clear.html" title="保持清洁的Git提交记录，三招就够了" rel="bookmark">保持清洁的Git提交记录，三招就够了</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/jenkins-shared-library.html" title="Jenkins Shared Library" rel="bookmark">Jenkins Shared Library</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/jenkins-environment-variables.html" title="Jenkins 使用环境变量" rel="bookmark">Jenkins 使用环境变量</a></h3></div></li></ul>
     </div>
   </section>
 
@@ -732,7 +798,7 @@
 
   <script>
     window.subData = {
-      title: '使用 Docker 部署 Spring Boot',
+      title: 'Git Worktree 大法真香',
       tools: true
     }
   </script>
@@ -884,7 +950,7 @@
 </header>
 
     <div class='content pure'>
-      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#前言"><span class="toc-text">前言</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#问题汇总"><span class="toc-text">问题汇总</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#背景"><span class="toc-text">背景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#我们面对的场景"><span class="toc-text">我们面对的场景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#git-worktree"><span class="toc-text">git-worktree</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#git-worktree-add"><span class="toc-text">git worktree add</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#git-worktree-list"><span class="toc-text">git worktree list</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#git-worktree-remove"><span class="toc-text">git worktree remove</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#git-worktree-prune"><span class="toc-text">git worktree prune</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-text">总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#灵魂追问"><span class="toc-text">灵魂追问</span></a></li></ol>
     </div>
   </section>
 
