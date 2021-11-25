@@ -13,7 +13,7 @@
   
 
   
-  <link rel="alternate" href="/atom.xml" title="日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享">
+  <link rel="alternate" href="/atom.xml" title="日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享" type="application/atom+xml">
   
 
   <meta name="HandheldFriendly" content="True" />
@@ -35,7 +35,9 @@
   
 
   
-    <link rel="stylesheet" href="/style.css">
+    
+<link rel="stylesheet" href="/style.css">
+
   
 
   <script>
@@ -85,7 +87,7 @@
         daovoice('update');
         </script>
     
-</head>
+<meta name="generator" content="Hexo 5.4.0"></head>
 
 <body>
   
@@ -509,33 +511,33 @@
 <h2 id="计划"><a href="#计划" class="headerlink" title="计划"></a>计划</h2><p>如无特殊异常，会按照 1 周 1 篇的节奏来分享，会控制篇幅大小，给大家留有思考空间，期待大家带着疑问等待下一篇文章的到来，我会从大家更多了解的内容出发，逐步走入并发的世界</p>
 <h2 id="并发开胃菜"><a href="#并发开胃菜" class="headerlink" title="并发开胃菜"></a>并发开胃菜</h2><p>不再多废话，拿出之前收藏的一篇文章作为并发编程的开胃小菜，通过这个形象比喻，希望大家能对并发有个初步的了解:</p>
 <blockquote>
-<p>摘自: <a href="https://www.cnblogs.com/CoolRandy/p/3169938.html" target="_blank" rel="noopener">https://www.cnblogs.com/CoolRandy/p/3169938.html</a></p>
+<p>摘自: <a target="_blank" rel="noopener" href="https://www.cnblogs.com/CoolRandy/p/3169938.html">https://www.cnblogs.com/CoolRandy/p/3169938.html</a></p>
 </blockquote>
 <p>觉得图解的很到位，将并发编程的几个核心要素都以具象的形式表达出来了，接下来看看何为 <strong>进程</strong>（<strong>process</strong>）和 <strong>线程</strong>（<strong>thread</strong>）</p>
-<p>1.计算机的核心是CPU，它承担了所有的计算任务。它就像一座工厂，时刻在运行。<br><img src="https://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E5%A4%9A%E7%BA%BF%E7%A8%8B/_image/2019-07-25/2019-08-25-20-23-20.jpg" alt=""></p>
-<p>2.假定工厂的电力有限，一次只能供给一个车间使用。也就是说，一个车间开工的时候，其他车间都必须停工。背后的含义就是，单个 CPU 一次只能运行一个任务。<br><img src="https://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E5%A4%9A%E7%BA%BF%E7%A8%8B/_image/2019-07-25/2019-08-25-20-24-05.jpg" alt=""></p>
-<p>3.<strong>进程</strong>就好比工厂的车间，它代表 CPU 所能处理的单个任务。任一时刻，CPU 总是运行一个 <strong>进程</strong>，其他 <strong>进程</strong> 处于非运行状态。<br><img src="https://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E5%A4%9A%E7%BA%BF%E7%A8%8B/_image/2019-07-25/2019-08-25-20-24-41.jpg" alt=""></p>
-<p>4.一个车间里，可以有很多工人。他们协同完成一个任务。<br><img src="https://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E5%A4%9A%E7%BA%BF%E7%A8%8B/_image/2019-07-25/2019-08-25-20-25-08.jpg" alt=""></p>
-<p>5.<strong>线程</strong> 就好比车间里的工人。一个 <strong>进程</strong> 可以包括多个 <strong>线程</strong>。<br><img src="https://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E5%A4%9A%E7%BA%BF%E7%A8%8B/_image/2019-07-25/2019-08-25-20-25-36.jpg" alt=""></p>
+<p>1.计算机的核心是CPU，它承担了所有的计算任务。它就像一座工厂，时刻在运行。<br><img src="https://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E5%A4%9A%E7%BA%BF%E7%A8%8B/_image/2019-07-25/2019-08-25-20-23-20.jpg"></p>
+<p>2.假定工厂的电力有限，一次只能供给一个车间使用。也就是说，一个车间开工的时候，其他车间都必须停工。背后的含义就是，单个 CPU 一次只能运行一个任务。<br><img src="https://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E5%A4%9A%E7%BA%BF%E7%A8%8B/_image/2019-07-25/2019-08-25-20-24-05.jpg"></p>
+<p>3.<strong>进程</strong>就好比工厂的车间，它代表 CPU 所能处理的单个任务。任一时刻，CPU 总是运行一个 <strong>进程</strong>，其他 <strong>进程</strong> 处于非运行状态。<br><img src="https://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E5%A4%9A%E7%BA%BF%E7%A8%8B/_image/2019-07-25/2019-08-25-20-24-41.jpg"></p>
+<p>4.一个车间里，可以有很多工人。他们协同完成一个任务。<br><img src="https://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E5%A4%9A%E7%BA%BF%E7%A8%8B/_image/2019-07-25/2019-08-25-20-25-08.jpg"></p>
+<p>5.<strong>线程</strong> 就好比车间里的工人。一个 <strong>进程</strong> 可以包括多个 <strong>线程</strong>。<br><img src="https://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E5%A4%9A%E7%BA%BF%E7%A8%8B/_image/2019-07-25/2019-08-25-20-25-36.jpg"></p>
 <p>6.车间的空间是工人们共享的，比如许多房间是每个工人都可以进出的。这象征一个 <strong>进程</strong> 的内存空间是共享的，每个 <strong>线程</strong> 都可以使用这些共享内存。</p>
-<p><img src="https://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E5%A4%9A%E7%BA%BF%E7%A8%8B/_image/2019-07-25/2019-08-25-20-26-04.jpg" alt=""></p>
+<p><img src="https://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E5%A4%9A%E7%BA%BF%E7%A8%8B/_image/2019-07-25/2019-08-25-20-26-04.jpg"></p>
 <p>7.可是，每间房间的大小不同，有些房间最多只能容纳一个人，比如厕所。里面有人的时候，其他人就不能进去了。这代表一个 <strong>线程</strong> 使用某些共享内存时，其他 <strong>线程</strong> 必须等它结束，才能使用这一块内存。</p>
-<p><img src="https://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E5%A4%9A%E7%BA%BF%E7%A8%8B/_image/2019-07-25/2019-08-25-20-26-34.jpg" alt=""></p>
-<p>8.一个防止他人进入的简单方法，就是门口加一把锁。先到的人锁上门，后到的人看到上锁，就在门口排队，等锁打开再进去。这就叫 “互斥锁”（Mutual exclusion，缩写 Mutex），防止多个 <strong>线程</strong> 同时读写某一块内存区域。<br><img src="https://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E5%A4%9A%E7%BA%BF%E7%A8%8B/_image/2019-07-25/2019-08-25-20-27-08.jpg" alt=""></p>
-<p>9.还有些房间，可以同时容纳 n 个人，比如厨房。也就是说，如果人数大于n，多出来的人只能在外面等着。这好比某些内存区域，只能供给固定数目的 <strong>线程</strong> 使用。<br><img src="https://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E5%A4%9A%E7%BA%BF%E7%A8%8B/_image/2019-07-25/2019-08-25-20-27-37.jpg" alt=""></p>
+<p><img src="https://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E5%A4%9A%E7%BA%BF%E7%A8%8B/_image/2019-07-25/2019-08-25-20-26-34.jpg"></p>
+<p>8.一个防止他人进入的简单方法，就是门口加一把锁。先到的人锁上门，后到的人看到上锁，就在门口排队，等锁打开再进去。这就叫 “互斥锁”（Mutual exclusion，缩写 Mutex），防止多个 <strong>线程</strong> 同时读写某一块内存区域。<br><img src="https://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E5%A4%9A%E7%BA%BF%E7%A8%8B/_image/2019-07-25/2019-08-25-20-27-08.jpg"></p>
+<p>9.还有些房间，可以同时容纳 n 个人，比如厨房。也就是说，如果人数大于n，多出来的人只能在外面等着。这好比某些内存区域，只能供给固定数目的 <strong>线程</strong> 使用。<br><img src="https://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E5%A4%9A%E7%BA%BF%E7%A8%8B/_image/2019-07-25/2019-08-25-20-27-37.jpg"></p>
 <p>10.这时的解决方法，就是在门口挂 n 把钥匙。进去的人就取一把钥匙，出来时再把钥匙挂回原处。后到的人发现钥匙架空了，就知道必须在门口排队等着了。这种做法叫做 “信号量”（Semaphore），用来保证多个 <strong>线程</strong> 不会互相冲突。</p>
-<p>不难看出，Mutex (互斥锁) 是 Semaphore (信号量)的一种特殊情况（n=1时）。也就是说，完全可以用后者替代前者。但是，因为 mutex 较为简单，且效率高，所以在必须保证资源独占的情况下，还是采用这种设计。<br><img src="https://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E5%A4%9A%E7%BA%BF%E7%A8%8B/_image/2019-07-25/2019-08-25-20-28-09.jpg" alt=""></p>
+<p>不难看出，Mutex (互斥锁) 是 Semaphore (信号量)的一种特殊情况（n=1时）。也就是说，完全可以用后者替代前者。但是，因为 mutex 较为简单，且效率高，所以在必须保证资源独占的情况下，还是采用这种设计。<br><img src="https://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E5%A4%9A%E7%BA%BF%E7%A8%8B/_image/2019-07-25/2019-08-25-20-28-09.jpg"></p>
 <p>11.操作系统的设计，因此可以归结为三点：<br>（1）以多 <strong>进程</strong> 形式，允许多个任务同时运行；<br>（2）以多 <strong>线程</strong> 形式，允许单个任务分成不同的部分运行；<br>（3）提供协调机制，一方面防止 <strong>进程</strong> 之间和 <strong>线程</strong> 之间产生冲突，另一方面允许 <strong>进程</strong> 之间和 <strong>线程</strong> 之间共享资源。</p>
-<p><img src="https://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E5%A4%9A%E7%BA%BF%E7%A8%8B/_image/2019-07-25/2019-08-25-20-28-40.jpg" alt=""></p>
+<p><img src="https://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E5%A4%9A%E7%BA%BF%E7%A8%8B/_image/2019-07-25/2019-08-25-20-28-40.jpg"></p>
 <p>相信看过这之后就了解了并发编程大概要关注的一些内容了，在后续的文章中，希望大家牢记，你是一个工厂只能有一个车间运行的负责人，如何让工人高效的干活且不出差错，也不起冲突，你就是合格的负责人……</p>
-<h2 id="提高效率工具"><a href="#提高效率工具" class="headerlink" title="提高效率工具"></a>提高效率工具</h2><p><img src="https://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E6%84%9F%E6%83%B3%E4%B8%8E%E6%80%BB%E7%BB%93/_image/2019-06-18/b.png" alt=""> [center]</p>
+<h2 id="提高效率工具"><a href="#提高效率工具" class="headerlink" title="提高效率工具"></a>提高效率工具</h2><p><img src="https://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E6%84%9F%E6%83%B3%E4%B8%8E%E6%80%BB%E7%BB%93/_image/2019-06-18/b.png"> [center]</p>
 <hr>
 <h2 id="推荐阅读"><a href="#推荐阅读" class="headerlink" title="推荐阅读"></a>推荐阅读</h2><ul>
-<li><a href="https://mp.weixin.qq.com/s/6dg3u2PkcTSQHu_3T_QYnA" target="_blank" rel="noopener">只会用 git pull ？有时候你可以尝试更优雅的处理方式 </a></li>
-<li><a href="https://mp.weixin.qq.com/s/Dnr1jLebvBUHnziZzSfcrA" target="_blank" rel="noopener">双亲委派模型：大厂高频面试题，轻松搞定</a></li>
-<li><a href="https://mp.weixin.qq.com/s/YBQB086ADBjHUmwrFQrWew" target="_blank" rel="noopener">面试还不知道BeanFactory和ApplicationContext的区别？</a></li>
-<li><a href="https://mp.weixin.qq.com/s/hR1TqkVzwZ_T8fuMnsM4hQ" target="_blank" rel="noopener">如何设计好的RESTful API</a></li>
-<li><a href="https://mp.weixin.qq.com/s/V7h8O6pVFQ-nr_iA2SNqtw" target="_blank" rel="noopener">程序猿为什么要看源码？</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/6dg3u2PkcTSQHu_3T_QYnA">只会用 git pull ？有时候你可以尝试更优雅的处理方式 </a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/Dnr1jLebvBUHnziZzSfcrA">双亲委派模型：大厂高频面试题，轻松搞定</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/YBQB086ADBjHUmwrFQrWew">面试还不知道BeanFactory和ApplicationContext的区别？</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/hR1TqkVzwZ_T8fuMnsM4hQ">如何设计好的RESTful API</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/V7h8O6pVFQ-nr_iA2SNqtw">程序猿为什么要看源码？</a></li>
 </ul>
 <hr>
 <blockquote>
@@ -549,18 +551,18 @@
 <blockquote>
 <p>以读侦探小说思维轻松趣味学习 Java 技术栈相关知识，本着将复杂问题简单化，抽象问题具体化和图形化原则逐步分解技术问题，技术持续更新，请持续关注……</p>
 </blockquote>
-<p><img src="https://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E6%84%9F%E6%83%B3%E4%B8%8E%E6%80%BB%E7%BB%93/_image/2019-06-18/a%20%281%29.png" alt=""></p>
+<p><img src="https://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E6%84%9F%E6%83%B3%E4%B8%8E%E6%80%BB%E7%BB%93/_image/2019-06-18/a%20%281%29.png"></p>
 
       </div>
       <!-- <div class="tuijian">
         <br><br>
         📚相关文章
-        <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-book.html" title="120000字，你们要的Java并发编程图文小册来了" rel="bookmark">120000字，你们要的Java并发编程图文小册来了</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-aqs-acquireshared-and-semaphore.html" title="Java AQS共享式获取同步状态及Semaphore的应用分析" rel="bookmark">Java AQS共享式获取同步状态及Semaphore的应用分析</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-countdownlatch-vs-cyclicbarrier.html" title="CountDownLatch 和 CyclicBarrier 傻傻的分不清楚？" rel="bookmark">CountDownLatch 和 CyclicBarrier 傻傻的分不清楚？</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/executorservice-vs-completionservice.html" title="ExecutorService VS CompletionService" rel="bookmark">ExecutorService VS CompletionService</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-aqs-and-reentrantlock.html" title="Java AQS队列同步器以及ReentrantLock的应用" rel="bookmark">Java AQS队列同步器以及ReentrantLock的应用</a></h3></div></li></ul>
+        <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-book.html" title="120000字，你们要的Java并发编程图文小册来了" rel="bookmark">120000字，你们要的Java并发编程图文小册来了</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-aqs-acquireshared-and-semaphore.html" title="Java AQS共享式获取同步状态及Semaphore的应用分析" rel="bookmark">Java AQS共享式获取同步状态及Semaphore的应用分析</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/executorservice-vs-completionservice.html" title="ExecutorService VS CompletionService" rel="bookmark">ExecutorService VS CompletionService</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-interrupt-mechnism.html" title="Java多线程中断机制" rel="bookmark">Java多线程中断机制</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-thread-life-cycle.html" title="Java线程生命周期这样理解挺简单的" rel="bookmark">Java线程生命周期这样理解挺简单的</a></h3></div></li></ul>
       </div> -->
       <div class="personalweixin">
         <br><br>
         <blockquote>
-          <a href="https://mp.weixin.qq.com/s/G7BXuZh0Qh1-mE6ts4LJqQ" target="_blank" rel="noopener">加我微信</a>，咱们交流技术与思想，共同成长
+          <a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/G7BXuZh0Qh1-mE6ts4LJqQ">加我微信</a>，咱们交流技术与思想，共同成长
         </blockquote>
         <br>
 
@@ -598,9 +600,9 @@
   <div class="-mob-share-list share-body">
     
       
-        <a class="-mob-share-qq" title="QQ好友" rel="external nofollow noopener noreferrer"
+        <a class="-mob-share-qq" title="QQ好友" rel="external nofollow noopener noreferrer noopener"
           
-          href="http://connect.qq.com/widget/shareqq/index.html?url=https://dayarch.top/p/java-concurrency-metaphor.html&title=并发编程之初探 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=写在前面
+          target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://dayarch.top/p/java-concurrency-metaphor.html&title=并发编程之初探 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=写在前面
 Java 有进阶，其名为并发，并发知识之大，一口吃不下。那好，请您多吃几口，又没说一顿吃完，细嚼慢咽才有味. 所有 Java 书籍都将并发编程放在其高级/进阶篇章中，其重要性不言而喻，学好并发也是自身走入高级行列的必备素质之一
 
 并发/并行，进程/线程 这些概念总是显得过于抽象，因为这是与操作系统沟通用到的词汇，就像我们习惯了使用十进制算法，二进制和 16 进制就需要思维的切换；生活中，我们彼此总是不能互相理解，平静之后，我们知道要换位思考；程序的世界也一样，为了更好的理解问题，你也要站在操作系统的角度来思考问题，但当你尝试理解对方时，是违背自己认知习惯的，所以有些困难在所难免
@@ -615,9 +617,9 @@ Java 有进阶，其名为并发，并发知识之大，一口吃不下。那好
       
     
       
-        <a class="-mob-share-qzone" title="QQ空间" rel="external nofollow noopener noreferrer"
+        <a class="-mob-share-qzone" title="QQ空间" rel="external nofollow noopener noreferrer noopener"
           
-          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://dayarch.top/p/java-concurrency-metaphor.html&title=并发编程之初探 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=写在前面
+          target="_blank" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://dayarch.top/p/java-concurrency-metaphor.html&title=并发编程之初探 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=写在前面
 Java 有进阶，其名为并发，并发知识之大，一口吃不下。那好，请您多吃几口，又没说一顿吃完，细嚼慢咽才有味. 所有 Java 书籍都将并发编程放在其高级/进阶篇章中，其重要性不言而喻，学好并发也是自身走入高级行列的必备素质之一
 
 并发/并行，进程/线程 这些概念总是显得过于抽象，因为这是与操作系统沟通用到的词汇，就像我们习惯了使用十进制算法，二进制和 16 进制就需要思维的切换；生活中，我们彼此总是不能互相理解，平静之后，我们知道要换位思考；程序的世界也一样，为了更好的理解问题，你也要站在操作系统的角度来思考问题，但当你尝试理解对方时，是违背自己认知习惯的，所以有些困难在所难免
@@ -632,9 +634,9 @@ Java 有进阶，其名为并发，并发知识之大，一口吃不下。那好
       
     
       
-        <a class="-mob-share-weibo" title="微博" rel="external nofollow noopener noreferrer"
+        <a class="-mob-share-weibo" title="微博" rel="external nofollow noopener noreferrer noopener"
           
-          href="http://service.weibo.com/share/share.php?url=https://dayarch.top/p/java-concurrency-metaphor.html&title=并发编程之初探 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=写在前面
+          target="_blank" href="http://service.weibo.com/share/share.php?url=https://dayarch.top/p/java-concurrency-metaphor.html&title=并发编程之初探 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=写在前面
 Java 有进阶，其名为并发，并发知识之大，一口吃不下。那好，请您多吃几口，又没说一顿吃完，细嚼慢咽才有味. 所有 Java 书籍都将并发编程放在其高级/进阶篇章中，其重要性不言而喻，学好并发也是自身走入高级行列的必备素质之一
 
 并发/并行，进程/线程 这些概念总是显得过于抽象，因为这是与操作系统沟通用到的词汇，就像我们习惯了使用十进制算法，二进制和 16 进制就需要思维的切换；生活中，我们彼此总是不能互相理解，平静之后，我们知道要换位思考；程序的世界也一样，为了更好的理解问题，你也要站在操作系统的角度来思考问题，但当你尝试理解对方时，是违背自己认知习惯的，所以有些困难在所难免
@@ -723,7 +725,7 @@ Java 有进阶，其名为并发，并发知识之大，一口吃不下。那好
 </header>
 
     <div class="content pure">
-      <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-book.html" title="120000字，你们要的Java并发编程图文小册来了" rel="bookmark">120000字，你们要的Java并发编程图文小册来了</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-aqs-acquireshared-and-semaphore.html" title="Java AQS共享式获取同步状态及Semaphore的应用分析" rel="bookmark">Java AQS共享式获取同步状态及Semaphore的应用分析</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-countdownlatch-vs-cyclicbarrier.html" title="CountDownLatch 和 CyclicBarrier 傻傻的分不清楚？" rel="bookmark">CountDownLatch 和 CyclicBarrier 傻傻的分不清楚？</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/executorservice-vs-completionservice.html" title="ExecutorService VS CompletionService" rel="bookmark">ExecutorService VS CompletionService</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-aqs-and-reentrantlock.html" title="Java AQS队列同步器以及ReentrantLock的应用" rel="bookmark">Java AQS队列同步器以及ReentrantLock的应用</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-future-and-callable.html" title="Java Future详解与使用" rel="bookmark">Java Future详解与使用</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-interrupt-mechnism.html" title="Java多线程中断机制" rel="bookmark">Java多线程中断机制</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-thread-life-cycle.html" title="Java线程生命周期这样理解挺简单的" rel="bookmark">Java线程生命周期这样理解挺简单的</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-dead-lock.html" title="Java并发死锁解决思路" rel="bookmark">Java并发死锁解决思路</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java8-completablefuture-tutorial.html" title="java8 CompletableFuture 使用详解" rel="bookmark">java8 CompletableFuture 使用详解</a></h3></div></li></ul>
+      <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-book.html" title="120000字，你们要的Java并发编程图文小册来了" rel="bookmark">120000字，你们要的Java并发编程图文小册来了</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-aqs-acquireshared-and-semaphore.html" title="Java AQS共享式获取同步状态及Semaphore的应用分析" rel="bookmark">Java AQS共享式获取同步状态及Semaphore的应用分析</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/executorservice-vs-completionservice.html" title="ExecutorService VS CompletionService" rel="bookmark">ExecutorService VS CompletionService</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-interrupt-mechnism.html" title="Java多线程中断机制" rel="bookmark">Java多线程中断机制</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-thread-life-cycle.html" title="Java线程生命周期这样理解挺简单的" rel="bookmark">Java线程生命周期这样理解挺简单的</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/difference-between-volatile-and-synchronized-keyword.html" title="volatile和synchronized图文透彻讲解" rel="bookmark">volatile和synchronized图文透彻讲解</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/why-we-need-to-use-threadpool.html" title="为什么要使用线程池?" rel="bookmark">为什么要使用线程池?</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-core.html" title="并发编程三大核心" rel="bookmark">并发编程三大核心</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-dead-lock.html" title="Java并发死锁解决思路" rel="bookmark">Java并发死锁解决思路</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-three-questions.html" title="并发编程三大问题" rel="bookmark">并发编程三大问题</a></h3></div></li></ul>
     </div>
   </section>
 
@@ -931,7 +933,7 @@ Java 有进阶，其名为并发，并发知识之大，一口吃不下。那好
 </header>
 
     <div class='content pure'>
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#写在前面"><span class="toc-text">写在前面</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#如何学并发"><span class="toc-text">如何学并发</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-「Java并发编程实战」"><span class="toc-text">1.「Java并发编程实战」</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-「码出高效」"><span class="toc-text">2. 「码出高效」</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-「Java并发编程之美」"><span class="toc-text">3. 「Java并发编程之美」</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-「Java-并发编程的艺术」"><span class="toc-text">4. 「Java 并发编程的艺术」</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#计划"><span class="toc-text">计划</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#并发开胃菜"><span class="toc-text">并发开胃菜</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#提高效率工具"><span class="toc-text">提高效率工具</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#推荐阅读"><span class="toc-text">推荐阅读</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#欢迎持续关注公众号：「日拱一兵」"><span class="toc-text">欢迎持续关注公众号：「日拱一兵」</span></a></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%99%E5%9C%A8%E5%89%8D%E9%9D%A2"><span class="toc-text">写在前面</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E5%AD%A6%E5%B9%B6%E5%8F%91"><span class="toc-text">如何学并发</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E3%80%8CJava%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98%E3%80%8D"><span class="toc-text">1.「Java并发编程实战」</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E3%80%8C%E7%A0%81%E5%87%BA%E9%AB%98%E6%95%88%E3%80%8D"><span class="toc-text">2. 「码出高效」</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-%E3%80%8CJava%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E4%B9%8B%E7%BE%8E%E3%80%8D"><span class="toc-text">3. 「Java并发编程之美」</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-%E3%80%8CJava-%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E7%9A%84%E8%89%BA%E6%9C%AF%E3%80%8D"><span class="toc-text">4. 「Java 并发编程的艺术」</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AE%A1%E5%88%92"><span class="toc-text">计划</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B9%B6%E5%8F%91%E5%BC%80%E8%83%83%E8%8F%9C"><span class="toc-text">并发开胃菜</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8F%90%E9%AB%98%E6%95%88%E7%8E%87%E5%B7%A5%E5%85%B7"><span class="toc-text">提高效率工具</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8E%A8%E8%8D%90%E9%98%85%E8%AF%BB"><span class="toc-text">推荐阅读</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%AC%A2%E8%BF%8E%E6%8C%81%E7%BB%AD%E5%85%B3%E6%B3%A8%E5%85%AC%E4%BC%97%E5%8F%B7%EF%BC%9A%E3%80%8C%E6%97%A5%E6%8B%B1%E4%B8%80%E5%85%B5%E3%80%8D"><span class="toc-text">欢迎持续关注公众号：「日拱一兵」</span></a></li></ol></li></ol>
     </div>
   </section>
 
@@ -1006,7 +1008,7 @@ Java 有进阶，其名为并发，并发知识之大，一口吃不下。那好
   &nbsp;&nbsp;|&nbsp;&nbsp;  
   
     &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-        class="white-color">264.1k</span>&nbsp;字
+        class="white-color">267.4k</span>&nbsp;字
     
 
   &nbsp;&nbsp;|&nbsp;&nbsp;  
@@ -1061,7 +1063,7 @@ Java 有进阶，其名为并发，并发知识之大，一口吃不下。那好
     
     。
   </div>
-  <div><p>博客内容遵循 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
+  <div><p>博客内容遵循 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
 </div>
   <!-- <div class="github-badge">
       <a style="color: #fff" rel="license" href="https://hexo.io/" target="_blank" title="由 Hexo 强力驱动">
@@ -1169,10 +1171,14 @@ Java 有进阶，其名为并发，并发知识之大，一口吃不下。那好
 
 
 
-  <script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/app.js"></script>
+  
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/app.js"></script>
 
 
-  <script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/search.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/search.js"></script>
+
 
 
 

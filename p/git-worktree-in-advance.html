@@ -1,0 +1,1318 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  
+  <title>Git Worktree 高级使用 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享</title>
+  
+  <meta name="keywords" content="Git, worktree, Java,SpringBoot,并发编程, ElasticSearch, 日拱一兵">
+  
+  
+  <meta name="description" content="Git worktree 高级使用, 本站是日拱一兵的技术分享博客，内容涵盖Java后端技术、Spring Boot、Java并发编程等技术研究与分享，用有趣的方式解读技术">
+  
+
+  
+  <link rel="alternate" href="/atom.xml" title="日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享" type="application/atom+xml">
+  
+
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <!-- meta -->
+  
+
+  <!-- link -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-waves@0.7.6/dist/waves.min.css">
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.10.1/css/all.min.css">
+  
+
+  
+  <link rel="shortcut icon" type='image/x-icon' href="https://cdn.jsdelivr.net/gh/xaoxuu/assets@master/favicon/favicon.ico">
+  
+
+  
+    
+<link rel="stylesheet" href="/style.css">
+
+  
+
+  <script>
+    function setLoadingBarProgress(num) {
+      document.getElementById('loading-bar').style.width=num+"%";
+    }
+  </script>
+
+  
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-147539283-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-147539283-1');
+    </script>
+  
+  
+    <!-- ba -->
+    <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?f553477a3dc5ab3837e9a4dead4e0bc7";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+    </script>
+  
+
+
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-1774278264048334",
+        enable_page_level_ads: true
+      });
+    </script>
+
+    
+        <script>
+        (function(i,s,o,g,r,a,m){i["DaoVoiceObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;a.charset="utf-8";m.parentNode.insertBefore(a,m)})(window,document,"script",('https:' == document.location.protocol ? 'https:' : 'http:') + "//widget.daovoice.io/widget/0f81ff2f.js","daovoice")
+        daovoice('init', {
+            app_id: "8a3d6849"
+        });
+        daovoice('update');
+        </script>
+    
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  
+  
+  <div class="cover-wrapper">
+    <cover class='cover post half'>
+      
+        
+  <img class='logo' src='/assets/logo.png'/>
+
+
+  <div class="m_search">
+    <form name="searchform" class="form u-search-form">
+      <input type="text" class="input u-search-input" placeholder="世界很大，搜索一下" />
+      <i class="icon fas fa-search fa-fw"></i>
+    </form>
+  </div>
+
+<div class='menu navgation'>
+  <ul class='h-list'>
+    
+      
+        <li>
+          <a class="nav home" href="/"
+            
+              rel="nofollow"
+            
+            
+            id="home">
+            <i class='fas fa-home fa-fw'></i>&nbsp;主页
+          </a>
+        </li>
+      
+        <li>
+          <a class="nav home" href="/categories/"
+            
+              rel="nofollow"
+            
+            
+            id="categories">
+            <i class='fas fa-folder-open fa-fw'></i>&nbsp;分类
+          </a>
+        </li>
+      
+        <li>
+          <a class="nav home" href="/tags/"
+            
+              rel="nofollow"
+            
+            
+            id="tags">
+            <i class='fas fa-tags fa-fw'></i>&nbsp;标签
+          </a>
+        </li>
+      
+        <li>
+          <a class="nav home" href="/archives/"
+            
+              rel="nofollow"
+            
+            
+            id="archives">
+            <i class='fas fa-archive fa-fw'></i>&nbsp;归档
+          </a>
+        </li>
+      
+        <li>
+          <a class="nav home" href="/comments/"
+            
+              rel="nofollow"
+            
+            
+            id="comments">
+            <i class='fas fa-comments fa-fw'></i>&nbsp;留言板
+          </a>
+        </li>
+      
+    
+  </ul>
+</div>
+
+<br>
+<div class="description center-align">
+    
+    <span id="typed"></span>
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.9"></script>
+    <script>
+        var typed = new Typed("#typed", {
+            strings: ['从来没有真正的绝境, 只有心灵的迷途', 'Never really desperate, only the lost of the soul'],
+            startDelay: 300,
+            typeSpeed: 100,
+            loop: true,
+            backSpeed: 50,
+            showCursor: true
+        });
+    </script>
+    
+</div>
+
+      
+    </cover>
+    <header class="l_header pure">
+  <div id="loading-bar-wrapper">
+    <div id="loading-bar" class="pure"></div>
+  </div>
+
+	<div class='wrapper'>		
+		<div class="nav-main container container--flex">
+      <a class="logo flat-box" href='/' >
+        
+          日拱一兵
+        
+      </a>
+		<div class='menu navgation'>
+				<ul class='h-list'>
+          
+  					
+  						<li>
+								<a class="nav flat-box" href="/"
+                  
+                    rel="nofollow"
+                  
+                  
+                  id="home">
+									<i class='fas fa-home fa-fw'></i>&nbsp;主页
+								</a>
+							</li>
+      			
+  						<li>
+								<a class="nav flat-box" href="/categories/"
+                  
+                    rel="nofollow"
+                  
+                  
+                  id="categories">
+									<i class='fas fa-folder-open fa-fw'></i>&nbsp;分类
+								</a>
+							</li>
+      			
+  						<li>
+								<a class="nav flat-box" href="/tags/"
+                  
+                    rel="nofollow"
+                  
+                  
+                  id="tags">
+									<i class='fas fa-tags fa-fw'></i>&nbsp;标签
+								</a>
+							</li>
+      			
+  						<li>
+								<a class="nav flat-box" href="/archives/"
+                  
+                    rel="nofollow"
+                  
+                  
+                  id="archives">
+									<i class='fas fa-archive fa-fw'></i>&nbsp;归档
+								</a>
+							</li>
+      			
+  						<li>
+								<a class="nav flat-box" href="/friends/"
+                  
+                    rel="nofollow"
+                  
+                  
+                  id="friends">
+									<i class='fas fa-link fa-fw'></i>&nbsp;友链
+								</a>
+							</li>
+      			
+  						<li>
+								<a class="nav flat-box" href="/comments/"
+                  
+                    rel="nofollow"
+                  
+                  
+                  id="comments">
+									<i class='fas fa-comments fa-fw'></i>&nbsp;留言板
+								</a>
+							</li>
+      			
+      		
+				</ul>
+			</div>
+
+			
+				<div class="m_search">
+					<form name="searchform" class="form u-search-form">
+						<input type="text" class="input u-search-input" placeholder="搜索" />
+						<i class="icon fas fa-search fa-fw"></i>
+					</form>
+				</div>
+			
+			<ul class='switcher h-list'>
+				
+					<li class='s-search'><a class="fas fa-search fa-fw" href='javascript:void(0)'></a></li>
+				
+				<li class='s-menu'><a class="fas fa-bars fa-fw" href='javascript:void(0)'></a></li>
+			</ul>
+		</div>
+		<div class='nav-sub container container--flex'>
+			<a class="logo flat-box"></a>
+			<ul class='switcher h-list'>
+				<li class='s-comment'><a class="flat-btn fas fa-comments fa-fw" href='javascript:void(0)'></a></li>
+        
+          <li class='s-toc'><a class="flat-btn fas fa-list fa-fw" href='javascript:void(0)'></a></li>
+        
+			</ul>
+		</div>
+	</div>
+</header>
+	<aside class="menu-phone">
+    <header>
+		<nav class="menu navgation">
+      <ul>
+        
+          
+            <li>
+							<a class="nav flat-box" href="/"
+                
+                  rel="nofollow"
+                
+                
+                id="home">
+								<i class='fas fa-clock fa-fw'></i>&nbsp;近期文章
+							</a>
+            </li>
+          
+            <li>
+							<a class="nav flat-box" href="/categories/"
+                
+                  rel="nofollow"
+                
+                
+                id="categories">
+								<i class='fas fa-folder-open fa-fw'></i>&nbsp;分类
+							</a>
+            </li>
+          
+            <li>
+							<a class="nav flat-box" href="/tags/"
+                
+                  rel="nofollow"
+                
+                
+                id="tags">
+								<i class='fas fa-tags fa-fw'></i>&nbsp;标签
+							</a>
+            </li>
+          
+            <li>
+							<a class="nav flat-box" href="/archives/"
+                
+                  rel="nofollow"
+                
+                
+                id="archives">
+								<i class='fas fa-archive fa-fw'></i>&nbsp;归档
+							</a>
+            </li>
+          
+            <li>
+							<a class="nav flat-box" href="/friends/"
+                
+                  rel="nofollow"
+                
+                
+                id="friends">
+								<i class='fas fa-link fa-fw'></i>&nbsp;友链
+							</a>
+            </li>
+          
+            <li>
+							<a class="nav flat-box" href="/comments/"
+                
+                  rel="nofollow"
+                
+                
+                id="comments">
+								<i class='fas fa-comments fa-fw'></i>&nbsp;留言板
+							</a>
+            </li>
+          
+       
+      </ul>
+		</nav>
+    </header>
+	</aside>
+<script>setLoadingBarProgress(40);</script>
+
+  </div>
+
+
+  <div class="l_body">
+    <div class='body-wrapper'>
+      <div class='l_main'>
+  
+
+  <article id="post" class="post white-box article-type-post" itemscope itemprop="blogPost">
+    
+
+
+  <section class='meta'>
+    
+    
+    <div class="meta" id="header-meta">
+      
+        
+  
+    <h1 class="title">
+      <a href="/p/git-worktree-in-advance.html">
+        Git Worktree 高级使用
+      </a>
+    </h1>
+  
+
+
+      
+      <div class='new-meta-box'>
+        
+          
+        
+          
+            
+  <div class='new-meta-item author'>
+    
+      <a href="https://dayarch.top" rel="nofollow">
+        
+          <img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png">
+        
+        <p>tanθ</p>
+      </a>
+    
+  </div>
+
+
+          
+        
+          
+            <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+    <p>2021-11-25</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+  
+  <div class='new-meta-item category'>
+    <a href='/categories/Coding/DevOps/' rel="nofollow">
+      <i class="fas fa-folder-open" aria-hidden="true"></i>
+      <p>Coding&nbsp;/&nbsp;DevOps</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            
+  
+    <div class="new-meta-item browse busuanzi">
+      <a class='notlink'>
+        <i class="fas fa-eye" aria-hidden="true"></i>
+        <p>
+          <span id="busuanzi_value_page_pv">
+            <i class="fas fa-spinner fa-spin fa-fw" aria-hidden="true"></i>
+          </span>
+        </p>
+      </a>
+    </div>
+  
+
+
+          
+        
+          
+            
+
+          
+        
+      </div>
+      
+        <hr>
+      
+    </div>
+  </section>
+
+
+    <section class="article typo">
+      <div class="article-entry" itemprop="articleBody">
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>上一篇文章 <a href="https://dayarch.top/p/git-worktree-in-practice.html">Git Worktree 大法真香</a> 带大家了解了 git worktree 是如何帮助我同时在多个分支工作，并且互不影响的。但是创建 worktree 的目录位置不是在当前项目下，总感觉创建好的这些 worktree 不属于当前项目，这对于磁盘管理强迫症的我来说是十分难受的，今天就带大家了解一种高级用法来解决这个痛点</p>
+<h2 id="准备知识"><a href="#准备知识" class="headerlink" title="准备知识"></a>准备知识</h2><p>在使用高级用法之前，你需要知道一点 <code>bare repo</code> 知识，我们先从你熟悉的命令开始</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git init</span><br><span class="line">git clone https://github.com/FraserYu/amend-crash-demo.git</span><br></pre></td></tr></table></figure>
+
+<p>这两个命令就会生成一个 <code>non-bare repo</code>，我们通常都在这样的 <code>repo</code> 中进行日常工作, 你可以在这里面 <code>add</code>/<code>commit</code>/<code>pull</code>/<code>push</code></p>
+<p>要想生成一个 <code>bare repo</code> 也很简单, 只需在上面两个命令的基础上加上 <code>--bare</code> 参数即可</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git init --bare</span><br><span class="line">git clone --bare https://github.com/FraserYu/amend-crash-demo.git</span><br></pre></td></tr></table></figure>
+
+<p>来执行这两个 clone 命令，并查看文件内容你就会看出差别了</p>
+<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host@master/blog-img20211123203649.png"></p>
+<ol>
+<li><code>bare repo</code> 仅仅包含 Git 相关信息，并不包含我们的实际项目文件（<code>.java</code>/<code>.js</code>/<code>.py</code>）,  而 <code>non-bare repo</code> 却包含我们的全部信息</li>
+<li>bare repo 名称默认是带有 <code>.git</code> 后缀的，这也恰恰证明了第一点</li>
+<li>bare repo 中是不存在 <code>.git</code> 文件夹的，这也就导致它不能像 <code>non-bare repo</code> 那样 <code>add</code>/<code>commit</code>/<code>pull</code>/<code>push</code></li>
+</ol>
+<p>看到这，你可能感觉 bare repo 就是一个 Git 空壳文件夹，一无是处。其实不然，正因为 bare repo 的这些特性（不能对它进行更改），也就避免 repo 里面的内容被弄的一团糟，所以可以被用来做私有的中心化 repo，一张图解释，其实就是这样的：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host@master/blog-img20211122210132.png"></p>
+<p>如果你有兴趣，可以按照下面的命令在本地实验一下整个过程：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">user@server:$~  git init --bare name_to_repo.git</span><br><span class="line"></span><br><span class="line">user@machine1:$~ git clone user@server:/path/to/repo/name_to_repo.git .</span><br><span class="line">user@machine1:$~ cd name_to_repo</span><br><span class="line">user@machine1:$~ touch README</span><br><span class="line">user@machine1:$~ echo &quot;Hello world&quot; &gt;&gt; README</span><br><span class="line">user@machine1:$~ git add README</span><br><span class="line">user@machine1:$~ git commit -m &quot;Adding a README&quot;</span><br><span class="line">user@machine1:$~ git push origin master</span><br><span class="line"></span><br><span class="line">user@server:$~ ls /path/to/repo/name_to_repo.git/</span><br><span class="line">branches/ config description HEAD hooks/ info/ objects/ refs/</span><br><span class="line"></span><br><span class="line">user@machine2:$~ git clone user@server:/path/to/repo/name_to_repo.git .</span><br><span class="line">user@machine2:$~ ls name_to_repo.git/</span><br><span class="line">README</span><br><span class="line">user@machine2:$~ cat README</span><br><span class="line">Hello world</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><strong>实验结果就是</strong>：无论在 machine1 下怎么 push 文件，bare repo 中都不会存在你 push 的文件，只有 Git 相关信息。但是 machine2 clone 最新的 repo 时，却能看到machine1 push 的文件，这正是 Git 的魔法所在</p>
+</blockquote>
+<p>到这里，bare repo 就解释完了。接下来，接上一篇  <a href="https://dayarch.top/p/git-worktree-in-practice.html">Git Worktree 大法真香</a> 内容，借助 bare repo 的特性，来优化同时在多个分支工作的做法吧</p>
+<h2 id="Git-Worktree-高级用法"><a href="#Git-Worktree-高级用法" class="headerlink" title="Git Worktree 高级用法"></a>Git Worktree 高级用法</h2><p>首先，在你选定的目录下为你的项目（比如这里叫 <code>amend-crash-demo</code>）单独创建一个文件夹, 并 <code>cd</code> 进去</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkdir amend-crash-demo</span><br><span class="line">cd amend-crash-demo</span><br></pre></td></tr></table></figure>
+
+<p>接下来以 bare 的形式 clone 项目代码, 并将内容 clone 到 <code>.bare</code> 文件夹内：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone --bare git@github.com:FraserYu/amend-crash-demo.git .bare</span><br></pre></td></tr></table></figure>
+
+<p>我们还要在当前目录下创建一个 <code>.git</code> <strong>文件</strong>，文件内容是以 <code>gitdir</code> 的形式指向我们的 <code>.bare</code> <strong>文件夹</strong> （如果不理解 gitdir 的含义，请回看  <a href="https://dayarch.top/p/git-worktree-in-practice.html">Git Worktree 大法真香</a> ）</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo &quot;gitdir: ./.bare&quot; &gt; .git</span><br></pre></td></tr></table></figure>
+
+<p>然后我们要编辑 .bare/config 文件，并修改 <code>[remote &quot;origin&quot;]</code>内容，和下面内容保持一致（也就是添加第 6 行内容），这确保我们创建 worktree 切换分支，可以显示正确的分支名称</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">vim .bare/config</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> -----------------------------------------------</span></span><br><span class="line"> [remote &quot;origin&quot;]</span><br><span class="line">       url = git@github.com:FraserYu/amend-crash-demo.git</span><br><span class="line">       fetch = +refs/heads/*:refs/remotes/origin/*</span><br></pre></td></tr></table></figure>
+
+<p>接下来我们就可以创建 worktree 了，首先我们要为 main 分支创建 worktree，因为 main 分支 HEAD 的指向的 commit-ish 就是你创建其他 worktree 的 commit-ish</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">git worktree add main</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> --------------------------------</span></span><br><span class="line">Preparing worktree (checking out &#x27;main&#x27;)</span><br><span class="line">HEAD is now at 82b8711 add main file</span><br></pre></td></tr></table></figure>
+
+<p>通常我们不会直接在 main 分支上直接工作，而是创建其它类型的分支，继续创建名为 <code>feature/JIRA234-feature3</code> 的 worktree</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">git worktree add -b &quot;feature/JIRA234-feature3&quot; feature3</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> ------------------------------------------------</span></span><br><span class="line">Preparing worktree (new branch &#x27;feature/JIRA234-feature3&#x27;)</span><br><span class="line">HEAD is now at 82b8711 add main file</span><br></pre></td></tr></table></figure>
+
+<p>查看当前文件夹的内容，你会发现只有 <code>main</code> 和 <code>feature3</code> 两个文件夹（因为 <code>.bare</code> 和 <code>.git</code> 是隐藏文件夹/文件），这样是不是相当清爽呢？</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">ls -l</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> -------------------------------------------</span></span><br><span class="line">total 0</span><br><span class="line">drwxr-xr-x  10  rgyb  staff  320 Nov 23 21:44 feature3</span><br><span class="line">drwxr-xr-x  10  rgyb  staff  320 Nov 23 21:36 main</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">ls -al</span><br><span class="line"><span class="meta">#</span><span class="bash"> -------------------------------------------</span></span><br><span class="line">total 8</span><br><span class="line">drwxr-xr-x   6  rgyb  staff  192 Nov 23 21:44  .</span><br><span class="line">drwxr-xr-x   3  rgyb  staff   96 Nov 23 21:14   ..</span><br><span class="line">drwxr-xr-x  12  rgyb  staff  384 Nov 23 21:36  .bare</span><br><span class="line">-rw-r--r--   1  rgyb  staff   16 Nov 23 21:29   .git</span><br><span class="line">drwxr-xr-x  10  rgyb  staff  320 Nov 23 21:44  feature3</span><br><span class="line">drwxr-xr-x  10  rgyb  staff  320 Nov 23 21:36  main</span><br></pre></td></tr></table></figure>
+
+<p>接下来就可以尽情的在我们的各种分支上，彼此互不影响的进行  <code>add</code>/<code>commit</code>/<code>pull</code>/<code>push</code> 操作了</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">echo &quot;feature3 development&quot; &gt; feature3.yaml</span><br><span class="line">git add feature3.yaml</span><br><span class="line"></span><br><span class="line">git commit -m &quot;feat: [JIRA234-feature3] feature3 development&quot;</span><br><span class="line"><span class="meta">#</span><span class="bash"> ------------------------------------------------------------------</span></span><br><span class="line">[feature/JIRA234-feature3 aeaac94] feat: [JIRA234-feature3] feature3 development</span><br><span class="line"> 1 file changed, 1 insertion(+)</span><br><span class="line"> create mode 100644 feature3.yaml</span><br><span class="line"></span><br><span class="line">git push --set-upstream origin feature/JIRA234-feature3</span><br></pre></td></tr></table></figure>
+
+<p>通过上一篇文章 worktree 的四个命令，多分支协同开发不再是问题：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">git worktree add</span><br><span class="line">git worktree list</span><br><span class="line"><span class="meta">#</span><span class="bash"> ------------------------------------------------------------------------------------------------</span></span><br><span class="line">/Users/rgyb/Documents/projects/amend-crash-demo/.bare        (bare)</span><br><span class="line">/Users/rgyb/Documents/projects/amend-crash-demo/feature3   aeaac94 [feature/JIRA234-feature3]</span><br><span class="line">/Users/rgyb/Documents/projects/amend-crash-demo/main        82b8711 [main]</span><br><span class="line"></span><br><span class="line">git worktree remove</span><br><span class="line">git worktree prune</span><br></pre></td></tr></table></figure>
+
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>通过借助 bare repo 的特性，我们可以非常整洁的将所有 worktree 只管理在当前项目目录下，多分支协同开发，就像这样：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">└── amend-crash-demo</span><br><span class="line">    ├── feature3</span><br><span class="line">    │   ├── README.md</span><br><span class="line">    │   ├── config.yaml</span><br><span class="line">    │   ├── feat1.txt</span><br><span class="line">    │   ├── feature3.yaml</span><br><span class="line">    │   ├── file1.yaml</span><br><span class="line">    │   ├── hotfix.yaml</span><br><span class="line">    │   ├── main.properties</span><br><span class="line">    │   └── main.yaml</span><br><span class="line">    └── main</span><br><span class="line">        ├── README.md</span><br><span class="line">        ├── config.yaml</span><br><span class="line">        ├── feat1.txt</span><br><span class="line">        ├── file1.yaml</span><br><span class="line">        ├── hotfix.yaml</span><br><span class="line">        ├── main.properties</span><br><span class="line">        └── main.yaml</span><br><span class="line"></span><br><span class="line">3 directories, 15 files</span><br></pre></td></tr></table></figure>
+
+<p>如果你有磁盘管理强迫症，这绝对是个好办法。</p>
+<blockquote>
+<p>如果你想更好的理解整个过程，你需要在操作本文命令的同时，查看 Git 相关的文件信息</p>
+</blockquote>
+<p>有什么问题，留言区交流</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ol>
+<li><a target="_blank" rel="noopener" href="https://www.blopig.com/blog/2017/06/using-bare-git-repos/">https://www.blopig.com/blog/2017/06/using-bare-git-repos/</a></li>
+<li><a target="_blank" rel="noopener" href="https://lists.mcs.anl.gov/pipermail/petsc-dev/2021-May/027448.html">https://lists.mcs.anl.gov/pipermail/petsc-dev/2021-May/027448.html</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.saintsjd.com/2011/01/what-is-a-bare-git-repository/">https://www.saintsjd.com/2011/01/what-is-a-bare-git-repository/</a></li>
+<li><a target="_blank" rel="noopener" href="https://infrequently.org/2021/07/worktrees-step-by-step/">https://infrequently.org/2021/07/worktrees-step-by-step/</a></li>
+<li><a target="_blank" rel="noopener" href="https://morgan.cugerone.com/blog/how-to-use-git-worktree-and-in-a-clean-way/">https://morgan.cugerone.com/blog/how-to-use-git-worktree-and-in-a-clean-way/</a></li>
+</ol>
+
+      </div>
+      <!-- <div class="tuijian">
+        <br><br>
+        📚相关文章
+        <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/git-ignore.html" title="Git Ignoring Files" rel="bookmark">Git Ignoring Files</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/git-worktree-in-practice.html" title="Git Worktree 大法真香" rel="bookmark">Git Worktree 大法真香</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/git-multiple-account.html" title="Git配置多个账号（GitLab和GitHub）" rel="bookmark">Git配置多个账号（GitLab和GitHub）</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/git-workflow.html" title="git 使用流程" rel="bookmark">git 使用流程</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/three-ways-to-keep-git-log-clear.html" title="保持清洁的Git提交记录，三招就够了" rel="bookmark">保持清洁的Git提交记录，三招就够了</a></h3></div></li></ul>
+      </div> -->
+      <div class="personalweixin">
+        <br><br>
+        <blockquote>
+          <a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/G7BXuZh0Qh1-mE6ts4LJqQ">加我微信</a>，咱们交流技术与思想，共同成长
+        </blockquote>
+        <br>
+
+      </div>
+      
+      
+        <br>
+        
+
+
+  <section class='meta' id="footer-meta">
+    <div class='new-meta-box'>
+      
+        
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-11-25T19:08:35+08:00">
+  <a class='notlink'>
+    <i class="fas fa-clock" aria-hidden="true"></i>
+    <p>更新于 2021年11月25日</p>
+  </a>
+</div>
+
+        
+      
+        
+          
+  
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/Git/" rel="nofollow"><i class="fas fa-tag" aria-hidden="true"></i><p>Git</p></a></div>
+
+
+        
+      
+        
+          
+  <div class="new-meta-item share -mob-share-list">
+  <div class="-mob-share-list share-body">
+    
+      
+        <a class="-mob-share-qq" title="QQ好友" rel="external nofollow noopener noreferrer noopener"
+          
+          target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://dayarch.top/p/git-worktree-in-advance.html&title=Git Worktree 高级使用 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=前言
+上一篇文章 Git Worktree 大法真香 带大家了解了 git worktree 是如何帮助我同时在多个分支工作，并且互不影响的。但是创建 worktree 的目录位置不是在当前项目下，总感觉创建好的这些 worktree 不属于当前项目，这对于磁盘管理强迫症的我来说是十分难受的，今天就带大家了解一种高级用法来解决这个痛点
+
+准备知识
+在使用高级用法之前，你需要知道一点 bare repo 知识，我们先从你熟悉的命令开始
+
+1
+2
+
+
+git init
+git clone https://github.com/FraserYu/amend-crash-demo.git
+
+
+这两个命"
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/assets@19.1.9/logo/128/qq.png">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-qzone" title="QQ空间" rel="external nofollow noopener noreferrer noopener"
+          
+          target="_blank" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://dayarch.top/p/git-worktree-in-advance.html&title=Git Worktree 高级使用 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=前言
+上一篇文章 Git Worktree 大法真香 带大家了解了 git worktree 是如何帮助我同时在多个分支工作，并且互不影响的。但是创建 worktree 的目录位置不是在当前项目下，总感觉创建好的这些 worktree 不属于当前项目，这对于磁盘管理强迫症的我来说是十分难受的，今天就带大家了解一种高级用法来解决这个痛点
+
+准备知识
+在使用高级用法之前，你需要知道一点 bare repo 知识，我们先从你熟悉的命令开始
+
+1
+2
+
+
+git init
+git clone https://github.com/FraserYu/amend-crash-demo.git
+
+
+这两个命"
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/assets@19.1.9/logo/128/qzone.png">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-weibo" title="微博" rel="external nofollow noopener noreferrer noopener"
+          
+          target="_blank" href="http://service.weibo.com/share/share.php?url=https://dayarch.top/p/git-worktree-in-advance.html&title=Git Worktree 高级使用 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=前言
+上一篇文章 Git Worktree 大法真香 带大家了解了 git worktree 是如何帮助我同时在多个分支工作，并且互不影响的。但是创建 worktree 的目录位置不是在当前项目下，总感觉创建好的这些 worktree 不属于当前项目，这对于磁盘管理强迫症的我来说是十分难受的，今天就带大家了解一种高级用法来解决这个痛点
+
+准备知识
+在使用高级用法之前，你需要知道一点 bare repo 知识，我们先从你熟悉的命令开始
+
+1
+2
+
+
+git init
+git clone https://github.com/FraserYu/amend-crash-demo.git
+
+
+这两个命"
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/assets@19.1.9/logo/128/weibo.png">
+          
+        </a>
+      
+    
+  </div>
+</div>
+
+
+
+        
+      
+    </div>
+  </section>
+
+
+      
+      
+          <div class="prev-next">
+              
+              
+                  <section class="next">
+                      <span class="art-item-right" aria-hidden="true">
+                          <h6>下一页&nbsp;<i class="fas fa-chevron-right" aria-hidden="true"></i></h6>
+                          <h4>
+                              <a href="/p/git-worktree-in-practice.html" rel="prev" title="Git Worktree 大法真香">
+                                  
+                                      Git Worktree 大法真香
+                                  
+                              </a>
+                          </h4>
+                          
+                              
+                              <h6 class="tags">
+                                  <a class="tag" href="/tags/Git/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> Git</a>
+                              </h6>
+                          
+                      </span>
+                  </section>
+              
+          </div>
+      
+    </section>
+  </article>
+
+
+  
+    
+  
+    
+      
+        
+          
+  <section class='widget related_posts'>
+    
+<header class='pure'>
+  <div><i class="fas fa-bookmark fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;相关文章</div>
+  
+</header>
+
+    <div class="content pure">
+      <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/git-ignore.html" title="Git Ignoring Files" rel="bookmark">Git Ignoring Files</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/git-worktree-in-practice.html" title="Git Worktree 大法真香" rel="bookmark">Git Worktree 大法真香</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/git-multiple-account.html" title="Git配置多个账号（GitLab和GitHub）" rel="bookmark">Git配置多个账号（GitLab和GitHub）</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/git-workflow.html" title="git 使用流程" rel="bookmark">git 使用流程</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/three-ways-to-keep-git-log-clear.html" title="保持清洁的Git提交记录，三招就够了" rel="bookmark">保持清洁的Git提交记录，三招就够了</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/jenkins-shared-library.html" title="Jenkins Shared Library" rel="bookmark">Jenkins Shared Library</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/jenkins-environment-variables.html" title="Jenkins 使用环境变量" rel="bookmark">Jenkins 使用环境变量</a></h3></div></li></ul>
+    </div>
+  </section>
+
+
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+  
+    
+  
+
+
+  <!-- 显示推荐文章和评论 -->
+
+
+
+  <article class="post white-box comments">
+    <section class="article typo">
+      <h4><i class="fas fa-comments fa-fw" aria-hidden="true"></i>&nbsp;评论</h4>
+      
+      
+      
+        <section id="comments">
+          <div id="gitalk-container"></div>
+        </section>
+      
+      
+    </section>
+  </article>
+
+
+
+
+
+
+<!-- 根据页面mathjax变量决定是否加载MathJax数学公式js -->
+
+
+
+  <script>
+    window.subData = {
+      title: 'Git Worktree 高级使用',
+      tools: true
+    }
+  </script>
+
+
+
+  <script src="https://my.openwrite.cn/js/readmore.js" type="text/javascript"></script>
+  <script>
+      const btw = new BTWPlugin();
+      btw.init({
+          id: 'post',
+          blogId: '10015-1569397635991-668',
+          name: '日拱一兵',
+          qrcode: 'https://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E6%84%9F%E6%83%B3%E4%B8%8E%E6%80%BB%E7%BB%93/_image/2019-07-25/qrcode.jpg',
+          keyword: 'tanrgyb',
+      });
+  </script>
+  
+
+</div>
+<aside class='l_side'>
+  
+    
+    
+      
+      
+        
+          
+          
+        
+          
+          
+            
+              <section class='widget author'>
+  <div class='content pure'>
+    
+      <div class='avatar'>
+        <img class='avatar' src='https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgqrcode.jpg'/>
+      </div>
+    
+    
+      <div class='text'>
+        
+        
+        
+          <p><span id="jinrishici-sentence">从来没有真正的绝境，只有心灵的迷途</span></p>
+          <script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
+        
+      </div>
+    
+    
+      <div class="social-wrapper">
+        
+          
+            <a href="/atom.xml"
+              class="social fas fa-rss flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="mailto:dayarch@126.com"
+              class="social fas fa-envelope flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="https://github.com/FraserYu"
+              class="social fab fa-github flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+      </div>
+    
+  </div>
+</section>
+
+            
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+      
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+      
+        
+          
+          
+        
+          
+          
+        
+          
+          
+            
+              
+  <section class='widget toc-wrapper'>
+    
+<header class='pure'>
+  <div><i class="fas fa-list fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;本文目录</div>
+  
+    <!-- <div class='wrapper'><a class="s-toc rightBtn" rel="external nofollow noopener noreferrer" href="javascript:void(0)"><i class="fas fa-thumbtack fa-fw"></i></a></div> -->
+  
+</header>
+
+    <div class='content pure'>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%86%E5%A4%87%E7%9F%A5%E8%AF%86"><span class="toc-text">准备知识</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Git-Worktree-%E9%AB%98%E7%BA%A7%E7%94%A8%E6%B3%95"><span class="toc-text">Git Worktree 高级用法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-text">总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83"><span class="toc-text">参考</span></a></li></ol>
+    </div>
+  </section>
+
+
+            
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+      
+    
+
+  
+</aside>
+
+<footer id="footer" class="clearfix">
+  
+    <div class="footer">
+      <p><strong>If you can NOT explain it simply, you do NOT understand it well enough</strong></p>
+
+    </div>
+    <br>
+  
+  
+    <div class="social-wrapper">
+      
+        
+          <a href="/atom.xml"
+            class="social fas fa-rss flat-btn"
+            target="_blank"
+            rel="external nofollow noopener noreferrer">
+          </a>
+        
+      
+        
+          <a href="mailto:dayarch@126.com"
+            class="social fas fa-envelope flat-btn"
+            target="_blank"
+            rel="external nofollow noopener noreferrer">
+          </a>
+        
+      
+        
+          <a href="https://github.com/FraserYu"
+            class="social fab fa-github flat-btn"
+            target="_blank"
+            rel="external nofollow noopener noreferrer">
+          </a>
+        
+      
+    </div>
+  
+  <br>
+  Copyright <i class="far fa-copyright"></i>  2018-2019 
+  <a href="https://www.itrhx.com/" target="_blank"> Tanθ's Blog </a>
+  &nbsp;&nbsp;|&nbsp;&nbsp;<img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgicp.png">
+  <a href="http://www.beian.miit.gov.cn/" target="_blank">辽ICP备19017651号-1</a>
+
+  &nbsp;&nbsp;|&nbsp;&nbsp;  
+  
+    &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+        class="white-color">267.4k</span>&nbsp;字
+    
+
+  &nbsp;&nbsp;|&nbsp;&nbsp;  
+  
+    <span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+    <script>
+        var now = new Date(); 
+        function createtime() { 
+            var grt= new Date("05/22/2019 09:09:06");//在此处修改你的建站时间
+            now.setTime(now.getTime()+250); 
+            days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+            hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+            if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+            mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+            seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+            snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+            document.getElementById("timeDate").innerHTML = "本站已运行 "+dnum+" 天 "; 
+            document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+        } 
+    setInterval("createtime()",250);
+    </script>
+    
+  &nbsp;&nbsp;|&nbsp;&nbsp;<a href="https://dayarch.top/sitemap.xml" target="_blank">站点地图</a>
+  &nbsp;&nbsp;|&nbsp;&nbsp;<a href="https://tongji.baidu.com/web/welcome/ico?s=f553477a3dc5ab3837e9a4dead4e0bc7" target="_blank">站长统计</a>
+  
+  
+
+
+
+
+  <div>
+    <!-- 本站使用
+    <a href="https://xaoxuu.com/wiki/material-x/" target="_blank" class="codename">Material X</a>
+    作为主题 -->
+    
+      <!-- ， -->
+      <!-- 总访问量为
+      <span id="busuanzi_value_site_pv"><i class="fas fa-eyes" aria-hidden="true"></i></span>
+      次 -->
+      <span id="busuanzi_container_site_pv">
+        &nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;<span id="busuanzi_value_site_pv"
+            class="white-color"></span>&nbsp;次
+    </span>
+      <!-- &nbsp;&nbsp;|&nbsp;&nbsp; -->
+      <!-- 总访客量 -->
+      <!-- <span id="busuanzi_container_site_uv"><i class="fas fa-eyes" aria-hidden="true"></i></span> -->
+      <span id="busuanzi_container_site_uv">
+        |&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;<span id="busuanzi_value_site_uv"
+            class="white-color"></span>&nbsp;人
+    </span>
+      <!-- 人 -->
+    
+    。
+  </div>
+  <div><p>博客内容遵循 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
+</div>
+  <!-- <div class="github-badge">
+      <a style="color: #fff" rel="license" href="https://hexo.io/" target="_blank" title="由 Hexo 强力驱动">
+      <span class="badge-subject">Powered</span><span class="badge-value bg-blue">Hexo</span></a>
+    </div> -->
+</footer>
+<script>setLoadingBarProgress(80);</script>
+
+
+<script>
+    (function(){
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        }
+        else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+   
+
+      <script>setLoadingBarProgress(60);</script>
+    </div>
+    <a class="s-top fas fa-arrow-up fa-fw" href='javascript:void(0)'></a>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+
+  <script>
+    var GOOGLE_CUSTOM_SEARCH_API_KEY = "";
+    var GOOGLE_CUSTOM_SEARCH_ENGINE_ID = "";
+    var ALGOLIA_API_KEY = "";
+    var ALGOLIA_APP_ID = "";
+    var ALGOLIA_INDEX_NAME = "";
+    var AZURE_SERVICE_NAME = "";
+    var AZURE_INDEX_NAME = "";
+    var AZURE_QUERY_KEY = "";
+    var BAIDU_API_ID = "";
+    var SEARCH_SERVICE = "hexo" || "hexo";
+    var ROOT = "/"||"/";
+    if(!ROOT.endsWith('/'))ROOT += '/';
+  </script>
+
+<script src="//instant.page/1.2.2" type="module" integrity="sha384-2xV8M5griQmzyiY3CDqh1dn4z3llDVqZDqzjzcY+jCBCk/a5fXJmuZ/40JJAPeoU"></script>
+
+
+  <script async src="https://cdn.jsdelivr.net/npm/scrollreveal@4.0.5/dist/scrollreveal.min.js"></script>
+  <script type="text/javascript">
+    $(function() {
+      const $reveal = $('.reveal');
+      if ($reveal.length === 0) return;
+      const sr = ScrollReveal({ distance: 0 });
+      sr.reveal('.reveal');
+    });
+  </script>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/node-waves@0.7.6/dist/waves.min.js"></script>
+  <script type="text/javascript">
+    $(function() {
+      Waves.attach('.flat-btn', ['waves-button']);
+      Waves.attach('.float-btn', ['waves-button', 'waves-float']);
+      Waves.attach('.float-btn-light', ['waves-button', 'waves-float', 'waves-light']);
+      Waves.attach('.flat-box', ['waves-block']);
+      Waves.attach('.float-box', ['waves-block', 'waves-float']);
+      Waves.attach('.waves-image');
+      Waves.init();
+    });
+  </script>
+
+
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <!-- <script async src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-busuanzi@2.3/js/busuanzi.pure.mini.js"></script> -->
+
+
+
+
+
+
+
+
+
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+  <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+  <script type="text/javascript">
+    var gitalk = new Gitalk({
+      clientID: "57bd3ce366ba25a73a1a",
+      clientSecret: "bab4a248180b9ac85b16fb44bf4ba171648f9cab",
+      repo: "myBlogTalk",
+      owner: "FraserYu",
+      admin: "FraserYu",
+      
+        id: location.pathname,      // Ensure uniqueness and length less than 50
+      
+      distractionFreeMode: false  // Facebook-like distraction free mode
+    });
+    gitalk.render('gitalk-container');
+  </script>
+
+
+
+
+
+  
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/app.js"></script>
+
+
+
+  
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/search.js"></script>
+
+
+
+
+
+<!-- 复制 -->
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  let COPY_SUCCESS = "复制成功";
+  let COPY_FAILURE = "复制失败";
+  /*页面载入完成后，创建复制按钮*/
+  !function (e, t, a) {
+    /* code */
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '  <i class="fa fa-copy"></i><span>复制</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+
+      clipboard.on('success', function(e) {
+        //您可以加入成功提示
+        console.info('Action:', e.action);
+        console.info('Text:', e.text);
+        console.info('Trigger:', e.trigger);
+        success_prompt(COPY_SUCCESS);
+        e.clearSelection();
+      });
+      clipboard.on('error', function(e) {
+        //您可以加入失败提示
+        console.error('Action:', e.action);
+        console.error('Trigger:', e.trigger);
+        fail_prompt(COPY_FAILURE);
+      });
+    }
+    initCopyCode();
+
+  }(window, document);
+
+  /**
+   * 弹出式提示框，默认1.5秒自动消失
+   * @param message 提示信息
+   * @param style 提示样式，有alert-success、alert-danger、alert-warning、alert-info
+   * @param time 消失时间
+   */
+  var prompt = function (message, style, time)
+  {
+      style = (style === undefined) ? 'alert-success' : style;
+      time = (time === undefined) ? 1500 : time*1000;
+      $('<div>')
+          .appendTo('body')
+          .addClass('alert ' + style)
+          .html(message)
+          .show()
+          .delay(time)
+          .fadeOut();
+  };
+
+  // 成功提示
+  var success_prompt = function(message, time)
+  {
+      prompt(message, 'alert-success', time);
+  };
+
+  // 失败提示
+  var fail_prompt = function(message, time)
+  {
+      prompt(message, 'alert-danger', time);
+  };
+
+  // 提醒
+  var warning_prompt = function(message, time)
+  {
+      prompt(message, 'alert-warning', time);
+  };
+
+  // 信息提示
+  var info_prompt = function(message, time)
+  {
+      prompt(message, 'alert-info', time);
+  };
+
+</script>
+
+
+<!-- fancybox -->
+<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+<script>
+  let LAZY_LOAD_IMAGE = "";
+  $(".article-entry").find("fancybox").find("img").each(function () {
+      var element = document.createElement("a");
+      $(element).attr("data-fancybox", "gallery");
+      $(element).attr("href", $(this).attr("src"));
+      /* 图片采用懒加载处理时,
+       * 一般图片标签内会有个属性名来存放图片的真实地址，比如 data-original,
+       * 那么此处将原本的属性名src替换为对应属性名data-original,
+       * 修改如下
+       */
+       if (LAZY_LOAD_IMAGE) {
+         $(element).attr("href", $(this).attr("data-original"));
+       }
+      $(this).wrap(element);
+  });
+</script>
+
+
+
+
+
+  <script>setLoadingBarProgress(100);</script>
+
+<!-- 鼠标点击火花效果 -->
+<!-- <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+<script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+<script type="text/javascript" src="/js/fireworks.js"></script> -->
+
+<!-- 腾讯分析代码 -->
+<!-- <script type="text/javascript" src="http://tajs.qq.com/stats?sId=66485661" charset="UTF-8"></script> -->
+
+  <!--动态线条背景-->
+<!-- <script type="text/javascript" color="100,220,220" opacity='0.8' zIndex="-2" count="400" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script> -->
+<!-- 样式二（飘动的彩带） -->
+<!-- <script src="https://g.joyinshare.com/hc/piao.js" type="text/javascript"></script> -->
+<!-- 样式一（鼠标点击更换样式） -->
+<!-- <script src="https://g.joyinshare.com/hc/ribbon.min.js" type="text/javascript"></script> -->
+</body>
+</html>

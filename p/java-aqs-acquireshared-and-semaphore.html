@@ -13,7 +13,7 @@
   
 
   
-  <link rel="alternate" href="/atom.xml" title="日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享">
+  <link rel="alternate" href="/atom.xml" title="日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享" type="application/atom+xml">
   
 
   <meta name="HandheldFriendly" content="True" />
@@ -35,7 +35,9 @@
   
 
   
-    <link rel="stylesheet" href="/style.css">
+    
+<link rel="stylesheet" href="/style.css">
+
   
 
   <script>
@@ -85,7 +87,7 @@
         daovoice('update');
         </script>
     
-</head>
+<meta name="generator" content="Hexo 5.4.0"></head>
 
 <body>
   
@@ -484,8 +486,8 @@
 
     <section class="article typo">
       <div class="article-entry" itemprop="articleBody">
-        <p>现陆续将Demo代码和技术文章整理在一起 <a href="https://github.com/FraserYu/learnings" target="_blank" rel="noopener">Github实践精选</a> ，方便大家阅读查看，本文同样收录在此，觉得不错，还请Star🌟</p>
-<p><fancybox><img src="https://rgyb.sunluomeng.top/20200613150348.png" alt=""></fancybox></p>
+        <p>现陆续将Demo代码和技术文章整理在一起 <a target="_blank" rel="noopener" href="https://github.com/FraserYu/learnings">Github实践精选</a> ，方便大家阅读查看，本文同样收录在此，觉得不错，还请Star🌟</p>
+<p><fancybox><img src="https://rgyb.sunluomeng.top/20200613150348.png"></fancybox></p>
 <p>看到本期内容这么少，是不是心动了呢？ </p>
 <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>上一篇万字长文 <a href="https://dayarch.top/p/java-aqs-and-reentrantlock.html">Java AQS队列同步器以及ReentrantLock的应用</a> 为我们读 JUC 源码以及其设计思想做了足够多的铺垫，接下来的内容我将重点说明差异化，如果有些童鞋不是能很好的理解文中的一些内容，强烈建议回看上一篇文章，搞懂基础内容，接下来的阅读真会轻松加愉快</p>
 <hr>
@@ -496,19 +498,19 @@
 <li>有超时限制的独占式获取锁</li>
 </ul>
 <p>AQS 提供的模版方法里面还差共享式获取同步状态没有介绍，所以我们今天来揭开这个看似神秘的面纱</p>
-<p><fancybox><img src="https://rgyb.sunluomeng.top/20200613150826.png" alt=""></fancybox></p>
+<p><fancybox><img src="https://rgyb.sunluomeng.top/20200613150826.png"></fancybox></p>
 <h2 id="AQS-中的共享式获取同步状态"><a href="#AQS-中的共享式获取同步状态" class="headerlink" title="AQS 中的共享式获取同步状态"></a>AQS 中的共享式获取同步状态</h2><p>独占式是你中没我，我中没你的的一种互斥形式，共享式显然就不是这样了，所以他们的唯一区别就是：</p>
 <blockquote>
 <p>同一时刻能否有多个线程同时获取到同步状态</p>
 </blockquote>
 <p>简单来说，就是这样滴：</p>
-<p><fancybox><img src="https://rgyb.sunluomeng.top/20200613104401.png" alt=""></fancybox></p>
+<p><fancybox><img src="https://rgyb.sunluomeng.top/20200613104401.png"></fancybox></p>
 <p>我们知道同步状态 state 是维护在 AQS 中的，抛开可重入锁的概念，我在上篇文章中也提到了，独占式和共享式控制同步状态 state 的区别仅仅是这样：</p>
-<p><fancybox><img src="https://rgyb.sunluomeng.top/20200523160705.png" alt=""></fancybox></p>
+<p><fancybox><img src="https://rgyb.sunluomeng.top/20200523160705.png"></fancybox></p>
 <p>所以说想了解 AQS 的 xxxShared 的模版方法，只需要知道它是怎么控制 state 的就好了</p>
 <h3 id="AQS共享式获取同步状态源码分析"><a href="#AQS共享式获取同步状态源码分析" class="headerlink" title="AQS共享式获取同步状态源码分析"></a>AQS共享式获取同步状态源码分析</h3><p>为了帮助大家更好的回忆内容，我将上一篇文章的两个关键内容粘贴在此处，帮助大家快速回忆，关于共享式，大家只需要关注【骚紫色】就可以了</p>
-<h4 id="自定义同步器需要重写的方法"><a href="#自定义同步器需要重写的方法" class="headerlink" title="自定义同步器需要重写的方法"></a>自定义同步器需要重写的方法</h4><p><fancybox><img src="https://rgyb.sunluomeng.top/20200523160830.png" alt=""></fancybox></p>
-<h4 id="AQS-提供的模版方法"><a href="#AQS-提供的模版方法" class="headerlink" title="AQS 提供的模版方法"></a>AQS 提供的模版方法</h4><p><fancybox><img src="https://rgyb.sunluomeng.top/20200523195957.png" alt=""></fancybox></p>
+<h4 id="自定义同步器需要重写的方法"><a href="#自定义同步器需要重写的方法" class="headerlink" title="自定义同步器需要重写的方法"></a>自定义同步器需要重写的方法</h4><p><fancybox><img src="https://rgyb.sunluomeng.top/20200523160830.png"></fancybox></p>
+<h4 id="AQS-提供的模版方法"><a href="#AQS-提供的模版方法" class="headerlink" title="AQS 提供的模版方法"></a>AQS 提供的模版方法</h4><p><fancybox><img src="https://rgyb.sunluomeng.top/20200523195957.png"></fancybox></p>
 <p>故事就从这里说起吧 (你会发现和独占式惊人的相似)，关键代码都加了注释</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title">acquireShared</span><span class="params">(<span class="keyword">int</span> arg)</span> </span>&#123;</span><br><span class="line">  	<span class="comment">// 同样调用自定义同步器需要重写的方法，非阻塞式的尝试获取同步状态，如果结果小于零，则获取同步状态失败</span></span><br><span class="line">    <span class="keyword">if</span> (tryAcquireShared(arg) &lt; <span class="number">0</span>)</span><br><span class="line">      	<span class="comment">// 调用 AQS 提供的模版方法，进入等待队列</span></span><br><span class="line">        doAcquireShared(arg);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -520,22 +522,22 @@
 
 
 <p>上面代码第 18 行我们提到和独占式获取同步状态的区别，贴心的给大家一个更直观的对比：</p>
-<p><fancybox><img src="https://rgyb.sunluomeng.top/20200613111949.png" alt=""></fancybox></p>
+<p><fancybox><img src="https://rgyb.sunluomeng.top/20200613111949.png"></fancybox></p>
 <p>差别只在这里，所以我们就来看看 <code>setHeadAndPropagate(node, r)</code> 到底干了什么，我之前说过 JDK 源码中的方法命名绝大多数还是非常直观的，该方法直译过来就是 【设置头并且传播/繁衍】。独占式只是设置了头，共享式除了设置头还多了一个传播，你的疑问应该已经来了：</p>
 <blockquote>
 <p>啥是传播，为什么会有传播这个设置呢？</p>
 </blockquote>
 <p>想了解这个问题，你需要先知道非阻塞共享式获取同步状态返回值的含义：</p>
-<p><fancybox><img src="https://rgyb.sunluomeng.top/20200613114247.png" alt=""></fancybox></p>
+<p><fancybox><img src="https://rgyb.sunluomeng.top/20200613114247.png"></fancybox></p>
 <p>这里说的传播其实说的是 <code>propagate &gt; 0</code> 的情况，道理也很简单，当前线程获取同步状态成功了，还有剩余的同步状态可用于其他线程获取，<strong>那就要通知在等待队列的线程，让他们尝试获取剩余的同步状态</strong></p>
 <p><strong>如果要让等待队列中的线程获取到通知，需要线程调用 release 方法实现的</strong>。接下来，我们走近 <code>setHeadAndPropagate</code> 一探究竟，验证一下</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"> <span class="comment">// 入参，node： 当前节点</span></span><br><span class="line"><span class="comment">// 入参，propagate：获取同步状态的结果值，即上面方法中的变量 r</span></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">setHeadAndPropagate</span><span class="params">(Node node, <span class="keyword">int</span> propagate)</span> </span>&#123;</span><br><span class="line">   		<span class="comment">// 记录旧的头部节点，用于下面的check</span></span><br><span class="line">       Node h = head; </span><br><span class="line">   		<span class="comment">// 将当前节点设置为头节点</span></span><br><span class="line">       setHead(node);</span><br><span class="line">       </span><br><span class="line">   		<span class="comment">// 通过 propagate 的值和 waitStatus 的值来判断是否可以调用 doReleaseShared 方法</span></span><br><span class="line">       <span class="keyword">if</span> (propagate &gt; <span class="number">0</span> || h == <span class="keyword">null</span> || h.waitStatus &lt; <span class="number">0</span> ||</span><br><span class="line">           (h = head) == <span class="keyword">null</span> || h.waitStatus &lt; <span class="number">0</span>) &#123;</span><br><span class="line">           Node s = node.next;</span><br><span class="line">         	<span class="comment">// 如果后继节点为空或者后继节点为共享类型，则进行唤醒后继节点</span></span><br><span class="line">   				<span class="comment">// 这里后继节点为空意思是只剩下当前头节点了，另外这里的 s == null 也是判断空指针的标准写法</span></span><br><span class="line">           <span class="keyword">if</span> (s == <span class="keyword">null</span> || s.isShared())</span><br><span class="line">               doReleaseShared();</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
 
 <p>上面方法的大方向作用我们了解了，但是代码中何时调用 <code>doReleaseShared</code> 的判断逻辑还是挺让人费解的，为什么会有这么一大堆的判断，我们来逐个分析一下：</p>
 <p>这里的空判断有点让人头大，我们先挑出来说明一下：</p>
-<p><fancybox><img src="https://rgyb.sunluomeng.top/20200613120818.png" alt=""></fancybox></p>
+<p><fancybox><img src="https://rgyb.sunluomeng.top/20200613120818.png"></fancybox></p>
 <p>排除了其他判断条件的干扰，接下来我们就专注分析 propagate 和 waitStatus 两个判断条件就可以了，这里再将 waitStatus 的几种状态展示在这里，帮助大家理解，【骚粉色】是我们一会要用到的：</p>
-<p><fancybox><img src="https://rgyb.sunluomeng.top/20200613124631.png" alt=""></fancybox></p>
+<p><fancybox><img src="https://rgyb.sunluomeng.top/20200613124631.png"></fancybox></p>
 <blockquote>
 <p>propagate &gt; 0</p>
 </blockquote>
@@ -555,18 +557,18 @@
 </ul>
 <p>所以猜测，当前线程执行到 h.waitStatus &lt; 0 的判断前，有另外一个线程刚好执行了  <code>doReleaseShared()</code> 方法，将 waitStatus 又设置成PROPAGATE = -3</p>
 <p>这个理解有点绕，我们还是来画个图理解一下吧：</p>
-<p><fancybox><img src="https://rgyb.sunluomeng.top/20200613132907.png" alt=""></fancybox></p>
+<p><fancybox><img src="https://rgyb.sunluomeng.top/20200613132907.png"></fancybox></p>
 <p>可能有同学还是不太能理解这么写的道理，我们一直说 propagate &lt;&gt; = 0 的情况，propagate = 0 代表的是<strong>当时/当时/当时</strong> 尝试获取同步状态没成功，但是之后可能又有共享状态被释放了，所以上面的逻辑是以防这种万一，你懂的，严谨的并发就是要防止一切万一，现在结合这个情景再来理解上面的判断你是否豁然开朗了呢？</p>
 <p>继续向下看，</p>
 <blockquote>
 <p>前序条件不成立，(h = head) == null ||  h.waitStatus &lt; 0 <strong>注意这里的h是新的头节点）</strong></p>
 </blockquote>
 <p>有了上面铺垫，这个就直接画个图就更好理解啦，其实就是没有那么巧有另外一个线程掺合了</p>
-<p><fancybox><img src="https://rgyb.sunluomeng.top/20200613133904.png" alt=""></fancybox></p>
+<p><fancybox><img src="https://rgyb.sunluomeng.top/20200613133904.png"></fancybox></p>
 <p>相信到这里你应该理解共享式获取同步状态的全部过程了吧，至于<strong>非阻塞共享式获取同步状态</strong>和<strong>带有超时时间获取同步状态</strong>，结合本文讲的 setHeadAndPropagate 逻辑和独占式获取同步状态的实现过程过程来看，真是一毛一样，这里就不再累述了，赶紧打开你的 IDE 去验证一下吧</p>
 <p>我们分析了AQS 的模版方法，还一直没说 <code>tryAcquireShared(arg)</code> 这个方法是如何被重写的，想要了解这个，我们就来看一看共享式获取同步状态的经典应用 Semaphore</p>
 <h2 id="Semaphore-的应用及源码分析"><a href="#Semaphore-的应用及源码分析" class="headerlink" title="Semaphore 的应用及源码分析"></a>Semaphore 的应用及源码分析</h2><h3 id="Semaphore-概念"><a href="#Semaphore-概念" class="headerlink" title="Semaphore 概念"></a>Semaphore 概念</h3><p>Semaphore 中文多翻译为 【信号量】，我还特意查了一下剑桥辞典的英文解释：</p>
-<p><fancybox><img src="https://rgyb.sunluomeng.top/20200613134832.png" alt=""></fancybox></p>
+<p><fancybox><img src="https://rgyb.sunluomeng.top/20200613134832.png"></fancybox></p>
 <p>其实就是信号标志（two flags），比如红绿灯，每个交通灯产生两种不同行为</p>
 <ul>
 <li>Flag1-红灯：停车</li>
@@ -579,14 +581,14 @@
 </ul>
 <p>所以我们走近 Semaphore ，来看看它到底是怎么应用 AQS 的，又是怎样重写 <code>tryAcquireShared(arg)</code>  方法的</p>
 <h3 id="Semaphore-源码分析"><a href="#Semaphore-源码分析" class="headerlink" title="Semaphore 源码分析"></a>Semaphore 源码分析</h3><p>先看一下类结构</p>
-<p><fancybox><img src="https://rgyb.sunluomeng.top/20200613135824.png" alt=""></fancybox></p>
+<p><fancybox><img src="https://rgyb.sunluomeng.top/20200613135824.png"></fancybox></p>
 <p>看到这里你是否有点跌眼镜，和 ReentrantLock 相似的可怕吧，如果你有些陌生，再次强烈建议你回看上一篇文章 <a href="https://dayarch.top/p/java-aqs-and-reentrantlock.html">Java AQS队列同步器以及ReentrantLock的应用</a> ，这里直接提速对比看公平和非公平两种重写的 <code>tryAcquireShared(arg)</code> 方法，没有意外，公平与否，就是判断是否有前驱节点</p>
-<p><fancybox><img src="https://rgyb.sunluomeng.top/20200613140142.png" alt=""></fancybox></p>
+<p><fancybox><img src="https://rgyb.sunluomeng.top/20200613140142.png"></fancybox></p>
 <p>方法内部只是计算 state 的剩余值，那 state 的初始值是多少怎么设置呢？当然也就是构造方法了：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">Semaphore</span><span class="params">(<span class="keyword">int</span> permits)</span> </span>&#123;</span><br><span class="line">    	<span class="comment">// 默认仍是非公平的同步器，至于为什么默认是非公平的，在上一篇文章中也特意说明过</span></span><br><span class="line">      sync = <span class="keyword">new</span> NonfairSync(permits);</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  NonfairSync(<span class="keyword">int</span> permits) &#123;</span><br><span class="line">  		<span class="keyword">super</span>(permits);</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
 
 <p>super 方法，就会将初始值给到 AQS 中的 state</p>
-<p><fancybox><img src="https://rgyb.sunluomeng.top/20200613140716.png" alt=""></fancybox></p>
+<p><fancybox><img src="https://rgyb.sunluomeng.top/20200613140716.png"></fancybox></p>
 <p>也许你发现了，当我们把 permits 设置为1 的时候，不就是 ReentrantLock 的互斥锁了嘛，说的一点也没错，我们用 Semaphore 也能实现基本互斥锁的效果</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">int</span> count;</span><br><span class="line"><span class="comment">//初始化信号量</span></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">final</span> Semaphore s </span><br><span class="line">    = <span class="keyword">new</span> Semaphore(<span class="number">1</span>);</span><br><span class="line"><span class="comment">//用信号量保证互斥    </span></span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">addOne</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  s.acquire();</span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    count+=<span class="number">1</span>;</span><br><span class="line">  &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">    s.release();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -595,7 +597,7 @@
 <p>But（英文听力中的重点），Semaphore 肯定不是为这种特例存在的，它是共享式获取同步状态的一种实现。如果使用信号量，我们通常会将 permits 设置成大于1的值，不知道你是否还记得我曾在 <a href="https://dayarch.top/p/why-we-need-to-use-threadpool.html">为什么要使用线程池?</a> 一文中说到的池化概念，在同一时刻，允许多个线程使用连接池，每个连接被释放之前，不允许其他线程使用。所以说 <strong>Semaphore 可以允许多个线程访问一个临界区</strong>，最终很好的做到一个<strong>限流/限流/限流</strong> 的作用</p>
 <p>虽然 Semaphore 能很好的提供限流作用，说实话，Semaphore 的限流作用比较单一，我在实际工作中使用 Semaphore 并不是很多，如果真的要用高性能限流器，Guava RateLimiter 是一个非常不错的选择，我们后面会做分析，有兴趣的可以提前了解一下</p>
 <p>关于 Semaphore 源码，就这么三下五除二的结束了</p>
-<p><fancybox><img src="https://rgyb.sunluomeng.top/20200613150959.png" alt=""></fancybox></p>
+<p><fancybox><img src="https://rgyb.sunluomeng.top/20200613150959.png"></fancybox></p>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>不知你有没有感觉到，我们的节奏明显加快了，好多原来分散的点在被疯狂的串联起来，如果按照这个方式来阅读 JUC 源码，相信你也不会一头扎进去迷失方向，然后沮丧的退出 JUC 吧，然后面试背诵答案，然后忘记，然后再背诵？</p>
 <p>跟上节奏，关于共享式获取同步状态，Semaphore 只不过是非常经典的应用，ReadWriteLock 和 CountDownLatch 日常应用还是非常广泛的，我们接下来就陆续聊聊它们吧</p>
 <h2 id="灵魂追问"><a href="#灵魂追问" class="headerlink" title="灵魂追问"></a>灵魂追问</h2><ol>
@@ -605,19 +607,19 @@
 <h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ol>
 <li>Java 并发实战</li>
 <li>Java 并发编程的艺术</li>
-<li><a href="https://blog.csdn.net/anlian523/article/details/106319294" target="_blank" rel="noopener">https://blog.csdn.net/anlian523/article/details/106319294</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/anlian523/article/details/106319294">https://blog.csdn.net/anlian523/article/details/106319294</a></li>
 </ol>
 
       </div>
       <!-- <div class="tuijian">
         <br><br>
         📚相关文章
-        <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-book.html" title="120000字，你们要的Java并发编程图文小册来了" rel="bookmark">120000字，你们要的Java并发编程图文小册来了</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-countdownlatch-vs-cyclicbarrier.html" title="CountDownLatch 和 CyclicBarrier 傻傻的分不清楚？" rel="bookmark">CountDownLatch 和 CyclicBarrier 傻傻的分不清楚？</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/executorservice-vs-completionservice.html" title="ExecutorService VS CompletionService" rel="bookmark">ExecutorService VS CompletionService</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-aqs-and-reentrantlock.html" title="Java AQS队列同步器以及ReentrantLock的应用" rel="bookmark">Java AQS队列同步器以及ReentrantLock的应用</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-future-and-callable.html" title="Java Future详解与使用" rel="bookmark">Java Future详解与使用</a></h3></div></li></ul>
+        <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-book.html" title="120000字，你们要的Java并发编程图文小册来了" rel="bookmark">120000字，你们要的Java并发编程图文小册来了</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/executorservice-vs-completionservice.html" title="ExecutorService VS CompletionService" rel="bookmark">ExecutorService VS CompletionService</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-interrupt-mechnism.html" title="Java多线程中断机制" rel="bookmark">Java多线程中断机制</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-thread-life-cycle.html" title="Java线程生命周期这样理解挺简单的" rel="bookmark">Java线程生命周期这样理解挺简单的</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/difference-between-volatile-and-synchronized-keyword.html" title="volatile和synchronized图文透彻讲解" rel="bookmark">volatile和synchronized图文透彻讲解</a></h3></div></li></ul>
       </div> -->
       <div class="personalweixin">
         <br><br>
         <blockquote>
-          <a href="https://mp.weixin.qq.com/s/G7BXuZh0Qh1-mE6ts4LJqQ" target="_blank" rel="noopener">加我微信</a>，咱们交流技术与思想，共同成长
+          <a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/G7BXuZh0Qh1-mE6ts4LJqQ">加我微信</a>，咱们交流技术与思想，共同成长
         </blockquote>
         <br>
 
@@ -655,9 +657,9 @@
   <div class="-mob-share-list share-body">
     
       
-        <a class="-mob-share-qq" title="QQ好友" rel="external nofollow noopener noreferrer"
+        <a class="-mob-share-qq" title="QQ好友" rel="external nofollow noopener noreferrer noopener"
           
-          href="http://connect.qq.com/widget/shareqq/index.html?url=https://dayarch.top/p/java-aqs-acquireshared-and-semaphore.html&title=Java AQS共享式获取同步状态及Semaphore的应用分析 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=现陆续将Demo代码和技术文章整理在一起 Github实践精选 ，方便大家阅读查看，本文同样收录在此，觉得不错，还请Star🌟
+          target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://dayarch.top/p/java-aqs-acquireshared-and-semaphore.html&title=Java AQS共享式获取同步状态及Semaphore的应用分析 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=现陆续将Demo代码和技术文章整理在一起 Github实践精选 ，方便大家阅读查看，本文同样收录在此，觉得不错，还请Star🌟
 
 
 
@@ -683,9 +685,9 @@ AQS 中我们介绍了独占式获取同步状态的多种情形：
       
     
       
-        <a class="-mob-share-qzone" title="QQ空间" rel="external nofollow noopener noreferrer"
+        <a class="-mob-share-qzone" title="QQ空间" rel="external nofollow noopener noreferrer noopener"
           
-          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://dayarch.top/p/java-aqs-acquireshared-and-semaphore.html&title=Java AQS共享式获取同步状态及Semaphore的应用分析 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=现陆续将Demo代码和技术文章整理在一起 Github实践精选 ，方便大家阅读查看，本文同样收录在此，觉得不错，还请Star🌟
+          target="_blank" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://dayarch.top/p/java-aqs-acquireshared-and-semaphore.html&title=Java AQS共享式获取同步状态及Semaphore的应用分析 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=现陆续将Demo代码和技术文章整理在一起 Github实践精选 ，方便大家阅读查看，本文同样收录在此，觉得不错，还请Star🌟
 
 
 
@@ -711,9 +713,9 @@ AQS 中我们介绍了独占式获取同步状态的多种情形：
       
     
       
-        <a class="-mob-share-weibo" title="微博" rel="external nofollow noopener noreferrer"
+        <a class="-mob-share-weibo" title="微博" rel="external nofollow noopener noreferrer noopener"
           
-          href="http://service.weibo.com/share/share.php?url=https://dayarch.top/p/java-aqs-acquireshared-and-semaphore.html&title=Java AQS共享式获取同步状态及Semaphore的应用分析 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=现陆续将Demo代码和技术文章整理在一起 Github实践精选 ，方便大家阅读查看，本文同样收录在此，觉得不错，还请Star🌟
+          target="_blank" href="http://service.weibo.com/share/share.php?url=https://dayarch.top/p/java-aqs-acquireshared-and-semaphore.html&title=Java AQS共享式获取同步状态及Semaphore的应用分析 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=现陆续将Demo代码和技术文章整理在一起 Github实践精选 ，方便大家阅读查看，本文同样收录在此，觉得不错，还请Star🌟
 
 
 
@@ -813,7 +815,7 @@ AQS 中我们介绍了独占式获取同步状态的多种情形：
 </header>
 
     <div class="content pure">
-      <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-book.html" title="120000字，你们要的Java并发编程图文小册来了" rel="bookmark">120000字，你们要的Java并发编程图文小册来了</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-countdownlatch-vs-cyclicbarrier.html" title="CountDownLatch 和 CyclicBarrier 傻傻的分不清楚？" rel="bookmark">CountDownLatch 和 CyclicBarrier 傻傻的分不清楚？</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/executorservice-vs-completionservice.html" title="ExecutorService VS CompletionService" rel="bookmark">ExecutorService VS CompletionService</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-aqs-and-reentrantlock.html" title="Java AQS队列同步器以及ReentrantLock的应用" rel="bookmark">Java AQS队列同步器以及ReentrantLock的应用</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-future-and-callable.html" title="Java Future详解与使用" rel="bookmark">Java Future详解与使用</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-interrupt-mechnism.html" title="Java多线程中断机制" rel="bookmark">Java多线程中断机制</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-thread-life-cycle.html" title="Java线程生命周期这样理解挺简单的" rel="bookmark">Java线程生命周期这样理解挺简单的</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java8-completablefuture-tutorial.html" title="java8 CompletableFuture 使用详解" rel="bookmark">java8 CompletableFuture 使用详解</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-dead-lock.html" title="Java并发死锁解决思路" rel="bookmark">Java并发死锁解决思路</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/difference-between-volatile-and-synchronized-keyword.html" title="volatile和synchronized图文透彻讲解" rel="bookmark">volatile和synchronized图文透彻讲解</a></h3></div></li></ul>
+      <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-book.html" title="120000字，你们要的Java并发编程图文小册来了" rel="bookmark">120000字，你们要的Java并发编程图文小册来了</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/executorservice-vs-completionservice.html" title="ExecutorService VS CompletionService" rel="bookmark">ExecutorService VS CompletionService</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-interrupt-mechnism.html" title="Java多线程中断机制" rel="bookmark">Java多线程中断机制</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-thread-life-cycle.html" title="Java线程生命周期这样理解挺简单的" rel="bookmark">Java线程生命周期这样理解挺简单的</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/difference-between-volatile-and-synchronized-keyword.html" title="volatile和synchronized图文透彻讲解" rel="bookmark">volatile和synchronized图文透彻讲解</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/why-we-need-to-use-threadpool.html" title="为什么要使用线程池?" rel="bookmark">为什么要使用线程池?</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-core.html" title="并发编程三大核心" rel="bookmark">并发编程三大核心</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-three-questions.html" title="并发编程三大问题" rel="bookmark">并发编程三大问题</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-dead-lock.html" title="Java并发死锁解决思路" rel="bookmark">Java并发死锁解决思路</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/waiting-notification-mechanism.html" title="并发编程之等待通知机制" rel="bookmark">并发编程之等待通知机制</a></h3></div></li></ul>
     </div>
   </section>
 
@@ -1021,7 +1023,7 @@ AQS 中我们介绍了独占式获取同步状态的多种情形：
 </header>
 
     <div class='content pure'>
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#AQS-中的共享式获取同步状态"><span class="toc-text">AQS 中的共享式获取同步状态</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#AQS共享式获取同步状态源码分析"><span class="toc-text">AQS共享式获取同步状态源码分析</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#自定义同步器需要重写的方法"><span class="toc-text">自定义同步器需要重写的方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#AQS-提供的模版方法"><span class="toc-text">AQS 提供的模版方法</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Semaphore-的应用及源码分析"><span class="toc-text">Semaphore 的应用及源码分析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Semaphore-概念"><span class="toc-text">Semaphore 概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Semaphore-源码分析"><span class="toc-text">Semaphore 源码分析</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-text">总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#灵魂追问"><span class="toc-text">灵魂追问</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考"><span class="toc-text">参考</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#AQS-%E4%B8%AD%E7%9A%84%E5%85%B1%E4%BA%AB%E5%BC%8F%E8%8E%B7%E5%8F%96%E5%90%8C%E6%AD%A5%E7%8A%B6%E6%80%81"><span class="toc-text">AQS 中的共享式获取同步状态</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#AQS%E5%85%B1%E4%BA%AB%E5%BC%8F%E8%8E%B7%E5%8F%96%E5%90%8C%E6%AD%A5%E7%8A%B6%E6%80%81%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90"><span class="toc-text">AQS共享式获取同步状态源码分析</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E5%90%8C%E6%AD%A5%E5%99%A8%E9%9C%80%E8%A6%81%E9%87%8D%E5%86%99%E7%9A%84%E6%96%B9%E6%B3%95"><span class="toc-text">自定义同步器需要重写的方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#AQS-%E6%8F%90%E4%BE%9B%E7%9A%84%E6%A8%A1%E7%89%88%E6%96%B9%E6%B3%95"><span class="toc-text">AQS 提供的模版方法</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Semaphore-%E7%9A%84%E5%BA%94%E7%94%A8%E5%8F%8A%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90"><span class="toc-text">Semaphore 的应用及源码分析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Semaphore-%E6%A6%82%E5%BF%B5"><span class="toc-text">Semaphore 概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Semaphore-%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90"><span class="toc-text">Semaphore 源码分析</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-text">总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%81%B5%E9%AD%82%E8%BF%BD%E9%97%AE"><span class="toc-text">灵魂追问</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83"><span class="toc-text">参考</span></a></li></ol>
     </div>
   </section>
 
@@ -1096,7 +1098,7 @@ AQS 中我们介绍了独占式获取同步状态的多种情形：
   &nbsp;&nbsp;|&nbsp;&nbsp;  
   
     &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-        class="white-color">264.1k</span>&nbsp;字
+        class="white-color">267.4k</span>&nbsp;字
     
 
   &nbsp;&nbsp;|&nbsp;&nbsp;  
@@ -1151,7 +1153,7 @@ AQS 中我们介绍了独占式获取同步状态的多种情形：
     
     。
   </div>
-  <div><p>博客内容遵循 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
+  <div><p>博客内容遵循 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
 </div>
   <!-- <div class="github-badge">
       <a style="color: #fff" rel="license" href="https://hexo.io/" target="_blank" title="由 Hexo 强力驱动">
@@ -1259,10 +1261,14 @@ AQS 中我们介绍了独占式获取同步状态的多种情形：
 
 
 
-  <script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/app.js"></script>
+  
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/app.js"></script>
 
 
-  <script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/search.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/search.js"></script>
+
 
 
 

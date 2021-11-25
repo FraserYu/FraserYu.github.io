@@ -13,7 +13,7 @@
   
 
   
-  <link rel="alternate" href="/atom.xml" title="日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享">
+  <link rel="alternate" href="/atom.xml" title="日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享" type="application/atom+xml">
   
 
   <meta name="HandheldFriendly" content="True" />
@@ -35,7 +35,9 @@
   
 
   
-    <link rel="stylesheet" href="/style.css">
+    
+<link rel="stylesheet" href="/style.css">
+
   
 
   <script>
@@ -85,7 +87,7 @@
         daovoice('update');
         </script>
     
-</head>
+<meta name="generator" content="Hexo 5.4.0"></head>
 
 <body>
   
@@ -489,26 +491,26 @@
 <p><img src="https://i03piccdn.sogoucdn.com/8c2c3c7fdfc3b299" alt="img"></p>
 <p>像现在的大前端Angular、VUE、REACT这些大前端框架我只是略有了解，完全没有用过，用Node作为中间服务器也是相对陌生状态，项目中需要，我是一定不会放过这个可以掉头发的良机（想法很简答， 跳出自己的舒适区）</p>
 <p><img src="https://i01piccdn.sogoucdn.com/21c3784942552f15" alt="img"></p>
-<p>毕竟要在实际项目中写Node代码的，这么严峻的问题我是要认真对待的，要不然会让队友消耗太多 WTFs/min 能量（这是什么含义？请看【<a href="https://mp.weixin.qq.com/s/K3fHhXbSNAMVEQF_2NHg9g" target="_blank" rel="noopener">读《Clean Code 代码整洁之道》之感悟</a>】），作为一个小白，通过学习一小段时间还是有所收获的，下面主要说一下我的学习过程，<strong>请有经验的大佬多指正，让俺少走点弯路多留几根头发</strong></p>
+<p>毕竟要在实际项目中写Node代码的，这么严峻的问题我是要认真对待的，要不然会让队友消耗太多 WTFs/min 能量（这是什么含义？请看【<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/K3fHhXbSNAMVEQF_2NHg9g">读《Clean Code 代码整洁之道》之感悟</a>】），作为一个小白，通过学习一小段时间还是有所收获的，下面主要说一下我的学习过程，<strong>请有经验的大佬多指正，让俺少走点弯路多留几根头发</strong></p>
 <h2 id="Node-js-学习"><a href="#Node-js-学习" class="headerlink" title="Node.js 学习"></a>Node.js 学习</h2><p>和大家一样，我也是各种上网查阅资料，这里将目前的学习过程做个简单的记录</p>
-<h3 id="Node-js-官网"><a href="#Node-js-官网" class="headerlink" title="Node.js 官网"></a><a href="https://nodejs.org/en/" target="_blank" rel="noopener">Node.js 官网</a></h3><p>学习一样东西，第一步自然是先打开官网，这里根正苗红，与众不同</p>
+<h3 id="Node-js-官网"><a href="#Node-js-官网" class="headerlink" title="Node.js 官网"></a><a target="_blank" rel="noopener" href="https://nodejs.org/en/">Node.js 官网</a></h3><p>学习一样东西，第一步自然是先打开官网，这里根正苗红，与众不同</p>
 <p>优点：很快可以有一个相对直观的了解，文档与API齐全</p>
 <p>缺点：这里的苗太正了，【事件驱动、构建在V8引擎】等陌生词汇直接让我眼冒金星，这类词语就好比小时候父母对我们说的词汇，只有长大之后才会明白</p>
 <p>面对这些陌生的内容，我并不是很担心（内心懵的一P），相信长大后会明白的，随手毫不留情把网站关掉</p>
-<h3 id="tutorialspoint"><a href="#tutorialspoint" class="headerlink" title="tutorialspoint"></a>tutorialspoint</h3><p><a href="https://www.tutorialspoint.com/index.htm" target="_blank" rel="noopener">tutorialspoint</a> 是我非常喜欢的学习网站，上面有很多技术教程，先来个截图瞧瞧</p>
-<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200225080943.png" alt=""></p>
+<h3 id="tutorialspoint"><a href="#tutorialspoint" class="headerlink" title="tutorialspoint"></a>tutorialspoint</h3><p><a target="_blank" rel="noopener" href="https://www.tutorialspoint.com/index.htm">tutorialspoint</a> 是我非常喜欢的学习网站，上面有很多技术教程，先来个截图瞧瞧</p>
+<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200225080943.png"></p>
 <p>优点：教程内容简单明了，循序渐进，案例代码齐全</p>
 <p>缺点：这是一个英文网站</p>
 <p>（<strong>Tips</strong>: 看英文文档应该成为我们的必备技能之一）</p>
-<p>不要被英文网站吓到，其实没什么陌生词汇，按照<a href="https://www.tutorialspoint.com/nodejs/index.htm" target="_blank" rel="noopener">Node.js 教程</a> 从头到尾撸了一遍，有了相对全面的了解，知道了基本骨架内容, 一边撸一遍记笔记（忽略着潦草的字）</p>
-<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgWechatIMG197.jpeg" alt=""></p>
+<p>不要被英文网站吓到，其实没什么陌生词汇，按照<a target="_blank" rel="noopener" href="https://www.tutorialspoint.com/nodejs/index.htm">Node.js 教程</a> 从头到尾撸了一遍，有了相对全面的了解，知道了基本骨架内容, 一边撸一遍记笔记（忽略着潦草的字）</p>
+<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgWechatIMG197.jpeg"></p>
 <p>中途还是有很多不理解的内容，都用黄色的笔圈了出来，放在后面慢慢查阅，<strong>紧跟主线，以防自己跑偏</strong></p>
 <h3 id="极客时间-慕课网"><a href="#极客时间-慕课网" class="headerlink" title="极客时间/慕课网"></a>极客时间/慕课网</h3><p>教学视频是前辈多年浓缩的精华，有了一些基础概念，我会选择站在巨人的肩膀上整体看一下。日常主要通过【极客时间】和【慕课网】这两个网站搜索视频资料，其中还在极客时间购买了下面的这门课</p>
-<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgWechatIMG199.jpeg" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgWechatIMG199.jpeg"></p>
 <p>这门课的基础知识讲的不算多，前序章节以石头剪刀布的简单游戏来说明Node.js一些特性，后面实战实现极客时间【详情/列表/评论】等页面</p>
 <p>杨浩老师讲解的很清晰，中间穿插着很多冷幽默，但对于小白的我来说，这门课看早了，里面讲的很多内容我还不能理解，但是里面说的一些构建思想，比如CommonJS，这些内容还是十分受用的，视频课程目前看了超过2/3，我选择按下暂停键，觉得有必要写一些Demo来使用上面学到的一些知识点了，我相信当我再回头过来看这个视频的收获一定是不一样的</p>
-<h3 id="Github"><a href="#Github" class="headerlink" title="Github"></a>Github</h3><p>欢迎来到世界最大的同性交友网站，想不到要写一个什么样的Demo，于是来这里搜索一下，还真找到了自建博客的学习性项目<a href="https://github.com/nswbmw/N-blog" target="_blank" rel="noopener">N-Blog</a> （你有什么需求完全可以先来上面找找轮子的）</p>
-<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200225092053.png" alt=""></p>
+<h3 id="Github"><a href="#Github" class="headerlink" title="Github"></a>Github</h3><p>欢迎来到世界最大的同性交友网站，想不到要写一个什么样的Demo，于是来这里搜索一下，还真找到了自建博客的学习性项目<a target="_blank" rel="noopener" href="https://github.com/nswbmw/N-blog">N-Blog</a> （你有什么需求完全可以先来上面找找轮子的）</p>
+<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200225092053.png"></p>
 <p>找项目有几看：</p>
 <ol>
 <li>commits的活跃度</li>
@@ -524,9 +526,9 @@
 <li>Express: 4.16.2</li>
 </ul>
 <p>看技术栈，就可以认定，这是接近真实项目的存在，于是，按部就班的<strong>敲代码，敲代码，敲代码</strong>（不是复制粘贴），因为敲代码就可能会出现错误，这样也在学习中逐步学会了调试</p>
-<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200225092721.png" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200225092721.png"></p>
 <p>通过两天时间也终于做出了最终的效果</p>
-<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200225093129.png" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200225093129.png"></p>
 <p>麻雀虽小，五脏俱全，在实现过程遇到了太多问题，比如：</p>
 <ul>
 <li>npm全局安装权限问题</li>
@@ -535,10 +537,10 @@
 <li>……</li>
 </ul>
 <p>在学习的过程中我都有做记录，同时结合项目内容做了下面这张思维导图，只有全部点亮这些叶子，才能算是做完了这个Demo（更多细节内容隐藏在了节点notes里面）</p>
-<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgNode1.png" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgNode1.png"></p>
 <p>这个思维导图肯定不是标准的Node.js 学习内容，只不过是应对我本次基础的学习，后续的学习会不断对这个思维导图进行修正的</p>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>你以为我们就可以彻底抛弃官网了吗？在调试与编写代码的过程中，遇到某个知识点，就要果断回到官网查看，那里有最权威的解释。另外，带有目的性的查看官网总比一头扎进去舒服的多，你觉得呢</p>
-<p>与其说这是我这几天学习Node.js 方式，不如说这是我学习新东西的整体方法和路线，写这篇文章也想借此当个话题和大家聊聊，欢迎大家留言或<a href="https://mp.weixin.qq.com/s/G7BXuZh0Qh1-mE6ts4LJqQ" target="_blank" rel="noopener">进群</a>分享彼此的学习方法/读书笔记/技术交流等，共同进步</p>
+<p>与其说这是我这几天学习Node.js 方式，不如说这是我学习新东西的整体方法和路线，写这篇文章也想借此当个话题和大家聊聊，欢迎大家留言或<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/G7BXuZh0Qh1-mE6ts4LJqQ">进群</a>分享彼此的学习方法/读书笔记/技术交流等，共同进步</p>
 <p>隔三差五，我也会输出一些Node.js 相关的内容，你以为我喜新厌旧了？在我心中，Java依旧是我怡红院的头牌（我必须宠她）</p>
 <p>最后，<strong>不要永远呆在自己的舒适区，stay hungry， stay foolish</strong></p>
 
@@ -551,7 +553,7 @@
       <div class="personalweixin">
         <br><br>
         <blockquote>
-          <a href="https://mp.weixin.qq.com/s/G7BXuZh0Qh1-mE6ts4LJqQ" target="_blank" rel="noopener">加我微信</a>，咱们交流技术与思想，共同成长
+          <a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/G7BXuZh0Qh1-mE6ts4LJqQ">加我微信</a>，咱们交流技术与思想，共同成长
         </blockquote>
         <br>
 
@@ -586,9 +588,9 @@
   <div class="-mob-share-list share-body">
     
       
-        <a class="-mob-share-qq" title="QQ好友" rel="external nofollow noopener noreferrer"
+        <a class="-mob-share-qq" title="QQ好友" rel="external nofollow noopener noreferrer noopener"
           
-          href="http://connect.qq.com/widget/shareqq/index.html?url=https://dayarch.top/p/start-to-learn-nodejs.html&title=Java后端的我在学Node.js 你敢信？ | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=项目需要，我需要储备一些Node.js 相关的知识了，整体感觉是一件好事
+          target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://dayarch.top/p/start-to-learn-nodejs.html&title=Java后端的我在学Node.js 你敢信？ | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=项目需要，我需要储备一些Node.js 相关的知识了，整体感觉是一件好事
 
 背景
 从前，我也写过前端，不过那会最多用到HTML5 +jQuery相关技术。也没有准确的时间点来划分，我就忽忽悠悠的专注于Java后端了
@@ -609,9 +611,9 @@
       
     
       
-        <a class="-mob-share-qzone" title="QQ空间" rel="external nofollow noopener noreferrer"
+        <a class="-mob-share-qzone" title="QQ空间" rel="external nofollow noopener noreferrer noopener"
           
-          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://dayarch.top/p/start-to-learn-nodejs.html&title=Java后端的我在学Node.js 你敢信？ | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=项目需要，我需要储备一些Node.js 相关的知识了，整体感觉是一件好事
+          target="_blank" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://dayarch.top/p/start-to-learn-nodejs.html&title=Java后端的我在学Node.js 你敢信？ | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=项目需要，我需要储备一些Node.js 相关的知识了，整体感觉是一件好事
 
 背景
 从前，我也写过前端，不过那会最多用到HTML5 +jQuery相关技术。也没有准确的时间点来划分，我就忽忽悠悠的专注于Java后端了
@@ -632,9 +634,9 @@
       
     
       
-        <a class="-mob-share-weibo" title="微博" rel="external nofollow noopener noreferrer"
+        <a class="-mob-share-weibo" title="微博" rel="external nofollow noopener noreferrer noopener"
           
-          href="http://service.weibo.com/share/share.php?url=https://dayarch.top/p/start-to-learn-nodejs.html&title=Java后端的我在学Node.js 你敢信？ | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=项目需要，我需要储备一些Node.js 相关的知识了，整体感觉是一件好事
+          target="_blank" href="http://service.weibo.com/share/share.php?url=https://dayarch.top/p/start-to-learn-nodejs.html&title=Java后端的我在学Node.js 你敢信？ | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=项目需要，我需要储备一些Node.js 相关的知识了，整体感觉是一件好事
 
 背景
 从前，我也写过前端，不过那会最多用到HTML5 +jQuery相关技术。也没有准确的时间点来划分，我就忽忽悠悠的专注于Java后端了
@@ -937,7 +939,7 @@
 </header>
 
     <div class='content pure'>
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#背景"><span class="toc-text">背景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Node-js-学习"><span class="toc-text">Node.js 学习</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Node-js-官网"><span class="toc-text">Node.js 官网</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#tutorialspoint"><span class="toc-text">tutorialspoint</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#极客时间-慕课网"><span class="toc-text">极客时间/慕课网</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Github"><span class="toc-text">Github</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-text">总结</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%83%8C%E6%99%AF"><span class="toc-text">背景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Node-js-%E5%AD%A6%E4%B9%A0"><span class="toc-text">Node.js 学习</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Node-js-%E5%AE%98%E7%BD%91"><span class="toc-text">Node.js 官网</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#tutorialspoint"><span class="toc-text">tutorialspoint</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9E%81%E5%AE%A2%E6%97%B6%E9%97%B4-%E6%85%95%E8%AF%BE%E7%BD%91"><span class="toc-text">极客时间&#x2F;慕课网</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Github"><span class="toc-text">Github</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-text">总结</span></a></li></ol>
     </div>
   </section>
 
@@ -1012,7 +1014,7 @@
   &nbsp;&nbsp;|&nbsp;&nbsp;  
   
     &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-        class="white-color">264.1k</span>&nbsp;字
+        class="white-color">267.4k</span>&nbsp;字
     
 
   &nbsp;&nbsp;|&nbsp;&nbsp;  
@@ -1067,7 +1069,7 @@
     
     。
   </div>
-  <div><p>博客内容遵循 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
+  <div><p>博客内容遵循 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
 </div>
   <!-- <div class="github-badge">
       <a style="color: #fff" rel="license" href="https://hexo.io/" target="_blank" title="由 Hexo 强力驱动">
@@ -1175,10 +1177,14 @@
 
 
 
-  <script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/app.js"></script>
+  
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/app.js"></script>
 
 
-  <script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/search.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/search.js"></script>
+
 
 
 

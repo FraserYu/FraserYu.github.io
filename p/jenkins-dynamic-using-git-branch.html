@@ -13,7 +13,7 @@
   
 
   
-  <link rel="alternate" href="/atom.xml" title="日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享">
+  <link rel="alternate" href="/atom.xml" title="日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享" type="application/atom+xml">
   
 
   <meta name="HandheldFriendly" content="True" />
@@ -35,7 +35,9 @@
   
 
   
-    <link rel="stylesheet" href="/style.css">
+    
+<link rel="stylesheet" href="/style.css">
+
   
 
   <script>
@@ -85,7 +87,7 @@
         daovoice('update');
         </script>
     
-</head>
+<meta name="generator" content="Hexo 5.4.0"></head>
 
 <body>
   
@@ -506,26 +508,26 @@
 <li>Multibranch Pipeline （多分支 Pipeline）</li>
 </ol>
 <p>如下图：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host@master/blog-img20210317100822.png" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host@master/blog-img20210317100822.png"></p>
 <p>如果使用了<code>多分支 Pipeline</code>，就不会存在动态使用分支名称的问题了。如果你想使用单分支 Pipeline，又想动态使用分支，那本文就派上用场了</p>
 <h2 id="Jenkins-中动态使用分支名称"><a href="#Jenkins-中动态使用分支名称" class="headerlink" title="Jenkins 中动态使用分支名称"></a>Jenkins 中动态使用分支名称</h2><p>新建单分支 Pipeline后，可以在界面中看到 <code>This project is parameterized</code> , 勾选上，然后添加 String 类型的参数，如下图所示，String 类型的参数名称为 <code>BranchName</code>, 默认值是 <code>master</code> 分支</p>
-<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host@master/blog-img20210317101629.png" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host@master/blog-img20210317101629.png"></p>
 <p>向下滚动，来配置 Jenkins Pipeline，其中在指定 Jenkins Pipeline 分支的位置，就可以使用上面刚刚创建的变量 <code>BranchName</code> 了，如下图所示，配置成</p>
 <figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">*/$&#123;BranchName&#125;</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host@master/blog-img20210317102111.png" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host@master/blog-img20210317102111.png"></p>
 <blockquote>
 <p>注意：如果勾选 Lightweight checkout 可能会出现下面的 Error</p>
 </blockquote>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">stderr: fatal: Couldn't find remote ref refs/heads/$&#123;BranchName&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">stderr: fatal: Couldn&#x27;t find remote ref refs/heads/$&#123;BranchName&#125;</span><br></pre></td></tr></table></figure>
 
 
 
 <p>以这种方式，Jenkins Pipeline 会动态根据分支名称来拉取代码，同样也可以在 Jenkinsfile 中动态使用刚刚创建好的 <code>BranchName</code></p>
-<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">pipeline &#123;</span><br><span class="line">	...</span><br><span class="line">	</span><br><span class="line">	parameters &#123;</span><br><span class="line">		string(<span class="string">name:</span> <span class="string">'BranchName'</span>, <span class="string">defaultValue:</span> <span class="string">'master'</span>, <span class="string">description:</span> <span class="literal">null</span>)</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	stages &#123;</span><br><span class="line">		stage (<span class="string">'Test Branch Name'</span>) &#123;</span><br><span class="line">			steps &#123;</span><br><span class="line">				echo <span class="string">"$&#123;env.BranchName&#125;"</span></span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">pipeline &#123;</span><br><span class="line">	...</span><br><span class="line">	</span><br><span class="line">	parameters &#123;</span><br><span class="line">		string(<span class="attr">name:</span> <span class="string">&#x27;BranchName&#x27;</span>, <span class="attr">defaultValue:</span> <span class="string">&#x27;master&#x27;</span>, <span class="attr">description:</span> <span class="literal">null</span>)</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	stages &#123;</span><br><span class="line">		stage (<span class="string">&#x27;Test Branch Name&#x27;</span>) &#123;</span><br><span class="line">			steps &#123;</span><br><span class="line">				echo <span class="string">&quot;$&#123;env.BranchName&#125;&quot;</span></span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>当点击左侧 Build with Parameters 后，我们就可以动态输入分支名称来运行 job 了</p>
-<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host@master/blog-img20210328203212.png" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host@master/blog-img20210328203212.png"></p>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>在 Jenkins 中，其实这是一种很常见的动态使用参数的方式，config 的其他参数也可以动态引用变量，大大增加灵活性，如果你要维护 JenkinsPipelie 相关的内容，你大概率会遇到这种需求，这个小技巧收入囊中吧</p>
 
       </div>
@@ -537,7 +539,7 @@
       <div class="personalweixin">
         <br><br>
         <blockquote>
-          <a href="https://mp.weixin.qq.com/s/G7BXuZh0Qh1-mE6ts4LJqQ" target="_blank" rel="noopener">加我微信</a>，咱们交流技术与思想，共同成长
+          <a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/G7BXuZh0Qh1-mE6ts4LJqQ">加我微信</a>，咱们交流技术与思想，共同成长
         </blockquote>
         <br>
 
@@ -575,9 +577,9 @@
   <div class="-mob-share-list share-body">
     
       
-        <a class="-mob-share-qq" title="QQ好友" rel="external nofollow noopener noreferrer"
+        <a class="-mob-share-qq" title="QQ好友" rel="external nofollow noopener noreferrer noopener"
           
-          href="http://connect.qq.com/widget/shareqq/index.html?url=https://dayarch.top/p/jenkins-dynamic-using-git-branch.html&title=Jenkins 动态使用分支名称 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=前言
+          target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://dayarch.top/p/jenkins-dynamic-using-git-branch.html&title=Jenkins 动态使用分支名称 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=前言
 在上一篇 Jenkins 使用环境变量 中，帮助大家使用一条 Docker 命令就可以快速玩转 Jenkins，同时用最简单的方式解释了 Jenkins 中让人混乱的环境变量，本文还是接着变量说点事情
 
 一般成熟的项目流程都会通过 Jenkins Pipeline 来做 CI 部分，在默认 Jenkins 环境配置中，Jenkins Pipeline 分为两种：
@@ -599,9 +601,9 @@
       
     
       
-        <a class="-mob-share-qzone" title="QQ空间" rel="external nofollow noopener noreferrer"
+        <a class="-mob-share-qzone" title="QQ空间" rel="external nofollow noopener noreferrer noopener"
           
-          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://dayarch.top/p/jenkins-dynamic-using-git-branch.html&title=Jenkins 动态使用分支名称 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=前言
+          target="_blank" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://dayarch.top/p/jenkins-dynamic-using-git-branch.html&title=Jenkins 动态使用分支名称 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=前言
 在上一篇 Jenkins 使用环境变量 中，帮助大家使用一条 Docker 命令就可以快速玩转 Jenkins，同时用最简单的方式解释了 Jenkins 中让人混乱的环境变量，本文还是接着变量说点事情
 
 一般成熟的项目流程都会通过 Jenkins Pipeline 来做 CI 部分，在默认 Jenkins 环境配置中，Jenkins Pipeline 分为两种：
@@ -623,9 +625,9 @@
       
     
       
-        <a class="-mob-share-weibo" title="微博" rel="external nofollow noopener noreferrer"
+        <a class="-mob-share-weibo" title="微博" rel="external nofollow noopener noreferrer noopener"
           
-          href="http://service.weibo.com/share/share.php?url=https://dayarch.top/p/jenkins-dynamic-using-git-branch.html&title=Jenkins 动态使用分支名称 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=前言
+          target="_blank" href="http://service.weibo.com/share/share.php?url=https://dayarch.top/p/jenkins-dynamic-using-git-branch.html&title=Jenkins 动态使用分支名称 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=前言
 在上一篇 Jenkins 使用环境变量 中，帮助大家使用一条 Docker 命令就可以快速玩转 Jenkins，同时用最简单的方式解释了 Jenkins 中让人混乱的环境变量，本文还是接着变量说点事情
 
 一般成熟的项目流程都会通过 Jenkins Pipeline 来做 CI 部分，在默认 Jenkins 环境配置中，Jenkins Pipeline 分为两种：
@@ -721,7 +723,7 @@
 </header>
 
     <div class="content pure">
-      <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/jenkins-shared-library.html" title="Jenkins Shared Library" rel="bookmark">Jenkins Shared Library</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/jenkins-environment-variables.html" title="Jenkins 使用环境变量" rel="bookmark">Jenkins 使用环境变量</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/jenkins-config-mail.html" title="Jenkins学习之邮箱配置" rel="bookmark">Jenkins学习之邮箱配置</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/jenkins-hybris-deploy.html" title="Jenkins自动化部署Hybris" rel="bookmark">Jenkins自动化部署Hybris</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/git-worktree-in-practice.html" title="Git Worktree 大法真香" rel="bookmark">Git Worktree 大法真香</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/git-ignore.html" title="Git Ignoring Files" rel="bookmark">Git Ignoring Files</a></h3></div></li></ul>
+      <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/jenkins-shared-library.html" title="Jenkins Shared Library" rel="bookmark">Jenkins Shared Library</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/jenkins-environment-variables.html" title="Jenkins 使用环境变量" rel="bookmark">Jenkins 使用环境变量</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/jenkins-config-mail.html" title="Jenkins学习之邮箱配置" rel="bookmark">Jenkins学习之邮箱配置</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/jenkins-hybris-deploy.html" title="Jenkins自动化部署Hybris" rel="bookmark">Jenkins自动化部署Hybris</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/git-ignore.html" title="Git Ignoring Files" rel="bookmark">Git Ignoring Files</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/git-worktree-in-practice.html" title="Git Worktree 大法真香" rel="bookmark">Git Worktree 大法真香</a></h3></div></li></ul>
     </div>
   </section>
 
@@ -929,7 +931,7 @@
 </header>
 
     <div class='content pure'>
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Jenkins-中动态使用分支名称"><span class="toc-text">Jenkins 中动态使用分支名称</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-text">总结</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Jenkins-%E4%B8%AD%E5%8A%A8%E6%80%81%E4%BD%BF%E7%94%A8%E5%88%86%E6%94%AF%E5%90%8D%E7%A7%B0"><span class="toc-text">Jenkins 中动态使用分支名称</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-text">总结</span></a></li></ol>
     </div>
   </section>
 
@@ -1004,7 +1006,7 @@
   &nbsp;&nbsp;|&nbsp;&nbsp;  
   
     &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-        class="white-color">264.1k</span>&nbsp;字
+        class="white-color">267.4k</span>&nbsp;字
     
 
   &nbsp;&nbsp;|&nbsp;&nbsp;  
@@ -1059,7 +1061,7 @@
     
     。
   </div>
-  <div><p>博客内容遵循 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
+  <div><p>博客内容遵循 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
 </div>
   <!-- <div class="github-badge">
       <a style="color: #fff" rel="license" href="https://hexo.io/" target="_blank" title="由 Hexo 强力驱动">
@@ -1167,10 +1169,14 @@
 
 
 
-  <script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/app.js"></script>
+  
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/app.js"></script>
 
 
-  <script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/search.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/search.js"></script>
+
 
 
 

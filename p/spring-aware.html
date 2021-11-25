@@ -13,7 +13,7 @@
   
 
   
-  <link rel="alternate" href="/atom.xml" title="日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享">
+  <link rel="alternate" href="/atom.xml" title="日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享" type="application/atom+xml">
   
 
   <meta name="HandheldFriendly" content="True" />
@@ -35,7 +35,9 @@
   
 
   
-    <link rel="stylesheet" href="/style.css">
+    
+<link rel="stylesheet" href="/style.css">
+
   
 
   <script>
@@ -85,7 +87,7 @@
         daovoice('update');
         </script>
     
-</head>
+<meta name="generator" content="Hexo 5.4.0"></head>
 
 <body>
   
@@ -490,18 +492,18 @@
 <li><a href="https://dayarch.top/p/spring-bean-lifecycle-destroy.html">Spring Bean 生命周期之缘尽</a><br>我们了解了 Spring Bean 的生命周期核心内容，bean 是如何被初始化变为 <code>Ready for Use</code> 的状态，当资源被回收时又是如何被 destroy 的，但 <code>Spring Bean Life Cycle</code>图并未被全部点亮，这篇文章将点亮剩余内容，同时说说你常见的 XxxxAware 接口</li>
 </ol>
 <p>为什么要说 Spring Bean 生命周期又说 Aware 呢？下来点亮剩下内容你也许就明白了：</p>
-<p><fancybox><img src="http://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E5%BA%94%E7%94%A8%E7%B1%BB%E6%96%87%E7%AB%A0/_image/2019-07-03/Xnip2019-07-03_13-45-04.jpg" alt=""></fancybox></p>
+<p><fancybox><img src="http://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E5%BA%94%E7%94%A8%E7%B1%BB%E6%96%87%E7%AB%A0/_image/2019-07-03/Xnip2019-07-03_13-45-04.jpg"></fancybox></p>
 <ol>
 <li>在 Spring Bean <code>Ready for Use</code>之前的起源当然是要调用构造器，所以 Constructor 毋庸置疑是创建 Spring Bean 的第一步</li>
 <li>通过 Setter 方法完成依赖注入，SDI （Setter Dependency Injection）</li>
 <li>依赖注入一旦结束，<code>BeanNameAware.setBeanName()</code> 会被调用，它设置该 bean 在 Bean Factory 中的名称</li>
-<li>接下来调用 <code>BeanClassLoaderAware.setBeanClassLoader()</code>，为 bean 实例提供类加载器，我们知道所有类都是要通过类加载器加载到上下文的，关于类的加载机制/双亲委派模型（大厂都爱问的面试题）内容会在后续给出来，让你透彻的了解</li>
+<li>接下来调用 <code>BeanClassLoaderAware.setBeanClassLoader() </code>，为 bean 实例提供类加载器，我们知道所有类都是要通过类加载器加载到上下文的，关于类的加载机制/双亲委派模型（大厂都爱问的面试题）内容会在后续给出来，让你透彻的了解</li>
 <li>然后 <code>BeanFactoryAware.setBeanFactory()</code> 会被调用为 bean 实例提供其所拥有的 factory</li>
 </ol>
 <p>关于 1、2 两点我要额外多说一些内容，请看下面代码：</p>
-<p><fancybox><img src="http://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E5%BA%94%E7%94%A8%E7%B1%BB%E6%96%87%E7%AB%A0/_image/2019-07/2019-07-09-19-17-44%402x.png" alt=""></fancybox></p>
+<p><fancybox><img src="http://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E5%BA%94%E7%94%A8%E7%B1%BB%E6%96%87%E7%AB%A0/_image/2019-07/2019-07-09-19-17-44%402x.png"></fancybox></p>
 <p>这里，我们尝试通过构造器访问自动注入的 field <code>Environment env</code>，当构造器被调用时，Spring Bean 还没被完全初始化，这就会导致 <code>NullPointerExceptions</code>；<br>我们变换一下方式：</p>
-<p><fancybox><img src="http://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E5%BA%94%E7%94%A8%E7%B1%BB%E6%96%87%E7%AB%A0/_image/2019-07/2019-07-09-19-19-37%402x.png" alt=""></fancybox></p>
+<p><fancybox><img src="http://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E5%BA%94%E7%94%A8%E7%B1%BB%E6%96%87%E7%AB%A0/_image/2019-07/2019-07-09-19-19-37%402x.png"></fancybox></p>
 <p>这种方式，Environment 实例被安全注入之后才调用 <code>@PostConstruct</code>标记的方法，这样就不会抛出 <code>NullPointerException</code> 了。</p>
 <p>这会回看周期图，有没有豁然开朗？</p>
 <blockquote>
@@ -510,7 +512,7 @@
 <p>后续会有一个章节专门说一说面试经常被问起的 <code>Spring 有几种依赖注入方式</code>的尴尬问题，请关注后续文章</p>
 <p>到这里终于可以说一说 Aware 了，且看</p>
 <h2 id="Aware"><a href="#Aware" class="headerlink" title="Aware"></a>Aware</h2><p>Aware 是 Spring 中的一个根接口，继承该接口的子接口有很多，比如周期图中的那三个 Aware，但是该接口没有任何方法，所以大家可以把它理解成一个标记接口：</p>
-<p><fancybox><img src="http://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E5%BA%94%E7%94%A8%E7%B1%BB%E6%96%87%E7%AB%A0/_image/2019-07/2019-07-09-19-20-29%402x.png" alt=""></fancybox></p>
+<p><fancybox><img src="http://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E5%BA%94%E7%94%A8%E7%B1%BB%E6%96%87%E7%AB%A0/_image/2019-07/2019-07-09-19-20-29%402x.png"></fancybox></p>
 <p>Aware 翻译过来可以理解为”察觉的；注意到的；感知的” ，XxxxAware 也就是对….感知的，没有 Aware 就是无感知的吗？对喽</p>
 <blockquote>
 <p>Spring 的依赖注入最大亮点就是所有的 Bean 对 Spring 容器的存在是没有意识的，拿 <a href="https://dayarch.top/p/spring-bean-lifecycle-creation.html">Spring Bean 生命周期之缘起</a> 文章中“小学生入少先队”为例子说明，小学生还是那个小学生，加入少先队还是加入共青团只不过规则不一样罢了<br>但是在实际项目中，我们不可避免的要用到 Spring 容器本身提供的资源（难免要有事情需要少先队组织的帮助），这时候要让 Bean 主动意识到 Spring 容器的存在，才能调用 Spring 所提供的资源，这就是 Spring Aware. 其实 Spring Aware 是 Spring 设计为框架内部使用的，若使用了，你的 Bean 将会和 Spring 框架耦合，所以自己不单独使用，但是在读框架源码时希望你不再模糊.</p>
@@ -549,14 +551,14 @@
 </tr>
 </tbody></table>
 <p>来看类关系图：</p>
-<p><fancybox><img src="http://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E5%BA%94%E7%94%A8%E7%B1%BB%E6%96%87%E7%AB%A0/_image/2019-07-03/Xnip2019-07-03_14-39-56.jpg" alt=""></fancybox></p>
+<p><fancybox><img src="http://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E5%BA%94%E7%94%A8%E7%B1%BB%E6%96%87%E7%AB%A0/_image/2019-07-03/Xnip2019-07-03_14-39-56.jpg"></fancybox></p>
 <p>当然不止以上这些 Aware， 通常使用 Spring Aware 的目的是为了让 Bean 获得 Spring 容器的服务。</p>
 <h2 id="代码示例"><a href="#代码示例" class="headerlink" title="代码示例"></a>代码示例</h2><h3 id="BeanNameAware"><a href="#BeanNameAware" class="headerlink" title="BeanNameAware"></a>BeanNameAware</h3><p>自定义 bean 实现 BeanNameAware</p>
-<p><fancybox><img src="http://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E5%BA%94%E7%94%A8%E7%B1%BB%E6%96%87%E7%AB%A0/_image/2019-07/2019-07-09-19-21-09%402x.png" alt=""></fancybox></p>
+<p><fancybox><img src="http://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E5%BA%94%E7%94%A8%E7%B1%BB%E6%96%87%E7%AB%A0/_image/2019-07/2019-07-09-19-21-09%402x.png"></fancybox></p>
 <p>注册 bean</p>
-<p><fancybox><img src="http://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E5%BA%94%E7%94%A8%E7%B1%BB%E6%96%87%E7%AB%A0/_image/2019-07/2019-07-09-19-21-51%402x.png" alt=""></fancybox></p>
+<p><fancybox><img src="http://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E5%BA%94%E7%94%A8%E7%B1%BB%E6%96%87%E7%AB%A0/_image/2019-07/2019-07-09-19-21-51%402x.png"></fancybox></p>
 <p>运行</p>
-<p><fancybox><img src="http://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E5%BA%94%E7%94%A8%E7%B1%BB%E6%96%87%E7%AB%A0/_image/2019-07/2019-07-09-19-22-45%402x.png" alt=""></fancybox></p>
+<p><fancybox><img src="http://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E5%BA%94%E7%94%A8%E7%B1%BB%E6%96%87%E7%AB%A0/_image/2019-07/2019-07-09-19-22-45%402x.png"></fancybox></p>
 <p>和预想一样，Bean Name 输出结果为 <code>myCustomBeanName</code>，如果移除掉 @Bean 注解的 name 属性， 输出结果为 <code>getMyBeanName</code></p>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>在大多数情况下，我们应该避免使用任何 Aware 接口，除非我们需要它们。实现这些接口会将代码耦合到Spring框架，但是希望看过本节内容之后阅读框架源码思维更加清晰</p>
 <h2 id="灵魂追问"><a href="#灵魂追问" class="headerlink" title="灵魂追问"></a>灵魂追问</h2><ol>
@@ -574,7 +576,7 @@
       <div class="personalweixin">
         <br><br>
         <blockquote>
-          <a href="https://mp.weixin.qq.com/s/G7BXuZh0Qh1-mE6ts4LJqQ" target="_blank" rel="noopener">加我微信</a>，咱们交流技术与思想，共同成长
+          <a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/G7BXuZh0Qh1-mE6ts4LJqQ">加我微信</a>，咱们交流技术与思想，共同成长
         </blockquote>
         <br>
 
@@ -612,9 +614,9 @@
   <div class="-mob-share-list share-body">
     
       
-        <a class="-mob-share-qq" title="QQ好友" rel="external nofollow noopener noreferrer"
+        <a class="-mob-share-qq" title="QQ好友" rel="external nofollow noopener noreferrer noopener"
           
-          href="http://connect.qq.com/widget/shareqq/index.html?url=https://dayarch.top/p/spring-aware.html&title=Spring Aware 到底是什么？ | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=通过如下前序两篇文章:
+          target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://dayarch.top/p/spring-aware.html&title=Spring Aware 到底是什么？ | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=通过如下前序两篇文章:
 
  1. Spring Bean 生命周期之缘起
  2. Spring Bean 生命周期之缘尽
@@ -634,9 +636,9 @@
       
     
       
-        <a class="-mob-share-qzone" title="QQ空间" rel="external nofollow noopener noreferrer"
+        <a class="-mob-share-qzone" title="QQ空间" rel="external nofollow noopener noreferrer noopener"
           
-          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://dayarch.top/p/spring-aware.html&title=Spring Aware 到底是什么？ | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=通过如下前序两篇文章:
+          target="_blank" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://dayarch.top/p/spring-aware.html&title=Spring Aware 到底是什么？ | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=通过如下前序两篇文章:
 
  1. Spring Bean 生命周期之缘起
  2. Spring Bean 生命周期之缘尽
@@ -656,9 +658,9 @@
       
     
       
-        <a class="-mob-share-weibo" title="微博" rel="external nofollow noopener noreferrer"
+        <a class="-mob-share-weibo" title="微博" rel="external nofollow noopener noreferrer noopener"
           
-          href="http://service.weibo.com/share/share.php?url=https://dayarch.top/p/spring-aware.html&title=Spring Aware 到底是什么？ | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=通过如下前序两篇文章:
+          target="_blank" href="http://service.weibo.com/share/share.php?url=https://dayarch.top/p/spring-aware.html&title=Spring Aware 到底是什么？ | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=通过如下前序两篇文章:
 
  1. Spring Bean 生命周期之缘起
  2. Spring Bean 生命周期之缘尽
@@ -752,7 +754,7 @@
 </header>
 
     <div class="content pure">
-      <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/spring-bean-lifecycle-destroy.html" title="Spring Bean生命周期之缘尽" rel="bookmark">Spring Bean生命周期之缘尽</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/spring-bean-lifecycle-creation.html" title="Spring Bean生命周期之缘起" rel="bookmark">Spring Bean生命周期之缘起</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/spring-boot-execute-on-startup.html" title="在Spring Boot启动时执行代码的几种方法" rel="bookmark">在Spring Boot启动时执行代码的几种方法</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/spring-boot-condition-annotation.html" title="@Conditional注解，Spring Boot 的灵活配置" rel="bookmark">@Conditional注解，Spring Boot 的灵活配置</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/spring-boot-messageconverter.html" title="HttpMessageConverter转换原理解析" rel="bookmark">HttpMessageConverter转换原理解析</a></h3></div></li></ul>
+      <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/spring-bean-lifecycle-destroy.html" title="Spring Bean生命周期之缘尽" rel="bookmark">Spring Bean生命周期之缘尽</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/spring-bean-lifecycle-creation.html" title="Spring Bean生命周期之缘起" rel="bookmark">Spring Bean生命周期之缘起</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/spring-boot-execute-on-startup.html" title="在Spring Boot启动时执行代码的几种方法" rel="bookmark">在Spring Boot启动时执行代码的几种方法</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/spring-boot-condition-annotation.html" title="@Conditional注解，Spring Boot 的灵活配置" rel="bookmark">@Conditional注解，Spring Boot 的灵活配置</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/spring-boot-starter-custom.html" title="Spring Boot 自定义starter 全面教程" rel="bookmark">Spring Boot 自定义starter 全面教程</a></h3></div></li></ul>
     </div>
   </section>
 
@@ -960,7 +962,7 @@
 </header>
 
     <div class='content pure'>
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Aware"><span class="toc-text">Aware</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#代码示例"><span class="toc-text">代码示例</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#BeanNameAware"><span class="toc-text">BeanNameAware</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-text">总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#灵魂追问"><span class="toc-text">灵魂追问</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Demo代码"><span class="toc-text">Demo代码</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Aware"><span class="toc-text">Aware</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E7%A4%BA%E4%BE%8B"><span class="toc-text">代码示例</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#BeanNameAware"><span class="toc-text">BeanNameAware</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-text">总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%81%B5%E9%AD%82%E8%BF%BD%E9%97%AE"><span class="toc-text">灵魂追问</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Demo%E4%BB%A3%E7%A0%81"><span class="toc-text">Demo代码</span></a></li></ol>
     </div>
   </section>
 
@@ -1035,7 +1037,7 @@
   &nbsp;&nbsp;|&nbsp;&nbsp;  
   
     &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-        class="white-color">264.1k</span>&nbsp;字
+        class="white-color">267.4k</span>&nbsp;字
     
 
   &nbsp;&nbsp;|&nbsp;&nbsp;  
@@ -1090,7 +1092,7 @@
     
     。
   </div>
-  <div><p>博客内容遵循 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
+  <div><p>博客内容遵循 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
 </div>
   <!-- <div class="github-badge">
       <a style="color: #fff" rel="license" href="https://hexo.io/" target="_blank" title="由 Hexo 强力驱动">
@@ -1198,10 +1200,14 @@
 
 
 
-  <script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/app.js"></script>
+  
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/app.js"></script>
 
 
-  <script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/search.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/search.js"></script>
+
 
 
 

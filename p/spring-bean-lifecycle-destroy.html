@@ -13,7 +13,7 @@
   
 
   
-  <link rel="alternate" href="/atom.xml" title="日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享">
+  <link rel="alternate" href="/atom.xml" title="日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享" type="application/atom+xml">
   
 
   <meta name="HandheldFriendly" content="True" />
@@ -35,7 +35,9 @@
   
 
   
-    <link rel="stylesheet" href="/style.css">
+    
+<link rel="stylesheet" href="/style.css">
+
   
 
   <script>
@@ -85,7 +87,7 @@
         daovoice('update');
         </script>
     
-</head>
+<meta name="generator" content="Hexo 5.4.0"></head>
 
 <body>
   
@@ -500,21 +502,21 @@
 <blockquote>
 <p>正所谓，天对地，雨对风； @PostConstruct 对 @PreDestroy；InitializingBean.afterPropertiesSet() 对 DisposableBean.destroy()； init-method 对 destroy-method；雷隐隐，雾蒙蒙；山花对海树，赤日对苍穹；平仄平仄平平仄，仄平仄平仄仄平，仄仄平……</p>
 </blockquote>
-<p><fancybox><img src="http://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E5%BA%94%E7%94%A8%E7%B1%BB%E6%96%87%E7%AB%A0/_image/2019-07-02/%E5%B2%B3%E4%BA%91%E9%B9%8F1.gif" alt=""> </fancybox></p>
+<p><fancybox><img src="http://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E5%BA%94%E7%94%A8%E7%B1%BB%E6%96%87%E7%AB%A0/_image/2019-07-02/%E5%B2%B3%E4%BA%91%E9%B9%8F1.gif"> </fancybox></p>
 <p>感觉讲到这没必要讲下去了，一切清晰明了，但我还有话要说</p>
-<p><fancybox><img src="http://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E5%BA%94%E7%94%A8%E7%B1%BB%E6%96%87%E7%AB%A0/_image/2019-07-02/6bad7ce4875a2946.gif" alt=""> </fancybox></p>
+<p><fancybox><img src="http://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E5%BA%94%E7%94%A8%E7%B1%BB%E6%96%87%E7%AB%A0/_image/2019-07-02/6bad7ce4875a2946.gif"> </fancybox></p>
 <p>当 Spring Ioc 容器要移除 bean 时，销毁相关回调方法将会被执行，这么做的目的时释放被 bean 持有的资源，或者去执行一些终极任务. 当 ApplicationContext 调用 registerShutdownHook 方法时，这些销毁方法就会被触发，但一般正常的业务中很少会用到这些方法</p>
-<p><fancybox><img src="http://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E5%BA%94%E7%94%A8%E7%B1%BB%E6%96%87%E7%AB%A0/_image/2019-07/2019-07-11-16-43-10%402x.png" alt=""></fancybox></p>
+<p><fancybox><img src="http://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E5%BA%94%E7%94%A8%E7%B1%BB%E6%96%87%E7%AB%A0/_image/2019-07/2019-07-11-16-43-10%402x.png"></fancybox></p>
 <p>接下来具体的展示一下三种方法的使用方式</p>
 <h2 id="三种销毁-Spring-Bean-的方式"><a href="#三种销毁-Spring-Bean-的方式" class="headerlink" title="三种销毁 Spring Bean 的方式"></a>三种销毁 Spring Bean 的方式</h2><h3 id="DisposableBean"><a href="#DisposableBean" class="headerlink" title="DisposableBean"></a>DisposableBean</h3><p>Spring 为我们提供了 DisposableBean 接口</p>
-<p><fancybox><img src="http://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E5%BA%94%E7%94%A8%E7%B1%BB%E6%96%87%E7%AB%A0/_image/2019-07/2019-07-11-16-43-30%402x.png" alt=""></fancybox></p>
+<p><fancybox><img src="http://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E5%BA%94%E7%94%A8%E7%B1%BB%E6%96%87%E7%AB%A0/_image/2019-07/2019-07-11-16-43-30%402x.png"></fancybox></p>
 <p>我们可以通过实现 <code>DisposableBean</code> 接口，在其唯一方法 <code>destroy</code> 内完成 bean 销毁的工作，但是 Spring Framework 官方并不建议我们通过这种方法来销毁 bean，这同样是一种强耦合的方式，我们看到框架层面才会用到这个方法。</p>
 <h3 id="PreDestroy"><a href="#PreDestroy" class="headerlink" title="@PreDestroy"></a>@PreDestroy</h3><p>这种方式是 Spring 非常提倡的一种方式，我们通常将其标记在方法上即可，通常习惯将这个方法起名为 <code>destory()</code></p>
-<p><fancybox><img src="http://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E5%BA%94%E7%94%A8%E7%B1%BB%E6%96%87%E7%AB%A0/_image/2019-07/2019-07-11-16-43-52%402x.png" alt=""></fancybox></p>
+<p><fancybox><img src="http://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E5%BA%94%E7%94%A8%E7%B1%BB%E6%96%87%E7%AB%A0/_image/2019-07/2019-07-11-16-43-52%402x.png"></fancybox></p>
 <h3 id="destroy-method"><a href="#destroy-method" class="headerlink" title="destroy-method"></a>destroy-method</h3><p>同样是两种方式，第一种方式：</p>
-<p><fancybox><img src="http://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E5%BA%94%E7%94%A8%E7%B1%BB%E6%96%87%E7%AB%A0/_image/2019-07/2019-07-11-16-44-04%402x.png" alt=""></fancybox></p>
+<p><fancybox><img src="http://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E5%BA%94%E7%94%A8%E7%B1%BB%E6%96%87%E7%AB%A0/_image/2019-07/2019-07-11-16-44-04%402x.png"></fancybox></p>
 <p>第二种方式</p>
-<p><fancybox><img src="http://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E5%BA%94%E7%94%A8%E7%B1%BB%E6%96%87%E7%AB%A0/_image/2019-07/2019-07-11-16-44-15%402x.png" alt=""></fancybox></p>
+<p><fancybox><img src="http://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E5%BA%94%E7%94%A8%E7%B1%BB%E6%96%87%E7%AB%A0/_image/2019-07/2019-07-11-16-44-15%402x.png"></fancybox></p>
 <p>以上三种 Bean 的销毁方式也是可以组合使用的，那么组合在一起的调用顺序是什么呢？</p>
 <ol>
 <li>首先 @PreDestroy 会被调用</li>
@@ -522,13 +524,13 @@
 <li>最后调用通过 XML 配置的 destroy-method 方法或通过设置 @Bean 注解 设置 destroyMethod 属性的方法</li>
 </ol>
 <p>用图示来说明一下调用顺序</p>
-<p><fancybox><img src="http://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E5%BA%94%E7%94%A8%E7%B1%BB%E6%96%87%E7%AB%A0/_image/2019-07-02/Xnip2019-07-02_16-00-23.jpg" alt=""> </fancybox></p>
+<p><fancybox><img src="http://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E5%BA%94%E7%94%A8%E7%B1%BB%E6%96%87%E7%AB%A0/_image/2019-07-02/Xnip2019-07-02_16-00-23.jpg"> </fancybox></p>
 <p>这个调用顺序也不难记忆</p>
 <blockquote>
 <p>PreDestroy <code>(P)</code>，destroy <code>(D)</code>，destroy-method <code>(D)</code> —&gt; <code>PDD （那个3亿人都在 pin 的那个 APP 名称，目前 3 亿人中没有我）</code></p>
 </blockquote>
 <p>再来看看 Spring Bean 生命周期图，我们已经点亮了核心部分：</p>
-<p><fancybox><img src="http://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E5%BA%94%E7%94%A8%E7%B1%BB%E6%96%87%E7%AB%A0/_image/2019-07-02/Xnip2019-07-02_16-01-53.jpg" alt=""> </fancybox></p>
+<p><fancybox><img src="http://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E5%BA%94%E7%94%A8%E7%B1%BB%E6%96%87%E7%AB%A0/_image/2019-07-02/Xnip2019-07-02_16-01-53.jpg"> </fancybox></p>
 <p>我们要注意，在销毁的过程并没有类似 BeanPostProcess 那中切面的思想，这里要注意到区别。</p>
 <h2 id="灵魂追问"><a href="#灵魂追问" class="headerlink" title="灵魂追问"></a>灵魂追问</h2><ol>
 <li>在阅读框架源码时，哪些地方用到了 bean 的销毁方法？</li>
@@ -539,12 +541,12 @@
       <!-- <div class="tuijian">
         <br><br>
         📚相关文章
-        <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/spring-bean-lifecycle-creation.html" title="Spring Bean生命周期之缘起" rel="bookmark">Spring Bean生命周期之缘起</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/spring-boot-execute-on-startup.html" title="在Spring Boot启动时执行代码的几种方法" rel="bookmark">在Spring Boot启动时执行代码的几种方法</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/spring-aware.html" title="Spring Aware 到底是什么？" rel="bookmark">Spring Aware 到底是什么？</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/spring-boot-condition-annotation.html" title="@Conditional注解，Spring Boot 的灵活配置" rel="bookmark">@Conditional注解，Spring Boot 的灵活配置</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/easyexcel-read.html" title="EasyExcel读取Excel实际应用" rel="bookmark">EasyExcel读取Excel实际应用</a></h3></div></li></ul>
+        <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/spring-bean-lifecycle-creation.html" title="Spring Bean生命周期之缘起" rel="bookmark">Spring Bean生命周期之缘起</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/spring-boot-execute-on-startup.html" title="在Spring Boot启动时执行代码的几种方法" rel="bookmark">在Spring Boot启动时执行代码的几种方法</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/spring-aware.html" title="Spring Aware 到底是什么？" rel="bookmark">Spring Aware 到底是什么？</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/spring-boot-condition-annotation.html" title="@Conditional注解，Spring Boot 的灵活配置" rel="bookmark">@Conditional注解，Spring Boot 的灵活配置</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/spring-boot-starter-custom.html" title="Spring Boot 自定义starter 全面教程" rel="bookmark">Spring Boot 自定义starter 全面教程</a></h3></div></li></ul>
       </div> -->
       <div class="personalweixin">
         <br><br>
         <blockquote>
-          <a href="https://mp.weixin.qq.com/s/G7BXuZh0Qh1-mE6ts4LJqQ" target="_blank" rel="noopener">加我微信</a>，咱们交流技术与思想，共同成长
+          <a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/G7BXuZh0Qh1-mE6ts4LJqQ">加我微信</a>，咱们交流技术与思想，共同成长
         </blockquote>
         <br>
 
@@ -582,9 +584,9 @@
   <div class="-mob-share-list share-body">
     
       
-        <a class="-mob-share-qq" title="QQ好友" rel="external nofollow noopener noreferrer"
+        <a class="-mob-share-qq" title="QQ好友" rel="external nofollow noopener noreferrer noopener"
           
-          href="http://connect.qq.com/widget/shareqq/index.html?url=https://dayarch.top/p/spring-bean-lifecycle-destroy.html&title=Spring Bean生命周期之缘尽 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=上一篇文章 Spring Bean 生命周期之缘起 说明了我是谁？ 和 我从哪里来? 的两大哲学问题，今天我们要讨论一下终极哲学我要到哪里去？
+          target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://dayarch.top/p/spring-bean-lifecycle-destroy.html&title=Spring Bean生命周期之缘尽 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=上一篇文章 Spring Bean 生命周期之缘起 说明了我是谁？ 和 我从哪里来? 的两大哲学问题，今天我们要讨论一下终极哲学我要到哪里去？
 
  初始化 Spring Bean 有三种方式：
 
@@ -608,9 +610,9 @@
       
     
       
-        <a class="-mob-share-qzone" title="QQ空间" rel="external nofollow noopener noreferrer"
+        <a class="-mob-share-qzone" title="QQ空间" rel="external nofollow noopener noreferrer noopener"
           
-          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://dayarch.top/p/spring-bean-lifecycle-destroy.html&title=Spring Bean生命周期之缘尽 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=上一篇文章 Spring Bean 生命周期之缘起 说明了我是谁？ 和 我从哪里来? 的两大哲学问题，今天我们要讨论一下终极哲学我要到哪里去？
+          target="_blank" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://dayarch.top/p/spring-bean-lifecycle-destroy.html&title=Spring Bean生命周期之缘尽 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=上一篇文章 Spring Bean 生命周期之缘起 说明了我是谁？ 和 我从哪里来? 的两大哲学问题，今天我们要讨论一下终极哲学我要到哪里去？
 
  初始化 Spring Bean 有三种方式：
 
@@ -634,9 +636,9 @@
       
     
       
-        <a class="-mob-share-weibo" title="微博" rel="external nofollow noopener noreferrer"
+        <a class="-mob-share-weibo" title="微博" rel="external nofollow noopener noreferrer noopener"
           
-          href="http://service.weibo.com/share/share.php?url=https://dayarch.top/p/spring-bean-lifecycle-destroy.html&title=Spring Bean生命周期之缘尽 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=上一篇文章 Spring Bean 生命周期之缘起 说明了我是谁？ 和 我从哪里来? 的两大哲学问题，今天我们要讨论一下终极哲学我要到哪里去？
+          target="_blank" href="http://service.weibo.com/share/share.php?url=https://dayarch.top/p/spring-bean-lifecycle-destroy.html&title=Spring Bean生命周期之缘尽 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=上一篇文章 Spring Bean 生命周期之缘起 说明了我是谁？ 和 我从哪里来? 的两大哲学问题，今天我们要讨论一下终极哲学我要到哪里去？
 
  初始化 Spring Bean 有三种方式：
 
@@ -734,7 +736,7 @@
 </header>
 
     <div class="content pure">
-      <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/spring-bean-lifecycle-creation.html" title="Spring Bean生命周期之缘起" rel="bookmark">Spring Bean生命周期之缘起</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/spring-boot-execute-on-startup.html" title="在Spring Boot启动时执行代码的几种方法" rel="bookmark">在Spring Boot启动时执行代码的几种方法</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/spring-aware.html" title="Spring Aware 到底是什么？" rel="bookmark">Spring Aware 到底是什么？</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/spring-boot-condition-annotation.html" title="@Conditional注解，Spring Boot 的灵活配置" rel="bookmark">@Conditional注解，Spring Boot 的灵活配置</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/easyexcel-read.html" title="EasyExcel读取Excel实际应用" rel="bookmark">EasyExcel读取Excel实际应用</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/spring-boot-messageconverter.html" title="HttpMessageConverter转换原理解析" rel="bookmark">HttpMessageConverter转换原理解析</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/spring-boot-configurationProperties-usage.html" title="Spring Boot @ConfigurationProperties 注解最强使用详解" rel="bookmark">Spring Boot @ConfigurationProperties 注解最强使用详解</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/spring-boot-starter-custom.html" title="Spring Boot 自定义starter 全面教程" rel="bookmark">Spring Boot 自定义starter 全面教程</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/shiro-in-practice.html" title="Shiro—小而美的安全框架" rel="bookmark">Shiro—小而美的安全框架</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/springmvc-init-binder.html" title="Spring MVC 之 @initbinder" rel="bookmark">Spring MVC 之 @initbinder</a></h3></div></li></ul>
+      <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/spring-bean-lifecycle-creation.html" title="Spring Bean生命周期之缘起" rel="bookmark">Spring Bean生命周期之缘起</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/spring-boot-execute-on-startup.html" title="在Spring Boot启动时执行代码的几种方法" rel="bookmark">在Spring Boot启动时执行代码的几种方法</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/spring-aware.html" title="Spring Aware 到底是什么？" rel="bookmark">Spring Aware 到底是什么？</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/spring-boot-condition-annotation.html" title="@Conditional注解，Spring Boot 的灵活配置" rel="bookmark">@Conditional注解，Spring Boot 的灵活配置</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/spring-boot-starter-custom.html" title="Spring Boot 自定义starter 全面教程" rel="bookmark">Spring Boot 自定义starter 全面教程</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/spring-data-binding-mechanism.html" title="Spring 数据绑定剖析" rel="bookmark">Spring 数据绑定剖析</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/spring-boot-json-return-non-null.html" title="Springboot Json格式数据不返回null值属性" rel="bookmark">Springboot Json格式数据不返回null值属性</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/docker-deploy-spring-boot.html" title="使用 Docker 部署 Spring Boot" rel="bookmark">使用 Docker 部署 Spring Boot</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/springmvc-response-status.html" title="Spring MVC 之 @ResponseStatus" rel="bookmark">Spring MVC 之 @ResponseStatus</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/springmvc-init-binder.html" title="Spring MVC 之 @initbinder" rel="bookmark">Spring MVC 之 @initbinder</a></h3></div></li></ul>
     </div>
   </section>
 
@@ -942,7 +944,7 @@
 </header>
 
     <div class='content pure'>
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#三种销毁-Spring-Bean-的方式"><span class="toc-text">三种销毁 Spring Bean 的方式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#DisposableBean"><span class="toc-text">DisposableBean</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PreDestroy"><span class="toc-text">@PreDestroy</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#destroy-method"><span class="toc-text">destroy-method</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#灵魂追问"><span class="toc-text">灵魂追问</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E7%A7%8D%E9%94%80%E6%AF%81-Spring-Bean-%E7%9A%84%E6%96%B9%E5%BC%8F"><span class="toc-text">三种销毁 Spring Bean 的方式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#DisposableBean"><span class="toc-text">DisposableBean</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PreDestroy"><span class="toc-text">@PreDestroy</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#destroy-method"><span class="toc-text">destroy-method</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%81%B5%E9%AD%82%E8%BF%BD%E9%97%AE"><span class="toc-text">灵魂追问</span></a></li></ol>
     </div>
   </section>
 
@@ -1017,7 +1019,7 @@
   &nbsp;&nbsp;|&nbsp;&nbsp;  
   
     &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-        class="white-color">264.1k</span>&nbsp;字
+        class="white-color">267.4k</span>&nbsp;字
     
 
   &nbsp;&nbsp;|&nbsp;&nbsp;  
@@ -1072,7 +1074,7 @@
     
     。
   </div>
-  <div><p>博客内容遵循 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
+  <div><p>博客内容遵循 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
 </div>
   <!-- <div class="github-badge">
       <a style="color: #fff" rel="license" href="https://hexo.io/" target="_blank" title="由 Hexo 强力驱动">
@@ -1180,10 +1182,14 @@
 
 
 
-  <script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/app.js"></script>
+  
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/app.js"></script>
 
 
-  <script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/search.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/search.js"></script>
+
 
 
 

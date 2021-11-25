@@ -13,7 +13,7 @@
   
 
   
-  <link rel="alternate" href="/atom.xml" title="日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享">
+  <link rel="alternate" href="/atom.xml" title="日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享" type="application/atom+xml">
   
 
   <meta name="HandheldFriendly" content="True" />
@@ -35,7 +35,9 @@
   
 
   
-    <link rel="stylesheet" href="/style.css">
+    
+<link rel="stylesheet" href="/style.css">
+
   
 
   <script>
@@ -85,7 +87,7 @@
         daovoice('update');
         </script>
     
-</head>
+<meta name="generator" content="Hexo 5.4.0"></head>
 
 <body>
   
@@ -484,9 +486,9 @@
 
     <section class="article typo">
       <div class="article-entry" itemprop="articleBody">
-        <p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200315160153.png" alt=""></fancybox></p>
+        <p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200315160153.png"></fancybox></p>
 <h2 id="并发编程为什么会有等待通知机制"><a href="#并发编程为什么会有等待通知机制" class="headerlink" title="并发编程为什么会有等待通知机制"></a>并发编程为什么会有等待通知机制</h2><p>上一篇文章说明了 <a href="https://dayarch.top/p/java-concurrency-dead-lock.html">Java并发死锁解决思路</a> ， 解决死锁的思路之一就是 <code>破坏请求和保持条件</code>, 所有柜员都要通过<strong>唯一</strong>的账本管理员一次性拿到所有转账业务需要的账本，就像下面这样： </p>
-<p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgaccountmananger.png" alt=""></fancybox></p>
+<p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgaccountmananger.png"></fancybox></p>
 <p>没有等待/通知机制之前，所有柜员都通过死循环的方式不断向账本管理员申请所有账本，程序的体现就是这样：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span>(!accountBookManager.getAllRequiredAccountBook(<span class="keyword">this</span>, target)) </span><br><span class="line">；</span><br></pre></td></tr></table></figure>
 
@@ -494,7 +496,7 @@
 
 <p>假如账本管理员是年轻小伙，腿脚利落（即执行 getAllRequiredAccountBook方法耗时短），并且多个柜员转账的业务冲突量不大，这个方案简单粗暴且有效，柜员只需要尝试几次就可以成功（即通过少量的循环可以实现）</p>
 <p>过了好多年，年轻的账本管理员变成了年迈的老人，行动迟缓（即执行 getAllRequiredAccountBook 耗时长），同时，多个柜员转账的业务冲突量也变大，之前几十次循环能做到的，现在可能就要申请成千上百，甚至上万次才能完成一次转账</p>
-<p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200311103256.png" alt=""></fancybox></p>
+<p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200311103256.png"></fancybox></p>
 <p> <strong>人工无限申请浪费口舌， 程序无限申请浪费CPU。聪明的人就想到了 <code>等待/通知</code> 机制</strong></p>
 <h2 id="等待-通知机制"><a href="#等待-通知机制" class="headerlink" title="等待/通知机制"></a>等待/通知机制</h2><p>无限循环实在太浪费CPU，而理想情况应该是这样：</p>
 <ul>
@@ -561,20 +563,20 @@
 <li>一个锁对应一个【入口等待队列】，不同锁的入口等待队列没任何关系，说白了他们就不存在竞争关系。你想呀，不同患者进入眼科和耳鼻喉科看大夫一点冲突都没有</li>
 <li><code>wait(), notify()/notifyAll()</code>  要在 synchronized 内部被使用，并且，如果锁的对象是this，就要 <code>this.wait()，this.notify()/this.notifyAll()</code> , 否则JVM就会抛出 <code>java.lang.IllegalMonitorStateException</code> 的。你想呀，等待/通知机制就是从【竞争】环境逐渐衍生出来的策略，不在锁竞争内部使用或等待/通知错了对象， 自然是不符合常理的</li>
 </ol>
-<p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200312143352.png" alt=""></fancybox></p>
+<p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200312143352.png"></fancybox></p>
 <p>有了上面知识的铺垫，要想将无限循环策略改为等待通知策略，你还需要问自己四个问题：</p>
-<h3 id="灵魂-4-问"><a href="#灵魂-4-问" class="headerlink" title="灵魂 4 问"></a>灵魂 4 问</h3><p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200312144436.png" alt=""></fancybox></p>
+<h3 id="灵魂-4-问"><a href="#灵魂-4-问" class="headerlink" title="灵魂 4 问"></a>灵魂 4 问</h3><p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200312144436.png"></fancybox></p>
 <p>我们拿钱庄账本管理员的例子依依做以上回答：</p>
-<p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200315160059.png" alt=""></fancybox></p>
+<p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200315160059.png"></fancybox></p>
 <p>我们优化钱庄转账的程序：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AccountBookManager</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	List&lt;Object&gt; accounts = <span class="keyword">new</span> ArrayList&lt;&gt;(<span class="number">2</span>);</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">synchronized</span> <span class="keyword">boolean</span> <span class="title">getAllRequiredAccountBook</span><span class="params">( Object from, Object to)</span></span>&#123;</span><br><span class="line">		<span class="keyword">if</span>(accounts.contains(from) || accounts.contains(to))&#123;</span><br><span class="line">			<span class="keyword">try</span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.wait();</span><br><span class="line">      &#125;<span class="keyword">catch</span>(Exception e)&#123;</span><br><span class="line">        </span><br><span class="line">      &#125;</span><br><span class="line">		&#125; <span class="keyword">else</span>&#123;</span><br><span class="line">			accounts.add(from);</span><br><span class="line">			accounts.add(to);</span><br><span class="line"></span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">// 归还资源</span></span><br><span class="line">	<span class="function"><span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">releaseObtainedAccountBook</span><span class="params">(Object from, Object to)</span></span>&#123;</span><br><span class="line">		accounts.remove(from);</span><br><span class="line">		accounts.remove(to);</span><br><span class="line">    notify();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
 
 <p>就这样【看】 【似】 【完】 【美】的解决了，其实上面的程序有两个大坑：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imge18d20c94006dfe0-3cdd6892e1ea4e8e-3668d8ad5f1cfd4ddcc222610ebc14e7.gif" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imge18d20c94006dfe0-3cdd6892e1ea4e8e-3668d8ad5f1cfd4ddcc222610ebc14e7.gif"></p>
 <h3 id="坑一"><a href="#坑一" class="headerlink" title="坑一"></a>坑一</h3><p>在上面 <code>this.wait()</code> 处，使用了 if 条件判断，会出现天大的麻烦，来看下图（从下往上看）：</p>
-<p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200312151758.png" alt=""></fancybox></p>
+<p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200312151758.png"></fancybox></p>
 <p>notify 唤醒的那一刻，线程<strong>【曾经/曾经/曾经】</strong>要求的条件得到了满足，从这一刻开始，到去条件等队列中唤醒线程，再到再次尝试获取锁是<code>有时间差</code>的，当再次获取到锁时，线程曾经要求的条件是<strong>不一定</strong>满足，所以需要<strong>重新</strong>进行条件判断，所以需要将 <code>if</code> 判断改成 <code>while</code> 判断</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">synchronized</span> <span class="keyword">boolean</span> <span class="title">getAllRequiredAccountBook</span><span class="params">( Object from, Object to)</span></span>&#123;</span><br><span class="line">		<span class="keyword">while</span>(accounts.contains(from) || accounts.contains(to))&#123;</span><br><span class="line">			<span class="keyword">try</span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.wait();</span><br><span class="line">      &#125;<span class="keyword">catch</span>(Exception e)&#123;</span><br><span class="line">        </span><br><span class="line">      &#125;</span><br><span class="line">		&#125; <span class="keyword">else</span>&#123;</span><br><span class="line">			accounts.add(from);</span><br><span class="line">			accounts.add(to);</span><br><span class="line"></span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">		&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -592,7 +594,7 @@
 <p>从哪里跌倒就从哪里爬起来；在哪里wait，就从wait那里继续向后执行</p>
 </blockquote>
 <p>所以，这也就成了使用wait()的标准范式</p>
-<p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200312154011.png" alt=""></fancybox></p>
+<p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200312154011.png"></fancybox></p>
 <p>至于坑二，是线程归还所使用的账户之后使用 notify 而不是 notifyAll 进行通知，由于坑很大，需要一些知识铺垫来说明</p>
 <h2 id="为什么说尽量使用-notifyAll"><a href="#为什么说尽量使用-notifyAll" class="headerlink" title="为什么说尽量使用 notifyAll()"></a>为什么说尽量使用 notifyAll()</h2><p>notify() 和 notifyAll() 到底啥区别？</p>
 <p><code>notify()</code> 函数</p>
@@ -605,15 +607,15 @@
 </blockquote>
 <p>看个非常简单的程序例子吧</p>
 <p><strong>示例程序一</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Slf</span>4j</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">NotifyTest</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">volatile</span> Object resourceA = <span class="keyword">new</span> Object();</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line">		Thread threadA = <span class="keyword">new</span> Thread(() -&gt; &#123;</span><br><span class="line">				<span class="keyword">synchronized</span> (resourceA)&#123;</span><br><span class="line">					log.info(<span class="string">"threadA get resourceA lock"</span>);</span><br><span class="line"></span><br><span class="line">					<span class="keyword">try</span>&#123;</span><br><span class="line">						log.info(<span class="string">"threadA begins to wait"</span>);</span><br><span class="line">						resourceA.wait();</span><br><span class="line">						log.info(<span class="string">"threadA ends wait"</span>);</span><br><span class="line">					&#125;<span class="keyword">catch</span> (InterruptedException e)&#123;</span><br><span class="line">						log.error(e.getMessage());</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line">		&#125;);</span><br><span class="line"></span><br><span class="line">		Thread threadB = <span class="keyword">new</span> Thread(() -&gt; &#123;</span><br><span class="line">			<span class="keyword">synchronized</span> (resourceA)&#123;</span><br><span class="line">				log.info(<span class="string">"threadB get resourceA lock"</span>);</span><br><span class="line"></span><br><span class="line">				<span class="keyword">try</span>&#123;</span><br><span class="line">					log.info(<span class="string">"threadB begins to wait"</span>);</span><br><span class="line">					resourceA.wait();</span><br><span class="line">					log.info(<span class="string">"threadB ends wait"</span>);</span><br><span class="line">				&#125;<span class="keyword">catch</span> (InterruptedException e)&#123;</span><br><span class="line">					log.error(e.getMessage());</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;);</span><br><span class="line"></span><br><span class="line">		Thread threadC = <span class="keyword">new</span> Thread(() -&gt; &#123;</span><br><span class="line">			<span class="keyword">synchronized</span> (resourceA)&#123;</span><br><span class="line">				log.info(<span class="string">"threadC begin to notify"</span>);</span><br><span class="line">				resourceA.notify();</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;);</span><br><span class="line"></span><br><span class="line">		threadA.start();</span><br><span class="line">		threadB.start();</span><br><span class="line"></span><br><span class="line">		Thread.sleep(<span class="number">1000</span>);</span><br><span class="line"></span><br><span class="line">		threadC.start();</span><br><span class="line"></span><br><span class="line">		threadA.join();</span><br><span class="line">		threadB.join();</span><br><span class="line">		threadC.join();</span><br><span class="line"></span><br><span class="line">		log.info(<span class="string">"main thread over now"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Slf4j</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">NotifyTest</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">volatile</span> Object resourceA = <span class="keyword">new</span> Object();</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line">		Thread threadA = <span class="keyword">new</span> Thread(() -&gt; &#123;</span><br><span class="line">				<span class="keyword">synchronized</span> (resourceA)&#123;</span><br><span class="line">					log.info(<span class="string">&quot;threadA get resourceA lock&quot;</span>);</span><br><span class="line"></span><br><span class="line">					<span class="keyword">try</span>&#123;</span><br><span class="line">						log.info(<span class="string">&quot;threadA begins to wait&quot;</span>);</span><br><span class="line">						resourceA.wait();</span><br><span class="line">						log.info(<span class="string">&quot;threadA ends wait&quot;</span>);</span><br><span class="line">					&#125;<span class="keyword">catch</span> (InterruptedException e)&#123;</span><br><span class="line">						log.error(e.getMessage());</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line">		&#125;);</span><br><span class="line"></span><br><span class="line">		Thread threadB = <span class="keyword">new</span> Thread(() -&gt; &#123;</span><br><span class="line">			<span class="keyword">synchronized</span> (resourceA)&#123;</span><br><span class="line">				log.info(<span class="string">&quot;threadB get resourceA lock&quot;</span>);</span><br><span class="line"></span><br><span class="line">				<span class="keyword">try</span>&#123;</span><br><span class="line">					log.info(<span class="string">&quot;threadB begins to wait&quot;</span>);</span><br><span class="line">					resourceA.wait();</span><br><span class="line">					log.info(<span class="string">&quot;threadB ends wait&quot;</span>);</span><br><span class="line">				&#125;<span class="keyword">catch</span> (InterruptedException e)&#123;</span><br><span class="line">					log.error(e.getMessage());</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;);</span><br><span class="line"></span><br><span class="line">		Thread threadC = <span class="keyword">new</span> Thread(() -&gt; &#123;</span><br><span class="line">			<span class="keyword">synchronized</span> (resourceA)&#123;</span><br><span class="line">				log.info(<span class="string">&quot;threadC begin to notify&quot;</span>);</span><br><span class="line">				resourceA.notify();</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;);</span><br><span class="line"></span><br><span class="line">		threadA.start();</span><br><span class="line">		threadB.start();</span><br><span class="line"></span><br><span class="line">		Thread.sleep(<span class="number">1000</span>);</span><br><span class="line"></span><br><span class="line">		threadC.start();</span><br><span class="line"></span><br><span class="line">		threadA.join();</span><br><span class="line">		threadB.join();</span><br><span class="line">		threadC.join();</span><br><span class="line"></span><br><span class="line">		log.info(<span class="string">&quot;main thread over now&quot;</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>来看运行结果</p>
-<p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200312204947.png" alt=""></fancybox></p>
+<p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200312204947.png"></fancybox></p>
 <p>程序中我们使用notify()随机通知resourceA的等待队列的一个线程，threadA被唤醒，threadB却没有打印出 <code>threadB ends wait</code> 这句话，遗憾的死掉了</p>
 <p>将 notify() 换成 notifyAll() 的结果想必你已经知道了</p>
-<p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200312205605.png" alt=""></fancybox></p>
+<p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200312205605.png"></fancybox></p>
 <p>使用 notifyAll() 确实不会遗落等待队列中的线程，但也产生了比较强烈的竞争，如果notify() 设计的本身就是 bug，那么这个函数应该早就从 JDK 中移除了，它随机通知一个线程的形式必定是有用武之地的</p>
-<h2 id="什么时候可以使用-notify"><a href="#什么时候可以使用-notify" class="headerlink" title="什么时候可以使用 notify()"></a>什么时候可以使用 notify()</h2><p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200312210340.png" alt=""></fancybox></p>
+<h2 id="什么时候可以使用-notify"><a href="#什么时候可以使用-notify" class="headerlink" title="什么时候可以使用 notify()"></a>什么时候可以使用 notify()</h2><p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200312210340.png"></fancybox></p>
 <p>notify() 的典型的应用就是线程池（按照上面的三个条件你自问自答验证一下是这样吗？）</p>
 <p>这里我们拿一个 JUC 下的类来看看 notify() 的用处</p>
 <blockquote>
@@ -624,7 +626,7 @@
 </ul>
 </blockquote>
 <p>在IDE中，打开 <code>ArrayBlockingQueue.java</code> </p>
-<p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200315101013.png" alt=""></fancybox></p>
+<p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200315101013.png"></fancybox></p>
 <p>所有的入队 public 方法<code>offer()/put()</code> 内部都调用了 private 的 <code>enqueue()</code> 方法</p>
 <p>所有的出队 public 方法<code>poll()/take()</code> 内部都调用了 private 的 <code>dequeue()</code> 方法</p>
 <p>将这个模型进行精简就是下面这个样子：</p>
@@ -633,11 +635,11 @@
 
 
 <p>如果满足上面这三个条件，notify() 的使用就恰到好处；我们用使用 <code>notify()</code>的条件进行验证</p>
-<p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200315104007.png" alt=""></fancybox></p>
+<p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200315104007.png"></fancybox></p>
 <p>有的同学看到这里可能会稍稍有一些疑惑，<code>await()/signal()</code> 和 <code>wait()/notify()</code> 组合的玩法看着不太一样呢，你疑惑的没有错</p>
 <p>因为 Java 内置的监视器锁模型是 MESA 模型的精简版</p>
 <h2 id="MESA模型"><a href="#MESA模型" class="headerlink" title="MESA模型"></a>MESA模型</h2><p>MESA 监视器模型中说，每一个条件变量都对应一个条件等待队列</p>
-<p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200315110223.png" alt=""></fancybox></p>
+<p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200315110223.png"></fancybox></p>
 <p>对应到上面程序：</p>
 <ul>
 <li>队列已满是前提条件，条件变量A就是notFull，也就是notFull.await; notFull.signal</li>
@@ -651,7 +653,7 @@
 <li>如果是synchronized块，条件变量就是块中的内容了 </li>
 </ul>
 <p>说完了这些，你有没有恍然大悟的感觉呢</p>
-<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200315115553.png" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200315115553.png"></p>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>如果业务冲突不大，循环等待是一种简单粗暴且有效的方式；但是当业务冲突大之后，通知/等待机制是必不可少的使用策略</p>
 <p>通过这篇文章，相信你已经可以通过灵魂4问，知道如何将循环等待改善成通知/等待模型了；另外也知道如何正确的使用通知/等待机制了</p>
 <h2 id="灵魂追问"><a href="#灵魂追问" class="headerlink" title="灵魂追问"></a>灵魂追问</h2><ol>
@@ -664,27 +666,27 @@
 <li>Java 并发编程之美</li>
 <li>码出高效</li>
 <li>Java 并发编程的艺术</li>
-<li><a href="https://www.geeksforgeeks.org/difference-notify-notifyall-java/" target="_blank" rel="noopener">https://www.geeksforgeeks.org/difference-notify-notifyall-java/</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.geeksforgeeks.org/difference-notify-notifyall-java/">https://www.geeksforgeeks.org/difference-notify-notifyall-java/</a></li>
 <li>…</li>
 </ul>
 <hr>
 <p>下面的文章，就需要聊聊【线程的生命周期】了，只有熟知线程的生命周期，你才能更好的编写并发程序。</p>
 <p>我这面也在逐步总结常见的并发面试问题（总结ing……）答案整理好后会通知大家，请持续关注</p>
-<p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200315120104.png" alt=""></fancybox></p>
+<p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200315120104.png"></fancybox></p>
 <p>同时，这里也整理了一点 Java 硬核资料，有需要的就公众号回复【资料】/【666】吧</p>
-<p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200310160835.png" alt=""></fancybox></p>
+<p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200310160835.png"></fancybox></p>
 <hr>
 
       </div>
       <!-- <div class="tuijian">
         <br><br>
         📚相关文章
-        <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-book.html" title="120000字，你们要的Java并发编程图文小册来了" rel="bookmark">120000字，你们要的Java并发编程图文小册来了</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-aqs-acquireshared-and-semaphore.html" title="Java AQS共享式获取同步状态及Semaphore的应用分析" rel="bookmark">Java AQS共享式获取同步状态及Semaphore的应用分析</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-countdownlatch-vs-cyclicbarrier.html" title="CountDownLatch 和 CyclicBarrier 傻傻的分不清楚？" rel="bookmark">CountDownLatch 和 CyclicBarrier 傻傻的分不清楚？</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/executorservice-vs-completionservice.html" title="ExecutorService VS CompletionService" rel="bookmark">ExecutorService VS CompletionService</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-aqs-and-reentrantlock.html" title="Java AQS队列同步器以及ReentrantLock的应用" rel="bookmark">Java AQS队列同步器以及ReentrantLock的应用</a></h3></div></li></ul>
+        <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-book.html" title="120000字，你们要的Java并发编程图文小册来了" rel="bookmark">120000字，你们要的Java并发编程图文小册来了</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-aqs-acquireshared-and-semaphore.html" title="Java AQS共享式获取同步状态及Semaphore的应用分析" rel="bookmark">Java AQS共享式获取同步状态及Semaphore的应用分析</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/executorservice-vs-completionservice.html" title="ExecutorService VS CompletionService" rel="bookmark">ExecutorService VS CompletionService</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-interrupt-mechnism.html" title="Java多线程中断机制" rel="bookmark">Java多线程中断机制</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-thread-life-cycle.html" title="Java线程生命周期这样理解挺简单的" rel="bookmark">Java线程生命周期这样理解挺简单的</a></h3></div></li></ul>
       </div> -->
       <div class="personalweixin">
         <br><br>
         <blockquote>
-          <a href="https://mp.weixin.qq.com/s/G7BXuZh0Qh1-mE6ts4LJqQ" target="_blank" rel="noopener">加我微信</a>，咱们交流技术与思想，共同成长
+          <a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/G7BXuZh0Qh1-mE6ts4LJqQ">加我微信</a>，咱们交流技术与思想，共同成长
         </blockquote>
         <br>
 
@@ -722,9 +724,9 @@
   <div class="-mob-share-list share-body">
     
       
-        <a class="-mob-share-qq" title="QQ好友" rel="external nofollow noopener noreferrer"
+        <a class="-mob-share-qq" title="QQ好友" rel="external nofollow noopener noreferrer noopener"
           
-          href="http://connect.qq.com/widget/shareqq/index.html?url=https://dayarch.top/p/waiting-notification-mechanism.html&title=并发编程之等待通知机制 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=并发编程为什么会有等待通知机制
+          target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://dayarch.top/p/waiting-notification-mechanism.html&title=并发编程之等待通知机制 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=并发编程为什么会有等待通知机制
 上一篇文章说明了 Java并发死锁解决思路 ， 解决死锁的思路之一就是 破坏请求和保持条件, 所有柜员都要通过唯一的账本管理员一次性拿到所有转账业务需要的账本，就像下面这样： 
 
 
@@ -749,9 +751,9 @@ while(!accountBookManager.getAllRequiredAccountBook(this, target))
       
     
       
-        <a class="-mob-share-qzone" title="QQ空间" rel="external nofollow noopener noreferrer"
+        <a class="-mob-share-qzone" title="QQ空间" rel="external nofollow noopener noreferrer noopener"
           
-          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://dayarch.top/p/waiting-notification-mechanism.html&title=并发编程之等待通知机制 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=并发编程为什么会有等待通知机制
+          target="_blank" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://dayarch.top/p/waiting-notification-mechanism.html&title=并发编程之等待通知机制 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=并发编程为什么会有等待通知机制
 上一篇文章说明了 Java并发死锁解决思路 ， 解决死锁的思路之一就是 破坏请求和保持条件, 所有柜员都要通过唯一的账本管理员一次性拿到所有转账业务需要的账本，就像下面这样： 
 
 
@@ -776,9 +778,9 @@ while(!accountBookManager.getAllRequiredAccountBook(this, target))
       
     
       
-        <a class="-mob-share-weibo" title="微博" rel="external nofollow noopener noreferrer"
+        <a class="-mob-share-weibo" title="微博" rel="external nofollow noopener noreferrer noopener"
           
-          href="http://service.weibo.com/share/share.php?url=https://dayarch.top/p/waiting-notification-mechanism.html&title=并发编程之等待通知机制 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=并发编程为什么会有等待通知机制
+          target="_blank" href="http://service.weibo.com/share/share.php?url=https://dayarch.top/p/waiting-notification-mechanism.html&title=并发编程之等待通知机制 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=并发编程为什么会有等待通知机制
 上一篇文章说明了 Java并发死锁解决思路 ， 解决死锁的思路之一就是 破坏请求和保持条件, 所有柜员都要通过唯一的账本管理员一次性拿到所有转账业务需要的账本，就像下面这样： 
 
 
@@ -877,7 +879,7 @@ while(!accountBookManager.getAllRequiredAccountBook(this, target))
 </header>
 
     <div class="content pure">
-      <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-book.html" title="120000字，你们要的Java并发编程图文小册来了" rel="bookmark">120000字，你们要的Java并发编程图文小册来了</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-aqs-acquireshared-and-semaphore.html" title="Java AQS共享式获取同步状态及Semaphore的应用分析" rel="bookmark">Java AQS共享式获取同步状态及Semaphore的应用分析</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-countdownlatch-vs-cyclicbarrier.html" title="CountDownLatch 和 CyclicBarrier 傻傻的分不清楚？" rel="bookmark">CountDownLatch 和 CyclicBarrier 傻傻的分不清楚？</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/executorservice-vs-completionservice.html" title="ExecutorService VS CompletionService" rel="bookmark">ExecutorService VS CompletionService</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-aqs-and-reentrantlock.html" title="Java AQS队列同步器以及ReentrantLock的应用" rel="bookmark">Java AQS队列同步器以及ReentrantLock的应用</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-future-and-callable.html" title="Java Future详解与使用" rel="bookmark">Java Future详解与使用</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-interrupt-mechnism.html" title="Java多线程中断机制" rel="bookmark">Java多线程中断机制</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-thread-life-cycle.html" title="Java线程生命周期这样理解挺简单的" rel="bookmark">Java线程生命周期这样理解挺简单的</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-dead-lock.html" title="Java并发死锁解决思路" rel="bookmark">Java并发死锁解决思路</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java8-completablefuture-tutorial.html" title="java8 CompletableFuture 使用详解" rel="bookmark">java8 CompletableFuture 使用详解</a></h3></div></li></ul>
+      <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-book.html" title="120000字，你们要的Java并发编程图文小册来了" rel="bookmark">120000字，你们要的Java并发编程图文小册来了</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-aqs-acquireshared-and-semaphore.html" title="Java AQS共享式获取同步状态及Semaphore的应用分析" rel="bookmark">Java AQS共享式获取同步状态及Semaphore的应用分析</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/executorservice-vs-completionservice.html" title="ExecutorService VS CompletionService" rel="bookmark">ExecutorService VS CompletionService</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-interrupt-mechnism.html" title="Java多线程中断机制" rel="bookmark">Java多线程中断机制</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-thread-life-cycle.html" title="Java线程生命周期这样理解挺简单的" rel="bookmark">Java线程生命周期这样理解挺简单的</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/difference-between-volatile-and-synchronized-keyword.html" title="volatile和synchronized图文透彻讲解" rel="bookmark">volatile和synchronized图文透彻讲解</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/why-we-need-to-use-threadpool.html" title="为什么要使用线程池?" rel="bookmark">为什么要使用线程池?</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-core.html" title="并发编程三大核心" rel="bookmark">并发编程三大核心</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-dead-lock.html" title="Java并发死锁解决思路" rel="bookmark">Java并发死锁解决思路</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-three-questions.html" title="并发编程三大问题" rel="bookmark">并发编程三大问题</a></h3></div></li></ul>
     </div>
   </section>
 
@@ -1085,7 +1087,7 @@ while(!accountBookManager.getAllRequiredAccountBook(this, target))
 </header>
 
     <div class='content pure'>
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#并发编程为什么会有等待通知机制"><span class="toc-text">并发编程为什么会有等待通知机制</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#等待-通知机制"><span class="toc-text">等待/通知机制</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#灵魂-4-问"><span class="toc-text">灵魂 4 问</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#坑一"><span class="toc-text">坑一</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#为什么说尽量使用-notifyAll"><span class="toc-text">为什么说尽量使用 notifyAll()</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#null"><span class="toc-text"></span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#什么时候可以使用-notify"><span class="toc-text">什么时候可以使用 notify()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MESA模型"><span class="toc-text">MESA模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-text">总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#灵魂追问"><span class="toc-text">灵魂追问</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考"><span class="toc-text">参考</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E6%9C%89%E7%AD%89%E5%BE%85%E9%80%9A%E7%9F%A5%E6%9C%BA%E5%88%B6"><span class="toc-text">并发编程为什么会有等待通知机制</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AD%89%E5%BE%85-%E9%80%9A%E7%9F%A5%E6%9C%BA%E5%88%B6"><span class="toc-text">等待&#x2F;通知机制</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%81%B5%E9%AD%82-4-%E9%97%AE"><span class="toc-text">灵魂 4 问</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9D%91%E4%B8%80"><span class="toc-text">坑一</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%AF%B4%E5%B0%BD%E9%87%8F%E4%BD%BF%E7%94%A8-notifyAll"><span class="toc-text">为什么说尽量使用 notifyAll()</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text"></span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%97%B6%E5%80%99%E5%8F%AF%E4%BB%A5%E4%BD%BF%E7%94%A8-notify"><span class="toc-text">什么时候可以使用 notify()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MESA%E6%A8%A1%E5%9E%8B"><span class="toc-text">MESA模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-text">总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%81%B5%E9%AD%82%E8%BF%BD%E9%97%AE"><span class="toc-text">灵魂追问</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83"><span class="toc-text">参考</span></a></li></ol>
     </div>
   </section>
 
@@ -1160,7 +1162,7 @@ while(!accountBookManager.getAllRequiredAccountBook(this, target))
   &nbsp;&nbsp;|&nbsp;&nbsp;  
   
     &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-        class="white-color">264.1k</span>&nbsp;字
+        class="white-color">267.4k</span>&nbsp;字
     
 
   &nbsp;&nbsp;|&nbsp;&nbsp;  
@@ -1215,7 +1217,7 @@ while(!accountBookManager.getAllRequiredAccountBook(this, target))
     
     。
   </div>
-  <div><p>博客内容遵循 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
+  <div><p>博客内容遵循 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
 </div>
   <!-- <div class="github-badge">
       <a style="color: #fff" rel="license" href="https://hexo.io/" target="_blank" title="由 Hexo 强力驱动">
@@ -1323,10 +1325,14 @@ while(!accountBookManager.getAllRequiredAccountBook(this, target))
 
 
 
-  <script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/app.js"></script>
+  
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/app.js"></script>
 
 
-  <script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/search.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/search.js"></script>
+
 
 
 

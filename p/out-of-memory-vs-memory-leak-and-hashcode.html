@@ -13,7 +13,7 @@
   
 
   
-  <link rel="alternate" href="/atom.xml" title="日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享">
+  <link rel="alternate" href="/atom.xml" title="日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享" type="application/atom+xml">
   
 
   <meta name="HandheldFriendly" content="True" />
@@ -35,7 +35,9 @@
   
 
   
-    <link rel="stylesheet" href="/style.css">
+    
+<link rel="stylesheet" href="/style.css">
+
   
 
   <script>
@@ -85,7 +87,7 @@
         daovoice('update');
         </script>
     
-</head>
+<meta name="generator" content="Hexo 5.4.0"></head>
 
 <body>
   
@@ -482,13 +484,13 @@
 
     <section class="article typo">
       <div class="article-entry" itemprop="articleBody">
-        <p><img src="https://rgyb.sunluomeng.top/20200802100356.png" alt=""></p>
+        <p><img src="https://rgyb.sunluomeng.top/20200802100356.png"></p>
 <h2 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h2><p>起因是群里的一位童鞋突然问了这么问题：</p>
 <blockquote>
 <p>如果重写 equals 不重写 hashcode 会有什么影响？</p>
 </blockquote>
 <p>这个问题从上午10:45 开始陆续讨论，到下午15:39 接近尾声 （忽略这形同虚设的马赛克）</p>
-<p><fancybox><img src="https://rgyb.sunluomeng.top/memoryleak.jpg" alt=""></fancybox></p>
+<p><fancybox><img src="https://rgyb.sunluomeng.top/memoryleak.jpg"></fancybox></p>
 <p>这是一个好问题，更是一个高频基础面试题，我还曾经专门写过一篇文章 <a href="https://dayarch.top/p/java-equals-hashcode.html">Java equals 和 hashCode 的这几个问题可以说明白吗</a>, 主要说明了以下内容</p>
 <img src="https://rgyb.sunluomeng.top/20200728204424.png" style="zoom:50%;" />
 
@@ -496,14 +498,14 @@
 
 <p>随着讨论的进行，问题慢慢集中在内存溢出和内存泄漏的问题上</p>
 <h2 id="内存溢出-VS-内存泄漏"><a href="#内存溢出-VS-内存泄漏" class="headerlink" title="内存溢出 VS 内存泄漏"></a>内存溢出 VS 内存泄漏</h2><p>这两个词在中文解释上有些相似，至少给我的第一感觉，他们的差别是这样的（有人和我一样吗？）</p>
-<p><fancybox><img src="https://rgyb.sunluomeng.top/20200728211319.png" alt=""></fancybox></p>
+<p><fancybox><img src="https://rgyb.sunluomeng.top/20200728211319.png"></fancybox></p>
 <p>内存溢出：Out of Memory (OOM) ，这个大家都很熟悉了，理解起来也很简单，就是内存不够用了（啤酒【对象】太多，杯子【内存】装不下了）</p>
 <blockquote>
 <p>那啥是内存泄漏呢？</p>
 </blockquote>
 <p>内存泄漏：<strong>Memory Leak</strong></p>
 <p>特意查了一下 Leak 的字典含义，解释1的直白翻译是【通常是由于<code>错误</code>或<code>失误</code>，从一个<code>开口</code> <code>进入</code>或逃脱】</p>
-<p><fancybox><img src="https://rgyb.sunluomeng.top/20200728222954.png" alt=""></fancybox></p>
+<p><fancybox><img src="https://rgyb.sunluomeng.top/20200728222954.png"></fancybox></p>
 <p>所以程序中的内存泄漏我的理解更多是：由于程序的编写错误暴漏出一些 <strong>开口</strong>，导致一些对象<strong>进入</strong>这写开口，最终<strong>导致相关问题</strong>，进一步说白了，程序有漏洞，不当的调用就会出问题</p>
 <p>所以接下来我们主要来看看 Java 内存泄漏，以及问题的起因 hashCode 和内存泄漏到底有哪些关系</p>
 <h2 id="内存泄漏"><a href="#内存泄漏" class="headerlink" title="内存泄漏"></a>内存泄漏</h2><p>咱也是一个有身份证的人，不能总讲大白话，相对官方的内存泄漏解释是这样滴：</p>
@@ -511,9 +513,9 @@
 <p>内存泄漏说明的是这样一种情况：堆中存在一些不再使用的对象，但垃圾收集器无法将它们从内存中删除（垃圾收集器定期删除未引用的对象，但从不收集仍在引用的对象），因此对它们进行了不必要的维护</p>
 </blockquote>
 <p>这句话略显抽象，一张图你就能明白</p>
-<p><fancybox><img src="https://rgyb.sunluomeng.top/20200729103633.png" alt=""></fancybox></p>
+<p><fancybox><img src="https://rgyb.sunluomeng.top/20200729103633.png"></fancybox></p>
 <p>如果有用的、但垃圾收集器又不能删除的对象增多，就像下图这样，那么就会逐渐导致内存溢出(OOM)了</p>
-<p><fancybox><img src="https://rgyb.sunluomeng.top/20200729104155.png" alt=""></fancybox></p>
+<p><fancybox><img src="https://rgyb.sunluomeng.top/20200729104155.png"></fancybox></p>
 <p>所以也可以总结为，OOM 的原因之一可能是内存泄漏导致的</p>
 <h3 id="内存泄漏会带来哪些问题"><a href="#内存泄漏会带来哪些问题" class="headerlink" title="内存泄漏会带来哪些问题"></a>内存泄漏会带来哪些问题</h3><p>内存泄漏，会导致真正可用内存变少，在没达到 OOM 的这个过程中，就会出现奇奇怪怪的问题</p>
 <ol>
@@ -527,7 +529,7 @@
 <p>那常见的哪些情形可能会引起内存泄漏呢？又有哪些解决办法呢？</p>
 </blockquote>
 <h2 id="会引起内存泄漏的常见情形与相应解决办法"><a href="#会引起内存泄漏的常见情形与相应解决办法" class="headerlink" title="会引起内存泄漏的常见情形与相应解决办法"></a>会引起内存泄漏的常见情形与相应解决办法</h2><h3 id="静态成员变量的乱用"><a href="#静态成员变量的乱用" class="headerlink" title="静态成员变量的乱用"></a>静态成员变量的乱用</h3><p>直接来看一个例子</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Slf</span>4j</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StaticTest</span> </span>&#123;</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> List&lt;Double&gt; list = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">populateList</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10000000</span>; i++) &#123;</span><br><span class="line">			list.add(Math.random());</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">new</span> StaticTest().populateList();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Slf4j</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StaticTest</span> </span>&#123;</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> List&lt;Double&gt; list = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">populateList</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10000000</span>; i++) &#123;</span><br><span class="line">			list.add(Math.random());</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">new</span> StaticTest().populateList();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p><code>populateList()</code> 是一个 public 方法，可能被各种调用，导致 list 无限增大 </p>
 <h4 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h4><p>解决办法很简单，针对这种情形（<strong>也就是通常所说的长周期对象引用短周期对象</strong>），就是将 list 放到方法内部，方法栈帧执行完自动就会被回收了</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">populateList</span><span class="params">()</span> </span>&#123;</span><br><span class="line">   List&lt;Double&gt; list = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">   <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10000000</span>; i++) &#123;</span><br><span class="line">      list.add(Math.random());</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -556,7 +558,7 @@
 
 <h3 id="不正确的-equals-和-hashCode-实现"><a href="#不正确的-equals-和-hashCode-实现" class="headerlink" title="不正确的 equals 和 hashCode 实现"></a>不正确的 equals 和 hashCode 实现</h3><p>又回到了这两个函数上，有很大一部分程序员不会主动重写 equals 和 hashCode，尤其是用 Lombok @Data 注解（该注解默认会帮助重写这两个函数）后，更会忽视这两个方法实现，一不小心的使就可能引起内存泄漏</p>
 <p>来看个非常简单的例子：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MemLeakTest</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line">      Map&lt;Person, String&gt; map = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">      Person p1 = <span class="keyword">new</span> Person(<span class="string">"zhangsan"</span>, <span class="number">1</span>);</span><br><span class="line">      Person p2 = <span class="keyword">new</span> Person(<span class="string">"zhangsan"</span>, <span class="number">1</span>);</span><br><span class="line">      Person p3 = <span class="keyword">new</span> Person(<span class="string">"zhangsan"</span>, <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">      map.put(p1, <span class="string">"zhangsan"</span>);</span><br><span class="line">      map.put(p2, <span class="string">"zhangsan"</span>);</span><br><span class="line">      map.put(p3, <span class="string">"zhangsan"</span>);</span><br><span class="line"></span><br><span class="line">      System.out.println(map.entrySet().size()); <span class="comment">// 运行结果：3</span></span><br><span class="line">   &#125;</span><br><span class="line">&#125;  </span><br><span class="line"></span><br><span class="line"><span class="meta">@Getter</span></span><br><span class="line"><span class="meta">@Setter</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">	<span class="keyword">private</span> String name;</span><br><span class="line">	<span class="keyword">private</span> Integer id;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">Person</span><span class="params">(String name, Integer id)</span></span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.name = name;</span><br><span class="line">		<span class="keyword">this</span>.id = id;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MemLeakTest</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line">      Map&lt;Person, String&gt; map = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">      Person p1 = <span class="keyword">new</span> Person(<span class="string">&quot;zhangsan&quot;</span>, <span class="number">1</span>);</span><br><span class="line">      Person p2 = <span class="keyword">new</span> Person(<span class="string">&quot;zhangsan&quot;</span>, <span class="number">1</span>);</span><br><span class="line">      Person p3 = <span class="keyword">new</span> Person(<span class="string">&quot;zhangsan&quot;</span>, <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">      map.put(p1, <span class="string">&quot;zhangsan&quot;</span>);</span><br><span class="line">      map.put(p2, <span class="string">&quot;zhangsan&quot;</span>);</span><br><span class="line">      map.put(p3, <span class="string">&quot;zhangsan&quot;</span>);</span><br><span class="line"></span><br><span class="line">      System.out.println(map.entrySet().size()); <span class="comment">// 运行结果：3</span></span><br><span class="line">   &#125;</span><br><span class="line">&#125;  </span><br><span class="line"></span><br><span class="line"><span class="meta">@Getter</span></span><br><span class="line"><span class="meta">@Setter</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">	<span class="keyword">private</span> String name;</span><br><span class="line">	<span class="keyword">private</span> Integer id;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">Person</span><span class="params">(String name, Integer id)</span></span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.name = name;</span><br><span class="line">		<span class="keyword">this</span>.id = id;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
 
@@ -566,10 +568,10 @@
 <p>p1, p2, p3 在【业务】属性上是完全相同的三个对象，由于「对象地址」的不同导致生成的 hashCode 不一样，最终都被放到 Map 中，这就会导致业务重复对象占用空间，所以这也是内存泄漏的一种</p>
 <h4 id="解决办法-2"><a href="#解决办法-2" class="headerlink" title="解决办法"></a>解决办法</h4><p>解决办法很简单，在 Person 上加一个 Lombok 的 <code>@Data</code> 注解自动帮你重写 hashCode 方法，或手动在 IDE 中 generate，再次运行，结果就为 1了，符合业务需求</p>
 <p>那重写了 hashCode 确实可以避免重复对象的加入，那这就完事大吉了吗, 再来看个例子</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line">  <span class="comment">// 注意: HashSet 的底层也是 Map 结构 </span></span><br><span class="line">  Set&lt;Person&gt; set = <span class="keyword">new</span> HashSet&lt;Person&gt;();</span><br><span class="line"></span><br><span class="line">   Person p1 = <span class="keyword">new</span> Person(<span class="string">"zhangsan"</span>, <span class="number">1</span>);</span><br><span class="line">   Person p2 = <span class="keyword">new</span> Person(<span class="string">"lisi"</span>, <span class="number">2</span>);</span><br><span class="line">   Person p3 = <span class="keyword">new</span> Person(<span class="string">"wanger"</span>, <span class="number">3</span>);</span><br><span class="line"></span><br><span class="line">   set.add(p1);</span><br><span class="line">   set.add(p2);</span><br><span class="line">   set.add(p3);</span><br><span class="line">   </span><br><span class="line">   System.out.println(set.size()); <span class="comment">// 运行结果：3</span></span><br><span class="line">   p3.setName(<span class="string">"wangermao"</span>);</span><br><span class="line">   set.remove(p3);</span><br><span class="line">   System.out.println(set.size()); <span class="comment">// 运行结果：3</span></span><br><span class="line">   set.add(p3);</span><br><span class="line">   System.out.println(set.size()); <span class="comment">// 运行结果：4</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line">  <span class="comment">// 注意: HashSet 的底层也是 Map 结构 </span></span><br><span class="line">  Set&lt;Person&gt; set = <span class="keyword">new</span> HashSet&lt;Person&gt;();</span><br><span class="line"></span><br><span class="line">   Person p1 = <span class="keyword">new</span> Person(<span class="string">&quot;zhangsan&quot;</span>, <span class="number">1</span>);</span><br><span class="line">   Person p2 = <span class="keyword">new</span> Person(<span class="string">&quot;lisi&quot;</span>, <span class="number">2</span>);</span><br><span class="line">   Person p3 = <span class="keyword">new</span> Person(<span class="string">&quot;wanger&quot;</span>, <span class="number">3</span>);</span><br><span class="line"></span><br><span class="line">   set.add(p1);</span><br><span class="line">   set.add(p2);</span><br><span class="line">   set.add(p3);</span><br><span class="line">   </span><br><span class="line">   System.out.println(set.size()); <span class="comment">// 运行结果：3</span></span><br><span class="line">   p3.setName(<span class="string">&quot;wangermao&quot;</span>);</span><br><span class="line">   set.remove(p3);</span><br><span class="line">   System.out.println(set.size()); <span class="comment">// 运行结果：3</span></span><br><span class="line">   set.add(p3);</span><br><span class="line">   System.out.println(set.size()); <span class="comment">// 运行结果：4</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>从运行结果中来看，很显然 set.remove(p3) 没有删除成功，因为 <code>p3.setName(&quot;wangermao&quot;)</code> 后，重新计算 p3 的 hashCode 会发生变化，所以 remove 的时候会找不到相应的 Node，这就又给了增加相同对象的“机会”，导致业务中无用的对象被引用着，所以可以说这也是内存泄漏的一种。运行结果来看：</p>
-<p><fancybox><img src="https://rgyb.sunluomeng.top/20200729121241.png" alt=""></fancybox></p>
+<p><fancybox><img src="https://rgyb.sunluomeng.top/20200729121241.png"></fancybox></p>
 <p><strong>所以诸如此类操作，最好是先 remove，然后更改属性，最后再重新 add 进去</strong></p>
 <p>看到这，你应该发现了，要解决 hashCode 相关的问题，你要充分了解集合的特性，更要留意类是否重写了该方法以及它们的实现方式，避免出现内存泄漏情况</p>
 <h3 id="ThreadLocal"><a href="#ThreadLocal" class="headerlink" title="ThreadLocal"></a>ThreadLocal</h3><p>群消息中的最后，<strong>小姐姐</strong> 留下【ThreadLocal】几个字，深藏功与名的离开了，一看就是高手</p>
@@ -587,13 +589,13 @@
 <p>总的来说，引起内存泄漏的原因非常多，比如还有引用外部类的内部类等问题，这里不再展开说明，只是说明了几种非常常见的可能引发内存泄漏问题的几种场景</p>
 <p>内存泄漏问题不易察觉，所以有时需要借助工具来帮忙</p>
 <h2 id="JVisualJVM"><a href="#JVisualJVM" class="headerlink" title="JVisualJVM"></a>JVisualJVM</h2><p>JVisualJvm 【可视化JVM】，可分析JDK1.6及其以上版本的JVM运行时的JVM参数、系统参数、堆栈、CPU使用等信息。可分析本地应用及远程应用，在JDK1.6以上版本中自带。工具的使用暂不展开说明， 想快速使用此工具，只需要在 IDE 中安装个 <code>VisualVM Launcher</code> 插件</p>
-<p><fancybox><img src="https://rgyb.sunluomeng.top/20200801150117.png" alt=""></fancybox></p>
+<p><fancybox><img src="https://rgyb.sunluomeng.top/20200801150117.png"></fancybox></p>
 <p>然后在进行基本的配置</p>
-<p><fancybox><img src="https://rgyb.sunluomeng.top/20200801150313.png" alt=""></fancybox></p>
+<p><fancybox><img src="https://rgyb.sunluomeng.top/20200801150313.png"></fancybox></p>
 <p>然后在IDE的右上角或当前类鼠标右键就可以点击运行查看了</p>
-<p><fancybox><img src="https://rgyb.sunluomeng.top/20200801150904.png" alt=""></fancybox></p>
+<p><fancybox><img src="https://rgyb.sunluomeng.top/20200801150904.png"></fancybox></p>
 <p>运行起 VisualJVM 就是这样子了</p>
-<p><fancybox><img src="https://rgyb.sunluomeng.top/20200801145900.png" alt=""></fancybox></p>
+<p><fancybox><img src="https://rgyb.sunluomeng.top/20200801145900.png"></fancybox></p>
 <p>不要走，还没结束，在总结这篇文章的时候，我还发现了「新大陆」</p>
 <h2 id="HashCode-真是根据对象内存地址生成的？"><a href="#HashCode-真是根据对象内存地址生成的？" class="headerlink" title="HashCode 真是根据对象内存地址生成的？"></a>HashCode 真是根据对象内存地址生成的？</h2><p>脑海中的印象不知道为何，很根深蒂固的接受了Object hashCode 是根据对象内存地址生成的，这次刚好想探求一下 hashCode 的本质，还着实打破了我的固有印象 (以 JDK1.8 为例)</p>
 <p>OpenJDK 定义 hashCode 的方法在下面两个文件中</p>
@@ -601,8 +603,8 @@
 <li><code>src/share/vm/prims/jvm.h</code></li>
 <li><code>src/share/vm/prims/jvm.cpp</code></li>
 </ul>
-<p>逐步看下去，最终会来到 <a href="http://hg.openjdk.java.net/jdk8u/jdk8u/hotspot/file/87ee5ee27509/src/share/vm/runtime/synchronizer.cpp#l555" target="_blank" rel="noopener">get_next_hash</a> 这个方法中，方便大家查看我先把方法截图至此：</p>
-<p><fancybox><img src="https://rgyb.sunluomeng.top/image-20200801132535262.png" alt=""></fancybox></p>
+<p>逐步看下去，最终会来到 <a target="_blank" rel="noopener" href="http://hg.openjdk.java.net/jdk8u/jdk8u/hotspot/file/87ee5ee27509/src/share/vm/runtime/synchronizer.cpp#l555">get_next_hash</a> 这个方法中，方便大家查看我先把方法截图至此：</p>
+<p><fancybox><img src="https://rgyb.sunluomeng.top/image-20200801132535262.png"></fancybox></p>
 <p>总的来说有 6 种生成 hashCode 的方式：</p>
 <ul>
 <li><strong>0:</strong> A randomly generated number </li>
@@ -610,13 +612,13 @@
 <li><strong>2:</strong> A hardcoded 1 (used for sensitivity testing.) </li>
 <li><strong>3:</strong> A sequence. </li>
 <li><strong>4:</strong> The memory address of the object, cast to int</li>
-<li><strong>5（else）:</strong> Thread state combined with xorshift<a href="https://wiki.openjdk.java.net/display/HotSpot/Synchronization" target="_blank" rel="noopener">^1</a></li>
+<li><strong>5（else）:</strong> Thread state combined with xorshift<a target="_blank" rel="noopener" href="https://wiki.openjdk.java.net/display/HotSpot/Synchronization">^1</a></li>
 </ul>
 <p>那在 JDK1.8 种用的哪一种呢？</p>
-<p><fancybox><img src="https://rgyb.sunluomeng.top/Screen11.png" alt=""></fancybox></p>
+<p><fancybox><img src="https://rgyb.sunluomeng.top/Screen11.png"></fancybox></p>
 <p>可以看到在 JDK1.8 中生成 hashCode 的方式是 5， 也就是走程序的 else 路径，即使用 Xorshift，并不是之前认为的对象内存地址「1」，以为老版本是采用对象内存地址的方式，所以继续查看其他版本</p>
-<p><fancybox><img src="https://rgyb.sunluomeng.top/20200801135712.png" alt=""></fancybox></p>
-<p>从图中可以看出，<strong>JDK1.6</strong><a href="http://hg.openjdk.java.net/jdk6/jdk6/hotspot/file/5cec449cc409/src/share/vm/runtime/globals.hpp#l1128" target="_blank" rel="noopener">^2</a> 和 <strong>JDK1.7</strong><a href="http://hg.openjdk.java.net/jdk7u/jdk7u/hotspot/file/5b9a416a5632/src/share/vm/runtime/globals.hpp#l1100" target="_blank" rel="noopener">^3</a> 版本生成 hashCode 的方式「1」随机数的形式，和我们原本认为的并不一样，别的版本没有继续查询，至于「流传下来」说是对象内存地址生成的 hashCode 我也木有再深入研究，有了解的同学还请留言赐教</p>
+<p><fancybox><img src="https://rgyb.sunluomeng.top/20200801135712.png"></fancybox></p>
+<p>从图中可以看出，<strong>JDK1.6</strong><a target="_blank" rel="noopener" href="http://hg.openjdk.java.net/jdk6/jdk6/hotspot/file/5cec449cc409/src/share/vm/runtime/globals.hpp#l1128">^2</a> 和 <strong>JDK1.7</strong><a target="_blank" rel="noopener" href="http://hg.openjdk.java.net/jdk7u/jdk7u/hotspot/file/5b9a416a5632/src/share/vm/runtime/globals.hpp#l1100">^3</a> 版本生成 hashCode 的方式「1」随机数的形式，和我们原本认为的并不一样，别的版本没有继续查询，至于「流传下来」说是对象内存地址生成的 hashCode 我也木有再深入研究，有了解的同学还请留言赐教</p>
 <p>那么问题来了：</p>
 <blockquote>
 <p>假设用的 JDK1.6或 JDK1.7，它们生成 hashCode 的方式是随机生成的，那一个对象多次调用hashCode是会有不同的hashCode 呢？（排除服务重启的情况）</p>
@@ -626,10 +628,10 @@
 <p>它们存在哪了？</p>
 </blockquote>
 <p>hash 值是存在对象头中的，我们还知道对象头中还可能存储线程ID，所以他们在某些情形中还会存在冲突</p>
-<h2 id="对象头中-hashCode-和-偏向锁的冲突"><a href="#对象头中-hashCode-和-偏向锁的冲突" class="headerlink" title="对象头中 hashCode 和 偏向锁的冲突"></a>对象头中 hashCode 和 偏向锁的冲突</h2><p>jvm 启动时，可以使用 <code>-XX:+UseBiasedLocking=true</code> 开启偏向锁，（关于偏向锁，轻量级锁，重量级锁大家查阅 synchronized 相关文档就可以），这里引 <strong>OpenJDK Wiki</strong><a href="https://en.wikipedia.org/wiki/Xorshift" target="_blank" rel="noopener">^4</a> 里面的图片加以文字说明整个冲突过程</p>
-<p><fancybox><img src="https://rgyb.sunluomeng.top/20200801143654.png" alt=""></fancybox></p>
+<h2 id="对象头中-hashCode-和-偏向锁的冲突"><a href="#对象头中-hashCode-和-偏向锁的冲突" class="headerlink" title="对象头中 hashCode 和 偏向锁的冲突"></a>对象头中 hashCode 和 偏向锁的冲突</h2><p>jvm 启动时，可以使用 <code>-XX:+UseBiasedLocking=true</code> 开启偏向锁，（关于偏向锁，轻量级锁，重量级锁大家查阅 synchronized 相关文档就可以），这里引 <strong>OpenJDK Wiki</strong><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Xorshift">^4</a> 里面的图片加以文字说明整个冲突过程</p>
+<p><fancybox><img src="https://rgyb.sunluomeng.top/20200801143654.png"></fancybox></p>
 <p>所以，调用 Object 的 hashCode() 方法或者 System.identityHashCode() 方法会让对象不能使用偏向锁。到这里你也就应该知道了，如果你还想使用偏向锁，那最好重写 hashCode() 方法，避免使偏向锁失效 </p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>为了解决群的这个问题，发现新大陆的同时也差点让我掉入【追问无底洞】，不过通过本文你应该了解内存溢出和内存泄漏的差别，以及他们的解决方案，另外 hashCode<a href="https://srvaroa.github.io/jvm/java/openjdk/biased-locking/2017/01/30/hashCode.html" target="_blank" rel="noopener">^5</a> 生成方式还着实让人有些惊讶，如果你知道「hashCode的生成是根据对象内存地址生成的来源，还请留言赐教」。除此之外，小小的 hashCode 还有可能让偏向锁失效，所有的这些细节问题都有可能是导致程序崩溃的坑，所以勿以「恶」小而为之，毋以「善」小而不为，良好的编程习惯能避免很多问题</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>为了解决群的这个问题，发现新大陆的同时也差点让我掉入【追问无底洞】，不过通过本文你应该了解内存溢出和内存泄漏的差别，以及他们的解决方案，另外 hashCode<a target="_blank" rel="noopener" href="https://srvaroa.github.io/jvm/java/openjdk/biased-locking/2017/01/30/hashCode.html">^5</a> 生成方式还着实让人有些惊讶，如果你知道「hashCode的生成是根据对象内存地址生成的来源，还请留言赐教」。除此之外，小小的 hashCode 还有可能让偏向锁失效，所有的这些细节问题都有可能是导致程序崩溃的坑，所以勿以「恶」小而为之，毋以「善」小而不为，良好的编程习惯能避免很多问题</p>
 <p>当然想要更好的理解内存泄漏，当然是要更好的理解 GC 机制，而想要更好的理解 GC，当然是更好的理解 JVM，咱们后续慢慢分析吧</p>
 <h2 id="灵魂追问"><a href="#灵魂追问" class="headerlink" title="灵魂追问"></a>灵魂追问</h2><ol>
 <li>为了清除 ThreadLocal 线程变量值，不用 <code>ThreadLocal.remove()</code> 方法，而是用 <code>ThreadLocal.set(null)</code> 会达到同样的效果吗？</li>
@@ -645,7 +647,7 @@
       <div class="personalweixin">
         <br><br>
         <blockquote>
-          <a href="https://mp.weixin.qq.com/s/G7BXuZh0Qh1-mE6ts4LJqQ" target="_blank" rel="noopener">加我微信</a>，咱们交流技术与思想，共同成长
+          <a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/G7BXuZh0Qh1-mE6ts4LJqQ">加我微信</a>，咱们交流技术与思想，共同成长
         </blockquote>
         <br>
 
@@ -683,9 +685,9 @@
   <div class="-mob-share-list share-body">
     
       
-        <a class="-mob-share-qq" title="QQ好友" rel="external nofollow noopener noreferrer"
+        <a class="-mob-share-qq" title="QQ好友" rel="external nofollow noopener noreferrer noopener"
           
-          href="http://connect.qq.com/widget/shareqq/index.html?url=https://dayarch.top/p/out-of-memory-vs-memory-leak-and-hashcode.html&title=hashCode是根据对象内存地址生成的？ | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=起因
+          target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://dayarch.top/p/out-of-memory-vs-memory-leak-and-hashcode.html&title=hashCode是根据对象内存地址生成的？ | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=起因
 起因是群里的一位童鞋突然问了这么问题：
 
 如果重写 equals 不重写 hashcode 会有什么影响？
@@ -713,9 +715,9 @@
       
     
       
-        <a class="-mob-share-qzone" title="QQ空间" rel="external nofollow noopener noreferrer"
+        <a class="-mob-share-qzone" title="QQ空间" rel="external nofollow noopener noreferrer noopener"
           
-          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://dayarch.top/p/out-of-memory-vs-memory-leak-and-hashcode.html&title=hashCode是根据对象内存地址生成的？ | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=起因
+          target="_blank" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://dayarch.top/p/out-of-memory-vs-memory-leak-and-hashcode.html&title=hashCode是根据对象内存地址生成的？ | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=起因
 起因是群里的一位童鞋突然问了这么问题：
 
 如果重写 equals 不重写 hashcode 会有什么影响？
@@ -743,9 +745,9 @@
       
     
       
-        <a class="-mob-share-weibo" title="微博" rel="external nofollow noopener noreferrer"
+        <a class="-mob-share-weibo" title="微博" rel="external nofollow noopener noreferrer noopener"
           
-          href="http://service.weibo.com/share/share.php?url=https://dayarch.top/p/out-of-memory-vs-memory-leak-and-hashcode.html&title=hashCode是根据对象内存地址生成的？ | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=起因
+          target="_blank" href="http://service.weibo.com/share/share.php?url=https://dayarch.top/p/out-of-memory-vs-memory-leak-and-hashcode.html&title=hashCode是根据对象内存地址生成的？ | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=起因
 起因是群里的一位童鞋突然问了这么问题：
 
 如果重写 equals 不重写 hashcode 会有什么影响？
@@ -847,7 +849,7 @@
 </header>
 
     <div class="content pure">
-      <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-string-interview.html" title="Java String基础面试" rel="bookmark">Java String基础面试</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-equals-hashcode.html" title="Java equals 和 hashCode 面试那点事" rel="bookmark">Java equals 和 hashCode 面试那点事</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/difference-between-beanfactory-and-applicationcontext.html" title="面试还不知道BeanFactory和ApplicationContext的区别？" rel="bookmark">面试还不知道BeanFactory和ApplicationContext的区别？</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/easyexcel-read.html" title="EasyExcel读取Excel实际应用" rel="bookmark">EasyExcel读取Excel实际应用</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/http-client-advanced-usage.html" title="IntelliJ IDEA HTTP Client高级使用详解" rel="bookmark">IntelliJ IDEA HTTP Client高级使用详解</a></h3></div></li></ul>
+      <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-string-interview.html" title="Java String基础面试" rel="bookmark">Java String基础面试</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-equals-hashcode.html" title="Java equals 和 hashCode 面试那点事" rel="bookmark">Java equals 和 hashCode 面试那点事</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/difference-between-beanfactory-and-applicationcontext.html" title="面试还不知道BeanFactory和ApplicationContext的区别？" rel="bookmark">面试还不知道BeanFactory和ApplicationContext的区别？</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/http-client-advanced-usage.html" title="IntelliJ IDEA HTTP Client高级使用详解" rel="bookmark">IntelliJ IDEA HTTP Client高级使用详解</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/intellj-idea-advanced-debug.html" title="IntelliJ IDEA 高级Debug技巧，助你起飞" rel="bookmark">IntelliJ IDEA 高级Debug技巧，助你起飞</a></h3></div></li></ul>
     </div>
   </section>
 
@@ -1055,7 +1057,7 @@
 </header>
 
     <div class='content pure'>
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#起因"><span class="toc-text">起因</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#内存溢出-VS-内存泄漏"><span class="toc-text">内存溢出 VS 内存泄漏</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#内存泄漏"><span class="toc-text">内存泄漏</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#内存泄漏会带来哪些问题"><span class="toc-text">内存泄漏会带来哪些问题</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#会引起内存泄漏的常见情形与相应解决办法"><span class="toc-text">会引起内存泄漏的常见情形与相应解决办法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#静态成员变量的乱用"><span class="toc-text">静态成员变量的乱用</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#解决办法"><span class="toc-text">解决办法</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#未关闭的流"><span class="toc-text">未关闭的流</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#解决办法-1"><span class="toc-text">解决办法</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#不正确的-equals-和-hashCode-实现"><span class="toc-text">不正确的 equals 和 hashCode 实现</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#解决办法-2"><span class="toc-text">解决办法</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ThreadLocal"><span class="toc-text">ThreadLocal</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#解决办法-3"><span class="toc-text">解决办法</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JVisualJVM"><span class="toc-text">JVisualJVM</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#HashCode-真是根据对象内存地址生成的？"><span class="toc-text">HashCode 真是根据对象内存地址生成的？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#对象头中-hashCode-和-偏向锁的冲突"><span class="toc-text">对象头中 hashCode 和 偏向锁的冲突</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-text">总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#灵魂追问"><span class="toc-text">灵魂追问</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考"><span class="toc-text">参考</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B5%B7%E5%9B%A0"><span class="toc-text">起因</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%85%E5%AD%98%E6%BA%A2%E5%87%BA-VS-%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F"><span class="toc-text">内存溢出 VS 内存泄漏</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F"><span class="toc-text">内存泄漏</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F%E4%BC%9A%E5%B8%A6%E6%9D%A5%E5%93%AA%E4%BA%9B%E9%97%AE%E9%A2%98"><span class="toc-text">内存泄漏会带来哪些问题</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BC%9A%E5%BC%95%E8%B5%B7%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F%E7%9A%84%E5%B8%B8%E8%A7%81%E6%83%85%E5%BD%A2%E4%B8%8E%E7%9B%B8%E5%BA%94%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95"><span class="toc-text">会引起内存泄漏的常见情形与相应解决办法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9D%99%E6%80%81%E6%88%90%E5%91%98%E5%8F%98%E9%87%8F%E7%9A%84%E4%B9%B1%E7%94%A8"><span class="toc-text">静态成员变量的乱用</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95"><span class="toc-text">解决办法</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%AA%E5%85%B3%E9%97%AD%E7%9A%84%E6%B5%81"><span class="toc-text">未关闭的流</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95-1"><span class="toc-text">解决办法</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8D%E6%AD%A3%E7%A1%AE%E7%9A%84-equals-%E5%92%8C-hashCode-%E5%AE%9E%E7%8E%B0"><span class="toc-text">不正确的 equals 和 hashCode 实现</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95-2"><span class="toc-text">解决办法</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ThreadLocal"><span class="toc-text">ThreadLocal</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95-3"><span class="toc-text">解决办法</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JVisualJVM"><span class="toc-text">JVisualJVM</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#HashCode-%E7%9C%9F%E6%98%AF%E6%A0%B9%E6%8D%AE%E5%AF%B9%E8%B1%A1%E5%86%85%E5%AD%98%E5%9C%B0%E5%9D%80%E7%94%9F%E6%88%90%E7%9A%84%EF%BC%9F"><span class="toc-text">HashCode 真是根据对象内存地址生成的？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AF%B9%E8%B1%A1%E5%A4%B4%E4%B8%AD-hashCode-%E5%92%8C-%E5%81%8F%E5%90%91%E9%94%81%E7%9A%84%E5%86%B2%E7%AA%81"><span class="toc-text">对象头中 hashCode 和 偏向锁的冲突</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-text">总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%81%B5%E9%AD%82%E8%BF%BD%E9%97%AE"><span class="toc-text">灵魂追问</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83"><span class="toc-text">参考</span></a></li></ol>
     </div>
   </section>
 
@@ -1130,7 +1132,7 @@
   &nbsp;&nbsp;|&nbsp;&nbsp;  
   
     &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-        class="white-color">264.1k</span>&nbsp;字
+        class="white-color">267.4k</span>&nbsp;字
     
 
   &nbsp;&nbsp;|&nbsp;&nbsp;  
@@ -1185,7 +1187,7 @@
     
     。
   </div>
-  <div><p>博客内容遵循 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
+  <div><p>博客内容遵循 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
 </div>
   <!-- <div class="github-badge">
       <a style="color: #fff" rel="license" href="https://hexo.io/" target="_blank" title="由 Hexo 强力驱动">
@@ -1293,10 +1295,14 @@
 
 
 
-  <script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/app.js"></script>
+  
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/app.js"></script>
 
 
-  <script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/search.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/search.js"></script>
+
 
 
 

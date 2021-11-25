@@ -13,7 +13,7 @@
   
 
   
-  <link rel="alternate" href="/atom.xml" title="日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享">
+  <link rel="alternate" href="/atom.xml" title="日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享" type="application/atom+xml">
   
 
   <meta name="HandheldFriendly" content="True" />
@@ -35,7 +35,9 @@
   
 
   
-    <link rel="stylesheet" href="/style.css">
+    
+<link rel="stylesheet" href="/style.css">
+
   
 
   <script>
@@ -85,7 +87,7 @@
         daovoice('update');
         </script>
     
-</head>
+<meta name="generator" content="Hexo 5.4.0"></head>
 
 <body>
   
@@ -484,7 +486,7 @@
       <div class="article-entry" itemprop="articleBody">
         <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>大家都有学习如何规范简洁的<strong>编写代码</strong>，但却很少学习如何规范简洁的<strong>提交代码</strong>。现在大家基本上都用 Git 作为源码管理的工具，Git 提供了极大的灵活性，我们按照各种 workflow 来提交/合并 code，这种灵活性把控不好，也会带来很多问题</p>
 <p>最常见的问题就是乱成一团的 git log history，那真的是老太太的裹脚布, 又臭又长, 个人极其不喜欢这种 log </p>
-<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host@master/blog-img20211120204638.png" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host@master/blog-img20211120204638.png"></p>
 <p>造成这个问题的根本原因就是随意提交代码。</p>
 <blockquote>
 <p>代码都提交了，那还有什么办法拯救吗？三个锦囊，就可以完美解决了</p>
@@ -501,7 +503,7 @@
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">* 98a75af (HEAD -&gt; feature/JIRA123-amend-test) feat: [JIRA123] add feature 1.2</span><br><span class="line">* 119f86e feat: [JIRA123] add feature 1.1</span><br><span class="line">* 5dd0ad3 feat: [JIRA123] add feature 1</span><br><span class="line">* c69f53d (origin/main, origin/feature/JIRA123-amend-test, origin/HEAD, main) Initial commit</span><br></pre></td></tr></table></figure>
 
 <p>假设我们要修改最后一个 log message，就可以使用下面命令：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git commit --amend -m "feat: [JIRA123] add feature 1.2 and 1.3"</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git commit --amend -m &quot;feat: [JIRA123] add feature 1.2 and 1.3&quot;</span><br></pre></td></tr></table></figure>
 
 <p>我们再来看一下 log 信息, 可以发现，我们用新的 commit-id <code>5e354d1</code> 替换了旧的 commit-id <code>98a75af</code>, 修改了 message，并没有增加节点</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">* 5e354d1 (HEAD -&gt; feature/JIRA123-amend-test) feat: [JIRA123] add feature 1.2 and 1.3</span><br><span class="line">* 119f86e feat: [JIRA123] add feature 1.1</span><br><span class="line">* 5dd0ad3 feat: [JIRA123] add feature 1</span><br><span class="line">* c69f53d (origin/main, origin/feature/JIRA123-amend-test, origin/HEAD, main) Initial commit</span><br></pre></td></tr></table></figure>
@@ -510,7 +512,7 @@
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── README.md</span><br><span class="line">└── feat1.txt</span><br><span class="line"></span><br><span class="line">0 directories, 2 files</span><br></pre></td></tr></table></figure>
 
 <p>假设我们提交 <code>feature 1.3</code> 的时候，忘记了一个配置文件 <code>config.yaml</code>, 不想修改 log，不想添加新的 commit-id，那下面的这个命令就非常好用了</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">echo "feature 1.3 config info" &gt; config.yaml</span><br><span class="line">git add .</span><br><span class="line">git commit --amend --no-edit</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">echo &quot;feature 1.3 config info&quot; &gt; config.yaml</span><br><span class="line">git add .</span><br><span class="line">git commit --amend --no-edit</span><br></pre></td></tr></table></figure>
 
 <p><code>git commit --amend --no-edit</code> 就是灵魂所在了，来看一下当前的 repo 文件：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── README.md</span><br><span class="line">├── config.yaml</span><br><span class="line">└── feat1.txt</span><br><span class="line"></span><br><span class="line">0 directories, 3 files</span><br></pre></td></tr></table></figure>
@@ -519,7 +521,7 @@
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">* 247572e (HEAD -&gt; feature/JIRA123-amend-test) feat: [JIRA123] add feature 1.2 and 1.3</span><br><span class="line">* 119f86e feat: [JIRA123] add feature 1.1</span><br><span class="line">* 5dd0ad3 feat: [JIRA123] add feature 1</span><br><span class="line">* c69f53d (origin/main, origin/feature/JIRA123-amend-test, origin/HEAD, main) Initial commit</span><br></pre></td></tr></table></figure>
 
 <p>知道这个技巧，就可以确保我们的每次提交都包含有效的信息了。一张图描述这个过程就是这个样子了：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host@master/blog-img20211120212936.png" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host@master/blog-img20211120212936.png"></p>
 <p>有了 <code>--no-edit</code> 的 buff 加成，威力更大一些</p>
 <h2 id="善用-git-rebase-i"><a href="#善用-git-rebase-i" class="headerlink" title="善用 git rebase -i"></a>善用 git rebase -i</h2><p>可以看着，上面的 log 都是在开发 feature1，我们在把 feature 分支 merge 到 main 分支之前，还是应该继续合并 log commit 节点的，这就用到了 </p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git rebase -i HEAD~n</span><br></pre></td></tr></table></figure>
@@ -528,7 +530,7 @@
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git rebase -i HEAD~3</span><br></pre></td></tr></table></figure>
 
 <p>运行后，会显示一个 vim 编辑器，内容如下：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"> 1 pick 5dd0ad3 feat: [JIRA123] add feature 1</span><br><span class="line"> 2 pick 119f86e feat: [JIRA123] add feature 1.1</span><br><span class="line"> 3 pick 247572e feat: [JIRA123] add feature 1.2 and 1.3</span><br><span class="line"> 4</span><br><span class="line"> 5 # Rebase c69f53d..247572e onto c69f53d (3 commands)</span><br><span class="line"> 6 #</span><br><span class="line"> 7 # Commands:</span><br><span class="line"> 8 # p, pick &lt;commit&gt; = use commit</span><br><span class="line"> 9 # r, reword &lt;commit&gt; = use commit, but edit the commit message</span><br><span class="line">10 # e, edit &lt;commit&gt; = use commit, but stop for amending</span><br><span class="line">11 # s, squash &lt;commit&gt; = use commit, but meld into previous commit</span><br><span class="line">12 # f, fixup &lt;commit&gt; = like "squash", but discard this commit's log message</span><br><span class="line">13 # x, exec &lt;command&gt; = run command (the rest of the line) using shell</span><br><span class="line">14 # d, drop &lt;commit&gt; = remove commit</span><br><span class="line">15 # l, label &lt;label&gt; = label current HEAD with a name</span><br><span class="line">16 # t, reset &lt;label&gt; = reset HEAD to a label</span><br><span class="line">17 # m, merge [-C &lt;commit&gt; | -c &lt;commit&gt;] &lt;label&gt; [# &lt;oneline&gt;]</span><br><span class="line">18 # .       create a merge commit using the original merge commit's</span><br><span class="line">19 # .       message (or the oneline, if no original merge commit was</span><br><span class="line">20 # .       specified). Use -c &lt;commit&gt; to reword the commit message.</span><br><span class="line">21 #</span><br><span class="line">22 # These lines can be re-ordered; they are executed from top to bottom.</span><br><span class="line">23 #</span><br><span class="line">24 # If you remove a line here THAT COMMIT WILL BE LOST.</span><br><span class="line">25 #</span><br><span class="line">26 #   However, if you remove everything, the rebase will be aborted.</span><br><span class="line">27 #</span><br><span class="line">28 #</span><br><span class="line">29 # Note that empty commits are commented out</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"> 1 pick 5dd0ad3 feat: [JIRA123] add feature 1</span><br><span class="line"> 2 pick 119f86e feat: [JIRA123] add feature 1.1</span><br><span class="line"> 3 pick 247572e feat: [JIRA123] add feature 1.2 and 1.3</span><br><span class="line"> 4</span><br><span class="line"> 5 # Rebase c69f53d..247572e onto c69f53d (3 commands)</span><br><span class="line"> 6 #</span><br><span class="line"> 7 # Commands:</span><br><span class="line"> 8 # p, pick &lt;commit&gt; = use commit</span><br><span class="line"> 9 # r, reword &lt;commit&gt; = use commit, but edit the commit message</span><br><span class="line">10 # e, edit &lt;commit&gt; = use commit, but stop for amending</span><br><span class="line">11 # s, squash &lt;commit&gt; = use commit, but meld into previous commit</span><br><span class="line">12 # f, fixup &lt;commit&gt; = like &quot;squash&quot;, but discard this commit&#x27;s log message</span><br><span class="line">13 # x, exec &lt;command&gt; = run command (the rest of the line) using shell</span><br><span class="line">14 # d, drop &lt;commit&gt; = remove commit</span><br><span class="line">15 # l, label &lt;label&gt; = label current HEAD with a name</span><br><span class="line">16 # t, reset &lt;label&gt; = reset HEAD to a label</span><br><span class="line">17 # m, merge [-C &lt;commit&gt; | -c &lt;commit&gt;] &lt;label&gt; [# &lt;oneline&gt;]</span><br><span class="line">18 # .       create a merge commit using the original merge commit&#x27;s</span><br><span class="line">19 # .       message (or the oneline, if no original merge commit was</span><br><span class="line">20 # .       specified). Use -c &lt;commit&gt; to reword the commit message.</span><br><span class="line">21 #</span><br><span class="line">22 # These lines can be re-ordered; they are executed from top to bottom.</span><br><span class="line">23 #</span><br><span class="line">24 # If you remove a line here THAT COMMIT WILL BE LOST.</span><br><span class="line">25 #</span><br><span class="line">26 #   However, if you remove everything, the rebase will be aborted.</span><br><span class="line">27 #</span><br><span class="line">28 #</span><br><span class="line">29 # Note that empty commits are commented out</span><br></pre></td></tr></table></figure>
 
 <p>合并 commit-id 最常用的是 <code>squash</code> 和 <code>fixup</code>, 前者包含 commit message，后者不包含，这里使用 fixup, 然后 <code>:wq</code> 退出</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1 pick 5dd0ad3 feat: [JIRA123] add feature 1</span><br><span class="line">2 fixup 119f86e feat: [JIRA123] add feature 1.1</span><br><span class="line">3 fixup 247572e feat: [JIRA123] add feature 1.2 and 1.3</span><br></pre></td></tr></table></figure>
@@ -539,14 +541,14 @@
 <h2 id="善用-rebase"><a href="#善用-rebase" class="headerlink" title="善用 rebase"></a>善用 rebase</h2><p>上面的 feature1 已经完整的开发完了，main 分支也有了其他人的更新，在将 feature merge 回 main 分支之前，以防代码有冲突，需要先将 main 分支的内容合并到 feature 中，如果用 merge 命令，就会多处一个 merge 节点，log history 中也会出现拐点，并不是线性的，所以这里我们可以在 feature 分支上使用 rebase 命令</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git pull origin main --rebase</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host@master/blog-img20211120215234.png" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host@master/blog-img20211120215234.png"></p>
 <p>pull 命令的背后是自动帮我们做 merge 的，但是这里以 rebase 的形式，再来看一下 log</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">* d40daa6 (HEAD -&gt; feature/JIRA123-amend-test) feat: [JIRA123] add feature 1</span><br><span class="line">* 446f463 (origin/main, origin/HEAD) Create main.properties</span><br><span class="line">* c69f53d (origin/feature/JIRA123-amend-test, main) Initial commit</span><br></pre></td></tr></table></figure>
 
 <p>我们的 feature1 功能 <code>on top of</code> main 的提交节点，还是保持线性，接下来就可以 push 代码，然后提 PR，将你的 feature merge 到 main 分支了</p>
 <p>简单描述 merge 和 rebase 的区别就是这样的：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host@master/blog-imggit1.gif" alt=""></p>
-<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host@master/blog-imggit2.gif" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host@master/blog-imggit1.gif"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host@master/blog-imggit2.gif"></p>
 <p>我这里使用 <code>git pull origin main --rebase</code> 省略了切换 main 并拉取最新内容再切回来的过程，一步到位，背后的原理都是上图展示的这样</p>
 <p>使用 rebase 是要遵守一个黄金法则的，这个之前有说过，就不再是赘述了</p>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>有了这三个锦囊，相信大家的 git log 都无比的清晰，如果你还不知道，完全可以用起来，如果你的组内成员不知道，你完全可以推广起来，这样的 repo 看起来才更健康</p>
@@ -556,12 +558,12 @@
       <!-- <div class="tuijian">
         <br><br>
         📚相关文章
-        <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/git-worktree-in-practice.html" title="Git Worktree 大法真香" rel="bookmark">Git Worktree 大法真香</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/git-ignore.html" title="Git Ignoring Files" rel="bookmark">Git Ignoring Files</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/git-multiple-account.html" title="Git配置多个账号（GitLab和GitHub）" rel="bookmark">Git配置多个账号（GitLab和GitHub）</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/git-workflow.html" title="git 使用流程" rel="bookmark">git 使用流程</a></h3></div></li></ul>
+        <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/git-ignore.html" title="Git Ignoring Files" rel="bookmark">Git Ignoring Files</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/git-worktree-in-practice.html" title="Git Worktree 大法真香" rel="bookmark">Git Worktree 大法真香</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/git-worktree-in-advance.html" title="Git Worktree 高级使用" rel="bookmark">Git Worktree 高级使用</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/git-multiple-account.html" title="Git配置多个账号（GitLab和GitHub）" rel="bookmark">Git配置多个账号（GitLab和GitHub）</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/git-workflow.html" title="git 使用流程" rel="bookmark">git 使用流程</a></h3></div></li></ul>
       </div> -->
       <div class="personalweixin">
         <br><br>
         <blockquote>
-          <a href="https://mp.weixin.qq.com/s/G7BXuZh0Qh1-mE6ts4LJqQ" target="_blank" rel="noopener">加我微信</a>，咱们交流技术与思想，共同成长
+          <a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/G7BXuZh0Qh1-mE6ts4LJqQ">加我微信</a>，咱们交流技术与思想，共同成长
         </blockquote>
         <br>
 
@@ -599,9 +601,9 @@
   <div class="-mob-share-list share-body">
     
       
-        <a class="-mob-share-qq" title="QQ好友" rel="external nofollow noopener noreferrer"
+        <a class="-mob-share-qq" title="QQ好友" rel="external nofollow noopener noreferrer noopener"
           
-          href="http://connect.qq.com/widget/shareqq/index.html?url=https://dayarch.top/p/three-ways-to-keep-git-log-clear.html&title=保持清洁的Git提交记录，三招就够了 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=背景
+          target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://dayarch.top/p/three-ways-to-keep-git-log-clear.html&title=保持清洁的Git提交记录，三招就够了 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=背景
 大家都有学习如何规范简洁的编写代码，但却很少学习如何规范简洁的提交代码。现在大家基本上都用 Git 作为源码管理的工具，Git 提供了极大的灵活性，我们按照各种 workflow 来提交/合并 code，这种灵活性把控不好，也会带来很多问题
 
 最常见的问题就是乱成一团的 git log history，那真的是老太太的裹脚布, 又臭又长, 个人极其不喜欢这种 log 
@@ -628,9 +630,9 @@
       
     
       
-        <a class="-mob-share-qzone" title="QQ空间" rel="external nofollow noopener noreferrer"
+        <a class="-mob-share-qzone" title="QQ空间" rel="external nofollow noopener noreferrer noopener"
           
-          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://dayarch.top/p/three-ways-to-keep-git-log-clear.html&title=保持清洁的Git提交记录，三招就够了 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=背景
+          target="_blank" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://dayarch.top/p/three-ways-to-keep-git-log-clear.html&title=保持清洁的Git提交记录，三招就够了 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=背景
 大家都有学习如何规范简洁的编写代码，但却很少学习如何规范简洁的提交代码。现在大家基本上都用 Git 作为源码管理的工具，Git 提供了极大的灵活性，我们按照各种 workflow 来提交/合并 code，这种灵活性把控不好，也会带来很多问题
 
 最常见的问题就是乱成一团的 git log history，那真的是老太太的裹脚布, 又臭又长, 个人极其不喜欢这种 log 
@@ -657,9 +659,9 @@
       
     
       
-        <a class="-mob-share-weibo" title="微博" rel="external nofollow noopener noreferrer"
+        <a class="-mob-share-weibo" title="微博" rel="external nofollow noopener noreferrer noopener"
           
-          href="http://service.weibo.com/share/share.php?url=https://dayarch.top/p/three-ways-to-keep-git-log-clear.html&title=保持清洁的Git提交记录，三招就够了 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=背景
+          target="_blank" href="http://service.weibo.com/share/share.php?url=https://dayarch.top/p/three-ways-to-keep-git-log-clear.html&title=保持清洁的Git提交记录，三招就够了 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=背景
 大家都有学习如何规范简洁的编写代码，但却很少学习如何规范简洁的提交代码。现在大家基本上都用 Git 作为源码管理的工具，Git 提供了极大的灵活性，我们按照各种 workflow 来提交/合并 code，这种灵活性把控不好，也会带来很多问题
 
 最常见的问题就是乱成一团的 git log history，那真的是老太太的裹脚布, 又臭又长, 个人极其不喜欢这种 log 
@@ -760,7 +762,7 @@
 </header>
 
     <div class="content pure">
-      <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/git-worktree-in-practice.html" title="Git Worktree 大法真香" rel="bookmark">Git Worktree 大法真香</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/git-ignore.html" title="Git Ignoring Files" rel="bookmark">Git Ignoring Files</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/git-multiple-account.html" title="Git配置多个账号（GitLab和GitHub）" rel="bookmark">Git配置多个账号（GitLab和GitHub）</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/git-workflow.html" title="git 使用流程" rel="bookmark">git 使用流程</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/jenkins-shared-library.html" title="Jenkins Shared Library" rel="bookmark">Jenkins Shared Library</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/jenkins-environment-variables.html" title="Jenkins 使用环境变量" rel="bookmark">Jenkins 使用环境变量</a></h3></div></li></ul>
+      <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/git-ignore.html" title="Git Ignoring Files" rel="bookmark">Git Ignoring Files</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/git-worktree-in-practice.html" title="Git Worktree 大法真香" rel="bookmark">Git Worktree 大法真香</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/git-worktree-in-advance.html" title="Git Worktree 高级使用" rel="bookmark">Git Worktree 高级使用</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/git-multiple-account.html" title="Git配置多个账号（GitLab和GitHub）" rel="bookmark">Git配置多个账号（GitLab和GitHub）</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/git-workflow.html" title="git 使用流程" rel="bookmark">git 使用流程</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/jenkins-shared-library.html" title="Jenkins Shared Library" rel="bookmark">Jenkins Shared Library</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/jenkins-environment-variables.html" title="Jenkins 使用环境变量" rel="bookmark">Jenkins 使用环境变量</a></h3></div></li></ul>
     </div>
   </section>
 
@@ -968,7 +970,7 @@
 </header>
 
     <div class='content pure'>
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#背景"><span class="toc-text">背景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#善用-git-commit-–amend"><span class="toc-text">善用 git commit –amend</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#善用-git-rebase-i"><span class="toc-text">善用 git rebase -i</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#善用-rebase"><span class="toc-text">善用 rebase</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-text">总结</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%83%8C%E6%99%AF"><span class="toc-text">背景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%96%84%E7%94%A8-git-commit-%E2%80%93amend"><span class="toc-text">善用 git commit –amend</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%96%84%E7%94%A8-git-rebase-i"><span class="toc-text">善用 git rebase -i</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%96%84%E7%94%A8-rebase"><span class="toc-text">善用 rebase</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-text">总结</span></a></li></ol>
     </div>
   </section>
 
@@ -1043,7 +1045,7 @@
   &nbsp;&nbsp;|&nbsp;&nbsp;  
   
     &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-        class="white-color">264.1k</span>&nbsp;字
+        class="white-color">267.4k</span>&nbsp;字
     
 
   &nbsp;&nbsp;|&nbsp;&nbsp;  
@@ -1098,7 +1100,7 @@
     
     。
   </div>
-  <div><p>博客内容遵循 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
+  <div><p>博客内容遵循 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
 </div>
   <!-- <div class="github-badge">
       <a style="color: #fff" rel="license" href="https://hexo.io/" target="_blank" title="由 Hexo 强力驱动">
@@ -1206,10 +1208,14 @@
 
 
 
-  <script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/app.js"></script>
+  
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/app.js"></script>
 
 
-  <script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/search.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/search.js"></script>
+
 
 
 

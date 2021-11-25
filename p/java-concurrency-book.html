@@ -13,7 +13,7 @@
   
 
   
-  <link rel="alternate" href="/atom.xml" title="日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享">
+  <link rel="alternate" href="/atom.xml" title="日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享" type="application/atom+xml">
   
 
   <meta name="HandheldFriendly" content="True" />
@@ -35,7 +35,9 @@
   
 
   
-    <link rel="stylesheet" href="/style.css">
+    
+<link rel="stylesheet" href="/style.css">
+
   
 
   <script>
@@ -85,7 +87,7 @@
         daovoice('update');
         </script>
     
-</head>
+<meta name="generator" content="Hexo 5.4.0"></head>
 
 <body>
   
@@ -488,13 +490,13 @@
 <p>关注公众号：<code>日拱一兵</code>  并设置为<code>星标</code>，回复  <code>并发小册</code>即可获取，希望这次我们不一样</p>
 </blockquote>
 <p>Java 有并发，并发知识之大，一口吃不下<br>这曾是我不愿意触碰的知识角<br>多次一头扎进并发，无功而返<br>为应对面试，临时苦苦记忆，不成体系<br>这一次我决定从基础开始，攻克它</p>
-<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host@master/blog-img20210307211214.png" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host@master/blog-img20210307211214.png"></p>
 <p>12,0000 字<br>68Mb 高清无水印图文<br>2021 年刚开始<br>日拱一兵免费送上整理好的小册<br>这次希望我们不一样</p>
-<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host@master/blog-img%E5%9B%BE%E6%80%AA%E5%85%BD_d89980b9e99d7e9e7b42969b29ddd046_71564.jpg" alt=""></p>
-<h2 id="思维导图——理清脉络"><a href="#思维导图——理清脉络" class="headerlink" title="思维导图——理清脉络"></a>思维导图——理清脉络</h2><p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host@master/blog-img20210307211610.png" alt=""></p>
-<h2 id="知识讲解——循序渐进"><a href="#知识讲解——循序渐进" class="headerlink" title="知识讲解——循序渐进"></a>知识讲解——循序渐进</h2><p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host@master/blog-img20210307211633.png" alt=""></p>
-<h2 id="抽象问题——图文并茂"><a href="#抽象问题——图文并茂" class="headerlink" title="抽象问题——图文并茂"></a>抽象问题——图文并茂</h2><p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host@master/blog-img20210307211655.png" alt=""></p>
-<h2 id="实现细节——源码分析"><a href="#实现细节——源码分析" class="headerlink" title="实现细节——源码分析"></a>实现细节——源码分析</h2><p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host@master/blog-img20210307211717.png" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host@master/blog-img%E5%9B%BE%E6%80%AA%E5%85%BD_d89980b9e99d7e9e7b42969b29ddd046_71564.jpg"></p>
+<h2 id="思维导图——理清脉络"><a href="#思维导图——理清脉络" class="headerlink" title="思维导图——理清脉络"></a>思维导图——理清脉络</h2><p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host@master/blog-img20210307211610.png"></p>
+<h2 id="知识讲解——循序渐进"><a href="#知识讲解——循序渐进" class="headerlink" title="知识讲解——循序渐进"></a>知识讲解——循序渐进</h2><p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host@master/blog-img20210307211633.png"></p>
+<h2 id="抽象问题——图文并茂"><a href="#抽象问题——图文并茂" class="headerlink" title="抽象问题——图文并茂"></a>抽象问题——图文并茂</h2><p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host@master/blog-img20210307211655.png"></p>
+<h2 id="实现细节——源码分析"><a href="#实现细节——源码分析" class="headerlink" title="实现细节——源码分析"></a>实现细节——源码分析</h2><p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host@master/blog-img20210307211717.png"></p>
 <blockquote>
 <p>「态度」夫夷以近，则游者众；险以远，则至者少。而世之奇伟、瑰怪，非常之观，常在于险远，而人之所罕至焉，故非有志者不能至也。有志矣，不随以止也，然力不足者，亦不能至也。有志与力，而又不随以怠，至于幽暗昏惑而无物以相之，亦不能至也。然力足以至焉，于人为可讥，而在己为有悔；尽吾志也而不能至者，可以无悔矣，其孰能讥之乎？此余之所得也 —— 游褒禅山记（王安石）</p>
 </blockquote>
@@ -505,12 +507,12 @@
       <!-- <div class="tuijian">
         <br><br>
         📚相关文章
-        <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-aqs-acquireshared-and-semaphore.html" title="Java AQS共享式获取同步状态及Semaphore的应用分析" rel="bookmark">Java AQS共享式获取同步状态及Semaphore的应用分析</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-countdownlatch-vs-cyclicbarrier.html" title="CountDownLatch 和 CyclicBarrier 傻傻的分不清楚？" rel="bookmark">CountDownLatch 和 CyclicBarrier 傻傻的分不清楚？</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/executorservice-vs-completionservice.html" title="ExecutorService VS CompletionService" rel="bookmark">ExecutorService VS CompletionService</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-aqs-and-reentrantlock.html" title="Java AQS队列同步器以及ReentrantLock的应用" rel="bookmark">Java AQS队列同步器以及ReentrantLock的应用</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-future-and-callable.html" title="Java Future详解与使用" rel="bookmark">Java Future详解与使用</a></h3></div></li></ul>
+        <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-aqs-acquireshared-and-semaphore.html" title="Java AQS共享式获取同步状态及Semaphore的应用分析" rel="bookmark">Java AQS共享式获取同步状态及Semaphore的应用分析</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/executorservice-vs-completionservice.html" title="ExecutorService VS CompletionService" rel="bookmark">ExecutorService VS CompletionService</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-interrupt-mechnism.html" title="Java多线程中断机制" rel="bookmark">Java多线程中断机制</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-thread-life-cycle.html" title="Java线程生命周期这样理解挺简单的" rel="bookmark">Java线程生命周期这样理解挺简单的</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/difference-between-volatile-and-synchronized-keyword.html" title="volatile和synchronized图文透彻讲解" rel="bookmark">volatile和synchronized图文透彻讲解</a></h3></div></li></ul>
       </div> -->
       <div class="personalweixin">
         <br><br>
         <blockquote>
-          <a href="https://mp.weixin.qq.com/s/G7BXuZh0Qh1-mE6ts4LJqQ" target="_blank" rel="noopener">加我微信</a>，咱们交流技术与思想，共同成长
+          <a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/G7BXuZh0Qh1-mE6ts4LJqQ">加我微信</a>，咱们交流技术与思想，共同成长
         </blockquote>
         <br>
 
@@ -548,9 +550,9 @@
   <div class="-mob-share-list share-body">
     
       
-        <a class="-mob-share-qq" title="QQ好友" rel="external nofollow noopener noreferrer"
+        <a class="-mob-share-qq" title="QQ好友" rel="external nofollow noopener noreferrer noopener"
           
-          href="http://connect.qq.com/widget/shareqq/index.html?url=https://dayarch.top/p/java-concurrency-book.html&title=120000字，你们要的Java并发编程图文小册来了 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=关注公众号：日拱一兵 并设置为星标，回复 并发小册即可获取，希望这次我们不一样
+          target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://dayarch.top/p/java-concurrency-book.html&title=120000字，你们要的Java并发编程图文小册来了 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=关注公众号：日拱一兵 并设置为星标，回复 并发小册即可获取，希望这次我们不一样
 
 Java 有并发，并发知识之大，一口吃不下
 这曾是我不愿意触碰的知识角
@@ -590,9 +592,9 @@ Java 有并发，并发知识之大，一口吃不下
       
     
       
-        <a class="-mob-share-qzone" title="QQ空间" rel="external nofollow noopener noreferrer"
+        <a class="-mob-share-qzone" title="QQ空间" rel="external nofollow noopener noreferrer noopener"
           
-          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://dayarch.top/p/java-concurrency-book.html&title=120000字，你们要的Java并发编程图文小册来了 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=关注公众号：日拱一兵 并设置为星标，回复 并发小册即可获取，希望这次我们不一样
+          target="_blank" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://dayarch.top/p/java-concurrency-book.html&title=120000字，你们要的Java并发编程图文小册来了 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=关注公众号：日拱一兵 并设置为星标，回复 并发小册即可获取，希望这次我们不一样
 
 Java 有并发，并发知识之大，一口吃不下
 这曾是我不愿意触碰的知识角
@@ -632,9 +634,9 @@ Java 有并发，并发知识之大，一口吃不下
       
     
       
-        <a class="-mob-share-weibo" title="微博" rel="external nofollow noopener noreferrer"
+        <a class="-mob-share-weibo" title="微博" rel="external nofollow noopener noreferrer noopener"
           
-          href="http://service.weibo.com/share/share.php?url=https://dayarch.top/p/java-concurrency-book.html&title=120000字，你们要的Java并发编程图文小册来了 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=关注公众号：日拱一兵 并设置为星标，回复 并发小册即可获取，希望这次我们不一样
+          target="_blank" href="http://service.weibo.com/share/share.php?url=https://dayarch.top/p/java-concurrency-book.html&title=120000字，你们要的Java并发编程图文小册来了 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=关注公众号：日拱一兵 并设置为星标，回复 并发小册即可获取，希望这次我们不一样
 
 Java 有并发，并发知识之大，一口吃不下
 这曾是我不愿意触碰的知识角
@@ -748,7 +750,7 @@ Java 有并发，并发知识之大，一口吃不下
 </header>
 
     <div class="content pure">
-      <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-aqs-acquireshared-and-semaphore.html" title="Java AQS共享式获取同步状态及Semaphore的应用分析" rel="bookmark">Java AQS共享式获取同步状态及Semaphore的应用分析</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-countdownlatch-vs-cyclicbarrier.html" title="CountDownLatch 和 CyclicBarrier 傻傻的分不清楚？" rel="bookmark">CountDownLatch 和 CyclicBarrier 傻傻的分不清楚？</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/executorservice-vs-completionservice.html" title="ExecutorService VS CompletionService" rel="bookmark">ExecutorService VS CompletionService</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-aqs-and-reentrantlock.html" title="Java AQS队列同步器以及ReentrantLock的应用" rel="bookmark">Java AQS队列同步器以及ReentrantLock的应用</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-future-and-callable.html" title="Java Future详解与使用" rel="bookmark">Java Future详解与使用</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-interrupt-mechnism.html" title="Java多线程中断机制" rel="bookmark">Java多线程中断机制</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-thread-life-cycle.html" title="Java线程生命周期这样理解挺简单的" rel="bookmark">Java线程生命周期这样理解挺简单的</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java8-completablefuture-tutorial.html" title="java8 CompletableFuture 使用详解" rel="bookmark">java8 CompletableFuture 使用详解</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-dead-lock.html" title="Java并发死锁解决思路" rel="bookmark">Java并发死锁解决思路</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/difference-between-volatile-and-synchronized-keyword.html" title="volatile和synchronized图文透彻讲解" rel="bookmark">volatile和synchronized图文透彻讲解</a></h3></div></li></ul>
+      <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-aqs-acquireshared-and-semaphore.html" title="Java AQS共享式获取同步状态及Semaphore的应用分析" rel="bookmark">Java AQS共享式获取同步状态及Semaphore的应用分析</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/executorservice-vs-completionservice.html" title="ExecutorService VS CompletionService" rel="bookmark">ExecutorService VS CompletionService</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-interrupt-mechnism.html" title="Java多线程中断机制" rel="bookmark">Java多线程中断机制</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-thread-life-cycle.html" title="Java线程生命周期这样理解挺简单的" rel="bookmark">Java线程生命周期这样理解挺简单的</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/difference-between-volatile-and-synchronized-keyword.html" title="volatile和synchronized图文透彻讲解" rel="bookmark">volatile和synchronized图文透彻讲解</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/why-we-need-to-use-threadpool.html" title="为什么要使用线程池?" rel="bookmark">为什么要使用线程池?</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-core.html" title="并发编程三大核心" rel="bookmark">并发编程三大核心</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-three-questions.html" title="并发编程三大问题" rel="bookmark">并发编程三大问题</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-dead-lock.html" title="Java并发死锁解决思路" rel="bookmark">Java并发死锁解决思路</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/waiting-notification-mechanism.html" title="并发编程之等待通知机制" rel="bookmark">并发编程之等待通知机制</a></h3></div></li></ul>
     </div>
   </section>
 
@@ -956,7 +958,7 @@ Java 有并发，并发知识之大，一口吃不下
 </header>
 
     <div class='content pure'>
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#思维导图——理清脉络"><span class="toc-text">思维导图——理清脉络</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#知识讲解——循序渐进"><span class="toc-text">知识讲解——循序渐进</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#抽象问题——图文并茂"><span class="toc-text">抽象问题——图文并茂</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#实现细节——源码分析"><span class="toc-text">实现细节——源码分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#后续来袭"><span class="toc-text">后续来袭</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%9D%E7%BB%B4%E5%AF%BC%E5%9B%BE%E2%80%94%E2%80%94%E7%90%86%E6%B8%85%E8%84%89%E7%BB%9C"><span class="toc-text">思维导图——理清脉络</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9F%A5%E8%AF%86%E8%AE%B2%E8%A7%A3%E2%80%94%E2%80%94%E5%BE%AA%E5%BA%8F%E6%B8%90%E8%BF%9B"><span class="toc-text">知识讲解——循序渐进</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8A%BD%E8%B1%A1%E9%97%AE%E9%A2%98%E2%80%94%E2%80%94%E5%9B%BE%E6%96%87%E5%B9%B6%E8%8C%82"><span class="toc-text">抽象问题——图文并茂</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0%E7%BB%86%E8%8A%82%E2%80%94%E2%80%94%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90"><span class="toc-text">实现细节——源码分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%90%8E%E7%BB%AD%E6%9D%A5%E8%A2%AD"><span class="toc-text">后续来袭</span></a></li></ol>
     </div>
   </section>
 
@@ -1031,7 +1033,7 @@ Java 有并发，并发知识之大，一口吃不下
   &nbsp;&nbsp;|&nbsp;&nbsp;  
   
     &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-        class="white-color">264.1k</span>&nbsp;字
+        class="white-color">267.4k</span>&nbsp;字
     
 
   &nbsp;&nbsp;|&nbsp;&nbsp;  
@@ -1086,7 +1088,7 @@ Java 有并发，并发知识之大，一口吃不下
     
     。
   </div>
-  <div><p>博客内容遵循 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
+  <div><p>博客内容遵循 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
 </div>
   <!-- <div class="github-badge">
       <a style="color: #fff" rel="license" href="https://hexo.io/" target="_blank" title="由 Hexo 强力驱动">
@@ -1194,10 +1196,14 @@ Java 有并发，并发知识之大，一口吃不下
 
 
 
-  <script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/app.js"></script>
+  
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/app.js"></script>
 
 
-  <script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/search.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/search.js"></script>
+
 
 
 

@@ -13,7 +13,7 @@
   
 
   
-  <link rel="alternate" href="/atom.xml" title="日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享">
+  <link rel="alternate" href="/atom.xml" title="日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享" type="application/atom+xml">
   
 
   <meta name="HandheldFriendly" content="True" />
@@ -35,7 +35,9 @@
   
 
   
-    <link rel="stylesheet" href="/style.css">
+    
+<link rel="stylesheet" href="/style.css">
+
   
 
   <script>
@@ -85,7 +87,7 @@
         daovoice('update');
         </script>
     
-</head>
+<meta name="generator" content="Hexo 5.4.0"></head>
 
 <body>
   
@@ -484,12 +486,12 @@
       <div class="article-entry" itemprop="articleBody">
         <blockquote class="blockquote-center">像面向对象编程一样理解Docker镜像与容器</blockquote>
 
-<p>上一篇文章<a href="http://fraserlife.com/2017/11/01/Docker%E5%AD%A6%E4%B9%A0-%E4%B8%80-%E2%80%94%E2%80%94Docker%E5%AE%89%E8%A3%85/#more" target="_blank" rel="noopener">Docker学习(一)——Docker安装</a>讲述了在Ubuntu下安装，安装完了要了解一下Docker架构与一些名词解释，这样对Docker后续的操作会有更好的理解.</p>
+<p>上一篇文章<a target="_blank" rel="noopener" href="http://fraserlife.com/2017/11/01/Docker%E5%AD%A6%E4%B9%A0-%E4%B8%80-%E2%80%94%E2%80%94Docker%E5%AE%89%E8%A3%85/#more">Docker学习(一)——Docker安装</a>讲述了在Ubuntu下安装，安装完了要了解一下Docker架构与一些名词解释，这样对Docker后续的操作会有更好的理解.</p>
 <p>Docker 使用客户端-服务器 (C/S) 架构模式，使用远程API来管理和创建Docker容器, 也就是说我们通过Docker客户端来完成对镜像以及容器的一系列操作</p>
 <img itemprop="url image" src="/uploads/architecture.jpg" class="full-image" />
 
 <p>对于上面的图片出现的一系列名词可以这样理解：</p>
-<a id="more"></a>
+<span id="more"></span>
 
 <table>
 <thead>
@@ -508,7 +510,7 @@
 </tr>
 <tr>
 <td align="left">Docker 客户端(Client)</td>
-<td align="left">Docker 客户端通过命令行或者其他工具使用 Docker API (<a href="https://docs.docker.com/reference/api/docker_remote_api" target="_blank" rel="noopener">https://docs.docker.com/reference/api/docker_remote_api</a>) 与 Docker 的守护进程通信</td>
+<td align="left">Docker 客户端通过命令行或者其他工具使用 Docker API (<a target="_blank" rel="noopener" href="https://docs.docker.com/reference/api/docker_remote_api">https://docs.docker.com/reference/api/docker_remote_api</a>) 与 Docker 的守护进程通信</td>
 </tr>
 <tr>
 <td align="left">Docker 主机(Host)</td>
@@ -516,7 +518,7 @@
 </tr>
 <tr>
 <td align="left">Docker 仓库(Registry)</td>
-<td align="left">Docker 仓库用来保存镜像，可以理解为代码控制中的代码仓库，Docker Hub(<a href="https://hub.docker.com" target="_blank" rel="noopener">https://hub.docker.com</a>) 提供了庞大的镜像集合供使用</td>
+<td align="left">Docker 仓库用来保存镜像，可以理解为代码控制中的代码仓库，Docker Hub(<a target="_blank" rel="noopener" href="https://hub.docker.com/">https://hub.docker.com</a>) 提供了庞大的镜像集合供使用</td>
 </tr>
 </tbody></table>
 <p><em>关于Registry我要多说一句，应该把它理解成管理仓库的仓库，这个仓库中有Ubuntu仓库，Apache仓库，Nginx仓库等， 每个小仓库还都管理不同version的镜像，如Ubuntu1604,Ubuntu1404等.</em></p>
@@ -539,20 +541,20 @@
 </tbody></table>
 <p>充分理解一下这篇架构图以及名词解释，就要进入接下来的Docker之旅了.</p>
 <h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><ol>
-<li><a href="http://www.runoob.com/docker/docker-architecture.html" target="_blank" rel="noopener">Docker架构</a></li>
-<li><a href="http://www.cnblogs.com/SzeCheng/p/6822905.html" target="_blank" rel="noopener">几张图帮你理解 docker 基本原理及快速入门</a></li>
+<li><a target="_blank" rel="noopener" href="http://www.runoob.com/docker/docker-architecture.html">Docker架构</a></li>
+<li><a target="_blank" rel="noopener" href="http://www.cnblogs.com/SzeCheng/p/6822905.html">几张图帮你理解 docker 基本原理及快速入门</a></li>
 </ol>
 
       </div>
       <!-- <div class="tuijian">
         <br><br>
         📚相关文章
-        <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/docker-container-is-a-process.html" title="Docker Container就是个进程" rel="bookmark">Docker Container就是个进程</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/docker-install-command-completion.html" title="Docker命令自动补全" rel="bookmark">Docker命令自动补全</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/docker-image.html" title="Docker学习(三)——镜像" rel="bookmark">Docker学习(三)——镜像</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/docker-container.html" title="Docker学习(四)——容器" rel="bookmark">Docker学习(四)——容器</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/docker-install.html" title="Docker学习(一)——Docker安装" rel="bookmark">Docker学习(一)——Docker安装</a></h3></div></li></ul>
+        <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/docker-container-is-a-process.html" title="Docker Container就是个进程" rel="bookmark">Docker Container就是个进程</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/docker-install-command-completion.html" title="Docker命令自动补全" rel="bookmark">Docker命令自动补全</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/docker-install.html" title="Docker学习(一)——Docker安装" rel="bookmark">Docker学习(一)——Docker安装</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/docker-image.html" title="Docker学习(三)——镜像" rel="bookmark">Docker学习(三)——镜像</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/docker-container.html" title="Docker学习(四)——容器" rel="bookmark">Docker学习(四)——容器</a></h3></div></li></ul>
       </div> -->
       <div class="personalweixin">
         <br><br>
         <blockquote>
-          <a href="https://mp.weixin.qq.com/s/G7BXuZh0Qh1-mE6ts4LJqQ" target="_blank" rel="noopener">加我微信</a>，咱们交流技术与思想，共同成长
+          <a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/G7BXuZh0Qh1-mE6ts4LJqQ">加我微信</a>，咱们交流技术与思想，共同成长
         </blockquote>
         <br>
 
@@ -590,9 +592,9 @@
   <div class="-mob-share-list share-body">
     
       
-        <a class="-mob-share-qq" title="QQ好友" rel="external nofollow noopener noreferrer"
+        <a class="-mob-share-qq" title="QQ好友" rel="external nofollow noopener noreferrer noopener"
           
-          href="http://connect.qq.com/widget/shareqq/index.html?url=https://dayarch.top/p/docker-architect.html&title=Docker学习(二)——Docker架构 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=像面向对象编程一样理解Docker镜像与容器上一篇文章Docker学习(一)——Docker安装讲述了在Ubuntu下安装，安装完了要了解一下Docker架构与一些名词解释，这样对Docker后续的操作会有更好的理解.
+          target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://dayarch.top/p/docker-architect.html&title=Docker学习(二)——Docker架构 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=像面向对象编程一样理解Docker镜像与容器上一篇文章Docker学习(一)——Docker安装讲述了在Ubuntu下安装，安装完了要了解一下Docker架构与一些名词解释，这样对Docker后续的操作会有更好的理解.
 
 Docker 使用客户端-服务器 (C/S) 架构模式，使用远程API来管理和创建Docker容器, 也就是说我们通过Docker客户端来完成对镜像以及容器的一系列操作
 
@@ -608,9 +610,9 @@ Docker 使用客户端-服务器 (C/S) 架构模式，使用远程API来管理�
       
     
       
-        <a class="-mob-share-qzone" title="QQ空间" rel="external nofollow noopener noreferrer"
+        <a class="-mob-share-qzone" title="QQ空间" rel="external nofollow noopener noreferrer noopener"
           
-          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://dayarch.top/p/docker-architect.html&title=Docker学习(二)——Docker架构 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=像面向对象编程一样理解Docker镜像与容器上一篇文章Docker学习(一)——Docker安装讲述了在Ubuntu下安装，安装完了要了解一下Docker架构与一些名词解释，这样对Docker后续的操作会有更好的理解.
+          target="_blank" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://dayarch.top/p/docker-architect.html&title=Docker学习(二)——Docker架构 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=像面向对象编程一样理解Docker镜像与容器上一篇文章Docker学习(一)——Docker安装讲述了在Ubuntu下安装，安装完了要了解一下Docker架构与一些名词解释，这样对Docker后续的操作会有更好的理解.
 
 Docker 使用客户端-服务器 (C/S) 架构模式，使用远程API来管理和创建Docker容器, 也就是说我们通过Docker客户端来完成对镜像以及容器的一系列操作
 
@@ -626,9 +628,9 @@ Docker 使用客户端-服务器 (C/S) 架构模式，使用远程API来管理�
       
     
       
-        <a class="-mob-share-weibo" title="微博" rel="external nofollow noopener noreferrer"
+        <a class="-mob-share-weibo" title="微博" rel="external nofollow noopener noreferrer noopener"
           
-          href="http://service.weibo.com/share/share.php?url=https://dayarch.top/p/docker-architect.html&title=Docker学习(二)——Docker架构 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=像面向对象编程一样理解Docker镜像与容器上一篇文章Docker学习(一)——Docker安装讲述了在Ubuntu下安装，安装完了要了解一下Docker架构与一些名词解释，这样对Docker后续的操作会有更好的理解.
+          target="_blank" href="http://service.weibo.com/share/share.php?url=https://dayarch.top/p/docker-architect.html&title=Docker学习(二)——Docker架构 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=像面向对象编程一样理解Docker镜像与容器上一篇文章Docker学习(一)——Docker安装讲述了在Ubuntu下安装，安装完了要了解一下Docker架构与一些名词解释，这样对Docker后续的操作会有更好的理解.
 
 Docker 使用客户端-服务器 (C/S) 架构模式，使用远程API来管理和创建Docker容器, 也就是说我们通过Docker客户端来完成对镜像以及容器的一系列操作
 
@@ -718,7 +720,7 @@ Docker 使用客户端-服务器 (C/S) 架构模式，使用远程API来管理�
 </header>
 
     <div class="content pure">
-      <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/docker-container-is-a-process.html" title="Docker Container就是个进程" rel="bookmark">Docker Container就是个进程</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/docker-install-command-completion.html" title="Docker命令自动补全" rel="bookmark">Docker命令自动补全</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/docker-image.html" title="Docker学习(三)——镜像" rel="bookmark">Docker学习(三)——镜像</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/docker-container.html" title="Docker学习(四)——容器" rel="bookmark">Docker学习(四)——容器</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/docker-install.html" title="Docker学习(一)——Docker安装" rel="bookmark">Docker学习(一)——Docker安装</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/docker-deploy-spring-boot.html" title="使用 Docker 部署 Spring Boot" rel="bookmark">使用 Docker 部署 Spring Boot</a></h3></div></li></ul>
+      <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/docker-container-is-a-process.html" title="Docker Container就是个进程" rel="bookmark">Docker Container就是个进程</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/docker-install-command-completion.html" title="Docker命令自动补全" rel="bookmark">Docker命令自动补全</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/docker-install.html" title="Docker学习(一)——Docker安装" rel="bookmark">Docker学习(一)——Docker安装</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/docker-image.html" title="Docker学习(三)——镜像" rel="bookmark">Docker学习(三)——镜像</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/docker-container.html" title="Docker学习(四)——容器" rel="bookmark">Docker学习(四)——容器</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/docker-deploy-spring-boot.html" title="使用 Docker 部署 Spring Boot" rel="bookmark">使用 Docker 部署 Spring Boot</a></h3></div></li></ul>
     </div>
   </section>
 
@@ -926,7 +928,7 @@ Docker 使用客户端-服务器 (C/S) 架构模式，使用远程API来管理�
 </header>
 
     <div class='content pure'>
-      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#参考"><span class="toc-text">参考</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%82%E8%80%83"><span class="toc-text">参考</span></a></li></ol>
     </div>
   </section>
 
@@ -1001,7 +1003,7 @@ Docker 使用客户端-服务器 (C/S) 架构模式，使用远程API来管理�
   &nbsp;&nbsp;|&nbsp;&nbsp;  
   
     &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-        class="white-color">264.1k</span>&nbsp;字
+        class="white-color">267.4k</span>&nbsp;字
     
 
   &nbsp;&nbsp;|&nbsp;&nbsp;  
@@ -1056,7 +1058,7 @@ Docker 使用客户端-服务器 (C/S) 架构模式，使用远程API来管理�
     
     。
   </div>
-  <div><p>博客内容遵循 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
+  <div><p>博客内容遵循 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
 </div>
   <!-- <div class="github-badge">
       <a style="color: #fff" rel="license" href="https://hexo.io/" target="_blank" title="由 Hexo 强力驱动">
@@ -1164,10 +1166,14 @@ Docker 使用客户端-服务器 (C/S) 架构模式，使用远程API来管理�
 
 
 
-  <script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/app.js"></script>
+  
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/app.js"></script>
 
 
-  <script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/search.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/search.js"></script>
+
 
 
 

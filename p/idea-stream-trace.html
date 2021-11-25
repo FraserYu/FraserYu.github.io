@@ -13,7 +13,7 @@
   
 
   
-  <link rel="alternate" href="/atom.xml" title="日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享">
+  <link rel="alternate" href="/atom.xml" title="日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享" type="application/atom+xml">
   
 
   <meta name="HandheldFriendly" content="True" />
@@ -35,7 +35,9 @@
   
 
   
-    <link rel="stylesheet" href="/style.css">
+    
+<link rel="stylesheet" href="/style.css">
+
   
 
   <script>
@@ -85,7 +87,7 @@
         daovoice('update');
         </script>
     
-</head>
+<meta name="generator" content="Hexo 5.4.0"></head>
 
 <body>
   
@@ -489,31 +491,31 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">  Object[] res = Stream.of(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>).filter( i -&gt; i%<span class="number">2</span> == <span class="number">0</span>).filter( i -&gt; i&gt;<span class="number">3</span>).toArray();</span><br><span class="line">  System.out.println(Arrays.toString(res));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>我们可以在 Stream 操作处打上断点，逐步查看结果，就像这样：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host@master/blog-img20210511085423.png" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host@master/blog-img20210511085423.png"></p>
 <p>我们需要各种单步调试，不是很直观，我们迫切的需要个一览视图，让我们快速查看我们的 Stream 结果</p>
 <h2 id="可视化调试"><a href="#可视化调试" class="headerlink" title="可视化调试"></a>可视化调试</h2><p>同样先选择行断点，以 <code>Debug</code> 模式进入程序：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host@master/blog-img20210511090152.png" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host@master/blog-img20210511090152.png"></p>
 <p>接下来会弹出 <code>Stream Trace</code>，整个 Stream 操作尽显眼前</p>
-<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host@master/blog-img20210511090325.png" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host@master/blog-img20210511090325.png"></p>
 <p>同样可以点击左下角的 <code>Flat Mode</code> 按钮，将整个视图扁平化</p>
-<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host@master/blog-img20210511090630.png" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host@master/blog-img20210511090630.png"></p>
 <p>在实际业务中，我们通常对集合进行各种 Stream 操作，我们再来个复杂一些的例子：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">List&lt;Optional&lt;Customer&gt;&gt; customers = Arrays.asList(</span><br><span class="line">		Optional.of(<span class="keyword">new</span> Customer(<span class="string">"日拱一兵"</span>, <span class="number">18</span>)),</span><br><span class="line">		Optional.of(<span class="keyword">new</span> Customer(<span class="string">"卑微的小开发"</span>, <span class="number">22</span>)),</span><br><span class="line">		Optional.empty(),</span><br><span class="line">		Optional.of(<span class="keyword">new</span> Customer(<span class="string">"OOT"</span>, <span class="number">21</span>)),</span><br><span class="line">		Optional.empty(),</span><br><span class="line">		Optional.of(<span class="keyword">new</span> Customer(<span class="string">"温柔一刀"</span>, <span class="number">23</span>)),</span><br><span class="line">		Optional.empty()</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="keyword">long</span> numberOf65PlusCustomers = customers</span><br><span class="line">		.stream()</span><br><span class="line">		.flatMap(c -&gt; c</span><br><span class="line">				.map(Stream::of)</span><br><span class="line">				.orElseGet(Stream::empty))</span><br><span class="line">		.filter(c -&gt; c.getAge() &gt; <span class="number">18</span>)</span><br><span class="line">		.count();</span><br><span class="line"></span><br><span class="line">System.out.println(numberOf65PlusCustomers);</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">List&lt;Optional&lt;Customer&gt;&gt; customers = Arrays.asList(</span><br><span class="line">		Optional.of(<span class="keyword">new</span> Customer(<span class="string">&quot;日拱一兵&quot;</span>, <span class="number">18</span>)),</span><br><span class="line">		Optional.of(<span class="keyword">new</span> Customer(<span class="string">&quot;卑微的小开发&quot;</span>, <span class="number">22</span>)),</span><br><span class="line">		Optional.empty(),</span><br><span class="line">		Optional.of(<span class="keyword">new</span> Customer(<span class="string">&quot;OOT&quot;</span>, <span class="number">21</span>)),</span><br><span class="line">		Optional.empty(),</span><br><span class="line">		Optional.of(<span class="keyword">new</span> Customer(<span class="string">&quot;温柔一刀&quot;</span>, <span class="number">23</span>)),</span><br><span class="line">		Optional.empty()</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="keyword">long</span> numberOf65PlusCustomers = customers</span><br><span class="line">		.stream()</span><br><span class="line">		.flatMap(c -&gt; c</span><br><span class="line">				.map(Stream::of)</span><br><span class="line">				.orElseGet(Stream::empty))</span><br><span class="line">		.filter(c -&gt; c.getAge() &gt; <span class="number">18</span>)</span><br><span class="line">		.count();</span><br><span class="line"></span><br><span class="line">System.out.println(numberOf65PlusCustomers);</span><br></pre></td></tr></table></figure>
 
 <p>同样按照上面的操作得到可视化 Stream Trace 视图，直观了解整个 Stream 流程，查看对象属性等</p>
-<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host@master/blog-img20210511092343.png" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host@master/blog-img20210511092343.png"></p>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>这个简单的功能，看一遍就会，相信可以在日常的调试中对你有很大帮助，接下来会介绍更多的你不曾留意又很高级调试技巧</p>
 
       </div>
       <!-- <div class="tuijian">
         <br><br>
         📚相关文章
-        <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/http-client-advanced-usage.html" title="IntelliJ IDEA HTTP Client高级使用详解" rel="bookmark">IntelliJ IDEA HTTP Client高级使用详解</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/scratch-files-and-scratch-bufferss.html" title="Intellij IDEA 创建Scratch files 和 Scratch buffers" rel="bookmark">Intellij IDEA 创建Scratch files 和 Scratch buffers</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/intellj-idea-advanced-debug.html" title="IntelliJ IDEA 高级Debug技巧，助你起飞" rel="bookmark">IntelliJ IDEA 高级Debug技巧，助你起飞</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/intellij-idea-configuration-and-plugins.html" title="Intellij IDEA 配置和插件合集" rel="bookmark">Intellij IDEA 配置和插件合集</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/how-to-use-todo-feature.html" title="小小TODO也有大道理" rel="bookmark">小小TODO也有大道理</a></h3></div></li></ul>
+        <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/http-client-advanced-usage.html" title="IntelliJ IDEA HTTP Client高级使用详解" rel="bookmark">IntelliJ IDEA HTTP Client高级使用详解</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/intellj-idea-advanced-debug.html" title="IntelliJ IDEA 高级Debug技巧，助你起飞" rel="bookmark">IntelliJ IDEA 高级Debug技巧，助你起飞</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/scratch-files-and-scratch-bufferss.html" title="Intellij IDEA 创建Scratch files 和 Scratch buffers" rel="bookmark">Intellij IDEA 创建Scratch files 和 Scratch buffers</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/intellij-idea-configuration-and-plugins.html" title="Intellij IDEA 配置和插件合集" rel="bookmark">Intellij IDEA 配置和插件合集</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/how-to-use-todo-feature.html" title="小小TODO也有大道理" rel="bookmark">小小TODO也有大道理</a></h3></div></li></ul>
       </div> -->
       <div class="personalweixin">
         <br><br>
         <blockquote>
-          <a href="https://mp.weixin.qq.com/s/G7BXuZh0Qh1-mE6ts4LJqQ" target="_blank" rel="noopener">加我微信</a>，咱们交流技术与思想，共同成长
+          <a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/G7BXuZh0Qh1-mE6ts4LJqQ">加我微信</a>，咱们交流技术与思想，共同成长
         </blockquote>
         <br>
 
@@ -703,7 +705,7 @@ public static void main(String[] args) {
 </header>
 
     <div class="content pure">
-      <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/http-client-advanced-usage.html" title="IntelliJ IDEA HTTP Client高级使用详解" rel="bookmark">IntelliJ IDEA HTTP Client高级使用详解</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/scratch-files-and-scratch-bufferss.html" title="Intellij IDEA 创建Scratch files 和 Scratch buffers" rel="bookmark">Intellij IDEA 创建Scratch files 和 Scratch buffers</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/intellj-idea-advanced-debug.html" title="IntelliJ IDEA 高级Debug技巧，助你起飞" rel="bookmark">IntelliJ IDEA 高级Debug技巧，助你起飞</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/intellij-idea-configuration-and-plugins.html" title="Intellij IDEA 配置和插件合集" rel="bookmark">Intellij IDEA 配置和插件合集</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/how-to-use-todo-feature.html" title="小小TODO也有大道理" rel="bookmark">小小TODO也有大道理</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/book-reviews-clean-code.html" title="读《Clean Code 代码整洁之道》之感悟" rel="bookmark">读《Clean Code 代码整洁之道》之感悟</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/easyexcel-read.html" title="EasyExcel读取Excel实际应用" rel="bookmark">EasyExcel读取Excel实际应用</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-string-interview.html" title="Java String基础面试" rel="bookmark">Java String基础面试</a></h3></div></li></ul>
+      <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/http-client-advanced-usage.html" title="IntelliJ IDEA HTTP Client高级使用详解" rel="bookmark">IntelliJ IDEA HTTP Client高级使用详解</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/intellj-idea-advanced-debug.html" title="IntelliJ IDEA 高级Debug技巧，助你起飞" rel="bookmark">IntelliJ IDEA 高级Debug技巧，助你起飞</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/scratch-files-and-scratch-bufferss.html" title="Intellij IDEA 创建Scratch files 和 Scratch buffers" rel="bookmark">Intellij IDEA 创建Scratch files 和 Scratch buffers</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/intellij-idea-configuration-and-plugins.html" title="Intellij IDEA 配置和插件合集" rel="bookmark">Intellij IDEA 配置和插件合集</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/how-to-use-todo-feature.html" title="小小TODO也有大道理" rel="bookmark">小小TODO也有大道理</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/book-reviews-clean-code.html" title="读《Clean Code 代码整洁之道》之感悟" rel="bookmark">读《Clean Code 代码整洁之道》之感悟</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-string-interview.html" title="Java String基础面试" rel="bookmark">Java String基础面试</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/jdk12-new-feature-overview.html" title="Java 12 新特性一览" rel="bookmark">Java 12 新特性一览</a></h3></div></li></ul>
     </div>
   </section>
 
@@ -911,7 +913,7 @@ public static void main(String[] args) {
 </header>
 
     <div class='content pure'>
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#常规调试"><span class="toc-text">常规调试</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#可视化调试"><span class="toc-text">可视化调试</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-text">总结</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E8%A7%84%E8%B0%83%E8%AF%95"><span class="toc-text">常规调试</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%AF%E8%A7%86%E5%8C%96%E8%B0%83%E8%AF%95"><span class="toc-text">可视化调试</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-text">总结</span></a></li></ol>
     </div>
   </section>
 
@@ -986,7 +988,7 @@ public static void main(String[] args) {
   &nbsp;&nbsp;|&nbsp;&nbsp;  
   
     &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-        class="white-color">264.1k</span>&nbsp;字
+        class="white-color">267.4k</span>&nbsp;字
     
 
   &nbsp;&nbsp;|&nbsp;&nbsp;  
@@ -1041,7 +1043,7 @@ public static void main(String[] args) {
     
     。
   </div>
-  <div><p>博客内容遵循 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
+  <div><p>博客内容遵循 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
 </div>
   <!-- <div class="github-badge">
       <a style="color: #fff" rel="license" href="https://hexo.io/" target="_blank" title="由 Hexo 强力驱动">
@@ -1149,10 +1151,14 @@ public static void main(String[] args) {
 
 
 
-  <script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/app.js"></script>
+  
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/app.js"></script>
 
 
-  <script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/search.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/search.js"></script>
+
 
 
 

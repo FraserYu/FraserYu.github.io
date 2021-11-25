@@ -13,7 +13,7 @@
   
 
   
-  <link rel="alternate" href="/atom.xml" title="日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享">
+  <link rel="alternate" href="/atom.xml" title="日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享" type="application/atom+xml">
   
 
   <meta name="HandheldFriendly" content="True" />
@@ -35,7 +35,9 @@
   
 
   
-    <link rel="stylesheet" href="/style.css">
+    
+<link rel="stylesheet" href="/style.css">
+
   
 
   <script>
@@ -85,7 +87,7 @@
         daovoice('update');
         </script>
     
-</head>
+<meta name="generator" content="Hexo 5.4.0"></head>
 
 <body>
   
@@ -483,68 +485,68 @@
     <section class="article typo">
       <div class="article-entry" itemprop="articleBody">
         <p>上一篇文章 <a href="https://dayarch.top/p/mysql-cross-table-update.html"><a href="https://dayarch.top/p/mysql-cross-table-update.html">跨表更新，看到自己写的SQL像个憨憨</a></a> 写了关于跨表个更新的内容。一年过的很快，文中后来的两位员工 <code>馮大</code> 和 <code>馮二</code> 也要面对无情的 KPI 考核了，他们工作干的很不错，performance 分别是 4 和 5</p>
-<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200203190431.png" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200203190431.png"></p>
 <p>新需求来了，静悄悄的来了！！！ 领导想要查看每个 performance 下都有谁，同时要求将这些人的名称要逗号拼接成一个字符串，也就是说要得到下面的结果：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200203190752.png" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200203190752.png"></p>
 <p>要将结果集中某个指定的列进行字符串拼接，这要怎么做呢？主角闪亮✨登场</p>
-<h2 id="GROUP-CONCAT-expr"><a href="#GROUP-CONCAT-expr" class="headerlink" title="GROUP_CONCAT(expr)"></a>GROUP_CONCAT(expr)</h2><p>在 <a href="https://dev.mysql.com/doc/refman/8.0/en/group-by-functions.html#function_group-concat" target="_blank" rel="noopener">Mysql 官方文档</a> 中，该函数被放在聚合函数章节，如果你要按照指定字段分组拼接，就要配合关键字 <code>GROUP BY</code> 来使用的</p>
-<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgimage-20200203192855823.png" alt=""></p>
+<h2 id="GROUP-CONCAT-expr"><a href="#GROUP-CONCAT-expr" class="headerlink" title="GROUP_CONCAT(expr)"></a>GROUP_CONCAT(expr)</h2><p>在 <a target="_blank" rel="noopener" href="https://dev.mysql.com/doc/refman/8.0/en/group-by-functions.html#function_group-concat">Mysql 官方文档</a> 中，该函数被放在聚合函数章节，如果你要按照指定字段分组拼接，就要配合关键字 <code>GROUP BY</code> 来使用的</p>
+<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgimage-20200203192855823.png"></p>
 <h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><blockquote>
 <p>该函数返回一个字符串结果，该字符串结果是通过分组串联的<code>非NULL值</code>。如果没有非NULL值，则返回NULL。完整语法如下：</p>
 </blockquote>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">GROUP_CONCAT([DISTINCT] expr [,expr ...]</span><br><span class="line">             [ORDER BY &#123;unsigned_integer | col_name | expr&#125;</span><br><span class="line">                 [ASC | DESC] [,col_name ...]]</span><br><span class="line">             [SEPARATOR str_val])</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">GROUP_CONCAT([<span class="keyword">DISTINCT</span>] expr [,expr ...]</span><br><span class="line">             [<span class="keyword">ORDER</span> <span class="keyword">BY</span> &#123;unsigned_integer <span class="operator">|</span> col_name <span class="operator">|</span> expr&#125;</span><br><span class="line">                 [<span class="keyword">ASC</span> <span class="operator">|</span> <span class="keyword">DESC</span>] [,col_name ...]]</span><br><span class="line">             [SEPARATOR str_val])</span><br></pre></td></tr></table></figure>
 
 
 
 <p>What?  这个语法看着太复杂了吧，别着急，下面会用例子慢慢说明逐一验证滴</p>
 <h3 id="使用案例"><a href="#使用案例" class="headerlink" title="使用案例"></a>使用案例</h3><p>先完成文章开头的需求：</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">performance</span>, <span class="keyword">GROUP_CONCAT</span>(employee_name) <span class="keyword">AS</span> employees</span><br><span class="line"><span class="keyword">FROM</span> employees</span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> <span class="keyword">performance</span>;</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> performance, GROUP_CONCAT(employee_name) <span class="keyword">AS</span> employees</span><br><span class="line"><span class="keyword">FROM</span> employees</span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> performance;</span><br></pre></td></tr></table></figure>
 
 
 
 <p>zou是这个结果：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200203190644.png" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200203190644.png"></p>
 <p>到这里，领导给过来的需求就完成了😜</p>
 <p><strong>客官请留步，您点的菜还没上完呢……</strong></p>
 <p>我们是国际化的团队，我们的家乡遍布五湖四海</p>
-<p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200203200846.png" alt=""></fancybox></p>
+<p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200203200846.png"></fancybox></p>
 <p>领导想关怀一下员工，要查看公司全部员工的家乡都有哪些地方。员工们可能来自同一个地方，所以要将结果集去重复，<code>DISTINCT</code> 关键字就派上用场了</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">GROUP_CONCAT</span>(<span class="keyword">DISTINCT</span> home_town)</span><br><span class="line"><span class="keyword">FROM</span> employees;</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> GROUP_CONCAT(<span class="keyword">DISTINCT</span> home_town)</span><br><span class="line"><span class="keyword">FROM</span> employees;</span><br></pre></td></tr></table></figure>
 
 
 
 <p>来看结果：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200203201356.png" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200203201356.png"></p>
 <p>领导的关怀遍布五湖四海啊……</p>
 <p>文案要改了，领导的关怀是遍布<code>四海五湖</code>的, 那么 <code>ORDER BY</code> 关键字就派上用场了</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">GROUP_CONCAT</span>(<span class="keyword">DISTINCT</span> home_town <span class="keyword">ORDER</span> <span class="keyword">BY</span> home_town <span class="keyword">DESC</span>) <span class="keyword">AS</span> <span class="string">'领导关怀地区'</span></span><br><span class="line"><span class="keyword">FROM</span> employees;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 没我这么起变量的哈，还是汉语，我看你是疯了</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> GROUP_CONCAT(<span class="keyword">DISTINCT</span> home_town <span class="keyword">ORDER</span> <span class="keyword">BY</span> home_town <span class="keyword">DESC</span>) <span class="keyword">AS</span> <span class="string">&#x27;领导关怀地区&#x27;</span></span><br><span class="line"><span class="keyword">FROM</span> employees;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 没我这么起变量的哈，还是汉语，我看你是疯了</span></span><br></pre></td></tr></table></figure>
 
 
 
-<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200203201904.png" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200203201904.png"></p>
 <p>这里你看到 <code>GROUP_CONCAT</code> 函数拼接字符串默认的分隔符是逗号 <code>,</code>, 领导不开心，逗号么的感情，要用❕才能体现出关怀的强烈， <code>SEPARATOR</code> 关键字就派上用场了</p>
 <blockquote>
 <p>分组拼接的值之间默认分隔符是逗号（，）。要明确指定分隔符，需要使用 <code>SEPARATOR</code> 关键字，紧跟其后的是你想设置的分隔符。要完全消除分隔符，就在 <code>SEPARATOR</code> 关键字后面写  ‘’ 就好了</p>
 </blockquote>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">GROUP_CONCAT</span>(<span class="keyword">DISTINCT</span> home_town <span class="keyword">ORDER</span> <span class="keyword">BY</span> home_town <span class="keyword">DESC</span> SEPARATOR <span class="string">'!'</span>) <span class="keyword">AS</span> <span class="string">'领导关怀地区'</span></span><br><span class="line"><span class="keyword">FROM</span> employees;</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> GROUP_CONCAT(<span class="keyword">DISTINCT</span> home_town <span class="keyword">ORDER</span> <span class="keyword">BY</span> home_town <span class="keyword">DESC</span> SEPARATOR <span class="string">&#x27;!&#x27;</span>) <span class="keyword">AS</span> <span class="string">&#x27;领导关怀地区&#x27;</span></span><br><span class="line"><span class="keyword">FROM</span> employees;</span><br></pre></td></tr></table></figure>
 
 
 
-<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200203202350.png" alt=""></p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">GROUP_CONCAT</span>(<span class="keyword">DISTINCT</span> home_town SEPARATOR <span class="string">''</span>) <span class="keyword">AS</span> <span class="string">'领导关怀地区'</span></span><br><span class="line"><span class="keyword">FROM</span> employees;</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200203202350.png"></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> GROUP_CONCAT(<span class="keyword">DISTINCT</span> home_town SEPARATOR <span class="string">&#x27;&#x27;</span>) <span class="keyword">AS</span> <span class="string">&#x27;领导关怀地区&#x27;</span></span><br><span class="line"><span class="keyword">FROM</span> employees;</span><br></pre></td></tr></table></figure>
 
 
 
-<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200203203120.png" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200203203120.png"></p>
 <p>这关怀到位了吧，你品，你细品！！！</p>
 <p>领导的关怀能力也有限，<strong>拼接的字符串默认的最大长度是1024个字符</strong>，可以通过下面语句查看当前限制是多少：</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">show</span> <span class="keyword">variables</span> <span class="keyword">like</span> <span class="string">'group_concat_max_len'</span>;</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">show</span> variables <span class="keyword">like</span> <span class="string">&#x27;group_concat_max_len&#x27;</span>;</span><br></pre></td></tr></table></figure>
 
 
 
-<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200203204525.png" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200203204525.png"></p>
 <p>领导的能力可是飘忽不定的，所以我们可以灵活的设置这个值</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SET</span> [<span class="keyword">GLOBAL</span> | <span class="keyword">SESSION</span>] group_concat_max_len = val;</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SET</span> [<span class="keyword">GLOBAL</span> <span class="operator">|</span> SESSION] group_concat_max_len <span class="operator">=</span> val;</span><br></pre></td></tr></table></figure>
 
 
 
@@ -553,17 +555,17 @@
 <li>GLOBAL：全局都生效</li>
 </ul>
 <p>该语句在执行后，MySQL重启之前一直有作用，一旦重启 MySQL，则会恢复默认值</p>
-<p>有时候 <code>GROUP_CONCAT()</code>  还要搭配 <code>CONCAT_WS()</code> 发挥出一点点威力，举个简单的例子</p>
+<p>有时候 <code>GROUP_CONCAT()</code>  还要搭配 <code>CONCAT_WS() </code> 发挥出一点点威力，举个简单的例子</p>
 <blockquote>
 <p>将消费者的名和姓用逗号进行分隔，然后再用 <code>;</code> 进行分隔</p>
 </blockquote>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span></span><br><span class="line">    <span class="keyword">GROUP_CONCAT</span>(</span><br><span class="line">       <span class="keyword">CONCAT_WS</span>(<span class="string">', '</span>, contactLastName, contactFirstName)</span><br><span class="line">       SEPARATOR <span class="string">';'</span>)</span><br><span class="line"><span class="keyword">FROM</span></span><br><span class="line">    customers;</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span></span><br><span class="line">    GROUP_CONCAT(</span><br><span class="line">       CONCAT_WS(<span class="string">&#x27;, &#x27;</span>, contactLastName, contactFirstName)</span><br><span class="line">       SEPARATOR <span class="string">&#x27;;&#x27;</span>)</span><br><span class="line"><span class="keyword">FROM</span></span><br><span class="line">    customers;</span><br></pre></td></tr></table></figure>
 
 
 
-<p>这里是 <a href="https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_concat-ws" target="_blank" rel="noopener">CONCAT_WS()函数用法</a>, 很简单，请自行查看吧……</p>
+<p>这里是 <a target="_blank" rel="noopener" href="https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_concat-ws">CONCAT_WS()函数用法</a>, 很简单，请自行查看吧……</p>
 <h2 id="注意⚠️"><a href="#注意⚠️" class="headerlink" title="注意⚠️"></a>注意⚠️</h2><p>GROUP_CONCAT（）函数返回单个字符串，而不是值列表。这意味着我们不能在 IN 运算符中使用GROUP_CONCAT（）函数的结果，例如，在子查询中， 像这样：</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span></span><br><span class="line">    <span class="keyword">id</span>, <span class="keyword">name</span></span><br><span class="line"><span class="keyword">FROM</span></span><br><span class="line">    table_name</span><br><span class="line"><span class="keyword">WHERE</span></span><br><span class="line">    <span class="keyword">id</span> <span class="keyword">IN</span> <span class="keyword">GROUP_CONCAT</span>(<span class="keyword">id</span>);</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span></span><br><span class="line">    id, name</span><br><span class="line"><span class="keyword">FROM</span></span><br><span class="line">    table_name</span><br><span class="line"><span class="keyword">WHERE</span></span><br><span class="line">    id <span class="keyword">IN</span> GROUP_CONCAT(id);</span><br></pre></td></tr></table></figure>
 
 
 
@@ -582,7 +584,7 @@
       <div class="personalweixin">
         <br><br>
         <blockquote>
-          <a href="https://mp.weixin.qq.com/s/G7BXuZh0Qh1-mE6ts4LJqQ" target="_blank" rel="noopener">加我微信</a>，咱们交流技术与思想，共同成长
+          <a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/G7BXuZh0Qh1-mE6ts4LJqQ">加我微信</a>，咱们交流技术与思想，共同成长
         </blockquote>
         <br>
 
@@ -620,9 +622,9 @@
   <div class="-mob-share-list share-body">
     
       
-        <a class="-mob-share-qq" title="QQ好友" rel="external nofollow noopener noreferrer"
+        <a class="-mob-share-qq" title="QQ好友" rel="external nofollow noopener noreferrer noopener"
           
-          href="http://connect.qq.com/widget/shareqq/index.html?url=https://dayarch.top/p/mysql-group-concat-function-usage.html&title=MySQL group_concat 函数详解 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=上一篇文章 跨表更新，看到自己写的SQL像个憨憨 写了关于跨表个更新的内容。一年过的很快，文中后来的两位员工 馮大 和 馮二 也要面对无情的 KPI 考核了，他们工作干的很不错，performance 分别是 4 和 5
+          target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://dayarch.top/p/mysql-group-concat-function-usage.html&title=MySQL group_concat 函数详解 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=上一篇文章 跨表更新，看到自己写的SQL像个憨憨 写了关于跨表个更新的内容。一年过的很快，文中后来的两位员工 馮大 和 馮二 也要面对无情的 KPI 考核了，他们工作干的很不错，performance 分别是 4 和 5
 
 
 
@@ -643,9 +645,9 @@ GROUP_CONCAT(expr)
       
     
       
-        <a class="-mob-share-qzone" title="QQ空间" rel="external nofollow noopener noreferrer"
+        <a class="-mob-share-qzone" title="QQ空间" rel="external nofollow noopener noreferrer noopener"
           
-          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://dayarch.top/p/mysql-group-concat-function-usage.html&title=MySQL group_concat 函数详解 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=上一篇文章 跨表更新，看到自己写的SQL像个憨憨 写了关于跨表个更新的内容。一年过的很快，文中后来的两位员工 馮大 和 馮二 也要面对无情的 KPI 考核了，他们工作干的很不错，performance 分别是 4 和 5
+          target="_blank" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://dayarch.top/p/mysql-group-concat-function-usage.html&title=MySQL group_concat 函数详解 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=上一篇文章 跨表更新，看到自己写的SQL像个憨憨 写了关于跨表个更新的内容。一年过的很快，文中后来的两位员工 馮大 和 馮二 也要面对无情的 KPI 考核了，他们工作干的很不错，performance 分别是 4 和 5
 
 
 
@@ -666,9 +668,9 @@ GROUP_CONCAT(expr)
       
     
       
-        <a class="-mob-share-weibo" title="微博" rel="external nofollow noopener noreferrer"
+        <a class="-mob-share-weibo" title="微博" rel="external nofollow noopener noreferrer noopener"
           
-          href="http://service.weibo.com/share/share.php?url=https://dayarch.top/p/mysql-group-concat-function-usage.html&title=MySQL group_concat 函数详解 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=上一篇文章 跨表更新，看到自己写的SQL像个憨憨 写了关于跨表个更新的内容。一年过的很快，文中后来的两位员工 馮大 和 馮二 也要面对无情的 KPI 考核了，他们工作干的很不错，performance 分别是 4 和 5
+          target="_blank" href="http://service.weibo.com/share/share.php?url=https://dayarch.top/p/mysql-group-concat-function-usage.html&title=MySQL group_concat 函数详解 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=上一篇文章 跨表更新，看到自己写的SQL像个憨憨 写了关于跨表个更新的内容。一年过的很快，文中后来的两位员工 馮大 和 馮二 也要面对无情的 KPI 考核了，他们工作干的很不错，performance 分别是 4 和 5
 
 
 
@@ -971,7 +973,7 @@ GROUP_CONCAT(expr)
 </header>
 
     <div class='content pure'>
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#GROUP-CONCAT-expr"><span class="toc-text">GROUP_CONCAT(expr)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#定义"><span class="toc-text">定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用案例"><span class="toc-text">使用案例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#注意⚠️"><span class="toc-text">注意⚠️</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-text">总结</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#GROUP-CONCAT-expr"><span class="toc-text">GROUP_CONCAT(expr)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89"><span class="toc-text">定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E6%A1%88%E4%BE%8B"><span class="toc-text">使用案例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B3%A8%E6%84%8F%E2%9A%A0%EF%B8%8F"><span class="toc-text">注意⚠️</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-text">总结</span></a></li></ol>
     </div>
   </section>
 
@@ -1046,7 +1048,7 @@ GROUP_CONCAT(expr)
   &nbsp;&nbsp;|&nbsp;&nbsp;  
   
     &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-        class="white-color">264.1k</span>&nbsp;字
+        class="white-color">267.4k</span>&nbsp;字
     
 
   &nbsp;&nbsp;|&nbsp;&nbsp;  
@@ -1101,7 +1103,7 @@ GROUP_CONCAT(expr)
     
     。
   </div>
-  <div><p>博客内容遵循 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
+  <div><p>博客内容遵循 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
 </div>
   <!-- <div class="github-badge">
       <a style="color: #fff" rel="license" href="https://hexo.io/" target="_blank" title="由 Hexo 强力驱动">
@@ -1209,10 +1211,14 @@ GROUP_CONCAT(expr)
 
 
 
-  <script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/app.js"></script>
+  
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/app.js"></script>
 
 
-  <script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/search.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/search.js"></script>
+
 
 
 

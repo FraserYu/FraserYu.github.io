@@ -13,7 +13,7 @@
   
 
   
-  <link rel="alternate" href="/atom.xml" title="日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享">
+  <link rel="alternate" href="/atom.xml" title="日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享" type="application/atom+xml">
   
 
   <meta name="HandheldFriendly" content="True" />
@@ -35,7 +35,9 @@
   
 
   
-    <link rel="stylesheet" href="/style.css">
+    
+<link rel="stylesheet" href="/style.css">
+
   
 
   <script>
@@ -85,7 +87,7 @@
         daovoice('update');
         </script>
     
-</head>
+<meta name="generator" content="Hexo 5.4.0"></head>
 
 <body>
   
@@ -483,35 +485,35 @@
     <section class="article typo">
       <div class="article-entry" itemprop="articleBody">
         <p>关于 Java String，这是面试的基础，但是还有很多童鞋不能说清楚，所以本文将简单而又透彻的说明一下那个让你迷惑的 String</p>
-<p><img src="https://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E5%BA%94%E7%94%A8%E7%B1%BB%E6%96%87%E7%AB%A0/_image/2019-08-30/mountain-landscape-2031539_1920.jpg" alt=""></p>
+<p><img src="https://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E5%BA%94%E7%94%A8%E7%B1%BB%E6%96%87%E7%AB%A0/_image/2019-08-30/mountain-landscape-2031539_1920.jpg"></p>
 <p>在 Java 中，我们有两种方式创建一个字符串</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">String x = <span class="string">"abc"</span>;</span><br><span class="line">String y = <span class="keyword">new</span> String(<span class="string">"abc"</span>);</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">String x = <span class="string">&quot;abc&quot;</span>;</span><br><span class="line">String y = <span class="keyword">new</span> String(<span class="string">&quot;abc&quot;</span>);</span><br></pre></td></tr></table></figure>
 <p>你常见也常写第一种，很少见第二种，但面试还总问这类问题，双引号和构造器两种形式创建字符串到底有什么差别呢？</p>
 <p>先来看例子</p>
-<h3 id="例子-1"><a href="#例子-1" class="headerlink" title="例子 1"></a>例子 1</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">String a = <span class="string">"abcd"</span>;</span><br><span class="line">String b = <span class="string">"abcd"</span>;</span><br><span class="line">System.out.println(a == b);  <span class="comment">// True</span></span><br><span class="line">System.out.println(a.equals(b)); <span class="comment">// True</span></span><br></pre></td></tr></table></figure>
+<h3 id="例子-1"><a href="#例子-1" class="headerlink" title="例子 1"></a>例子 1</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">String a = <span class="string">&quot;abcd&quot;</span>;</span><br><span class="line">String b = <span class="string">&quot;abcd&quot;</span>;</span><br><span class="line">System.out.println(a == b);  <span class="comment">// True</span></span><br><span class="line">System.out.println(a.equals(b)); <span class="comment">// True</span></span><br></pre></td></tr></table></figure>
 <p><code>a == b</code> 结果为 true，是因为 a 和 b 都指向 <strong>方法区(method area)</strong> 同一个字符串文字，内存引用是同一个</p>
 <p>当多次创建相同的字符串文字时，只存储每个不同字符串值的一个副本。这个叫做<strong>字符串留驻/留用</strong>，Java 中所有编译期字符串常量都会被自动留驻</p>
-<h3 id="例子-2"><a href="#例子-2" class="headerlink" title="例子 2"></a>例子 2</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">String c = <span class="keyword">new</span> String(<span class="string">"abcd"</span>);</span><br><span class="line">String d = <span class="keyword">new</span> String(<span class="string">"abcd"</span>);</span><br><span class="line">System.out.println(c == d);  <span class="comment">// False</span></span><br><span class="line">System.out.println(c.equals(d)); <span class="comment">// True</span></span><br></pre></td></tr></table></figure>
+<h3 id="例子-2"><a href="#例子-2" class="headerlink" title="例子 2"></a>例子 2</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">String c = <span class="keyword">new</span> String(<span class="string">&quot;abcd&quot;</span>);</span><br><span class="line">String d = <span class="keyword">new</span> String(<span class="string">&quot;abcd&quot;</span>);</span><br><span class="line">System.out.println(c == d);  <span class="comment">// False</span></span><br><span class="line">System.out.println(c.equals(d)); <span class="comment">// True</span></span><br></pre></td></tr></table></figure>
 <p><code>c==d</code> 结果为 false，因为 c 和 d 的引用指向<strong>堆</strong>中不同的对象，<code>不同的对象肯定有不同的内存引用</code></p>
 <p>举了两个例子，文字描述有点懵？我们来试图通过图形来理解上述两种情况:</p>
-<p><img src="https://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E5%BA%94%E7%94%A8%E7%B1%BB%E6%96%87%E7%AB%A0/_image/2019-08-30/2019-08-30-18-44-15.jpg" alt=""></p>
+<p><img src="https://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E5%BA%94%E7%94%A8%E7%B1%BB%E6%96%87%E7%AB%A0/_image/2019-08-30/2019-08-30-18-44-15.jpg"></p>
 <p>也许你已经看看出来了，一个是在<code>方法区</code>，一个是在<code>堆</code>中，在 JVM 模型中这是两个不同的区域，也许你面试时也经常被问到吧，来看下图:</p>
-<p><img src="https://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E5%BA%94%E7%94%A8%E7%B1%BB%E6%96%87%E7%AB%A0/_image/2019-08-30/2019-08-30-18-47-02.jpg" alt=""></p>
+<p><img src="https://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E5%BA%94%E7%94%A8%E7%B1%BB%E6%96%87%E7%AB%A0/_image/2019-08-30/2019-08-30-18-47-02.jpg"></p>
 <p>再次提醒一下，所有 new 的对象都会在 Heap 中，这样以后你就好区分了</p>
 <h2 id="运行期字符串留驻"><a href="#运行期字符串留驻" class="headerlink" title="运行期字符串留驻"></a>运行期字符串留驻</h2><p>上面说的字符串留驻是在编译期，那么运行期可以吗？答案是肯定的，我们需要一个函数来帮忙</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">String c = <span class="keyword">new</span> String(<span class="string">"abcd"</span>).intern();</span><br><span class="line">String d = <span class="keyword">new</span> String(<span class="string">"abcd"</span>).intern();</span><br><span class="line">System.out.println(c == d);  <span class="comment">// Now true</span></span><br><span class="line">System.out.println(c.equals(d)); <span class="comment">// True</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">String c = <span class="keyword">new</span> String(<span class="string">&quot;abcd&quot;</span>).intern();</span><br><span class="line">String d = <span class="keyword">new</span> String(<span class="string">&quot;abcd&quot;</span>).intern();</span><br><span class="line">System.out.println(c == d);  <span class="comment">// Now true</span></span><br><span class="line">System.out.println(c.equals(d)); <span class="comment">// True</span></span><br></pre></td></tr></table></figure>
 <p>看到 <code>c == d</code> 结果为 true，你应该理解 intern (英文有拘留，软禁的意思)的作用了，通过调用 intern()方法，就好比把创建的字符串拘留在方法区一样了</p>
 <p>在面试时甚至还会问你下面代码创建了几个对象:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">String d = <span class="keyword">new</span> String(<span class="string">"abcd"</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">String d = <span class="keyword">new</span> String(<span class="string">&quot;abcd&quot;</span>)</span><br></pre></td></tr></table></figure>
 <ol>
 <li>如果方法区已存在”abcd”, 那么只创建一个 new String 的对象</li>
 <li>如果方法区没有”abcd”, 那么要创建两个对象，一个在方法区，一个在堆中</li>
 </ol>
 <p>所以，<strong>正常情况</strong>下我们没必要使用构造器创建对象，因为这很可能会产生一个额外的没用的对象，但是有例外哦，我们下面说</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">String s = <span class="string">"abcd"</span>;</span><br><span class="line">s = s.concat(<span class="string">"ef"</span>);</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">String s = <span class="string">&quot;abcd&quot;</span>;</span><br><span class="line">s = s.concat(<span class="string">&quot;ef&quot;</span>);</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E5%BA%94%E7%94%A8%E7%B1%BB%E6%96%87%E7%AB%A0/_image/2019-08-30/2019-08-30-20-38-21.jpg" alt=""></p>
-<p>当我们想在字符串 s 后面拼接字符”ef”时，会在堆中创建一个新的对象，并将 s 的引用指向新创建的对象，由于 String 创建的是不可变对象，所以 <strong>String 类中的所有方法都不会改变它自身，而是返回一个新的字符串(快打开你的 IDE，看看是否每个操作String 的方法最后都是返回有 return new String 字样)</strong>，到这里你也应该理解了一个道理:</p>
+<p><img src="https://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E5%BA%94%E7%94%A8%E7%B1%BB%E6%96%87%E7%AB%A0/_image/2019-08-30/2019-08-30-20-38-21.jpg"></p>
+<p>当我们想在字符串 s 后面拼接字符”ef”时，会在堆中创建一个新的对象，并将 s 的引用指向新创建的对象，由于 String 创建的是不可变对象，所以 **String 类中的所有方法都不会改变它自身，而是返回一个新的字符串(快打开你的 IDE，看看是否每个操作String 的方法最后都是返回有 return new String 字样)**，到这里你也应该理解了一个道理:</p>
 <blockquote>
 <p> 如果我们需要一个字符串被修改，我们最好使用 StringBuffer 或者 StringBuilder，否则，由于每次操作字符串都会创建一个新的对象，而旧的对象不会有引用指向它，这样我们会浪费很多垃圾回收的时间</p>
 </blockquote>
@@ -532,16 +534,16 @@
 <li>String 和基本类型的包装类如 Integer 和 Long 都被 final 修饰，但为什么不建议作为 synchronized 同步块的参数适用呢？</li>
 <li>基本类型自动装箱你知道发生了什么吗？和上一个问题有关系</li>
 </ol>
-<h2 id="提高效率工具"><a href="#提高效率工具" class="headerlink" title="提高效率工具"></a>提高效率工具</h2><p><img src="https://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E6%84%9F%E6%83%B3%E4%B8%8E%E6%80%BB%E7%BB%93/_image/2019-06-18/b.png" alt=""></p>
-<h3 id="Material-Theme-UI"><a href="#Material-Theme-UI" class="headerlink" title="Material Theme UI"></a>Material Theme UI</h3><p>这是一款 IDEA 的主题插件，安装后，选择 <code>Material Palenight</code> 主题，同时作出如下设置<br><img src="https://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E5%BA%94%E7%94%A8%E7%B1%BB%E6%96%87%E7%AB%A0/_image/2019-08-30/2019-08-31-11-43-17.png" alt=""></p>
-<p>设置完后，你的 IDEA 就是下面这样，引起极度舒适<br><img src="https://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E5%BA%94%E7%94%A8%E7%B1%BB%E6%96%87%E7%AB%A0/_image/2019-08-30/2019-08-31-11-39-58.jpg" alt=""></p>
+<h2 id="提高效率工具"><a href="#提高效率工具" class="headerlink" title="提高效率工具"></a>提高效率工具</h2><p><img src="https://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E6%84%9F%E6%83%B3%E4%B8%8E%E6%80%BB%E7%BB%93/_image/2019-06-18/b.png"></p>
+<h3 id="Material-Theme-UI"><a href="#Material-Theme-UI" class="headerlink" title="Material Theme UI"></a>Material Theme UI</h3><p>这是一款 IDEA 的主题插件，安装后，选择 <code>Material Palenight</code> 主题，同时作出如下设置<br><img src="https://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E5%BA%94%E7%94%A8%E7%B1%BB%E6%96%87%E7%AB%A0/_image/2019-08-30/2019-08-31-11-43-17.png"></p>
+<p>设置完后，你的 IDEA 就是下面这样，引起极度舒适<br><img src="https://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E5%BA%94%E7%94%A8%E7%B1%BB%E6%96%87%E7%AB%A0/_image/2019-08-30/2019-08-31-11-39-58.jpg"></p>
 <hr>
 <h2 id="推荐阅读"><a href="#推荐阅读" class="headerlink" title="推荐阅读"></a>推荐阅读</h2><ul>
-<li><a href="https://mp.weixin.qq.com/s/q5cyK14WGiMm-R6NIFBcTg" target="_blank" rel="noopener">每天用SpringBoot，还不懂RESTful API返回统一数据格式是怎么实现的？ </a></li>
-<li><a href="https://mp.weixin.qq.com/s/Dnr1jLebvBUHnziZzSfcrA" target="_blank" rel="noopener">双亲委派模型：大厂高频面试题，轻松搞定</a></li>
-<li><a href="https://mp.weixin.qq.com/s/YBQB086ADBjHUmwrFQrWew" target="_blank" rel="noopener">面试还不知道BeanFactory和ApplicationContext的区别？</a></li>
-<li><a href="https://mp.weixin.qq.com/s/hR1TqkVzwZ_T8fuMnsM4hQ" target="_blank" rel="noopener">如何设计好的RESTful API</a></li>
-<li><a href="https://mp.weixin.qq.com/s/ilND8u_8HGSTSrJiMB4X8g" target="_blank" rel="noopener">红黑树，超强动静图详解，简单易懂</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/q5cyK14WGiMm-R6NIFBcTg">每天用SpringBoot，还不懂RESTful API返回统一数据格式是怎么实现的？ </a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/Dnr1jLebvBUHnziZzSfcrA">双亲委派模型：大厂高频面试题，轻松搞定</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/YBQB086ADBjHUmwrFQrWew">面试还不知道BeanFactory和ApplicationContext的区别？</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/hR1TqkVzwZ_T8fuMnsM4hQ">如何设计好的RESTful API</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/ilND8u_8HGSTSrJiMB4X8g">红黑树，超强动静图详解，简单易懂</a></li>
 </ul>
 <hr>
 <blockquote>
@@ -555,7 +557,7 @@
 <blockquote>
 <p>以读侦探小说思维轻松趣味学习 Java 技术栈相关知识，本着将复杂问题简单化，抽象问题具体化和图形化原则逐步分解技术问题，技术持续更新，请持续关注……</p>
 </blockquote>
-<p><img src="https://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E6%84%9F%E6%83%B3%E4%B8%8E%E6%80%BB%E7%BB%93/_image/2019-06-18/a%20%281%29.png" alt=""></p>
+<p><img src="https://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E6%84%9F%E6%83%B3%E4%B8%8E%E6%80%BB%E7%BB%93/_image/2019-06-18/a%20%281%29.png"></p>
 
       </div>
       <!-- <div class="tuijian">
@@ -566,7 +568,7 @@
       <div class="personalweixin">
         <br><br>
         <blockquote>
-          <a href="https://mp.weixin.qq.com/s/G7BXuZh0Qh1-mE6ts4LJqQ" target="_blank" rel="noopener">加我微信</a>，咱们交流技术与思想，共同成长
+          <a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/G7BXuZh0Qh1-mE6ts4LJqQ">加我微信</a>，咱们交流技术与思想，共同成长
         </blockquote>
         <br>
 
@@ -604,9 +606,9 @@
   <div class="-mob-share-list share-body">
     
       
-        <a class="-mob-share-qq" title="QQ好友" rel="external nofollow noopener noreferrer"
+        <a class="-mob-share-qq" title="QQ好友" rel="external nofollow noopener noreferrer noopener"
           
-          href="http://connect.qq.com/widget/shareqq/index.html?url=https://dayarch.top/p/java-string-interview.html&title=Java String基础面试 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=关于 Java String，这是面试的基础，但是还有很多童鞋不能说清楚，所以本文将简单而又透彻的说明一下那个让你迷惑的 String
+          target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://dayarch.top/p/java-string-interview.html&title=Java String基础面试 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=关于 Java String，这是面试的基础，但是还有很多童鞋不能说清楚，所以本文将简单而又透彻的说明一下那个让你迷惑的 String
 
 
 
@@ -643,9 +645,9 @@ System.out.println(a == b);  // T"
       
     
       
-        <a class="-mob-share-qzone" title="QQ空间" rel="external nofollow noopener noreferrer"
+        <a class="-mob-share-qzone" title="QQ空间" rel="external nofollow noopener noreferrer noopener"
           
-          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://dayarch.top/p/java-string-interview.html&title=Java String基础面试 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=关于 Java String，这是面试的基础，但是还有很多童鞋不能说清楚，所以本文将简单而又透彻的说明一下那个让你迷惑的 String
+          target="_blank" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://dayarch.top/p/java-string-interview.html&title=Java String基础面试 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=关于 Java String，这是面试的基础，但是还有很多童鞋不能说清楚，所以本文将简单而又透彻的说明一下那个让你迷惑的 String
 
 
 
@@ -682,9 +684,9 @@ System.out.println(a == b);  // T"
       
     
       
-        <a class="-mob-share-weibo" title="微博" rel="external nofollow noopener noreferrer"
+        <a class="-mob-share-weibo" title="微博" rel="external nofollow noopener noreferrer noopener"
           
-          href="http://service.weibo.com/share/share.php?url=https://dayarch.top/p/java-string-interview.html&title=Java String基础面试 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=关于 Java String，这是面试的基础，但是还有很多童鞋不能说清楚，所以本文将简单而又透彻的说明一下那个让你迷惑的 String
+          target="_blank" href="http://service.weibo.com/share/share.php?url=https://dayarch.top/p/java-string-interview.html&title=Java String基础面试 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=关于 Java String，这是面试的基础，但是还有很多童鞋不能说清楚，所以本文将简单而又透彻的说明一下那个让你迷惑的 String
 
 
 
@@ -795,7 +797,7 @@ System.out.println(a == b);  // T"
 </header>
 
     <div class="content pure">
-      <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/out-of-memory-vs-memory-leak-and-hashcode.html" title="hashCode是根据对象内存地址生成的？" rel="bookmark">hashCode是根据对象内存地址生成的？</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-equals-hashcode.html" title="Java equals 和 hashCode 面试那点事" rel="bookmark">Java equals 和 hashCode 面试那点事</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/difference-between-beanfactory-and-applicationcontext.html" title="面试还不知道BeanFactory和ApplicationContext的区别？" rel="bookmark">面试还不知道BeanFactory和ApplicationContext的区别？</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/easyexcel-read.html" title="EasyExcel读取Excel实际应用" rel="bookmark">EasyExcel读取Excel实际应用</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/http-client-advanced-usage.html" title="IntelliJ IDEA HTTP Client高级使用详解" rel="bookmark">IntelliJ IDEA HTTP Client高级使用详解</a></h3></div></li></ul>
+      <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/out-of-memory-vs-memory-leak-and-hashcode.html" title="hashCode是根据对象内存地址生成的？" rel="bookmark">hashCode是根据对象内存地址生成的？</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-equals-hashcode.html" title="Java equals 和 hashCode 面试那点事" rel="bookmark">Java equals 和 hashCode 面试那点事</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/difference-between-beanfactory-and-applicationcontext.html" title="面试还不知道BeanFactory和ApplicationContext的区别？" rel="bookmark">面试还不知道BeanFactory和ApplicationContext的区别？</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/http-client-advanced-usage.html" title="IntelliJ IDEA HTTP Client高级使用详解" rel="bookmark">IntelliJ IDEA HTTP Client高级使用详解</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/intellj-idea-advanced-debug.html" title="IntelliJ IDEA 高级Debug技巧，助你起飞" rel="bookmark">IntelliJ IDEA 高级Debug技巧，助你起飞</a></h3></div></li></ul>
     </div>
   </section>
 
@@ -1003,7 +1005,7 @@ System.out.println(a == b);  // T"
 </header>
 
     <div class='content pure'>
-      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#例子-1"><span class="toc-text">例子 1</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#例子-2"><span class="toc-text">例子 2</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#运行期字符串留驻"><span class="toc-text">运行期字符串留驻</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#为什么-String-类被-final-修饰"><span class="toc-text">为什么 String 类被 final 修饰</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#字符串池的需求"><span class="toc-text">字符串池的需求</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#缓存-hashcode"><span class="toc-text">缓存 hashcode</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安全性"><span class="toc-text">安全性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#不可变对象天生是线程安全的"><span class="toc-text">不可变对象天生是线程安全的</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#附加说明"><span class="toc-text">附加说明</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#灵魂追问"><span class="toc-text">灵魂追问</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#提高效率工具"><span class="toc-text">提高效率工具</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Material-Theme-UI"><span class="toc-text">Material Theme UI</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#推荐阅读"><span class="toc-text">推荐阅读</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#欢迎持续关注公众号：「日拱一兵」"><span class="toc-text">欢迎持续关注公众号：「日拱一兵」</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BE%8B%E5%AD%90-1"><span class="toc-text">例子 1</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BE%8B%E5%AD%90-2"><span class="toc-text">例子 2</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%90%E8%A1%8C%E6%9C%9F%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%95%99%E9%A9%BB"><span class="toc-text">运行期字符串留驻</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88-String-%E7%B1%BB%E8%A2%AB-final-%E4%BF%AE%E9%A5%B0"><span class="toc-text">为什么 String 类被 final 修饰</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%B1%A0%E7%9A%84%E9%9C%80%E6%B1%82"><span class="toc-text">字符串池的需求</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%93%E5%AD%98-hashcode"><span class="toc-text">缓存 hashcode</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E5%85%A8%E6%80%A7"><span class="toc-text">安全性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8D%E5%8F%AF%E5%8F%98%E5%AF%B9%E8%B1%A1%E5%A4%A9%E7%94%9F%E6%98%AF%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E7%9A%84"><span class="toc-text">不可变对象天生是线程安全的</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%99%84%E5%8A%A0%E8%AF%B4%E6%98%8E"><span class="toc-text">附加说明</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%81%B5%E9%AD%82%E8%BF%BD%E9%97%AE"><span class="toc-text">灵魂追问</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8F%90%E9%AB%98%E6%95%88%E7%8E%87%E5%B7%A5%E5%85%B7"><span class="toc-text">提高效率工具</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Material-Theme-UI"><span class="toc-text">Material Theme UI</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8E%A8%E8%8D%90%E9%98%85%E8%AF%BB"><span class="toc-text">推荐阅读</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%AC%A2%E8%BF%8E%E6%8C%81%E7%BB%AD%E5%85%B3%E6%B3%A8%E5%85%AC%E4%BC%97%E5%8F%B7%EF%BC%9A%E3%80%8C%E6%97%A5%E6%8B%B1%E4%B8%80%E5%85%B5%E3%80%8D"><span class="toc-text">欢迎持续关注公众号：「日拱一兵」</span></a></li></ol>
     </div>
   </section>
 
@@ -1078,7 +1080,7 @@ System.out.println(a == b);  // T"
   &nbsp;&nbsp;|&nbsp;&nbsp;  
   
     &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-        class="white-color">264.1k</span>&nbsp;字
+        class="white-color">267.4k</span>&nbsp;字
     
 
   &nbsp;&nbsp;|&nbsp;&nbsp;  
@@ -1133,7 +1135,7 @@ System.out.println(a == b);  // T"
     
     。
   </div>
-  <div><p>博客内容遵循 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
+  <div><p>博客内容遵循 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
 </div>
   <!-- <div class="github-badge">
       <a style="color: #fff" rel="license" href="https://hexo.io/" target="_blank" title="由 Hexo 强力驱动">
@@ -1241,10 +1243,14 @@ System.out.println(a == b);  // T"
 
 
 
-  <script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/app.js"></script>
+  
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/app.js"></script>
 
 
-  <script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/search.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/search.js"></script>
+
 
 
 

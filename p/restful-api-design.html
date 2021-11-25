@@ -13,7 +13,7 @@
   
 
   
-  <link rel="alternate" href="/atom.xml" title="日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享">
+  <link rel="alternate" href="/atom.xml" title="日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享" type="application/atom+xml">
   
 
   <meta name="HandheldFriendly" content="True" />
@@ -35,7 +35,9 @@
   
 
   
-    <link rel="stylesheet" href="/style.css">
+    
+<link rel="stylesheet" href="/style.css">
+
   
 
   <script>
@@ -85,7 +87,7 @@
         daovoice('update');
         </script>
     
-</head>
+<meta name="generator" content="Hexo 5.4.0"></head>
 
 <body>
   
@@ -493,7 +495,7 @@
 <li>完成当前业务接口对接，前端人员经常会询问下一步业务流程的接口定义在哪里，对接形式是什么样的</li>
 </ul>
 <p>以上只是前后端人员通过接口交互的一小部分问题，这些问题就好比”牙痛”，不致命，但是在整个软件开发的生命周期内，天天”牙痛”是很要命的, 需要解决上述的问题，需要前后端人员都能认识与了解接口设计规范的重要性。</p>
-<h2 id="什么是REST"><a href="#什么是REST" class="headerlink" title="什么是REST"></a>什么是REST</h2><p>在 2000 年，Roy Fielding 提出 <a href="https://zjcqoo.github.io/-----https://en.wikipedia.org/wiki/Representational_state_transfer" target="_blank" rel="noopener">Representational State Transfer (REST)</a> 的概念，中文翻译过来”表述性状态传递”，感兴趣的朋友可以去维基百科看看原始概念，乍一看是一个挺抽象的概念，但其实，这个概念就像交通灯规则一样简单，就看如何看待相关规范. 当我们谈及 RESTful 设计规范，多数人能了解设计的大原则，但是不了解小细节，而对这些细节的了解与否，是能否治好”牙痛病”的关键</p>
+<h2 id="什么是REST"><a href="#什么是REST" class="headerlink" title="什么是REST"></a>什么是REST</h2><p>在 2000 年，Roy Fielding 提出 <a target="_blank" rel="noopener" href="https://zjcqoo.github.io/-----https://en.wikipedia.org/wiki/Representational_state_transfer">Representational State Transfer (REST)</a> 的概念，中文翻译过来”表述性状态传递”，感兴趣的朋友可以去维基百科看看原始概念，乍一看是一个挺抽象的概念，但其实，这个概念就像交通灯规则一样简单，就看如何看待相关规范. 当我们谈及 RESTful 设计规范，多数人能了解设计的大原则，但是不了解小细节，而对这些细节的了解与否，是能否治好”牙痛病”的关键</p>
 <h2 id="REST术语介绍"><a href="#REST术语介绍" class="headerlink" title="REST术语介绍"></a>REST术语介绍</h2><p>现实世界交通灯有红绿黄，REST相关的概念也是三个：资源，集合，URL</p>
 <h3 id="资源"><a href="#资源" class="headerlink" title="资源"></a>资源</h3><p>资源是某种东西的对象或表示，它具有一些与之相关的数据，并且可以有一组方法对其进行操作。 例如, 动物，学校和员工是资源;  删除，添加，更新是对这些资源执行的相关操作</p>
 <h3 id="集合"><a href="#集合" class="headerlink" title="集合"></a>集合</h3><p>集合是资源集合，例如，公司是公司资源的集合</p>
@@ -521,7 +523,7 @@
 <p>根据 HTTP 规范，动词一律大写，另外根据RESTful 幂等性（多次调用是否会对资源产生影响）原则，我们不能乱用动词，GET/PUT/DELETE 是幂等的，POST/PATCH 不是幂等的</p>
 <p>有些客户端只能使用<code>GET</code>和<code>POST</code>这两种方法。服务器必须接受<code>POST</code>模拟其他三个方法（<code>PUT</code>、<code>PATCH</code>、<code>DELETE</code>）。</p>
 <p>这时，客户端发出的 HTTP 请求，要加上<code>X-HTTP-Method-Override</code>属性，告诉服务器应该使用哪一个动词，覆盖<code>POST</code>方法。</p>
-<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">POST</span> <span class="string">/users/12</span> HTTP/1.1</span><br><span class="line"><span class="attribute">X-HTTP-Method-Override</span>: PUT</span><br></pre></td></tr></table></figure>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">POST</span> <span class="string">/users/12</span> <span class="meta">HTTP/1.1</span></span><br><span class="line"><span class="attribute">X-HTTP-Method-Override</span><span class="punctuation">: </span>PUT</span><br></pre></td></tr></table></figure>
 
 <p>上面代码中，<code>X-HTTP-Method-Override</code>指定本次请求的方法是<code>PUT</code>，而不是<code>POST</code></p>
 <h4 id="名词"><a href="#名词" class="headerlink" title="名词"></a>名词</h4><p>名词就是表示一个资源或者服务，如 /users，/teachers，这里看到我用名词复数的形式描述某一资源，至于用单数还是复数每个人都有自己的见解，我在这里推荐使用复数，因为在现实世界中，资源多数是以集合的形式存在的</p>
@@ -550,35 +552,35 @@
 <td>删除指定用户</td>
 </tr>
 </tbody></table>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">POST /users</span><br><span class="line">GET /users</span><br><span class="line">PUT /users</span><br><span class="line">DELETE /users</span><br><span class="line">GET /users/12</span><br><span class="line">PUT /users/12</span><br><span class="line">DELETE /users/12</span><br></pre></td></tr></table></figure>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">POST /users</span><br><span class="line">GET /users</span><br><span class="line">PUT /users</span><br><span class="line">DELETE /users</span><br><span class="line">GET /users/12</span><br><span class="line">PUT /users/12</span><br><span class="line">DELETE /users/12</span><br></pre></td></tr></table></figure>
 
 <p>上述<strong>动词 + 名词</strong>的组合是不是清晰多了，没有杂乱的动词在 URL 中，大家的理解含义相同</p>
 <h4 id="URL-层级"><a href="#URL-层级" class="headerlink" title="URL 层级"></a>URL 层级</h4><p>现实中哪有这么简单的 CRUD，资源的相互关联与嵌套很常见，<em>查找 id 是 12 的用户的所有帖子</em>， 如何设计这个 URL，下面两种设计也会有争论：</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">GET /users/12/posts</span><br><span class="line">GET /posts?userId=12</span><br></pre></td></tr></table></figure>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">GET /users/12/posts</span><br><span class="line">GET /posts?userId=12</span><br></pre></td></tr></table></figure>
 
 <p>第一种出现两个名词主题（users/posts），会让人有几秒钟的猜想，这到底请求的是用户资源还是帖子资源，当存在更深浅套的时候也不容易扩展，所以我推荐第二种方式，主体名词 posts 资源明显，其他过滤条件也更容易扩展，比如 /posts?userName=zhangsan，我们可以复用同样的接口</p>
 <h4 id="版本"><a href="#版本" class="headerlink" title="版本"></a>版本</h4><p>我们看到过很多如下 URL 设计，用来区分 API 版本：</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">POST /v2/users</span><br><span class="line">GET /V1/users/12</span><br></pre></td></tr></table></figure>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">POST /v2/users</span><br><span class="line">GET /V1/users/12</span><br></pre></td></tr></table></figure>
 
 <p>我们都指向同样的资源 users，URL 中为什么要加版本号呢？ 针对这个问题，答案依旧没有统一标准，如果多个版本的API版本返回数据结果结构一样，那没必要区分版本，如果结构已经发生变化，而且要向下兼容，那版本号是很好的区分方式，而且通过 URL 加版本的方式可以更好的发现资源</p>
 <h4 id="过滤-分页-排序"><a href="#过滤-分页-排序" class="headerlink" title="过滤/分页/排序"></a>过滤/分页/排序</h4><p>实际的业务场景中会经常对请求资源做条件筛选，分页显示，以及排序，我们不要为这些业务要求创建不同步的 API，我们应该尽量保持 URL 的信息简单，只需添加查询条件参数来实现上述功能，同时符合”望 URL 知意”的原则</p>
-<h5 id="过滤"><a href="#过滤" class="headerlink" title="过滤"></a>过滤</h5><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">GET /users/12/posts?state=published</span><br><span class="line">GET /users/12/posts?published=true</span><br></pre></td></tr></table></figure>
+<h5 id="过滤"><a href="#过滤" class="headerlink" title="过滤"></a>过滤</h5><figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">GET /users/12/posts?state=published</span><br><span class="line">GET /users/12/posts?published=true</span><br></pre></td></tr></table></figure>
 
 <p>上述两种方式都可以实现资源的过滤</p>
-<h5 id="分页"><a href="#分页" class="headerlink" title="分页"></a>分页</h5><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GET /users?pageNo=1&amp;pageSize=20</span><br></pre></td></tr></table></figure>
+<h5 id="分页"><a href="#分页" class="headerlink" title="分页"></a>分页</h5><figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GET /users?pageNo=1&amp;pageSize=20</span><br></pre></td></tr></table></figure>
 
 <p>以分页方式查询用户列表，显示第 2 页内容，每页显示 20 条信息</p>
-<h5 id="排序"><a href="#排序" class="headerlink" title="排序"></a>排序</h5><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GET /users?sort=score_desc</span><br></pre></td></tr></table></figure>
+<h5 id="排序"><a href="#排序" class="headerlink" title="排序"></a>排序</h5><figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GET /users?sort=score_desc</span><br></pre></td></tr></table></figure>
 
 <p>按照学生分数降序进行排序</p>
 <p>上述所有的方式我们都可以做到”望 URL 知意”，这就是好的设计</p>
 <h3 id="返回结果"><a href="#返回结果" class="headerlink" title="返回结果"></a>返回结果</h3><p>RESTful API 的返回结果也是设计环节中重要的一环</p>
 <h4 id="响应数据格式"><a href="#响应数据格式" class="headerlink" title="响应数据格式"></a>响应数据格式</h4><p>API 返回的数据格式，不应该是纯文本，而应该是一个 JSON 对象，因为这样才能返回标准的结构化数据。所以，服务器回应的 HTTP 头的<code>Content-Type</code>属性要设为<code>application/json</code>。同时客户端也应作出相应的配合，客户端请求时，也要明确告诉服务器，可以接受 JSON 格式，即请求的 HTTP 头的<code>ACCEPT</code>属性也要设成<code>application/json</code>，多渠道调用可能会存在相同资源需要有不同的 producer 类型的情况存在</p>
 <h4 id="响应状态码"><a href="#响应状态码" class="headerlink" title="响应状态码"></a>响应状态码</h4><p>很多后端开发人员可能受开发框架所限，或者返回数据封装形式不够好，经常会给前端人员不是很友好的 HTTP 状态码，比如 response 有 error，却给出 <code>200 HTTP.OK</code> 的状态码 (明明吃了三碗粉，却给两碗粉的钱)</p>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">HTTP/1.1 200 OK</span><br><span class="line">Content-Type: application/json</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">    <span class="attr">"status"</span>: <span class="string">"-1"</span>,</span><br><span class="line">    <span class="attr">"result"</span>: &#123;</span><br><span class="line">        <span class="attr">"error"</span>: <span class="string">"分数应小于150"</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">HTTP/<span class="number">1.1</span> <span class="number">200</span> OK</span><br><span class="line">Content-Type: application/json</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">    <span class="attr">&quot;status&quot;</span>: <span class="string">&quot;-1&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;result&quot;</span>: &#123;</span><br><span class="line">        <span class="attr">&quot;error&quot;</span>: <span class="string">&quot;分数应小于150&quot;</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>有人说，我已经标记返回内容 status 是 -1（表示failure）, 用 200 作为状态码也无妨吧？这是一个很错误的观念，RESTful 的设计理念之一是简单直观，试想一下，前端开发人员打开开发者工具，所有请求都是200的状态码，但是页面数据就是没有显示出来，难道前端开发人员还要每个接口调用点开看一看，是哪个 status 是 -1 导致的吗？ 很显然我们不希望这样的情况发生，正确的做法应该类似这样的：</p>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">HTTP/1.1 400 Bad Request</span><br><span class="line">Content-Type: application/json</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">    <span class="attr">"status"</span>: <span class="string">"-1"</span>,</span><br><span class="line">    <span class="attr">"result"</span>: &#123;</span><br><span class="line">        <span class="attr">"error"</span>: <span class="string">"分数应小于150"</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">HTTP/<span class="number">1.1</span> <span class="number">400</span> Bad Request</span><br><span class="line">Content-Type: application/json</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">    <span class="attr">&quot;status&quot;</span>: <span class="string">&quot;-1&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;result&quot;</span>: &#123;</span><br><span class="line">        <span class="attr">&quot;error&quot;</span>: <span class="string">&quot;分数应小于150&quot;</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>下面页列举出来常用的状态码以及表示的含义：</p>
 <h5 id="2xx-状态码"><a href="#2xx-状态码" class="headerlink" title="2xx 状态码"></a>2xx 状态码</h5><p>   200表示成功，同时我们可以表示的更加精确</p>
@@ -616,23 +618,23 @@
 </ul>
 </blockquote>
 <h4 id="无状态"><a href="#无状态" class="headerlink" title="无状态"></a>无状态</h4><p>过去开发人员通常会将活动的用户信息存储在服务端的 session 中， 这种形式很显然不适用于现在分布式微服务架构的模式，我们可以使用 JWT (JSON Web Token) 如 OAuth2 来实现，这样每次在 Httpheader 中添加 token 来做验证即可</p>
-<h4 id="API-文档"><a href="#API-文档" class="headerlink" title="API 文档"></a>API 文档</h4><p>Swagger是一种广泛使用的工具来用来记录与呈现 REST API，它提供了一种探索特定 API 使用的方法，因此允许开发人员理解底层的语义行为。 这是一种使用注释添加文档的声明性方法，它进一步生成描述 API 及其用法的 JSON，可以实时应对 API 的更新，具体请参考 <a href="https://swagger.io/" target="_blank" rel="noopener">Swagger 官网</a> , 同时使用 Spring Boot 的小伙伴也可以很轻松的集成 Swagger，只需引入<a href="https://github.com/SpringForAll/spring-boot-starter-swagger" target="_blank" rel="noopener">Swagger Starter</a></p>
+<h4 id="API-文档"><a href="#API-文档" class="headerlink" title="API 文档"></a>API 文档</h4><p>Swagger是一种广泛使用的工具来用来记录与呈现 REST API，它提供了一种探索特定 API 使用的方法，因此允许开发人员理解底层的语义行为。 这是一种使用注释添加文档的声明性方法，它进一步生成描述 API 及其用法的 JSON，可以实时应对 API 的更新，具体请参考 <a target="_blank" rel="noopener" href="https://swagger.io/">Swagger 官网</a> , 同时使用 Spring Boot 的小伙伴也可以很轻松的集成 Swagger，只需引入<a target="_blank" rel="noopener" href="https://github.com/SpringForAll/spring-boot-starter-swagger">Swagger Starter</a></p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.spring4all<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>swagger-spring-boot-starter<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">version</span>&gt;</span>1.9.0.RELEASE<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
 <h4 id="HATEOAS"><a href="#HATEOAS" class="headerlink" title="HATEOAS"></a>HATEOAS</h4><p>HATEOAS (Hypermedia As Transfer Engine Of Application State), API 的使用者未必知道，URL 是怎么设计的。一个解决方法就是，在回应中，给出相关链接，便于下一步操作。这样的话，用户只要记住一个 URL，就可以发现其他的 URL。这种方法叫做 HATEOAS , 举个例子，列表页数据通常会有查看操作，这样我们在返回列表页的数据的时候同样返回如何操作查看具体数据详情的 API 接口：</p>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"status"</span>: <span class="string">"-1"</span>,</span><br><span class="line">    <span class="attr">"result"</span>: [&#123;</span><br><span class="line">        <span class="attr">"id"</span>: <span class="number">1</span>,</span><br><span class="line">      	<span class="attr">"name"</span>: <span class="string">"zhangsan"</span>,</span><br><span class="line">      	<span class="attr">"links"</span>:[</span><br><span class="line">          &#123;</span><br><span class="line">            <span class="attr">"href"</span>: <span class="string">"http://localhost:8080/user/&#123;id&#125;"</span></span><br><span class="line">          &#125;</span><br><span class="line">        ]</span><br><span class="line">    &#125;]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">&quot;status&quot;</span>: <span class="string">&quot;-1&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;result&quot;</span>: [&#123;</span><br><span class="line">        <span class="attr">&quot;id&quot;</span>: <span class="number">1</span>,</span><br><span class="line">      	<span class="attr">&quot;name&quot;</span>: <span class="string">&quot;zhangsan&quot;</span>,</span><br><span class="line">      	<span class="attr">&quot;links&quot;</span>:[</span><br><span class="line">          &#123;</span><br><span class="line">            <span class="attr">&quot;href&quot;</span>: <span class="string">&quot;http://localhost:8080/user/&#123;id&#125;&quot;</span></span><br><span class="line">          &#125;</span><br><span class="line">        ]</span><br><span class="line">    &#125;]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>使用 Spring 框架的小伙伴可以快速的体验一下这种方式，Spring 官网项目 <a href="https://spring.io/projects/spring-hateoas" target="_blank" rel="noopener">Spring HATEOAS</a> , 会快速的将参数都做替换, 将查看 API URL 中的 id 直接替换成 1。</p>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"status"</span>: <span class="string">"-1"</span>,</span><br><span class="line">    <span class="attr">"result"</span>: [&#123;</span><br><span class="line">        <span class="attr">"id"</span>: <span class="number">1</span>,</span><br><span class="line">      	<span class="attr">"name"</span>: <span class="string">"zhangsan"</span>,</span><br><span class="line">      	<span class="attr">"links"</span>:[</span><br><span class="line">          &#123;</span><br><span class="line">            <span class="attr">"href"</span>: <span class="string">"http://localhost:8080/user/1"</span></span><br><span class="line">          &#125;</span><br><span class="line">        ]</span><br><span class="line">    &#125;]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>使用 Spring 框架的小伙伴可以快速的体验一下这种方式，Spring 官网项目 <a target="_blank" rel="noopener" href="https://spring.io/projects/spring-hateoas">Spring HATEOAS</a> , 会快速的将参数都做替换, 将查看 API URL 中的 id 直接替换成 1。</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">&quot;status&quot;</span>: <span class="string">&quot;-1&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;result&quot;</span>: [&#123;</span><br><span class="line">        <span class="attr">&quot;id&quot;</span>: <span class="number">1</span>,</span><br><span class="line">      	<span class="attr">&quot;name&quot;</span>: <span class="string">&quot;zhangsan&quot;</span>,</span><br><span class="line">      	<span class="attr">&quot;links&quot;</span>:[</span><br><span class="line">          &#123;</span><br><span class="line">            <span class="attr">&quot;href&quot;</span>: <span class="string">&quot;http://localhost:8080/user/1&quot;</span></span><br><span class="line">          &#125;</span><br><span class="line">        ]</span><br><span class="line">    &#125;]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
 
-<h2 id="提升效率工具"><a href="#提升效率工具" class="headerlink" title="提升效率工具"></a>提升效率工具</h2><h3 id="RestfulToolkit"><a href="#RestfulToolkit" class="headerlink" title="RestfulToolkit"></a>RestfulToolkit</h3><p>后端开发人员可以安装 IntellJ idea 插件 <a href="https://plugins.jetbrains.com/plugin/10292-restfultoolkit" target="_blank" rel="noopener">RestfulToolkit</a>, Mac 环境使用快捷键 <code>CMD + \</code> 输入关键字快速定位到 API 位置</p>
+<h2 id="提升效率工具"><a href="#提升效率工具" class="headerlink" title="提升效率工具"></a>提升效率工具</h2><h3 id="RestfulToolkit"><a href="#RestfulToolkit" class="headerlink" title="RestfulToolkit"></a>RestfulToolkit</h3><p>后端开发人员可以安装 IntellJ idea 插件 <a target="_blank" rel="noopener" href="https://plugins.jetbrains.com/plugin/10292-restfultoolkit">RestfulToolkit</a>, Mac 环境使用快捷键 <code>CMD + \</code> 输入关键字快速定位到 API 位置</p>
 <p><img src="https://plugins.jetbrains.com/files/10292/screenshot_17681.png" alt="官网截图"></p>
 <p>同时在右侧工具栏打开 API，会自动生成 demoData 请求参数，实现快速调用测试：</p>
 <p><img src="https://plugins.jetbrains.com/files/10292/screenshot_17679.png" alt="参数"></p>
 <h3 id="JSON-Viewer"><a href="#JSON-Viewer" class="headerlink" title="JSON-Viewer"></a>JSON-Viewer</h3><p>JSON-Viewer  是 Chrome 浏览器的插件，用于快速解析及格式化 json 内容，在 Chrome omnibox（多功能输入框）输入<code>json-viewer + TAB</code> ，将 json 内容拷贝进去，然后输入回车键，将看到结构清晰的 json 数据，同时可以自定义主题</p>
-<p><img src="http://ww1.sinaimg.cn/large/8dc363e6ly1g39u1u0er6j21v80tyadz.jpg" alt=""></p>
+<p><img src="http://ww1.sinaimg.cn/large/8dc363e6ly1g39u1u0er6j21v80tyadz.jpg"></p>
 <p>另外，前端人员打开开发者工具，双击请求链接，会自动将 response 中的 json 数据解析出来，非常方便</p>
 <h3 id="Postman"><a href="#Postman" class="headerlink" title="Postman"></a>Postman</h3><p>Postman 功能十分强大， 搜索 <code>Postman 自定义环境变量</code>，会打开新世界的大门</p>
 <h2 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h2><p>如何设计出最好的 RESTful API 永远不会有结论，设计出高可用，团队认可，简单清晰明了的 RESTful API 就是好的。</p>
@@ -647,7 +649,7 @@
       <div class="personalweixin">
         <br><br>
         <blockquote>
-          <a href="https://mp.weixin.qq.com/s/G7BXuZh0Qh1-mE6ts4LJqQ" target="_blank" rel="noopener">加我微信</a>，咱们交流技术与思想，共同成长
+          <a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/G7BXuZh0Qh1-mE6ts4LJqQ">加我微信</a>，咱们交流技术与思想，共同成长
         </blockquote>
         <br>
 
@@ -674,7 +676,7 @@
         
           
   
-  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/HTTP/" rel="nofollow"><i class="fas fa-tag" aria-hidden="true"></i><p>HTTP</p></a></div> <div class="new-meta-item meta-tags"><a class="tag" href="/tags/RESTful/" rel="nofollow"><i class="fas fa-tag" aria-hidden="true"></i><p>RESTful</p></a></div>
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/RESTful/" rel="nofollow"><i class="fas fa-tag" aria-hidden="true"></i><p>RESTful</p></a></div> <div class="new-meta-item meta-tags"><a class="tag" href="/tags/HTTP/" rel="nofollow"><i class="fas fa-tag" aria-hidden="true"></i><p>HTTP</p></a></div>
 
 
         
@@ -685,9 +687,9 @@
   <div class="-mob-share-list share-body">
     
       
-        <a class="-mob-share-qq" title="QQ好友" rel="external nofollow noopener noreferrer"
+        <a class="-mob-share-qq" title="QQ好友" rel="external nofollow noopener noreferrer noopener"
           
-          href="http://connect.qq.com/widget/shareqq/index.html?url=https://dayarch.top/p/restful-api-design.html&title=如何设计好的Restful API | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=现状
+          target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://dayarch.top/p/restful-api-design.html&title=如何设计好的Restful API | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=现状
 现阶段的开发模式多以前后端分离形式存在，前后端开发人员需要通过大量 API 来进行数据交互，如果在交互过程中前后端人员经常遭遇如下问题：
 
  * 前端人员不能快速理解接口字段含义及接口字段变化
@@ -706,9 +708,9 @@
       
     
       
-        <a class="-mob-share-qzone" title="QQ空间" rel="external nofollow noopener noreferrer"
+        <a class="-mob-share-qzone" title="QQ空间" rel="external nofollow noopener noreferrer noopener"
           
-          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://dayarch.top/p/restful-api-design.html&title=如何设计好的Restful API | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=现状
+          target="_blank" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://dayarch.top/p/restful-api-design.html&title=如何设计好的Restful API | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=现状
 现阶段的开发模式多以前后端分离形式存在，前后端开发人员需要通过大量 API 来进行数据交互，如果在交互过程中前后端人员经常遭遇如下问题：
 
  * 前端人员不能快速理解接口字段含义及接口字段变化
@@ -727,9 +729,9 @@
       
     
       
-        <a class="-mob-share-weibo" title="微博" rel="external nofollow noopener noreferrer"
+        <a class="-mob-share-weibo" title="微博" rel="external nofollow noopener noreferrer noopener"
           
-          href="http://service.weibo.com/share/share.php?url=https://dayarch.top/p/restful-api-design.html&title=如何设计好的Restful API | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=现状
+          target="_blank" href="http://service.weibo.com/share/share.php?url=https://dayarch.top/p/restful-api-design.html&title=如何设计好的Restful API | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=现状
 现阶段的开发模式多以前后端分离形式存在，前后端开发人员需要通过大量 API 来进行数据交互，如果在交互过程中前后端人员经常遭遇如下问题：
 
  * 前端人员不能快速理解接口字段含义及接口字段变化
@@ -1030,7 +1032,7 @@
 </header>
 
     <div class='content pure'>
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#现状"><span class="toc-text">现状</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#什么是REST"><span class="toc-text">什么是REST</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#REST术语介绍"><span class="toc-text">REST术语介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#资源"><span class="toc-text">资源</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#集合"><span class="toc-text">集合</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#URL"><span class="toc-text">URL</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#如何设计和开发一个高可用的-REST-APIs"><span class="toc-text">如何设计和开发一个高可用的 REST APIs</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#URL-设计"><span class="toc-text">URL 设计</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#动词"><span class="toc-text">动词</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#名词"><span class="toc-text">名词</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#动词-名词"><span class="toc-text">动词 + 名词</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#URL-层级"><span class="toc-text">URL 层级</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#版本"><span class="toc-text">版本</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#过滤-分页-排序"><span class="toc-text">过滤/分页/排序</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#过滤"><span class="toc-text">过滤</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#分页"><span class="toc-text">分页</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#排序"><span class="toc-text">排序</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#返回结果"><span class="toc-text">返回结果</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#响应数据格式"><span class="toc-text">响应数据格式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#响应状态码"><span class="toc-text">响应状态码</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#2xx-状态码"><span class="toc-text">2xx 状态码</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4xx-状态码"><span class="toc-text">4xx 状态码</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#5xx-状态码"><span class="toc-text">5xx 状态码</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#无状态"><span class="toc-text">无状态</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#API-文档"><span class="toc-text">API 文档</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#HATEOAS"><span class="toc-text">HATEOAS</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#提升效率工具"><span class="toc-text">提升效率工具</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#RestfulToolkit"><span class="toc-text">RestfulToolkit</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JSON-Viewer"><span class="toc-text">JSON-Viewer</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Postman"><span class="toc-text">Postman</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#写在最后"><span class="toc-text">写在最后</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%8E%B0%E7%8A%B6"><span class="toc-text">现状</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFREST"><span class="toc-text">什么是REST</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#REST%E6%9C%AF%E8%AF%AD%E4%BB%8B%E7%BB%8D"><span class="toc-text">REST术语介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B5%84%E6%BA%90"><span class="toc-text">资源</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9B%86%E5%90%88"><span class="toc-text">集合</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#URL"><span class="toc-text">URL</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1%E5%92%8C%E5%BC%80%E5%8F%91%E4%B8%80%E4%B8%AA%E9%AB%98%E5%8F%AF%E7%94%A8%E7%9A%84-REST-APIs"><span class="toc-text">如何设计和开发一个高可用的 REST APIs</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#URL-%E8%AE%BE%E8%AE%A1"><span class="toc-text">URL 设计</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8A%A8%E8%AF%8D"><span class="toc-text">动词</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%90%8D%E8%AF%8D"><span class="toc-text">名词</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8A%A8%E8%AF%8D-%E5%90%8D%E8%AF%8D"><span class="toc-text">动词 + 名词</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#URL-%E5%B1%82%E7%BA%A7"><span class="toc-text">URL 层级</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%89%88%E6%9C%AC"><span class="toc-text">版本</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%87%E6%BB%A4-%E5%88%86%E9%A1%B5-%E6%8E%92%E5%BA%8F"><span class="toc-text">过滤&#x2F;分页&#x2F;排序</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%BF%87%E6%BB%A4"><span class="toc-text">过滤</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%88%86%E9%A1%B5"><span class="toc-text">分页</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%8E%92%E5%BA%8F"><span class="toc-text">排序</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%94%E5%9B%9E%E7%BB%93%E6%9E%9C"><span class="toc-text">返回结果</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%93%8D%E5%BA%94%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8F"><span class="toc-text">响应数据格式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%93%8D%E5%BA%94%E7%8A%B6%E6%80%81%E7%A0%81"><span class="toc-text">响应状态码</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#2xx-%E7%8A%B6%E6%80%81%E7%A0%81"><span class="toc-text">2xx 状态码</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4xx-%E7%8A%B6%E6%80%81%E7%A0%81"><span class="toc-text">4xx 状态码</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#5xx-%E7%8A%B6%E6%80%81%E7%A0%81"><span class="toc-text">5xx 状态码</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%97%A0%E7%8A%B6%E6%80%81"><span class="toc-text">无状态</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#API-%E6%96%87%E6%A1%A3"><span class="toc-text">API 文档</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#HATEOAS"><span class="toc-text">HATEOAS</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8F%90%E5%8D%87%E6%95%88%E7%8E%87%E5%B7%A5%E5%85%B7"><span class="toc-text">提升效率工具</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#RestfulToolkit"><span class="toc-text">RestfulToolkit</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JSON-Viewer"><span class="toc-text">JSON-Viewer</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Postman"><span class="toc-text">Postman</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%99%E5%9C%A8%E6%9C%80%E5%90%8E"><span class="toc-text">写在最后</span></a></li></ol>
     </div>
   </section>
 
@@ -1105,7 +1107,7 @@
   &nbsp;&nbsp;|&nbsp;&nbsp;  
   
     &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-        class="white-color">264.1k</span>&nbsp;字
+        class="white-color">267.4k</span>&nbsp;字
     
 
   &nbsp;&nbsp;|&nbsp;&nbsp;  
@@ -1160,7 +1162,7 @@
     
     。
   </div>
-  <div><p>博客内容遵循 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
+  <div><p>博客内容遵循 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
 </div>
   <!-- <div class="github-badge">
       <a style="color: #fff" rel="license" href="https://hexo.io/" target="_blank" title="由 Hexo 强力驱动">
@@ -1268,10 +1270,14 @@
 
 
 
-  <script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/app.js"></script>
+  
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/app.js"></script>
 
 
-  <script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/search.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/search.js"></script>
+
 
 
 

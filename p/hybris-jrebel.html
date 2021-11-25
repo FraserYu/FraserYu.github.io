@@ -13,7 +13,7 @@
   
 
   
-  <link rel="alternate" href="/atom.xml" title="日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享">
+  <link rel="alternate" href="/atom.xml" title="日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享" type="application/atom+xml">
   
 
   <meta name="HandheldFriendly" content="True" />
@@ -35,7 +35,9 @@
   
 
   
-    <link rel="stylesheet" href="/style.css">
+    
+<link rel="stylesheet" href="/style.css">
+
   
 
   <script>
@@ -85,7 +87,7 @@
         daovoice('update');
         </script>
     
-</head>
+<meta name="generator" content="Hexo 5.4.0"></head>
 
 <body>
   
@@ -484,27 +486,33 @@
       <div class="article-entry" itemprop="articleBody">
         <h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>Jrebel是非常强大的实现项目热部署的软件，当然也比较消耗电脑的性能，当如Hybris的这种启动需要一段时间的项目，对于后端开发人员来说，改动一些东西就要重启服务真的是一种折磨，浪费时间，接下来说明一下Jrebel在Hybris项目中的配置</p>
 <h3 id="配置Jrebel"><a href="#配置Jrebel" class="headerlink" title="配置Jrebel"></a>配置Jrebel</h3><p>Jrebel可以通过IntelliJ IDEA来下载安装集成好的插件，也可以单独下载Jrebel的包 （请支持正版）</p>
-<a id="more"></a>
+<span id="more"></span>
 
 <h4 id="方法一：通过IntelliJ-IDEA-插件"><a href="#方法一：通过IntelliJ-IDEA-插件" class="headerlink" title="方法一：通过IntelliJ IDEA 插件"></a>方法一：通过IntelliJ IDEA 插件</h4><p>如下图下载安装InteliJ IDEA 插件<br><img src="http://7xkyc7.com1.z0.glb.clouddn.com/jrebel_jrebel.png" alt="Jrebel"></p>
 <p>安装好之后我们就可以在IntelliJ IDEA的安装目录中看到该插件，接下来在Hybris的local.properties文件中来配置tomcat</p>
 <pre><code>#JRebel
 tomcat.javaoptions=-agentpath:&quot;D:/Users/fraser/.IntelliJIdea2016.2/config/plugins/jr-ide-idea/lib/jrebel6/lib/jrebel64.dll&quot;  -DforceANSI=true
-tomcat.debugjavaoptions=-agentpath:&quot;D:/Users/fraser/.IntelliJIdea2016.2/config/plugins/jr-ide-idea/lib/jrebel6/lib/jrebel64.dll&quot; -Xdebug -Xrunjdwp:transport=dt_socket,server=y,address=8000,suspend=n -DforceANSI=true</code></pre><h4 id="方法二：通过安装包"><a href="#方法二：通过安装包" class="headerlink" title="方法二：通过安装包"></a>方法二：通过安装包</h4><p>下载Jrebel安装包来，将安装包解压到某一个目录下，然后同样配置local.properties 文件如下：</p>
+tomcat.debugjavaoptions=-agentpath:&quot;D:/Users/fraser/.IntelliJIdea2016.2/config/plugins/jr-ide-idea/lib/jrebel6/lib/jrebel64.dll&quot; -Xdebug -Xrunjdwp:transport=dt_socket,server=y,address=8000,suspend=n -DforceANSI=true
+</code></pre>
+<h4 id="方法二：通过安装包"><a href="#方法二：通过安装包" class="headerlink" title="方法二：通过安装包"></a>方法二：通过安装包</h4><p>下载Jrebel安装包来，将安装包解压到某一个目录下，然后同样配置local.properties 文件如下：</p>
 <pre><code>#JREBEL
 tomcat.javaoptions=-Xverify:none -javaagent:&quot;E:/MyProjectSpace/jrebel_5.6.0/jrebe/jrebel.jar=de.hybris.tomcat.HybrisWebappClassLoader60&quot;
 tomcat.debugjavaoptions=-Xverify:none -javaagent:&quot;E:/MyProjectSpace/jrebel_5.6.0/jrebe/jrebel.jar=de.hybris.tomcat.HybrisWebappClassLoader60&quot;-Xdebug -Xrunjdwp:transport=dt_socket,server=y,address=8060,suspend=y
 
 #可不配
-tomcat.generaloptions=-Xmx2G -Xms2G -XX:PermSize=500M -XX:MaxPermSize=300M -Xss256K -XX:+DisableExplicitGC -XX:+UseConcMarkSweepGC -XX:CMSInitiatingOccupancyFraction=75 -XX:+CMSPermGenSweepingEnabled -XX:+CMSClassUnloadingEnabled -XX:+UseCMSInitiatingOccupancyOnly -XX:+CMSParallelRemarkEnabled -XX:+ParallelRefProcEnabled -XX:+CMSScavengeBeforeRemark  -XX:+PrintGCTimeStamps -XX:+PrintGCDetails -Xloggc:&quot;${HYBRIS_LOG_DIR}/tomcat/java_gc.log&quot; -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Dorg.tanukisoftware.wrapper.WrapperManager.mbean=true -Djava.endorsed.dirs=..b/endorsed -Dcatalina.base=%CATALINA_BASE% -Dcatalina.home=%CATALINA_HOME% -Dfile.encoding=UTF-8 -Dlog4j.configuration=log4j_init_tomcat.properties -Djava.util.logging.config.file=jdk_logging.properties -Djava.io.tmpdir=&quot;${HYBRIS_TEMP_DIR}&quot; -Dsun.rmi.dgc.client.gcInterval=3600000 -Dsun.rmi.dgc.server.gcInterval=3600000</code></pre><h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><p>启动Hybris服务器如看到如下信息就说明Jrebel配置成功：<br><img src="http://7xkyc7.com1.z0.glb.clouddn.com/jrebel_jrebel1.png" alt="jrebel1"></p>
+tomcat.generaloptions=-Xmx2G -Xms2G -XX:PermSize=500M -XX:MaxPermSize=300M -Xss256K -XX:+DisableExplicitGC -XX:+UseConcMarkSweepGC -XX:CMSInitiatingOccupancyFraction=75 -XX:+CMSPermGenSweepingEnabled -XX:+CMSClassUnloadingEnabled -XX:+UseCMSInitiatingOccupancyOnly -XX:+CMSParallelRemarkEnabled -XX:+ParallelRefProcEnabled -XX:+CMSScavengeBeforeRemark  -XX:+PrintGCTimeStamps -XX:+PrintGCDetails -Xloggc:&quot;$&#123;HYBRIS_LOG_DIR&#125;/tomcat/java_gc.log&quot; -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Dorg.tanukisoftware.wrapper.WrapperManager.mbean=true -Djava.endorsed.dirs=..b/endorsed -Dcatalina.base=%CATALINA_BASE% -Dcatalina.home=%CATALINA_HOME% -Dfile.encoding=UTF-8 -Dlog4j.configuration=log4j_init_tomcat.properties -Djava.util.logging.config.file=jdk_logging.properties -Djava.io.tmpdir=&quot;$&#123;HYBRIS_TEMP_DIR&#125;&quot; -Dsun.rmi.dgc.client.gcInterval=3600000 -Dsun.rmi.dgc.server.gcInterval=3600000
+</code></pre>
+<h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><p>启动Hybris服务器如看到如下信息就说明Jrebel配置成功：<br><img src="http://7xkyc7.com1.z0.glb.clouddn.com/jrebel_jrebel1.png" alt="jrebel1"></p>
 <p>这样我们执行<strong>ant build</strong> 命令等待build成功，就可以实现热部署，如果遇到如下问题：<br><img src="http://7xkyc7.com1.z0.glb.clouddn.com/jrebel_jrebel2.png" alt="jrebel3"></p>
-<p>找到<strong>D:\projects\hybrisHn\hybris\bin\ext-backoffice\backoffice\buildcallbacks.xml</strong> 文件，按照如下注释掉<strong><backoffice_remove_web_fragments/></strong> 即可</p>
+<p>找到<strong>D:\projects\hybrisHn\hybris\bin\ext-backoffice\backoffice\buildcallbacks.xml</strong> 文件，按照如下注释掉**<backoffice_remove_web_fragments/>** 即可</p>
 <pre><code>&lt;macrodef name=&quot;backoffice_after_build&quot;&gt;
     &lt;sequential&gt;
         &lt;!--&lt;backoffice_remove_web_fragments/&gt;--&gt;
         &lt;backoffice_create_web_fragments/&gt;
     &lt;/sequential&gt;
-&lt;/macrodef&gt;</code></pre><p>重新尝试<strong>ant build</strong> 命令应该就可以build成功，快尝试一下吧</p>
+&lt;/macrodef&gt;
+</code></pre>
+<p>重新尝试<strong>ant build</strong> 命令应该就可以build成功，快尝试一下吧</p>
 
       </div>
       <!-- <div class="tuijian">
@@ -515,7 +523,7 @@ tomcat.generaloptions=-Xmx2G -Xms2G -XX:PermSize=500M -XX:MaxPermSize=300M -Xss2
       <div class="personalweixin">
         <br><br>
         <blockquote>
-          <a href="https://mp.weixin.qq.com/s/G7BXuZh0Qh1-mE6ts4LJqQ" target="_blank" rel="noopener">加我微信</a>，咱们交流技术与思想，共同成长
+          <a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/G7BXuZh0Qh1-mE6ts4LJqQ">加我微信</a>，咱们交流技术与思想，共同成长
         </blockquote>
         <br>
 
@@ -553,9 +561,9 @@ tomcat.generaloptions=-Xmx2G -Xms2G -XX:PermSize=500M -XX:MaxPermSize=300M -Xss2
   <div class="-mob-share-list share-body">
     
       
-        <a class="-mob-share-qq" title="QQ好友" rel="external nofollow noopener noreferrer"
+        <a class="-mob-share-qq" title="QQ好友" rel="external nofollow noopener noreferrer noopener"
           
-          href="http://connect.qq.com/widget/shareqq/index.html?url=https://dayarch.top/p/hybris-jrebel.html&title=Hybris tomcat Jrebel热部署配置 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=背景
+          target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://dayarch.top/p/hybris-jrebel.html&title=Hybris tomcat Jrebel热部署配置 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=背景
 Jrebel是非常强大的实现项目热部署的软件，当然也比较消耗电脑的性能，当如Hybris的这种启动需要一段时间的项目，对于后端开发人员来说，改动一些东西就要重启服务真的是一种折磨，浪费时间，接下来说明一下Jrebel在Hybris项目中的配置
 
 配置Jrebel
@@ -575,9 +583,9 @@ Jrebel可以通过IntelliJ IDEA来下载安装集成好的插件，也可以单�
       
     
       
-        <a class="-mob-share-qzone" title="QQ空间" rel="external nofollow noopener noreferrer"
+        <a class="-mob-share-qzone" title="QQ空间" rel="external nofollow noopener noreferrer noopener"
           
-          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://dayarch.top/p/hybris-jrebel.html&title=Hybris tomcat Jrebel热部署配置 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=背景
+          target="_blank" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://dayarch.top/p/hybris-jrebel.html&title=Hybris tomcat Jrebel热部署配置 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=背景
 Jrebel是非常强大的实现项目热部署的软件，当然也比较消耗电脑的性能，当如Hybris的这种启动需要一段时间的项目，对于后端开发人员来说，改动一些东西就要重启服务真的是一种折磨，浪费时间，接下来说明一下Jrebel在Hybris项目中的配置
 
 配置Jrebel
@@ -597,9 +605,9 @@ Jrebel可以通过IntelliJ IDEA来下载安装集成好的插件，也可以单�
       
     
       
-        <a class="-mob-share-weibo" title="微博" rel="external nofollow noopener noreferrer"
+        <a class="-mob-share-weibo" title="微博" rel="external nofollow noopener noreferrer noopener"
           
-          href="http://service.weibo.com/share/share.php?url=https://dayarch.top/p/hybris-jrebel.html&title=Hybris tomcat Jrebel热部署配置 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=背景
+          target="_blank" href="http://service.weibo.com/share/share.php?url=https://dayarch.top/p/hybris-jrebel.html&title=Hybris tomcat Jrebel热部署配置 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=背景
 Jrebel是非常强大的实现项目热部署的软件，当然也比较消耗电脑的性能，当如Hybris的这种启动需要一段时间的项目，对于后端开发人员来说，改动一些东西就要重启服务真的是一种折磨，浪费时间，接下来说明一下Jrebel在Hybris项目中的配置
 
 配置Jrebel
@@ -901,7 +909,7 @@ Jrebel可以通过IntelliJ IDEA来下载安装集成好的插件，也可以单�
 </header>
 
     <div class='content pure'>
-      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#背景"><span class="toc-text">背景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#配置Jrebel"><span class="toc-text">配置Jrebel</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#方法一：通过IntelliJ-IDEA-插件"><span class="toc-text">方法一：通过IntelliJ IDEA 插件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#方法二：通过安装包"><span class="toc-text">方法二：通过安装包</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#测试"><span class="toc-text">测试</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%83%8C%E6%99%AF"><span class="toc-text">背景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%85%8D%E7%BD%AEJrebel"><span class="toc-text">配置Jrebel</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%B9%E6%B3%95%E4%B8%80%EF%BC%9A%E9%80%9A%E8%BF%87IntelliJ-IDEA-%E6%8F%92%E4%BB%B6"><span class="toc-text">方法一：通过IntelliJ IDEA 插件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%B9%E6%B3%95%E4%BA%8C%EF%BC%9A%E9%80%9A%E8%BF%87%E5%AE%89%E8%A3%85%E5%8C%85"><span class="toc-text">方法二：通过安装包</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B5%8B%E8%AF%95"><span class="toc-text">测试</span></a></li></ol>
     </div>
   </section>
 
@@ -976,7 +984,7 @@ Jrebel可以通过IntelliJ IDEA来下载安装集成好的插件，也可以单�
   &nbsp;&nbsp;|&nbsp;&nbsp;  
   
     &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-        class="white-color">264.1k</span>&nbsp;字
+        class="white-color">267.4k</span>&nbsp;字
     
 
   &nbsp;&nbsp;|&nbsp;&nbsp;  
@@ -1031,7 +1039,7 @@ Jrebel可以通过IntelliJ IDEA来下载安装集成好的插件，也可以单�
     
     。
   </div>
-  <div><p>博客内容遵循 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
+  <div><p>博客内容遵循 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
 </div>
   <!-- <div class="github-badge">
       <a style="color: #fff" rel="license" href="https://hexo.io/" target="_blank" title="由 Hexo 强力驱动">
@@ -1139,10 +1147,14 @@ Jrebel可以通过IntelliJ IDEA来下载安装集成好的插件，也可以单�
 
 
 
-  <script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/app.js"></script>
+  
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/app.js"></script>
 
 
-  <script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/search.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/search.js"></script>
+
 
 
 

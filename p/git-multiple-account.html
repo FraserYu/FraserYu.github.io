@@ -13,7 +13,7 @@
   
 
   
-  <link rel="alternate" href="/atom.xml" title="日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享">
+  <link rel="alternate" href="/atom.xml" title="日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享" type="application/atom+xml">
   
 
   <meta name="HandheldFriendly" content="True" />
@@ -35,7 +35,9 @@
   
 
   
-    <link rel="stylesheet" href="/style.css">
+    
+<link rel="stylesheet" href="/style.css">
+
   
 
   <script>
@@ -85,7 +87,7 @@
         daovoice('update');
         </script>
     
-</head>
+<meta name="generator" content="Hexo 5.4.0"></head>
 
 <body>
   
@@ -490,12 +492,16 @@
 <li>https url 在push的时候是需要验证用户名和密码的，而 SSH 在push的时候，是不需要输入用户名的，如果配置SSH key的时候设置了密码，则需要输入密码的，否则直接是不需要输入密码的。</li>
 </ol>
 </blockquote>
-<a id="more"></a>
+<span id="more"></span>
 
 <h3 id="Git设置多账户"><a href="#Git设置多账户" class="headerlink" title="Git设置多账户"></a>Git设置多账户</h3><h4 id="检查本机是否已有SSH-Key"><a href="#检查本机是否已有SSH-Key" class="headerlink" title="检查本机是否已有SSH Key"></a>检查本机是否已有SSH Key</h4><pre><code>$ cd ~/.ssh
-$ ls</code></pre><p>如果存在会有两个秘钥文件id_rsa(私钥)和id_rsa.pub(公钥)，如果没有则需要下一步的创建。</p>
+$ ls
+</code></pre>
+<p>如果存在会有两个秘钥文件id_rsa(私钥)和id_rsa.pub(公钥)，如果没有则需要下一步的创建。</p>
 <h4 id="创建SSH-Key"><a href="#创建SSH-Key" class="headerlink" title="创建SSH Key"></a>创建SSH Key</h4><p>输入如下命令：</p>
-<pre><code>$ ssh-keygen -t rsa -C &quot;your_email@example.com&quot;</code></pre><p>参数解析：</p>
+<pre><code>$ ssh-keygen -t rsa -C &quot;your_email@example.com&quot;
+</code></pre>
+<p>参数解析：</p>
 <blockquote>
 <ul>
 <li>-t 指定密钥类型，默认是 rsa ，可以省略。</li>
@@ -505,52 +511,80 @@ $ ls</code></pre><p>如果存在会有两个秘钥文件id_rsa(私钥)和id_rsa.
 </blockquote>
 <p>以上代码省略了 -f 参数，因此，运行上面那条命令后会让你输入一个文件名，用于保存刚才生成的 SSH key 代码，如：</p>
 <pre><code>Generating public/private rsa key pair.
-# Enter file in which to save the key (/c/Users/you/.ssh/id_rsa): [Press enter]</code></pre><p>当然，你也可以不输入文件名，直接车，使用默认文件名（推荐），那么就会生成 id_rsa 和 id_rsa.pub 两个秘钥文件。</p>
+# Enter file in which to save the key (/c/Users/you/.ssh/id_rsa): [Press enter]
+</code></pre>
+<p>当然，你也可以不输入文件名，直接车，使用默认文件名（推荐），那么就会生成 id_rsa 和 id_rsa.pub 两个秘钥文件。</p>
 <p>接着又会提示你输入两次密码（该密码是你push文件的时候要输入的密码，而不是github管理者的密码），这样别人用你的机器没有密码是不可能随便push代码的，一种安全性的体现，当然，你也可以不输入密码，直接按回车。那么push的时候就不需要输入密码，直接提交到github上了。</p>
 <pre><code>Enter passphrase (empty for no passphrase):
-# Enter same passphrase again:</code></pre><p>在此案例中，就需要输入两个email来创建个相应的SSH Key:</p>
+# Enter same passphrase again:
+</code></pre>
+<p>在此案例中，就需要输入两个email来创建个相应的SSH Key:</p>
 <pre><code>$ ssh-keygen -t rsa -C &quot;personal@example.com&quot; (个人邮箱)
-$ ssh-keygen -t rsa -C &quot;company@example.com&quot; (公司邮箱)</code></pre><p>此时在.ssh 目录下应该会有下面四个文件：</p>
-<pre><code>id_rsa  id_rsa.pub  id_rsa_company  id_rsa_company.pub</code></pre><p>将公钥id_rsa.pub和id_rsa_company.pub 分别添加到GitHub和GitLab上，怎样添加请自行查询，至此，我们已经有两个用户（可以更多），怎样指定要连接GitHub还是GitLab呢？这样就需要解决多用户的权限问题。</p>
+$ ssh-keygen -t rsa -C &quot;company@example.com&quot; (公司邮箱)
+</code></pre>
+<p>此时在.ssh 目录下应该会有下面四个文件：</p>
+<pre><code>id_rsa  id_rsa.pub  id_rsa_company  id_rsa_company.pub
+</code></pre>
+<p>将公钥id_rsa.pub和id_rsa_company.pub 分别添加到GitHub和GitLab上，怎样添加请自行查询，至此，我们已经有两个用户（可以更多），怎样指定要连接GitHub还是GitLab呢？这样就需要解决多用户的权限问题。</p>
 <h4 id="多用户权限问题"><a href="#多用户权限问题" class="headerlink" title="多用户权限问题"></a>多用户权限问题</h4><p>GitHub/GitLab使用SSH与客户端连接。如果是单用户（A），生成密钥对后，将公钥保存至 GitHub/GitLab，每次连接时SSH客户端发送本地私钥（默认~/.ssh/id_rsa）到服务端验证。单用户情况下，连接的服务器上保存的公钥和发送的私钥自然是配对的。但是如果是 多用户 （A,B），我们在连接到第二个帐号时，B保存的是自己的公钥，但是SSH客户端依然发送默认私钥，即A的私钥，那么这个验证自然无法通过, 所以需要让SSH客户端发现B的私钥。</p>
 <ol>
 <li><p>查看系统SSH Key</p>
-<pre><code>$ ssh-add -l</code></pre><p>如果提示：</p>
-<pre><code>$ Could not open a connection to your authentication agent.</code></pre><p>可以输入如下命令然后重新输入：<strong>ssh-add -l</strong></p>
-<pre><code>$ ssh-agent bash</code></pre><blockquote>
+<pre><code> $ ssh-add -l
+</code></pre>
+<p>如果提示：</p>
+<pre><code> $ Could not open a connection to your authentication agent.
+</code></pre>
+<p>可以输入如下命令然后重新输入：<strong>ssh-add -l</strong></p>
+<pre><code> $ ssh-agent bash
+</code></pre>
+<blockquote>
 <p><strong>ssh-agent bash命令解释：</strong><br>ssh-agent是专为既令人愉快又安全的处理RSA和DSA密钥而设计的特殊程序，不同于ssh，ssh-agent是个长时间持续运行的守护进程（daemon），设计它的唯一目的就是对解密的专用密钥进行<strong>高速缓存</strong>。ssh包含的内建支持允许它同ssh-agent通信，允许ssh不必每次新连接时都提示您要密码才能获取解密的专用密钥。对于ssh-agent，您只要使用ssh-add把专用密钥添加到ssh-agent的高速缓存中。这是个一次性过程；用过ssh-add之后，ssh将从ssh-agent获取您的专用密钥，而不会提示要密码短语来烦您了。<br>如果出现如下提示信息说明没有SSH Key在代理中</p>
 </blockquote>
-<pre><code>$ The agent has no identities.</code></pre><p>下面可以手动加入SSH Key 到代理中：</p>
-<pre><code>$ ssh-add ~/.ssh/id_rsa_company</code></pre><p>可以使用如下命令remove SSH Key</p>
-<pre><code>$ ssh-add -D</code></pre></li>
-<li><p>配置config 路由文件<br>config文件即绑定私钥和远程服务器的关系，以我的config文件为例：</p>
-<pre><code># 该文件用于配置私钥对应的服务器
-# 默认自己GitHub的配置
-Host github
- HostName github.com
- User FraserYu
- PreferredAuthentications publickey
- IdentityFile ~/.ssh/id_rsa
-
-# 公司所用GitLab的配置
-Host gitlab
- HostName gitlab.com #(可以是域名/IP地址)
- User Fraser
- PreferredAuthentications publickey
- IdentityFile ~/.ssh/id_rsa_company         </code></pre></li>
-<li><p>测试<br>输入如下命令进行GitLab和GitHub的测试(注意命令中用了Host的别名)：</p>
-<pre><code>$ ssh -T git@github
-$ ssh -T git@gitlab
-$ git clone git@github:username/project.git</code></pre></li>
-<li><p>用户名邮箱配置<br>Git全局配置和单个仓库的用户名邮箱配置，学习git的时候, 大家刚开始使用之前都配置了一个全局的用户名和邮箱</p>
-<pre><code>$ git config --global user.name &quot;github&apos;s Name&quot;
-$ git config --global user.email &quot;github@xx.com&quot;
-$ git config --list</code></pre><p>如果你公司的项目是放在自建的gitlab上面, 如果你不进行配置用户名和邮箱的话, 则会使用全局的, 这个时候是错误的, 正确的做法是针对公司的项目, 在项目根目录下进行单独配置</p>
-<pre><code>$ git config user.name &quot;gitlab&apos;s Name&quot;
-$ git config user.email &quot;gitlab@xx.com&quot;
-$ git config --list</code></pre><p>git config –list查看当前配置, 在当前项目下面查看的配置是全局配置+当前项目的配置, 使用的时候会优先使用当前项目的配置</p>
+<pre><code> $ The agent has no identities.
+</code></pre>
+<p>下面可以手动加入SSH Key 到代理中：</p>
+<pre><code> $ ssh-add ~/.ssh/id_rsa_company
+</code></pre>
+<p>可以使用如下命令remove SSH Key</p>
+<pre><code> $ ssh-add -D
+</code></pre>
 </li>
-<li><p>除了默认的id_rsa是被git默认读取，我们每次打开终端都需要执行 <strong>ssh-add ～/.ssh/id_rsa_company</strong>， 这样十分麻烦，以MacOs为🌰，我们可以将其添加到 KeyChain Access， 执行命令 <strong>ssh-add -K [path/to/your/ssh-key]</strong>，  如：ssh-add -K ～/.ssh/id_rsa_company 即可</p>
+<li><p>配置config 路由文件<br>config文件即绑定私钥和远程服务器的关系，以我的config文件为例：</p>
+<pre><code> # 该文件用于配置私钥对应的服务器
+ # 默认自己GitHub的配置
+ Host github
+  HostName github.com
+  User FraserYu
+  PreferredAuthentications publickey
+  IdentityFile ~/.ssh/id_rsa
+
+ # 公司所用GitLab的配置
+ Host gitlab
+  HostName gitlab.com #(可以是域名/IP地址)
+  User Fraser
+  PreferredAuthentications publickey
+  IdentityFile ~/.ssh/id_rsa_company         
+</code></pre>
+</li>
+<li><p>测试<br>输入如下命令进行GitLab和GitHub的测试(注意命令中用了Host的别名)：</p>
+<pre><code> $ ssh -T git@github
+ $ ssh -T git@gitlab
+ $ git clone git@github:username/project.git
+</code></pre>
+</li>
+<li><p>用户名邮箱配置<br>Git全局配置和单个仓库的用户名邮箱配置，学习git的时候, 大家刚开始使用之前都配置了一个全局的用户名和邮箱</p>
+<pre><code> $ git config --global user.name &quot;github&#39;s Name&quot;
+ $ git config --global user.email &quot;github@xx.com&quot;
+ $ git config --list
+</code></pre>
+<p>如果你公司的项目是放在自建的gitlab上面, 如果你不进行配置用户名和邮箱的话, 则会使用全局的, 这个时候是错误的, 正确的做法是针对公司的项目, 在项目根目录下进行单独配置</p>
+<pre><code> $ git config user.name &quot;gitlab&#39;s Name&quot;
+ $ git config user.email &quot;gitlab@xx.com&quot;
+ $ git config --list
+</code></pre>
+<p>git config –list查看当前配置, 在当前项目下面查看的配置是全局配置+当前项目的配置, 使用的时候会优先使用当前项目的配置</p>
+</li>
+<li><p>除了默认的id_rsa是被git默认读取，我们每次打开终端都需要执行 <strong>ssh-add ～/.ssh/id_rsa_company</strong>， 这样十分麻烦，以MacOs为🌰，我们可以将其添加到 KeyChain Access， 执行命令 **ssh-add -K [path/to/your/ssh-key]**，  如：ssh-add -K ～/.ssh/id_rsa_company 即可</p>
 </li>
 </ol>
 
@@ -558,12 +592,12 @@ $ git config --list</code></pre><p>git config –list查看当前配置, 在当�
       <!-- <div class="tuijian">
         <br><br>
         📚相关文章
-        <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/git-worktree-in-practice.html" title="Git Worktree 大法真香" rel="bookmark">Git Worktree 大法真香</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/git-ignore.html" title="Git Ignoring Files" rel="bookmark">Git Ignoring Files</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/git-workflow.html" title="git 使用流程" rel="bookmark">git 使用流程</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/three-ways-to-keep-git-log-clear.html" title="保持清洁的Git提交记录，三招就够了" rel="bookmark">保持清洁的Git提交记录，三招就够了</a></h3></div></li></ul>
+        <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/git-ignore.html" title="Git Ignoring Files" rel="bookmark">Git Ignoring Files</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/git-worktree-in-practice.html" title="Git Worktree 大法真香" rel="bookmark">Git Worktree 大法真香</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/git-worktree-in-advance.html" title="Git Worktree 高级使用" rel="bookmark">Git Worktree 高级使用</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/git-workflow.html" title="git 使用流程" rel="bookmark">git 使用流程</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/three-ways-to-keep-git-log-clear.html" title="保持清洁的Git提交记录，三招就够了" rel="bookmark">保持清洁的Git提交记录，三招就够了</a></h3></div></li></ul>
       </div> -->
       <div class="personalweixin">
         <br><br>
         <blockquote>
-          <a href="https://mp.weixin.qq.com/s/G7BXuZh0Qh1-mE6ts4LJqQ" target="_blank" rel="noopener">加我微信</a>，咱们交流技术与思想，共同成长
+          <a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/G7BXuZh0Qh1-mE6ts4LJqQ">加我微信</a>，咱们交流技术与思想，共同成长
         </blockquote>
         <br>
 
@@ -601,9 +635,9 @@ $ git config --list</code></pre><p>git config –list查看当前配置, 在当�
   <div class="-mob-share-list share-body">
     
       
-        <a class="-mob-share-qq" title="QQ好友" rel="external nofollow noopener noreferrer"
+        <a class="-mob-share-qq" title="QQ好友" rel="external nofollow noopener noreferrer noopener"
           
-          href="http://connect.qq.com/widget/shareqq/index.html?url=https://dayarch.top/p/git-multiple-account.html&title=Git配置多个账号（GitLab和GitHub） | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=背景
+          target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://dayarch.top/p/git-multiple-account.html&title=Git配置多个账号（GitLab和GitHub） | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=背景
 现在好多公司用GitLab作为项目管理工具，自己也会有开源项目在GitHub上，按照以往的配置全局的用户貌似在这种情形下就没有作用了（公司的项目需要用公司邮箱，自己的项目需要用自己的邮箱），此时就要做Git多账户的管理与设置。
 
 Git支持的协议
@@ -620,9 +654,9 @@ https 和 SSH 的区别
       
     
       
-        <a class="-mob-share-qzone" title="QQ空间" rel="external nofollow noopener noreferrer"
+        <a class="-mob-share-qzone" title="QQ空间" rel="external nofollow noopener noreferrer noopener"
           
-          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://dayarch.top/p/git-multiple-account.html&title=Git配置多个账号（GitLab和GitHub） | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=背景
+          target="_blank" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://dayarch.top/p/git-multiple-account.html&title=Git配置多个账号（GitLab和GitHub） | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=背景
 现在好多公司用GitLab作为项目管理工具，自己也会有开源项目在GitHub上，按照以往的配置全局的用户貌似在这种情形下就没有作用了（公司的项目需要用公司邮箱，自己的项目需要用自己的邮箱），此时就要做Git多账户的管理与设置。
 
 Git支持的协议
@@ -639,9 +673,9 @@ https 和 SSH 的区别
       
     
       
-        <a class="-mob-share-weibo" title="微博" rel="external nofollow noopener noreferrer"
+        <a class="-mob-share-weibo" title="微博" rel="external nofollow noopener noreferrer noopener"
           
-          href="http://service.weibo.com/share/share.php?url=https://dayarch.top/p/git-multiple-account.html&title=Git配置多个账号（GitLab和GitHub） | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=背景
+          target="_blank" href="http://service.weibo.com/share/share.php?url=https://dayarch.top/p/git-multiple-account.html&title=Git配置多个账号（GitLab和GitHub） | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=背景
 现在好多公司用GitLab作为项目管理工具，自己也会有开源项目在GitHub上，按照以往的配置全局的用户貌似在这种情形下就没有作用了（公司的项目需要用公司邮箱，自己的项目需要用自己的邮箱），此时就要做Git多账户的管理与设置。
 
 Git支持的协议
@@ -732,7 +766,7 @@ https 和 SSH 的区别
 </header>
 
     <div class="content pure">
-      <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/git-worktree-in-practice.html" title="Git Worktree 大法真香" rel="bookmark">Git Worktree 大法真香</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/git-ignore.html" title="Git Ignoring Files" rel="bookmark">Git Ignoring Files</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/git-workflow.html" title="git 使用流程" rel="bookmark">git 使用流程</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/three-ways-to-keep-git-log-clear.html" title="保持清洁的Git提交记录，三招就够了" rel="bookmark">保持清洁的Git提交记录，三招就够了</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/jenkins-shared-library.html" title="Jenkins Shared Library" rel="bookmark">Jenkins Shared Library</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/jenkins-environment-variables.html" title="Jenkins 使用环境变量" rel="bookmark">Jenkins 使用环境变量</a></h3></div></li></ul>
+      <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/git-ignore.html" title="Git Ignoring Files" rel="bookmark">Git Ignoring Files</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/git-worktree-in-practice.html" title="Git Worktree 大法真香" rel="bookmark">Git Worktree 大法真香</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/git-worktree-in-advance.html" title="Git Worktree 高级使用" rel="bookmark">Git Worktree 高级使用</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/git-workflow.html" title="git 使用流程" rel="bookmark">git 使用流程</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/three-ways-to-keep-git-log-clear.html" title="保持清洁的Git提交记录，三招就够了" rel="bookmark">保持清洁的Git提交记录，三招就够了</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/jenkins-shared-library.html" title="Jenkins Shared Library" rel="bookmark">Jenkins Shared Library</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/jenkins-environment-variables.html" title="Jenkins 使用环境变量" rel="bookmark">Jenkins 使用环境变量</a></h3></div></li></ul>
     </div>
   </section>
 
@@ -940,7 +974,7 @@ https 和 SSH 的区别
 </header>
 
     <div class='content pure'>
-      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#背景"><span class="toc-text">背景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Git支持的协议"><span class="toc-text">Git支持的协议</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#https-和-SSH-的区别"><span class="toc-text">https 和 SSH 的区别</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Git设置多账户"><span class="toc-text">Git设置多账户</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#检查本机是否已有SSH-Key"><span class="toc-text">检查本机是否已有SSH Key</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#创建SSH-Key"><span class="toc-text">创建SSH Key</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#多用户权限问题"><span class="toc-text">多用户权限问题</span></a></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%83%8C%E6%99%AF"><span class="toc-text">背景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Git%E6%94%AF%E6%8C%81%E7%9A%84%E5%8D%8F%E8%AE%AE"><span class="toc-text">Git支持的协议</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#https-%E5%92%8C-SSH-%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-text">https 和 SSH 的区别</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Git%E8%AE%BE%E7%BD%AE%E5%A4%9A%E8%B4%A6%E6%88%B7"><span class="toc-text">Git设置多账户</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A3%80%E6%9F%A5%E6%9C%AC%E6%9C%BA%E6%98%AF%E5%90%A6%E5%B7%B2%E6%9C%89SSH-Key"><span class="toc-text">检查本机是否已有SSH Key</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%9B%E5%BB%BASSH-Key"><span class="toc-text">创建SSH Key</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%9A%E7%94%A8%E6%88%B7%E6%9D%83%E9%99%90%E9%97%AE%E9%A2%98"><span class="toc-text">多用户权限问题</span></a></li></ol></li></ol>
     </div>
   </section>
 
@@ -1015,7 +1049,7 @@ https 和 SSH 的区别
   &nbsp;&nbsp;|&nbsp;&nbsp;  
   
     &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-        class="white-color">264.1k</span>&nbsp;字
+        class="white-color">267.4k</span>&nbsp;字
     
 
   &nbsp;&nbsp;|&nbsp;&nbsp;  
@@ -1070,7 +1104,7 @@ https 和 SSH 的区别
     
     。
   </div>
-  <div><p>博客内容遵循 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
+  <div><p>博客内容遵循 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
 </div>
   <!-- <div class="github-badge">
       <a style="color: #fff" rel="license" href="https://hexo.io/" target="_blank" title="由 Hexo 强力驱动">
@@ -1178,10 +1212,14 @@ https 和 SSH 的区别
 
 
 
-  <script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/app.js"></script>
+  
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/app.js"></script>
 
 
-  <script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/search.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/search.js"></script>
+
 
 
 

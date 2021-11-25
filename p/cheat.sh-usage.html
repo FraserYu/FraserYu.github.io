@@ -13,7 +13,7 @@
   
 
   
-  <link rel="alternate" href="/atom.xml" title="日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享">
+  <link rel="alternate" href="/atom.xml" title="日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享" type="application/atom+xml">
   
 
   <meta name="HandheldFriendly" content="True" />
@@ -35,7 +35,9 @@
   
 
   
-    <link rel="stylesheet" href="/style.css">
+    
+<link rel="stylesheet" href="/style.css">
+
   
 
   <script>
@@ -85,7 +87,7 @@
         daovoice('update');
         </script>
     
-</head>
+<meta name="generator" content="Hexo 5.4.0"></head>
 
 <body>
   
@@ -498,8 +500,8 @@
 
 
 <p>非也，其实是 <code>cheat.sh</code></p>
-<h2 id="cheat-sh-介绍"><a href="#cheat-sh-介绍" class="headerlink" title="cheat.sh 介绍"></a>cheat.sh 介绍</h2><p><a href="https://github.com/chubin/cheat.sh" target="_blank" rel="noopener" title="cheat.sh">cheat.sh</a> 就是一个可以满足上述愿望的小哆啦，目前在 Github 的形式是这样滴：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20201115210247.png" alt=""></p>
+<h2 id="cheat-sh-介绍"><a href="#cheat-sh-介绍" class="headerlink" title="cheat.sh 介绍"></a>cheat.sh 介绍</h2><p><a target="_blank" rel="noopener" href="https://github.com/chubin/cheat.sh" title="cheat.sh">cheat.sh</a> 就是一个可以满足上述愿望的小哆啦，目前在 Github 的形式是这样滴：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20201115210247.png"></p>
 <p>Commit 也非常活跃，就是这么一个哆啦</p>
 <ul>
 <li>它提供一个简单的 curl/浏览器接口方便我们查询</li>
@@ -512,33 +514,33 @@
 <p>先来认识一下，打开命令行终端，使用 curl 命令输入：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl cht.sh</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20201115210940.png" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20201115210940.png"></p>
 <h3 id="如何使用-cheat-sh"><a href="#如何使用-cheat-sh" class="headerlink" title="如何使用 cheat.sh"></a>如何使用 cheat.sh</h3><p>先拿几个常用的 UNIX/Linux 命令练练手：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl cht.sh/tar</span><br></pre></td></tr></table></figure>
 
 <p>瞧这整理的规范和简洁不？</p>
-<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20201115211502.png" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20201115211502.png"></p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl cht.sh/tr</span><br></pre></td></tr></table></figure>
 
 <p>答案依旧整洁规范， 同时还<strong>高亮显示</strong>，友好的很啊</p>
-<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20201115211649.png" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20201115211649.png"></p>
 <p>如果你不知道某个命令，还可以使用 <code>～Keyword</code> 的形式来查询，比如你想查看如何建立快照</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl cht.sh/~snapshot</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20201115213039.png" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20201115213039.png"></p>
 <p>上面说过， cheat.sh 包含 1000 多个常用的 UNIX/Linux 命令，当需要的时候，按照语法 <code>curl cht.sh/&lt;you-cmd&gt;</code> 尽情查询吧</p>
-<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img6af89bc8gw1f8qfau787rg203k034glk.gif" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img6af89bc8gw1f8qfau787rg203k034glk.gif"></p>
 <p>除了 Linux 命令，我们还说支持 58 种语言，当写代码时某个 API 不会用或需要完成某些操作，cheat.sh 依旧可以帮上忙，比如我总是记不住 Java Lambda 的 group 操作</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl cht.sh/java/lambda+group</span><br></pre></td></tr></table></figure>
 
 <p>记住下面的标准格式，搜索的结果都是和  StackOverflow 一样的高质量</p>
-<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20201115215811.png" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20201115215811.png"></p>
 <p>如果这个答案还不是你想要的，你就可以<strong>添加数字进行翻页</strong>获取其他结果</p>
-<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20201115220446.png" alt=""></p>
-<p>另外你觉得结果中的注释很碍眼的话，可以在每次查询的后面加上 <code>\?Q</code>，就像这样：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20201115220446.png"></p>
+<p>另外你觉得结果中的注释很碍眼的话，可以在每次查询的后面加上 <code>\?Q </code>，就像这样：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl cht.sh/java/lambda+group\?Q</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20201119215347.png" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20201119215347.png"></p>
 <p>当然每种语言都默认支持 :list 和 :help 两种查询方式，作为帮助指令，大家可以自行尝试了，比如 go 语言</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">curl cht.sh/go/:list</span><br><span class="line">curl cht.sh/go/:help</span><br></pre></td></tr></table></figure>
 
@@ -549,26 +551,26 @@
 <h3 id="Cheat-sh-命令行客户端"><a href="#Cheat-sh-命令行客户端" class="headerlink" title="Cheat.sh 命令行客户端"></a>Cheat.sh 命令行客户端</h3><h4 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h4><p>安装 CLI Client （Command Line Client）非常简单，只需要依次执行下面的命令即可：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 注意你的环境变量 PATH 已经 import 了 ~/bin 下的内容</span></span><br><span class="line">mkdir -p ~/bin/</span><br><span class="line">curl https://cht.sh/:cht.sh &gt; ~/bin/cht.sh</span><br><span class="line">chmod +x ~/bin/cht.sh</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20201122203135.png" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20201122203135.png"></p>
 <p>如果要保证 shell 模式可用，还需要安装一个依赖 <code>rlwrap</code>, 下面两种安装方式都可以（我直接用brew安装的）</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">brew install rlwrap</span><br><span class="line"><span class="meta">#</span><span class="bash"> 或者</span></span><br><span class="line">sudo apt install rlwrap</span><br></pre></td></tr></table></figure>
 
 <h4 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h4><p>有了 CLI Client 之后，来看一看搜索上的变化：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20201122204101.png" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20201122204101.png"></p>
 <p>这个 CLI Client 还提供了一个更加便利的 shell 模式：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cht.sh --shell</span><br></pre></td></tr></table></figure>
 
 <p>如下图，每次直接按照语言搜索相关内容就可以了：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20201124214729.png" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20201124214729.png"></p>
 <p>通常我们编程在一段时间内会用一种语言，我们可以进一步简化搜索过程，cd 到某个语言目录下：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20201124214952.png" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20201124214952.png"></p>
 <p>如果进入 shell 模式，同时想一次性进入某个语言目录，也可以通过一条命令搞定：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cht.sh --shell java</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20201124215150.png" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20201124215150.png"></p>
 <h4 id="隐身模式"><a href="#隐身模式" class="headerlink" title="隐身模式"></a>隐身模式</h4><p>相信很多小伙伴都配有划词工具，比如某个单词不会了，选中相应的单词，就会出来解释，cheat.sh 也有类似的模式，进入某个语言目录下之后，输入 <code>stealth Q</code> 就可以进入这个模式了：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20201124215809.png" alt="">用鼠标选中文本后，用起来的效果就是这样滴：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgstealth.gif" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20201124215809.png">用鼠标选中文本后，用起来的效果就是这样滴：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgstealth.gif"></p>
 <blockquote>
 <p>不过这里建议，<strong>搜索的单词不要超过 5 个</strong></p>
 </blockquote>
@@ -579,7 +581,7 @@
 <p>然后就可以 run 自己的服务 </p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/chubin/cheat.sh.git</span><br><span class="line">cd cheat.sh</span><br><span class="line">docker-compose up</span><br></pre></td></tr></table></figure>
 
-<p>最后访问服务： <a href="http://localhost:8002/" target="_blank" rel="noopener">http://localhost:8002</a> </p>
+<p>最后访问服务： <a target="_blank" rel="noopener" href="http://localhost:8002/">http://localhost:8002</a> </p>
 <h3 id="集成主流编辑器"><a href="#集成主流编辑器" class="headerlink" title="集成主流编辑器"></a>集成主流编辑器</h3><p>cheat.sh 同样和主流编辑器有很好的集成：</p>
 <table>
 <thead>
@@ -675,12 +677,12 @@
 <td>✓</td>
 </tr>
 </tbody></table>
-<p>Vim 的集成度是最高的，大家可以根据 <a href="https://github.com/dbeniamine/cheat.sh-vim" target="_blank" rel="noopener">cheat.sh-vim</a> 自行配置</p>
+<p>Vim 的集成度是最高的，大家可以根据 <a target="_blank" rel="noopener" href="https://github.com/dbeniamine/cheat.sh-vim">cheat.sh-vim</a> 自行配置</p>
 <p>VSCode 和 IDEA 是大家高频使用的两个 IDE，和他们集成就很简单了，只需要安装相应的插件：</p>
-<h4 id="VSCode-插件"><a href="#VSCode-插件" class="headerlink" title="VSCode 插件"></a>VSCode 插件</h4><p>安装 <a href="https://github.com/mre/vscode-snippet" target="_blank" rel="noopener">vscode-snippet</a> 就可以在 VSCode 中快速使用这个功能了</p>
-<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgvs.gif" alt=""></p>
-<h4 id="IDEA-插件"><a href="#IDEA-插件" class="headerlink" title="IDEA 插件"></a>IDEA 插件</h4><p>安装 <a href="https://github.com/szymonprz/idea-cheatsh-plugin" target="_blank" rel="noopener">idea-cheatsh-plugin</a> 这个插件就可以在 Intellij IDEA 中使用这个功能了</p>
-<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgidea.gif" alt=""></p>
+<h4 id="VSCode-插件"><a href="#VSCode-插件" class="headerlink" title="VSCode 插件"></a>VSCode 插件</h4><p>安装 <a target="_blank" rel="noopener" href="https://github.com/mre/vscode-snippet">vscode-snippet</a> 就可以在 VSCode 中快速使用这个功能了</p>
+<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgvs.gif"></p>
+<h4 id="IDEA-插件"><a href="#IDEA-插件" class="headerlink" title="IDEA 插件"></a>IDEA 插件</h4><p>安装 <a target="_blank" rel="noopener" href="https://github.com/szymonprz/idea-cheatsh-plugin">idea-cheatsh-plugin</a> 这个插件就可以在 Intellij IDEA 中使用这个功能了</p>
+<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgidea.gif"></p>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>至于支持的 58 种语言都是什么，请大家自行参考 README 文档，关于 cheat.sh, 了解这些基本的使用就已经够了，还是那句话，好的工具是用来提高工作效率的，不要被工具过度捆绑，公众号回复「工具」获取更多内容</p>
 
       </div>
@@ -692,7 +694,7 @@
       <div class="personalweixin">
         <br><br>
         <blockquote>
-          <a href="https://mp.weixin.qq.com/s/G7BXuZh0Qh1-mE6ts4LJqQ" target="_blank" rel="noopener">加我微信</a>，咱们交流技术与思想，共同成长
+          <a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/G7BXuZh0Qh1-mE6ts4LJqQ">加我微信</a>，咱们交流技术与思想，共同成长
         </blockquote>
         <br>
 
@@ -730,9 +732,9 @@
   <div class="-mob-share-list share-body">
     
       
-        <a class="-mob-share-qq" title="QQ好友" rel="external nofollow noopener noreferrer"
+        <a class="-mob-share-qq" title="QQ好友" rel="external nofollow noopener noreferrer noopener"
           
-          href="http://connect.qq.com/widget/shareqq/index.html?url=https://dayarch.top/p/cheat.sh-usage.html&title=cheat.sh使用详解 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=前言
+          target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://dayarch.top/p/cheat.sh-usage.html&title=cheat.sh使用详解 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=前言
 作为程序员需要了解的东西有很多，日常编码和写脚本脱离不开各式语言与 Linux 命令。为了记住一些杂乱的或不被经常使用的知识点，我们迫切需要一个“小抄”/备忘录，小抄内容多了自然繁杂，所以我们希望这个小抄要：
 
  1. 简洁：只包含你想要的内容，没有其他「花边」内容
@@ -751,9 +753,9 @@
       
     
       
-        <a class="-mob-share-qzone" title="QQ空间" rel="external nofollow noopener noreferrer"
+        <a class="-mob-share-qzone" title="QQ空间" rel="external nofollow noopener noreferrer noopener"
           
-          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://dayarch.top/p/cheat.sh-usage.html&title=cheat.sh使用详解 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=前言
+          target="_blank" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://dayarch.top/p/cheat.sh-usage.html&title=cheat.sh使用详解 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=前言
 作为程序员需要了解的东西有很多，日常编码和写脚本脱离不开各式语言与 Linux 命令。为了记住一些杂乱的或不被经常使用的知识点，我们迫切需要一个“小抄”/备忘录，小抄内容多了自然繁杂，所以我们希望这个小抄要：
 
  1. 简洁：只包含你想要的内容，没有其他「花边」内容
@@ -772,9 +774,9 @@
       
     
       
-        <a class="-mob-share-weibo" title="微博" rel="external nofollow noopener noreferrer"
+        <a class="-mob-share-weibo" title="微博" rel="external nofollow noopener noreferrer noopener"
           
-          href="http://service.weibo.com/share/share.php?url=https://dayarch.top/p/cheat.sh-usage.html&title=cheat.sh使用详解 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=前言
+          target="_blank" href="http://service.weibo.com/share/share.php?url=https://dayarch.top/p/cheat.sh-usage.html&title=cheat.sh使用详解 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=前言
 作为程序员需要了解的东西有很多，日常编码和写脚本脱离不开各式语言与 Linux 命令。为了记住一些杂乱的或不被经常使用的知识点，我们迫切需要一个“小抄”/备忘录，小抄内容多了自然繁杂，所以我们希望这个小抄要：
 
  1. 简洁：只包含你想要的内容，没有其他「花边」内容
@@ -1075,7 +1077,7 @@
 </header>
 
     <div class='content pure'>
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#cheat-sh-介绍"><span class="toc-text">cheat.sh 介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#如何使用-cheat-sh"><span class="toc-text">如何使用 cheat.sh</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Cheat-sh-命令行客户端"><span class="toc-text">Cheat.sh 命令行客户端</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#安装"><span class="toc-text">安装</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#使用"><span class="toc-text">使用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#隐身模式"><span class="toc-text">隐身模式</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#集成主流编辑器"><span class="toc-text">集成主流编辑器</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#VSCode-插件"><span class="toc-text">VSCode 插件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#IDEA-插件"><span class="toc-text">IDEA 插件</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-text">总结</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#cheat-sh-%E4%BB%8B%E7%BB%8D"><span class="toc-text">cheat.sh 介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8-cheat-sh"><span class="toc-text">如何使用 cheat.sh</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Cheat-sh-%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%AE%A2%E6%88%B7%E7%AB%AF"><span class="toc-text">Cheat.sh 命令行客户端</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%89%E8%A3%85"><span class="toc-text">安装</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8"><span class="toc-text">使用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%9A%90%E8%BA%AB%E6%A8%A1%E5%BC%8F"><span class="toc-text">隐身模式</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9B%86%E6%88%90%E4%B8%BB%E6%B5%81%E7%BC%96%E8%BE%91%E5%99%A8"><span class="toc-text">集成主流编辑器</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#VSCode-%E6%8F%92%E4%BB%B6"><span class="toc-text">VSCode 插件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#IDEA-%E6%8F%92%E4%BB%B6"><span class="toc-text">IDEA 插件</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-text">总结</span></a></li></ol>
     </div>
   </section>
 
@@ -1150,7 +1152,7 @@
   &nbsp;&nbsp;|&nbsp;&nbsp;  
   
     &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-        class="white-color">264.1k</span>&nbsp;字
+        class="white-color">267.4k</span>&nbsp;字
     
 
   &nbsp;&nbsp;|&nbsp;&nbsp;  
@@ -1205,7 +1207,7 @@
     
     。
   </div>
-  <div><p>博客内容遵循 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
+  <div><p>博客内容遵循 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
 </div>
   <!-- <div class="github-badge">
       <a style="color: #fff" rel="license" href="https://hexo.io/" target="_blank" title="由 Hexo 强力驱动">
@@ -1313,10 +1315,14 @@
 
 
 
-  <script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/app.js"></script>
+  
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/app.js"></script>
 
 
-  <script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/search.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/search.js"></script>
+
 
 
 

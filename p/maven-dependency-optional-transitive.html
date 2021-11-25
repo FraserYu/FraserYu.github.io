@@ -13,7 +13,7 @@
   
 
   
-  <link rel="alternate" href="/atom.xml" title="日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享">
+  <link rel="alternate" href="/atom.xml" title="日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享" type="application/atom+xml">
   
 
   <meta name="HandheldFriendly" content="True" />
@@ -35,7 +35,9 @@
   
 
   
-    <link rel="stylesheet" href="/style.css">
+    
+<link rel="stylesheet" href="/style.css">
+
   
 
   <script>
@@ -85,7 +87,7 @@
         daovoice('update');
         </script>
     
-</head>
+<meta name="generator" content="Hexo 5.4.0"></head>
 
 <body>
   
@@ -487,17 +489,17 @@
         <h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>本来想写一篇「如何自定义Spring Boot Starter」，但是为了更好理解 Starter 的一些设计理念和其中的关键点，所以提前将一些细节内容单独提取出来讲解说明</p>
 <p>在 Maven pom.xml 中，你经常会看到依赖项中有类似下面的代码:</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>sample.ProjectA<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>Project-A<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">scope</span>&gt;</span>compile<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">optional</span>&gt;</span>true<span class="tag">&lt;/<span class="name">optional</span>&gt;</span> </span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>这里的 <code>&lt;optional&gt;true&lt;/optional&gt;</code> 是什么意思呢？</p>
+<p>这里的 <code>&lt;optional&gt;true&lt;/optional&gt; </code> 是什么意思呢？</p>
 <h2 id="optional-关键字的奥秘"><a href="#optional-关键字的奥秘" class="headerlink" title="optional 关键字的奥秘"></a>optional 关键字的奥秘</h2><p>老规矩，画个图说明问题:</p>
-<p><img src="http://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E5%BA%94%E7%94%A8%E7%B1%BB%E6%96%87%E7%AB%A0/_image/2019-10-11/maven%20optional%20%283%29.png" alt=""></p>
+<p><img src="http://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E5%BA%94%E7%94%A8%E7%B1%BB%E6%96%87%E7%AB%A0/_image/2019-10-11/maven%20optional%20%283%29.png"></p>
 <p>由于 project C 使用到了两个来自 project A 的类 (OptionalFeatureAClass) 和 project B 的类 (OptionalFeatureBClass). 如果 project C 没有依赖 packageA 和 packageB，那么编译将会失败。</p>
 <p>project D 依赖 project C，但是对于 project D 来说，类 (OptionalFeatureAClass) 和类 (OptionalFeatureBClass) <strong>是可选的特性</strong>，所以为了让最终的 war/ejb package 不包含不必要的依赖，使用<code>&lt;optional&gt;</code> 声明当前依赖是可选的, 默认情况下也不会被其他项目继承(好比 Java 中的 final 类，不能被其他类继承一样)</p>
 <p>如果 project D 确实需要用到 project C 中的 OptionalFeatureAClass 怎么办呢？那我们就需要在 project D 的 pom.xml 中显式的添加声明 project A 依赖，继续看下图:</p>
-<p><img src="http://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E5%BA%94%E7%94%A8%E7%B1%BB%E6%96%87%E7%AB%A0/_image/2019-10-11/maven%20optional%202.png" alt=""></p>
+<p><img src="http://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E5%BA%94%E7%94%A8%E7%B1%BB%E6%96%87%E7%AB%A0/_image/2019-10-11/maven%20optional%202.png"></p>
 <p>Project D 需要用到 Project A 的 OptionalFeatureAClass，那么需要在 Project D 的 pom.xml 文件中显式的添加对 Project A 的依赖</p>
 <p>到这也就很好理解为什么 Maven 为什么要设计 optional 关键字了，假设一个关于数据库持久化的项目(Project C), 为了适配更多类型的数据库持久化设计，比如 Mysql 持久化设计(Project A) 和 Oracle 持久化设计(Project B)，当我们的项目(Project D) 要用的 Project C 的持久化设计，不可能既引入 mysql 驱动又引入 oracle 驱动吧，所以我们要显式的指定一个，就是这个道理了</p>
-<h2 id="实际案例"><a href="#实际案例" class="headerlink" title="实际案例"></a>实际案例</h2><p>在 <a href="https://repo1.maven.org/maven2/org/springframework/boot/spring-boot-actuator/1.3.3.RELEASE/spring-boot-actuator-1.3.3.RELEASE.pom" target="_blank" rel="noopener">spring-boot-actuator</a> pom.xml 文件中，有超过 20 个依赖是 optional</p>
-<p><img src="http://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E5%BA%94%E7%94%A8%E7%B1%BB%E6%96%87%E7%AB%A0/_image/2019-10-11/2019-10-11-20-34-58.png" alt=""></p>
+<h2 id="实际案例"><a href="#实际案例" class="headerlink" title="实际案例"></a>实际案例</h2><p>在 <a target="_blank" rel="noopener" href="https://repo1.maven.org/maven2/org/springframework/boot/spring-boot-actuator/1.3.3.RELEASE/spring-boot-actuator-1.3.3.RELEASE.pom">spring-boot-actuator</a> pom.xml 文件中，有超过 20 个依赖是 optional</p>
+<p><img src="http://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E5%BA%94%E7%94%A8%E7%B1%BB%E6%96%87%E7%AB%A0/_image/2019-10-11/2019-10-11-20-34-58.png"></p>
 <p>因为 Spring Boot 不可能将没必要的依赖也打包到你最终的 jar package 中，所以用到 spring boot actuator 的项目最终生成的 jar package 中不会包含这 20 多个依赖 jar，如果你要用到哪一个，显式的加入到你的项目就好了</p>
 <p>在接下来的文章，自定义 Spring Boot Starter 也是这个策略，因为 starter 是包含特定功能为其他项目服务用的，类似本文的 Project C 的角色了，到这里你理解 optional 的奥秘了吗？</p>
 <h2 id="反向应用"><a href="#反向应用" class="headerlink" title="反向应用"></a>反向应用</h2><p>如果 Project C 引入的依赖没有加 <code>&lt;optional&gt;true&lt;/optional&gt;</code>，Project D 又需要依赖 Project C，但只用到 Project A 的类怎么办呢？Maven 也是有解决办法的，使用 exclusion 关键字，不多说，上一段代码就懂了:</p>
@@ -508,7 +510,7 @@
 <li>有很多童鞋项目组用的构建工具时 Gradle，你知道 Gradle 中是怎样表示的吗？</li>
 <li>自定义 starter，你知道官方标准 starter 的结构是什么样的吗？</li>
 </ol>
-<h2 id="提高效率工具"><a href="#提高效率工具" class="headerlink" title="提高效率工具"></a>提高效率工具</h2><p><img src="http://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E6%84%9F%E6%83%B3%E4%B8%8E%E6%80%BB%E7%BB%93/_image/2019-06-18/b.png" alt=""> </p>
+<h2 id="提高效率工具"><a href="#提高效率工具" class="headerlink" title="提高效率工具"></a>提高效率工具</h2><p><img src="http://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E6%84%9F%E6%83%B3%E4%B8%8E%E6%80%BB%E7%BB%93/_image/2019-06-18/b.png"> </p>
 <hr>
 <h2 id="推荐阅读"><a href="#推荐阅读" class="headerlink" title="推荐阅读"></a>推荐阅读</h2><ol>
 <li><a href="https://dayarch.top/p/d7e125a1.html">这次走进并发的世界，请不要错过</a></li>
@@ -530,7 +532,7 @@
 <blockquote>
 <p>以读侦探小说思维轻松趣味学习 Java 技术栈相关知识，本着将复杂问题简单化，抽象问题具体化和图形化原则逐步分解技术问题，技术持续更新，请持续关注……</p>
 </blockquote>
-<p><img src="http://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E6%84%9F%E6%83%B3%E4%B8%8E%E6%80%BB%E7%BB%93/_image/2019-06-18/a%20%281%29.png" alt=""></p>
+<p><img src="http://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E6%84%9F%E6%83%B3%E4%B8%8E%E6%80%BB%E7%BB%93/_image/2019-06-18/a%20%281%29.png"></p>
 
       </div>
       <!-- <div class="tuijian">
@@ -541,7 +543,7 @@
       <div class="personalweixin">
         <br><br>
         <blockquote>
-          <a href="https://mp.weixin.qq.com/s/G7BXuZh0Qh1-mE6ts4LJqQ" target="_blank" rel="noopener">加我微信</a>，咱们交流技术与思想，共同成长
+          <a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/G7BXuZh0Qh1-mE6ts4LJqQ">加我微信</a>，咱们交流技术与思想，共同成长
         </blockquote>
         <br>
 
@@ -579,9 +581,9 @@
   <div class="-mob-share-list share-body">
     
       
-        <a class="-mob-share-qq" title="QQ好友" rel="external nofollow noopener noreferrer"
+        <a class="-mob-share-qq" title="QQ好友" rel="external nofollow noopener noreferrer noopener"
           
-          href="http://connect.qq.com/widget/shareqq/index.html?url=https://dayarch.top/p/maven-dependency-optional-transitive.html&title=Maven 依赖传递性透彻理解 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=写在前面
+          target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://dayarch.top/p/maven-dependency-optional-transitive.html&title=Maven 依赖传递性透彻理解 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=写在前面
 本来想写一篇「如何自定义Spring Boot Starter」，但是为了更好理解 Starter 的一些设计理念和其中的关键点，所以提前将一些细节内容单独提取出来讲解说明
 
 在 Maven pom.xml 中，你经常会看到依赖项中有类似下面的代码:
@@ -610,9 +612,9 @@
       
     
       
-        <a class="-mob-share-qzone" title="QQ空间" rel="external nofollow noopener noreferrer"
+        <a class="-mob-share-qzone" title="QQ空间" rel="external nofollow noopener noreferrer noopener"
           
-          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://dayarch.top/p/maven-dependency-optional-transitive.html&title=Maven 依赖传递性透彻理解 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=写在前面
+          target="_blank" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://dayarch.top/p/maven-dependency-optional-transitive.html&title=Maven 依赖传递性透彻理解 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=写在前面
 本来想写一篇「如何自定义Spring Boot Starter」，但是为了更好理解 Starter 的一些设计理念和其中的关键点，所以提前将一些细节内容单独提取出来讲解说明
 
 在 Maven pom.xml 中，你经常会看到依赖项中有类似下面的代码:
@@ -641,9 +643,9 @@
       
     
       
-        <a class="-mob-share-weibo" title="微博" rel="external nofollow noopener noreferrer"
+        <a class="-mob-share-weibo" title="微博" rel="external nofollow noopener noreferrer noopener"
           
-          href="http://service.weibo.com/share/share.php?url=https://dayarch.top/p/maven-dependency-optional-transitive.html&title=Maven 依赖传递性透彻理解 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=写在前面
+          target="_blank" href="http://service.weibo.com/share/share.php?url=https://dayarch.top/p/maven-dependency-optional-transitive.html&title=Maven 依赖传递性透彻理解 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=写在前面
 本来想写一篇「如何自定义Spring Boot Starter」，但是为了更好理解 Starter 的一些设计理念和其中的关键点，所以提前将一些细节内容单独提取出来讲解说明
 
 在 Maven pom.xml 中，你经常会看到依赖项中有类似下面的代码:
@@ -746,7 +748,7 @@
 </header>
 
     <div class="content pure">
-      <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/maven-project-structure.html" title="Maven Project" rel="bookmark">Maven Project</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/git-worktree-in-practice.html" title="Git Worktree 大法真香" rel="bookmark">Git Worktree 大法真香</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/git-ignore.html" title="Git Ignoring Files" rel="bookmark">Git Ignoring Files</a></h3></div></li></ul>
+      <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/maven-project-structure.html" title="Maven Project" rel="bookmark">Maven Project</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/git-ignore.html" title="Git Ignoring Files" rel="bookmark">Git Ignoring Files</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/git-worktree-in-practice.html" title="Git Worktree 大法真香" rel="bookmark">Git Worktree 大法真香</a></h3></div></li></ul>
     </div>
   </section>
 
@@ -954,7 +956,7 @@
 </header>
 
     <div class='content pure'>
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#写在前面"><span class="toc-text">写在前面</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#optional-关键字的奥秘"><span class="toc-text">optional 关键字的奥秘</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#实际案例"><span class="toc-text">实际案例</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#反向应用"><span class="toc-text">反向应用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-text">总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#灵魂追问"><span class="toc-text">灵魂追问</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#提高效率工具"><span class="toc-text">提高效率工具</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#推荐阅读"><span class="toc-text">推荐阅读</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#欢迎持续关注公众号：「日拱一兵」"><span class="toc-text">欢迎持续关注公众号：「日拱一兵」</span></a></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%99%E5%9C%A8%E5%89%8D%E9%9D%A2"><span class="toc-text">写在前面</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#optional-%E5%85%B3%E9%94%AE%E5%AD%97%E7%9A%84%E5%A5%A5%E7%A7%98"><span class="toc-text">optional 关键字的奥秘</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E9%99%85%E6%A1%88%E4%BE%8B"><span class="toc-text">实际案例</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%8D%E5%90%91%E5%BA%94%E7%94%A8"><span class="toc-text">反向应用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-text">总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%81%B5%E9%AD%82%E8%BF%BD%E9%97%AE"><span class="toc-text">灵魂追问</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8F%90%E9%AB%98%E6%95%88%E7%8E%87%E5%B7%A5%E5%85%B7"><span class="toc-text">提高效率工具</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8E%A8%E8%8D%90%E9%98%85%E8%AF%BB"><span class="toc-text">推荐阅读</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%AC%A2%E8%BF%8E%E6%8C%81%E7%BB%AD%E5%85%B3%E6%B3%A8%E5%85%AC%E4%BC%97%E5%8F%B7%EF%BC%9A%E3%80%8C%E6%97%A5%E6%8B%B1%E4%B8%80%E5%85%B5%E3%80%8D"><span class="toc-text">欢迎持续关注公众号：「日拱一兵」</span></a></li></ol></li></ol>
     </div>
   </section>
 
@@ -1029,7 +1031,7 @@
   &nbsp;&nbsp;|&nbsp;&nbsp;  
   
     &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-        class="white-color">264.1k</span>&nbsp;字
+        class="white-color">267.4k</span>&nbsp;字
     
 
   &nbsp;&nbsp;|&nbsp;&nbsp;  
@@ -1084,7 +1086,7 @@
     
     。
   </div>
-  <div><p>博客内容遵循 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
+  <div><p>博客内容遵循 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
 </div>
   <!-- <div class="github-badge">
       <a style="color: #fff" rel="license" href="https://hexo.io/" target="_blank" title="由 Hexo 强力驱动">
@@ -1192,10 +1194,14 @@
 
 
 
-  <script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/app.js"></script>
+  
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/app.js"></script>
 
 
-  <script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/search.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/search.js"></script>
+
 
 
 

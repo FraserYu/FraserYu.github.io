@@ -13,7 +13,7 @@
   
 
   
-  <link rel="alternate" href="/atom.xml" title="日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享">
+  <link rel="alternate" href="/atom.xml" title="日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享" type="application/atom+xml">
   
 
   <meta name="HandheldFriendly" content="True" />
@@ -35,7 +35,9 @@
   
 
   
-    <link rel="stylesheet" href="/style.css">
+    
+<link rel="stylesheet" href="/style.css">
+
   
 
   <script>
@@ -85,7 +87,7 @@
         daovoice('update');
         </script>
     
-</head>
+<meta name="generator" content="Hexo 5.4.0"></head>
 
 <body>
   
@@ -510,7 +512,7 @@
 
 
 <p>有人做了三分，可以通过 PPT 说出七分，有人做了七分，却说不出三分，程序员的内心活动正如去年很火的新东方年会改编 「沙漠骆驼」的歌词一样：</p>
-<p><img src="https://rgyb.sunluomeng.top/20200830220950.png" alt=""></p>
+<p><img src="https://rgyb.sunluomeng.top/20200830220950.png"></p>
 <p>为了不再经历相似的年底考评悲剧。所以，作为老实人，如果做了七分，底线至少要说出七分，没有商量的余地</p>
 <p>可是当程序员面对 <strong>PPT</strong> 或 <strong>KeyNote</strong> 总是无从下手，这要怎么办？</p>
 <blockquote>
@@ -520,14 +522,14 @@
 <h2 id="reveal-md"><a href="#reveal-md" class="headerlink" title="reveal-md"></a>reveal-md</h2><blockquote>
 <p>reveal-md 可以将 Markdown 文件渲染出非常漂亮的演示文稿</p>
 </blockquote>
-<p><strong>Github 地址：</strong> <a href="https://github.com/webpro/reveal-md" target="_blank" rel="noopener">https://github.com/webpro/reveal-md</a></p>
+<p><strong>Github 地址：</strong> <a target="_blank" rel="noopener" href="https://github.com/webpro/reveal-md">https://github.com/webpro/reveal-md</a></p>
 <h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p>安装很简单，安装好 NodeJS，一条 npm 命令（全局安装）即可：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g reveal-md</span><br></pre></td></tr></table></figure>
 
-<h2 id=""><a href="#" class="headerlink" title=""></a></h2><p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200830202837.png" alt=""></p>
+<h2 id=""><a href="#" class="headerlink" title=""></a></h2><p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200830202837.png"></p>
 <p>安装完，你需要做的就只是写 Markdown 文件了</p>
 <h3 id="写-Markdown-文件"><a href="#写-Markdown-文件" class="headerlink" title="写 Markdown 文件"></a>写 Markdown 文件</h3><p>在一个 Markdown 文件中，用 <code>\n---\n</code> 作为分隔多个 PPT 页面的标识符，如果你用 Typora，其实就是输入 <code>---</code>，然后回车就搞定了，然后在里面按照 Markdown 语法填充内容就 OK 了</p>
-<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="section"># 标题</span></span><br><span class="line"></span><br><span class="line"><span class="bullet">* </span>程序员如何看待写 PPT？</span><br><span class="line"><span class="bullet">* </span>如何以技术人员的方式写 PPT？</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line"><span class="section">## 程序员如何看待写 PPT？</span></span><br><span class="line"></span><br><span class="line"><span class="quote">&gt; 世界最牛逼的语言是 「PPT」</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="section"># 标题</span></span><br><span class="line"></span><br><span class="line"><span class="bullet">*</span> 程序员如何看待写 PPT？</span><br><span class="line"><span class="bullet">*</span> 如何以技术人员的方式写 PPT？</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line"><span class="section">## 程序员如何看待写 PPT？</span></span><br><span class="line"></span><br><span class="line"><span class="quote">&gt; 世界最牛逼的语言是 「PPT」</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 <p>这就写完了 2 页 PPT，不用调整格式，不用添加过渡效果，只需要run reveal-md 服务渲染一下你的 Markdown 文件就好了</p>
 <h3 id="渲染-Markdown-文件"><a href="#渲染-Markdown-文件" class="headerlink" title="渲染 Markdown 文件"></a>渲染 Markdown 文件</h3><p>因为我们是全局安装的 <code>reveal-md</code>， 所以只需要按照下面命令通过路径找到你的 MD 文件即可</p>
@@ -536,52 +538,52 @@
 <p>你也可以 cd 到 Markdown file 目录直接运行：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">reveal-md yourSlide.md</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200902111947.png" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200902111947.png"></p>
 <p>在运行上述命令后会自动打开你默认使用的浏览器，默认是高大上的黑色主题，如果你开启浏览器全屏，就是这个效果了 （听说，属于你的演示来要开始了？）</p>
-<p><img src="https://rgyb.sunluomeng.top/20200902105626.png" alt=""></p>
+<p><img src="https://rgyb.sunluomeng.top/20200902105626.png"></p>
 <p>点击右下角的<code>下一页</code>图标, 会有默认翻滚的过渡效果，就到了下一页（这个效果值几毛？）</p>
-<p><img src="https://rgyb.sunluomeng.top/2020-09-06at20.09.58.gif" alt=""></p>
+<p><img src="https://rgyb.sunluomeng.top/2020-09-06at20.09.58.gif"></p>
 <p>这种简约又简单的方式爱了没？</p>
 <p>我们都知道，PPT 或者 KeyNote 对代码的展示不是很友好，reveal-md 就不一样了（毕竟是 Markdown 嘛）</p>
-<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img9150e4e5ly1fkq92f0ughg206o06ot9b.gif" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img9150e4e5ly1fkq92f0ughg206o06ot9b.gif"></p>
 <p>我们再通过 <code>---</code> 新建一页，按照 Markdown 语法添加代码，重新 run 上述命令，可以看到，展示出来的代码<strong>有滚动条</strong>，<strong>有代码高亮</strong>，一应俱全</p>
-<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200902111803.png" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200902111803.png"></p>
 <p>以上我们都是使用 reveal-md 的默认值，它当然也支持一些个性化设置</p>
 <h3 id="个性化设置"><a href="#个性化设置" class="headerlink" title="个性化设置"></a>个性化设置</h3><h4 id="主题"><a href="#主题" class="headerlink" title="主题"></a>主题</h4><p>上面使用的是默认主题 black （黑色主题），我们可以通过 <code>--theme xxxTheme</code> 来变更主题</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">reveal-md myTest.md --theme solarized</span><br></pre></td></tr></table></figure>
 
 <p>效果就是这个样子了（好像有点阮一峰老师博客的赶脚）</p>
-<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200903212518.png" alt=""></p>
-<p>去哪里找这些主题呢？访问 <a href="https://github.com/hakimel/reveal.js/tree/master/css/theme/source" target="_blank" rel="noopener">https://github.com/hakimel/reveal.js/tree/master/css/theme/source</a> 就可以查看 reveal-md 默认支持的所有主题，你只需要在运行命令时指定主题名字就好</p>
+<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200903212518.png"></p>
+<p>去哪里找这些主题呢？访问 <a target="_blank" rel="noopener" href="https://github.com/hakimel/reveal.js/tree/master/css/theme/source">https://github.com/hakimel/reveal.js/tree/master/css/theme/source</a> 就可以查看 reveal-md 默认支持的所有主题，你只需要在运行命令时指定主题名字就好</p>
 <p>如果你想玩点更高级的自定义样式，只需要指定自定义的主题文件就可以了</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">reveal-md slides.md --theme theme/my-custom.css</span><br></pre></td></tr></table></figure>
 
-<p>如果你不知道怎么写自定义主题 CSS 文件，那就参照 <a href="https://rawgit.com/puzzle/pitc-revealjs-theme/master/theme/puzzle.css" target="_blank" rel="noopener">https://rawgit.com/puzzle/pitc-revealjs-theme/master/theme/puzzle.css</a> 更改一些参数值就是你自定义的了</p>
+<p>如果你不知道怎么写自定义主题 CSS 文件，那就参照 <a target="_blank" rel="noopener" href="https://rawgit.com/puzzle/pitc-revealjs-theme/master/theme/puzzle.css">https://rawgit.com/puzzle/pitc-revealjs-theme/master/theme/puzzle.css</a> 更改一些参数值就是你自定义的了</p>
 <h4 id="代码高亮主题"><a href="#代码高亮主题" class="headerlink" title="代码高亮主题"></a>代码高亮主题</h4><p>Markdown 本身就对代码有很好的支持，上面使用的代码默认高亮主题是 <code>zenburn</code>，当然也可以使用 <code>--highlight-theme xxxTheme</code> 选择其他高亮主题，像这样：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">reveal-md slides.md --highlight-theme atom-one-dark</span><br></pre></td></tr></table></figure>
 
-<p>reveal-md 同样支持很多高亮主题，查看 <a href="https://github.com/highlightjs/highlight.js/tree/master/src/styles" target="_blank" rel="noopener">https://github.com/highlightjs/highlight.js/tree/master/src/styles</a> 同样是指定名字就好。这里更换为 atom-one-dark 高亮主题后，就是这个效果了</p>
-<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200903213345.png" alt=""></p>
+<p>reveal-md 同样支持很多高亮主题，查看 <a target="_blank" rel="noopener" href="https://github.com/highlightjs/highlight.js/tree/master/src/styles">https://github.com/highlightjs/highlight.js/tree/master/src/styles</a> 同样是指定名字就好。这里更换为 atom-one-dark 高亮主题后，就是这个效果了</p>
+<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200903213345.png"></p>
 <h4 id="添加背景图片"><a href="#添加背景图片" class="headerlink" title="添加背景图片"></a>添加背景图片</h4><p>在上面演示过渡效果时你也许就注意到了，我在某一页上添加了背景图片，添加背景图片也很（四声）简单，只需要在每页 PPT 的开头添加这段代码指定图片就可以</p>
-<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="xml"><span class="comment">&lt;!-- .slide: data-background="./lighthouse-5439227_1920.jpg" --&gt;</span></span></span><br></pre></td></tr></table></figure>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- .slide: data-background=&quot;./lighthouse-5439227<span class="emphasis">_1920.jpg&quot; --&gt;</span></span><br></pre></td></tr></table></figure>
 
 <p>担心你在 Markdown 文件里写上述代码有些困惑，这里做个截图说明</p>
-<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200903213901.png" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200903213901.png"></p>
 <p>重新运行，就是你刚刚看到的效果</p>
-<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200903214037.png" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200903214037.png"></p>
 <p>能添加图片，当然也能添加视频</p>
 <h4 id="添加背景视频"><a href="#添加背景视频" class="headerlink" title="添加背景视频"></a>添加背景视频</h4><p>和添加背景图片类似，同样在每一页的开头添加下面代码：</p>
-<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="xml"><span class="comment">&lt;!-- .slide: data-background-video="./all.mov" --&gt;</span></span></span><br></pre></td></tr></table></figure>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- .slide: data-background-video=&quot;./all.mov&quot; --&gt;</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200903214514.png" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200903214514.png"></p>
 <blockquote>
-<p>背景视频是 2020 Mac 屏保，还是非常炫酷低，有兴趣的可以访问：<em><a href="https://mp.weixin.qq.com/s/TgbF7gRWEu7DeUQdYYWYmg" target="_blank" rel="noopener">https://mp.weixin.qq.com/s/TgbF7gRWEu7DeUQdYYWYmg</a></em>  获取相应视频和安装文件就好了</p>
+<p>背景视频是 2020 Mac 屏保，还是非常炫酷低，有兴趣的可以访问：<em><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/TgbF7gRWEu7DeUQdYYWYmg">https://mp.weixin.qq.com/s/TgbF7gRWEu7DeUQdYYWYmg</a></em>  获取相应视频和安装文件就好了</p>
 </blockquote>
 <h4 id="演讲人预览下一页视角"><a href="#演讲人预览下一页视角" class="headerlink" title="演讲人预览下一页视角"></a>演讲人预览下一页视角</h4><p>通常在讲演 PPT 时，会有一块小屏幕做下一页提醒，reveal-md 同样支持，只需要在 Markdown 文件开头单独页添加（别写错）：</p>
 <p><strong>Note:.</strong></p>
-<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200903215220.png" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200903215220.png"></p>
 <p>重新运行，在打开的界面按键盘 <code>s</code> 按键, 就会弹出另外一个浏览器窗口为你提供预览下一页的界面，这时我们可以将全凭浏览器页拖到公共大屏，自己查看小屏幕</p>
-<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200903215336.png" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200903215336.png"></p>
 <h4 id="自动刷新改动"><a href="#自动刷新改动" class="headerlink" title="自动刷新改动"></a>自动刷新改动</h4><p>在写演示稿如果有些改动就重新运行还挺麻烦的，所以可以通过 <strong>-w</strong> 参数来自动刷新页面内容</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">reveal-md myTest.md --theme solarized --highlight-theme atom-one-dark -w</span><br></pre></td></tr></table></figure>
 
@@ -594,34 +596,34 @@
 <h4 id="自定义模版"><a href="#自定义模版" class="headerlink" title="自定义模版"></a>自定义模版</h4><p>上面演示的这些都是在默认模版下渲染的，我们可以通过 –template xxxTemplate 来自定义自己的模版</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">reveal-md myTest.md --template my-reveal-template.html</span><br></pre></td></tr></table></figure>
 
-<p>同样，如果你不知道怎么写模版，你完全可以参考这个默认的模版内容做一些值的更改：<em><a href="https://github.com/webpro/reveal-md/blob/master/lib/template/reveal.html" target="_blank" rel="noopener">https://github.com/webpro/reveal-md/blob/master/lib/template/reveal.html</a></em></p>
+<p>同样，如果你不知道怎么写模版，你完全可以参考这个默认的模版内容做一些值的更改：<em><a target="_blank" rel="noopener" href="https://github.com/webpro/reveal-md/blob/master/lib/template/reveal.html">https://github.com/webpro/reveal-md/blob/master/lib/template/reveal.html</a></em></p>
 <h4 id="双列模式"><a href="#双列模式" class="headerlink" title="双列模式"></a>双列模式</h4><p>之前刚接触 reveal-md.js  时只是使用单列模式，其实在有些情况双列展示可以非常友好的展示一些对比性内容， <strong>刚好组内万能大神找到了双列解决方案，我就私下取经, 得到了解决方案</strong></p>
 <p>我们可以写个自己的 CSS 文件，比如 <code>doubleCol.css</code> 然后在里面添加这点样式就行了：</p>
 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-id">#left</span> &#123;</span><br><span class="line">	<span class="attribute">margin</span>: <span class="number">10px</span> <span class="number">0</span> <span class="number">15px</span> <span class="number">20px</span>;</span><br><span class="line">	<span class="attribute">text-align</span>: left;</span><br><span class="line">	<span class="attribute">float</span>: left;</span><br><span class="line">	<span class="attribute">z-index</span>:-<span class="number">10</span>;</span><br><span class="line">	<span class="attribute">width</span>:<span class="number">48%</span>;</span><br><span class="line">	<span class="attribute">font-size</span>: <span class="number">0.85em</span>;</span><br><span class="line">	<span class="attribute">line-height</span>: <span class="number">1.5</span>; </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-id">#right</span> &#123;</span><br><span class="line">	<span class="attribute">margin</span>: <span class="number">10px</span> <span class="number">0</span> <span class="number">15px</span> <span class="number">0</span>;</span><br><span class="line">	<span class="attribute">float</span>: right;</span><br><span class="line">	<span class="attribute">text-align</span>: left;</span><br><span class="line">	<span class="attribute">z-index</span>:-<span class="number">10</span>;</span><br><span class="line">	<span class="attribute">width</span>:<span class="number">48%</span>;</span><br><span class="line">	<span class="attribute">font-size</span>: <span class="number">0.85em</span>;</span><br><span class="line">	<span class="attribute">line-height</span>: <span class="number">1.5</span>; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>然后我们在 Markdown 文件里，像下面这样添加 Markdown 语法内容就好了</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"left"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">## Left column</span><br><span class="line">- Bullet 1</span><br><span class="line">- Bullet 2</span><br><span class="line">- Bullet 3 </span><br><span class="line">- Even [links](https://www.google.com)</span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"right"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">## Right colum</span><br><span class="line">1. List</span><br><span class="line">2. List</span><br><span class="line">3. ![Icon](https://cdn3.iconfinder.com/data/icons/ballicons-free/128/graph.png)</span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;left&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">## Left column</span><br><span class="line">- Bullet 1</span><br><span class="line">- Bullet 2</span><br><span class="line">- Bullet 3 </span><br><span class="line">- Even [links](https://www.google.com)</span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;right&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">## Right colum</span><br><span class="line">1. List</span><br><span class="line">2. List</span><br><span class="line">3. ![Icon](https://cdn3.iconfinder.com/data/icons/ballicons-free/128/graph.png)</span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
 
 
 <p>通过 –css 引入咱们自定义的 CSS 文件即可，就想这样：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">reveal-md myTest.md  --css theme/doubleCol.css</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://rgyb.sunluomeng.top/20200906205645.png" alt=""></p>
-<p>到这里，这些设置基本上可以满足基本需求了，如果你听过 <a href="https://github.com/hakimel/reveal.js" target="_blank" rel="noopener">reveal.js</a> ，那你很容易就看出来了， reveal-md 只不过在上层做了 MarkDown 的渲染，这样只需要用基本的 Markdown 语法就可以代替写整个 HTML，大大简化整个过程，不建议书写大量 HTML，这与 Markdown 的设计思想时违背的，如果你有兴趣完全可以尝试一下了</p>
+<p><img src="https://rgyb.sunluomeng.top/20200906205645.png"></p>
+<p>到这里，这些设置基本上可以满足基本需求了，如果你听过 <a target="_blank" rel="noopener" href="https://github.com/hakimel/reveal.js">reveal.js</a> ，那你很容易就看出来了， reveal-md 只不过在上层做了 MarkDown 的渲染，这样只需要用基本的 Markdown 语法就可以代替写整个 HTML，大大简化整个过程，不建议书写大量 HTML，这与 Markdown 的设计思想时违背的，如果你有兴趣完全可以尝试一下了</p>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>reveal-md 只是写演示文稿的工具，不要被其过渡捆绑；另外写 PPT 也是一个不容忽视的软技能，不要产生排斥心理，它可以锻炼自己归纳总结的能力，梳理内容的逻辑思维，以及演讲表达的技巧…… 作为程序员，拓宽自己的能力总是没错的</p>
-<p><img src="https://rgyb.sunluomeng.top/20200906211702.png" alt=""></p>
+<p><img src="https://rgyb.sunluomeng.top/20200906211702.png"></p>
 
       </div>
       <!-- <div class="tuijian">
         <br><br>
         📚相关文章
-        <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/2020-to-2021.html" title="2020归零，2021走你" rel="bookmark">2020归零，2021走你</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/2019-summary.html" title="2019归零，2020走你" rel="bookmark">2019归零，2020走你</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/how-to-organize-your-day.html" title="如何清爽的安排日常？" rel="bookmark">如何清爽的安排日常？</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/room-for-individual-study.html" title="花钱上自习，你会选择这么做吗？" rel="bookmark">花钱上自习，你会选择这么做吗？</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/pmp-certificate.html" title="闲着无聊考个PMP玩玩" rel="bookmark">闲着无聊考个PMP玩玩</a></h3></div></li></ul>
+        <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/2019-summary.html" title="2019归零，2020走你" rel="bookmark">2019归零，2020走你</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/2020-to-2021.html" title="2020归零，2021走你" rel="bookmark">2020归零，2021走你</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/how-to-organize-your-day.html" title="如何清爽的安排日常？" rel="bookmark">如何清爽的安排日常？</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/room-for-individual-study.html" title="花钱上自习，你会选择这么做吗？" rel="bookmark">花钱上自习，你会选择这么做吗？</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/pmp-certificate.html" title="闲着无聊考个PMP玩玩" rel="bookmark">闲着无聊考个PMP玩玩</a></h3></div></li></ul>
       </div> -->
       <div class="personalweixin">
         <br><br>
         <blockquote>
-          <a href="https://mp.weixin.qq.com/s/G7BXuZh0Qh1-mE6ts4LJqQ" target="_blank" rel="noopener">加我微信</a>，咱们交流技术与思想，共同成长
+          <a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/G7BXuZh0Qh1-mE6ts4LJqQ">加我微信</a>，咱们交流技术与思想，共同成长
         </blockquote>
         <br>
 
@@ -659,9 +661,9 @@
   <div class="-mob-share-list share-body">
     
       
-        <a class="-mob-share-qq" title="QQ好友" rel="external nofollow noopener noreferrer"
+        <a class="-mob-share-qq" title="QQ好友" rel="external nofollow noopener noreferrer noopener"
           
-          href="http://connect.qq.com/widget/shareqq/index.html?url=https://dayarch.top/p/reveal-md-ppt.html&title=reveal-md 写出不一样的PPT | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=听说程序员看不上写 PPT ？
+          target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://dayarch.top/p/reveal-md-ppt.html&title=reveal-md 写出不一样的PPT | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=听说程序员看不上写 PPT ？
 
 程序员是实干派，面对写 PPT 这事通常都是嗤之以鼻。头可断，万行代码不能乱；血可流，写PPT是真犯愁。写 PPT 着实是程序员工作中的三座大山之一
 
@@ -685,9 +687,9 @@
       
     
       
-        <a class="-mob-share-qzone" title="QQ空间" rel="external nofollow noopener noreferrer"
+        <a class="-mob-share-qzone" title="QQ空间" rel="external nofollow noopener noreferrer noopener"
           
-          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://dayarch.top/p/reveal-md-ppt.html&title=reveal-md 写出不一样的PPT | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=听说程序员看不上写 PPT ？
+          target="_blank" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://dayarch.top/p/reveal-md-ppt.html&title=reveal-md 写出不一样的PPT | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=听说程序员看不上写 PPT ？
 
 程序员是实干派，面对写 PPT 这事通常都是嗤之以鼻。头可断，万行代码不能乱；血可流，写PPT是真犯愁。写 PPT 着实是程序员工作中的三座大山之一
 
@@ -711,9 +713,9 @@
       
     
       
-        <a class="-mob-share-weibo" title="微博" rel="external nofollow noopener noreferrer"
+        <a class="-mob-share-weibo" title="微博" rel="external nofollow noopener noreferrer noopener"
           
-          href="http://service.weibo.com/share/share.php?url=https://dayarch.top/p/reveal-md-ppt.html&title=reveal-md 写出不一样的PPT | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=听说程序员看不上写 PPT ？
+          target="_blank" href="http://service.weibo.com/share/share.php?url=https://dayarch.top/p/reveal-md-ppt.html&title=reveal-md 写出不一样的PPT | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=听说程序员看不上写 PPT ？
 
 程序员是实干派，面对写 PPT 这事通常都是嗤之以鼻。头可断，万行代码不能乱；血可流，写PPT是真犯愁。写 PPT 着实是程序员工作中的三座大山之一
 
@@ -811,7 +813,7 @@
 </header>
 
     <div class="content pure">
-      <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/2020-to-2021.html" title="2020归零，2021走你" rel="bookmark">2020归零，2021走你</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/2019-summary.html" title="2019归零，2020走你" rel="bookmark">2019归零，2020走你</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/how-to-organize-your-day.html" title="如何清爽的安排日常？" rel="bookmark">如何清爽的安排日常？</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/room-for-individual-study.html" title="花钱上自习，你会选择这么做吗？" rel="bookmark">花钱上自习，你会选择这么做吗？</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/pmp-certificate.html" title="闲着无聊考个PMP玩玩" rel="bookmark">闲着无聊考个PMP玩玩</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/powertoys-a-powerful-tool-in-Windows.html" title="PowerToys,一款强大的Windows工具" rel="bookmark">PowerToys,一款强大的Windows工具</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/cheat.sh-usage.html" title="cheat.sh使用详解" rel="bookmark">cheat.sh使用详解</a></h3></div></li></ul>
+      <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/2019-summary.html" title="2019归零，2020走你" rel="bookmark">2019归零，2020走你</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/2020-to-2021.html" title="2020归零，2021走你" rel="bookmark">2020归零，2021走你</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/how-to-organize-your-day.html" title="如何清爽的安排日常？" rel="bookmark">如何清爽的安排日常？</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/room-for-individual-study.html" title="花钱上自习，你会选择这么做吗？" rel="bookmark">花钱上自习，你会选择这么做吗？</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/pmp-certificate.html" title="闲着无聊考个PMP玩玩" rel="bookmark">闲着无聊考个PMP玩玩</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/powertoys-a-powerful-tool-in-Windows.html" title="PowerToys,一款强大的Windows工具" rel="bookmark">PowerToys,一款强大的Windows工具</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/cheat.sh-usage.html" title="cheat.sh使用详解" rel="bookmark">cheat.sh使用详解</a></h3></div></li></ul>
     </div>
   </section>
 
@@ -1019,7 +1021,7 @@
 </header>
 
     <div class='content pure'>
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#reveal-md"><span class="toc-text">reveal-md</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#安装"><span class="toc-text">安装</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#null"><span class="toc-text"></span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#写-Markdown-文件"><span class="toc-text">写 Markdown 文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#渲染-Markdown-文件"><span class="toc-text">渲染 Markdown 文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#个性化设置"><span class="toc-text">个性化设置</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#主题"><span class="toc-text">主题</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#代码高亮主题"><span class="toc-text">代码高亮主题</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#添加背景图片"><span class="toc-text">添加背景图片</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#添加背景视频"><span class="toc-text">添加背景视频</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#演讲人预览下一页视角"><span class="toc-text">演讲人预览下一页视角</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#自动刷新改动"><span class="toc-text">自动刷新改动</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#导出-PDF"><span class="toc-text">导出 PDF</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#自定义模版"><span class="toc-text">自定义模版</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#双列模式"><span class="toc-text">双列模式</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-text">总结</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#reveal-md"><span class="toc-text">reveal-md</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85"><span class="toc-text">安装</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text"></span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%86%99-Markdown-%E6%96%87%E4%BB%B6"><span class="toc-text">写 Markdown 文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B8%B2%E6%9F%93-Markdown-%E6%96%87%E4%BB%B6"><span class="toc-text">渲染 Markdown 文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%AA%E6%80%A7%E5%8C%96%E8%AE%BE%E7%BD%AE"><span class="toc-text">个性化设置</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%BB%E9%A2%98"><span class="toc-text">主题</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E9%AB%98%E4%BA%AE%E4%B8%BB%E9%A2%98"><span class="toc-text">代码高亮主题</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B7%BB%E5%8A%A0%E8%83%8C%E6%99%AF%E5%9B%BE%E7%89%87"><span class="toc-text">添加背景图片</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B7%BB%E5%8A%A0%E8%83%8C%E6%99%AF%E8%A7%86%E9%A2%91"><span class="toc-text">添加背景视频</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%BC%94%E8%AE%B2%E4%BA%BA%E9%A2%84%E8%A7%88%E4%B8%8B%E4%B8%80%E9%A1%B5%E8%A7%86%E8%A7%92"><span class="toc-text">演讲人预览下一页视角</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%87%AA%E5%8A%A8%E5%88%B7%E6%96%B0%E6%94%B9%E5%8A%A8"><span class="toc-text">自动刷新改动</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AF%BC%E5%87%BA-PDF"><span class="toc-text">导出 PDF</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E6%A8%A1%E7%89%88"><span class="toc-text">自定义模版</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%8C%E5%88%97%E6%A8%A1%E5%BC%8F"><span class="toc-text">双列模式</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-text">总结</span></a></li></ol>
     </div>
   </section>
 
@@ -1094,7 +1096,7 @@
   &nbsp;&nbsp;|&nbsp;&nbsp;  
   
     &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-        class="white-color">264.1k</span>&nbsp;字
+        class="white-color">267.4k</span>&nbsp;字
     
 
   &nbsp;&nbsp;|&nbsp;&nbsp;  
@@ -1149,7 +1151,7 @@
     
     。
   </div>
-  <div><p>博客内容遵循 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
+  <div><p>博客内容遵循 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
 </div>
   <!-- <div class="github-badge">
       <a style="color: #fff" rel="license" href="https://hexo.io/" target="_blank" title="由 Hexo 强力驱动">
@@ -1257,10 +1259,14 @@
 
 
 
-  <script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/app.js"></script>
+  
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/app.js"></script>
 
 
-  <script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/search.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/search.js"></script>
+
 
 
 

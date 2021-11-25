@@ -13,7 +13,7 @@
   
 
   
-  <link rel="alternate" href="/atom.xml" title="日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享">
+  <link rel="alternate" href="/atom.xml" title="日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享" type="application/atom+xml">
   
 
   <meta name="HandheldFriendly" content="True" />
@@ -35,7 +35,9 @@
   
 
   
-    <link rel="stylesheet" href="/style.css">
+    
+<link rel="stylesheet" href="/style.css">
+
   
 
   <script>
@@ -85,7 +87,7 @@
         daovoice('update');
         </script>
     
-</head>
+<meta name="generator" content="Hexo 5.4.0"></head>
 
 <body>
   
@@ -537,9 +539,9 @@
 <li>在每个 volatile 读操作的后面插入一个 LoadStore 屏障</li>
 </ol>
 <p>1 和 2 用图形描述以及对应表格规则就是下面这个样子了:</p>
-<p><img src="http://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E5%A4%9A%E7%BA%BF%E7%A8%8B/_image/2019-09-24/volatilepingzhang12.png" alt=""></p>
+<p><img src="http://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E5%A4%9A%E7%BA%BF%E7%A8%8B/_image/2019-09-24/volatilepingzhang12.png"></p>
 <p>3 和 4 用图形描述以及对应表格规则就是下面这个样子了:</p>
-<p><img src="http://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E5%A4%9A%E7%BA%BF%E7%A8%8B/_image/2019-09-24/volatilepingzhang34.png" alt=""></p>
+<p><img src="http://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E5%A4%9A%E7%BA%BF%E7%A8%8B/_image/2019-09-24/volatilepingzhang34.png"></p>
 <blockquote>
 <p>其实图形也是表格内容的体现，只不过告诉大家内存屏障是如何禁止指令重排序的，所以大家只要牢记表格内容即可</p>
 </blockquote>
@@ -548,7 +550,7 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">VolatileBarrierExample</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">int</span> a;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">volatile</span> <span class="keyword">int</span> v1 = <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">volatile</span> <span class="keyword">int</span> v2 = <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">readAndWrite</span><span class="params">()</span></span>&#123;</span><br><span class="line">		<span class="keyword">int</span> i = v1; <span class="comment">//第一个volatile读</span></span><br><span class="line">		<span class="keyword">int</span> j = v2;	<span class="comment">//第二个volatile读</span></span><br><span class="line">		a = i + j;	<span class="comment">//普通写</span></span><br><span class="line">		v1 = i + <span class="number">1</span>;	<span class="comment">//第一个volatile写</span></span><br><span class="line">		v2 = j * <span class="number">2</span>;	<span class="comment">//第二个volatile写</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>将屏障指令带入到程序就是这个样子:</p>
-<p><img src="http://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E5%A4%9A%E7%BA%BF%E7%A8%8B/_image/2019-09-24/volatile1234.png" alt=""></p>
+<p><img src="http://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E5%A4%9A%E7%BA%BF%E7%A8%8B/_image/2019-09-24/volatile1234.png"></p>
 <p>我们将上图分几个角度来看:</p>
 <ol>
 <li>彩色是将屏障指令带入到程序中生成的全部内容，也就是编译器生成的<strong>「最稳妥」</strong>的方案</li>
@@ -556,15 +558,15 @@
 </ol>
 <p>到这里你应该了解了 volatile 是如何通过内存屏障保证程序不被”擅自”排序的，那 volatile 是如何保证可见性的呢？</p>
 <h2 id="volatile-写-读的内存语义"><a href="#volatile-写-读的内存语义" class="headerlink" title="volatile 写-读的内存语义"></a>volatile 写-读的内存语义</h2><p>回顾一下之前文章内容中的程序，假定线程 A 先执行 writer 方法，随后线程 B 执行 reader 方法，:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ReorderExample</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">int</span> x = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">int</span> y = <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">volatile</span> <span class="keyword">boolean</span> flag = <span class="keyword">false</span>;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">writer</span><span class="params">()</span></span>&#123;</span><br><span class="line">		x = <span class="number">42</span>;	<span class="comment">//1</span></span><br><span class="line">		y = <span class="number">50</span>;	<span class="comment">//2</span></span><br><span class="line">		flag = <span class="keyword">true</span>;	<span class="comment">//3</span></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">reader</span><span class="params">()</span></span>&#123;</span><br><span class="line">		<span class="keyword">if</span> (flag)&#123;	<span class="comment">//4</span></span><br><span class="line">			System.out.println(<span class="string">"x:"</span> + x);	<span class="comment">//5</span></span><br><span class="line">			System.out.println(<span class="string">"y:"</span> + y);	<span class="comment">//6</span></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ReorderExample</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">int</span> x = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">int</span> y = <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">volatile</span> <span class="keyword">boolean</span> flag = <span class="keyword">false</span>;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">writer</span><span class="params">()</span></span>&#123;</span><br><span class="line">		x = <span class="number">42</span>;	<span class="comment">//1</span></span><br><span class="line">		y = <span class="number">50</span>;	<span class="comment">//2</span></span><br><span class="line">		flag = <span class="keyword">true</span>;	<span class="comment">//3</span></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">reader</span><span class="params">()</span></span>&#123;</span><br><span class="line">		<span class="keyword">if</span> (flag)&#123;	<span class="comment">//4</span></span><br><span class="line">			System.out.println(<span class="string">&quot;x:&quot;</span> + x);	<span class="comment">//5</span></span><br><span class="line">			System.out.println(<span class="string">&quot;y:&quot;</span> + y);	<span class="comment">//6</span></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>到这里你是否还记得之前说过的 JMM，是的，你还记得😂，当线程 A 执行 writer 方法时，且看下图:</p>
-<p><img src="http://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E5%A4%9A%E7%BA%BF%E7%A8%8B/_image/2019-09-24/volatile%E5%8F%AF%E8%A7%81%E6%80%A7.png" alt=""></p>
+<p><img src="http://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E5%A4%9A%E7%BA%BF%E7%A8%8B/_image/2019-09-24/volatile%E5%8F%AF%E8%A7%81%E6%80%A7.png"></p>
 <p>线程 A 将本地内存更改的变量写回到主内存中</p>
 <blockquote>
 <h3 id="volatile-读的内存语义"><a href="#volatile-读的内存语义" class="headerlink" title="volatile 读的内存语义:"></a>volatile 读的内存语义:</h3><p>当读一个 volatile 变量时, JMM 会把该线程对应的本地内存置为无效。线程接下来将从主内存中读取共享变量。</p>
 </blockquote>
 <p>所以当线程 B 执行 reader 方法时，图形结构就变成了这个样子:</p>
-<p><img src="http://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E5%A4%9A%E7%BA%BF%E7%A8%8B/_image/2019-09-24/volatile%E5%8F%AF%E8%A7%81%E6%80%A7%E8%AF%BB.png" alt=""></p>
+<p><img src="http://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E5%A4%9A%E7%BA%BF%E7%A8%8B/_image/2019-09-24/volatile%E5%8F%AF%E8%A7%81%E6%80%A7%E8%AF%BB.png"></p>
 <p>线程 B 本地内存变量无效，从主内存中读取变量到本地内存中，也就得到了线程 A 更改后的结果，这就是 volatile 是如何保证可见性的</p>
 <p>如果你看过前面的文章你就不难理解上面的两张图了，综合起来说:</p>
 <ol>
@@ -583,16 +585,16 @@
 <li>如果 volatile 写之后直接 return，那还会生成 StoreLoad 指令吗？</li>
 <li>synchronized 是怎样逐步被优化的？</li>
 </ol>
-<h2 id="提高效率工具"><a href="#提高效率工具" class="headerlink" title="提高效率工具"></a>提高效率工具</h2><p><img src="http://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E6%84%9F%E6%83%B3%E4%B8%8E%E6%80%BB%E7%BB%93/_image/2019-06-18/b.png" alt=""> </p>
-<h3 id="tool-lu"><a href="#tool-lu" class="headerlink" title="tool.lu"></a>tool.lu</h3><p><a href="https://tool.lu" target="_blank" rel="noopener">https://tool.lu</a> 是一款集成了非常多功能的在线工具，基本满足日常开发所需</p>
-<p><img src="http://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E5%A4%9A%E7%BA%BF%E7%A8%8B/_image/2019-09-24/2019-09-29-19-28-22.png" alt=""></p>
+<h2 id="提高效率工具"><a href="#提高效率工具" class="headerlink" title="提高效率工具"></a>提高效率工具</h2><p><img src="http://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E6%84%9F%E6%83%B3%E4%B8%8E%E6%80%BB%E7%BB%93/_image/2019-06-18/b.png"> </p>
+<h3 id="tool-lu"><a href="#tool-lu" class="headerlink" title="tool.lu"></a>tool.lu</h3><p><a target="_blank" rel="noopener" href="https://tool.lu/">https://tool.lu</a> 是一款集成了非常多功能的在线工具，基本满足日常开发所需</p>
+<p><img src="http://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E5%A4%9A%E7%BA%BF%E7%A8%8B/_image/2019-09-24/2019-09-29-19-28-22.png"></p>
 <hr>
 <h2 id="推荐阅读"><a href="#推荐阅读" class="headerlink" title="推荐阅读"></a>推荐阅读</h2><ul>
-<li><a href="https://mp.weixin.qq.com/s/I53l5W_Wl-lMc-_FAeJ6WQ" target="_blank" rel="noopener">这次走进并发的世界，请不要错过 </a></li>
-<li><a href="https://mp.weixin.qq.com/s/SrNsvp2NjhAEqYugx6c-3Q" target="_blank" rel="noopener">学并发编程，透彻理解这三个核心是关键</a></li>
-<li><a href="https://mp.weixin.qq.com/s/fQcozKziqMxFMBkptpnuTw" target="_blank" rel="noopener">并发Bug之源有三，请睁大眼睛看清它们</a></li>
-<li><a href="https://mp.weixin.qq.com/s/074jYZWZODJ5Z2qXyWy4gw" target="_blank" rel="noopener">可见性有序性，Happens-before来搞定</a></li>
-<li><a href="https://mp.weixin.qq.com/s/SSfs_kz60MjfrvtwNhY7pg" target="_blank" rel="noopener">解决原子性问题？你首先需要的是宏观理解</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/I53l5W_Wl-lMc-_FAeJ6WQ">这次走进并发的世界，请不要错过 </a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/SrNsvp2NjhAEqYugx6c-3Q">学并发编程，透彻理解这三个核心是关键</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/fQcozKziqMxFMBkptpnuTw">并发Bug之源有三，请睁大眼睛看清它们</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/074jYZWZODJ5Z2qXyWy4gw">可见性有序性，Happens-before来搞定</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/SSfs_kz60MjfrvtwNhY7pg">解决原子性问题？你首先需要的是宏观理解</a></li>
 </ul>
 <hr>
 <blockquote>
@@ -611,12 +613,12 @@
       <!-- <div class="tuijian">
         <br><br>
         📚相关文章
-        <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/difference-between-volatile-and-synchronized-keyword.html" title="volatile和synchronized图文透彻讲解" rel="bookmark">volatile和synchronized图文透彻讲解</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-book.html" title="120000字，你们要的Java并发编程图文小册来了" rel="bookmark">120000字，你们要的Java并发编程图文小册来了</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-aqs-acquireshared-and-semaphore.html" title="Java AQS共享式获取同步状态及Semaphore的应用分析" rel="bookmark">Java AQS共享式获取同步状态及Semaphore的应用分析</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-countdownlatch-vs-cyclicbarrier.html" title="CountDownLatch 和 CyclicBarrier 傻傻的分不清楚？" rel="bookmark">CountDownLatch 和 CyclicBarrier 傻傻的分不清楚？</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/executorservice-vs-completionservice.html" title="ExecutorService VS CompletionService" rel="bookmark">ExecutorService VS CompletionService</a></h3></div></li></ul>
+        <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/difference-between-volatile-and-synchronized-keyword.html" title="volatile和synchronized图文透彻讲解" rel="bookmark">volatile和synchronized图文透彻讲解</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-book.html" title="120000字，你们要的Java并发编程图文小册来了" rel="bookmark">120000字，你们要的Java并发编程图文小册来了</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-aqs-acquireshared-and-semaphore.html" title="Java AQS共享式获取同步状态及Semaphore的应用分析" rel="bookmark">Java AQS共享式获取同步状态及Semaphore的应用分析</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/executorservice-vs-completionservice.html" title="ExecutorService VS CompletionService" rel="bookmark">ExecutorService VS CompletionService</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-interrupt-mechnism.html" title="Java多线程中断机制" rel="bookmark">Java多线程中断机制</a></h3></div></li></ul>
       </div> -->
       <div class="personalweixin">
         <br><br>
         <blockquote>
-          <a href="https://mp.weixin.qq.com/s/G7BXuZh0Qh1-mE6ts4LJqQ" target="_blank" rel="noopener">加我微信</a>，咱们交流技术与思想，共同成长
+          <a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/G7BXuZh0Qh1-mE6ts4LJqQ">加我微信</a>，咱们交流技术与思想，共同成长
         </blockquote>
         <br>
 
@@ -654,9 +656,9 @@
   <div class="-mob-share-list share-body">
     
       
-        <a class="-mob-share-qq" title="QQ好友" rel="external nofollow noopener noreferrer"
+        <a class="-mob-share-qq" title="QQ好友" rel="external nofollow noopener noreferrer noopener"
           
-          href="http://connect.qq.com/widget/shareqq/index.html?url=https://dayarch.top/p/java-concurrency-volatile.html&title=面试volatile关键字时，我们应该具备哪些谈资？ | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=写在前面
+          target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://dayarch.top/p/java-concurrency-volatile.html&title=面试volatile关键字时，我们应该具备哪些谈资？ | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=写在前面
 在 可见性有序性，Happens-before来搞定 文章中，happens-before 的原则之一: volatile变量规则
 
  对一个 volatile 域的写, happens-before 于任意后续对这个 volatile 域的读
@@ -674,9 +676,9 @@ happens-before 之 volatile 变量规则
       
     
       
-        <a class="-mob-share-qzone" title="QQ空间" rel="external nofollow noopener noreferrer"
+        <a class="-mob-share-qzone" title="QQ空间" rel="external nofollow noopener noreferrer noopener"
           
-          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://dayarch.top/p/java-concurrency-volatile.html&title=面试volatile关键字时，我们应该具备哪些谈资？ | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=写在前面
+          target="_blank" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://dayarch.top/p/java-concurrency-volatile.html&title=面试volatile关键字时，我们应该具备哪些谈资？ | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=写在前面
 在 可见性有序性，Happens-before来搞定 文章中，happens-before 的原则之一: volatile变量规则
 
  对一个 volatile 域的写, happens-before 于任意后续对这个 volatile 域的读
@@ -694,9 +696,9 @@ happens-before 之 volatile 变量规则
       
     
       
-        <a class="-mob-share-weibo" title="微博" rel="external nofollow noopener noreferrer"
+        <a class="-mob-share-weibo" title="微博" rel="external nofollow noopener noreferrer noopener"
           
-          href="http://service.weibo.com/share/share.php?url=https://dayarch.top/p/java-concurrency-volatile.html&title=面试volatile关键字时，我们应该具备哪些谈资？ | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=写在前面
+          target="_blank" href="http://service.weibo.com/share/share.php?url=https://dayarch.top/p/java-concurrency-volatile.html&title=面试volatile关键字时，我们应该具备哪些谈资？ | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=写在前面
 在 可见性有序性，Happens-before来搞定 文章中，happens-before 的原则之一: volatile变量规则
 
  对一个 volatile 域的写, happens-before 于任意后续对这个 volatile 域的读
@@ -741,7 +743,7 @@ happens-before 之 volatile 变量规则
                           
                               
                               <h6 class="tags">
-                                  <a class="tag" href="/tags/Spring-Boot/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> Spring Boot</a> <a class="tag" href="/tags/EasyExcel/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> EasyExcel</a> <a class="tag" href="/tags/POI/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> POI</a> <a class="tag" href="/tags/Excel/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> Excel</a>
+                                  <a class="tag" href="/tags/Spring-Boot/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> Spring Boot</a> <a class="tag" href="/tags/Excel/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> Excel</a> <a class="tag" href="/tags/EasyExcel/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> EasyExcel</a> <a class="tag" href="/tags/POI/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> POI</a>
                               </h6>
                           
                       </span>
@@ -788,7 +790,7 @@ happens-before 之 volatile 变量规则
 </header>
 
     <div class="content pure">
-      <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/difference-between-volatile-and-synchronized-keyword.html" title="volatile和synchronized图文透彻讲解" rel="bookmark">volatile和synchronized图文透彻讲解</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-book.html" title="120000字，你们要的Java并发编程图文小册来了" rel="bookmark">120000字，你们要的Java并发编程图文小册来了</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-aqs-acquireshared-and-semaphore.html" title="Java AQS共享式获取同步状态及Semaphore的应用分析" rel="bookmark">Java AQS共享式获取同步状态及Semaphore的应用分析</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-countdownlatch-vs-cyclicbarrier.html" title="CountDownLatch 和 CyclicBarrier 傻傻的分不清楚？" rel="bookmark">CountDownLatch 和 CyclicBarrier 傻傻的分不清楚？</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/executorservice-vs-completionservice.html" title="ExecutorService VS CompletionService" rel="bookmark">ExecutorService VS CompletionService</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-aqs-and-reentrantlock.html" title="Java AQS队列同步器以及ReentrantLock的应用" rel="bookmark">Java AQS队列同步器以及ReentrantLock的应用</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-future-and-callable.html" title="Java Future详解与使用" rel="bookmark">Java Future详解与使用</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-interrupt-mechnism.html" title="Java多线程中断机制" rel="bookmark">Java多线程中断机制</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-dead-lock.html" title="Java并发死锁解决思路" rel="bookmark">Java并发死锁解决思路</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-thread-life-cycle.html" title="Java线程生命周期这样理解挺简单的" rel="bookmark">Java线程生命周期这样理解挺简单的</a></h3></div></li></ul>
+      <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/difference-between-volatile-and-synchronized-keyword.html" title="volatile和synchronized图文透彻讲解" rel="bookmark">volatile和synchronized图文透彻讲解</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-book.html" title="120000字，你们要的Java并发编程图文小册来了" rel="bookmark">120000字，你们要的Java并发编程图文小册来了</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-aqs-acquireshared-and-semaphore.html" title="Java AQS共享式获取同步状态及Semaphore的应用分析" rel="bookmark">Java AQS共享式获取同步状态及Semaphore的应用分析</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/executorservice-vs-completionservice.html" title="ExecutorService VS CompletionService" rel="bookmark">ExecutorService VS CompletionService</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-interrupt-mechnism.html" title="Java多线程中断机制" rel="bookmark">Java多线程中断机制</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-thread-life-cycle.html" title="Java线程生命周期这样理解挺简单的" rel="bookmark">Java线程生命周期这样理解挺简单的</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/why-we-need-to-use-threadpool.html" title="为什么要使用线程池?" rel="bookmark">为什么要使用线程池?</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-core.html" title="并发编程三大核心" rel="bookmark">并发编程三大核心</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-dead-lock.html" title="Java并发死锁解决思路" rel="bookmark">Java并发死锁解决思路</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-three-questions.html" title="并发编程三大问题" rel="bookmark">并发编程三大问题</a></h3></div></li></ul>
     </div>
   </section>
 
@@ -996,7 +998,7 @@ happens-before 之 volatile 变量规则
 </header>
 
     <div class='content pure'>
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#写在前面"><span class="toc-text">写在前面</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#happens-before-之-volatile-变量规则"><span class="toc-text">happens-before 之 volatile 变量规则</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#内存屏障-Memory-Barriers-Fences"><span class="toc-text">内存屏障 (Memory Barriers / Fences)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#volatile-写-读的内存语义"><span class="toc-text">volatile 写-读的内存语义</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#volatile-读的内存语义"><span class="toc-text">volatile 读的内存语义:</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#彩蛋"><span class="toc-text">彩蛋</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#灵魂追问"><span class="toc-text">灵魂追问</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#提高效率工具"><span class="toc-text">提高效率工具</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#tool-lu"><span class="toc-text">tool.lu</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#推荐阅读"><span class="toc-text">推荐阅读</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#欢迎持续关注公众号：「日拱一兵」"><span class="toc-text">欢迎持续关注公众号：「日拱一兵」</span></a></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%99%E5%9C%A8%E5%89%8D%E9%9D%A2"><span class="toc-text">写在前面</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#happens-before-%E4%B9%8B-volatile-%E5%8F%98%E9%87%8F%E8%A7%84%E5%88%99"><span class="toc-text">happens-before 之 volatile 变量规则</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%85%E5%AD%98%E5%B1%8F%E9%9A%9C-Memory-Barriers-Fences"><span class="toc-text">内存屏障 (Memory Barriers &#x2F; Fences)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#volatile-%E5%86%99-%E8%AF%BB%E7%9A%84%E5%86%85%E5%AD%98%E8%AF%AD%E4%B9%89"><span class="toc-text">volatile 写-读的内存语义</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#volatile-%E8%AF%BB%E7%9A%84%E5%86%85%E5%AD%98%E8%AF%AD%E4%B9%89"><span class="toc-text">volatile 读的内存语义:</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BD%A9%E8%9B%8B"><span class="toc-text">彩蛋</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%81%B5%E9%AD%82%E8%BF%BD%E9%97%AE"><span class="toc-text">灵魂追问</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8F%90%E9%AB%98%E6%95%88%E7%8E%87%E5%B7%A5%E5%85%B7"><span class="toc-text">提高效率工具</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#tool-lu"><span class="toc-text">tool.lu</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8E%A8%E8%8D%90%E9%98%85%E8%AF%BB"><span class="toc-text">推荐阅读</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%AC%A2%E8%BF%8E%E6%8C%81%E7%BB%AD%E5%85%B3%E6%B3%A8%E5%85%AC%E4%BC%97%E5%8F%B7%EF%BC%9A%E3%80%8C%E6%97%A5%E6%8B%B1%E4%B8%80%E5%85%B5%E3%80%8D"><span class="toc-text">欢迎持续关注公众号：「日拱一兵」</span></a></li></ol></li></ol>
     </div>
   </section>
 
@@ -1071,7 +1073,7 @@ happens-before 之 volatile 变量规则
   &nbsp;&nbsp;|&nbsp;&nbsp;  
   
     &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-        class="white-color">264.1k</span>&nbsp;字
+        class="white-color">267.4k</span>&nbsp;字
     
 
   &nbsp;&nbsp;|&nbsp;&nbsp;  
@@ -1126,7 +1128,7 @@ happens-before 之 volatile 变量规则
     
     。
   </div>
-  <div><p>博客内容遵循 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
+  <div><p>博客内容遵循 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
 </div>
   <!-- <div class="github-badge">
       <a style="color: #fff" rel="license" href="https://hexo.io/" target="_blank" title="由 Hexo 强力驱动">
@@ -1234,10 +1236,14 @@ happens-before 之 volatile 变量规则
 
 
 
-  <script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/app.js"></script>
+  
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/app.js"></script>
 
 
-  <script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/search.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/search.js"></script>
+
 
 
 

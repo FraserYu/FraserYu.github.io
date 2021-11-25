@@ -13,7 +13,7 @@
   
 
   
-  <link rel="alternate" href="/atom.xml" title="日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享">
+  <link rel="alternate" href="/atom.xml" title="日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享" type="application/atom+xml">
   
 
   <meta name="HandheldFriendly" content="True" />
@@ -35,7 +35,9 @@
   
 
   
-    <link rel="stylesheet" href="/style.css">
+    
+<link rel="stylesheet" href="/style.css">
+
   
 
   <script>
@@ -85,7 +87,7 @@
         daovoice('update');
         </script>
     
-</head>
+<meta name="generator" content="Hexo 5.4.0"></head>
 
 <body>
   
@@ -490,7 +492,7 @@
 <p>*Annotation for mapping web requests onto specific handler classes and/or handler methods. Provides a consistent style between Servlet and Portlet environments, with the semantics adapting to the concrete environment. *</p>
 </blockquote>
 <p>翻译过来的意思就是通过在在类和方法上的限制来匹配request</p>
-<a id="more"></a>
+<span id="more"></span>
 
 <h3 id="RequestMapping的几大属性"><a href="#RequestMapping的几大属性" class="headerlink" title="RequestMapping的几大属性"></a>RequestMapping的几大属性</h3><p>在Spring4.2.4的API中发现RequestMapping有八大属性来mappingURL请求</p>
 <ol>
@@ -501,12 +503,12 @@
 </li>
 <li><p><strong>method</strong></p>
 <blockquote>
-<p><em>The HTTP request methods to map to, narrowing the primary mapping: *</em>GET, POST, HEAD, OPTIONS, PUT, PATCH, DELETE, TRACE. ***<br>Http请求中有以上几种方式，我们可以通过加入method来限制mapping范围</p>
+<p>*The HTTP request methods to map to, narrowing the primary mapping: **GET, POST, HEAD, OPTIONS, PUT, PATCH, DELETE, TRACE. ***<br>Http请求中有以上几种方式，我们可以通过加入method来限制mapping范围</p>
 </blockquote>
 </li>
 <li><p><strong>params</strong></p>
 <blockquote>
-<p><em>Same format for any environment: a sequence of “myParam=myValue” style expressions, with a request only mapped if each such parameter is found to have the given value. Expressions can be negated by using the “!=” operator, as in “myParam!=myValue”. “myParam” style expressions are also supported, with such parameters having to be present in the request (allowed to have any value). Finally, “!myParam” style expressions indicate that the specified parameter is not supposed to be present in the request. *<br>请求参数中必须有key*</em>等于<strong>某个value或者key必须</strong>不等于<strong>某个value，多个条件是</strong>与**的关系。</p>
+<p>*Same format for any environment: a sequence of “myParam=myValue” style expressions, with a request only mapped if each such parameter is found to have the given value. Expressions can be negated by using the “!=” operator, as in “myParam!=myValue”. “myParam” style expressions are also supported, with such parameters having to be present in the request (allowed to have any value). Finally, “!myParam” style expressions indicate that the specified parameter is not supposed to be present in the request. *<br>请求参数中必须有key<strong>等于</strong>某个value或者key必须<strong>不等于</strong>某个value，多个条件是<strong>与</strong>的关系。</p>
 </blockquote>
 </li>
 <li><p><strong>headers</strong></p>
@@ -515,8 +517,8 @@
 </blockquote>
 </li>
 </ol>
-<p><strong><em>Also supports media type wildcards (</em>), for headers such as Accept and Content-Type. For instance,will match requests with a Content-Type of “text/html”, “text/plain”, etc. *</strong><br>和params属性类似，支持通配符匹配。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping</span>(value = <span class="string">"/something"</span>, headers = <span class="string">"content-type=text/*"</span>)</span><br></pre></td></tr></table></figure>
+<p>**<em>Also supports media type wildcards (</em>), for headers such as Accept and Content-Type. For instance,will match requests with a Content-Type of “text/html”, “text/plain”, etc. ***<br>和params属性类似，支持通配符匹配。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping(value = &quot;/something&quot;, headers = &quot;content-type=text/*&quot;)</span></span><br></pre></td></tr></table></figure>
 
 <ol start="5">
 <li><p><strong>name</strong></p>
@@ -528,8 +530,10 @@
 <blockquote>
 <p>*The consumable media types of the mapped request, narrowing the primary mapping. The format is a single media type or a sequence of media types, with a request only mapped if the Content-Type matches one of these media types. Examples:</p>
 </blockquote>
-<pre><code>consumes = &quot;text/plain&quot;
-consumes = {&quot;text/plain&quot;, &quot;application/*&quot;}</code></pre><blockquote>
+<pre><code> consumes = &quot;text/plain&quot;
+ consumes = &#123;&quot;text/plain&quot;, &quot;application/*&quot;&#125;
+</code></pre>
+<blockquote>
 <p>*Expressions can be negated by using the “!” operator, as in “!text/plain”, which matches all requests with a Content-Type other than “text/plain”. *<br>consumes数组里面可以是一个或多个值，只要匹配到他们其中一个即可。</p>
 </blockquote>
 </li>
@@ -537,9 +541,11 @@ consumes = {&quot;text/plain&quot;, &quot;application/*&quot;}</code></pre><bloc
 <blockquote>
 <p><em>he producible media types of the mapped request, narrowing the primary mapping. The format is a single media type or a sequence of media types, with a request only mapped if the Accept matches one of these media types. Examples:</em></p>
 </blockquote>
-<pre><code>produces = &quot;text/plain&quot;
-produces = {&quot;text/plain&quot;, &quot;application/*&quot;}
-produces = &quot;application/json; charset=UTF-8&quot;</code></pre><blockquote>
+<pre><code>  produces = &quot;text/plain&quot;
+  produces = &#123;&quot;text/plain&quot;, &quot;application/*&quot;&#125;
+  produces = &quot;application/json; charset=UTF-8&quot;
+</code></pre>
+<blockquote>
 <p>*It affects the actual content type written, for example to produce a JSON response with UTF-8 encoding, “application/json; charset=UTF-8” should be used. Expressions can be negated by using the “!” operator, as in “!text/plain”, which matches all requests with a Accept other than “text/plain”. *<br>指定返回的内容类型，仅当request请求头中的(Accept)类型中包含该指定类型才返回</p>
 </blockquote>
 </li>
@@ -551,106 +557,122 @@ produces = &quot;application/json; charset=UTF-8&quot;</code></pre><blockquote>
 </ol>
 <p>以上所有属性都是来限制mapping要求的，但是常用的是<strong>params、method、consumes</strong>.</p>
 <h3 id="验证属性"><a href="#验证属性" class="headerlink" title="验证属性"></a>验证属性</h3><ol>
-<li><p><strong>value</strong><br>value支持通配符的表现形式,  <strong>?</strong>表示匹配文件名中的一个字符, * 表示匹配任意一个或多个字符, ** 表示匹配多层路径的一个或多个字符, @PathVariable算是URL参数的占位符。</p>
-<pre><code>@RequestMapping(value=&quot;/?/testValue1/{id}&quot;)
-public String testValue1(@PathVariable(&quot;id&quot;) String id){
-    System.out.println(&quot;value测试&quot; + id);
-    return SUCCESS;
-}</code></pre><blockquote>
-<p><strong>URL</strong>:  <a href="http://localhost:8080/springMVC1/demo/a/testValue1/28" target="_blank" rel="noopener">http://localhost:8080/springMVC1/demo/a/testValue1/28</a><br><strong>Result</strong>:  value测试28</p>
+<li><p><strong>value</strong><br>value支持通配符的表现形式,  **?**表示匹配文件名中的一个字符, * 表示匹配任意一个或多个字符, ** 表示匹配多层路径的一个或多个字符, @PathVariable算是URL参数的占位符。</p>
+<pre><code> @RequestMapping(value=&quot;/?/testValue1/&#123;id&#125;&quot;)
+ public String testValue1(@PathVariable(&quot;id&quot;) String id)&#123;
+     System.out.println(&quot;value测试&quot; + id);
+     return SUCCESS;
+ &#125;
+</code></pre>
+<blockquote>
+<p><strong>URL</strong>:  <a target="_blank" rel="noopener" href="http://localhost:8080/springMVC1/demo/a/testValue1/28">http://localhost:8080/springMVC1/demo/a/testValue1/28</a><br><strong>Result</strong>:  value测试28</p>
 </blockquote>
 <p>现在我们遇到一种情况，如果我们的id是1.2.0007.9 这种类型的字符，如果在还向上面那样来传参数只会的到1.0这样的结果，于是我们需要用到正则表达式：</p>
-<pre><code>@RequestMapping(value=&quot;/?/testValue1/{id：.*}&quot;)
-        public String testValue1(@PathVariable(&quot;id&quot;) String id){
-            System.out.println(&quot;value测试&quot; + id);
-            return SUCCESS;
-        }</code></pre><p> 写成{id:.*} 或 {id:.+} 都可以。</p>
+<pre><code> @RequestMapping(value=&quot;/?/testValue1/&#123;id：.*&#125;&quot;)
+         public String testValue1(@PathVariable(&quot;id&quot;) String id)&#123;
+             System.out.println(&quot;value测试&quot; + id);
+             return SUCCESS;
+         &#125;
+</code></pre>
+<p> 写成{id:.*} 或 {id:.+} 都可以。</p>
 </li>
 <li><p><strong>method</strong><br>jsp部分代码如下：</p>
-<pre><code>&lt;dl&gt;
-    &lt;dt&gt;Test method&lt;/dt&gt;
-    &lt;dd&gt;
-        &lt;a href=&quot;demo/testMethod_GET&quot;&gt;Method_GET&lt;/a&gt;
-    &lt;/dd&gt;
-    &lt;dd&gt;
-        &lt;form action=&quot;demo/testMethod_POST&quot; method=&quot;post&quot;&gt;
-            &lt;input type=&quot;submit&quot; value=&quot;Method_POST&quot;/&gt;
-        &lt;/form&gt;
-    &lt;/dd&gt;
-    &lt;dd&gt;
-        &lt;form action=&quot;demo/testMethod_DELETE&quot; method=&quot;post&quot;&gt;
-            &lt;input type=&quot;hidden&quot; name=&quot;_method&quot; value=&quot;DELETE&quot;/&gt;
-            &lt;input type=&quot;submit&quot; value=&quot;Method_DELETE&quot;/&gt;
-        &lt;/form&gt;
-    &lt;/dd&gt;
-    &lt;dd&gt;
-        &lt;form action=&quot;demo/testMethod_PUT&quot; method=&quot;post&quot;&gt;
-            &lt;input type=&quot;hidden&quot; name=&quot;_method&quot; value=&quot;PUT&quot;/&gt;
-            &lt;input type=&quot;submit&quot; value=&quot;Method_PUT&quot;/&gt;
-        &lt;/form&gt;
-    &lt;/dd&gt;
-&lt;/dl&gt;</code></pre><p>GET和POST方法很好理解，可是在DELETE方法和PUT方法中我们却加入了一个hidden类型的input，值分别为DELETE和PUT，为什么要加这个隐藏域，我们先来看一下Spring中org.springframework.web.filter.HiddenHttpMethodFilter类的一段源码：</p>
-<pre><code>public static final String DEFAULT_METHOD_PARAM = &quot;_method&quot;;
-private String methodParam = DEFAULT_METHOD_PARAM;
+<pre><code> &lt;dl&gt;
+     &lt;dt&gt;Test method&lt;/dt&gt;
+     &lt;dd&gt;
+         &lt;a href=&quot;demo/testMethod_GET&quot;&gt;Method_GET&lt;/a&gt;
+     &lt;/dd&gt;
+     &lt;dd&gt;
+         &lt;form action=&quot;demo/testMethod_POST&quot; method=&quot;post&quot;&gt;
+             &lt;input type=&quot;submit&quot; value=&quot;Method_POST&quot;/&gt;
+         &lt;/form&gt;
+     &lt;/dd&gt;
+     &lt;dd&gt;
+         &lt;form action=&quot;demo/testMethod_DELETE&quot; method=&quot;post&quot;&gt;
+             &lt;input type=&quot;hidden&quot; name=&quot;_method&quot; value=&quot;DELETE&quot;/&gt;
+             &lt;input type=&quot;submit&quot; value=&quot;Method_DELETE&quot;/&gt;
+         &lt;/form&gt;
+     &lt;/dd&gt;
+     &lt;dd&gt;
+         &lt;form action=&quot;demo/testMethod_PUT&quot; method=&quot;post&quot;&gt;
+             &lt;input type=&quot;hidden&quot; name=&quot;_method&quot; value=&quot;PUT&quot;/&gt;
+             &lt;input type=&quot;submit&quot; value=&quot;Method_PUT&quot;/&gt;
+         &lt;/form&gt;
+     &lt;/dd&gt;
+ &lt;/dl&gt;
+</code></pre>
+<p>GET和POST方法很好理解，可是在DELETE方法和PUT方法中我们却加入了一个hidden类型的input，值分别为DELETE和PUT，为什么要加这个隐藏域，我们先来看一下Spring中org.springframework.web.filter.HiddenHttpMethodFilter类的一段源码：</p>
+<pre><code> public static final String DEFAULT_METHOD_PARAM = &quot;_method&quot;;
+ private String methodParam = DEFAULT_METHOD_PARAM;
 
-@Override
-protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)throws ServletException, IOException {
+ @Override
+ protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)throws ServletException, IOException &#123;
 
-    String paramValue = request.getParameter(this.methodParam);
-    if (&quot;POST&quot;.equals(request.getMethod()) &amp;&amp; StringUtils.hasLength(paramValue)) {
-        String method = paramValue.toUpperCase(Locale.ENGLISH);
-        HttpServletRequest wrapper = new HttpMethodRequestWrapper(request, method);
-        filterChain.doFilter(wrapper, response);
-    }
-    else {
-        filterChain.doFilter(request, response);
-    }
-}</code></pre><p>这段代码的主要意思就是如果_method中存在值，并且是post方法，那我们的servlet对这个方法进行处理，为了完成这个功能我们需要进一步在web.xml中配置这个org.springframework.web.filter.HiddenHttpMethodFilter，如下：</p>
-<pre><code>&lt;!-- org.springframework.web.filter.HiddenHttpMethodFilter 可以将post请求转为PUT和DELETE请求 --&gt;
-&lt;filter&gt;
-    &lt;filter-name&gt;HiddenHttpMethodFilter&lt;/filter-name&gt;
-    &lt;filter-class&gt;org.springframework.web.filter.HiddenHttpMethodFilter&lt;/filter-class&gt;
-&lt;/filter&gt;
+     String paramValue = request.getParameter(this.methodParam);
+     if (&quot;POST&quot;.equals(request.getMethod()) &amp;&amp; StringUtils.hasLength(paramValue)) &#123;
+         String method = paramValue.toUpperCase(Locale.ENGLISH);
+         HttpServletRequest wrapper = new HttpMethodRequestWrapper(request, method);
+         filterChain.doFilter(wrapper, response);
+     &#125;
+     else &#123;
+         filterChain.doFilter(request, response);
+     &#125;
+ &#125;
+</code></pre>
+<p>这段代码的主要意思就是如果_method中存在值，并且是post方法，那我们的servlet对这个方法进行处理，为了完成这个功能我们需要进一步在web.xml中配置这个org.springframework.web.filter.HiddenHttpMethodFilter，如下：</p>
+<pre><code> &lt;!-- org.springframework.web.filter.HiddenHttpMethodFilter 可以将post请求转为PUT和DELETE请求 --&gt;
+ &lt;filter&gt;
+     &lt;filter-name&gt;HiddenHttpMethodFilter&lt;/filter-name&gt;
+     &lt;filter-class&gt;org.springframework.web.filter.HiddenHttpMethodFilter&lt;/filter-class&gt;
+ &lt;/filter&gt;
 
-&lt;filter-mapping&gt;
-    &lt;filter-name&gt;HiddenHttpMethodFilter&lt;/filter-name&gt;
-    &lt;url-pattern&gt;/*&lt;/url-pattern&gt;
-&lt;/filter-mapping&gt;</code></pre><p>现在我们来看JAVA后台controller中的代码，如下：</p>
-<pre><code>@RequestMapping(value=&quot;/testMethod_GET&quot;, method=RequestMethod.GET)
-public String testMethod_GET(){
-    System.out.println(&quot;This is GET method&quot;);
-    return SUCCESS;
-}
+ &lt;filter-mapping&gt;
+     &lt;filter-name&gt;HiddenHttpMethodFilter&lt;/filter-name&gt;
+     &lt;url-pattern&gt;/*&lt;/url-pattern&gt;
+ &lt;/filter-mapping&gt;
+</code></pre>
+<p>现在我们来看JAVA后台controller中的代码，如下：</p>
+<pre><code> @RequestMapping(value=&quot;/testMethod_GET&quot;, method=RequestMethod.GET)
+ public String testMethod_GET()&#123;
+     System.out.println(&quot;This is GET method&quot;);
+     return SUCCESS;
+ &#125;
 
-@RequestMapping(value=&quot;/testMethod_POST&quot;,method=RequestMethod.POST)
-public String testMethod_POST(){
-    System.out.println(&quot;This is POST method&quot;);
-    return SUCCESS;
-}
+ @RequestMapping(value=&quot;/testMethod_POST&quot;,method=RequestMethod.POST)
+ public String testMethod_POST()&#123;
+     System.out.println(&quot;This is POST method&quot;);
+     return SUCCESS;
+ &#125;
 
-@RequestMapping(value=&quot;/testMethod_DELETE&quot;, method=RequestMethod.DELETE)
-public String testMethod_DELETE(){
-    System.out.println(&quot;This is DELETE method&quot;);
-    return SUCCESS;
-}
+ @RequestMapping(value=&quot;/testMethod_DELETE&quot;, method=RequestMethod.DELETE)
+ public String testMethod_DELETE()&#123;
+     System.out.println(&quot;This is DELETE method&quot;);
+     return SUCCESS;
+ &#125;
 
-@RequestMapping(value=&quot;/testMethod_PUT&quot;, method=RequestMethod.PUT)
-public String testMethod_PUT(){
-    System.out.println(&quot;This is PUT method&quot;);
-    return SUCCESS;
-}        </code></pre></li>
+ @RequestMapping(value=&quot;/testMethod_PUT&quot;, method=RequestMethod.PUT)
+ public String testMethod_PUT()&#123;
+     System.out.println(&quot;This is PUT method&quot;);
+     return SUCCESS;
+ &#125;        
+</code></pre>
+</li>
 <li><p><strong>params</strong><br>jsp部分代码如下：</p>
-<pre><code>&lt;dl&gt;
-    &lt;dt&gt;Test params&lt;/dt&gt;
-    &lt;dd&gt;
-        &lt;a href=&quot;demo/testParams?username&amp;age=10&quot;&gt;testParams&lt;/a&gt;
-    &lt;/dd&gt;
-&lt;/dl&gt;</code></pre><p>Java的Controller代码如下：</p>
-<pre><code>@RequestMapping(value=&quot;/testParams&quot;, params={&quot;username&quot;,&quot;age!=0&quot;})
-public String testParams(){
-    System.out.println(&quot;testParams&quot;);
-    return SUCCESS;
-}</code></pre><p>params={“username”,”age!=0”}代表请求参数中<strong>必须</strong>有username和age这两个参数，同时age不能等于0.</p>
+<pre><code> &lt;dl&gt;
+     &lt;dt&gt;Test params&lt;/dt&gt;
+     &lt;dd&gt;
+         &lt;a href=&quot;demo/testParams?username&amp;age=10&quot;&gt;testParams&lt;/a&gt;
+     &lt;/dd&gt;
+ &lt;/dl&gt;
+</code></pre>
+<p>Java的Controller代码如下：</p>
+<pre><code> @RequestMapping(value=&quot;/testParams&quot;, params=&#123;&quot;username&quot;,&quot;age!=0&quot;&#125;)
+ public String testParams()&#123;
+     System.out.println(&quot;testParams&quot;);
+     return SUCCESS;
+ &#125;
+</code></pre>
+<p>params={“username”,”age!=0”}代表请求参数中<strong>必须</strong>有username和age这两个参数，同时age不能等于0.</p>
 </li>
 <li><p><strong>headers</strong><br>headers属性同params类似，都是可以以数组的形式来进行约束。需要什么样的请求参数可以通过开发者工具来查看请求中都有什么样的参数。</p>
 </li>
@@ -665,7 +687,7 @@ public String testParams(){
       <div class="personalweixin">
         <br><br>
         <blockquote>
-          <a href="https://mp.weixin.qq.com/s/G7BXuZh0Qh1-mE6ts4LJqQ" target="_blank" rel="noopener">加我微信</a>，咱们交流技术与思想，共同成长
+          <a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/G7BXuZh0Qh1-mE6ts4LJqQ">加我微信</a>，咱们交流技术与思想，共同成长
         </blockquote>
         <br>
 
@@ -703,9 +725,9 @@ public String testParams(){
   <div class="-mob-share-list share-body">
     
       
-        <a class="-mob-share-qq" title="QQ好友" rel="external nofollow noopener noreferrer"
+        <a class="-mob-share-qq" title="QQ好友" rel="external nofollow noopener noreferrer noopener"
           
-          href="http://connect.qq.com/widget/shareqq/index.html?url=https://dayarch.top/p/springmvc-requestmapping-annotation.html&title=SpringMVC之RequestMapping注解 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=SpringMVC之RequestMapping注解
+          target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://dayarch.top/p/springmvc-requestmapping-annotation.html&title=SpringMVC之RequestMapping注解 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=SpringMVC之RequestMapping注解
 
 
 
@@ -722,9 +744,9 @@ public String testParams(){
       
     
       
-        <a class="-mob-share-qzone" title="QQ空间" rel="external nofollow noopener noreferrer"
+        <a class="-mob-share-qzone" title="QQ空间" rel="external nofollow noopener noreferrer noopener"
           
-          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://dayarch.top/p/springmvc-requestmapping-annotation.html&title=SpringMVC之RequestMapping注解 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=SpringMVC之RequestMapping注解
+          target="_blank" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://dayarch.top/p/springmvc-requestmapping-annotation.html&title=SpringMVC之RequestMapping注解 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=SpringMVC之RequestMapping注解
 
 
 
@@ -741,9 +763,9 @@ public String testParams(){
       
     
       
-        <a class="-mob-share-weibo" title="微博" rel="external nofollow noopener noreferrer"
+        <a class="-mob-share-weibo" title="微博" rel="external nofollow noopener noreferrer noopener"
           
-          href="http://service.weibo.com/share/share.php?url=https://dayarch.top/p/springmvc-requestmapping-annotation.html&title=SpringMVC之RequestMapping注解 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=SpringMVC之RequestMapping注解
+          target="_blank" href="http://service.weibo.com/share/share.php?url=https://dayarch.top/p/springmvc-requestmapping-annotation.html&title=SpringMVC之RequestMapping注解 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=SpringMVC之RequestMapping注解
 
 
 
@@ -834,7 +856,7 @@ public String testParams(){
 </header>
 
     <div class="content pure">
-      <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/spring-boot-condition-annotation.html" title="@Conditional注解，Spring Boot 的灵活配置" rel="bookmark">@Conditional注解，Spring Boot 的灵活配置</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/spring-boot-messageconverter.html" title="HttpMessageConverter转换原理解析" rel="bookmark">HttpMessageConverter转换原理解析</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/shiro-in-practice.html" title="Shiro—小而美的安全框架" rel="bookmark">Shiro—小而美的安全框架</a></h3></div></li></ul>
+      <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/spring-boot-condition-annotation.html" title="@Conditional注解，Spring Boot 的灵活配置" rel="bookmark">@Conditional注解，Spring Boot 的灵活配置</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/spring-aware.html" title="Spring Aware 到底是什么？" rel="bookmark">Spring Aware 到底是什么？</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/spring-bean-lifecycle-destroy.html" title="Spring Bean生命周期之缘尽" rel="bookmark">Spring Bean生命周期之缘尽</a></h3></div></li></ul>
     </div>
   </section>
 
@@ -1042,7 +1064,7 @@ public String testParams(){
 </header>
 
     <div class='content pure'>
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#SpringMVC之RequestMapping注解"><span class="toc-text">SpringMVC之RequestMapping注解</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#什么是RequestMapping注解"><span class="toc-text">什么是RequestMapping注解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#RequestMapping的几大属性"><span class="toc-text">RequestMapping的几大属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#验证属性"><span class="toc-text">验证属性</span></a></li></ol></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#SpringMVC%E4%B9%8BRequestMapping%E6%B3%A8%E8%A7%A3"><span class="toc-text">SpringMVC之RequestMapping注解</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFRequestMapping%E6%B3%A8%E8%A7%A3"><span class="toc-text">什么是RequestMapping注解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#RequestMapping%E7%9A%84%E5%87%A0%E5%A4%A7%E5%B1%9E%E6%80%A7"><span class="toc-text">RequestMapping的几大属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%AA%8C%E8%AF%81%E5%B1%9E%E6%80%A7"><span class="toc-text">验证属性</span></a></li></ol></li></ol></li></ol>
     </div>
   </section>
 
@@ -1117,7 +1139,7 @@ public String testParams(){
   &nbsp;&nbsp;|&nbsp;&nbsp;  
   
     &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-        class="white-color">264.1k</span>&nbsp;字
+        class="white-color">267.4k</span>&nbsp;字
     
 
   &nbsp;&nbsp;|&nbsp;&nbsp;  
@@ -1172,7 +1194,7 @@ public String testParams(){
     
     。
   </div>
-  <div><p>博客内容遵循 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
+  <div><p>博客内容遵循 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
 </div>
   <!-- <div class="github-badge">
       <a style="color: #fff" rel="license" href="https://hexo.io/" target="_blank" title="由 Hexo 强力驱动">
@@ -1280,10 +1302,14 @@ public String testParams(){
 
 
 
-  <script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/app.js"></script>
+  
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/app.js"></script>
 
 
-  <script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/search.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/search.js"></script>
+
 
 
 

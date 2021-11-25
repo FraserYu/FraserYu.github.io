@@ -13,7 +13,7 @@
   
 
   
-  <link rel="alternate" href="/atom.xml" title="日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享">
+  <link rel="alternate" href="/atom.xml" title="日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享" type="application/atom+xml">
   
 
   <meta name="HandheldFriendly" content="True" />
@@ -35,7 +35,9 @@
   
 
   
-    <link rel="stylesheet" href="/style.css">
+    
+<link rel="stylesheet" href="/style.css">
+
   
 
   <script>
@@ -85,7 +87,7 @@
         daovoice('update');
         </script>
     
-</head>
+<meta name="generator" content="Hexo 5.4.0"></head>
 
 <body>
   
@@ -511,9 +513,9 @@
 <h4 id="两个对象-hashCode-相等，那他们-equals-不一定相等"><a href="#两个对象-hashCode-相等，那他们-equals-不一定相等" class="headerlink" title="两个对象 hashCode 相等，那他们 equals 不一定相等"></a>两个对象 <code>hashCode</code> 相等，那他们 <code>equals</code> 不一定相等</h4></blockquote>
 <p>查看 <code>Object</code> 类的 <code>hashCode</code> 方法:</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">native</span> <span class="keyword">int</span> <span class="title">hashCode</span><span class="params">()</span></span>;</span><br></pre></td></tr></table></figure>
-<p>继续查看该方法的注释，明确写明关于该方法的约束<br><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgXnip2019-12-16_21-06-16.jpg" alt=""></fancybox></p>
+<p>继续查看该方法的注释，明确写明关于该方法的约束<br><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgXnip2019-12-16_21-06-16.jpg"></fancybox></p>
 <p>其实在这个结果的背后，还有的是关于重写 <code>equals</code> 方法的约束</p>
-<h3 id="3-重写-equals-有哪些约束？"><a href="#3-重写-equals-有哪些约束？" class="headerlink" title="3. 重写 equals 有哪些约束？"></a>3. 重写 <code>equals</code> 有哪些约束？</h3><p>关于重写 <code>equals</code> 方法的约束，同样在该方法的注释中写的很清楚了，我在这里再说明一下:<br><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgXnip2019-12-16_20-49-14.jpg" alt=""></fancybox></p>
+<h3 id="3-重写-equals-有哪些约束？"><a href="#3-重写-equals-有哪些约束？" class="headerlink" title="3. 重写 equals 有哪些约束？"></a>3. 重写 <code>equals</code> 有哪些约束？</h3><p>关于重写 <code>equals</code> 方法的约束，同样在该方法的注释中写的很清楚了，我在这里再说明一下:<br><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgXnip2019-12-16_20-49-14.jpg"></fancybox></p>
 <p><strong>赤橙红绿青蓝紫，七彩以色列；哆来咪发唆拉西, 一曲安哥拉</strong> ，这些规则不是用来背诵的，只是在你需要重写 <code>equals</code> 方法时，打开 JDK 查看该方法，按照准则重写就好</p>
 <h3 id="4-什么时候需要我们重写-hashCode？"><a href="#4-什么时候需要我们重写-hashCode？" class="headerlink" title="4. 什么时候需要我们重写 hashCode？"></a>4. 什么时候需要我们重写 <code>hashCode</code>？</h3><p>为了比较值，我们重写 <code>equals</code> 方法，那什么时候又需要重写 <code>hashCode</code> 方法呢？</p>
 <blockquote>
@@ -524,7 +526,7 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Student</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">private</span> String name;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">int</span> age;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">equals</span><span class="params">(Object o)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">if</span> (<span class="keyword">this</span> == o) <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">		<span class="keyword">if</span> (o == <span class="keyword">null</span> || getClass() != o.getClass()) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">		Student student = (Student) o;</span><br><span class="line">		<span class="keyword">return</span> age == student.age &amp;&amp;</span><br><span class="line">				Objects.equals(name, student.name);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>编写测试代码:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">Student student1 = <span class="keyword">new</span> Student();</span><br><span class="line">student1.setName(<span class="string">"日拱一兵"</span>);</span><br><span class="line">student1.setAge(<span class="number">18</span>);</span><br><span class="line"></span><br><span class="line">Student student2 = <span class="keyword">new</span> Student();</span><br><span class="line">student2.setName(<span class="string">"日拱一兵"</span>);</span><br><span class="line">student2.setAge(<span class="number">18</span>);</span><br><span class="line"></span><br><span class="line">System.out.println(<span class="string">"student1.equals(student2)的结果是："</span> + student1.equals(student2));</span><br><span class="line"></span><br><span class="line">Set&lt;Student&gt; students = <span class="keyword">new</span> HashSet&lt;Student&gt;();</span><br><span class="line">students.add(student1);</span><br><span class="line">students.add(student2);</span><br><span class="line">System.out.println(<span class="string">"Student Set 集合长度是："</span> + students.size());</span><br><span class="line"></span><br><span class="line">Map&lt;Student, java.lang.String&gt; map = <span class="keyword">new</span> HashMap&lt;Student, java.lang.String&gt;();</span><br><span class="line">map.put(student1, <span class="string">"student1"</span>);</span><br><span class="line">map.put(student2, <span class="string">"student2"</span>);</span><br><span class="line">System.out.println(<span class="string">"Student Map 集合长度是："</span> + map.keySet().size());</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">Student student1 = <span class="keyword">new</span> Student();</span><br><span class="line">student1.setName(<span class="string">&quot;日拱一兵&quot;</span>);</span><br><span class="line">student1.setAge(<span class="number">18</span>);</span><br><span class="line"></span><br><span class="line">Student student2 = <span class="keyword">new</span> Student();</span><br><span class="line">student2.setName(<span class="string">&quot;日拱一兵&quot;</span>);</span><br><span class="line">student2.setAge(<span class="number">18</span>);</span><br><span class="line"></span><br><span class="line">System.out.println(<span class="string">&quot;student1.equals(student2)的结果是：&quot;</span> + student1.equals(student2));</span><br><span class="line"></span><br><span class="line">Set&lt;Student&gt; students = <span class="keyword">new</span> HashSet&lt;Student&gt;();</span><br><span class="line">students.add(student1);</span><br><span class="line">students.add(student2);</span><br><span class="line">System.out.println(<span class="string">&quot;Student Set 集合长度是：&quot;</span> + students.size());</span><br><span class="line"></span><br><span class="line">Map&lt;Student, java.lang.String&gt; map = <span class="keyword">new</span> HashMap&lt;Student, java.lang.String&gt;();</span><br><span class="line">map.put(student1, <span class="string">&quot;student1&quot;</span>);</span><br><span class="line">map.put(student2, <span class="string">&quot;student2&quot;</span>);</span><br><span class="line">System.out.println(<span class="string">&quot;Student Map 集合长度是：&quot;</span> + map.keySet().size());</span><br></pre></td></tr></table></figure>
 
 <p>查看运行结果:</p>
 <figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">student1.equals(student2)的结果是：true</span><br><span class="line">Student Set 集合长度是：2</span><br><span class="line">Student Map 集合长度是：2</span><br></pre></td></tr></table></figure>
@@ -539,7 +541,7 @@
 <ul>
 <li><p>如果你在使用 Lombok，不知道你是否注意到 Lombok 只有一个 <code>@EqualsAndHashCode</code> 注解，而没有拆分成  @Equals 和 @HashCode 两个注解，想了解更多 Lombok 的内容，也可以查看我之前写的文章 <a href="https://dayarch.top/p/lombok-usage.html">Lomok 使用详解</a></p>
 </li>
-<li><p>另外通过 IDE 快捷键生成重写方法时，你也会看到这两个方法放在一起，而不是像 getter 和 setter 那样分开<br><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgXnip2019-12-17_11-36-14.jpg" alt=""></p>
+<li><p>另外通过 IDE 快捷键生成重写方法时，你也会看到这两个方法放在一起，而不是像 getter 和 setter 那样分开<br><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgXnip2019-12-17_11-36-14.jpg"></p>
 </li>
 </ul>
 <p>以上两点都是隐形的规范约束，希望大家也严格遵守这个规范，以防带来不必要的麻烦，记忆的方式有多样，如果记不住这个文字约束，脑海中记住上面的图你也就懂了</p>
@@ -552,7 +554,7 @@
 <p>Map 的 key 是 <code>MethodParameter</code> ，根据我们上面的分析，这个类一定也会重写 <code>equals</code> 和 <code>hashCode</code> 方法，进去查看发现，hashCode 的计算也用到了 31 这个数字</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">equals</span><span class="params">(Object other)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">this</span> == other) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (!(other <span class="keyword">instanceof</span> MethodParameter)) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    MethodParameter otherParam = (MethodParameter) other;</span><br><span class="line">    <span class="keyword">return</span> (<span class="keyword">this</span>.parameterIndex == otherParam.parameterIndex &amp;&amp; getMember().equals(otherParam.getMember()));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">hashCode</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> (getMember().hashCode() * <span class="number">31</span> + <span class="keyword">this</span>.parameterIndex);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>为什么计算 hash 值要用到 31 这个数字呢？我在网上看到一篇不错的文章，分享给大家，作为科普，可以简单查看一下:<br><a href="https://www.cnblogs.com/nullllun/p/8350178.html" target="_blank" rel="noopener">String hashCode 方法为什么选择数字31作为乘子</a></p>
+<p>为什么计算 hash 值要用到 31 这个数字呢？我在网上看到一篇不错的文章，分享给大家，作为科普，可以简单查看一下:<br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/nullllun/p/8350178.html">String hashCode 方法为什么选择数字31作为乘子</a></p>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>如果还对<code>equals</code> 和 <code>hashCode</code> 关系及约束含混，我们只需要按照上述步骤逐步回忆即可，更好的是直接查看 JDK 源码；另外拿出实际的例子来反推验证是非常好的办法。如果你还有相关疑问，也可以留言探讨. </p>
 <h2 id="灵魂追问"><a href="#灵魂追问" class="headerlink" title="灵魂追问"></a>灵魂追问</h2><ol>
 <li>Thread 类就没有重写 <code>equals</code> 方法，你还知道哪些情况没必要重写 <code>equals</code> 方法吗？</li>
@@ -569,7 +571,7 @@
       <div class="personalweixin">
         <br><br>
         <blockquote>
-          <a href="https://mp.weixin.qq.com/s/G7BXuZh0Qh1-mE6ts4LJqQ" target="_blank" rel="noopener">加我微信</a>，咱们交流技术与思想，共同成长
+          <a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/G7BXuZh0Qh1-mE6ts4LJqQ">加我微信</a>，咱们交流技术与思想，共同成长
         </blockquote>
         <br>
 
@@ -607,9 +609,9 @@
   <div class="-mob-share-list share-body">
     
       
-        <a class="-mob-share-qq" title="QQ好友" rel="external nofollow noopener noreferrer"
+        <a class="-mob-share-qq" title="QQ好友" rel="external nofollow noopener noreferrer noopener"
           
-          href="http://connect.qq.com/widget/shareqq/index.html?url=https://dayarch.top/p/java-equals-hashcode.html&title=Java equals 和 hashCode 面试那点事 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=前言
+          target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://dayarch.top/p/java-equals-hashcode.html&title=Java equals 和 hashCode 面试那点事 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=前言
 上一篇文章 如何妙用 Spring 数据绑定？ ，灵魂追问 环节留下了一个有关 equals 和 hashcode 问题 。基础面试经常会碰到与之相关的问题，这不是一个复杂的问题，但很多朋友都苦于说明他们二者的关系和约束，于是写本文做单独说明，本篇文章将循序渐进 ( 通过举例，让记忆与理解更轻松 ) 说明这些让你有些苦恼的问题，Let’s go …….
 
 面试问题
@@ -633,9 +635,9 @@ public boole"
       
     
       
-        <a class="-mob-share-qzone" title="QQ空间" rel="external nofollow noopener noreferrer"
+        <a class="-mob-share-qzone" title="QQ空间" rel="external nofollow noopener noreferrer noopener"
           
-          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://dayarch.top/p/java-equals-hashcode.html&title=Java equals 和 hashCode 面试那点事 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=前言
+          target="_blank" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://dayarch.top/p/java-equals-hashcode.html&title=Java equals 和 hashCode 面试那点事 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=前言
 上一篇文章 如何妙用 Spring 数据绑定？ ，灵魂追问 环节留下了一个有关 equals 和 hashcode 问题 。基础面试经常会碰到与之相关的问题，这不是一个复杂的问题，但很多朋友都苦于说明他们二者的关系和约束，于是写本文做单独说明，本篇文章将循序渐进 ( 通过举例，让记忆与理解更轻松 ) 说明这些让你有些苦恼的问题，Let’s go …….
 
 面试问题
@@ -659,9 +661,9 @@ public boole"
       
     
       
-        <a class="-mob-share-weibo" title="微博" rel="external nofollow noopener noreferrer"
+        <a class="-mob-share-weibo" title="微博" rel="external nofollow noopener noreferrer noopener"
           
-          href="http://service.weibo.com/share/share.php?url=https://dayarch.top/p/java-equals-hashcode.html&title=Java equals 和 hashCode 面试那点事 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=前言
+          target="_blank" href="http://service.weibo.com/share/share.php?url=https://dayarch.top/p/java-equals-hashcode.html&title=Java equals 和 hashCode 面试那点事 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=前言
 上一篇文章 如何妙用 Spring 数据绑定？ ，灵魂追问 环节留下了一个有关 equals 和 hashcode 问题 。基础面试经常会碰到与之相关的问题，这不是一个复杂的问题，但很多朋友都苦于说明他们二者的关系和约束，于是写本文做单独说明，本篇文章将循序渐进 ( 通过举例，让记忆与理解更轻松 ) 说明这些让你有些苦恼的问题，Let’s go …….
 
 面试问题
@@ -759,7 +761,7 @@ public boole"
 </header>
 
     <div class="content pure">
-      <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-string-interview.html" title="Java String基础面试" rel="bookmark">Java String基础面试</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/out-of-memory-vs-memory-leak-and-hashcode.html" title="hashCode是根据对象内存地址生成的？" rel="bookmark">hashCode是根据对象内存地址生成的？</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/difference-between-beanfactory-and-applicationcontext.html" title="面试还不知道BeanFactory和ApplicationContext的区别？" rel="bookmark">面试还不知道BeanFactory和ApplicationContext的区别？</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/jdk12-new-feature-overview.html" title="Java 12 新特性一览" rel="bookmark">Java 12 新特性一览</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/jdk12-collectors-teeing-api-usage.html" title="Java12 Collectors.teeing 的使用详解" rel="bookmark">Java12 Collectors.teeing 的使用详解</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/lombok-usage.html" title="Lombok 使用教程详解" rel="bookmark">Lombok 使用教程详解</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/multiple-java-management.html" title="SDKMAN 统一灵活管理多版本Java" rel="bookmark">SDKMAN 统一灵活管理多版本Java</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/easyexcel-read.html" title="EasyExcel读取Excel实际应用" rel="bookmark">EasyExcel读取Excel实际应用</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/http-client-advanced-usage.html" title="IntelliJ IDEA HTTP Client高级使用详解" rel="bookmark">IntelliJ IDEA HTTP Client高级使用详解</a></h3></div></li></ul>
+      <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-string-interview.html" title="Java String基础面试" rel="bookmark">Java String基础面试</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/out-of-memory-vs-memory-leak-and-hashcode.html" title="hashCode是根据对象内存地址生成的？" rel="bookmark">hashCode是根据对象内存地址生成的？</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/difference-between-beanfactory-and-applicationcontext.html" title="面试还不知道BeanFactory和ApplicationContext的区别？" rel="bookmark">面试还不知道BeanFactory和ApplicationContext的区别？</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/jdk12-new-feature-overview.html" title="Java 12 新特性一览" rel="bookmark">Java 12 新特性一览</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/jdk12-collectors-teeing-api-usage.html" title="Java12 Collectors.teeing 的使用详解" rel="bookmark">Java12 Collectors.teeing 的使用详解</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/lombok-usage.html" title="Lombok 使用教程详解" rel="bookmark">Lombok 使用教程详解</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/multiple-java-management.html" title="SDKMAN 统一灵活管理多版本Java" rel="bookmark">SDKMAN 统一灵活管理多版本Java</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/http-client-advanced-usage.html" title="IntelliJ IDEA HTTP Client高级使用详解" rel="bookmark">IntelliJ IDEA HTTP Client高级使用详解</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/intellj-idea-advanced-debug.html" title="IntelliJ IDEA 高级Debug技巧，助你起飞" rel="bookmark">IntelliJ IDEA 高级Debug技巧，助你起飞</a></h3></div></li></ul>
     </div>
   </section>
 
@@ -967,7 +969,7 @@ public boole"
 </header>
 
     <div class='content pure'>
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#面试问题"><span class="toc-text">面试问题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-Java-里面有了-运算符，为什么还需要-equals-？"><span class="toc-text">1. Java 里面有了 == 运算符，为什么还需要 equals ？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-equals相等-和-hashcode-相等问题"><span class="toc-text">2.  equals相等 和 hashcode 相等问题</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#两个对象-equals-相等，那他们-hashCode-一定也相等"><span class="toc-text">两个对象 equals 相等，那他们 hashCode 一定也相等</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#两个对象-hashCode-相等，那他们-equals-不一定相等"><span class="toc-text">两个对象 hashCode 相等，那他们 equals 不一定相等</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-重写-equals-有哪些约束？"><span class="toc-text">3. 重写 equals 有哪些约束？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-什么时候需要我们重写-hashCode？"><span class="toc-text">4. 什么时候需要我们重写 hashCode？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-重写-hashCode-为什么总有-31-这个数字？"><span class="toc-text">5. 重写 hashCode 为什么总有 31 这个数字？</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-text">总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#灵魂追问"><span class="toc-text">灵魂追问</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9D%A2%E8%AF%95%E9%97%AE%E9%A2%98"><span class="toc-text">面试问题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-Java-%E9%87%8C%E9%9D%A2%E6%9C%89%E4%BA%86-%E8%BF%90%E7%AE%97%E7%AC%A6%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%98%E9%9C%80%E8%A6%81-equals-%EF%BC%9F"><span class="toc-text">1. Java 里面有了 &#x3D;&#x3D; 运算符，为什么还需要 equals ？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-equals%E7%9B%B8%E7%AD%89-%E5%92%8C-hashcode-%E7%9B%B8%E7%AD%89%E9%97%AE%E9%A2%98"><span class="toc-text">2.  equals相等 和 hashcode 相等问题</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%A4%E4%B8%AA%E5%AF%B9%E8%B1%A1-equals-%E7%9B%B8%E7%AD%89%EF%BC%8C%E9%82%A3%E4%BB%96%E4%BB%AC-hashCode-%E4%B8%80%E5%AE%9A%E4%B9%9F%E7%9B%B8%E7%AD%89"><span class="toc-text">两个对象 equals 相等，那他们 hashCode 一定也相等</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%A4%E4%B8%AA%E5%AF%B9%E8%B1%A1-hashCode-%E7%9B%B8%E7%AD%89%EF%BC%8C%E9%82%A3%E4%BB%96%E4%BB%AC-equals-%E4%B8%8D%E4%B8%80%E5%AE%9A%E7%9B%B8%E7%AD%89"><span class="toc-text">两个对象 hashCode 相等，那他们 equals 不一定相等</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E9%87%8D%E5%86%99-equals-%E6%9C%89%E5%93%AA%E4%BA%9B%E7%BA%A6%E6%9D%9F%EF%BC%9F"><span class="toc-text">3. 重写 equals 有哪些约束？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E4%BB%80%E4%B9%88%E6%97%B6%E5%80%99%E9%9C%80%E8%A6%81%E6%88%91%E4%BB%AC%E9%87%8D%E5%86%99-hashCode%EF%BC%9F"><span class="toc-text">4. 什么时候需要我们重写 hashCode？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E9%87%8D%E5%86%99-hashCode-%E4%B8%BA%E4%BB%80%E4%B9%88%E6%80%BB%E6%9C%89-31-%E8%BF%99%E4%B8%AA%E6%95%B0%E5%AD%97%EF%BC%9F"><span class="toc-text">5. 重写 hashCode 为什么总有 31 这个数字？</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-text">总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%81%B5%E9%AD%82%E8%BF%BD%E9%97%AE"><span class="toc-text">灵魂追问</span></a></li></ol>
     </div>
   </section>
 
@@ -1042,7 +1044,7 @@ public boole"
   &nbsp;&nbsp;|&nbsp;&nbsp;  
   
     &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-        class="white-color">264.1k</span>&nbsp;字
+        class="white-color">267.4k</span>&nbsp;字
     
 
   &nbsp;&nbsp;|&nbsp;&nbsp;  
@@ -1097,7 +1099,7 @@ public boole"
     
     。
   </div>
-  <div><p>博客内容遵循 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
+  <div><p>博客内容遵循 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
 </div>
   <!-- <div class="github-badge">
       <a style="color: #fff" rel="license" href="https://hexo.io/" target="_blank" title="由 Hexo 强力驱动">
@@ -1205,10 +1207,14 @@ public boole"
 
 
 
-  <script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/app.js"></script>
+  
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/app.js"></script>
 
 
-  <script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/search.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/search.js"></script>
+
 
 
 

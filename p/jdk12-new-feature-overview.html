@@ -13,7 +13,7 @@
   
 
   
-  <link rel="alternate" href="/atom.xml" title="日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享">
+  <link rel="alternate" href="/atom.xml" title="日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享" type="application/atom+xml">
   
 
   <meta name="HandheldFriendly" content="True" />
@@ -35,7 +35,9 @@
   
 
   
-    <link rel="stylesheet" href="/style.css">
+    
+<link rel="stylesheet" href="/style.css">
+
   
 
   <script>
@@ -85,7 +87,7 @@
         daovoice('update');
         </script>
     
-</head>
+<meta name="generator" content="Hexo 5.4.0"></head>
 
 <body>
   
@@ -492,36 +494,36 @@
 </li>
 </ul>
 </blockquote>
-<p>现陆续将Demo代码和技术文章整理在一起 <a href="https://github.com/FraserYu/learnings" target="_blank" rel="noopener">Github实践精选</a>，<strong>本文同样收录在此</strong>，方便大家阅读查看，觉得不错，还请Star🌟</p>
-<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgfenge.gif" alt=""></p>
+<p>现陆续将Demo代码和技术文章整理在一起 <a target="_blank" rel="noopener" href="https://github.com/FraserYu/learnings">Github实践精选</a>，<strong>本文同样收录在此</strong>，方便大家阅读查看，觉得不错，还请Star🌟</p>
+<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgfenge.gif"></p>
 <p>日常工作对集合操作真的太频繁了，前端时间就写过一篇关于Java 12 集合的文章 <a href="https://dayarch.top/p/jdk12-collectors-teeing-api-usage.html">Java12 Collectors.teeing 的使用详解</a> ， 有朋友留言说这个功能比较好用。个人觉得 Java12还有几个特性可以尝试使用，这篇文章就出炉了</p>
-<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgJava12_new_feature.png" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgJava12_new_feature.png"></p>
 <p>如果你目前使用的Java版本不是12，也没有关系，早已为你准备好良方，<a href="https://dayarch.top/p/multiple-java-management.html">SDKMAN 统一灵活管理多版本Java</a> ，可以让你快速各种尝鲜新特性</p>
 <h2 id="String-API-变化"><a href="#String-API-变化" class="headerlink" title="String API 变化"></a>String API 变化</h2><h3 id="String-indent"><a href="#String-indent" class="headerlink" title="String.indent()"></a>String.indent()</h3><p><code>indent</code> 「缩进」这个单词大家很熟悉了，这是Java12处理字符串的新功能，先来看方法定义：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200209135336.png" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200209135336.png"></p>
 <p>该方法很简单，只接收一个 <code>int</code> 类型的参数表示缩进值，这里的 n 既可以是正数，也可以是负数，只不过是增加空格 <code>space</code> 和移除空格的差别，来看个例子：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">String result = <span class="string">"foo\nbar\nbar2"</span>.indent(<span class="number">4</span>);</span><br><span class="line">System.out.println(result);</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">String result = <span class="string">&quot;foo\nbar\nbar2&quot;</span>.indent(<span class="number">4</span>);</span><br><span class="line">System.out.println(result);</span><br></pre></td></tr></table></figure>
 
 
 
 <p>打印结果是这样的（考验眼力的时候到了，仔细看截图在IDE中设置的缩进小点点😜）：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200209141352.png" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200209141352.png"></p>
 <p>调用 indent 方法会自动添加一个换行符号 <code>\n</code> ，在该方法的实现中也明确给了注释说明，目的是为了行终结符的规范化</p>
-<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200209153328.png" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200209153328.png"></p>
 <p><strong>注意：</strong>对于 <code>Tab</code> 就是当成一个字符来看到，比如我们把上面的例子稍作修改：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">String result = <span class="string">"foo\nbar\n\tbar2"</span>.indent(<span class="number">4</span>);</span><br><span class="line">System.out.println(result);</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">String result = <span class="string">&quot;foo\nbar\n\tbar2&quot;</span>.indent(<span class="number">4</span>);</span><br><span class="line">System.out.println(result);</span><br></pre></td></tr></table></figure>
 
 <p>来看打印结果，注意和上面的不同：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200209153700.png" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200209153700.png"></p>
 <p>就是这么简单，我们继续向下看</p>
 <h3 id="String-transform"><a href="#String-transform" class="headerlink" title="String.transform()"></a>String.transform()</h3><p><code>transform</code> 「转换」，我们经常会遇到字符串形势转换的需求，transform方法接收一个 Function 类型的参数， 生成一个全新形式的字符串</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">List&lt;String&gt; names = List.of( <span class="string">"   Alex"</span>, <span class="string">"brian"</span>);</span><br><span class="line"></span><br><span class="line">List&lt;String&gt; transformedNames = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (String name : names)&#123;</span><br><span class="line">	String transformedName = name.transform(String::strip)</span><br><span class="line">															 .transform(StringUtils::toCamelCase);</span><br><span class="line"></span><br><span class="line">	transformedNames.add(transformedName);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">List&lt;String&gt; names = List.of( <span class="string">&quot;   Alex&quot;</span>, <span class="string">&quot;brian&quot;</span>);</span><br><span class="line"></span><br><span class="line">List&lt;String&gt; transformedNames = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (String name : names)&#123;</span><br><span class="line">	String transformedName = name.transform(String::strip)</span><br><span class="line">															 .transform(StringUtils::toCamelCase);</span><br><span class="line"></span><br><span class="line">	transformedNames.add(transformedName);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
 
 <p>有朋友可能会说，这个和单纯的对字符串 trim 或者其他操作有什么区别啊？因为接受的参数是 Function类型，当Function类型作为入参时，内部的<strong>处理逻辑</strong>将增加更多灵活性</p>
 <h2 id="Files-mismatch-Path-Path"><a href="#Files-mismatch-Path-Path" class="headerlink" title="Files.mismatch(Path, Path)"></a>Files.mismatch(Path, Path)</h2><p>有时候，我们需要比较两个文件的内容是否相同，这个API就派上用场了，该方法比较两个 path 下的文件，并且返回一个 long 值，这个值表示第一处不匹配的字节位置。如果返回-1，说明两个文件相等，还是来看个例子：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Path file1 = Paths.get(<span class="string">"/Users/fraser/Documents/projects/personal/learning-demo-collection/jdk12-demo/src/file1.txt"</span>);</span><br><span class="line">		Path file2 = Paths.get(<span class="string">"/Users/fraser/Documents/projects/personal/learning-demo-collection/jdk12-demo/src/file2.txt"</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			<span class="keyword">long</span> mismatch = Files.mismatch(file1, file2);</span><br><span class="line">			System.out.println(mismatch);</span><br><span class="line">		&#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Path file1 = Paths.get(<span class="string">&quot;/Users/fraser/Documents/projects/personal/learning-demo-collection/jdk12-demo/src/file1.txt&quot;</span>);</span><br><span class="line">		Path file2 = Paths.get(<span class="string">&quot;/Users/fraser/Documents/projects/personal/learning-demo-collection/jdk12-demo/src/file2.txt&quot;</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			<span class="keyword">long</span> mismatch = Files.mismatch(file1, file2);</span><br><span class="line">			System.out.println(mismatch);</span><br><span class="line">		&#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;</span><br></pre></td></tr></table></figure>
 
 
 
@@ -531,7 +533,7 @@
 
 
 <p>查看运行结果：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200209203347.png" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200209203347.png"></p>
 <blockquote>
 <p>建议大家查看一下 <code>mismatch</code> 的实现逻辑，有个小算法在里面的</p>
 </blockquote>
@@ -542,7 +544,7 @@
 <li>表达式（不必为每个case块定义一个break语句，我们可以简单地使用箭头语法）</li>
 <li>变量赋值（使用新的switch表达式，我们可以直接将switch语句分配给一个变量）</li>
 </ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">boolean</span> isWeekend = <span class="keyword">switch</span> (day) </span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">case</span> MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY -&gt; <span class="keyword">false</span>;</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">case</span> SATURDAY, SUNDAY -&gt; <span class="keyword">true</span>;</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">default</span> -&gt; <span class="keyword">throw</span> <span class="keyword">new</span> IllegalStateException(<span class="string">"Illegal day entry :: "</span> + day);</span><br><span class="line">&#125;;</span><br><span class="line"> </span><br><span class="line">System.out.println(isWeekend);</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">boolean</span> isWeekend = <span class="keyword">switch</span> (day) </span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">case</span> MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY -&gt; <span class="keyword">false</span>;</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">case</span> SATURDAY, SUNDAY -&gt; <span class="keyword">true</span>;</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">default</span> -&gt; <span class="keyword">throw</span> <span class="keyword">new</span> IllegalStateException(<span class="string">&quot;Illegal day entry :: &quot;</span> + day);</span><br><span class="line">&#125;;</span><br><span class="line"> </span><br><span class="line">System.out.println(isWeekend);</span><br></pre></td></tr></table></figure>
 
 
 
@@ -560,7 +562,7 @@
 
 
 <p>来看运行结果：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200210132355.png" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200210132355.png"></p>
 <p>另外，CompactNumberFormat 是 NumberFormat的子类，我们可以自定义它的实例（其实就是格式化样式等），很简单，这个大家自行查看吧</p>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>Java近两年升级真是太快了，了解一些新功能总是没错的，大家动手实践试试吧，以后遇到类似的需求至少能避免我们重复造轮子了…..</p>
 <h2 id="灵魂追问"><a href="#灵魂追问" class="headerlink" title="灵魂追问"></a>灵魂追问</h2><ol>
@@ -572,12 +574,12 @@
       <!-- <div class="tuijian">
         <br><br>
         📚相关文章
-        <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/jdk12-collectors-teeing-api-usage.html" title="Java12 Collectors.teeing 的使用详解" rel="bookmark">Java12 Collectors.teeing 的使用详解</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-equals-hashcode.html" title="Java equals 和 hashCode 面试那点事" rel="bookmark">Java equals 和 hashCode 面试那点事</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/lombok-usage.html" title="Lombok 使用教程详解" rel="bookmark">Lombok 使用教程详解</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/multiple-java-management.html" title="SDKMAN 统一灵活管理多版本Java" rel="bookmark">SDKMAN 统一灵活管理多版本Java</a></h3></div></li></ul>
+        <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-equals-hashcode.html" title="Java equals 和 hashCode 面试那点事" rel="bookmark">Java equals 和 hashCode 面试那点事</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/jdk12-collectors-teeing-api-usage.html" title="Java12 Collectors.teeing 的使用详解" rel="bookmark">Java12 Collectors.teeing 的使用详解</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/lombok-usage.html" title="Lombok 使用教程详解" rel="bookmark">Lombok 使用教程详解</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/multiple-java-management.html" title="SDKMAN 统一灵活管理多版本Java" rel="bookmark">SDKMAN 统一灵活管理多版本Java</a></h3></div></li></ul>
       </div> -->
       <div class="personalweixin">
         <br><br>
         <blockquote>
-          <a href="https://mp.weixin.qq.com/s/G7BXuZh0Qh1-mE6ts4LJqQ" target="_blank" rel="noopener">加我微信</a>，咱们交流技术与思想，共同成长
+          <a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/G7BXuZh0Qh1-mE6ts4LJqQ">加我微信</a>，咱们交流技术与思想，共同成长
         </blockquote>
         <br>
 
@@ -615,9 +617,9 @@
   <div class="-mob-share-list share-body">
     
       
-        <a class="-mob-share-qq" title="QQ好友" rel="external nofollow noopener noreferrer"
+        <a class="-mob-share-qq" title="QQ好友" rel="external nofollow noopener noreferrer noopener"
           
-          href="http://connect.qq.com/widget/shareqq/index.html?url=https://dayarch.top/p/jdk12-new-feature-overview.html&title=Java 12 新特性一览 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=* 你有一个思想，我有一个思想，我们交换后，一个人就有两个思想
+          target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://dayarch.top/p/jdk12-new-feature-overview.html&title=Java 12 新特性一览 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=* 你有一个思想，我有一个思想，我们交换后，一个人就有两个思想
    
    
  * If you can NOT explain it simply, you do NOT understand it well enough
@@ -638,9 +640,9 @@
       
     
       
-        <a class="-mob-share-qzone" title="QQ空间" rel="external nofollow noopener noreferrer"
+        <a class="-mob-share-qzone" title="QQ空间" rel="external nofollow noopener noreferrer noopener"
           
-          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://dayarch.top/p/jdk12-new-feature-overview.html&title=Java 12 新特性一览 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=* 你有一个思想，我有一个思想，我们交换后，一个人就有两个思想
+          target="_blank" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://dayarch.top/p/jdk12-new-feature-overview.html&title=Java 12 新特性一览 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=* 你有一个思想，我有一个思想，我们交换后，一个人就有两个思想
    
    
  * If you can NOT explain it simply, you do NOT understand it well enough
@@ -661,9 +663,9 @@
       
     
       
-        <a class="-mob-share-weibo" title="微博" rel="external nofollow noopener noreferrer"
+        <a class="-mob-share-weibo" title="微博" rel="external nofollow noopener noreferrer noopener"
           
-          href="http://service.weibo.com/share/share.php?url=https://dayarch.top/p/jdk12-new-feature-overview.html&title=Java 12 新特性一览 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=* 你有一个思想，我有一个思想，我们交换后，一个人就有两个思想
+          target="_blank" href="http://service.weibo.com/share/share.php?url=https://dayarch.top/p/jdk12-new-feature-overview.html&title=Java 12 新特性一览 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=* 你有一个思想，我有一个思想，我们交换后，一个人就有两个思想
    
    
  * If you can NOT explain it simply, you do NOT understand it well enough
@@ -758,7 +760,7 @@
 </header>
 
     <div class="content pure">
-      <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/jdk12-collectors-teeing-api-usage.html" title="Java12 Collectors.teeing 的使用详解" rel="bookmark">Java12 Collectors.teeing 的使用详解</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-equals-hashcode.html" title="Java equals 和 hashCode 面试那点事" rel="bookmark">Java equals 和 hashCode 面试那点事</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/lombok-usage.html" title="Lombok 使用教程详解" rel="bookmark">Lombok 使用教程详解</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/multiple-java-management.html" title="SDKMAN 统一灵活管理多版本Java" rel="bookmark">SDKMAN 统一灵活管理多版本Java</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/easyexcel-read.html" title="EasyExcel读取Excel实际应用" rel="bookmark">EasyExcel读取Excel实际应用</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/http-client-advanced-usage.html" title="IntelliJ IDEA HTTP Client高级使用详解" rel="bookmark">IntelliJ IDEA HTTP Client高级使用详解</a></h3></div></li></ul>
+      <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-equals-hashcode.html" title="Java equals 和 hashCode 面试那点事" rel="bookmark">Java equals 和 hashCode 面试那点事</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/jdk12-collectors-teeing-api-usage.html" title="Java12 Collectors.teeing 的使用详解" rel="bookmark">Java12 Collectors.teeing 的使用详解</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/lombok-usage.html" title="Lombok 使用教程详解" rel="bookmark">Lombok 使用教程详解</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/multiple-java-management.html" title="SDKMAN 统一灵活管理多版本Java" rel="bookmark">SDKMAN 统一灵活管理多版本Java</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/http-client-advanced-usage.html" title="IntelliJ IDEA HTTP Client高级使用详解" rel="bookmark">IntelliJ IDEA HTTP Client高级使用详解</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/intellj-idea-advanced-debug.html" title="IntelliJ IDEA 高级Debug技巧，助你起飞" rel="bookmark">IntelliJ IDEA 高级Debug技巧，助你起飞</a></h3></div></li></ul>
     </div>
   </section>
 
@@ -966,7 +968,7 @@
 </header>
 
     <div class='content pure'>
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#String-API-变化"><span class="toc-text">String API 变化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#String-indent"><span class="toc-text">String.indent()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#String-transform"><span class="toc-text">String.transform()</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Files-mismatch-Path-Path"><span class="toc-text">Files.mismatch(Path, Path)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Support-for-Unicode-11-（当个了解就好了）"><span class="toc-text">Support for Unicode 11 （当个了解就好了）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Switch-Expressions-Preview"><span class="toc-text">Switch Expressions(Preview)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Compact-Number-Formatting-紧凑的数据格式"><span class="toc-text">Compact Number Formatting (紧凑的数据格式)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-text">总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#灵魂追问"><span class="toc-text">灵魂追问</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#String-API-%E5%8F%98%E5%8C%96"><span class="toc-text">String API 变化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#String-indent"><span class="toc-text">String.indent()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#String-transform"><span class="toc-text">String.transform()</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Files-mismatch-Path-Path"><span class="toc-text">Files.mismatch(Path, Path)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Support-for-Unicode-11-%EF%BC%88%E5%BD%93%E4%B8%AA%E4%BA%86%E8%A7%A3%E5%B0%B1%E5%A5%BD%E4%BA%86%EF%BC%89"><span class="toc-text">Support for Unicode 11 （当个了解就好了）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Switch-Expressions-Preview"><span class="toc-text">Switch Expressions(Preview)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Compact-Number-Formatting-%E7%B4%A7%E5%87%91%E7%9A%84%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8F"><span class="toc-text">Compact Number Formatting (紧凑的数据格式)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-text">总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%81%B5%E9%AD%82%E8%BF%BD%E9%97%AE"><span class="toc-text">灵魂追问</span></a></li></ol>
     </div>
   </section>
 
@@ -1041,7 +1043,7 @@
   &nbsp;&nbsp;|&nbsp;&nbsp;  
   
     &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-        class="white-color">264.1k</span>&nbsp;字
+        class="white-color">267.4k</span>&nbsp;字
     
 
   &nbsp;&nbsp;|&nbsp;&nbsp;  
@@ -1096,7 +1098,7 @@
     
     。
   </div>
-  <div><p>博客内容遵循 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
+  <div><p>博客内容遵循 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
 </div>
   <!-- <div class="github-badge">
       <a style="color: #fff" rel="license" href="https://hexo.io/" target="_blank" title="由 Hexo 强力驱动">
@@ -1204,10 +1206,14 @@
 
 
 
-  <script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/app.js"></script>
+  
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/app.js"></script>
 
 
-  <script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/search.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/search.js"></script>
+
 
 
 

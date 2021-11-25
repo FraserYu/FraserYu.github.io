@@ -13,7 +13,7 @@
   
 
   
-  <link rel="alternate" href="/atom.xml" title="日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享">
+  <link rel="alternate" href="/atom.xml" title="日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享" type="application/atom+xml">
   
 
   <meta name="HandheldFriendly" content="True" />
@@ -35,7 +35,9 @@
   
 
   
-    <link rel="stylesheet" href="/style.css">
+    
+<link rel="stylesheet" href="/style.css">
+
   
 
   <script>
@@ -85,7 +87,7 @@
         daovoice('update');
         </script>
     
-</head>
+<meta name="generator" content="Hexo 5.4.0"></head>
 
 <body>
   
@@ -484,7 +486,7 @@
 
     <section class="article typo">
       <div class="article-entry" itemprop="articleBody">
-        <p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200325143022.png" alt=""></fancybox></p>
+        <p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200325143022.png"></fancybox></p>
 <h2 id="为什么要了解线程的生命周期？"><a href="#为什么要了解线程的生命周期？" class="headerlink" title="为什么要了解线程的生命周期？"></a>为什么要了解线程的生命周期？</h2><p>之前写过 Spring Bean 生命周期三部曲：</p>
 <ol>
 <li><a href="https://dayarch.top/p/spring-bean-lifecycle-creation.html">Spring Bean生命周期之缘起</a></li>
@@ -492,11 +494,11 @@
 <li><a href="https://dayarch.top/p/spring-aware.html">Spring Aware 到底是什么？</a></li>
 </ol>
 <p>有朋友留言说：“了解了它们的生命周期后，使用 Spring Bean 好比看到它们的行动轨迹，现在使用就一点都不慌了”。我和他一样，了解事物的生命周期目的很简单，唯【不慌】也</p>
-<p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img%E4%B8%8D%E6%85%8C.gif" alt=""></fancybox></p>
+<p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img%E4%B8%8D%E6%85%8C.gif"></fancybox></p>
 <p><a href="https://dayarch.top/categories/Coding/Java-Concurrency/">Java 并发系列</a> 已经写了很多，从来还没提起过那个它【Java线程生命周期】。有了前序理论图文的铺垫，在走进源码世界之前，谈论它的时机恰好到了。因为，编写并发程序的核心之一就是正确的摆弄线程状态</p>
 <h2 id="线程生命周期的几种状态"><a href="#线程生命周期的几种状态" class="headerlink" title="线程生命周期的几种状态"></a>线程生命周期的几种状态</h2><p>刚接触线程生命周期时，我总是记不住，也理解不了他们的状态，可以说是比较混乱，更别说它们之间是如何进行状态转换的了。原因是我把<code>操作系统通用线程状态</code>和<code>编程语言封装后的线程状态</code> 概念混淆在一起了</p>
 <h3 id="操作系统通用线程状态"><a href="#操作系统通用线程状态" class="headerlink" title="操作系统通用线程状态"></a>操作系统通用线程状态</h3><p>个人觉得通用线程状态更符合我们的思考习惯。其状态总共有 5 种 （如下图）。对于经常写并发程序的同学来说，其嘴里经常念的都是操作系统中的这些通用线程状态，且看</p>
-<p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200322162836.png" alt=""></fancybox></p>
+<p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200322162836.png"></fancybox></p>
 <p>除去生【初始状态】死【终止状态】，其实只是三种状态的各种转换，听到这句话是不是心情放松了很多呢？</p>
 <p>为了更好的说明<code>通用线程状态</code>和 <code>Java 语言中的线程状态</code>，这里还是先对前者进行简短的说明 </p>
 <blockquote>
@@ -529,11 +531,11 @@
 <li>TIMED_WAITING</li>
 <li>TERMINATED</li>
 </ol>
-<p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgXnip2020-03-22_16-01-54.jpg" alt=""></fancybox></p>
+<p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgXnip2020-03-22_16-01-54.jpg"></fancybox></p>
 <p>这里要做一个小调查了，你有查看过这个类和读过其注释说明吗？（欢迎留言脚印哦）</p>
-<p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200325112648.png" alt=""></fancybox></p>
+<p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200325112648.png"></fancybox></p>
 <p>耳边响起五环之歌，Java中线程状态竟然比通用线程状态的 5 种多1种，变成了 6 种。这个看似复杂，其实并不是你想的那样，Java在通用线程状态的基础上，有裁剪，也有丰富，整体来说是少一种。再来看个图，注意颜色区分哦</p>
-<p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgimage-20200322163335824.png" alt=""></fancybox></p>
+<p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgimage-20200322163335824.png"></fancybox></p>
 <p>Java 语言中</p>
 <ul>
 <li>将通用线程状态的<code>可运行状态</code>和<code>运行状态</code>合并为 <code>Runnable</code>，</li>
@@ -541,7 +543,7 @@
 </ul>
 <p>看上图右侧【Java语言中的线程状态】，进一步简洁的说，除去线程生死，我们只要玩转 <code>RUNNABLE</code> 和<code>休眠状态</code>的转换就可以了，编写并发程序也多数是这两种状态的转换。所以我们需要了解，有哪些时机，会触发这些状态转换</p>
 <p>远看看轮廓， 近看看细节。我们将上面Java语言中的图进行细化，将触发的节点放到图中 (这看似复杂的图，其实三句话就能分解的，所以别慌)，且看：</p>
-<p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgstateoverview.png" alt=""></fancybox></p>
+<p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgstateoverview.png"></fancybox></p>
 <h4 id="RUNNABLE与BLOCKED状态转换"><a href="#RUNNABLE与BLOCKED状态转换" class="headerlink" title="RUNNABLE与BLOCKED状态转换"></a>RUNNABLE与BLOCKED状态转换</h4><p><strong>当且仅有（just only）一种情况会从 RUNNABLE 状态进入到 BLOCKED 状态</strong>，就是线程在等待 synchronized 内置隐式锁；如果等待的线程获取到了 synchronized 内置隐式锁，也就会从 BLOCKED 状态变为 RUNNABLE 状态了</p>
 <blockquote>
 <p><strong>注意：</strong></p>
@@ -554,7 +556,7 @@
 <hr>
 <p>相信到这里，你看Java线程生命周期的眼神就没那么迷惑了，重点就是RUNNABLE与休眠状态的切换，接下来我们看一看，如何查看线程中的状态，以及具体的代码触发点</p>
 <h2 id="如何查看线程处在什么状态"><a href="#如何查看线程处在什么状态" class="headerlink" title="如何查看线程处在什么状态"></a>如何查看线程处在什么状态</h2><h3 id="程序中调用-getState-方法"><a href="#程序中调用-getState-方法" class="headerlink" title="程序中调用 getState() 方法"></a>程序中调用 <code>getState()</code> 方法</h3><p>Thread 类中同样存在  <code>getState()</code> 方法用于查看当前线程状态，该方法就是返回上面提到的枚举类 <code>State</code></p>
-<p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200322202334.png" alt=""></fancybox></p>
+<p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200322202334.png"></fancybox></p>
 <h3 id=""><a href="#" class="headerlink" title=""></a></h3><h4 id="NEW"><a href="#NEW" class="headerlink" title="NEW"></a>NEW</h4><p>就是上面提到， 编程语言中特有的，通过继承 Thread 或实现 Runnable 接口定义线程后，这时的状态都是 NEW</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Thread thread = <span class="keyword">new</span> Thread(() -&gt; &#123;&#125;);</span><br><span class="line">System.out.println(thread.getState());</span><br></pre></td></tr></table></figure>
 
@@ -586,17 +588,17 @@
 
 
 <p>以上是程序中查看线程，自己写写测试看看状态还好，现实中的程序怎么可能允许你加这么多无用代码，所以，翠花，上酸菜（<strong>jstack</strong>）</p>
-<p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200325114400.png" alt=""></fancybox></p>
+<p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200325114400.png"></fancybox></p>
 <h3 id="jstack-命令查看"><a href="#jstack-命令查看" class="headerlink" title="jstack 命令查看"></a>jstack 命令查看</h3><p>相信你听说过这玩意，jstack 命令就比较强大了，不仅能查看线程当前状态，还能看调用栈，锁等线程栈信息</p>
 <p>大家可以随意写一些程序，这里我用了上面 WAITING 状态的代码, 修改睡眠时间 Thread.sleep(100000)，然后在终端按照下图标示依次执行下图命令</p>
-<p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgimage-20200324211507627.png" alt=""></fancybox></p>
+<p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgimage-20200324211507627.png"></fancybox></p>
 <p>更多功能还请大家自行查看，后续会单独写文章来教大家如何使用jstack查看线程栈信息</p>
 <h3 id="Arthas"><a href="#Arthas" class="headerlink" title="Arthas"></a>Arthas</h3><p>这个利器，无须多言吧，线上找茬监控没毛病，希望你可以灵活使用这个工具，攻克疑难杂症</p>
-<p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200324213310.png" alt=""></fancybox></p>
-<p>查看线程栈详细信息，非常方便：<a href="https://alibaba.github.io/arthas/thread.html" target="_blank" rel="noopener">https://alibaba.github.io/arthas/thread.html</a></p>
-<p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200324213720.png" alt=""></fancybox></p>
+<p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200324213310.png"></fancybox></p>
+<p>查看线程栈详细信息，非常方便：<a target="_blank" rel="noopener" href="https://alibaba.github.io/arthas/thread.html">https://alibaba.github.io/arthas/thread.html</a></p>
+<p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200324213720.png"></fancybox></p>
 <p>相信你已经和Arthas确认了眼神 </p>
-<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200324214443.png" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200324214443.png"></p>
 <p>关于线程生命周期状态整体就算说完了，编写并发程序时多问一问自己：</p>
 <blockquote>
 <p>调用某个API会将你的线程置为甚么状态？</p>
@@ -608,29 +610,27 @@
 <li><p>进入 BLOCKED只有一种情况，就是等待 synchronized 监视器锁，那调用 JUC 中的 Lock.lock() 方法，如果某个线程等待这个锁，这个线程状态是什么呢？为什么？</p>
 </li>
 </ol>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ThreadStateTest</span> </span>&#123;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line">    TestLock testLock = <span class="keyword">new</span> TestLock();</span><br><span class="line"></span><br><span class="line">    Thread thread2 = <span class="keyword">new</span> Thread(() -&gt; &#123;</span><br><span class="line">        testLock.myTestLock();</span><br><span class="line">    &#125;, <span class="string">"thread2"</span>);</span><br><span class="line"></span><br><span class="line">    Thread thread1 = <span class="keyword">new</span> Thread(() -&gt; &#123;</span><br><span class="line">            testLock.myTestLock();</span><br><span class="line">        &#125;, <span class="string">"thread1"</span>);</span><br><span class="line"></span><br><span class="line">    thread1.start();</span><br><span class="line">    Thread.sleep(<span class="number">1000</span>);</span><br><span class="line"></span><br><span class="line">    thread2.start();</span><br><span class="line">    Thread.sleep(<span class="number">1000</span>);</span><br><span class="line"></span><br><span class="line">    System.out.println(<span class="string">"****"</span> + (thread2.getState()));</span><br><span class="line"></span><br><span class="line">    Thread.sleep(<span class="number">20000</span>);</span><br><span class="line">    &#125;   </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Slf</span>4j</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TestLock</span></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> Lock lock = <span class="keyword">new</span> ReentrantLock();</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">myTestLock</span><span class="params">()</span></span>&#123;</span><br><span class="line">        lock.lock();</span><br><span class="line">        <span class="keyword">try</span>&#123;</span><br><span class="line">            Thread.sleep(<span class="number">10000</span>);</span><br><span class="line">            log.info(<span class="string">"testLock status"</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">            log.error(e.getMessage());</span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">            lock.unlock();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ThreadStateTest</span> </span>&#123;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line">    TestLock testLock = <span class="keyword">new</span> TestLock();</span><br><span class="line"></span><br><span class="line">    Thread thread2 = <span class="keyword">new</span> Thread(() -&gt; &#123;</span><br><span class="line">        testLock.myTestLock();</span><br><span class="line">    &#125;, <span class="string">&quot;thread2&quot;</span>);</span><br><span class="line"></span><br><span class="line">    Thread thread1 = <span class="keyword">new</span> Thread(() -&gt; &#123;</span><br><span class="line">            testLock.myTestLock();</span><br><span class="line">        &#125;, <span class="string">&quot;thread1&quot;</span>);</span><br><span class="line"></span><br><span class="line">    thread1.start();</span><br><span class="line">    Thread.sleep(<span class="number">1000</span>);</span><br><span class="line"></span><br><span class="line">    thread2.start();</span><br><span class="line">    Thread.sleep(<span class="number">1000</span>);</span><br><span class="line"></span><br><span class="line">    System.out.println(<span class="string">&quot;****&quot;</span> + (thread2.getState()));</span><br><span class="line"></span><br><span class="line">    Thread.sleep(<span class="number">20000</span>);</span><br><span class="line">    &#125;   </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Slf4j</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TestLock</span></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> Lock lock = <span class="keyword">new</span> ReentrantLock();</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">myTestLock</span><span class="params">()</span></span>&#123;</span><br><span class="line">        lock.lock();</span><br><span class="line">        <span class="keyword">try</span>&#123;</span><br><span class="line">            Thread.sleep(<span class="number">10000</span>);</span><br><span class="line">            log.info(<span class="string">&quot;testLock status&quot;</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">            log.error(e.getMessage());</span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">            lock.unlock();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <ol start="3">
 <li>synchronized 和 Lock 有什么区别？</li>
 </ol>
 <hr>
 <p>我这面也在逐步总结常见的并发面试问题（总结ing……）答案整理好后会通知大家，请持续关注</p>
-<p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200315120104.png" alt=""></fancybox></p>
+<p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200315120104.png"></fancybox></p>
 <p>同时，这里也整理了一点 Java 硬核资料，有需要的就公众号回复【资料】/【666】吧</p>
-<p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200310160835.png" alt=""></fancybox></p>
+<p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200310160835.png"></fancybox></p>
 
       </div>
       <!-- <div class="tuijian">
         <br><br>
         📚相关文章
-        <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-book.html" title="120000字，你们要的Java并发编程图文小册来了" rel="bookmark">120000字，你们要的Java并发编程图文小册来了</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-aqs-acquireshared-and-semaphore.html" title="Java AQS共享式获取同步状态及Semaphore的应用分析" rel="bookmark">Java AQS共享式获取同步状态及Semaphore的应用分析</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-countdownlatch-vs-cyclicbarrier.html" title="CountDownLatch 和 CyclicBarrier 傻傻的分不清楚？" rel="bookmark">CountDownLatch 和 CyclicBarrier 傻傻的分不清楚？</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/executorservice-vs-completionservice.html" title="ExecutorService VS CompletionService" rel="bookmark">ExecutorService VS CompletionService</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-aqs-and-reentrantlock.html" title="Java AQS队列同步器以及ReentrantLock的应用" rel="bookmark">Java AQS队列同步器以及ReentrantLock的应用</a></h3></div></li></ul>
+        <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-book.html" title="120000字，你们要的Java并发编程图文小册来了" rel="bookmark">120000字，你们要的Java并发编程图文小册来了</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-aqs-acquireshared-and-semaphore.html" title="Java AQS共享式获取同步状态及Semaphore的应用分析" rel="bookmark">Java AQS共享式获取同步状态及Semaphore的应用分析</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/executorservice-vs-completionservice.html" title="ExecutorService VS CompletionService" rel="bookmark">ExecutorService VS CompletionService</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-interrupt-mechnism.html" title="Java多线程中断机制" rel="bookmark">Java多线程中断机制</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/difference-between-volatile-and-synchronized-keyword.html" title="volatile和synchronized图文透彻讲解" rel="bookmark">volatile和synchronized图文透彻讲解</a></h3></div></li></ul>
       </div> -->
       <div class="personalweixin">
         <br><br>
         <blockquote>
-          <a href="https://mp.weixin.qq.com/s/G7BXuZh0Qh1-mE6ts4LJqQ" target="_blank" rel="noopener">加我微信</a>，咱们交流技术与思想，共同成长
+          <a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/G7BXuZh0Qh1-mE6ts4LJqQ">加我微信</a>，咱们交流技术与思想，共同成长
         </blockquote>
         <br>
 
@@ -668,9 +668,9 @@
   <div class="-mob-share-list share-body">
     
       
-        <a class="-mob-share-qq" title="QQ好友" rel="external nofollow noopener noreferrer"
+        <a class="-mob-share-qq" title="QQ好友" rel="external nofollow noopener noreferrer noopener"
           
-          href="http://connect.qq.com/widget/shareqq/index.html?url=https://dayarch.top/p/java-thread-life-cycle.html&title=Java线程生命周期这样理解挺简单的 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=为什么要了解线程的生命周期？
+          target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://dayarch.top/p/java-thread-life-cycle.html&title=Java线程生命周期这样理解挺简单的 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=为什么要了解线程的生命周期？
 之前写过 Spring Bean 生命周期三部曲：
 
  1. Spring Bean生命周期之缘起
@@ -691,9 +691,9 @@ Java 并发系列 已经写了很多，从来还没提起过那个它【Java线�
       
     
       
-        <a class="-mob-share-qzone" title="QQ空间" rel="external nofollow noopener noreferrer"
+        <a class="-mob-share-qzone" title="QQ空间" rel="external nofollow noopener noreferrer noopener"
           
-          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://dayarch.top/p/java-thread-life-cycle.html&title=Java线程生命周期这样理解挺简单的 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=为什么要了解线程的生命周期？
+          target="_blank" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://dayarch.top/p/java-thread-life-cycle.html&title=Java线程生命周期这样理解挺简单的 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=为什么要了解线程的生命周期？
 之前写过 Spring Bean 生命周期三部曲：
 
  1. Spring Bean生命周期之缘起
@@ -714,9 +714,9 @@ Java 并发系列 已经写了很多，从来还没提起过那个它【Java线�
       
     
       
-        <a class="-mob-share-weibo" title="微博" rel="external nofollow noopener noreferrer"
+        <a class="-mob-share-weibo" title="微博" rel="external nofollow noopener noreferrer noopener"
           
-          href="http://service.weibo.com/share/share.php?url=https://dayarch.top/p/java-thread-life-cycle.html&title=Java线程生命周期这样理解挺简单的 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=为什么要了解线程的生命周期？
+          target="_blank" href="http://service.weibo.com/share/share.php?url=https://dayarch.top/p/java-thread-life-cycle.html&title=Java线程生命周期这样理解挺简单的 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=为什么要了解线程的生命周期？
 之前写过 Spring Bean 生命周期三部曲：
 
  1. Spring Bean生命周期之缘起
@@ -811,7 +811,7 @@ Java 并发系列 已经写了很多，从来还没提起过那个它【Java线�
 </header>
 
     <div class="content pure">
-      <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-book.html" title="120000字，你们要的Java并发编程图文小册来了" rel="bookmark">120000字，你们要的Java并发编程图文小册来了</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-aqs-acquireshared-and-semaphore.html" title="Java AQS共享式获取同步状态及Semaphore的应用分析" rel="bookmark">Java AQS共享式获取同步状态及Semaphore的应用分析</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-countdownlatch-vs-cyclicbarrier.html" title="CountDownLatch 和 CyclicBarrier 傻傻的分不清楚？" rel="bookmark">CountDownLatch 和 CyclicBarrier 傻傻的分不清楚？</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/executorservice-vs-completionservice.html" title="ExecutorService VS CompletionService" rel="bookmark">ExecutorService VS CompletionService</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-aqs-and-reentrantlock.html" title="Java AQS队列同步器以及ReentrantLock的应用" rel="bookmark">Java AQS队列同步器以及ReentrantLock的应用</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-future-and-callable.html" title="Java Future详解与使用" rel="bookmark">Java Future详解与使用</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-interrupt-mechnism.html" title="Java多线程中断机制" rel="bookmark">Java多线程中断机制</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java8-completablefuture-tutorial.html" title="java8 CompletableFuture 使用详解" rel="bookmark">java8 CompletableFuture 使用详解</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-dead-lock.html" title="Java并发死锁解决思路" rel="bookmark">Java并发死锁解决思路</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/difference-between-volatile-and-synchronized-keyword.html" title="volatile和synchronized图文透彻讲解" rel="bookmark">volatile和synchronized图文透彻讲解</a></h3></div></li></ul>
+      <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-book.html" title="120000字，你们要的Java并发编程图文小册来了" rel="bookmark">120000字，你们要的Java并发编程图文小册来了</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-aqs-acquireshared-and-semaphore.html" title="Java AQS共享式获取同步状态及Semaphore的应用分析" rel="bookmark">Java AQS共享式获取同步状态及Semaphore的应用分析</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/executorservice-vs-completionservice.html" title="ExecutorService VS CompletionService" rel="bookmark">ExecutorService VS CompletionService</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-interrupt-mechnism.html" title="Java多线程中断机制" rel="bookmark">Java多线程中断机制</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/difference-between-volatile-and-synchronized-keyword.html" title="volatile和synchronized图文透彻讲解" rel="bookmark">volatile和synchronized图文透彻讲解</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/why-we-need-to-use-threadpool.html" title="为什么要使用线程池?" rel="bookmark">为什么要使用线程池?</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-core.html" title="并发编程三大核心" rel="bookmark">并发编程三大核心</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-three-questions.html" title="并发编程三大问题" rel="bookmark">并发编程三大问题</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-dead-lock.html" title="Java并发死锁解决思路" rel="bookmark">Java并发死锁解决思路</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/waiting-notification-mechanism.html" title="并发编程之等待通知机制" rel="bookmark">并发编程之等待通知机制</a></h3></div></li></ul>
     </div>
   </section>
 
@@ -1019,7 +1019,7 @@ Java 并发系列 已经写了很多，从来还没提起过那个它【Java线�
 </header>
 
     <div class='content pure'>
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#为什么要了解线程的生命周期？"><span class="toc-text">为什么要了解线程的生命周期？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#线程生命周期的几种状态"><span class="toc-text">线程生命周期的几种状态</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#操作系统通用线程状态"><span class="toc-text">操作系统通用线程状态</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Java语言线程状态"><span class="toc-text">Java语言线程状态</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#RUNNABLE与BLOCKED状态转换"><span class="toc-text">RUNNABLE与BLOCKED状态转换</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#RUNNABLE与WAITING状态转换"><span class="toc-text">RUNNABLE与WAITING状态转换</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#RUNNABLE与-TIMED-WAITING-状态转换"><span class="toc-text">RUNNABLE与 TIMED-WAITING 状态转换</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#如何查看线程处在什么状态"><span class="toc-text">如何查看线程处在什么状态</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#程序中调用-getState-方法"><span class="toc-text">程序中调用 getState() 方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#null"><span class="toc-text"></span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#NEW"><span class="toc-text">NEW</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#RUNNABLE"><span class="toc-text">RUNNABLE</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#BLOCKED"><span class="toc-text">BLOCKED</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#WAITING"><span class="toc-text">WAITING</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#TIMED-WAITING"><span class="toc-text">TIMED-WAITING</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#TERMINATED"><span class="toc-text">TERMINATED</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#jstack-命令查看"><span class="toc-text">jstack 命令查看</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Arthas"><span class="toc-text">Arthas</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#灵魂追问"><span class="toc-text">灵魂追问</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E4%BA%86%E8%A7%A3%E7%BA%BF%E7%A8%8B%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%EF%BC%9F"><span class="toc-text">为什么要了解线程的生命周期？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BA%BF%E7%A8%8B%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E7%9A%84%E5%87%A0%E7%A7%8D%E7%8A%B6%E6%80%81"><span class="toc-text">线程生命周期的几种状态</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E9%80%9A%E7%94%A8%E7%BA%BF%E7%A8%8B%E7%8A%B6%E6%80%81"><span class="toc-text">操作系统通用线程状态</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Java%E8%AF%AD%E8%A8%80%E7%BA%BF%E7%A8%8B%E7%8A%B6%E6%80%81"><span class="toc-text">Java语言线程状态</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#RUNNABLE%E4%B8%8EBLOCKED%E7%8A%B6%E6%80%81%E8%BD%AC%E6%8D%A2"><span class="toc-text">RUNNABLE与BLOCKED状态转换</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#RUNNABLE%E4%B8%8EWAITING%E7%8A%B6%E6%80%81%E8%BD%AC%E6%8D%A2"><span class="toc-text">RUNNABLE与WAITING状态转换</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#RUNNABLE%E4%B8%8E-TIMED-WAITING-%E7%8A%B6%E6%80%81%E8%BD%AC%E6%8D%A2"><span class="toc-text">RUNNABLE与 TIMED-WAITING 状态转换</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E6%9F%A5%E7%9C%8B%E7%BA%BF%E7%A8%8B%E5%A4%84%E5%9C%A8%E4%BB%80%E4%B9%88%E7%8A%B6%E6%80%81"><span class="toc-text">如何查看线程处在什么状态</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A8%8B%E5%BA%8F%E4%B8%AD%E8%B0%83%E7%94%A8-getState-%E6%96%B9%E6%B3%95"><span class="toc-text">程序中调用 getState() 方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text"></span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#NEW"><span class="toc-text">NEW</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#RUNNABLE"><span class="toc-text">RUNNABLE</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#BLOCKED"><span class="toc-text">BLOCKED</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#WAITING"><span class="toc-text">WAITING</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#TIMED-WAITING"><span class="toc-text">TIMED-WAITING</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#TERMINATED"><span class="toc-text">TERMINATED</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#jstack-%E5%91%BD%E4%BB%A4%E6%9F%A5%E7%9C%8B"><span class="toc-text">jstack 命令查看</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Arthas"><span class="toc-text">Arthas</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%81%B5%E9%AD%82%E8%BF%BD%E9%97%AE"><span class="toc-text">灵魂追问</span></a></li></ol>
     </div>
   </section>
 
@@ -1094,7 +1094,7 @@ Java 并发系列 已经写了很多，从来还没提起过那个它【Java线�
   &nbsp;&nbsp;|&nbsp;&nbsp;  
   
     &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-        class="white-color">264.1k</span>&nbsp;字
+        class="white-color">267.4k</span>&nbsp;字
     
 
   &nbsp;&nbsp;|&nbsp;&nbsp;  
@@ -1149,7 +1149,7 @@ Java 并发系列 已经写了很多，从来还没提起过那个它【Java线�
     
     。
   </div>
-  <div><p>博客内容遵循 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
+  <div><p>博客内容遵循 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
 </div>
   <!-- <div class="github-badge">
       <a style="color: #fff" rel="license" href="https://hexo.io/" target="_blank" title="由 Hexo 强力驱动">
@@ -1257,10 +1257,14 @@ Java 并发系列 已经写了很多，从来还没提起过那个它【Java线�
 
 
 
-  <script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/app.js"></script>
+  
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/app.js"></script>
 
 
-  <script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/search.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/search.js"></script>
+
 
 
 

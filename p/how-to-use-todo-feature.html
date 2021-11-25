@@ -13,7 +13,7 @@
   
 
   
-  <link rel="alternate" href="/atom.xml" title="日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享">
+  <link rel="alternate" href="/atom.xml" title="日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享" type="application/atom+xml">
   
 
   <meta name="HandheldFriendly" content="True" />
@@ -35,7 +35,9 @@
   
 
   
-    <link rel="stylesheet" href="/style.css">
+    
+<link rel="stylesheet" href="/style.css">
+
   
 
   <script>
@@ -85,7 +87,7 @@
         daovoice('update');
         </script>
     
-</head>
+<meta name="generator" content="Hexo 5.4.0"></head>
 
 <body>
   
@@ -487,11 +489,11 @@
 
 <p>你这样做，别人也会这样做。一时间，项目中可能会存在大量的 <code>TODO</code>，当你搜寻你的 <code>TODO</code> 时也就变得非常麻烦，如同石沉大海，也就失去了这个标记的意义。</p>
 <p>IntelliJ IDEA允许我们添加特殊类型的注释，使得这些注释在编辑器中突出显示，它们被索引，并在 <code>TODO 工具窗口</code> 中列出。这样，我们就容易追踪自己的 <code>TODO</code> 了。</p>
-<p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgTODOexample.png" alt=""></fancybox></p>
+<p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgTODOexample.png"></fancybox></p>
 <h2 id="默认的-TODO"><a href="#默认的-TODO" class="headerlink" title="默认的 TODO"></a>默认的 <code>TODO</code></h2><p>默认情况下，IntelliJ IDEA识别两种模式：小写和大写的 <code>TODO</code> 和 <code>FIXME</code> 这些模式可在任何受支持文件类型的行注释和块注释内部使用。我们可以根据需要修改默认模式或添加自己的模式</p>
 <p>如上图，我们可以创建多行的 <code>TODO</code> (类似 Spring Boot 中的 YAML 配置多个值)，需要缩进第一行之后的注释行。如果没有缩进，则将行视为常规注释行</p>
 <p>要禁用多行 <code>TODO</code> 项目，使用快捷键 <code>⌘ + ,</code> 打开 Preferences， 搜索 <code>TODO</code> (Editor | TODO), 你会看到如下界面</p>
-<p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgXnip2020-01-09_09-06-39.jpg" alt=""></fancybox></p>
+<p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgXnip2020-01-09_09-06-39.jpg"></fancybox></p>
 <p>要查看系统中的所有 <code>TODO</code>，请打开 TODO 工具窗口 (快捷键 <code>⌘ + 6</code> )。切换选项查看 <code>TODO</code> 范围:</p>
 <ul>
 <li>从当前项目中的所有文件</li>
@@ -499,17 +501,17 @@
 <li>指定范围的文件</li>
 <li>活动的变更列表</li>
 </ul>
-<p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgXnip2020-01-09_09-23-45.jpg" alt=""></fancybox></p>
+<p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgXnip2020-01-09_09-23-45.jpg"></fancybox></p>
 <p>到这里 Intellij IDEA 默认提供的 <code>TODO</code> 就介绍完了，为了能更快的找到我们自己的 TODO，我们就需要进行自定义</p>
 <h2 id="自定义-TODO"><a href="#自定义-TODO" class="headerlink" title="自定义 TODO"></a>自定义 TODO</h2><p>重新打开 <code>TODO</code> 位置，新增 TODO item，这里新增 <code>optimize</code>，用于标识待优化内容</p>
-<p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgXnip2020-01-09_09-46-03.jpg" alt=""></fancybox></p>
-<p>添加个过滤器，用于 <code>TODO</code> 的分组<br><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgXnip2020-01-09_09-50-35.jpg" alt=""></fancybox></p>
+<p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgXnip2020-01-09_09-46-03.jpg"></fancybox></p>
+<p>添加个过滤器，用于 <code>TODO</code> 的分组<br><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgXnip2020-01-09_09-50-35.jpg"></fancybox></p>
 <p>随便添加一个优化备注，通过以上介绍的功能，快速定位到我们自己的 <code>TODO</code></p>
-<p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgXnip2020-01-09_09-54-37.jpg" alt=""></fancybox></p>
+<p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgXnip2020-01-09_09-54-37.jpg"></fancybox></p>
 <p>如果你的待办事项通常是相对固定的描述，你也可以配合 Live Template 快速生成 <code>TODO</code> 内容</p>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>当团队规模很大，你又同时有很多待办的时候，<code>TODO</code> 特性可以帮助我们做标识，自定义 <code>TODO</code> 可以帮我们快速定位，我们可以充分利用这个特性，但是</p>
 <blockquote>
-<h4 id="定期清理-TODO"><a href="#定期清理-TODO" class="headerlink" title="定期清理 TODO"></a>定期清理 TODO</h4><p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img2020-01-09-10-45-53@2x.png" alt=""></fancybox></p>
+<h4 id="定期清理-TODO"><a href="#定期清理-TODO" class="headerlink" title="定期清理 TODO"></a>定期清理 TODO</h4><p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img2020-01-09-10-45-53@2x.png"></fancybox></p>
 </blockquote>
 <h2 id="灵魂追问"><a href="#灵魂追问" class="headerlink" title="灵魂追问"></a>灵魂追问</h2><ol>
 <li>你觉得项目中代码有哪些不规范/不够整洁的地方？(欢迎到博客下方留言讨论)</li>
@@ -520,12 +522,12 @@
       <!-- <div class="tuijian">
         <br><br>
         📚相关文章
-        <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/http-client-advanced-usage.html" title="IntelliJ IDEA HTTP Client高级使用详解" rel="bookmark">IntelliJ IDEA HTTP Client高级使用详解</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/scratch-files-and-scratch-bufferss.html" title="Intellij IDEA 创建Scratch files 和 Scratch buffers" rel="bookmark">Intellij IDEA 创建Scratch files 和 Scratch buffers</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/idea-stream-trace.html" title="IntelliJ IDEA 高级调试之Stream Trace" rel="bookmark">IntelliJ IDEA 高级调试之Stream Trace</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/intellj-idea-advanced-debug.html" title="IntelliJ IDEA 高级Debug技巧，助你起飞" rel="bookmark">IntelliJ IDEA 高级Debug技巧，助你起飞</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/intellij-idea-configuration-and-plugins.html" title="Intellij IDEA 配置和插件合集" rel="bookmark">Intellij IDEA 配置和插件合集</a></h3></div></li></ul>
+        <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/http-client-advanced-usage.html" title="IntelliJ IDEA HTTP Client高级使用详解" rel="bookmark">IntelliJ IDEA HTTP Client高级使用详解</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/intellj-idea-advanced-debug.html" title="IntelliJ IDEA 高级Debug技巧，助你起飞" rel="bookmark">IntelliJ IDEA 高级Debug技巧，助你起飞</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/idea-stream-trace.html" title="IntelliJ IDEA 高级调试之Stream Trace" rel="bookmark">IntelliJ IDEA 高级调试之Stream Trace</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/scratch-files-and-scratch-bufferss.html" title="Intellij IDEA 创建Scratch files 和 Scratch buffers" rel="bookmark">Intellij IDEA 创建Scratch files 和 Scratch buffers</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/intellij-idea-configuration-and-plugins.html" title="Intellij IDEA 配置和插件合集" rel="bookmark">Intellij IDEA 配置和插件合集</a></h3></div></li></ul>
       </div> -->
       <div class="personalweixin">
         <br><br>
         <blockquote>
-          <a href="https://mp.weixin.qq.com/s/G7BXuZh0Qh1-mE6ts4LJqQ" target="_blank" rel="noopener">加我微信</a>，咱们交流技术与思想，共同成长
+          <a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/G7BXuZh0Qh1-mE6ts4LJqQ">加我微信</a>，咱们交流技术与思想，共同成长
         </blockquote>
         <br>
 
@@ -563,9 +565,9 @@
   <div class="-mob-share-list share-body">
     
       
-        <a class="-mob-share-qq" title="QQ好友" rel="external nofollow noopener noreferrer"
+        <a class="-mob-share-qq" title="QQ好友" rel="external nofollow noopener noreferrer noopener"
           
-          href="http://connect.qq.com/widget/shareqq/index.html?url=https://dayarch.top/p/how-to-use-todo-feature.html&title=小小TODO也有大道理 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=前言
+          target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://dayarch.top/p/how-to-use-todo-feature.html&title=小小TODO也有大道理 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=前言
 有时，我们需要标记部分代码以供将来参考，比如: 优化，改进，可能的更改，要讨论的问题等。 通常我们会在代码中加入如下的标记表示待办:
 
 1
@@ -591,9 +593,9 @@ IntelliJ IDEA允许我们添加特殊类型的注释，使得这些注释在编�
       
     
       
-        <a class="-mob-share-qzone" title="QQ空间" rel="external nofollow noopener noreferrer"
+        <a class="-mob-share-qzone" title="QQ空间" rel="external nofollow noopener noreferrer noopener"
           
-          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://dayarch.top/p/how-to-use-todo-feature.html&title=小小TODO也有大道理 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=前言
+          target="_blank" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://dayarch.top/p/how-to-use-todo-feature.html&title=小小TODO也有大道理 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=前言
 有时，我们需要标记部分代码以供将来参考，比如: 优化，改进，可能的更改，要讨论的问题等。 通常我们会在代码中加入如下的标记表示待办:
 
 1
@@ -619,9 +621,9 @@ IntelliJ IDEA允许我们添加特殊类型的注释，使得这些注释在编�
       
     
       
-        <a class="-mob-share-weibo" title="微博" rel="external nofollow noopener noreferrer"
+        <a class="-mob-share-weibo" title="微博" rel="external nofollow noopener noreferrer noopener"
           
-          href="http://service.weibo.com/share/share.php?url=https://dayarch.top/p/how-to-use-todo-feature.html&title=小小TODO也有大道理 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=前言
+          target="_blank" href="http://service.weibo.com/share/share.php?url=https://dayarch.top/p/how-to-use-todo-feature.html&title=小小TODO也有大道理 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=前言
 有时，我们需要标记部分代码以供将来参考，比如: 优化，改进，可能的更改，要讨论的问题等。 通常我们会在代码中加入如下的标记表示待办:
 
 1
@@ -721,7 +723,7 @@ IntelliJ IDEA允许我们添加特殊类型的注释，使得这些注释在编�
 </header>
 
     <div class="content pure">
-      <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/http-client-advanced-usage.html" title="IntelliJ IDEA HTTP Client高级使用详解" rel="bookmark">IntelliJ IDEA HTTP Client高级使用详解</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/scratch-files-and-scratch-bufferss.html" title="Intellij IDEA 创建Scratch files 和 Scratch buffers" rel="bookmark">Intellij IDEA 创建Scratch files 和 Scratch buffers</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/idea-stream-trace.html" title="IntelliJ IDEA 高级调试之Stream Trace" rel="bookmark">IntelliJ IDEA 高级调试之Stream Trace</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/intellj-idea-advanced-debug.html" title="IntelliJ IDEA 高级Debug技巧，助你起飞" rel="bookmark">IntelliJ IDEA 高级Debug技巧，助你起飞</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/intellij-idea-configuration-and-plugins.html" title="Intellij IDEA 配置和插件合集" rel="bookmark">Intellij IDEA 配置和插件合集</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/book-reviews-clean-code.html" title="读《Clean Code 代码整洁之道》之感悟" rel="bookmark">读《Clean Code 代码整洁之道》之感悟</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/oauth2-detail.html" title="OAuth2.0 详解" rel="bookmark">OAuth2.0 详解</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/restful-api-design.html" title="如何设计好的Restful API" rel="bookmark">如何设计好的Restful API</a></h3></div></li></ul>
+      <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/http-client-advanced-usage.html" title="IntelliJ IDEA HTTP Client高级使用详解" rel="bookmark">IntelliJ IDEA HTTP Client高级使用详解</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/intellj-idea-advanced-debug.html" title="IntelliJ IDEA 高级Debug技巧，助你起飞" rel="bookmark">IntelliJ IDEA 高级Debug技巧，助你起飞</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/idea-stream-trace.html" title="IntelliJ IDEA 高级调试之Stream Trace" rel="bookmark">IntelliJ IDEA 高级调试之Stream Trace</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/scratch-files-and-scratch-bufferss.html" title="Intellij IDEA 创建Scratch files 和 Scratch buffers" rel="bookmark">Intellij IDEA 创建Scratch files 和 Scratch buffers</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/intellij-idea-configuration-and-plugins.html" title="Intellij IDEA 配置和插件合集" rel="bookmark">Intellij IDEA 配置和插件合集</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/book-reviews-clean-code.html" title="读《Clean Code 代码整洁之道》之感悟" rel="bookmark">读《Clean Code 代码整洁之道》之感悟</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/oauth2-detail.html" title="OAuth2.0 详解" rel="bookmark">OAuth2.0 详解</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/restful-api-design.html" title="如何设计好的Restful API" rel="bookmark">如何设计好的Restful API</a></h3></div></li></ul>
     </div>
   </section>
 
@@ -929,7 +931,7 @@ IntelliJ IDEA允许我们添加特殊类型的注释，使得这些注释在编�
 </header>
 
     <div class='content pure'>
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#默认的-TODO"><span class="toc-text">默认的 TODO</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#自定义-TODO"><span class="toc-text">自定义 TODO</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-text">总结</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#定期清理-TODO"><span class="toc-text">定期清理 TODO</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#灵魂追问"><span class="toc-text">灵魂追问</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%BB%98%E8%AE%A4%E7%9A%84-TODO"><span class="toc-text">默认的 TODO</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89-TODO"><span class="toc-text">自定义 TODO</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-text">总结</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E6%9C%9F%E6%B8%85%E7%90%86-TODO"><span class="toc-text">定期清理 TODO</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%81%B5%E9%AD%82%E8%BF%BD%E9%97%AE"><span class="toc-text">灵魂追问</span></a></li></ol>
     </div>
   </section>
 
@@ -1004,7 +1006,7 @@ IntelliJ IDEA允许我们添加特殊类型的注释，使得这些注释在编�
   &nbsp;&nbsp;|&nbsp;&nbsp;  
   
     &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-        class="white-color">264.1k</span>&nbsp;字
+        class="white-color">267.4k</span>&nbsp;字
     
 
   &nbsp;&nbsp;|&nbsp;&nbsp;  
@@ -1059,7 +1061,7 @@ IntelliJ IDEA允许我们添加特殊类型的注释，使得这些注释在编�
     
     。
   </div>
-  <div><p>博客内容遵循 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
+  <div><p>博客内容遵循 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
 </div>
   <!-- <div class="github-badge">
       <a style="color: #fff" rel="license" href="https://hexo.io/" target="_blank" title="由 Hexo 强力驱动">
@@ -1167,10 +1169,14 @@ IntelliJ IDEA允许我们添加特殊类型的注释，使得这些注释在编�
 
 
 
-  <script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/app.js"></script>
+  
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/app.js"></script>
 
 
-  <script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/search.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/search.js"></script>
+
 
 
 

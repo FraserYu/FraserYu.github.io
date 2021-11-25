@@ -13,7 +13,7 @@
   
 
   
-  <link rel="alternate" href="/atom.xml" title="日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享">
+  <link rel="alternate" href="/atom.xml" title="日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享" type="application/atom+xml">
   
 
   <meta name="HandheldFriendly" content="True" />
@@ -35,7 +35,9 @@
   
 
   
-    <link rel="stylesheet" href="/style.css">
+    
+<link rel="stylesheet" href="/style.css">
+
   
 
   <script>
@@ -85,7 +87,7 @@
         daovoice('update');
         </script>
     
-</head>
+<meta name="generator" content="Hexo 5.4.0"></head>
 
 <body>
   
@@ -494,9 +496,9 @@
 <p>小学生 （Java Bean）通过提交资料申请（元数据配置）加入了少先队（Spring Ioc 容器），学习了一些精神与规定之后，变成了少先队员（Spring Bean）</p>
 </blockquote>
 <p>从这里可以看出，Java Bean 和 Spring Bean 都是具有特定功能的对象，小学生还是那个小学生，只不过加入了少先队之后有了新的身份，新的身份要按照组织 （Spring Ioc）的规定履行特定义务</p>
-<p>来看下图加深一下了解<br><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgXnip2019-07-01_20-14-05.jpg" alt=""></fancybox></p>
+<p>来看下图加深一下了解<br><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgXnip2019-07-01_20-14-05.jpg"></fancybox></p>
 <p>首先要有容器，实例化 Spring Ioc 容器是非常简单的，接口 <code>org.springframework.context.ApplicationContext</code> 表示Spring IoC容器，负责实例化，配置和组装上述 bean。 容器通过读取配置元数据获取有关要实例化，配置和组装的对象的指令。 配置元数据通常以XML，Java 注解或代码的形式表示。 它允许你自己表达组成应用程序的对象以及这些对象之间丰富的相互依赖性，比如这样：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ApplicationContext context = <span class="keyword">new</span> ClassPathXmlApplicationContext(<span class="keyword">new</span> String[] &#123;<span class="string">"spring.xml"</span>, <span class="string">"spring1.xml"</span>&#125;);</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ApplicationContext context = <span class="keyword">new</span> ClassPathXmlApplicationContext(<span class="keyword">new</span> String[] &#123;<span class="string">&quot;spring.xml&quot;</span>, <span class="string">&quot;spring1.xml&quot;</span>&#125;);</span><br></pre></td></tr></table></figure>
 
 <blockquote>
 <p>有了容器，我们需要做哪些处理，使其内部对象变为 <code>Ready for Use</code> 的状态?  </p>
@@ -506,11 +508,11 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">InitializingBean</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">afterPropertiesSet</span><span class="params">()</span> <span class="keyword">throws</span> Exception</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>我们可以通过实现 <code>InitializingBean</code> 接口，在其唯一方法 <code>afterPropertiesSet</code> 内完成实例化的工作，但是 Spring Framework 官方并不建议我们通过这种方法来完成 Bean 的实例化，这是一种强耦合的方式，我们看到框架层面才会用到这个方法。</p>
 <h3 id="PostConstruct"><a href="#PostConstruct" class="headerlink" title="@PostConstruct"></a>@PostConstruct</h3><p>这种方式是 Spring 非常提倡的一种方式，我们通常将其标记在方法上即可，通常习惯将这个方法起名为 <code>init()</code></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@PostConstruct</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  System.out.println(<span class="string">"Inside init() method..."</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@PostConstruct</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  System.out.println(<span class="string">&quot;Inside init() method...&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h3 id="init-method"><a href="#init-method" class="headerlink" title="init-method"></a>init-method</h3><p>你应该见过这种初始化方式：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyClass</span> </span>&#123;</span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">()</span> </span>&#123;</span><br><span class="line">      <span class="comment">// perform post-creation logic here</span></span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AppConfig</span> </span>&#123;</span><br><span class="line">   <span class="meta">@Bean</span>(initMethod = <span class="string">"init"</span>)</span><br><span class="line">   <span class="function"><span class="keyword">public</span> MyClass <span class="title">myclass</span><span class="params">()</span> </span>&#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">new</span> MyClass ();</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyClass</span> </span>&#123;</span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">()</span> </span>&#123;</span><br><span class="line">      <span class="comment">// perform post-creation logic here</span></span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AppConfig</span> </span>&#123;</span><br><span class="line">   <span class="meta">@Bean(initMethod = &quot;init&quot;)</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> MyClass <span class="title">myclass</span><span class="params">()</span> </span>&#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">new</span> MyClass ();</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>你也应该见过这种配置方式：</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"myClass"</span> <span class="attr">class</span>=<span class="string">"com.demo.MyClass"</span> <span class="attr">init-method</span>=<span class="string">"init"</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;myClass&quot;</span> <span class="attr">class</span>=<span class="string">&quot;com.demo.MyClass&quot;</span> <span class="attr">init-method</span>=<span class="string">&quot;init&quot;</span>/&gt;</span></span><br></pre></td></tr></table></figure>
 
 <p>没错，这只是同样功能的不同实现方式罢了<br>以上就是三种初始化 Spring Beans 的方式，我们在框架中看到过三种方式在组合使用，那么组合使用的调用顺序是什么呢？</p>
 <ol>
@@ -520,7 +522,7 @@
 </ol>
 <p>了解了这些，你也就了解了 Spring Bean 是怎么来的了</p>
 <p>通过图示来说明一下：</p>
-<p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgXnip2019-07-01_21-46-24.jpg" alt=""></fancybox></p>
+<p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgXnip2019-07-01_21-46-24.jpg"></fancybox></p>
 <p>这个调用顺序很难记忆吗吗？ </p>
 <blockquote>
 <p>PostConstruct <code>(P)</code>，afterPropertiesSet <code>(A)</code>，init-method <code>(I)</code> —&gt; <code>PAI （圆周率π）</code></p>
@@ -528,8 +530,8 @@
 <h2 id="BeanPostProcessor"><a href="#BeanPostProcessor" class="headerlink" title="BeanPostProcessor"></a>BeanPostProcessor</h2><p>BeanPostProcessor 接口，大家也应该有印象，里面只有两个方法：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">BeanPostProcessor</span> </span>&#123;</span><br><span class="line">    <span class="function">Object <span class="title">postProcessBeforeInitialization</span><span class="params">(Object var1, String var2)</span> <span class="keyword">throws</span> BeansException</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function">Object <span class="title">postProcessAfterInitialization</span><span class="params">(Object var1, String var2)</span> <span class="keyword">throws</span> BeansException</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>看方法名，BeforeInitialization 和 AfterInitialization，我们应该猜得出，这是在上述三种方式的前和后，算是一种全局的切面思想，我们经常会使用 <code>postProcessAfterInitialization</code> 方法，通过读取 Bean 的注解完成一些后续逻辑编写与属性的设定，现在 <code>Ready for Use</code>之前是这样：</p>
-<p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgXnip2019-07-02_08-38-03.jpg" alt=""></fancybox></p>
-<p>在 <code>Ready for Use</code> 之前，了解这些内容，已可以基本满足日常的工作内容，但这并不是 Ready for Use 的全部内容，Spring Bean 整个生命周期的流程应该是这样的，后续文章会逐步点亮：<br><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgXnip2019-07-02_09-34-02.jpg" alt=""></fancybox></p>
+<p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgXnip2019-07-02_08-38-03.jpg"></fancybox></p>
+<p>在 <code>Ready for Use</code> 之前，了解这些内容，已可以基本满足日常的工作内容，但这并不是 Ready for Use 的全部内容，Spring Bean 整个生命周期的流程应该是这样的，后续文章会逐步点亮：<br><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgXnip2019-07-02_09-34-02.jpg"></fancybox></p>
 <h2 id="灵魂追问"><a href="#灵魂追问" class="headerlink" title="灵魂追问"></a>灵魂追问</h2><ol>
 <li>了解了 Spring Bean 是怎么来的？那它是怎么没的呢？什么时候需要销毁他们呢？</li>
 <li>Spring 框架中 XxxxAware，这些类有什么作用，能在 <code>Ready for Use</code> 之前有用处吗？</li>
@@ -537,19 +539,19 @@
 </ol>
 <h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><ol>
 <li>虽然当下流行以注解声明方式进行编程，甚至高版本 Spring 会将一些方法标记为过时，但文章说明依旧会使用 <code>XMLBeanFactory</code> 这类方法，包括 XML 配置。这样做，只不过为了更清晰的说明问题。</li>
-<li>另外将 Spring Bean 声明周期的讲解，进行拆分，是为了让大家有独立的思考空间，带着问题去思考、时间，而不是被动的填充，最终串联起自己的学习网络，这样理解的更深刻，具体请看之前写的文章  <a href="https://mp.weixin.qq.com/s/V7h8O6pVFQ-nr_iA2SNqtw" target="_blank" rel="noopener">程序猿为什么要看源码</a>, 后续内容请持续关注</li>
+<li>另外将 Spring Bean 声明周期的讲解，进行拆分，是为了让大家有独立的思考空间，带着问题去思考、时间，而不是被动的填充，最终串联起自己的学习网络，这样理解的更深刻，具体请看之前写的文章  <a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/V7h8O6pVFQ-nr_iA2SNqtw">程序猿为什么要看源码</a>, 后续内容请持续关注</li>
 </ol>
 
       </div>
       <!-- <div class="tuijian">
         <br><br>
         📚相关文章
-        <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/spring-bean-lifecycle-destroy.html" title="Spring Bean生命周期之缘尽" rel="bookmark">Spring Bean生命周期之缘尽</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/spring-boot-execute-on-startup.html" title="在Spring Boot启动时执行代码的几种方法" rel="bookmark">在Spring Boot启动时执行代码的几种方法</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/spring-aware.html" title="Spring Aware 到底是什么？" rel="bookmark">Spring Aware 到底是什么？</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/spring-boot-condition-annotation.html" title="@Conditional注解，Spring Boot 的灵活配置" rel="bookmark">@Conditional注解，Spring Boot 的灵活配置</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/easyexcel-read.html" title="EasyExcel读取Excel实际应用" rel="bookmark">EasyExcel读取Excel实际应用</a></h3></div></li></ul>
+        <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/spring-bean-lifecycle-destroy.html" title="Spring Bean生命周期之缘尽" rel="bookmark">Spring Bean生命周期之缘尽</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/spring-boot-execute-on-startup.html" title="在Spring Boot启动时执行代码的几种方法" rel="bookmark">在Spring Boot启动时执行代码的几种方法</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/spring-aware.html" title="Spring Aware 到底是什么？" rel="bookmark">Spring Aware 到底是什么？</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/spring-boot-condition-annotation.html" title="@Conditional注解，Spring Boot 的灵活配置" rel="bookmark">@Conditional注解，Spring Boot 的灵活配置</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/spring-boot-starter-custom.html" title="Spring Boot 自定义starter 全面教程" rel="bookmark">Spring Boot 自定义starter 全面教程</a></h3></div></li></ul>
       </div> -->
       <div class="personalweixin">
         <br><br>
         <blockquote>
-          <a href="https://mp.weixin.qq.com/s/G7BXuZh0Qh1-mE6ts4LJqQ" target="_blank" rel="noopener">加我微信</a>，咱们交流技术与思想，共同成长
+          <a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/G7BXuZh0Qh1-mE6ts4LJqQ">加我微信</a>，咱们交流技术与思想，共同成长
         </blockquote>
         <br>
 
@@ -587,9 +589,9 @@
   <div class="-mob-share-list share-body">
     
       
-        <a class="-mob-share-qq" title="QQ好友" rel="external nofollow noopener noreferrer"
+        <a class="-mob-share-qq" title="QQ好友" rel="external nofollow noopener noreferrer noopener"
           
-          href="http://connect.qq.com/widget/shareqq/index.html?url=https://dayarch.top/p/spring-bean-lifecycle-creation.html&title=Spring Bean生命周期之缘起 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=Spring bean 的生命周期很容易理解。实例化 bean 时，可能需要执行一些初始化以使其进入可用 （Ready for Use）状态。类似地，当不再需要 bean 并将其从容器中移除时，可能需要进行一些清理，这就是它的生命周期
+          target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://dayarch.top/p/spring-bean-lifecycle-creation.html&title=Spring Bean生命周期之缘起 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=Spring bean 的生命周期很容易理解。实例化 bean 时，可能需要执行一些初始化以使其进入可用 （Ready for Use）状态。类似地，当不再需要 bean 并将其从容器中移除时，可能需要进行一些清理，这就是它的生命周期
 
 上一篇文章 面试还不知道BeanFactory和ApplicationContext的区别？ 中说明了接口 Beanfactory 和 Applicationcontext 可以通过 T getBean(String name, Class requiredType) 方法从 Spring 容器中获取bean，区别是，前者是懒加载形式，后者是预加载的形式"
           
@@ -601,9 +603,9 @@
       
     
       
-        <a class="-mob-share-qzone" title="QQ空间" rel="external nofollow noopener noreferrer"
+        <a class="-mob-share-qzone" title="QQ空间" rel="external nofollow noopener noreferrer noopener"
           
-          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://dayarch.top/p/spring-bean-lifecycle-creation.html&title=Spring Bean生命周期之缘起 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=Spring bean 的生命周期很容易理解。实例化 bean 时，可能需要执行一些初始化以使其进入可用 （Ready for Use）状态。类似地，当不再需要 bean 并将其从容器中移除时，可能需要进行一些清理，这就是它的生命周期
+          target="_blank" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://dayarch.top/p/spring-bean-lifecycle-creation.html&title=Spring Bean生命周期之缘起 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=Spring bean 的生命周期很容易理解。实例化 bean 时，可能需要执行一些初始化以使其进入可用 （Ready for Use）状态。类似地，当不再需要 bean 并将其从容器中移除时，可能需要进行一些清理，这就是它的生命周期
 
 上一篇文章 面试还不知道BeanFactory和ApplicationContext的区别？ 中说明了接口 Beanfactory 和 Applicationcontext 可以通过 T getBean(String name, Class requiredType) 方法从 Spring 容器中获取bean，区别是，前者是懒加载形式，后者是预加载的形式"
           
@@ -615,9 +617,9 @@
       
     
       
-        <a class="-mob-share-weibo" title="微博" rel="external nofollow noopener noreferrer"
+        <a class="-mob-share-weibo" title="微博" rel="external nofollow noopener noreferrer noopener"
           
-          href="http://service.weibo.com/share/share.php?url=https://dayarch.top/p/spring-bean-lifecycle-creation.html&title=Spring Bean生命周期之缘起 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=Spring bean 的生命周期很容易理解。实例化 bean 时，可能需要执行一些初始化以使其进入可用 （Ready for Use）状态。类似地，当不再需要 bean 并将其从容器中移除时，可能需要进行一些清理，这就是它的生命周期
+          target="_blank" href="http://service.weibo.com/share/share.php?url=https://dayarch.top/p/spring-bean-lifecycle-creation.html&title=Spring Bean生命周期之缘起 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=Spring bean 的生命周期很容易理解。实例化 bean 时，可能需要执行一些初始化以使其进入可用 （Ready for Use）状态。类似地，当不再需要 bean 并将其从容器中移除时，可能需要进行一些清理，这就是它的生命周期
 
 上一篇文章 面试还不知道BeanFactory和ApplicationContext的区别？ 中说明了接口 Beanfactory 和 Applicationcontext 可以通过 T getBean(String name, Class requiredType) 方法从 Spring 容器中获取bean，区别是，前者是懒加载形式，后者是预加载的形式"
           
@@ -703,7 +705,7 @@
 </header>
 
     <div class="content pure">
-      <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/spring-bean-lifecycle-destroy.html" title="Spring Bean生命周期之缘尽" rel="bookmark">Spring Bean生命周期之缘尽</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/spring-boot-execute-on-startup.html" title="在Spring Boot启动时执行代码的几种方法" rel="bookmark">在Spring Boot启动时执行代码的几种方法</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/spring-aware.html" title="Spring Aware 到底是什么？" rel="bookmark">Spring Aware 到底是什么？</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/spring-boot-condition-annotation.html" title="@Conditional注解，Spring Boot 的灵活配置" rel="bookmark">@Conditional注解，Spring Boot 的灵活配置</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/easyexcel-read.html" title="EasyExcel读取Excel实际应用" rel="bookmark">EasyExcel读取Excel实际应用</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/spring-boot-messageconverter.html" title="HttpMessageConverter转换原理解析" rel="bookmark">HttpMessageConverter转换原理解析</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/spring-boot-configurationProperties-usage.html" title="Spring Boot @ConfigurationProperties 注解最强使用详解" rel="bookmark">Spring Boot @ConfigurationProperties 注解最强使用详解</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/spring-boot-starter-custom.html" title="Spring Boot 自定义starter 全面教程" rel="bookmark">Spring Boot 自定义starter 全面教程</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/shiro-in-practice.html" title="Shiro—小而美的安全框架" rel="bookmark">Shiro—小而美的安全框架</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/springmvc-init-binder.html" title="Spring MVC 之 @initbinder" rel="bookmark">Spring MVC 之 @initbinder</a></h3></div></li></ul>
+      <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/spring-bean-lifecycle-destroy.html" title="Spring Bean生命周期之缘尽" rel="bookmark">Spring Bean生命周期之缘尽</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/spring-boot-execute-on-startup.html" title="在Spring Boot启动时执行代码的几种方法" rel="bookmark">在Spring Boot启动时执行代码的几种方法</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/spring-aware.html" title="Spring Aware 到底是什么？" rel="bookmark">Spring Aware 到底是什么？</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/spring-boot-condition-annotation.html" title="@Conditional注解，Spring Boot 的灵活配置" rel="bookmark">@Conditional注解，Spring Boot 的灵活配置</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/spring-boot-starter-custom.html" title="Spring Boot 自定义starter 全面教程" rel="bookmark">Spring Boot 自定义starter 全面教程</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/spring-data-binding-mechanism.html" title="Spring 数据绑定剖析" rel="bookmark">Spring 数据绑定剖析</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/spring-boot-json-return-non-null.html" title="Springboot Json格式数据不返回null值属性" rel="bookmark">Springboot Json格式数据不返回null值属性</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/docker-deploy-spring-boot.html" title="使用 Docker 部署 Spring Boot" rel="bookmark">使用 Docker 部署 Spring Boot</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/springmvc-response-status.html" title="Spring MVC 之 @ResponseStatus" rel="bookmark">Spring MVC 之 @ResponseStatus</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/springmvc-init-binder.html" title="Spring MVC 之 @initbinder" rel="bookmark">Spring MVC 之 @initbinder</a></h3></div></li></ul>
     </div>
   </section>
 
@@ -911,7 +913,7 @@
 </header>
 
     <div class='content pure'>
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#三种初始化方式"><span class="toc-text">三种初始化方式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#InitializingBean"><span class="toc-text">InitializingBean</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PostConstruct"><span class="toc-text">@PostConstruct</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#init-method"><span class="toc-text">init-method</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#BeanPostProcessor"><span class="toc-text">BeanPostProcessor</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#灵魂追问"><span class="toc-text">灵魂追问</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#补充说明"><span class="toc-text">补充说明</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E7%A7%8D%E5%88%9D%E5%A7%8B%E5%8C%96%E6%96%B9%E5%BC%8F"><span class="toc-text">三种初始化方式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#InitializingBean"><span class="toc-text">InitializingBean</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PostConstruct"><span class="toc-text">@PostConstruct</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#init-method"><span class="toc-text">init-method</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#BeanPostProcessor"><span class="toc-text">BeanPostProcessor</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%81%B5%E9%AD%82%E8%BF%BD%E9%97%AE"><span class="toc-text">灵魂追问</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A1%A5%E5%85%85%E8%AF%B4%E6%98%8E"><span class="toc-text">补充说明</span></a></li></ol>
     </div>
   </section>
 
@@ -986,7 +988,7 @@
   &nbsp;&nbsp;|&nbsp;&nbsp;  
   
     &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-        class="white-color">264.1k</span>&nbsp;字
+        class="white-color">267.4k</span>&nbsp;字
     
 
   &nbsp;&nbsp;|&nbsp;&nbsp;  
@@ -1041,7 +1043,7 @@
     
     。
   </div>
-  <div><p>博客内容遵循 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
+  <div><p>博客内容遵循 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
 </div>
   <!-- <div class="github-badge">
       <a style="color: #fff" rel="license" href="https://hexo.io/" target="_blank" title="由 Hexo 强力驱动">
@@ -1149,10 +1151,14 @@
 
 
 
-  <script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/app.js"></script>
+  
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/app.js"></script>
 
 
-  <script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/search.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/search.js"></script>
+
 
 
 

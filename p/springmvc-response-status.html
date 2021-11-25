@@ -13,7 +13,7 @@
   
 
   
-  <link rel="alternate" href="/atom.xml" title="日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享">
+  <link rel="alternate" href="/atom.xml" title="日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享" type="application/atom+xml">
   
 
   <meta name="HandheldFriendly" content="True" />
@@ -35,7 +35,9 @@
   
 
   
-    <link rel="stylesheet" href="/style.css">
+    
+<link rel="stylesheet" href="/style.css">
+
   
 
   <script>
@@ -85,7 +87,7 @@
         daovoice('update');
         </script>
     
-</head>
+<meta name="generator" content="Hexo 5.4.0"></head>
 
 <body>
   
@@ -485,18 +487,18 @@
     <section class="article typo">
       <div class="article-entry" itemprop="articleBody">
         <h3 id="ResponseStatus"><a href="#ResponseStatus" class="headerlink" title="@ResponseStatus"></a>@ResponseStatus</h3><p>Restful webservice请求会用到@ResponseStatus 注解，该注解可用于类级别上，也可以应用在方法级别上，代表请求响应的状态，通常就是返回HttpStatus的状态码，具体可查询每个状态码代，这里简单罗列一些：</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">CONTINUE(100, "Continue"),</span><br><span class="line">SWITCHING_PROTOCOLS(101, "Switching Protocols"),</span><br><span class="line">PROCESSING(102, "Processing"),</span><br><span class="line">CHECKPOINT(103, "Checkpoint"),</span><br><span class="line">OK(200, "OK"),</span><br><span class="line">CREATED(201, "Created"),</span><br><span class="line">ACCEPTED(202, "Accepted"),</span><br><span class="line">NON_AUTHORITATIVE_INFORMATION(203, "Non-Authoritative Information"),</span><br><span class="line">NO_CONTENT(204, "No Content"),</span><br><span class="line">RESET_CONTENT(205, "<span class="keyword">Reset</span> <span class="keyword">Content</span><span class="string">"),</span></span><br><span class="line"><span class="string">PARTIAL_CONTENT(206, "</span><span class="keyword">Partial</span> <span class="keyword">Content</span><span class="string">"),</span></span><br><span class="line"><span class="string">MULTI_STATUS(207, "</span>Multi-<span class="keyword">Status</span><span class="string">"),</span></span><br><span class="line"><span class="string">ALREADY_REPORTED(208, "</span>Already Reported<span class="string">"),</span></span><br><span class="line"><span class="string">IM_USED(226, "</span>IM Used<span class="string">"),</span></span><br><span class="line"><span class="string">MULTIPLE_CHOICES(300, "</span>Multiple Choices<span class="string">"),</span></span><br><span class="line"><span class="string">MOVED_PERMANENTLY(301, "</span>Moved Permanently<span class="string">"),</span></span><br><span class="line"><span class="string">FOUND(302, "</span><span class="keyword">Found</span><span class="string">"),</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">CONTINUE(<span class="number">100</span>, &quot;Continue&quot;),</span><br><span class="line">SWITCHING_PROTOCOLS(<span class="number">101</span>, &quot;Switching Protocols&quot;),</span><br><span class="line">PROCESSING(<span class="number">102</span>, &quot;Processing&quot;),</span><br><span class="line">CHECKPOINT(<span class="number">103</span>, &quot;Checkpoint&quot;),</span><br><span class="line">OK(<span class="number">200</span>, &quot;OK&quot;),</span><br><span class="line">CREATED(<span class="number">201</span>, &quot;Created&quot;),</span><br><span class="line">ACCEPTED(<span class="number">202</span>, &quot;Accepted&quot;),</span><br><span class="line">NON_AUTHORITATIVE_INFORMATION(<span class="number">203</span>, &quot;Non-Authoritative Information&quot;),</span><br><span class="line">NO_CONTENT(<span class="number">204</span>, &quot;No Content&quot;),</span><br><span class="line">RESET_CONTENT(<span class="number">205</span>, &quot;Reset Content&quot;),</span><br><span class="line">PARTIAL_CONTENT(<span class="number">206</span>, &quot;Partial Content&quot;),</span><br><span class="line">MULTI_STATUS(<span class="number">207</span>, &quot;Multi-Status&quot;),</span><br><span class="line">ALREADY_REPORTED(<span class="number">208</span>, &quot;Already Reported&quot;),</span><br><span class="line">IM_USED(<span class="number">226</span>, &quot;IM Used&quot;),</span><br><span class="line">MULTIPLE_CHOICES(<span class="number">300</span>, &quot;Multiple Choices&quot;),</span><br><span class="line">MOVED_PERMANENTLY(<span class="number">301</span>, &quot;Moved Permanently&quot;),</span><br><span class="line">FOUND(<span class="number">302</span>, &quot;Found&quot;),</span><br></pre></td></tr></table></figure>
 
-<a id="more"></a>
+<span id="more"></span>
 
 <h4 id="应用在类级别"><a href="#应用在类级别" class="headerlink" title="应用在类级别"></a>应用在类级别</h4><p>创建一个异常类，用该注解标注</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.zj.exception;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.springframework.http.HttpStatus;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.ResponseStatus;</span><br><span class="line"></span><br><span class="line"><span class="meta">@ResponseStatus</span>(value=HttpStatus.FORBIDDEN,reason=<span class="string">"用户不匹配"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserNotMatchException</span> <span class="keyword">extends</span> <span class="title">RuntimeException</span></span>&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.zj.exception;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.springframework.http.HttpStatus;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.ResponseStatus;</span><br><span class="line"></span><br><span class="line"><span class="meta">@ResponseStatus(value=HttpStatus.FORBIDDEN,reason=&quot;用户不匹配&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserNotMatchException</span> <span class="keyword">extends</span> <span class="title">RuntimeException</span></span>&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>写一个目标方法来抛出异常</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/testResponseStatus"</span>)</span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">testResponseStatus</span><span class="params">(<span class="keyword">int</span> i)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(i==<span class="number">0</span>)</span><br><span class="line">		<span class="keyword">throw</span> <span class="keyword">new</span> UserNotMatchException();</span><br><span class="line">	<span class="keyword">return</span> <span class="string">"hello"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping(&quot;/testResponseStatus&quot;)</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">testResponseStatus</span><span class="params">(<span class="keyword">int</span> i)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(i==<span class="number">0</span>)</span><br><span class="line">		<span class="keyword">throw</span> <span class="keyword">new</span> UserNotMatchException();</span><br><span class="line">	<span class="keyword">return</span> <span class="string">&quot;hello&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>这样当我们请求该方法，如果出现异常，会将用户不匹配的信息返回给浏览器，让异常信息更加明确，而不是一堆异常信息代码</p>
-<h4 id="应用在方法级别"><a href="#应用在方法级别" class="headerlink" title="应用在方法级别"></a>应用在方法级别</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@ResponseStatus</span>(value=HttpStatus.FORBIDDEN,reason=<span class="string">"用户名不匹配"</span>)</span><br><span class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/testResponseStatus"</span>)</span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">testResponseStatus</span><span class="params">(<span class="keyword">int</span> i)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(i==<span class="number">0</span>)</span><br><span class="line">		<span class="keyword">throw</span> <span class="keyword">new</span> UserNotMatchException();</span><br><span class="line">	<span class="keyword">return</span> <span class="string">"hello"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="应用在方法级别"><a href="#应用在方法级别" class="headerlink" title="应用在方法级别"></a>应用在方法级别</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@ResponseStatus(value=HttpStatus.FORBIDDEN,reason=&quot;用户名不匹配&quot;)</span></span><br><span class="line"><span class="meta">@RequestMapping(&quot;/testResponseStatus&quot;)</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">testResponseStatus</span><span class="params">(<span class="keyword">int</span> i)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(i==<span class="number">0</span>)</span><br><span class="line">		<span class="keyword">throw</span> <span class="keyword">new</span> UserNotMatchException();</span><br><span class="line">	<span class="keyword">return</span> <span class="string">&quot;hello&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p><strong>ResponseStatus修饰目标方法，无论它执行方法过程中有没有异常产生，用户都会得到异常的界面。而目标方法正常执行</strong></p>
 <p>这个情况要看项目的使用情况，通常会制定一个标准的异常信息显示，可以灵活使用.</p>
@@ -510,7 +512,7 @@
       <div class="personalweixin">
         <br><br>
         <blockquote>
-          <a href="https://mp.weixin.qq.com/s/G7BXuZh0Qh1-mE6ts4LJqQ" target="_blank" rel="noopener">加我微信</a>，咱们交流技术与思想，共同成长
+          <a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/G7BXuZh0Qh1-mE6ts4LJqQ">加我微信</a>，咱们交流技术与思想，共同成长
         </blockquote>
         <br>
 
@@ -548,9 +550,9 @@
   <div class="-mob-share-list share-body">
     
       
-        <a class="-mob-share-qq" title="QQ好友" rel="external nofollow noopener noreferrer"
+        <a class="-mob-share-qq" title="QQ好友" rel="external nofollow noopener noreferrer noopener"
           
-          href="http://connect.qq.com/widget/shareqq/index.html?url=https://dayarch.top/p/springmvc-response-status.html&title=Spring MVC 之 @ResponseStatus | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=@ResponseStatus
+          target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://dayarch.top/p/springmvc-response-status.html&title=Spring MVC 之 @ResponseStatus | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=@ResponseStatus
 Restful webservice请求会用到@ResponseStatus 注解，该注解可用于类级别上，也可以应用在方法级别上，代表请求响应的状态，通常就是返回HttpStatus的状态码，具体可查询每个状态码代，这里简单罗列一些：
 
 1
@@ -585,9 +587,9 @@ CHECKPOINT(103"
       
     
       
-        <a class="-mob-share-qzone" title="QQ空间" rel="external nofollow noopener noreferrer"
+        <a class="-mob-share-qzone" title="QQ空间" rel="external nofollow noopener noreferrer noopener"
           
-          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://dayarch.top/p/springmvc-response-status.html&title=Spring MVC 之 @ResponseStatus | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=@ResponseStatus
+          target="_blank" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://dayarch.top/p/springmvc-response-status.html&title=Spring MVC 之 @ResponseStatus | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=@ResponseStatus
 Restful webservice请求会用到@ResponseStatus 注解，该注解可用于类级别上，也可以应用在方法级别上，代表请求响应的状态，通常就是返回HttpStatus的状态码，具体可查询每个状态码代，这里简单罗列一些：
 
 1
@@ -622,9 +624,9 @@ CHECKPOINT(103"
       
     
       
-        <a class="-mob-share-weibo" title="微博" rel="external nofollow noopener noreferrer"
+        <a class="-mob-share-weibo" title="微博" rel="external nofollow noopener noreferrer noopener"
           
-          href="http://service.weibo.com/share/share.php?url=https://dayarch.top/p/springmvc-response-status.html&title=Spring MVC 之 @ResponseStatus | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=@ResponseStatus
+          target="_blank" href="http://service.weibo.com/share/share.php?url=https://dayarch.top/p/springmvc-response-status.html&title=Spring MVC 之 @ResponseStatus | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=@ResponseStatus
 Restful webservice请求会用到@ResponseStatus 注解，该注解可用于类级别上，也可以应用在方法级别上，代表请求响应的状态，通常就是返回HttpStatus的状态码，具体可查询每个状态码代，这里简单罗列一些：
 
 1
@@ -733,7 +735,7 @@ CHECKPOINT(103"
 </header>
 
     <div class="content pure">
-      <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/spring-aop.html" title="Spring AOP" rel="bookmark">Spring AOP</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/spring-boot-condition-annotation.html" title="@Conditional注解，Spring Boot 的灵活配置" rel="bookmark">@Conditional注解，Spring Boot 的灵活配置</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/spring-boot-messageconverter.html" title="HttpMessageConverter转换原理解析" rel="bookmark">HttpMessageConverter转换原理解析</a></h3></div></li></ul>
+      <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/spring-aop.html" title="Spring AOP" rel="bookmark">Spring AOP</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/spring-boot-condition-annotation.html" title="@Conditional注解，Spring Boot 的灵活配置" rel="bookmark">@Conditional注解，Spring Boot 的灵活配置</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/spring-aware.html" title="Spring Aware 到底是什么？" rel="bookmark">Spring Aware 到底是什么？</a></h3></div></li></ul>
     </div>
   </section>
 
@@ -941,7 +943,7 @@ CHECKPOINT(103"
 </header>
 
     <div class='content pure'>
-      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#ResponseStatus"><span class="toc-text">@ResponseStatus</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#应用在类级别"><span class="toc-text">应用在类级别</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#应用在方法级别"><span class="toc-text">应用在方法级别</span></a></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#ResponseStatus"><span class="toc-text">@ResponseStatus</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BA%94%E7%94%A8%E5%9C%A8%E7%B1%BB%E7%BA%A7%E5%88%AB"><span class="toc-text">应用在类级别</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BA%94%E7%94%A8%E5%9C%A8%E6%96%B9%E6%B3%95%E7%BA%A7%E5%88%AB"><span class="toc-text">应用在方法级别</span></a></li></ol></li></ol>
     </div>
   </section>
 
@@ -1016,7 +1018,7 @@ CHECKPOINT(103"
   &nbsp;&nbsp;|&nbsp;&nbsp;  
   
     &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-        class="white-color">264.1k</span>&nbsp;字
+        class="white-color">267.4k</span>&nbsp;字
     
 
   &nbsp;&nbsp;|&nbsp;&nbsp;  
@@ -1071,7 +1073,7 @@ CHECKPOINT(103"
     
     。
   </div>
-  <div><p>博客内容遵循 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
+  <div><p>博客内容遵循 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
 </div>
   <!-- <div class="github-badge">
       <a style="color: #fff" rel="license" href="https://hexo.io/" target="_blank" title="由 Hexo 强力驱动">
@@ -1179,10 +1181,14 @@ CHECKPOINT(103"
 
 
 
-  <script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/app.js"></script>
+  
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/app.js"></script>
 
 
-  <script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/search.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/search.js"></script>
+
 
 
 

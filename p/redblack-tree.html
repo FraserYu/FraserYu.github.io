@@ -13,7 +13,7 @@
   
 
   
-  <link rel="alternate" href="/atom.xml" title="日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享">
+  <link rel="alternate" href="/atom.xml" title="日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享" type="application/atom+xml">
   
 
   <meta name="HandheldFriendly" content="True" />
@@ -35,7 +35,9 @@
   
 
   
-    <link rel="stylesheet" href="/style.css">
+    
+<link rel="stylesheet" href="/style.css">
+
   
 
   <script>
@@ -85,7 +87,7 @@
         daovoice('update');
         </script>
     
-</head>
+<meta name="generator" content="Hexo 5.4.0"></head>
 
 <body>
   
@@ -488,21 +490,21 @@
 <blockquote>
 <p>通过工具 (公众号回复「工具」—&gt;那些可以提高效率的工具—&gt;红黑树) 动态感受红黑树的转换过程</p>
 </blockquote>
-<p><img src="https://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E5%BA%94%E7%94%A8%E7%B1%BB%E6%96%87%E7%AB%A0/_image/2019-07-19/Jul-19-2019%2016-46-36.gif" alt=""></p>
+<p><img src="https://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E5%BA%94%E7%94%A8%E7%B1%BB%E6%96%87%E7%AB%A0/_image/2019-07-19/Jul-19-2019%2016-46-36.gif"></p>
 <blockquote>
 <h4 id="俺家司令买完东西后，我俩经常会发生这样的一段对话"><a href="#俺家司令买完东西后，我俩经常会发生这样的一段对话" class="headerlink" title="俺家司令买完东西后，我俩经常会发生这样的一段对话:"></a>俺家司令买完东西后，我俩经常会发生这样的一段对话:</h4><p>司令:你猜我买的这个多少钱？<br><em>我: 1000</em><br>司令: 高了<br><em>我: 500</em><br>司令: 低了:<br><em>我: 750</em><br>…… 直到最后猜中</p>
 </blockquote>
 <p>这样说大家应该已经猜到了是「二分查找法」，通过这个例子我想要引出的是 <strong>树</strong>，来看图片</p>
-<p><img src="https://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E5%BA%94%E7%94%A8%E7%B1%BB%E6%96%87%E7%AB%A0/_image/2019-07-19/tree-838667.jpg" alt=""><br>程序中的树其实是我们日常看到的树的倒影，或者发挥一下想象，倒影也可以是树根</p>
+<p><img src="https://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E5%BA%94%E7%94%A8%E7%B1%BB%E6%96%87%E7%AB%A0/_image/2019-07-19/tree-838667.jpg"><br>程序中的树其实是我们日常看到的树的倒影，或者发挥一下想象，倒影也可以是树根</p>
 <h2 id="二叉查找树"><a href="#二叉查找树" class="headerlink" title="二叉查找树"></a>二叉查找树</h2><p>二叉查找树，Binary Search Tree 「BST」，要想了解二叉查找树，我们首先看下二叉查找树有哪些特性呢？</p>
 <ol>
 <li>某节点的左子树节点值仅包含小于该节点值</li>
 <li>某节点的右子树节点值仅包含大于该节点值</li>
 <li>左右子树每个也必须是二叉查找树<br>看个图就轻松理解上面三句话的意思了:</li>
 </ol>
-<p><img src="https://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E5%BA%94%E7%94%A8%E7%B1%BB%E6%96%87%E7%AB%A0/_image/2019-07-19/2019-07-19-10-33-23.jpg" alt=""></p>
+<p><img src="https://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E5%BA%94%E7%94%A8%E7%B1%BB%E6%96%87%E7%AB%A0/_image/2019-07-19/2019-07-19-10-33-23.jpg"></p>
 <p>上图，结合二叉查找树的三条约束来看，非常好，没有什么问题。再来看一个图，依旧符合上面三条约束，感觉有问题吗？</p>
-<p><img src="https://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E5%BA%94%E7%94%A8%E7%B1%BB%E6%96%87%E7%AB%A0/_image/2019-07-19/2019-07-19-10-42-07.jpg" alt=""></p>
+<p><img src="https://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E5%BA%94%E7%94%A8%E7%B1%BB%E6%96%87%E7%AB%A0/_image/2019-07-19/2019-07-19-10-42-07.jpg"></p>
 <ol>
 <li>这是一个走路一米六，一米八的树</li>
 <li>这是一个畸形的树，大风一挂很可能被折断的树<br>从程序的角度来说这个树不够平衡，查找次数或时间复杂度 O(h)可能会随着一条腿长无限增长</li>
@@ -530,7 +532,9 @@
 </ol>
 </li>
 <li><ol start="3">
-<li>如果 X 的 parent 不是黑色，同时 X 也不是 root:<ul>
+<li>如果 X 的 parent 不是黑色，同时 X 也不是 root:</li>
+</ol>
+<ul>
 <li>3.1 如果 X 的 uncle (叔叔) 是红色<ul>
 <li>3.1.1 将 parent 和 uncle 标记为黑色</li>
 <li>3.1.2 将 grand parent (祖父) 标记为红色</li>
@@ -539,10 +543,8 @@
 </li>
 </ul>
 </li>
-</ol>
-</li>
 </ul>
-<p>话不多说，看下图<br><img src="https://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E5%BA%94%E7%94%A8%E7%B1%BB%E6%96%87%E7%AB%A0/_image/2019-07-19/2019-07-19-15-21-51.jpg" alt=""></p>
+<p>话不多说，看下图<br><img src="https://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E5%BA%94%E7%94%A8%E7%B1%BB%E6%96%87%E7%AB%A0/_image/2019-07-19/2019-07-19-15-21-51.jpg"></p>
 <p>跟着上面的公式走:</p>
 <ol>
 <li>将新插入的 X 节点标记为红色</li>
@@ -556,7 +558,9 @@
 <p>刚刚说了 X 的 uncle 是红色的情况，接下来要说是黑色的情况</p>
 <ul>
 <li><ol start="3">
-<li>如果 X 的 parent 不是黑色，同时 X 也不是 root:<ul>
+<li>如果 X 的 parent 不是黑色，同时 X 也不是 root:</li>
+</ol>
+<ul>
 <li>3.2 如果 X 的 uncle (叔叔) 是黑色，我们要分四种情况处理<ul>
 <li>3.2.1 左左 (P 是 G 的左孩子，并且 X 是 P 的左孩子)</li>
 <li>3.2.2 左右 (P 是 G 的左孩子，并且 X 是 P 的右孩子)</li>
@@ -566,13 +570,11 @@
 </li>
 </ul>
 </li>
-</ol>
-</li>
 </ul>
-<p><img src="https://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E5%BA%94%E7%94%A8%E7%B1%BB%E6%96%87%E7%AB%A0/_image/2019-07-19/2019-07-19-15-38-39.jpg" alt=""></p>
-<h3 id="左右"><a href="#左右" class="headerlink" title="左右"></a>左右</h3><p>左旋: 使 X 的父节点 P 被 X 取代，同时父节点 P 成为 X 的左孩子，然后再应用 <strong>左左情况</strong><br><img src="https://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E5%BA%94%E7%94%A8%E7%B1%BB%E6%96%87%E7%AB%A0/_image/2019-07-19/2019-07-19-15-39-07.jpg" alt=""></p>
-<h3 id="右右"><a href="#右右" class="headerlink" title="右右"></a>右右</h3><p>与左左情况一样，想象成一根绳子<br><img src="https://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E5%BA%94%E7%94%A8%E7%B1%BB%E6%96%87%E7%AB%A0/_image/2019-07-19/2019-07-19-15-39-32.jpg" alt=""></p>
-<h3 id="右左"><a href="#右左" class="headerlink" title="右左"></a>右左</h3><p>右旋: 使 X 的父节点 P 被 X 取代，同时父节点 P 成为 X 的右孩子，然后再应用 <strong>右右情况</strong><br><img src="https://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E5%BA%94%E7%94%A8%E7%B1%BB%E6%96%87%E7%AB%A0/_image/2019-07-19/2019-07-19-15-39-44.jpg" alt=""></p>
+<p><img src="https://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E5%BA%94%E7%94%A8%E7%B1%BB%E6%96%87%E7%AB%A0/_image/2019-07-19/2019-07-19-15-38-39.jpg"></p>
+<h3 id="左右"><a href="#左右" class="headerlink" title="左右"></a>左右</h3><p>左旋: 使 X 的父节点 P 被 X 取代，同时父节点 P 成为 X 的左孩子，然后再应用 <strong>左左情况</strong><br><img src="https://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E5%BA%94%E7%94%A8%E7%B1%BB%E6%96%87%E7%AB%A0/_image/2019-07-19/2019-07-19-15-39-07.jpg"></p>
+<h3 id="右右"><a href="#右右" class="headerlink" title="右右"></a>右右</h3><p>与左左情况一样，想象成一根绳子<br><img src="https://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E5%BA%94%E7%94%A8%E7%B1%BB%E6%96%87%E7%AB%A0/_image/2019-07-19/2019-07-19-15-39-32.jpg"></p>
+<h3 id="右左"><a href="#右左" class="headerlink" title="右左"></a>右左</h3><p>右旋: 使 X 的父节点 P 被 X 取代，同时父节点 P 成为 X 的右孩子，然后再应用 <strong>右右情况</strong><br><img src="https://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E5%BA%94%E7%94%A8%E7%B1%BB%E6%96%87%E7%AB%A0/_image/2019-07-19/2019-07-19-15-39-44.jpg"></p>
 <p>你说的动图在哪里，你个大骗子，别着急，现在就为小伙伴们奉上动图演示，来说明公式的使用:</p>
 <h3 id="案例一"><a href="#案例一" class="headerlink" title="案例一"></a>案例一</h3><blockquote>
 <p>插入 10，20，30，15 到一个空树中</p>
@@ -581,12 +583,12 @@
 <li>向空树中第一次插入数字 10，肯定是 root 节点</li>
 <li>root 节点标记成黑色</li>
 </ol>
-<p><img src="https://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E5%BA%94%E7%94%A8%E7%B1%BB%E6%96%87%E7%AB%A0/_image/2019-07-19/Jul-19-2019%2016-08-11.gif" alt=""></p>
+<p><img src="https://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E5%BA%94%E7%94%A8%E7%B1%BB%E6%96%87%E7%AB%A0/_image/2019-07-19/Jul-19-2019%2016-08-11.gif"></p>
 <ol>
 <li>向树中插入新节点 20，标记为红色</li>
 <li>20 &gt; 10，并发现 10 没有叶子节点，将新节点 20 作为 10 的右孩子</li>
 </ol>
-<p><img src="https://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E5%BA%94%E7%94%A8%E7%B1%BB%E6%96%87%E7%AB%A0/_image/2019-07-19/Jul-19-2019%2016-12-00.gif" alt=""></p>
+<p><img src="https://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E5%BA%94%E7%94%A8%E7%B1%BB%E6%96%87%E7%AB%A0/_image/2019-07-19/Jul-19-2019%2016-12-00.gif"></p>
 <ol>
 <li>向树中插入新节点 30，标记为红色</li>
 <li>30 &gt; 10，查找 10 的右子树，找到 20</li>
@@ -595,7 +597,7 @@
 <li>通过一次旋转，提起 20 节点</li>
 <li>20 节点是根结点，标记为黑色</li>
 </ol>
-<p><img src="https://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E5%BA%94%E7%94%A8%E7%B1%BB%E6%96%87%E7%AB%A0/_image/2019-07-19/Jul-19-2019%2016-17-51.gif" alt=""></p>
+<p><img src="https://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E5%BA%94%E7%94%A8%E7%B1%BB%E6%96%87%E7%AB%A0/_image/2019-07-19/Jul-19-2019%2016-17-51.gif"></p>
 <ol>
 <li>向树中插入新节点 15，标记为红色</li>
 <li>通过比对大小和判断是否有叶子节点，最终插值为 10 节点的右孩子</li>
@@ -604,7 +606,7 @@
 <li>让 15 节点 grand parent 20 的颜色与 15 节点的颜色一样，变为红色</li>
 <li>20 为根结点，将其改为黑色</li>
 </ol>
-<p><img src="https://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E5%BA%94%E7%94%A8%E7%B1%BB%E6%96%87%E7%AB%A0/_image/2019-07-19/Jul-19-2019%2016-30-42.gif" alt=""></p>
+<p><img src="https://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E5%BA%94%E7%94%A8%E7%B1%BB%E6%96%87%E7%AB%A0/_image/2019-07-19/Jul-19-2019%2016-30-42.gif"></p>
 <blockquote>
 <p>继续插入其他节点只不过反复应用上面的公式，上面应用到的红黑树工具，可以暂停动画效果，一帧一帧的看红黑树的转换过程，这样通过练习，查看公式，观察变化三管齐下，红黑树的入门理解应该完全不再是问题了</p>
 </blockquote>
@@ -615,14 +617,14 @@
 <li>你了解各种树的时间复杂度吗？</li>
 <li>留个小作业，应用工具将 [10 70 32 34 13 56 32 56 21 3 62 4 ] 逐个插入到树中，理解红黑树 recolor 和 rotation 的转换规则</li>
 </ol>
-<h2 id="提高效率工具"><a href="#提高效率工具" class="headerlink" title="提高效率工具"></a>提高效率工具</h2><p><img src="https://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E6%84%9F%E6%83%B3%E4%B8%8E%E6%80%BB%E7%BB%93/_image/2019-06-18/b.png" alt=""></p>
+<h2 id="提高效率工具"><a href="#提高效率工具" class="headerlink" title="提高效率工具"></a>提高效率工具</h2><p><img src="https://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E6%84%9F%E6%83%B3%E4%B8%8E%E6%80%BB%E7%BB%93/_image/2019-06-18/b.png"></p>
 <hr>
 <h2 id="推荐阅读"><a href="#推荐阅读" class="headerlink" title="推荐阅读"></a>推荐阅读</h2><ul>
-<li><a href="https://mp.weixin.qq.com/s/6dg3u2PkcTSQHu_3T_QYnA" target="_blank" rel="noopener">只会用 git pull ？有时候你可以尝试更优雅的处理方式 </a></li>
-<li><a href="https://mp.weixin.qq.com/s/Dnr1jLebvBUHnziZzSfcrA" target="_blank" rel="noopener">双亲委派模型：大厂高频面试题，轻松搞定</a></li>
-<li><a href="https://mp.weixin.qq.com/s/YBQB086ADBjHUmwrFQrWew" target="_blank" rel="noopener">面试还不知道BeanFactory和ApplicationContext的区别？</a></li>
-<li><a href="https://mp.weixin.qq.com/s/hR1TqkVzwZ_T8fuMnsM4hQ" target="_blank" rel="noopener">如何设计好的RESTful API</a></li>
-<li><a href="https://mp.weixin.qq.com/s/V7h8O6pVFQ-nr_iA2SNqtw" target="_blank" rel="noopener">程序猿为什么要看源码？</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/6dg3u2PkcTSQHu_3T_QYnA">只会用 git pull ？有时候你可以尝试更优雅的处理方式 </a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/Dnr1jLebvBUHnziZzSfcrA">双亲委派模型：大厂高频面试题，轻松搞定</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/YBQB086ADBjHUmwrFQrWew">面试还不知道BeanFactory和ApplicationContext的区别？</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/hR1TqkVzwZ_T8fuMnsM4hQ">如何设计好的RESTful API</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/V7h8O6pVFQ-nr_iA2SNqtw">程序猿为什么要看源码？</a></li>
 </ul>
 <hr>
 <blockquote>
@@ -634,7 +636,7 @@
 </ul>
 <p><strong>后续文章会为你讲解各种时间空间复杂度，以及多线程，ElasticSearch 等问题</strong><br> 以读侦探小说思维轻松趣味学习 Java 技术栈相关知识，本着将复杂问题简单化，抽象问题具体化和图形化原则逐步分解技术问题，技术持续更新，请持续关注……</p>
 </blockquote>
-<p><img src="https://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E6%84%9F%E6%83%B3%E4%B8%8E%E6%80%BB%E7%BB%93/_image/2019-06-18/a%20%281%29.png" alt=""></p>
+<p><img src="https://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E6%84%9F%E6%83%B3%E4%B8%8E%E6%80%BB%E7%BB%93/_image/2019-06-18/a%20%281%29.png"></p>
 
       </div>
       <!-- <div class="tuijian">
@@ -645,7 +647,7 @@
       <div class="personalweixin">
         <br><br>
         <blockquote>
-          <a href="https://mp.weixin.qq.com/s/G7BXuZh0Qh1-mE6ts4LJqQ" target="_blank" rel="noopener">加我微信</a>，咱们交流技术与思想，共同成长
+          <a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/G7BXuZh0Qh1-mE6ts4LJqQ">加我微信</a>，咱们交流技术与思想，共同成长
         </blockquote>
         <br>
 
@@ -787,7 +789,7 @@
                           
                               
                               <h6 class="tags">
-                                  <a class="tag" href="/tags/HTTP/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> HTTP</a> <a class="tag" href="/tags/RESTful/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> RESTful</a>
+                                  <a class="tag" href="/tags/RESTful/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> RESTful</a> <a class="tag" href="/tags/HTTP/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> HTTP</a>
                               </h6>
                           
                       </span>
@@ -814,7 +816,7 @@
 </header>
 
     <div class="content pure">
-      <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/easyexcel-read.html" title="EasyExcel读取Excel实际应用" rel="bookmark">EasyExcel读取Excel实际应用</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/http-client-advanced-usage.html" title="IntelliJ IDEA HTTP Client高级使用详解" rel="bookmark">IntelliJ IDEA HTTP Client高级使用详解</a></h3></div></li></ul>
+      <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/http-client-advanced-usage.html" title="IntelliJ IDEA HTTP Client高级使用详解" rel="bookmark">IntelliJ IDEA HTTP Client高级使用详解</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/intellj-idea-advanced-debug.html" title="IntelliJ IDEA 高级Debug技巧，助你起飞" rel="bookmark">IntelliJ IDEA 高级Debug技巧，助你起飞</a></h3></div></li></ul>
     </div>
   </section>
 
@@ -1022,7 +1024,7 @@
 </header>
 
     <div class='content pure'>
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#写在前面"><span class="toc-text">写在前面</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#俺家司令买完东西后，我俩经常会发生这样的一段对话"><span class="toc-text">俺家司令买完东西后，我俩经常会发生这样的一段对话:</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二叉查找树"><span class="toc-text">二叉查找树</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#红黑树"><span class="toc-text">红黑树</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#左左情况"><span class="toc-text">左左情况</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#左右"><span class="toc-text">左右</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#右右"><span class="toc-text">右右</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#右左"><span class="toc-text">右左</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#案例一"><span class="toc-text">案例一</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#灵魂追问"><span class="toc-text">灵魂追问</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#提高效率工具"><span class="toc-text">提高效率工具</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#推荐阅读"><span class="toc-text">推荐阅读</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#欢迎持续关注公众号：「日拱一兵」"><span class="toc-text">欢迎持续关注公众号：「日拱一兵」</span></a></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%99%E5%9C%A8%E5%89%8D%E9%9D%A2"><span class="toc-text">写在前面</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BF%BA%E5%AE%B6%E5%8F%B8%E4%BB%A4%E4%B9%B0%E5%AE%8C%E4%B8%9C%E8%A5%BF%E5%90%8E%EF%BC%8C%E6%88%91%E4%BF%A9%E7%BB%8F%E5%B8%B8%E4%BC%9A%E5%8F%91%E7%94%9F%E8%BF%99%E6%A0%B7%E7%9A%84%E4%B8%80%E6%AE%B5%E5%AF%B9%E8%AF%9D"><span class="toc-text">俺家司令买完东西后，我俩经常会发生这样的一段对话:</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E5%8F%89%E6%9F%A5%E6%89%BE%E6%A0%91"><span class="toc-text">二叉查找树</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BA%A2%E9%BB%91%E6%A0%91"><span class="toc-text">红黑树</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B7%A6%E5%B7%A6%E6%83%85%E5%86%B5"><span class="toc-text">左左情况</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B7%A6%E5%8F%B3"><span class="toc-text">左右</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%B3%E5%8F%B3"><span class="toc-text">右右</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%B3%E5%B7%A6"><span class="toc-text">右左</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A1%88%E4%BE%8B%E4%B8%80"><span class="toc-text">案例一</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%81%B5%E9%AD%82%E8%BF%BD%E9%97%AE"><span class="toc-text">灵魂追问</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8F%90%E9%AB%98%E6%95%88%E7%8E%87%E5%B7%A5%E5%85%B7"><span class="toc-text">提高效率工具</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8E%A8%E8%8D%90%E9%98%85%E8%AF%BB"><span class="toc-text">推荐阅读</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%AC%A2%E8%BF%8E%E6%8C%81%E7%BB%AD%E5%85%B3%E6%B3%A8%E5%85%AC%E4%BC%97%E5%8F%B7%EF%BC%9A%E3%80%8C%E6%97%A5%E6%8B%B1%E4%B8%80%E5%85%B5%E3%80%8D"><span class="toc-text">欢迎持续关注公众号：「日拱一兵」</span></a></li></ol></li></ol>
     </div>
   </section>
 
@@ -1097,7 +1099,7 @@
   &nbsp;&nbsp;|&nbsp;&nbsp;  
   
     &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-        class="white-color">264.1k</span>&nbsp;字
+        class="white-color">267.4k</span>&nbsp;字
     
 
   &nbsp;&nbsp;|&nbsp;&nbsp;  
@@ -1152,7 +1154,7 @@
     
     。
   </div>
-  <div><p>博客内容遵循 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
+  <div><p>博客内容遵循 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
 </div>
   <!-- <div class="github-badge">
       <a style="color: #fff" rel="license" href="https://hexo.io/" target="_blank" title="由 Hexo 强力驱动">
@@ -1260,10 +1262,14 @@
 
 
 
-  <script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/app.js"></script>
+  
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/app.js"></script>
 
 
-  <script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/search.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/search.js"></script>
+
 
 
 

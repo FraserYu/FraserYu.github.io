@@ -13,7 +13,7 @@
   
 
   
-  <link rel="alternate" href="/atom.xml" title="日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享">
+  <link rel="alternate" href="/atom.xml" title="日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享" type="application/atom+xml">
   
 
   <meta name="HandheldFriendly" content="True" />
@@ -35,7 +35,9 @@
   
 
   
-    <link rel="stylesheet" href="/style.css">
+    
+<link rel="stylesheet" href="/style.css">
+
   
 
   <script>
@@ -85,7 +87,7 @@
         daovoice('update');
         </script>
     
-</head>
+<meta name="generator" content="Hexo 5.4.0"></head>
 
 <body>
   
@@ -484,7 +486,7 @@
       <div class="article-entry" itemprop="articleBody">
         <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>项目开发时间不算紧张，知道项目应用Jenkins 持续集成实现自动化部署，这个部署是如何实现的，向架构师取经研究之后做此记录.</p>
 <h3 id="部署架构拓扑图"><a href="#部署架构拓扑图" class="headerlink" title="部署架构拓扑图"></a>部署架构拓扑图</h3><p>以下是项目部署架构简易拓扑图，不包括Solr服务器的部署, Prod Env采用Cluster Deployment的方式.  </p>
-<a id="more"></a>
+<span id="more"></span>
 <p><img src="http://7xkyc7.com1.z0.glb.clouddn.com/jenkins_tp.png" alt="部署拓扑图"></p>
 <blockquote>
 <p>运维人员搭建Jenkins服务器之后，每位被授权的开发人员都可以访问Jenkins 工作主页， 当push代码之后，统一在指定时间点build (Jenkins没有采用有push代码自动build的方式 ).</p>
@@ -500,100 +502,110 @@
 <p>开发人员只需要点击Jenkins控制台的Build，即可完成自动化部署，这正是Jenkins 带来的便利，接下来就解释一下Jenkins 整个工作过程.</p>
 <h3 id="Jenkins-持续集成过程详解"><a href="#Jenkins-持续集成过程详解" class="headerlink" title="Jenkins 持续集成过程详解"></a>Jenkins 持续集成过程详解</h3><p>生产环境是采用集群部署，和QA环境是有所区别的，下面针对生产环境和QA环境分别作解释</p>
 <h4 id="Common-环境解释"><a href="#Common-环境解释" class="headerlink" title="Common 环境解释"></a>Common 环境解释</h4><p>Jenkins 的Home Directory 是  </p>
-<pre><code>/var/lib/jenkins</code></pre><h4 id="QA环境部署"><a href="#QA环境部署" class="headerlink" title="QA环境部署"></a>QA环境部署</h4><blockquote>
-<p>以QA1 环境为例，item名称为 <strong>qa_honor_hybris</strong>,  workspace的路径是Jenkins 的workspace路径与item名称的拼接，这样当前item的<strong>$workspace</strong>的路径为</p>
+<pre><code>/var/lib/jenkins
+</code></pre>
+<h4 id="QA环境部署"><a href="#QA环境部署" class="headerlink" title="QA环境部署"></a>QA环境部署</h4><blockquote>
+<p>以QA1 环境为例，item名称为 <strong>qa_honor_hybris</strong>,  workspace的路径是Jenkins 的workspace路径与item名称的拼接，这样当前item的**$workspace**的路径为</p>
 </blockquote>
-<pre><code>/var/lib/jenkins/workspace/qa_honor_hybris</code></pre><ol>
+<pre><code>/var/lib/jenkins/workspace/qa_honor_hybris
+</code></pre>
+<ol>
 <li><p>点击build之后，Jenkins会按照该item配置好的Git Repository 来拉取最新代码到workspace中</p>
 </li>
 <li><p>执行自定义Shell 脚本(Jenkins 控制台写好的脚本)</p>
-<pre><code># 1. 移除掉工作区旧代码
-rm -rf /data/qa_honor_hybris/hybris/bin/custom
-# 2. copy 拉取下来的最新代码到工作区中
-cp -r $WORKSPACE/bin/custom /data/qa_honor_hybris/hybris/bin
-# 3. copy local.properties  和 localextensions.xml 到 工作区config目录下
-cp $WORKSPACE/config/local.properties /data/qa_honor_hybris/hybris/config
-cp $WORKSPACE/config/localextensions.xml /data/qa_honor_hybris/hybris/config
-# 5. 进入工作区platform 目录
-cd /data/qa_honor_hybris/hybris/bin/platform
-# 6. 设置基本环境变量，当然可以Jenkins 设置好
-export JAVA_HOME=/usr/local/jdk1.8
-export JRE_HOME=/usr/local/jdk1.8/jre
-export CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar:$JRE_HOME/lib:$CLASSPATH
-export PATH=$JAVA_HOME/bin:$PATH
-# 7. 指定ant 目录并且build，执行该步骤是为了检测项目是否能build成功
-. ./setantenv.sh
-ant clean all
-# 8. 切换到工作区build 目录下
-cd /data/qa_honor_hybris/build
-./build_and_deploy.sh</code></pre></li>
+<pre><code> # 1. 移除掉工作区旧代码
+ rm -rf /data/qa_honor_hybris/hybris/bin/custom
+ # 2. copy 拉取下来的最新代码到工作区中
+ cp -r $WORKSPACE/bin/custom /data/qa_honor_hybris/hybris/bin
+ # 3. copy local.properties  和 localextensions.xml 到 工作区config目录下
+ cp $WORKSPACE/config/local.properties /data/qa_honor_hybris/hybris/config
+ cp $WORKSPACE/config/localextensions.xml /data/qa_honor_hybris/hybris/config
+ # 5. 进入工作区platform 目录
+ cd /data/qa_honor_hybris/hybris/bin/platform
+ # 6. 设置基本环境变量，当然可以Jenkins 设置好
+ export JAVA_HOME=/usr/local/jdk1.8
+ export JRE_HOME=/usr/local/jdk1.8/jre
+ export CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar:$JRE_HOME/lib:$CLASSPATH
+ export PATH=$JAVA_HOME/bin:$PATH
+ # 7. 指定ant 目录并且build，执行该步骤是为了检测项目是否能build成功
+ . ./setantenv.sh
+ ant clean all
+ # 8. 切换到工作区build 目录下
+ cd /data/qa_honor_hybris/build
+ ./build_and_deploy.sh
+</code></pre>
+</li>
 <li><p><strong>./build_and_deploy.sh</strong> 脚本内容</p>
-<pre><code>#!/bin/bash
-# 1. 进入工作区目录
-cd /var/lib/jenkins/workspace/qa1-honor-hybris
-echo &quot;build for honor hybris qa1&quot;
-# 删除workspace 历史内容
-echo &quot;create honor source code tar ball&quot;
-rm -rf honor
-rm -rf honor.tar.gz
-# 创建文件夹，等待打包
-mkdir honor
-# copy workspace 最新代码拷贝到 刚刚新建的honor 文件夹中
-cp -r /var/lib/jenkins/workspace/qa1-honor-hybris/bin honor
-cp -r /var/lib/jenkins/workspace/qa1-honor-hybris/config/qa honor
-# 将honor 文件夹压缩打包
-tar -zcvf honor.tar.gz honor
+<pre><code> #!/bin/bash
+ # 1. 进入工作区目录
+ cd /var/lib/jenkins/workspace/qa1-honor-hybris
+ echo &quot;build for honor hybris qa1&quot;
+ # 删除workspace 历史内容
+ echo &quot;create honor source code tar ball&quot;
+ rm -rf honor
+ rm -rf honor.tar.gz
+ # 创建文件夹，等待打包
+ mkdir honor
+ # copy workspace 最新代码拷贝到 刚刚新建的honor 文件夹中
+ cp -r /var/lib/jenkins/workspace/qa1-honor-hybris/bin honor
+ cp -r /var/lib/jenkins/workspace/qa1-honor-hybris/config/qa honor
+ # 将honor 文件夹压缩打包
+ tar -zcvf honor.tar.gz honor
 
-# 将打包的honor.tar.gz 远程copy到 QA1 服务器的workspace 中
-echo &quot;======copy tar ball to qa1 server(10.11.12.233)=====&quot;
-scp honor.tar.gz app@10.11.12.233:/data/build_workspace
-# 进入到QA1 环境并且进入workspace, 停掉QA1 的服务
-echo &quot;===build hybris and start hybris on qa1 server===&quot;
-ssh app@10.11.12.233 &apos;cd /data/build_workspace;. ./stop.sh&apos;
-# 执行QA1相应路径下的脚本.
-ssh app@10.11.12.233 &apos;cd /data/build_workspace;. ./build_and_start.sh&apos;
+ # 将打包的honor.tar.gz 远程copy到 QA1 服务器的workspace 中
+ echo &quot;======copy tar ball to qa1 server(10.11.12.233)=====&quot;
+ scp honor.tar.gz app@10.11.12.233:/data/build_workspace
+ # 进入到QA1 环境并且进入workspace, 停掉QA1 的服务
+ echo &quot;===build hybris and start hybris on qa1 server===&quot;
+ ssh app@10.11.12.233 &#39;cd /data/build_workspace;. ./stop.sh&#39;
+ # 执行QA1相应路径下的脚本.
+ ssh app@10.11.12.233 &#39;cd /data/build_workspace;. ./build_and_start.sh&#39;
 
-echo &quot;build_and_deploy done&quot;
-exit 0</code></pre></li>
+ echo &quot;build_and_deploy done&quot;
+ exit 0
+</code></pre>
+</li>
 <li><p><strong>./build_and_start.sh</strong> 脚本内容</p>
-<pre><code>#!/bin/bash
-# 1. 删除掉honor 文件夹（确保文件夹删除，下面其实已经删除了一次）
-rm -rf honor
-# 2. 赋予可读可写可执行的权限
-chmod 755 honor.tar.gz
-# 3. 解压刚刚传输过来的压缩包，并赋予可读可写可执行的权限
-tar -zxvf honor.tar.gz
-chmod -R 755 honor
+<pre><code> #!/bin/bash
+ # 1. 删除掉honor 文件夹（确保文件夹删除，下面其实已经删除了一次）
+ rm -rf honor
+ # 2. 赋予可读可写可执行的权限
+ chmod 755 honor.tar.gz
+ # 3. 解压刚刚传输过来的压缩包，并赋予可读可写可执行的权限
+ tar -zxvf honor.tar.gz
+ chmod -R 755 honor
 
-# 4. 删除掉旧的Hybris代码
-echo &quot;remove old honor hybris source code...&quot;
-rm -rf /data/build_workspace/honor-hybris/hybris/bin/custom
-rm -rf /data/build_workspace/honor-hybris/hybris/config/local.properties
-rm -rf /data/build_workspace/honor-hybris/hybris/config/localextensions.xml
+ # 4. 删除掉旧的Hybris代码
+ echo &quot;remove old honor hybris source code...&quot;
+ rm -rf /data/build_workspace/honor-hybris/hybris/bin/custom
+ rm -rf /data/build_workspace/honor-hybris/hybris/config/local.properties
+ rm -rf /data/build_workspace/honor-hybris/hybris/config/localextensions.xml
 
-# 5. copy刚刚解压出来的honor文件夹的内容到工作区
-echo &quot;copy new honor source code...&quot;
-cd /data/build_workspace
-cp -r honor/* honor-hybris/hybris
-cp honor/qa/local_qa1.properties honor-hybris/hybris/config/local.properties
-cp honor/qa/localextensions.xml honor-hybris/hybris/config/localextensions.xml
+ # 5. copy刚刚解压出来的honor文件夹的内容到工作区
+ echo &quot;copy new honor source code...&quot;
+ cd /data/build_workspace
+ cp -r honor/* honor-hybris/hybris
+ cp honor/qa/local_qa1.properties honor-hybris/hybris/config/local.properties
+ cp honor/qa/localextensions.xml honor-hybris/hybris/config/localextensions.xml
 
-# 6. 删除解压出来的文件夹
-rm -rf honor
-# 7. 设置环境变量
-echo &quot;begin to start qa1...&quot;
-export JAVA_HOME=&quot;/usr/local/jdk1.8.0_101&quot;
-export PATH=$JAVA_HOME/bin:$PATH
-cd /data/build_workspace/honor-hybris/hybris/bin/platform
-. ./setantenv.sh
-ant clean all
-# 8. 直接以debug模式启动（方便远程调试，但是Jenkins build进度条始终是红色，不影响使用，还没找到这个解决办法）
-. ./hybrisserver.sh debug
-exit 0</code></pre></li>
+ # 6. 删除解压出来的文件夹
+ rm -rf honor
+ # 7. 设置环境变量
+ echo &quot;begin to start qa1...&quot;
+ export JAVA_HOME=&quot;/usr/local/jdk1.8.0_101&quot;
+ export PATH=$JAVA_HOME/bin:$PATH
+ cd /data/build_workspace/honor-hybris/hybris/bin/platform
+ . ./setantenv.sh
+ ant clean all
+ # 8. 直接以debug模式启动（方便远程调试，但是Jenkins build进度条始终是红色，不影响使用，还没找到这个解决办法）
+ . ./hybrisserver.sh debug
+ exit 0
+</code></pre>
+</li>
 </ol>
 <p>以上是QA环境还不涉及到多node的情况，接下来会介绍Prod 的情况，大体流程和QA环境相似，只不过是多了处理node的情况.</p>
 <h4 id="Prod-环境部署"><a href="#Prod-环境部署" class="headerlink" title="Prod 环境部署"></a>Prod 环境部署</h4><blockquote>
-<p>Jenkins 在build之后会将最新的代码pull到release服务器， 然后在release服务器上执&gt; 行脚本，将代码发布到各个服务器上, 在release服务器的<strong>/data</strong> 目录下有两个目录</p>
+<p>Jenkins 在build之后会将最新的代码pull到release服务器， 然后在release服务器上执&gt; 行脚本，将代码发布到各个服务器上, 在release服务器的**/data** 目录下有两个目录</p>
 <ol>
 <li><strong>/data/install</strong>: 将环境所需的软件、Licence等存放在此，这些只是第一次发布的时候会用到</li>
 <li><strong>/data/build</strong>: 这是真正build的所需要的目录</li>
@@ -603,189 +615,203 @@ exit 0</code></pre></li>
 <li><p>点击build之后，Jenkins会按照该item配置好的Git Repository 来拉取最新代码到workspace中</p>
 </li>
 <li><p>执行自定义Shell 脚本(Jenkins 控制台写好的脚本, 和QA环境类似，注意目录的改变)</p>
-<pre><code>rm -rf /data/prod_honor_hybris/hybris/bin/custom
-cp -r $WORKSPACE/bin/custom /data/prod_honor_hybris/hybris/bin
-cp $WORKSPACE/config/local.properties /data/prod_honor_hybris/hybris/config
-cp $WORKSPACE/config/localextensions.xml /data/prod_honor_hybris/hybris/config
-cd /data/prod_honor_hybris/hybris/bin/platform
-export JAVA_HOME=/usr/local/jdk1.8
-export JRE_HOME=/usr/local/jdk1.8/jre
-export CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar:$JRE_HOME/lib:$CLASSPATH
-export PATH=$JAVA_HOME/bin:$PATH
-. ./setantenv.sh
-ant clean all
-cd /data/prod_honor_hybris/build
-./build_and_deploy.sh</code></pre></li>
+<pre><code> rm -rf /data/prod_honor_hybris/hybris/bin/custom
+ cp -r $WORKSPACE/bin/custom /data/prod_honor_hybris/hybris/bin
+ cp $WORKSPACE/config/local.properties /data/prod_honor_hybris/hybris/config
+ cp $WORKSPACE/config/localextensions.xml /data/prod_honor_hybris/hybris/config
+ cd /data/prod_honor_hybris/hybris/bin/platform
+ export JAVA_HOME=/usr/local/jdk1.8
+ export JRE_HOME=/usr/local/jdk1.8/jre
+ export CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar:$JRE_HOME/lib:$CLASSPATH
+ export PATH=$JAVA_HOME/bin:$PATH
+ . ./setantenv.sh
+ ant clean all
+ cd /data/prod_honor_hybris/build
+ ./build_and_deploy.sh
+</code></pre>
+</li>
 <li><p><strong>./build_and_deploy.sh</strong> 脚本内容</p>
-<pre><code>#!/bin/bash
-cd /var/lib/jenkins/workspace/prod-honor-hybris
-echo &quot;build for honor hybris product&quot;
+<pre><code> #!/bin/bash
+ cd /var/lib/jenkins/workspace/prod-honor-hybris
+ echo &quot;build for honor hybris product&quot;
 
-echo &quot;create honor source code tar ball&quot;
-rm -rf honor
-rm -rf honor.tar.gz
-mkdir honor
-cp -r /var/lib/jenkins/workspace/prod-honor-hybris/bin honor
-cp -r /var/lib/jenkins/workspace/prod-honor-hybris/config/prod honor
-tar -zcvf honor.tar.gz honor
+ echo &quot;create honor source code tar ball&quot;
+ rm -rf honor
+ rm -rf honor.tar.gz
+ mkdir honor
+ cp -r /var/lib/jenkins/workspace/prod-honor-hybris/bin honor
+ cp -r /var/lib/jenkins/workspace/prod-honor-hybris/config/prod honor
+ tar -zcvf honor.tar.gz honor
 
-# 1. 生产上要备份原有的压缩包，以防万一进行恢复版本
-echo &quot;======backup original tar in release server(10.11.12.232)=====&quot;
-ssh app@10.11.12.232 &quot;cp /data/build/product/honor.tar.gz /data/build/product/honor.tar.gz_backup&quot;
-echo &quot;======copy tar ball to release server(10.11.12.232)=====&quot;
-scp honor.tar.gz app@10.11.12.232:/data/build/product
-echo &quot;build_and_deploy done&quot;
-exit 0</code></pre></li>
+ # 1. 生产上要备份原有的压缩包，以防万一进行恢复版本
+ echo &quot;======backup original tar in release server(10.11.12.232)=====&quot;
+ ssh app@10.11.12.232 &quot;cp /data/build/product/honor.tar.gz /data/build/product/honor.tar.gz_backup&quot;
+ echo &quot;======copy tar ball to release server(10.11.12.232)=====&quot;
+ scp honor.tar.gz app@10.11.12.232:/data/build/product
+ echo &quot;build_and_deploy done&quot;
+ exit 0
+</code></pre>
+</li>
 </ol>
 <ol start="4">
 <li><p>发布内容前端服务器，进入到Prod Release 服务器相应目录执行脚本<strong>app_release.sh</strong></p>
 <blockquote>
 <p>主要动态循环IP地址，将文件传送到不同的服务器，执行相应服务器的脚本.</p>
 </blockquote>
-<pre><code>#!/bin/bash
+<pre><code> #!/bin/bash
 
-if [ $# -lt 2 ]; then
-  echo &quot;please provide server start index and end index&quot;
-  echo &quot;usage: $0 [start] [end]&quot;
- # exit 0
-fi
+ if [ $# -lt 2 ]; then
+   echo &quot;please provide server start index and end index&quot;
+   echo &quot;usage: $0 [start] [end]&quot;
+  # exit 0
+ fi
 
-s=prd-hybris-pad
-baseIp=11.12.126.
-let ipStartNum=$1+54
-echo &quot;release artifact to hybris server from $s$1 to $s$2&quot;
+ s=prd-hybris-pad
+ baseIp=11.12.126.
+ let ipStartNum=$1+54
+ echo &quot;release artifact to hybris server from $s$1 to $s$2&quot;
 
-for((i=$1;i&lt;=$2;i++))
-do
-    server=$s$i.xxx.com
-    ipAddr=$baseIp$ipStartNum
-    echo &quot;============deploy on $server====================&quot;
-    echo &quot;copy Hybris production Deployment ZIP to $server&quot;
-    scp /data/build/product/honor.tar.gz app@$server:/data/workspace
+ for((i=$1;i&lt;=$2;i++))
+ do
+     server=$s$i.xxx.com
+     ipAddr=$baseIp$ipStartNum
+     echo &quot;============deploy on $server====================&quot;
+     echo &quot;copy Hybris production Deployment ZIP to $server&quot;
+     scp /data/build/product/honor.tar.gz app@$server:/data/workspace
 
-    echo &quot;build hybris on $server and start hybris&quot;
-    ssh app@$server &quot;cd /data/workspace;./stop.sh; nohup ./build_and_start.sh $ipAddr  &gt;./build.log 2&gt;&amp;1 &amp; &quot;
-    let ipStartNum=$ipStartNum+1
-        sleep 1
-done
+     echo &quot;build hybris on $server and start hybris&quot;
+     ssh app@$server &quot;cd /data/workspace;./stop.sh; nohup ./build_and_start.sh $ipAddr  &gt;./build.log 2&gt;&amp;1 &amp; &quot;
+     let ipStartNum=$ipStartNum+1
+         sleep 1
+ done
 
-echo &quot;done&quot;
-#exit 0</code></pre></li>
+ echo &quot;done&quot;
+ #exit 0
+</code></pre>
+</li>
 <li><p>Prod 服务器目录结构</p>
 </li>
 </ol>
 <p><img src="http://7xkyc7.com1.z0.glb.clouddn.com/jenkins_prod1.png" alt="目录结构"></p>
 <ol start="6">
-<li><p>进入到Prod 服务器之一 查看<strong>./stop.sh</strong> 脚本内容</p>
-<pre><code>#!/bin/bash
-cd /data/workspace/hybris/hybris/bin/platform
-. ./setantenv.sh &amp;&amp; ./hybrisserver.sh stop</code></pre></li>
-<li><p>查看<strong>./build_and_start.sh</strong>内容（内容有些复杂）</p>
-<pre><code>#!/bin/bash
-rm -rf honor
-chmod 755 honor.tar.gz
-tar -zxvf honor.tar.gz
-chmod -R 755 honor
+<li><p>进入到Prod 服务器之一 查看**./stop.sh** 脚本内容</p>
+<pre><code> #!/bin/bash
+ cd /data/workspace/hybris/hybris/bin/platform
+ . ./setantenv.sh &amp;&amp; ./hybrisserver.sh stop
+</code></pre>
+</li>
+<li><p>查看**./build_and_start.sh**内容（内容有些复杂）</p>
+<pre><code> #!/bin/bash
+ rm -rf honor
+ chmod 755 honor.tar.gz
+ tar -zxvf honor.tar.gz
+ chmod -R 755 honor
 
-echo &quot;remove old honor hybris source code...&quot;
-rm -rf /data/workspace/hybris/hybris/bin/custom
-rm -rf /data/workspace/hybris/hybris/config/local.properties
-rm -rf /data/workspace/hybris/hybris/config/localextensions.xml
+ echo &quot;remove old honor hybris source code...&quot;
+ rm -rf /data/workspace/hybris/hybris/bin/custom
+ rm -rf /data/workspace/hybris/hybris/config/local.properties
+ rm -rf /data/workspace/hybris/hybris/config/localextensions.xml
 
-echo &quot;copy new honor source code...&quot;
-cp -r honor/* hybris/hybris
-cp honor/prod/local.properties hybris/hybris/config/local.properties
-cp honor/prod/localextensions.xml hybris/hybris/config/localextensions.xml
-cp template.tomcat.context.tpl hybris/hybris/config/tomcat/tomcat_context.tpl
-sed -c -i &apos;s/.*name=&quot;backoffice&quot;.*/&lt;!-- &lt;extension name=&quot;backoffice&quot; \/&gt; --&gt;/g&apos; hybris/hybris/config/localextensions.xml
-sed -c -i &apos;s/.*requires-channel=&quot;https&quot;.*/&lt;intercept-url pattern=&quot;\/\*\*&quot; requires-channel=&quot;https&quot;\/&gt;/g&apos; hybris/hybris/bin/custom/honor/honorcommercewebservices/web/webroot/WEB-INF/config/v2/security-v2-spring.xml
-  sed -c -i &apos;s/.*name=&quot;mcc&quot;.*/&lt;!-- &lt;extension name=&quot;mcc&quot; \/&gt; --&gt;/g&apos; hybris/hybris/config/localextensions.xml
+ echo &quot;copy new honor source code...&quot;
+ cp -r honor/* hybris/hybris
+ cp honor/prod/local.properties hybris/hybris/config/local.properties
+ cp honor/prod/localextensions.xml hybris/hybris/config/localextensions.xml
+ cp template.tomcat.context.tpl hybris/hybris/config/tomcat/tomcat_context.tpl
+ sed -c -i &#39;s/.*name=&quot;backoffice&quot;.*/&lt;!-- &lt;extension name=&quot;backoffice&quot; \/&gt; --&gt;/g&#39; hybris/hybris/config/localextensions.xml
+ sed -c -i &#39;s/.*requires-channel=&quot;https&quot;.*/&lt;intercept-url pattern=&quot;\/\*\*&quot; requires-channel=&quot;https&quot;\/&gt;/g&#39; hybris/hybris/bin/custom/honor/honorcommercewebservices/web/webroot/WEB-INF/config/v2/security-v2-spring.xml
+   sed -c -i &#39;s/.*name=&quot;mcc&quot;.*/&lt;!-- &lt;extension name=&quot;mcc&quot; \/&gt; --&gt;/g&#39; hybris/hybris/config/localextensions.xml
 
-#echo cluster.id=$1 &gt;&gt; hybris/hybris/config/local.properties
-echo -e &quot;\ncluster.broadcast.method.jgroups.tcp.bind_addr=$1&quot; &gt;&gt; hybris/hybris/config/local.properties
-echo -e &quot;\ntask.processing.enabled=fase&quot; &gt;&gt; hybris/hybris/config/local.properties
-echo -e &quot;\nhac.webroot=/hac&quot; &gt;&gt; hybris/hybris/config/local.properties
-rm -rf honor
+ #echo cluster.id=$1 &gt;&gt; hybris/hybris/config/local.properties
+ echo -e &quot;\ncluster.broadcast.method.jgroups.tcp.bind_addr=$1&quot; &gt;&gt; hybris/hybris/config/local.properties
+ echo -e &quot;\ntask.processing.enabled=fase&quot; &gt;&gt; hybris/hybris/config/local.properties
+ echo -e &quot;\nhac.webroot=/hac&quot; &gt;&gt; hybris/hybris/config/local.properties
+ rm -rf honor
 
-echo &quot;begin to start server...&quot;
-export JAVA_HOME=&quot;/usr/local/jdk1.8.0_101&quot;
-export PATH=$JAVA_HOME/bin:$PATH
-cd /data/workspace/hybris/hybris/bin/platform
-. ./setantenv.sh
-ant clean all
-. ./hybrisserver.sh start
-exit 0</code></pre></li>
+ echo &quot;begin to start server...&quot;
+ export JAVA_HOME=&quot;/usr/local/jdk1.8.0_101&quot;
+ export PATH=$JAVA_HOME/bin:$PATH
+ cd /data/workspace/hybris/hybris/bin/platform
+ . ./setantenv.sh
+ ant clean all
+ . ./hybrisserver.sh start
+ exit 0
+</code></pre>
+</li>
 </ol>
 <ol start="8">
 <li><p><strong>template.tomcat.context.tpl</strong> 文件内容</p>
-<pre><code>#if (
-  $contextPath != &apos;/hmc&apos; &amp;&amp;
-  $contextPath != &apos;/hac&apos; &amp;&amp;
-  $contextPath != &apos;/backoffice&apos; &amp;&amp;
-  $contextPath != &apos;/advancedexport&apos; &amp;&amp;
-  $contextPath != &apos;/admincockpit&apos; &amp;&amp;
-  $contextPath != &apos;/mcc&apos; &amp;&amp;
-  $contextPath != &apos;/reportcockpit&apos; &amp;&amp;   
-  $contextPath != &apos;/importcockpit&apos; &amp;&amp;  
-  $contextPath != &apos;/cscockpit&apos; &amp;&amp;  
-  $contextPath != &apos;/cmscockpit&apos; &amp;&amp;
-  $contextPath != &apos;/cmscockpitRegular&apos; &amp;&amp;
-  $contextPath != &apos;/productcockpit&apos; &amp;&amp;  
-  $contextPath != &apos;/chinacheckoutaddon&apos; &amp;&amp;
-  $contextPath != &apos;/instore&apos; &amp;&amp;
-  $contextPath != &apos;/virtualjdbc&apos; &amp;&amp;
-  $contextPath != &apos;/erpintegration&apos; &amp;&amp;
-  $contextPath != &apos;/acceleratorservices&apos; &amp;&amp;
-  $contextPath != &apos;/commercesearchsampledata&apos; &amp;&amp;
-  $contextPath != &apos;/solrfacetsearch&apos;
-)
+<pre><code> #if (
+   $contextPath != &#39;/hmc&#39; &amp;&amp;
+   $contextPath != &#39;/hac&#39; &amp;&amp;
+   $contextPath != &#39;/backoffice&#39; &amp;&amp;
+   $contextPath != &#39;/advancedexport&#39; &amp;&amp;
+   $contextPath != &#39;/admincockpit&#39; &amp;&amp;
+   $contextPath != &#39;/mcc&#39; &amp;&amp;
+   $contextPath != &#39;/reportcockpit&#39; &amp;&amp;   
+   $contextPath != &#39;/importcockpit&#39; &amp;&amp;  
+   $contextPath != &#39;/cscockpit&#39; &amp;&amp;  
+   $contextPath != &#39;/cmscockpit&#39; &amp;&amp;
+   $contextPath != &#39;/cmscockpitRegular&#39; &amp;&amp;
+   $contextPath != &#39;/productcockpit&#39; &amp;&amp;  
+   $contextPath != &#39;/chinacheckoutaddon&#39; &amp;&amp;
+   $contextPath != &#39;/instore&#39; &amp;&amp;
+   $contextPath != &#39;/virtualjdbc&#39; &amp;&amp;
+   $contextPath != &#39;/erpintegration&#39; &amp;&amp;
+   $contextPath != &#39;/acceleratorservices&#39; &amp;&amp;
+   $contextPath != &#39;/commercesearchsampledata&#39; &amp;&amp;
+   $contextPath != &#39;/solrfacetsearch&#39;
+ )
 
-#if($contextDescription &amp;&amp; $contextDescription != &apos;&apos;)
-            &lt;!-- $contextDescription --&gt;
-#end
-            &lt;Context path=&quot;$contextPath&quot; docBase=&quot;$contextDocBase&quot; $!contextAdditionalAttributes&gt;
-                &lt;Manager pathname=&quot;&quot; /&gt;
-#if($contextLoader &amp;&amp; $contextLoader != &apos;&apos;)
-                $contextLoader
-#end
-#if($contextAdditionalElements &amp;&amp; $contextAdditionalElements != &apos;&apos;)
-                $contextAdditionalElements
-#end
-            &lt;/Context&gt;
-#end</code></pre></li>
+ #if($contextDescription &amp;&amp; $contextDescription != &#39;&#39;)
+             &lt;!-- $contextDescription --&gt;
+ #end
+             &lt;Context path=&quot;$contextPath&quot; docBase=&quot;$contextDocBase&quot; $!contextAdditionalAttributes&gt;
+                 &lt;Manager pathname=&quot;&quot; /&gt;
+ #if($contextLoader &amp;&amp; $contextLoader != &#39;&#39;)
+                 $contextLoader
+ #end
+ #if($contextAdditionalElements &amp;&amp; $contextAdditionalElements != &#39;&#39;)
+                 $contextAdditionalElements
+ #end
+             &lt;/Context&gt;
+ #end
+</code></pre>
+</li>
 </ol>
 <ol start="9">
 <li><p>发布内容后端服务器，进入到Prod Release 服务器相应目录执行脚本<strong>backend_release.sh</strong></p>
-<pre><code>#!/bin/bash
+<pre><code> #!/bin/bash
 
-if [ $# -lt 2 ]; then
-  echo &quot;please provide server start index and end index&quot;
-  echo &quot;usage: $0 [start] [end]&quot;
- # exit 0
-fi
+ if [ $# -lt 2 ]; then
+   echo &quot;please provide server start index and end index&quot;
+   echo &quot;usage: $0 [start] [end]&quot;
+  # exit 0
+ fi
 
-s=prd-hybris
-baseIp=10.0.126.
-let ipStartNum=$1+52
-echo &quot;release artifact to hybris server from $s$1 to $s$2&quot;
+ s=prd-hybris
+ baseIp=10.0.126.
+ let ipStartNum=$1+52
+ echo &quot;release artifact to hybris server from $s$1 to $s$2&quot;
 
-for((i=$1;i&lt;=$2;i++))
-do
-    server=$s$i.xxxx.com
-    ipAddr=$baseIp$ipStartNum
+ for((i=$1;i&lt;=$2;i++))
+ do
+     server=$s$i.xxxx.com
+     ipAddr=$baseIp$ipStartNum
 
-    echo &quot;============deploy on $server====================&quot;
-    echo &quot;copy Hybris production Deployment ZIP to $server&quot;
-    scp /data/build/product/honor.tar.gz app@$server:/data/workspace
+     echo &quot;============deploy on $server====================&quot;
+     echo &quot;copy Hybris production Deployment ZIP to $server&quot;
+     scp /data/build/product/honor.tar.gz app@$server:/data/workspace
 
-    echo &quot;build hybris on $server and start hybris&quot;
-    ssh app@$server &quot;cd /data/workspace;./stop.sh; nohup ./build_and_start.sh  $ipAddr &gt;./build.log 2&gt;&amp;1 &amp; &quot;
-    let ipStartNum=$ipStartNum+1
-        sleep 1
-done
+     echo &quot;build hybris on $server and start hybris&quot;
+     ssh app@$server &quot;cd /data/workspace;./stop.sh; nohup ./build_and_start.sh  $ipAddr &gt;./build.log 2&gt;&amp;1 &amp; &quot;
+     let ipStartNum=$ipStartNum+1
+         sleep 1
+ done
 
-echo &quot;done&quot;
-#exit 0</code></pre></li>
+ echo &quot;done&quot;
+ #exit 0
+</code></pre>
+</li>
 </ol>
 <ol start="10">
 <li><p><strong>security-v2-spring.xml</strong> 文件内容</p>
@@ -818,10 +844,10 @@ echo &quot;done&quot;
 &lt;intercept-url pattern=&quot;/**&quot; requires-channel=&quot;https&quot;/&gt;
 
         &lt;port-mappings&gt;
-            &lt;port-mapping http=&quot;#{configurationService.configuration.getProperty(&apos;tomcat.http.port&apos;)}&quot;
-                          https=&quot;#{configurationService.configuration.getProperty(&apos;tomcat.ssl.port&apos;)}&quot;/&gt;
-            &lt;port-mapping http=&quot;#{configurationService.configuration.getProperty(&apos;embeddedserver.http.port&apos;)}&quot;
-                          https=&quot;#{configurationService.configuration.getProperty(&apos;embeddedserver.ssl.port&apos;)}&quot; /&gt;
+            &lt;port-mapping http=&quot;#&#123;configurationService.configuration.getProperty(&#39;tomcat.http.port&#39;)&#125;&quot;
+                          https=&quot;#&#123;configurationService.configuration.getProperty(&#39;tomcat.ssl.port&#39;)&#125;&quot;/&gt;
+            &lt;port-mapping http=&quot;#&#123;configurationService.configuration.getProperty(&#39;embeddedserver.http.port&#39;)&#125;&quot;
+                          https=&quot;#&#123;configurationService.configuration.getProperty(&#39;embeddedserver.ssl.port&#39;)&#125;&quot; /&gt;
         &lt;/port-mappings&gt;
 
         &lt;custom-filter ref=&quot;resourceServerFilter&quot; before=&quot;PRE_AUTH_FILTER&quot;/&gt;
@@ -847,7 +873,9 @@ echo &quot;done&quot;
     &lt;bean id=&quot;oAuth2ExceptionRendererV2&quot; parent=&quot;oAuth2ExceptionRenderer&quot;&gt;
         &lt;property name=&quot;messageConverters&quot; ref=&quot;messageConvertersV2&quot;/&gt;
     &lt;/bean&gt;
-&lt;/beans&gt;</code></pre></li>
+&lt;/beans&gt;
+</code></pre>
+</li>
 </ol>
 <p>大家看到了好处，也看到了Jenkins 不同服务器的部署基本类似，就是苦力活了， 接下来会将docker的部署陆续添加进来.</p>
 
@@ -860,7 +888,7 @@ echo &quot;done&quot;
       <div class="personalweixin">
         <br><br>
         <blockquote>
-          <a href="https://mp.weixin.qq.com/s/G7BXuZh0Qh1-mE6ts4LJqQ" target="_blank" rel="noopener">加我微信</a>，咱们交流技术与思想，共同成长
+          <a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/G7BXuZh0Qh1-mE6ts4LJqQ">加我微信</a>，咱们交流技术与思想，共同成长
         </blockquote>
         <br>
 
@@ -898,9 +926,9 @@ echo &quot;done&quot;
   <div class="-mob-share-list share-body">
     
       
-        <a class="-mob-share-qq" title="QQ好友" rel="external nofollow noopener noreferrer"
+        <a class="-mob-share-qq" title="QQ好友" rel="external nofollow noopener noreferrer noopener"
           
-          href="http://connect.qq.com/widget/shareqq/index.html?url=https://dayarch.top/p/jenkins-hybris-deploy.html&title=Jenkins自动化部署Hybris | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=前言
+          target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://dayarch.top/p/jenkins-hybris-deploy.html&title=Jenkins自动化部署Hybris | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=前言
 项目开发时间不算紧张，知道项目应用Jenkins 持续集成实现自动化部署，这个部署是如何实现的，向架构师取经研究之后做此记录.
 
 部署架构拓扑图
@@ -922,9 +950,9 @@ echo &quot;done&quot;
       
     
       
-        <a class="-mob-share-qzone" title="QQ空间" rel="external nofollow noopener noreferrer"
+        <a class="-mob-share-qzone" title="QQ空间" rel="external nofollow noopener noreferrer noopener"
           
-          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://dayarch.top/p/jenkins-hybris-deploy.html&title=Jenkins自动化部署Hybris | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=前言
+          target="_blank" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://dayarch.top/p/jenkins-hybris-deploy.html&title=Jenkins自动化部署Hybris | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=前言
 项目开发时间不算紧张，知道项目应用Jenkins 持续集成实现自动化部署，这个部署是如何实现的，向架构师取经研究之后做此记录.
 
 部署架构拓扑图
@@ -946,9 +974,9 @@ echo &quot;done&quot;
       
     
       
-        <a class="-mob-share-weibo" title="微博" rel="external nofollow noopener noreferrer"
+        <a class="-mob-share-weibo" title="微博" rel="external nofollow noopener noreferrer noopener"
           
-          href="http://service.weibo.com/share/share.php?url=https://dayarch.top/p/jenkins-hybris-deploy.html&title=Jenkins自动化部署Hybris | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=前言
+          target="_blank" href="http://service.weibo.com/share/share.php?url=https://dayarch.top/p/jenkins-hybris-deploy.html&title=Jenkins自动化部署Hybris | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=前言
 项目开发时间不算紧张，知道项目应用Jenkins 持续集成实现自动化部署，这个部署是如何实现的，向架构师取经研究之后做此记录.
 
 部署架构拓扑图
@@ -1044,7 +1072,7 @@ echo &quot;done&quot;
 </header>
 
     <div class="content pure">
-      <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/jenkins-shared-library.html" title="Jenkins Shared Library" rel="bookmark">Jenkins Shared Library</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/jenkins-environment-variables.html" title="Jenkins 使用环境变量" rel="bookmark">Jenkins 使用环境变量</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/jenkins-dynamic-using-git-branch.html" title="Jenkins 动态使用分支名称" rel="bookmark">Jenkins 动态使用分支名称</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/jenkins-config-mail.html" title="Jenkins学习之邮箱配置" rel="bookmark">Jenkins学习之邮箱配置</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/git-worktree-in-practice.html" title="Git Worktree 大法真香" rel="bookmark">Git Worktree 大法真香</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/git-ignore.html" title="Git Ignoring Files" rel="bookmark">Git Ignoring Files</a></h3></div></li></ul>
+      <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/jenkins-shared-library.html" title="Jenkins Shared Library" rel="bookmark">Jenkins Shared Library</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/jenkins-environment-variables.html" title="Jenkins 使用环境变量" rel="bookmark">Jenkins 使用环境变量</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/jenkins-dynamic-using-git-branch.html" title="Jenkins 动态使用分支名称" rel="bookmark">Jenkins 动态使用分支名称</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/jenkins-config-mail.html" title="Jenkins学习之邮箱配置" rel="bookmark">Jenkins学习之邮箱配置</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/git-ignore.html" title="Git Ignoring Files" rel="bookmark">Git Ignoring Files</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/git-worktree-in-practice.html" title="Git Worktree 大法真香" rel="bookmark">Git Worktree 大法真香</a></h3></div></li></ul>
     </div>
   </section>
 
@@ -1252,7 +1280,7 @@ echo &quot;done&quot;
 </header>
 
     <div class='content pure'>
-      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#前言"><span class="toc-text">前言</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#部署架构拓扑图"><span class="toc-text">部署架构拓扑图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Jenkins-持续集成过程详解"><span class="toc-text">Jenkins 持续集成过程详解</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Common-环境解释"><span class="toc-text">Common 环境解释</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#QA环境部署"><span class="toc-text">QA环境部署</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Prod-环境部署"><span class="toc-text">Prod 环境部署</span></a></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-text">前言</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%83%A8%E7%BD%B2%E6%9E%B6%E6%9E%84%E6%8B%93%E6%89%91%E5%9B%BE"><span class="toc-text">部署架构拓扑图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Jenkins-%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3"><span class="toc-text">Jenkins 持续集成过程详解</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Common-%E7%8E%AF%E5%A2%83%E8%A7%A3%E9%87%8A"><span class="toc-text">Common 环境解释</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#QA%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2"><span class="toc-text">QA环境部署</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Prod-%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2"><span class="toc-text">Prod 环境部署</span></a></li></ol></li></ol>
     </div>
   </section>
 
@@ -1327,7 +1355,7 @@ echo &quot;done&quot;
   &nbsp;&nbsp;|&nbsp;&nbsp;  
   
     &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-        class="white-color">264.1k</span>&nbsp;字
+        class="white-color">267.4k</span>&nbsp;字
     
 
   &nbsp;&nbsp;|&nbsp;&nbsp;  
@@ -1382,7 +1410,7 @@ echo &quot;done&quot;
     
     。
   </div>
-  <div><p>博客内容遵循 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
+  <div><p>博客内容遵循 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
 </div>
   <!-- <div class="github-badge">
       <a style="color: #fff" rel="license" href="https://hexo.io/" target="_blank" title="由 Hexo 强力驱动">
@@ -1490,10 +1518,14 @@ echo &quot;done&quot;
 
 
 
-  <script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/app.js"></script>
+  
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/app.js"></script>
 
 
-  <script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/search.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/search.js"></script>
+
 
 
 

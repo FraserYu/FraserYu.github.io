@@ -13,7 +13,7 @@
   
 
   
-  <link rel="alternate" href="/atom.xml" title="日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享">
+  <link rel="alternate" href="/atom.xml" title="日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享" type="application/atom+xml">
   
 
   <meta name="HandheldFriendly" content="True" />
@@ -35,7 +35,9 @@
   
 
   
-    <link rel="stylesheet" href="/style.css">
+    
+<link rel="stylesheet" href="/style.css">
+
   
 
   <script>
@@ -85,7 +87,7 @@
         daovoice('update');
         </script>
     
-</head>
+<meta name="generator" content="Hexo 5.4.0"></head>
 
 <body>
   
@@ -482,48 +484,56 @@
 
     <section class="article typo">
       <div class="article-entry" itemprop="articleBody">
-        <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>以下内容根据<a href="https://help.github.com/articles/ignoring-files/" target="_blank" rel="noopener">Git Help</a>以及<a href="https://git-scm.com/docs/gitignore" target="_blank" rel="noopener">Git Docs</a> 整理翻译</p>
+        <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>以下内容根据<a target="_blank" rel="noopener" href="https://help.github.com/articles/ignoring-files/">Git Help</a>以及<a target="_blank" rel="noopener" href="https://git-scm.com/docs/gitignore">Git Docs</a> 整理翻译</p>
 <h3 id="Ignoring-files-忽略文件"><a href="#Ignoring-files-忽略文件" class="headerlink" title="Ignoring files(忽略文件)"></a>Ignoring files(忽略文件)</h3><p>有时候会有一些我们不想Git 提交一些文件到GitHub/GitLab，下面有几种方式让我们告诉Git来忽略哪些文件.</p>
-<a id="more"></a>
+<span id="more"></span>
 
 <h4 id="Create-a-local-gitignore（创建局部-本地的-gitignore文件）"><a href="#Create-a-local-gitignore（创建局部-本地的-gitignore文件）" class="headerlink" title="Create a local .gitignore（创建局部/本地的.gitignore文件）"></a>Create a local .gitignore（创建局部/本地的.gitignore文件）</h4><blockquote>
-<p>如果在local repository（仓库）中创建一个名为<strong>.gitignore</strong>的文件，在你commit（提交）动作之前，Git 将会读取<strong>*.gitignore</strong>文件去判断哪些文件或者目录需要忽略掉. 同时这个文件应该push到remote repository, 这样clone该repository的用户都会共享ignore的规则. 当然GitHub上维护了一个官方的、针对许多流行的操作系统、环境、语言的<strong>.gitignore</strong> <a href="https://github.com/github/gitignore" target="_blank" rel="noopener">文件样例</a></p>
+<p>如果在local repository（仓库）中创建一个名为**.gitignore<strong>的文件，在你commit（提交）动作之前，Git 将会读取</strong><em>.gitignore*<em>文件去判断哪些文件或者目录需要忽略掉. 同时这个文件应该push到remote repository, 这样clone该repository的用户都会共享ignore的规则. 当然GitHub上维护了一个官方的、针对许多流行的操作系统、环境、语言的</em></em>.gitignore** <a target="_blank" rel="noopener" href="https://github.com/github/gitignore">文件样例</a></p>
 </blockquote>
-<p>在终端，定位到Git repository所在位置，输入以下命令来创建<strong>.gitignore</strong>文件（当然在windows环境可以直接在仓库位置鼠标右键创建名为.gitignore的文件即可）</p>
-<pre><code>touch .gitignore</code></pre><p><strong>注意</strong>：如果某个文件已经被提交，此时你想让git 忽略它，这是你把这个文件添加到<strong>.gitignore</strong>文件中，git也不会忽略它，此时我们必须先untrack这个文件，这样Git才会忽略这个文件</p>
-<pre><code>git rm --cached FILENAME</code></pre><h4 id="Create-a-global-gitignore（创建全局-gitignore文件）"><a href="#Create-a-global-gitignore（创建全局-gitignore文件）" class="headerlink" title="Create a global .gitignore（创建全局.gitignore文件）"></a>Create a global .gitignore（创建全局.gitignore文件）</h4><blockquote>
-<p>通常我们会有多个repository，如果多个仓库需要的规则类似，我们还需要为每一个repository都新建一个<strong>.gitignore</strong> 文件吗？显然我们此刻需要一个全局的方式来管控所有的repository. 有两种方式来创建该全局文件：</p>
+<p>在终端，定位到Git repository所在位置，输入以下命令来创建**.gitignore**文件（当然在windows环境可以直接在仓库位置鼠标右键创建名为.gitignore的文件即可）</p>
+<pre><code>touch .gitignore
+</code></pre>
+<p><strong>注意</strong>：如果某个文件已经被提交，此时你想让git 忽略它，这是你把这个文件添加到**.gitignore**文件中，git也不会忽略它，此时我们必须先untrack这个文件，这样Git才会忽略这个文件</p>
+<pre><code>git rm --cached FILENAME
+</code></pre>
+<h4 id="Create-a-global-gitignore（创建全局-gitignore文件）"><a href="#Create-a-global-gitignore（创建全局-gitignore文件）" class="headerlink" title="Create a global .gitignore（创建全局.gitignore文件）"></a>Create a global .gitignore（创建全局.gitignore文件）</h4><blockquote>
+<p>通常我们会有多个repository，如果多个仓库需要的规则类似，我们还需要为每一个repository都新建一个**.gitignore** 文件吗？显然我们此刻需要一个全局的方式来管控所有的repository. 有两种方式来创建该全局文件：</p>
 </blockquote>
 <ol>
-<li><p>当安装了Git之后，在git 主目录(Windows环境C:\Users\Fraser)下会有一个<strong>.gitconfig</strong>文件，里面指定了如下内容：</p>
-<pre><code>[user]
-[core]
-    excludesfile = D:\\Users\\fraser\\Documents\\gitignore_global.txt
-[user]
-[user]
-    name = XXXXX
-    email = XXXXX@qq.com</code></pre><p>也就是说我们把规则定义在<strong>gitignore_global.txt</strong>文件中就好. 或者指定其他文件， 这个文件是windows自动生成的</p>
+<li><p>当安装了Git之后，在git 主目录(Windows环境C:\Users\Fraser)下会有一个**.gitconfig**文件，里面指定了如下内容：</p>
+<pre><code> [user]
+ [core]
+     excludesfile = D:\\Users\\fraser\\Documents\\gitignore_global.txt
+ [user]
+ [user]
+     name = XXXXX
+     email = XXXXX@qq.com
+</code></pre>
+<p>也就是说我们把规则定义在<strong>gitignore_global.txt</strong>文件中就好. 或者指定其他文件， 这个文件是windows自动生成的</p>
 </li>
-<li><p>通过命令指定<strong>.gitignore_global</strong>的文件</p>
-<pre><code>git config --global core.excludesfile ~/.gitignore_global</code></pre><p>通常.gitignore_global文件也是放在主目录下.</p>
+<li><p>通过命令指定**.gitignore_global**的文件</p>
+<pre><code> git config --global core.excludesfile ~/.gitignore_global
+</code></pre>
+<p>通常.gitignore_global文件也是放在主目录下.</p>
 </li>
 </ol>
 <h4 id="Explicit-repository-excludes-明确仓库忽略的文件"><a href="#Explicit-repository-excludes-明确仓库忽略的文件" class="headerlink" title="Explicit repository excludes(明确仓库忽略的文件)"></a>Explicit repository excludes(明确仓库忽略的文件)</h4><blockquote>
-<p>如果你不想创建一个<strong>.gitignore</strong>文件并且share给其他人，你可以创建一个不需要提交到repository的规则，比如我使用IntelliJ IDEA编辑器，编辑器会生成一些相应文件，但是同事使用Eclipse，也就是说IntelliJ IDEA编辑器生成的文件规则并不适用Eclipse，所以我们需要用另外方法来处理这种情况.</p>
+<p>如果你不想创建一个**.gitignore**文件并且share给其他人，你可以创建一个不需要提交到repository的规则，比如我使用IntelliJ IDEA编辑器，编辑器会生成一些相应文件，但是同事使用Eclipse，也就是说IntelliJ IDEA编辑器生成的文件规则并不适用Eclipse，所以我们需要用另外方法来处理这种情况.</p>
 </blockquote>
-<p>用编辑器打开<strong>.git/info/exclude</strong>，将规则加载这里即可,这个git是不会提交的.</p>
+<p>用编辑器打开**.git/info/exclude**，将规则加载这里即可,这个git是不会提交的.</p>
 <h3 id="Ignore-规则说明"><a href="#Ignore-规则说明" class="headerlink" title="Ignore 规则说明"></a>Ignore 规则说明</h3><p>gitignore - Specifies intentionally untracked files to ignore</p>
 <h4 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h4><p>上面我们说到了我们可以采用多种方式来让git ignore文件，同时配置了这些文件，优先级是什么呢？</p>
 <ol>
 <li><strong>Level1</strong><br>命令行执行的命令(很少用)</li>
-<li><strong>Level2</strong><br>仓库中的<strong>.gitignore</strong> 文件</li>
+<li><strong>Level2</strong><br>仓库中的**.gitignore** 文件</li>
 <li><strong>Level3</strong><br>$GIT_DIR/info/exclude</li>
 <li><strong>Level4</strong><br>全局的配置：core.excludesFile</li>
 </ol>
 <h4 id="PATTERN-FORMAT规则说明"><a href="#PATTERN-FORMAT规则说明" class="headerlink" title="PATTERN FORMAT规则说明"></a>PATTERN FORMAT规则说明</h4><ol>
 <li>空行，没有任何实际ignore意义，只是作为可读性的分隔符</li>
 <li>“#”号开头代表该行是注释，如果在前面加上“\”，则转义成以“#”开头</li>
-<li>“!” 是重新让git check in 某文件的意思，但是该文件的父目录被exclude，re-include 该文件Git是做不到的. 同样可以加上”&quot;来转义，<strong>!important!.txt</strong>和<strong>!important!.txt</strong></li>
+<li>“!” 是重新让git check in 某文件的意思，但是该文件的父目录被exclude，re-include 该文件Git是做不到的. 同样可以加上”&quot;来转义，**!important!.txt<strong>和</strong>!important!.txt**</li>
 <li>以“/”结束，如<strong>foo/</strong> 会匹配foo以及foo下面的子文件夹，但是不会匹配foo/下面的任何文件.</li>
 <li>* 是通配符，如*.c，会匹配所有.c为后缀的文件</li>
 <li>** 的含义非常多：</li>
@@ -538,12 +548,12 @@
       <!-- <div class="tuijian">
         <br><br>
         📚相关文章
-        <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/git-worktree-in-practice.html" title="Git Worktree 大法真香" rel="bookmark">Git Worktree 大法真香</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/git-multiple-account.html" title="Git配置多个账号（GitLab和GitHub）" rel="bookmark">Git配置多个账号（GitLab和GitHub）</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/git-workflow.html" title="git 使用流程" rel="bookmark">git 使用流程</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/three-ways-to-keep-git-log-clear.html" title="保持清洁的Git提交记录，三招就够了" rel="bookmark">保持清洁的Git提交记录，三招就够了</a></h3></div></li></ul>
+        <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/git-worktree-in-practice.html" title="Git Worktree 大法真香" rel="bookmark">Git Worktree 大法真香</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/git-worktree-in-advance.html" title="Git Worktree 高级使用" rel="bookmark">Git Worktree 高级使用</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/git-multiple-account.html" title="Git配置多个账号（GitLab和GitHub）" rel="bookmark">Git配置多个账号（GitLab和GitHub）</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/git-workflow.html" title="git 使用流程" rel="bookmark">git 使用流程</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/three-ways-to-keep-git-log-clear.html" title="保持清洁的Git提交记录，三招就够了" rel="bookmark">保持清洁的Git提交记录，三招就够了</a></h3></div></li></ul>
       </div> -->
       <div class="personalweixin">
         <br><br>
         <blockquote>
-          <a href="https://mp.weixin.qq.com/s/G7BXuZh0Qh1-mE6ts4LJqQ" target="_blank" rel="noopener">加我微信</a>，咱们交流技术与思想，共同成长
+          <a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/G7BXuZh0Qh1-mE6ts4LJqQ">加我微信</a>，咱们交流技术与思想，共同成长
         </blockquote>
         <br>
 
@@ -581,16 +591,16 @@
   <div class="-mob-share-list share-body">
     
       
-        <a class="-mob-share-qq" title="QQ好友" rel="external nofollow noopener noreferrer"
+        <a class="-mob-share-qq" title="QQ好友" rel="external nofollow noopener noreferrer noopener"
           
-          href="http://connect.qq.com/widget/shareqq/index.html?url=https://dayarch.top/p/git-ignore.html&title=Git Ignoring Files | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=前言
+          target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://dayarch.top/p/git-ignore.html&title=Git Ignoring Files | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=前言
 以下内容根据Git Help以及Git Docs 整理翻译
 
 Ignoring files(忽略文件)
 有时候会有一些我们不想Git 提交一些文件到GitHub/GitLab，下面有几种方式让我们告诉Git来忽略哪些文件.
 
 Create a local .gitignore（创建局部/本地的.gitignore文件）
-如果在local repository（仓库）中创建一个名为.gitignore的文件，在你commit（提交）动作之前，Git 将会读取*.gitignore文件去判断哪些文件或者目录需要忽略掉. 同时这个文件应该push到remote repository, 这样cl"
+如果在local repository（仓库）中创建一个名为**.gitignore的文件，在你commit（提交）动作之前，Git 将会读取.gitignore*文件去判断哪些文件或者目录需要忽略掉. 同时这个文件应该push到remote repository, 这样"
           
           >
           
@@ -600,16 +610,16 @@ Create a local .gitignore（创建局部/本地的.gitignore文件）
       
     
       
-        <a class="-mob-share-qzone" title="QQ空间" rel="external nofollow noopener noreferrer"
+        <a class="-mob-share-qzone" title="QQ空间" rel="external nofollow noopener noreferrer noopener"
           
-          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://dayarch.top/p/git-ignore.html&title=Git Ignoring Files | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=前言
+          target="_blank" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://dayarch.top/p/git-ignore.html&title=Git Ignoring Files | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=前言
 以下内容根据Git Help以及Git Docs 整理翻译
 
 Ignoring files(忽略文件)
 有时候会有一些我们不想Git 提交一些文件到GitHub/GitLab，下面有几种方式让我们告诉Git来忽略哪些文件.
 
 Create a local .gitignore（创建局部/本地的.gitignore文件）
-如果在local repository（仓库）中创建一个名为.gitignore的文件，在你commit（提交）动作之前，Git 将会读取*.gitignore文件去判断哪些文件或者目录需要忽略掉. 同时这个文件应该push到remote repository, 这样cl"
+如果在local repository（仓库）中创建一个名为**.gitignore的文件，在你commit（提交）动作之前，Git 将会读取.gitignore*文件去判断哪些文件或者目录需要忽略掉. 同时这个文件应该push到remote repository, 这样"
           
           >
           
@@ -619,16 +629,16 @@ Create a local .gitignore（创建局部/本地的.gitignore文件）
       
     
       
-        <a class="-mob-share-weibo" title="微博" rel="external nofollow noopener noreferrer"
+        <a class="-mob-share-weibo" title="微博" rel="external nofollow noopener noreferrer noopener"
           
-          href="http://service.weibo.com/share/share.php?url=https://dayarch.top/p/git-ignore.html&title=Git Ignoring Files | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=前言
+          target="_blank" href="http://service.weibo.com/share/share.php?url=https://dayarch.top/p/git-ignore.html&title=Git Ignoring Files | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=前言
 以下内容根据Git Help以及Git Docs 整理翻译
 
 Ignoring files(忽略文件)
 有时候会有一些我们不想Git 提交一些文件到GitHub/GitLab，下面有几种方式让我们告诉Git来忽略哪些文件.
 
 Create a local .gitignore（创建局部/本地的.gitignore文件）
-如果在local repository（仓库）中创建一个名为.gitignore的文件，在你commit（提交）动作之前，Git 将会读取*.gitignore文件去判断哪些文件或者目录需要忽略掉. 同时这个文件应该push到remote repository, 这样cl"
+如果在local repository（仓库）中创建一个名为**.gitignore的文件，在你commit（提交）动作之前，Git 将会读取.gitignore*文件去判断哪些文件或者目录需要忽略掉. 同时这个文件应该push到remote repository, 这样"
           
           >
           
@@ -712,7 +722,7 @@ Create a local .gitignore（创建局部/本地的.gitignore文件）
 </header>
 
     <div class="content pure">
-      <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/git-worktree-in-practice.html" title="Git Worktree 大法真香" rel="bookmark">Git Worktree 大法真香</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/git-multiple-account.html" title="Git配置多个账号（GitLab和GitHub）" rel="bookmark">Git配置多个账号（GitLab和GitHub）</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/git-workflow.html" title="git 使用流程" rel="bookmark">git 使用流程</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/three-ways-to-keep-git-log-clear.html" title="保持清洁的Git提交记录，三招就够了" rel="bookmark">保持清洁的Git提交记录，三招就够了</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/jenkins-shared-library.html" title="Jenkins Shared Library" rel="bookmark">Jenkins Shared Library</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/jenkins-environment-variables.html" title="Jenkins 使用环境变量" rel="bookmark">Jenkins 使用环境变量</a></h3></div></li></ul>
+      <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/git-worktree-in-practice.html" title="Git Worktree 大法真香" rel="bookmark">Git Worktree 大法真香</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/git-worktree-in-advance.html" title="Git Worktree 高级使用" rel="bookmark">Git Worktree 高级使用</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/git-multiple-account.html" title="Git配置多个账号（GitLab和GitHub）" rel="bookmark">Git配置多个账号（GitLab和GitHub）</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/git-workflow.html" title="git 使用流程" rel="bookmark">git 使用流程</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/three-ways-to-keep-git-log-clear.html" title="保持清洁的Git提交记录，三招就够了" rel="bookmark">保持清洁的Git提交记录，三招就够了</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/jenkins-shared-library.html" title="Jenkins Shared Library" rel="bookmark">Jenkins Shared Library</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/jenkins-environment-variables.html" title="Jenkins 使用环境变量" rel="bookmark">Jenkins 使用环境变量</a></h3></div></li></ul>
     </div>
   </section>
 
@@ -920,7 +930,7 @@ Create a local .gitignore（创建局部/本地的.gitignore文件）
 </header>
 
     <div class='content pure'>
-      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#前言"><span class="toc-text">前言</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Ignoring-files-忽略文件"><span class="toc-text">Ignoring files(忽略文件)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Create-a-local-gitignore（创建局部-本地的-gitignore文件）"><span class="toc-text">Create a local .gitignore（创建局部/本地的.gitignore文件）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Create-a-global-gitignore（创建全局-gitignore文件）"><span class="toc-text">Create a global .gitignore（创建全局.gitignore文件）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Explicit-repository-excludes-明确仓库忽略的文件"><span class="toc-text">Explicit repository excludes(明确仓库忽略的文件)</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Ignore-规则说明"><span class="toc-text">Ignore 规则说明</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#描述"><span class="toc-text">描述</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#PATTERN-FORMAT规则说明"><span class="toc-text">PATTERN FORMAT规则说明</span></a></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-text">前言</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Ignoring-files-%E5%BF%BD%E7%95%A5%E6%96%87%E4%BB%B6"><span class="toc-text">Ignoring files(忽略文件)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Create-a-local-gitignore%EF%BC%88%E5%88%9B%E5%BB%BA%E5%B1%80%E9%83%A8-%E6%9C%AC%E5%9C%B0%E7%9A%84-gitignore%E6%96%87%E4%BB%B6%EF%BC%89"><span class="toc-text">Create a local .gitignore（创建局部&#x2F;本地的.gitignore文件）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Create-a-global-gitignore%EF%BC%88%E5%88%9B%E5%BB%BA%E5%85%A8%E5%B1%80-gitignore%E6%96%87%E4%BB%B6%EF%BC%89"><span class="toc-text">Create a global .gitignore（创建全局.gitignore文件）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Explicit-repository-excludes-%E6%98%8E%E7%A1%AE%E4%BB%93%E5%BA%93%E5%BF%BD%E7%95%A5%E7%9A%84%E6%96%87%E4%BB%B6"><span class="toc-text">Explicit repository excludes(明确仓库忽略的文件)</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Ignore-%E8%A7%84%E5%88%99%E8%AF%B4%E6%98%8E"><span class="toc-text">Ignore 规则说明</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8F%8F%E8%BF%B0"><span class="toc-text">描述</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#PATTERN-FORMAT%E8%A7%84%E5%88%99%E8%AF%B4%E6%98%8E"><span class="toc-text">PATTERN FORMAT规则说明</span></a></li></ol></li></ol>
     </div>
   </section>
 
@@ -995,7 +1005,7 @@ Create a local .gitignore（创建局部/本地的.gitignore文件）
   &nbsp;&nbsp;|&nbsp;&nbsp;  
   
     &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-        class="white-color">264.1k</span>&nbsp;字
+        class="white-color">267.4k</span>&nbsp;字
     
 
   &nbsp;&nbsp;|&nbsp;&nbsp;  
@@ -1050,7 +1060,7 @@ Create a local .gitignore（创建局部/本地的.gitignore文件）
     
     。
   </div>
-  <div><p>博客内容遵循 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
+  <div><p>博客内容遵循 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
 </div>
   <!-- <div class="github-badge">
       <a style="color: #fff" rel="license" href="https://hexo.io/" target="_blank" title="由 Hexo 强力驱动">
@@ -1158,10 +1168,14 @@ Create a local .gitignore（创建局部/本地的.gitignore文件）
 
 
 
-  <script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/app.js"></script>
+  
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/app.js"></script>
 
 
-  <script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/search.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/search.js"></script>
+
 
 
 

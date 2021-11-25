@@ -13,7 +13,7 @@
   
 
   
-  <link rel="alternate" href="/atom.xml" title="日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享">
+  <link rel="alternate" href="/atom.xml" title="日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享" type="application/atom+xml">
   
 
   <meta name="HandheldFriendly" content="True" />
@@ -35,7 +35,9 @@
   
 
   
-    <link rel="stylesheet" href="/style.css">
+    
+<link rel="stylesheet" href="/style.css">
+
   
 
   <script>
@@ -85,7 +87,7 @@
         daovoice('update');
         </script>
     
-</head>
+<meta name="generator" content="Hexo 5.4.0"></head>
 
 <body>
   
@@ -486,17 +488,20 @@
       <div class="article-entry" itemprop="articleBody">
         <h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>在Web项目中，太多需要提交表单或者在请求URL中添加参数信息的操作，无论是前者还是后者，SpringMVC都将每个元素当做String来处理， 如果前台传入格式化为字符串的日期或这数值类型的时候就会报错（在SpringMVC中，bean中定义了Date，double等类型，如果没有做任何处理的话，日期以及double都无法绑定），我们手动来强制转型很是麻烦，SpringMVC 提供的@initbinder 就是解决这个问题</p>
 <h3 id="initbinder"><a href="#initbinder" class="headerlink" title="@initbinder"></a>@initbinder</h3><p>在我的项目中是在BaseController中增加方法initBinder，并使用注解@InitBinder标注，那么spring mvc在绑定表单之前，都会先注册这些编辑器, Spring自己提供了大量的实现类，诸如CustomDateEditor ，CustomBooleanEditor，CustomNumberEditor等许多，基本上够用, 当然我们也可以自己来写这些编辑器.</p>
-<a id="more"></a>
+<span id="more"></span>
 
-<h4 id="自定义编辑器"><a href="#自定义编辑器" class="headerlink" title="自定义编辑器"></a>自定义编辑器</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.springframework.beans.propertyeditors.PropertiesEditor;  </span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DoubleEditor</span> <span class="keyword">extends</span> <span class="title">PropertiesEditor</span> </span>&#123;    </span><br><span class="line">	<span class="meta">@Override</span>    </span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setAsText</span><span class="params">(String text)</span> <span class="keyword">throws</span> IllegalArgumentException </span>&#123;    </span><br><span class="line">		<span class="keyword">if</span> (text == <span class="keyword">null</span> || text.equals(<span class="string">""</span>)) &#123;    </span><br><span class="line">			text = <span class="string">"0"</span>;    </span><br><span class="line">		&#125;    </span><br><span class="line">		setValue(Double.parseDouble(text));    </span><br><span class="line">	&#125;    </span><br><span class="line"></span><br><span class="line">	<span class="meta">@Override</span>    </span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">getAsText</span><span class="params">()</span> </span>&#123;    </span><br><span class="line">		<span class="keyword">return</span> getValue().toString();    </span><br><span class="line">	&#125;    </span><br><span class="line">&#125;  </span><br><span class="line">```	</span><br><span class="line"></span><br><span class="line">类似Long、Float等都可以这样写，然后将这些自定义的编辑器或Spring自带的编辑器放到BaseController中带有<span class="meta">@initbinder</span>的方法中注册就好.</span><br><span class="line">```java</span><br><span class="line"><span class="meta">@InitBinder</span>    </span><br><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">initBinder</span><span class="params">(WebDataBinder binder)</span> </span>&#123;    </span><br><span class="line">	binder.registerCustomEditor(Date.class, <span class="keyword">new</span> CustomDateEditor(<span class="keyword">new</span> SimpleDateFormat(<span class="string">"yyyy-MM-dd HH:mm:ss"</span>), <span class="keyword">true</span>));    </span><br><span class="line">	binder.registerCustomEditor(<span class="keyword">int</span>.class, <span class="keyword">new</span> CustomNumberEditor(<span class="keyword">int</span>.class, <span class="keyword">true</span>));    </span><br><span class="line">	binder.registerCustomEditor(<span class="keyword">int</span>.class, <span class="keyword">new</span> IntegerEditor());    </span><br><span class="line">	binder.registerCustomEditor(<span class="keyword">long</span>.class, <span class="keyword">new</span> CustomNumberEditor(<span class="keyword">long</span>.class, <span class="keyword">true</span>));  </span><br><span class="line">	binder.registerCustomEditor(<span class="keyword">long</span>.class, <span class="keyword">new</span> LongEditor());    </span><br><span class="line">	binder.registerCustomEditor(<span class="keyword">double</span>.class, <span class="keyword">new</span> DoubleEditor());    </span><br><span class="line">	binder.registerCustomEditor(<span class="keyword">float</span>.class, <span class="keyword">new</span> FloatEditor());    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="自定义编辑器"><a href="#自定义编辑器" class="headerlink" title="自定义编辑器"></a>自定义编辑器</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.springframework.beans.propertyeditors.PropertiesEditor;  </span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DoubleEditor</span> <span class="keyword">extends</span> <span class="title">PropertiesEditor</span> </span>&#123;    </span><br><span class="line">	<span class="meta">@Override</span>    </span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setAsText</span><span class="params">(String text)</span> <span class="keyword">throws</span> IllegalArgumentException </span>&#123;    </span><br><span class="line">		<span class="keyword">if</span> (text == <span class="keyword">null</span> || text.equals(<span class="string">&quot;&quot;</span>)) &#123;    </span><br><span class="line">			text = <span class="string">&quot;0&quot;</span>;    </span><br><span class="line">		&#125;    </span><br><span class="line">		setValue(Double.parseDouble(text));    </span><br><span class="line">	&#125;    </span><br><span class="line"></span><br><span class="line">	<span class="meta">@Override</span>    </span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">getAsText</span><span class="params">()</span> </span>&#123;    </span><br><span class="line">		<span class="keyword">return</span> getValue().toString();    </span><br><span class="line">	&#125;    </span><br><span class="line">&#125;  </span><br></pre></td></tr></table></figure>
+
+<p>类似Long、Float等都可以这样写，然后将这些自定义的编辑器或Spring自带的编辑器放到BaseController中带有@initbinder的方法中注册就好.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@InitBinder</span>    </span><br><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">initBinder</span><span class="params">(WebDataBinder binder)</span> </span>&#123;    </span><br><span class="line">	binder.registerCustomEditor(Date.class, <span class="keyword">new</span> CustomDateEditor(<span class="keyword">new</span> SimpleDateFormat(<span class="string">&quot;yyyy-MM-dd HH:mm:ss&quot;</span>), <span class="keyword">true</span>));    </span><br><span class="line">	binder.registerCustomEditor(<span class="keyword">int</span>.class, <span class="keyword">new</span> CustomNumberEditor(<span class="keyword">int</span>.class, <span class="keyword">true</span>));    </span><br><span class="line">	binder.registerCustomEditor(<span class="keyword">int</span>.class, <span class="keyword">new</span> IntegerEditor());    </span><br><span class="line">	binder.registerCustomEditor(<span class="keyword">long</span>.class, <span class="keyword">new</span> CustomNumberEditor(<span class="keyword">long</span>.class, <span class="keyword">true</span>));  </span><br><span class="line">	binder.registerCustomEditor(<span class="keyword">long</span>.class, <span class="keyword">new</span> LongEditor());    </span><br><span class="line">	binder.registerCustomEditor(<span class="keyword">double</span>.class, <span class="keyword">new</span> DoubleEditor());    </span><br><span class="line">	binder.registerCustomEditor(<span class="keyword">float</span>.class, <span class="keyword">new</span> FloatEditor());    </span><br><span class="line">&#125;  </span><br></pre></td></tr></table></figure>
 
 <p>当然我们也可以将自定义的编辑器直接继承 <strong>PropertyEditorSupport</strong>， 因为：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">org</span>.<span class="title">springframework</span>.<span class="title">beans</span>.<span class="title">propertyeditors</span>.<span class="title">PropertiesEditor</span> <span class="keyword">extends</span> <span class="title">java</span>.<span class="title">beans</span>.<span class="title">PropertyEditorSupport</span> </span>&#123;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">org</span>.<span class="title">springframework</span>.<span class="title">beans</span>.<span class="title">propertyeditors</span>.<span class="title">PropertiesEditor</span> <span class="keyword">extends</span> <span class="title">java</span>.<span class="title">beans</span>.<span class="title">PropertyEditorSupport</span> </span>&#123;  	</span><br></pre></td></tr></table></figure>
 
 <h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p>非常感谢一下两位作者贡献整理的文章：</p>
 <ol>
-<li><a href="http://blog.csdn.net/axin66ok/article/details/17938095#" target="_blank" rel="noopener">spring mvc使用@InitBinder 标签对表单数据绑定</a></li>
-<li><a href="http://www.cnblogs.com/shenxiaoquan/p/5753351.html" target="_blank" rel="noopener">@InitBind来解决字符串转日期类型</a></li>
+<li><a target="_blank" rel="noopener" href="http://blog.csdn.net/axin66ok/article/details/17938095#">spring mvc使用@InitBinder 标签对表单数据绑定</a></li>
+<li><a target="_blank" rel="noopener" href="http://www.cnblogs.com/shenxiaoquan/p/5753351.html">@InitBind来解决字符串转日期类型</a></li>
 </ol>
 
       </div>
@@ -508,7 +513,7 @@
       <div class="personalweixin">
         <br><br>
         <blockquote>
-          <a href="https://mp.weixin.qq.com/s/G7BXuZh0Qh1-mE6ts4LJqQ" target="_blank" rel="noopener">加我微信</a>，咱们交流技术与思想，共同成长
+          <a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/G7BXuZh0Qh1-mE6ts4LJqQ">加我微信</a>，咱们交流技术与思想，共同成长
         </blockquote>
         <br>
 
@@ -546,9 +551,9 @@
   <div class="-mob-share-list share-body">
     
       
-        <a class="-mob-share-qq" title="QQ好友" rel="external nofollow noopener noreferrer"
+        <a class="-mob-share-qq" title="QQ好友" rel="external nofollow noopener noreferrer noopener"
           
-          href="http://connect.qq.com/widget/shareqq/index.html?url=https://dayarch.top/p/springmvc-init-binder.html&title=Spring MVC 之 @initbinder | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=背景
+          target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://dayarch.top/p/springmvc-init-binder.html&title=Spring MVC 之 @initbinder | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=背景
 在Web项目中，太多需要提交表单或者在请求URL中添加参数信息的操作，无论是前者还是后者，SpringMVC都将每个元素当做String来处理， 如果前台传入格式化为字符串的日期或这数值类型的时候就会报错（在SpringMVC中，bean中定义了Date，double等类型，如果没有做任何处理的话，日期以及double都无法绑定），我们手动来强制转型很是麻烦，SpringMVC 提供的@initbinder 就是解决这个问题
 
 @initbinder
@@ -562,9 +567,9 @@
       
     
       
-        <a class="-mob-share-qzone" title="QQ空间" rel="external nofollow noopener noreferrer"
+        <a class="-mob-share-qzone" title="QQ空间" rel="external nofollow noopener noreferrer noopener"
           
-          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://dayarch.top/p/springmvc-init-binder.html&title=Spring MVC 之 @initbinder | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=背景
+          target="_blank" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://dayarch.top/p/springmvc-init-binder.html&title=Spring MVC 之 @initbinder | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=背景
 在Web项目中，太多需要提交表单或者在请求URL中添加参数信息的操作，无论是前者还是后者，SpringMVC都将每个元素当做String来处理， 如果前台传入格式化为字符串的日期或这数值类型的时候就会报错（在SpringMVC中，bean中定义了Date，double等类型，如果没有做任何处理的话，日期以及double都无法绑定），我们手动来强制转型很是麻烦，SpringMVC 提供的@initbinder 就是解决这个问题
 
 @initbinder
@@ -578,9 +583,9 @@
       
     
       
-        <a class="-mob-share-weibo" title="微博" rel="external nofollow noopener noreferrer"
+        <a class="-mob-share-weibo" title="微博" rel="external nofollow noopener noreferrer noopener"
           
-          href="http://service.weibo.com/share/share.php?url=https://dayarch.top/p/springmvc-init-binder.html&title=Spring MVC 之 @initbinder | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=背景
+          target="_blank" href="http://service.weibo.com/share/share.php?url=https://dayarch.top/p/springmvc-init-binder.html&title=Spring MVC 之 @initbinder | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=背景
 在Web项目中，太多需要提交表单或者在请求URL中添加参数信息的操作，无论是前者还是后者，SpringMVC都将每个元素当做String来处理， 如果前台传入格式化为字符串的日期或这数值类型的时候就会报错（在SpringMVC中，bean中定义了Date，double等类型，如果没有做任何处理的话，日期以及double都无法绑定），我们手动来强制转型很是麻烦，SpringMVC 提供的@initbinder 就是解决这个问题
 
 @initbinder
@@ -668,7 +673,7 @@
 </header>
 
     <div class="content pure">
-      <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/spring-boot-condition-annotation.html" title="@Conditional注解，Spring Boot 的灵活配置" rel="bookmark">@Conditional注解，Spring Boot 的灵活配置</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/spring-boot-messageconverter.html" title="HttpMessageConverter转换原理解析" rel="bookmark">HttpMessageConverter转换原理解析</a></h3></div></li></ul>
+      <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/spring-boot-condition-annotation.html" title="@Conditional注解，Spring Boot 的灵活配置" rel="bookmark">@Conditional注解，Spring Boot 的灵活配置</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/spring-aware.html" title="Spring Aware 到底是什么？" rel="bookmark">Spring Aware 到底是什么？</a></h3></div></li></ul>
     </div>
   </section>
 
@@ -876,7 +881,7 @@
 </header>
 
     <div class='content pure'>
-      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#背景"><span class="toc-text">背景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#initbinder"><span class="toc-text">@initbinder</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#自定义编辑器"><span class="toc-text">自定义编辑器</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#参考"><span class="toc-text">参考</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%83%8C%E6%99%AF"><span class="toc-text">背景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#initbinder"><span class="toc-text">@initbinder</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E7%BC%96%E8%BE%91%E5%99%A8"><span class="toc-text">自定义编辑器</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%82%E8%80%83"><span class="toc-text">参考</span></a></li></ol>
     </div>
   </section>
 
@@ -951,7 +956,7 @@
   &nbsp;&nbsp;|&nbsp;&nbsp;  
   
     &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-        class="white-color">264.1k</span>&nbsp;字
+        class="white-color">267.4k</span>&nbsp;字
     
 
   &nbsp;&nbsp;|&nbsp;&nbsp;  
@@ -1006,7 +1011,7 @@
     
     。
   </div>
-  <div><p>博客内容遵循 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
+  <div><p>博客内容遵循 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
 </div>
   <!-- <div class="github-badge">
       <a style="color: #fff" rel="license" href="https://hexo.io/" target="_blank" title="由 Hexo 强力驱动">
@@ -1114,10 +1119,14 @@
 
 
 
-  <script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/app.js"></script>
+  
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/app.js"></script>
 
 
-  <script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/search.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/search.js"></script>
+
 
 
 

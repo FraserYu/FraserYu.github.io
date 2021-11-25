@@ -13,7 +13,7 @@
   
 
   
-  <link rel="alternate" href="/atom.xml" title="日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享">
+  <link rel="alternate" href="/atom.xml" title="日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享" type="application/atom+xml">
   
 
   <meta name="HandheldFriendly" content="True" />
@@ -35,7 +35,9 @@
   
 
   
-    <link rel="stylesheet" href="/style.css">
+    
+<link rel="stylesheet" href="/style.css">
+
   
 
   <script>
@@ -85,7 +87,7 @@
         daovoice('update');
         </script>
     
-</head>
+<meta name="generator" content="Hexo 5.4.0"></head>
 
 <body>
   
@@ -483,14 +485,14 @@
     <section class="article typo">
       <div class="article-entry" itemprop="articleBody">
         <p>大家对 Docker 都应该有了或多或少的认识了，相信大家都是从这两张图来粗旷的理解 Docker 及容器概念的</p>
-<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20201221212233.png" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20201221212233.png"></p>
 <p>那我们如何更轻松的理解容器 <code>Container</code> 呢？说白了</p>
 <h2 id="Container-就是一个进程"><a href="#Container-就是一个进程" class="headerlink" title="Container 就是一个进程"></a>Container 就是一个进程</h2><p>比如我们 <code>run</code> 一个 <code>mongo</code> 的镜像 <code>image</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img2020-12-21at21.39.19.gif" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img2020-12-21at21.39.19.gif"></p>
 <p>然后我们通过下面命令列举出正在运行的容器 (以下两个命令等同)</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 旧命令</span></span><br><span class="line">docker ps</span><br><span class="line"><span class="meta">#</span><span class="bash"> 新命令</span></span><br><span class="line">docker container ls</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20201221214553.png" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20201221214553.png"></p>
 <p>个人建议使用新命令</p>
 <blockquote>
 <p>如果你对上述等同命令有所疑惑，或者好奇动图中的命令自动补全是怎么实现的，以及为什么建议使用新命令，请看 <a href="https://dayarch.top/p/docker-install-command-completion.html">Docker 命令自动补全</a>，在不熟悉命令之前，建议充分利用 TAB 键来查看每个命令的含义，然后结合实际使用场景，慢慢记忆，这样才根深蒂固</p>
@@ -498,7 +500,7 @@
 <p>我们 run 下面命令：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> top      -- Display the running processes of a container （这是 TAB 补全给的命令提示说明）</span></span><br><span class="line">docker container top mongo</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20201222160406.png" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20201222160406.png"></p>
 <p>从上图中可以看到，PID 为 2292，command 为 <code>mongod</code>。既然我们说 container 是一个进程，那我们就应该在 Host 中找得到，执行下面命令</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps aux | grep mongod</span><br></pre></td></tr></table></figure>
 
@@ -506,13 +508,13 @@
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rgyb           49927   0.0  0.0  4277516    708 s000  S+    4:06PM   0:00.00 grep --color=auto --exclude-dir=.bzr --exclude-dir=CVS --exclude-dir=.git --exclude-dir=.hg --exclude-dir=.svn mongod</span><br></pre></td></tr></table></figure>
 
 <p>关于 mongod 只有我们刚刚执行的 <code>grep mongod</code> 的操作，并没有上面说的 container，这是为什么？</p>
-<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20201222161238.png" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20201222161238.png"></p>
 <p>细心的朋友可能已经从动图中发现我是用 Mac 做的测试，Docker Platform 原生运行在 Linux 上（在 Linux 操作系统中就不会有上述问题，大家可以自行尝试）。我是用 Docker for Mac，其实使用的是在macOS上一个特殊的 xhyve VM中运行的小型(定制)Alpine Linux，所以如果想看到这个进程，我们需要进入到 Mac 的这个 Docker VM</p>
 <p>执行下述命令：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -it --rm --privileged --pid=host justincormack/nsenter1</span><br></pre></td></tr></table></figure>
 
-<p>（这里暂不展开说明，有兴趣的可以看看这个 <a href="https://github.com/justincormack/nsenter1" target="_blank" rel="noopener">justincormack/nsenter1 image</a> 到底做了什么，Docker for Windows 也可以用这种方式进入 Docker VM）</p>
-<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20201222162637.png" alt=""></p>
+<p>（这里暂不展开说明，有兴趣的可以看看这个 <a target="_blank" rel="noopener" href="https://github.com/justincormack/nsenter1">justincormack/nsenter1 image</a> 到底做了什么，Docker for Windows 也可以用这种方式进入 Docker VM）</p>
+<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20201222162637.png"></p>
 <p>到这，Container 是个进程算是证明完了，但是老gong，你证明这个有什么用呢？</p>
 <blockquote>
 <p>程序员都对进程有基本了解，证明 Container 是个进程，只不过是将一个“新”东西剥开看看本质，并挂靠到你熟悉的内容上</p>
@@ -524,16 +526,16 @@
 </ul>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Usage:	docker container inspect [OPTIONS] CONTAINER [CONTAINER...]</span><br><span class="line"></span><br><span class="line">Display detailed information on one or more containers</span><br><span class="line"></span><br><span class="line">Options:</span><br><span class="line">  -f, --format string   Format the output using the given Go template</span><br><span class="line">  -s, --size            Display total file sizes</span><br><span class="line">------------------------------</span><br><span class="line">docker container inspect mongo</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20201222164416.png" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20201222164416.png"></p>
 <p>细节内容非常多，可以简单的看一看（一定有你一眼就能看明白的信息），暂不用深究</p>
 <ul>
-<li><code>docker container stats mongo</code> 查看资源是用情况（动态统计）</li>
+<li> <code>docker container stats mongo</code> 查看资源是用情况（动态统计）</li>
 </ul>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Usage:	docker container stats [OPTIONS] [CONTAINER...]</span><br><span class="line"></span><br><span class="line">Display a live stream of container(s) resource usage statistics</span><br><span class="line"></span><br><span class="line">Options:</span><br><span class="line">  -a, --all             Show all containers (default shows just running)</span><br><span class="line">      --format string   Pretty-print images using a Go template</span><br><span class="line">      --no-stream       Disable streaming stats and only pull the first result</span><br><span class="line">      --no-trunc        Do not truncate output</span><br><span class="line">----------------------------      </span><br><span class="line">docker container stats mongo</span><br></pre></td></tr></table></figure>
 
 
 
-<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img2020-12-22at16.48.57.gif" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img2020-12-22at16.48.57.gif"></p>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>这里没有上来就和大家死背命令，现在不会，将来也不会。而是通过实际目的，结合命令补全自行查看的方式逐步认识与了解。强烈建议大家安装命令补全，可以尽情使用 TAB，也可以在每个命令后面添加 <code>--help</code> 的方式随时查看使用方式</p>
 <p>证明 Container 就是一个进程，这样贴近我们已有知识后，学习门槛至少矮了半截吧。最后做个游戏吧，你记住了本文的多少个命令？</p>
 <h2 id="灵魂追问"><a href="#灵魂追问" class="headerlink" title="灵魂追问"></a>灵魂追问</h2><ol>
@@ -544,12 +546,12 @@
       <!-- <div class="tuijian">
         <br><br>
         📚相关文章
-        <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/docker-install-command-completion.html" title="Docker命令自动补全" rel="bookmark">Docker命令自动补全</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/docker-image.html" title="Docker学习(三)——镜像" rel="bookmark">Docker学习(三)——镜像</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/docker-architect.html" title="Docker学习(二)——Docker架构" rel="bookmark">Docker学习(二)——Docker架构</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/docker-container.html" title="Docker学习(四)——容器" rel="bookmark">Docker学习(四)——容器</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/docker-install.html" title="Docker学习(一)——Docker安装" rel="bookmark">Docker学习(一)——Docker安装</a></h3></div></li></ul>
+        <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/docker-install-command-completion.html" title="Docker命令自动补全" rel="bookmark">Docker命令自动补全</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/docker-install.html" title="Docker学习(一)——Docker安装" rel="bookmark">Docker学习(一)——Docker安装</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/docker-image.html" title="Docker学习(三)——镜像" rel="bookmark">Docker学习(三)——镜像</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/docker-architect.html" title="Docker学习(二)——Docker架构" rel="bookmark">Docker学习(二)——Docker架构</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/docker-container.html" title="Docker学习(四)——容器" rel="bookmark">Docker学习(四)——容器</a></h3></div></li></ul>
       </div> -->
       <div class="personalweixin">
         <br><br>
         <blockquote>
-          <a href="https://mp.weixin.qq.com/s/G7BXuZh0Qh1-mE6ts4LJqQ" target="_blank" rel="noopener">加我微信</a>，咱们交流技术与思想，共同成长
+          <a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/G7BXuZh0Qh1-mE6ts4LJqQ">加我微信</a>，咱们交流技术与思想，共同成长
         </blockquote>
         <br>
 
@@ -587,9 +589,9 @@
   <div class="-mob-share-list share-body">
     
       
-        <a class="-mob-share-qq" title="QQ好友" rel="external nofollow noopener noreferrer"
+        <a class="-mob-share-qq" title="QQ好友" rel="external nofollow noopener noreferrer noopener"
           
-          href="http://connect.qq.com/widget/shareqq/index.html?url=https://dayarch.top/p/docker-container-is-a-process.html&title=Docker Container就是个进程 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=大家对 Docker 都应该有了或多或少的认识了，相信大家都是从这两张图来粗旷的理解 Docker 及容器概念的
+          target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://dayarch.top/p/docker-container-is-a-process.html&title=Docker Container就是个进程 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=大家对 Docker 都应该有了或多或少的认识了，相信大家都是从这两张图来粗旷的理解 Docker 及容器概念的
 
 
 
@@ -628,9 +630,9 @@ docker container ls
       
     
       
-        <a class="-mob-share-qzone" title="QQ空间" rel="external nofollow noopener noreferrer"
+        <a class="-mob-share-qzone" title="QQ空间" rel="external nofollow noopener noreferrer noopener"
           
-          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://dayarch.top/p/docker-container-is-a-process.html&title=Docker Container就是个进程 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=大家对 Docker 都应该有了或多或少的认识了，相信大家都是从这两张图来粗旷的理解 Docker 及容器概念的
+          target="_blank" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://dayarch.top/p/docker-container-is-a-process.html&title=Docker Container就是个进程 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=大家对 Docker 都应该有了或多或少的认识了，相信大家都是从这两张图来粗旷的理解 Docker 及容器概念的
 
 
 
@@ -669,9 +671,9 @@ docker container ls
       
     
       
-        <a class="-mob-share-weibo" title="微博" rel="external nofollow noopener noreferrer"
+        <a class="-mob-share-weibo" title="微博" rel="external nofollow noopener noreferrer noopener"
           
-          href="http://service.weibo.com/share/share.php?url=https://dayarch.top/p/docker-container-is-a-process.html&title=Docker Container就是个进程 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=大家对 Docker 都应该有了或多或少的认识了，相信大家都是从这两张图来粗旷的理解 Docker 及容器概念的
+          target="_blank" href="http://service.weibo.com/share/share.php?url=https://dayarch.top/p/docker-container-is-a-process.html&title=Docker Container就是个进程 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=大家对 Docker 都应该有了或多或少的认识了，相信大家都是从这两张图来粗旷的理解 Docker 及容器概念的
 
 
 
@@ -784,7 +786,7 @@ docker container ls
 </header>
 
     <div class="content pure">
-      <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/docker-install-command-completion.html" title="Docker命令自动补全" rel="bookmark">Docker命令自动补全</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/docker-image.html" title="Docker学习(三)——镜像" rel="bookmark">Docker学习(三)——镜像</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/docker-architect.html" title="Docker学习(二)——Docker架构" rel="bookmark">Docker学习(二)——Docker架构</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/docker-container.html" title="Docker学习(四)——容器" rel="bookmark">Docker学习(四)——容器</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/docker-install.html" title="Docker学习(一)——Docker安装" rel="bookmark">Docker学习(一)——Docker安装</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/docker-deploy-spring-boot.html" title="使用 Docker 部署 Spring Boot" rel="bookmark">使用 Docker 部署 Spring Boot</a></h3></div></li></ul>
+      <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/docker-install-command-completion.html" title="Docker命令自动补全" rel="bookmark">Docker命令自动补全</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/docker-install.html" title="Docker学习(一)——Docker安装" rel="bookmark">Docker学习(一)——Docker安装</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/docker-image.html" title="Docker学习(三)——镜像" rel="bookmark">Docker学习(三)——镜像</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/docker-architect.html" title="Docker学习(二)——Docker架构" rel="bookmark">Docker学习(二)——Docker架构</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/docker-container.html" title="Docker学习(四)——容器" rel="bookmark">Docker学习(四)——容器</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/docker-deploy-spring-boot.html" title="使用 Docker 部署 Spring Boot" rel="bookmark">使用 Docker 部署 Spring Boot</a></h3></div></li></ul>
     </div>
   </section>
 
@@ -992,7 +994,7 @@ docker container ls
 </header>
 
     <div class='content pure'>
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Container-就是一个进程"><span class="toc-text">Container 就是一个进程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-text">总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#灵魂追问"><span class="toc-text">灵魂追问</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Container-%E5%B0%B1%E6%98%AF%E4%B8%80%E4%B8%AA%E8%BF%9B%E7%A8%8B"><span class="toc-text">Container 就是一个进程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-text">总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%81%B5%E9%AD%82%E8%BF%BD%E9%97%AE"><span class="toc-text">灵魂追问</span></a></li></ol>
     </div>
   </section>
 
@@ -1067,7 +1069,7 @@ docker container ls
   &nbsp;&nbsp;|&nbsp;&nbsp;  
   
     &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-        class="white-color">264.1k</span>&nbsp;字
+        class="white-color">267.4k</span>&nbsp;字
     
 
   &nbsp;&nbsp;|&nbsp;&nbsp;  
@@ -1122,7 +1124,7 @@ docker container ls
     
     。
   </div>
-  <div><p>博客内容遵循 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
+  <div><p>博客内容遵循 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
 </div>
   <!-- <div class="github-badge">
       <a style="color: #fff" rel="license" href="https://hexo.io/" target="_blank" title="由 Hexo 强力驱动">
@@ -1230,10 +1232,14 @@ docker container ls
 
 
 
-  <script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/app.js"></script>
+  
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/app.js"></script>
 
 
-  <script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/search.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/search.js"></script>
+
 
 
 

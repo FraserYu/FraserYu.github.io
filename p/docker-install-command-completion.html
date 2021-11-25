@@ -13,7 +13,7 @@
   
 
   
-  <link rel="alternate" href="/atom.xml" title="日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享">
+  <link rel="alternate" href="/atom.xml" title="日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享" type="application/atom+xml">
   
 
   <meta name="HandheldFriendly" content="True" />
@@ -35,7 +35,9 @@
   
 
   
-    <link rel="stylesheet" href="/style.css">
+    
+<link rel="stylesheet" href="/style.css">
+
   
 
   <script>
@@ -85,7 +87,7 @@
         daovoice('update');
         </script>
     
-</head>
+<meta name="generator" content="Hexo 5.4.0"></head>
 
 <body>
   
@@ -487,7 +489,7 @@
 
 <p>他说，本来对 Docker 命令就不熟悉，这下感觉更加混乱了。其实个人看来，这么变化还使得命令看着更加规整</p>
 <p>当在命令行直接输入 <code>docker</code> 然后回车：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20201203215735.png" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20201203215735.png"></p>
 <p>从图中可以看出，Docker 将命令结构化的划分了两大类，Management Commands 和 Commands，其实前者就是一级命令，后者就是子命令 （这是自 Docker 1.13 开始的改动），所以以后使用命令就是这样滴：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker &lt;Management Command&gt; &lt;Sub-Command &lt;Opts/Args&gt;&gt;</span><br></pre></td></tr></table></figure>
 
@@ -504,8 +506,8 @@
 
 
 
-<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img%E4%BD%86%E6%98%AF.gif" alt=""></p>
-<p>我觉得 Zsh 更好，为什么？答案请看这篇：<a href="https://juejin.cn/post/6844904178075058189" target="_blank" rel="noopener">这篇 iTerm2 + Oh My Zsh 教程手把手让你成为这条街最靓的仔</a></p>
+<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img%E4%BD%86%E6%98%AF.gif"></p>
+<p>我觉得 Zsh 更好，为什么？答案请看这篇：<a target="_blank" rel="noopener" href="https://juejin.cn/post/6844904178075058189">这篇 iTerm2 + Oh My Zsh 教程手把手让你成为这条街最靓的仔</a></p>
 <h3 id="Zsh安装Docker命令自动补全"><a href="#Zsh安装Docker命令自动补全" class="headerlink" title="Zsh安装Docker命令自动补全"></a>Zsh安装Docker命令自动补全</h3><p>如果没有安装 Oh-My-Zsh shell，第一步则是要先安装它，逐条键入下面命令：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p ~/.zsh/completion</span><br><span class="line"></span><br><span class="line">curl -L https://raw.githubusercontent.com/docker/compose/1.27.4/contrib/completion/zsh/_docker-compose &gt; ~/.zsh/completion/_docker-compose</span><br></pre></td></tr></table></figure>
 
@@ -513,11 +515,11 @@
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">fpath=(~/.zsh/completion $fpath)</span><br><span class="line">autoload -Uz compinit &amp;&amp; compinit -i</span><br></pre></td></tr></table></figure>
 
 <p>比如我的 <code>~/.zshrc</code> 文件内容：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20201204220141.png" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20201204220141.png"></p>
 <p>搜索该文件插件位置，更新插件内容：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">plugins=(... docker docker-compose</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20201204220531.png" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20201204220531.png"></p>
 <p>顺便说一下，强烈建议使用 git 插件</p>
 <p>最后刷新一下使之生效：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source ~/.zshrc</span><br></pre></td></tr></table></figure>
@@ -525,19 +527,19 @@
 
 
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>自动补全功能就可以疯狂利用你的 Tab 键，这比查阅文档要更加快捷，来看看效果：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img2020-12-04at22.12.36.gif" alt=""></p>
-<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img2020-12-04at22.20.51.gif" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img2020-12-04at22.12.36.gif"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img2020-12-04at22.20.51.gif"></p>
 
       </div>
       <!-- <div class="tuijian">
         <br><br>
         📚相关文章
-        <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/docker-container-is-a-process.html" title="Docker Container就是个进程" rel="bookmark">Docker Container就是个进程</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/docker-image.html" title="Docker学习(三)——镜像" rel="bookmark">Docker学习(三)——镜像</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/docker-architect.html" title="Docker学习(二)——Docker架构" rel="bookmark">Docker学习(二)——Docker架构</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/docker-container.html" title="Docker学习(四)——容器" rel="bookmark">Docker学习(四)——容器</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/docker-install.html" title="Docker学习(一)——Docker安装" rel="bookmark">Docker学习(一)——Docker安装</a></h3></div></li></ul>
+        <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/docker-container-is-a-process.html" title="Docker Container就是个进程" rel="bookmark">Docker Container就是个进程</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/docker-install.html" title="Docker学习(一)——Docker安装" rel="bookmark">Docker学习(一)——Docker安装</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/docker-image.html" title="Docker学习(三)——镜像" rel="bookmark">Docker学习(三)——镜像</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/docker-architect.html" title="Docker学习(二)——Docker架构" rel="bookmark">Docker学习(二)——Docker架构</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/docker-container.html" title="Docker学习(四)——容器" rel="bookmark">Docker学习(四)——容器</a></h3></div></li></ul>
       </div> -->
       <div class="personalweixin">
         <br><br>
         <blockquote>
-          <a href="https://mp.weixin.qq.com/s/G7BXuZh0Qh1-mE6ts4LJqQ" target="_blank" rel="noopener">加我微信</a>，咱们交流技术与思想，共同成长
+          <a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/G7BXuZh0Qh1-mE6ts4LJqQ">加我微信</a>，咱们交流技术与思想，共同成长
         </blockquote>
         <br>
 
@@ -575,9 +577,9 @@
   <div class="-mob-share-list share-body">
     
       
-        <a class="-mob-share-qq" title="QQ好友" rel="external nofollow noopener noreferrer"
+        <a class="-mob-share-qq" title="QQ好友" rel="external nofollow noopener noreferrer noopener"
           
-          href="http://connect.qq.com/widget/shareqq/index.html?url=https://dayarch.top/p/docker-install-command-completion.html&title=Docker命令自动补全 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=前言
+          target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://dayarch.top/p/docker-install-command-completion.html&title=Docker命令自动补全 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=前言
 不知道这个小伙伴有多久没用过 Docker 了， 突然对我说 Docker 命令怎么发生变化了
 
 1
@@ -606,9 +608,9 @@ docker container run ...
       
     
       
-        <a class="-mob-share-qzone" title="QQ空间" rel="external nofollow noopener noreferrer"
+        <a class="-mob-share-qzone" title="QQ空间" rel="external nofollow noopener noreferrer noopener"
           
-          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://dayarch.top/p/docker-install-command-completion.html&title=Docker命令自动补全 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=前言
+          target="_blank" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://dayarch.top/p/docker-install-command-completion.html&title=Docker命令自动补全 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=前言
 不知道这个小伙伴有多久没用过 Docker 了， 突然对我说 Docker 命令怎么发生变化了
 
 1
@@ -637,9 +639,9 @@ docker container run ...
       
     
       
-        <a class="-mob-share-weibo" title="微博" rel="external nofollow noopener noreferrer"
+        <a class="-mob-share-weibo" title="微博" rel="external nofollow noopener noreferrer noopener"
           
-          href="http://service.weibo.com/share/share.php?url=https://dayarch.top/p/docker-install-command-completion.html&title=Docker命令自动补全 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=前言
+          target="_blank" href="http://service.weibo.com/share/share.php?url=https://dayarch.top/p/docker-install-command-completion.html&title=Docker命令自动补全 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=前言
 不知道这个小伙伴有多久没用过 Docker 了， 突然对我说 Docker 命令怎么发生变化了
 
 1
@@ -742,7 +744,7 @@ docker container run ...
 </header>
 
     <div class="content pure">
-      <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/docker-container-is-a-process.html" title="Docker Container就是个进程" rel="bookmark">Docker Container就是个进程</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/docker-image.html" title="Docker学习(三)——镜像" rel="bookmark">Docker学习(三)——镜像</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/docker-architect.html" title="Docker学习(二)——Docker架构" rel="bookmark">Docker学习(二)——Docker架构</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/docker-container.html" title="Docker学习(四)——容器" rel="bookmark">Docker学习(四)——容器</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/docker-install.html" title="Docker学习(一)——Docker安装" rel="bookmark">Docker学习(一)——Docker安装</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/docker-deploy-spring-boot.html" title="使用 Docker 部署 Spring Boot" rel="bookmark">使用 Docker 部署 Spring Boot</a></h3></div></li></ul>
+      <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/docker-container-is-a-process.html" title="Docker Container就是个进程" rel="bookmark">Docker Container就是个进程</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/docker-install.html" title="Docker学习(一)——Docker安装" rel="bookmark">Docker学习(一)——Docker安装</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/docker-image.html" title="Docker学习(三)——镜像" rel="bookmark">Docker学习(三)——镜像</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/docker-architect.html" title="Docker学习(二)——Docker架构" rel="bookmark">Docker学习(二)——Docker架构</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/docker-container.html" title="Docker学习(四)——容器" rel="bookmark">Docker学习(四)——容器</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/docker-deploy-spring-boot.html" title="使用 Docker 部署 Spring Boot" rel="bookmark">使用 Docker 部署 Spring Boot</a></h3></div></li></ul>
     </div>
   </section>
 
@@ -950,7 +952,7 @@ docker container run ...
 </header>
 
     <div class='content pure'>
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Docker-命令自动补全"><span class="toc-text">Docker 命令自动补全</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Mac-安装Docker命令自动补全"><span class="toc-text">Mac 安装Docker命令自动补全</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Zsh安装Docker命令自动补全"><span class="toc-text">Zsh安装Docker命令自动补全</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-text">总结</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Docker-%E5%91%BD%E4%BB%A4%E8%87%AA%E5%8A%A8%E8%A1%A5%E5%85%A8"><span class="toc-text">Docker 命令自动补全</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Mac-%E5%AE%89%E8%A3%85Docker%E5%91%BD%E4%BB%A4%E8%87%AA%E5%8A%A8%E8%A1%A5%E5%85%A8"><span class="toc-text">Mac 安装Docker命令自动补全</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Zsh%E5%AE%89%E8%A3%85Docker%E5%91%BD%E4%BB%A4%E8%87%AA%E5%8A%A8%E8%A1%A5%E5%85%A8"><span class="toc-text">Zsh安装Docker命令自动补全</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-text">总结</span></a></li></ol>
     </div>
   </section>
 
@@ -1025,7 +1027,7 @@ docker container run ...
   &nbsp;&nbsp;|&nbsp;&nbsp;  
   
     &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-        class="white-color">264.1k</span>&nbsp;字
+        class="white-color">267.4k</span>&nbsp;字
     
 
   &nbsp;&nbsp;|&nbsp;&nbsp;  
@@ -1080,7 +1082,7 @@ docker container run ...
     
     。
   </div>
-  <div><p>博客内容遵循 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
+  <div><p>博客内容遵循 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
 </div>
   <!-- <div class="github-badge">
       <a style="color: #fff" rel="license" href="https://hexo.io/" target="_blank" title="由 Hexo 强力驱动">
@@ -1188,10 +1190,14 @@ docker container run ...
 
 
 
-  <script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/app.js"></script>
+  
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/app.js"></script>
 
 
-  <script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/search.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/search.js"></script>
+
 
 
 

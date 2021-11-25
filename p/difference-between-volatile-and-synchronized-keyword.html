@@ -13,7 +13,7 @@
   
 
   
-  <link rel="alternate" href="/atom.xml" title="日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享">
+  <link rel="alternate" href="/atom.xml" title="日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享" type="application/atom+xml">
   
 
   <meta name="HandheldFriendly" content="True" />
@@ -35,7 +35,9 @@
   
 
   
-    <link rel="stylesheet" href="/style.css">
+    
+<link rel="stylesheet" href="/style.css">
+
   
 
   <script>
@@ -85,7 +87,7 @@
         daovoice('update');
         </script>
     
-</head>
+<meta name="generator" content="Hexo 5.4.0"></head>
 
 <body>
   
@@ -492,8 +494,8 @@
 </li>
 </ul>
 </blockquote>
-<p>现陆续将Demo代码和技术文章整理在一起 <a href="https://github.com/FraserYu/learnings" target="_blank" rel="noopener">Github实践精选</a> ，方便大家阅读查看，本文同样收录在此，觉得不错，还请Star🌟</p>
-<p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgfenge.gif" alt=""></fancybox></p>
+<p>现陆续将Demo代码和技术文章整理在一起 <a target="_blank" rel="noopener" href="https://github.com/FraserYu/learnings">Github实践精选</a> ，方便大家阅读查看，本文同样收录在此，觉得不错，还请Star🌟</p>
+<p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgfenge.gif"></fancybox></p>
 <p>之前写了几篇 <a href="https://dayarch.top/categories/Coding/Java-Concurrency/">Java并发编程的系列</a> 文章，有个朋友微群里问我，还是不能理解 <code>volatile</code> 和 <code>synchronized</code> 二者的区别, 他的问题主要可以归纳为这几个：</p>
 <ul>
 <li><p>volatile 与 synchronized 在处理哪些问题是相对等价的？</p>
@@ -507,13 +509,13 @@
 </ul>
 <p>如果你不能回答上面的几个问题，说明你对二者的区别还有一些含混。本文就通过<strong>图文</strong>的方式好好说说他们微妙的关系</p>
 <p>都听过【天上一天，地下一年】，假设 CPU 执行一条普通指令需要一天，那么 CPU 读写内存就得等待一年的时间。</p>
-<p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200301161659.png" alt=""></fancybox></p>
+<p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200301161659.png"></fancybox></p>
 <p>受【木桶原理】的限制，在CPU眼里，程序的整体性能都被内存的办事效率拉低了，为了解决这个短板，硬件同学也使用了我们做软件常用的提速策略——使用缓存Cache（实则是硬件同学给软件同学挖的坑）</p>
-<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img%E4%BD%A0%E7%9A%84%E9%94%85.gif" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img%E4%BD%A0%E7%9A%84%E9%94%85.gif"></p>
 <h3 id=""><a href="#" class="headerlink" title=""></a></h3><h2 id="Java-内存模型（JMM）"><a href="#Java-内存模型（JMM）" class="headerlink" title="Java 内存模型（JMM）"></a>Java 内存模型（JMM）</h2><p>CPU 增加了缓存均衡了与内存的速度差异，这一增加还是好几层。</p>
-<p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200303192228.png" alt=""></fancybox></p>
+<p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200303192228.png"></fancybox></p>
 <p>此时内存的短板不再那么明显，CPU甚喜。但随之却带来很多问题</p>
-<p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgjmm.png" alt=""></fancybox></p>
+<p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgjmm.png"></fancybox></p>
 <p>看上图，每个核都有自己的一级缓存（L1 Cache），有的架构里面还有所有核共用的二级缓存（L2 Cache）。使用缓存之后，当线程要访问共享变量时，如果 L1 中存在该共享变量，就不会再逐级访问直至主内存了。所以，通过这种方式，就补上了访问内存慢的短板</p>
 <p>具体来说，线程读/写共享变量的步骤是这样：</p>
 <ol>
@@ -529,7 +531,7 @@
 <li>在 L1 中将 X 的值修改为1，并逐层写回到主内存中</li>
 </ol>
 <p>此时，在线程 1 眼中，X 的值是这样的：</p>
-<p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgjmm-thread1-111.png" alt=""></fancybox></p>
+<p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgjmm-thread1-111.png"></fancybox></p>
 <p>接下来，线程 2 同样按照上面的步骤访问变量 X </p>
 <ol>
 <li>L1 中没有发现变量 X</li>
@@ -538,9 +540,9 @@
 <li>在L1中将X 的值修改为2，并逐层写回到主内存中</li>
 </ol>
 <p>此时，线程 2 眼中，X 的值是这样的：</p>
-<p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgjmm-thread2-111.png" alt=""></fancybox></p>
+<p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgjmm-thread2-111.png"></fancybox></p>
 <p>结合刚刚的两次操作，当线程1再访问变量x，我们看看有什么问题：</p>
-<p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgjmm-thread1and222.png" alt=""></fancybox></p>
+<p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgjmm-thread1and222.png"></fancybox></p>
 <p>此刻，如果线程 1 再次将 x=1回写，就会覆盖线程2 x=2 的结果，同样的共享变量，线程拿到的结果却不一样（线程1眼中x=1；线程2眼中x=2），这就是共享变量内存不可见的问题。</p>
 <p>怎么补坑呢？今天的两位主角闪亮登场，不过在说明 volatile关键字之前，我们先来说说你最熟悉的 synchronized 关键字</p>
 <h3 id="synchronized"><a href="#synchronized" class="headerlink" title="synchronized"></a>synchronized</h3><p>遇到线程不安全的问题，习惯性的会想到用 synchronized 关键字来解决问题，暂且先不论该办法是否合理，我们来看 synchronized 关键字是怎么解决上面提到的共享变量内存可见性问题的</p>
@@ -555,9 +557,9 @@
 <li>线程在【写入】共享变量时，不会把值缓存在寄存器或其他地方（就是刚刚说的所谓的「工作内存」），而是会把值刷新回主内存</li>
 </ul>
 <p>有种换汤不换药的感觉，你看的一点都没错</p>
-<p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200302134932.png" alt=""></fancybox></p>
+<p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200302134932.png"></fancybox></p>
 <p>所以，当使用 synchronized 或 volatile 后，多线程操作共享变量的步骤就变成了这样：</p>
-<p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgimage-20200302140442742.png" alt=""></fancybox></p>
+<p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgimage-20200302140442742.png"></fancybox></p>
 <p><strong>简单点来说就是不再参考 L1 和 L2 中共享变量的值，而是直接访问主内存</strong></p>
 <p>来点踏实的，上例子🌰</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ThreadNotSafeInteger</span> </span>&#123;</span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 共享变量 value</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">int</span> value;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getValue</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> value;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setValue</span><span class="params">(<span class="keyword">int</span> value)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.value = value;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -577,17 +579,17 @@
 
 <p>这两个结果是完全相同，在解决【当前】共享变量数据可见性的问题上，二者算是等同的</p>
 <p>如果说 synchronized 和 volatile 是完全等同的，那就没必要设计两个关键字了，继续看个例子</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Slf</span>4j</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">VisibilityIssue</span> </span>&#123;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> TOTAL = <span class="number">10000</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//	即便像下面这样加了 volatile 关键字修饰不会解决问题，因为并没有解决原子性问题</span></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">volatile</span> <span class="keyword">int</span> count;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		VisibilityIssue visibilityIssue = <span class="keyword">new</span> VisibilityIssue();</span><br><span class="line"></span><br><span class="line">		Thread thread1 = <span class="keyword">new</span> Thread(() -&gt; visibilityIssue.add10KCount());</span><br><span class="line">		Thread thread2 = <span class="keyword">new</span> Thread(() -&gt; visibilityIssue.add10KCount());</span><br><span class="line"></span><br><span class="line">		thread1.start();</span><br><span class="line">		thread2.start();</span><br><span class="line"></span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			thread1.join();</span><br><span class="line">			thread2.join();</span><br><span class="line">		&#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">			log.error(e.getMessage());</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		log.info(<span class="string">"count 值为：&#123;&#125;"</span>, visibilityIssue.count);</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">add10KCount</span><span class="params">()</span></span>&#123;</span><br><span class="line">		<span class="keyword">int</span> start = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">while</span> (start ++ &lt; TOTAL)&#123;</span><br><span class="line">			<span class="keyword">this</span>.count ++;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Slf4j</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">VisibilityIssue</span> </span>&#123;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> TOTAL = <span class="number">10000</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//	即便像下面这样加了 volatile 关键字修饰不会解决问题，因为并没有解决原子性问题</span></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">volatile</span> <span class="keyword">int</span> count;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		VisibilityIssue visibilityIssue = <span class="keyword">new</span> VisibilityIssue();</span><br><span class="line"></span><br><span class="line">		Thread thread1 = <span class="keyword">new</span> Thread(() -&gt; visibilityIssue.add10KCount());</span><br><span class="line">		Thread thread2 = <span class="keyword">new</span> Thread(() -&gt; visibilityIssue.add10KCount());</span><br><span class="line"></span><br><span class="line">		thread1.start();</span><br><span class="line">		thread2.start();</span><br><span class="line"></span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			thread1.join();</span><br><span class="line">			thread2.join();</span><br><span class="line">		&#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">			log.error(e.getMessage());</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		log.info(<span class="string">&quot;count 值为：&#123;&#125;&quot;</span>, visibilityIssue.count);</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">add10KCount</span><span class="params">()</span></span>&#123;</span><br><span class="line">		<span class="keyword">int</span> start = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">while</span> (start ++ &lt; TOTAL)&#123;</span><br><span class="line">			<span class="keyword">this</span>.count ++;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
 
 <p>其实就是将上面setValue 简单赋值操作 （this.value = value;）变成了  （this.count ++;）形式，如果你运行代码，你会发现，count的值始终是处于1w和2w之间的</p>
 <p>将上面方法再以 synchronized 的形式做改动</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Slf</span>4j</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">VisibilityIssue</span> </span>&#123;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> TOTAL = <span class="number">10000</span>;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">int</span> count;</span><br><span class="line">	</span><br><span class="line">  <span class="comment">//... 同上</span></span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">add10KCount</span><span class="params">()</span></span>&#123;</span><br><span class="line">		<span class="keyword">int</span> start = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">while</span> (start ++ &lt; TOTAL)&#123;</span><br><span class="line">			<span class="keyword">this</span>.count ++;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Slf4j</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">VisibilityIssue</span> </span>&#123;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> TOTAL = <span class="number">10000</span>;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">int</span> count;</span><br><span class="line">	</span><br><span class="line">  <span class="comment">//... 同上</span></span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">add10KCount</span><span class="params">()</span></span>&#123;</span><br><span class="line">		<span class="keyword">int</span> start = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">while</span> (start ++ &lt; TOTAL)&#123;</span><br><span class="line">			<span class="keyword">this</span>.count ++;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>再次运行代码，count 结果就是 2w</p>
 <p>两组代码，都通过 volatile 和 synchronized 关键字以同样形式修饰，怎么有的可以带来相同结果，有的却不能呢？</p>
-<p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgwhy.gif" alt=""></p>
+<p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgwhy.gif"></p>
 <p>这就要说说二者的不同了</p>
 <blockquote>
 <p>count++  程序代码是一行，但是翻译成 CPU 指令确是三行( 不信你用 <code>javap -c</code> 命令试试)</p>
@@ -631,12 +633,12 @@
       <!-- <div class="tuijian">
         <br><br>
         📚相关文章
-        <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-volatile.html" title="面试volatile关键字时，我们应该具备哪些谈资？" rel="bookmark">面试volatile关键字时，我们应该具备哪些谈资？</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-book.html" title="120000字，你们要的Java并发编程图文小册来了" rel="bookmark">120000字，你们要的Java并发编程图文小册来了</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-aqs-acquireshared-and-semaphore.html" title="Java AQS共享式获取同步状态及Semaphore的应用分析" rel="bookmark">Java AQS共享式获取同步状态及Semaphore的应用分析</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-countdownlatch-vs-cyclicbarrier.html" title="CountDownLatch 和 CyclicBarrier 傻傻的分不清楚？" rel="bookmark">CountDownLatch 和 CyclicBarrier 傻傻的分不清楚？</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/executorservice-vs-completionservice.html" title="ExecutorService VS CompletionService" rel="bookmark">ExecutorService VS CompletionService</a></h3></div></li></ul>
+        <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-volatile.html" title="面试volatile关键字时，我们应该具备哪些谈资？" rel="bookmark">面试volatile关键字时，我们应该具备哪些谈资？</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-book.html" title="120000字，你们要的Java并发编程图文小册来了" rel="bookmark">120000字，你们要的Java并发编程图文小册来了</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-aqs-acquireshared-and-semaphore.html" title="Java AQS共享式获取同步状态及Semaphore的应用分析" rel="bookmark">Java AQS共享式获取同步状态及Semaphore的应用分析</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/executorservice-vs-completionservice.html" title="ExecutorService VS CompletionService" rel="bookmark">ExecutorService VS CompletionService</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-interrupt-mechnism.html" title="Java多线程中断机制" rel="bookmark">Java多线程中断机制</a></h3></div></li></ul>
       </div> -->
       <div class="personalweixin">
         <br><br>
         <blockquote>
-          <a href="https://mp.weixin.qq.com/s/G7BXuZh0Qh1-mE6ts4LJqQ" target="_blank" rel="noopener">加我微信</a>，咱们交流技术与思想，共同成长
+          <a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/G7BXuZh0Qh1-mE6ts4LJqQ">加我微信</a>，咱们交流技术与思想，共同成长
         </blockquote>
         <br>
 
@@ -674,9 +676,9 @@
   <div class="-mob-share-list share-body">
     
       
-        <a class="-mob-share-qq" title="QQ好友" rel="external nofollow noopener noreferrer"
+        <a class="-mob-share-qq" title="QQ好友" rel="external nofollow noopener noreferrer noopener"
           
-          href="http://connect.qq.com/widget/shareqq/index.html?url=https://dayarch.top/p/difference-between-volatile-and-synchronized-keyword.html&title=volatile和synchronized图文透彻讲解 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=* 你有一个思想，我有一个思想，我们交换后，一个人就有两个思想
+          target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://dayarch.top/p/difference-between-volatile-and-synchronized-keyword.html&title=volatile和synchronized图文透彻讲解 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=* 你有一个思想，我有一个思想，我们交换后，一个人就有两个思想
    
    
  * If you can NOT explain it simply, you do NOT understand it well enough
@@ -699,9 +701,9 @@
       
     
       
-        <a class="-mob-share-qzone" title="QQ空间" rel="external nofollow noopener noreferrer"
+        <a class="-mob-share-qzone" title="QQ空间" rel="external nofollow noopener noreferrer noopener"
           
-          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://dayarch.top/p/difference-between-volatile-and-synchronized-keyword.html&title=volatile和synchronized图文透彻讲解 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=* 你有一个思想，我有一个思想，我们交换后，一个人就有两个思想
+          target="_blank" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://dayarch.top/p/difference-between-volatile-and-synchronized-keyword.html&title=volatile和synchronized图文透彻讲解 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=* 你有一个思想，我有一个思想，我们交换后，一个人就有两个思想
    
    
  * If you can NOT explain it simply, you do NOT understand it well enough
@@ -724,9 +726,9 @@
       
     
       
-        <a class="-mob-share-weibo" title="微博" rel="external nofollow noopener noreferrer"
+        <a class="-mob-share-weibo" title="微博" rel="external nofollow noopener noreferrer noopener"
           
-          href="http://service.weibo.com/share/share.php?url=https://dayarch.top/p/difference-between-volatile-and-synchronized-keyword.html&title=volatile和synchronized图文透彻讲解 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=* 你有一个思想，我有一个思想，我们交换后，一个人就有两个思想
+          target="_blank" href="http://service.weibo.com/share/share.php?url=https://dayarch.top/p/difference-between-volatile-and-synchronized-keyword.html&title=volatile和synchronized图文透彻讲解 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=* 你有一个思想，我有一个思想，我们交换后，一个人就有两个思想
    
    
  * If you can NOT explain it simply, you do NOT understand it well enough
@@ -818,7 +820,7 @@
 </header>
 
     <div class="content pure">
-      <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-volatile.html" title="面试volatile关键字时，我们应该具备哪些谈资？" rel="bookmark">面试volatile关键字时，我们应该具备哪些谈资？</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-book.html" title="120000字，你们要的Java并发编程图文小册来了" rel="bookmark">120000字，你们要的Java并发编程图文小册来了</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-aqs-acquireshared-and-semaphore.html" title="Java AQS共享式获取同步状态及Semaphore的应用分析" rel="bookmark">Java AQS共享式获取同步状态及Semaphore的应用分析</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-countdownlatch-vs-cyclicbarrier.html" title="CountDownLatch 和 CyclicBarrier 傻傻的分不清楚？" rel="bookmark">CountDownLatch 和 CyclicBarrier 傻傻的分不清楚？</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/executorservice-vs-completionservice.html" title="ExecutorService VS CompletionService" rel="bookmark">ExecutorService VS CompletionService</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-aqs-and-reentrantlock.html" title="Java AQS队列同步器以及ReentrantLock的应用" rel="bookmark">Java AQS队列同步器以及ReentrantLock的应用</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-future-and-callable.html" title="Java Future详解与使用" rel="bookmark">Java Future详解与使用</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-interrupt-mechnism.html" title="Java多线程中断机制" rel="bookmark">Java多线程中断机制</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-dead-lock.html" title="Java并发死锁解决思路" rel="bookmark">Java并发死锁解决思路</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-thread-life-cycle.html" title="Java线程生命周期这样理解挺简单的" rel="bookmark">Java线程生命周期这样理解挺简单的</a></h3></div></li></ul>
+      <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-volatile.html" title="面试volatile关键字时，我们应该具备哪些谈资？" rel="bookmark">面试volatile关键字时，我们应该具备哪些谈资？</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-book.html" title="120000字，你们要的Java并发编程图文小册来了" rel="bookmark">120000字，你们要的Java并发编程图文小册来了</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-aqs-acquireshared-and-semaphore.html" title="Java AQS共享式获取同步状态及Semaphore的应用分析" rel="bookmark">Java AQS共享式获取同步状态及Semaphore的应用分析</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/executorservice-vs-completionservice.html" title="ExecutorService VS CompletionService" rel="bookmark">ExecutorService VS CompletionService</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-interrupt-mechnism.html" title="Java多线程中断机制" rel="bookmark">Java多线程中断机制</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-thread-life-cycle.html" title="Java线程生命周期这样理解挺简单的" rel="bookmark">Java线程生命周期这样理解挺简单的</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/why-we-need-to-use-threadpool.html" title="为什么要使用线程池?" rel="bookmark">为什么要使用线程池?</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-core.html" title="并发编程三大核心" rel="bookmark">并发编程三大核心</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-dead-lock.html" title="Java并发死锁解决思路" rel="bookmark">Java并发死锁解决思路</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-three-questions.html" title="并发编程三大问题" rel="bookmark">并发编程三大问题</a></h3></div></li></ul>
     </div>
   </section>
 
@@ -1026,7 +1028,7 @@
 </header>
 
     <div class='content pure'>
-      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#null"><span class="toc-text"></span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Java-内存模型（JMM）"><span class="toc-text">Java 内存模型（JMM）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#synchronized"><span class="toc-text">synchronized</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#volatile"><span class="toc-text">volatile</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#灵魂追问"><span class="toc-text">灵魂追问</span></a>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text"></span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Java-%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%EF%BC%88JMM%EF%BC%89"><span class="toc-text">Java 内存模型（JMM）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#synchronized"><span class="toc-text">synchronized</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#volatile"><span class="toc-text">volatile</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%81%B5%E9%AD%82%E8%BF%BD%E9%97%AE"><span class="toc-text">灵魂追问</span></a>
     </div>
   </section>
 
@@ -1101,7 +1103,7 @@
   &nbsp;&nbsp;|&nbsp;&nbsp;  
   
     &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-        class="white-color">264.1k</span>&nbsp;字
+        class="white-color">267.4k</span>&nbsp;字
     
 
   &nbsp;&nbsp;|&nbsp;&nbsp;  
@@ -1156,7 +1158,7 @@
     
     。
   </div>
-  <div><p>博客内容遵循 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
+  <div><p>博客内容遵循 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
 </div>
   <!-- <div class="github-badge">
       <a style="color: #fff" rel="license" href="https://hexo.io/" target="_blank" title="由 Hexo 强力驱动">
@@ -1264,10 +1266,14 @@
 
 
 
-  <script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/app.js"></script>
+  
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/app.js"></script>
 
 
-  <script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/search.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/search.js"></script>
+
 
 
 

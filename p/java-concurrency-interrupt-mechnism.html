@@ -13,7 +13,7 @@
   
 
   
-  <link rel="alternate" href="/atom.xml" title="日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享">
+  <link rel="alternate" href="/atom.xml" title="日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享" type="application/atom+xml">
   
 
   <meta name="HandheldFriendly" content="True" />
@@ -35,7 +35,9 @@
   
 
   
-    <link rel="stylesheet" href="/style.css">
+    
+<link rel="stylesheet" href="/style.css">
+
   
 
   <script>
@@ -85,7 +87,7 @@
         daovoice('update');
         </script>
     
-</head>
+<meta name="generator" content="Hexo 5.4.0"></head>
 
 <body>
   
@@ -493,7 +495,7 @@
 </li>
 </ul>
 </blockquote>
-<p>现陆续将Demo代码和技术文章整理在一起 <a href="https://github.com/FraserYu/learnings" target="_blank" rel="noopener">Github实践精选</a> ，方便大家阅读查看，本文同样收录在此，觉得不错，还请Star🌟</p>
+<p>现陆续将Demo代码和技术文章整理在一起 <a target="_blank" rel="noopener" href="https://github.com/FraserYu/learnings">Github实践精选</a> ，方便大家阅读查看，本文同样收录在此，觉得不错，还请Star🌟</p>
 <hr>
 <p>横看成岭侧成峰，远近高低各不同，<a href="https://dayarch.top/categories/Coding/Java-Concurrency/">并发编程理论系列</a>基本已经结束，相信大家有了理论的铺垫，近看源码才能发现其设计之美，不会一头雾水</p>
 <hr>
@@ -511,17 +513,17 @@
 <li><code>interrupted()</code></li>
 <li><code>isInterrupted()</code></li>
 </ul>
-<p><fancybox><img src="https://rgyb.sunluomeng.top/20200513160945.png" alt=""></fancybox></p>
+<p><fancybox><img src="https://rgyb.sunluomeng.top/20200513160945.png"></fancybox></p>
 <p>看到这我不禁会问自己：</p>
-<p><img src="https://rgyb.sunluomeng.top/20200517135855.png" alt=""></p>
-<h2 id="什么是中断机制？"><a href="#什么是中断机制？" class="headerlink" title="什么是中断机制？"></a>什么是中断机制？</h2><p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200516202432.png" alt=""></fancybox></p>
+<p><img src="https://rgyb.sunluomeng.top/20200517135855.png"></p>
+<h2 id="什么是中断机制？"><a href="#什么是中断机制？" class="headerlink" title="什么是中断机制？"></a>什么是中断机制？</h2><p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200516202432.png"></fancybox></p>
 <p>刚刚接触【中断】这个词时，先入为主的概念就是“直接中断/打断”正在做的事，使其停止。我的理解是这样的：</p>
 <blockquote>
 <p>你：在打游戏</p>
 <p>女朋友：别打游戏了，赶快过来吃饭</p>
 <p>你：听到女朋友招呼之后立马中断手中的游戏乖乖过去吃饭</p>
 </blockquote>
-<p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200516203009.png" alt=""></fancybox></p>
+<p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200516203009.png"></fancybox></p>
 <p>在多线程编程中，中断是一种【协同】机制，怎么理解这么高大上的词呢？就是女朋友叫你吃饭，你收到了中断游戏通知，<strong>但是否马上放下手中的游戏去吃饭看你心情</strong> 。在程序中怎样演绎这个心情就看具体的业务逻辑了，Java 的中断机制就是这么简单</p>
 <p>如果还没改变这个先入为主的概念，我怀你你没有女朋友（😭）我们拥抱一下</p>
 <h2 id="为什么会有中断机制？"><a href="#为什么会有中断机制？" class="headerlink" title="为什么会有中断机制？"></a>为什么会有中断机制？</h2><p>中断是一种协同机制，我觉得就是解决【当局者迷】的状况</p>
@@ -530,9 +532,9 @@
 <p>那程序中如何中断？怎样识别是否中断？又如何处理中断呢？这就与上文提到的三个方法有关了</p>
 <h2 id="interrupt-VS-isInterrupted-VS-interrupted"><a href="#interrupt-VS-isInterrupted-VS-interrupted" class="headerlink" title="interrupt() VS isInterrupted() VS interrupted()"></a><code>interrupt()</code> VS <code>isInterrupted()</code> VS <code>interrupted()</code></h2><p>Java 的每个线程对象里都有一个 boolean 类型的标识，代表是否有中断请求，可你寻遍 Thread 类你也不会找到这个标识，因为这是通过底层 native 方法实现的。</p>
 <h3 id="interrupt"><a href="#interrupt" class="headerlink" title="interrupt()"></a>interrupt()</h3><p>interrupt() 方法是 <strong>唯一一个</strong> 可以将上面提到中断标志设置为 true 的方法，从这里可以看出，这是一个 Thread 类 public 的对象方法，所以可以推断出任何线程对象都可以调用该方法，进一步说明就是可以一个线程 interrupt 其他线程，也可以 interrupt 自己。其中，中断标识的设置是通过 native 方法 <code>interrupt0</code> 完成的</p>
-<p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200516213303.png" alt=""></fancybox></p>
+<p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200516213303.png"></fancybox></p>
 <p>在 Java 中，线程被中断的反应是不一样的，脾气不好的直接就抛出了 <code>InterruptedException()</code> ，</p>
-<p><fancybox><img src="https://rgyb.sunluomeng.top/20200516215134.png" alt=""></fancybox></p>
+<p><fancybox><img src="https://rgyb.sunluomeng.top/20200516215134.png"></fancybox></p>
 <p>该方法注释上写的很清楚，当线程被阻塞在：</p>
 <ol>
 <li>wait()</li>
@@ -541,10 +543,10 @@
 </ol>
 <p>这些方法时，如果被中断，就会抛出 InterruptedException 受检异常（也就是必须要求我们 catch 进行处理的）</p>
 <p>熟悉 JUC 的朋友可能知道，其实被中断抛出 InterruptedException 的远远不止这几个方法，比如：</p>
-<p><fancybox><img src="https://rgyb.sunluomeng.top/20200516215615.png" alt=""></fancybox></p>
+<p><fancybox><img src="https://rgyb.sunluomeng.top/20200516215615.png"></fancybox></p>
 <p>反向推理，这些可能阻塞的方法如果声明有 <code>throws InterruptedException</code> ， 也就暗示我们它们是可中断的</p>
 <p>调用 interrput() 方法后，中断标识就被设置为 true 了，那我们怎么利用这个中断标识，来判断某个线程中断标识到底什么状态呢？</p>
-<h3 id="isInterrupted"><a href="#isInterrupted" class="headerlink" title="isInterrupted()"></a>isInterrupted()</h3><p><fancybox><img src="https://rgyb.sunluomeng.top/20200516221434.png" alt=""></fancybox></p>
+<h3 id="isInterrupted"><a href="#isInterrupted" class="headerlink" title="isInterrupted()"></a>isInterrupted()</h3><p><fancybox><img src="https://rgyb.sunluomeng.top/20200516221434.png"></fancybox></p>
 <p>这个方法名起的非常好，因为比较符合我们 bean boolean 类型字段的 get 方法规范，没错，该方法就是返回中断标识的结果：</p>
 <ul>
 <li>true：线程被中断，</li>
@@ -552,9 +554,9 @@
 </ul>
 <p>拿到这个标识后，线程就可以判断这个标识来执行后续的逻辑了。有起名好的，也有起名不好的，就是下面这个方法：</p>
 <h3 id="interrupted"><a href="#interrupted" class="headerlink" title="interrupted()"></a>interrupted()</h3><p>按照常规翻译，过去时时态，这就是“被打断了/被打断的”，其实和上面的 isInterrupted() 方法差不多，两个方法都是调用 <code>private</code> 的 isInterrupted() 方法， 唯一差别就是会清空中断标识（这是从方法名中怎么也看不出来的）</p>
-<p><fancybox><img src="https://rgyb.sunluomeng.top/20200516223926.png" alt=""></fancybox></p>
+<p><fancybox><img src="https://rgyb.sunluomeng.top/20200516223926.png"></fancybox></p>
 <p>因为调用该方法，会返回当前中断标识，同时会清空中断标识，就有了那一段有点让人迷惑的方法注释：</p>
-<p><fancybox><img src="https://rgyb.sunluomeng.top/20200516224422.png" alt=""></fancybox></p>
+<p><fancybox><img src="https://rgyb.sunluomeng.top/20200516224422.png"></fancybox></p>
 <p>来段程序你就会明白上面注释的意思了：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Thread.currentThread().isInterrupted(); <span class="comment">// true</span></span><br><span class="line">Thread.interrupted() <span class="comment">// true，返回true后清空了中断标识将其置为 false</span></span><br><span class="line">Thread.currentThread().isInterrupted(); <span class="comment">// false</span></span><br><span class="line">Thread.interrupted() <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
 
@@ -565,7 +567,7 @@
 <p>当你可能要被大量中断并且你想确保只处理一次中断时，就可以使用这个方法了</p>
 </blockquote>
 <p>该方法在 JDK 源码中应用也非常多，比如（后续文章会具体分析，这里知道该方法的作用和使用场景就好）：</p>
-<p><fancybox><img src="https://rgyb.sunluomeng.top/20200517124752.png" alt=""></fancybox></p>
+<p><fancybox><img src="https://rgyb.sunluomeng.top/20200517124752.png"></fancybox></p>
 <p>相信到这里你已经能明确分辨三胞胎都是谁，并发挥怎样的作用了，那么有哪些场景我们可以使用中断机制呢？</p>
 <h2 id="中断机制的使用场景"><a href="#中断机制的使用场景" class="headerlink" title="中断机制的使用场景"></a>中断机制的使用场景</h2><p>通常，中断的使用场景有以下几个</p>
 <ul>
@@ -596,15 +598,15 @@
 
 
 <p>打开 Thread.sleep 方法：</p>
-<p><fancybox><img src="https://rgyb.sunluomeng.top/20200516231654.png" alt=""></fancybox></p>
+<p><fancybox><img src="https://rgyb.sunluomeng.top/20200516231654.png"></fancybox></p>
 <p>sleep 方法抛出 InterruptedException后，中断标识也被清空置为 false，我们在catch 没有通过调用 th.interrupt() 方法再次将中断标识置为 true，这就导致无限循环了</p>
 <p>这两个原则很好理解。总的来说，我们应该留意 InterruptedException，当我们捕获到该异常时，绝不可以默默的吞掉它，什么也不做，因为这会导致上层调用栈什么信息也获取不到。其实在编写程序时，捕获的任何受检异常我们都不应该吞掉</p>
 <h2 id="JDK-中有哪些使用中断机制的地方呢？"><a href="#JDK-中有哪些使用中断机制的地方呢？" class="headerlink" title="JDK 中有哪些使用中断机制的地方呢？"></a>JDK 中有哪些使用中断机制的地方呢？</h2><p>中断机制贯穿整个并发编程中，这里只简单列觉大家经常会使用的，我们可以通过阅读JDK源码来进一步了解中断机制以及学习如何使用中断机制</p>
 <h3 id="ThreadPoolExecutor"><a href="#ThreadPoolExecutor" class="headerlink" title="ThreadPoolExecutor"></a>ThreadPoolExecutor</h3><p>ThreadPoolExecutor 中的 shutdownNow 方法会遍历线程池中的工作线程并调用线程的 interrupt 方法来中断线程</p>
-<p><fancybox><img src="https://rgyb.sunluomeng.top/20200517125410.png" alt=""></fancybox></p>
-<p><fancybox><img src="https://rgyb.sunluomeng.top/20200517125513.png" alt=""></fancybox></p>
+<p><fancybox><img src="https://rgyb.sunluomeng.top/20200517125410.png"></fancybox></p>
+<p><fancybox><img src="https://rgyb.sunluomeng.top/20200517125513.png"></fancybox></p>
 <h3 id="FutureTask"><a href="#FutureTask" class="headerlink" title="FutureTask"></a>FutureTask</h3><p>FutureTask 中的 cancel 方法，如果传入的参数为 true，它将会在正在运行异步任务的线程上调用 interrupt 方法，如果正在执行的异步任务中的代码没有对中断做出响应，那么 cancel 方法中的参数将不会起到什么效果</p>
-<p><fancybox><img src="https://rgyb.sunluomeng.top/20200517125655.png" alt=""></fancybox></p>
+<p><fancybox><img src="https://rgyb.sunluomeng.top/20200517125655.png"></fancybox></p>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>到这里你应该理解Java 并发编程中断机制的含义了，它是一种协同机制，和你先入为主的概念完全不一样。区分了三个相近方法，说明了使用场景以及使用原则，同时又给出JDK源码一些常见案例，相信你已经胸中有沟壑了，接下来，跟上节奏，我们陆续走进源码吧</p>
 <h2 id="灵魂追问"><a href="#灵魂追问" class="headerlink" title="灵魂追问"></a>灵魂追问</h2><ol>
 <li>抛出 InterruptedException 后，中断标识就一定被清空吗？</li>
@@ -615,25 +617,25 @@
 <blockquote>
 <p>有朋友可能会问文章开头的图，同时看一个类的不同部分怎么实现的？不等您开口，我就全盘的招了，其实就是屏幕分割（在文件上鼠标右键-&gt;选择水平/垂直分割），这样在同时查看某些代码时还是很方便的（带鱼屏垂直分割真是爽翻天），保姆式演示如下：</p>
 </blockquote>
-<p><fancybox><img src="https://rgyb.sunluomeng.top/2020-05-14at22.09.53.gif" alt=""></fancybox></p>
+<p><fancybox><img src="https://rgyb.sunluomeng.top/2020-05-14at22.09.53.gif"></fancybox></p>
 <h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ol>
 <li>Java 并发编程实战</li>
 <li>Java并发编程的艺术</li>
-<li><a href="https://www.infoq.cn/article/java-interrupt-mechanism" target="_blank" rel="noopener">https://www.infoq.cn/article/java-interrupt-mechanism</a></li>
-<li><a href="https://coderanch.com/t/237332/certification/explain-interrupt-isInterrupted-interrupted-method" target="_blank" rel="noopener">https://coderanch.com/t/237332/certification/explain-interrupt-isInterrupted-interrupted-method</a></li>
-<li><a href="https://dzone.com/articles/waiting-for-coroutines" target="_blank" rel="noopener">https://dzone.com/articles/waiting-for-coroutines</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.infoq.cn/article/java-interrupt-mechanism">https://www.infoq.cn/article/java-interrupt-mechanism</a></li>
+<li><a target="_blank" rel="noopener" href="https://coderanch.com/t/237332/certification/explain-interrupt-isInterrupted-interrupted-method">https://coderanch.com/t/237332/certification/explain-interrupt-isInterrupted-interrupted-method</a></li>
+<li><a target="_blank" rel="noopener" href="https://dzone.com/articles/waiting-for-coroutines">https://dzone.com/articles/waiting-for-coroutines</a></li>
 </ol>
 
       </div>
       <!-- <div class="tuijian">
         <br><br>
         📚相关文章
-        <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-book.html" title="120000字，你们要的Java并发编程图文小册来了" rel="bookmark">120000字，你们要的Java并发编程图文小册来了</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-aqs-acquireshared-and-semaphore.html" title="Java AQS共享式获取同步状态及Semaphore的应用分析" rel="bookmark">Java AQS共享式获取同步状态及Semaphore的应用分析</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-countdownlatch-vs-cyclicbarrier.html" title="CountDownLatch 和 CyclicBarrier 傻傻的分不清楚？" rel="bookmark">CountDownLatch 和 CyclicBarrier 傻傻的分不清楚？</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/executorservice-vs-completionservice.html" title="ExecutorService VS CompletionService" rel="bookmark">ExecutorService VS CompletionService</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-aqs-and-reentrantlock.html" title="Java AQS队列同步器以及ReentrantLock的应用" rel="bookmark">Java AQS队列同步器以及ReentrantLock的应用</a></h3></div></li></ul>
+        <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-book.html" title="120000字，你们要的Java并发编程图文小册来了" rel="bookmark">120000字，你们要的Java并发编程图文小册来了</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-aqs-acquireshared-and-semaphore.html" title="Java AQS共享式获取同步状态及Semaphore的应用分析" rel="bookmark">Java AQS共享式获取同步状态及Semaphore的应用分析</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/executorservice-vs-completionservice.html" title="ExecutorService VS CompletionService" rel="bookmark">ExecutorService VS CompletionService</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-thread-life-cycle.html" title="Java线程生命周期这样理解挺简单的" rel="bookmark">Java线程生命周期这样理解挺简单的</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/difference-between-volatile-and-synchronized-keyword.html" title="volatile和synchronized图文透彻讲解" rel="bookmark">volatile和synchronized图文透彻讲解</a></h3></div></li></ul>
       </div> -->
       <div class="personalweixin">
         <br><br>
         <blockquote>
-          <a href="https://mp.weixin.qq.com/s/G7BXuZh0Qh1-mE6ts4LJqQ" target="_blank" rel="noopener">加我微信</a>，咱们交流技术与思想，共同成长
+          <a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/G7BXuZh0Qh1-mE6ts4LJqQ">加我微信</a>，咱们交流技术与思想，共同成长
         </blockquote>
         <br>
 
@@ -671,9 +673,9 @@
   <div class="-mob-share-list share-body">
     
       
-        <a class="-mob-share-qq" title="QQ好友" rel="external nofollow noopener noreferrer"
+        <a class="-mob-share-qq" title="QQ好友" rel="external nofollow noopener noreferrer noopener"
           
-          href="http://connect.qq.com/widget/shareqq/index.html?url=https://dayarch.top/p/java-concurrency-interrupt-mechnism.html&title=Java多线程中断机制 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=| 好看请赞，养成习惯
+          target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://dayarch.top/p/java-concurrency-interrupt-mechnism.html&title=Java多线程中断机制 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=| 好看请赞，养成习惯
 
  * 你有一个思想，我有一个思想，我们交换后，一个人就有两个思想
    
@@ -702,9 +704,9 @@
       
     
       
-        <a class="-mob-share-qzone" title="QQ空间" rel="external nofollow noopener noreferrer"
+        <a class="-mob-share-qzone" title="QQ空间" rel="external nofollow noopener noreferrer noopener"
           
-          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://dayarch.top/p/java-concurrency-interrupt-mechnism.html&title=Java多线程中断机制 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=| 好看请赞，养成习惯
+          target="_blank" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://dayarch.top/p/java-concurrency-interrupt-mechnism.html&title=Java多线程中断机制 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=| 好看请赞，养成习惯
 
  * 你有一个思想，我有一个思想，我们交换后，一个人就有两个思想
    
@@ -733,9 +735,9 @@
       
     
       
-        <a class="-mob-share-weibo" title="微博" rel="external nofollow noopener noreferrer"
+        <a class="-mob-share-weibo" title="微博" rel="external nofollow noopener noreferrer noopener"
           
-          href="http://service.weibo.com/share/share.php?url=https://dayarch.top/p/java-concurrency-interrupt-mechnism.html&title=Java多线程中断机制 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=| 好看请赞，养成习惯
+          target="_blank" href="http://service.weibo.com/share/share.php?url=https://dayarch.top/p/java-concurrency-interrupt-mechnism.html&title=Java多线程中断机制 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=| 好看请赞，养成习惯
 
  * 你有一个思想，我有一个思想，我们交换后，一个人就有两个思想
    
@@ -838,7 +840,7 @@
 </header>
 
     <div class="content pure">
-      <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-book.html" title="120000字，你们要的Java并发编程图文小册来了" rel="bookmark">120000字，你们要的Java并发编程图文小册来了</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-aqs-acquireshared-and-semaphore.html" title="Java AQS共享式获取同步状态及Semaphore的应用分析" rel="bookmark">Java AQS共享式获取同步状态及Semaphore的应用分析</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-countdownlatch-vs-cyclicbarrier.html" title="CountDownLatch 和 CyclicBarrier 傻傻的分不清楚？" rel="bookmark">CountDownLatch 和 CyclicBarrier 傻傻的分不清楚？</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/executorservice-vs-completionservice.html" title="ExecutorService VS CompletionService" rel="bookmark">ExecutorService VS CompletionService</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-aqs-and-reentrantlock.html" title="Java AQS队列同步器以及ReentrantLock的应用" rel="bookmark">Java AQS队列同步器以及ReentrantLock的应用</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-future-and-callable.html" title="Java Future详解与使用" rel="bookmark">Java Future详解与使用</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-thread-life-cycle.html" title="Java线程生命周期这样理解挺简单的" rel="bookmark">Java线程生命周期这样理解挺简单的</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java8-completablefuture-tutorial.html" title="java8 CompletableFuture 使用详解" rel="bookmark">java8 CompletableFuture 使用详解</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-dead-lock.html" title="Java并发死锁解决思路" rel="bookmark">Java并发死锁解决思路</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/difference-between-volatile-and-synchronized-keyword.html" title="volatile和synchronized图文透彻讲解" rel="bookmark">volatile和synchronized图文透彻讲解</a></h3></div></li></ul>
+      <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-book.html" title="120000字，你们要的Java并发编程图文小册来了" rel="bookmark">120000字，你们要的Java并发编程图文小册来了</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-aqs-acquireshared-and-semaphore.html" title="Java AQS共享式获取同步状态及Semaphore的应用分析" rel="bookmark">Java AQS共享式获取同步状态及Semaphore的应用分析</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/executorservice-vs-completionservice.html" title="ExecutorService VS CompletionService" rel="bookmark">ExecutorService VS CompletionService</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-thread-life-cycle.html" title="Java线程生命周期这样理解挺简单的" rel="bookmark">Java线程生命周期这样理解挺简单的</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/difference-between-volatile-and-synchronized-keyword.html" title="volatile和synchronized图文透彻讲解" rel="bookmark">volatile和synchronized图文透彻讲解</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/why-we-need-to-use-threadpool.html" title="为什么要使用线程池?" rel="bookmark">为什么要使用线程池?</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-core.html" title="并发编程三大核心" rel="bookmark">并发编程三大核心</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-three-questions.html" title="并发编程三大问题" rel="bookmark">并发编程三大问题</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-dead-lock.html" title="Java并发死锁解决思路" rel="bookmark">Java并发死锁解决思路</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/waiting-notification-mechanism.html" title="并发编程之等待通知机制" rel="bookmark">并发编程之等待通知机制</a></h3></div></li></ul>
     </div>
   </section>
 
@@ -1046,7 +1048,7 @@
 </header>
 
     <div class='content pure'>
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#什么是中断机制？"><span class="toc-text">什么是中断机制？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#为什么会有中断机制？"><span class="toc-text">为什么会有中断机制？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#interrupt-VS-isInterrupted-VS-interrupted"><span class="toc-text">interrupt() VS isInterrupted() VS interrupted()</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#interrupt"><span class="toc-text">interrupt()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#isInterrupted"><span class="toc-text">isInterrupted()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#interrupted"><span class="toc-text">interrupted()</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#中断机制的使用场景"><span class="toc-text">中断机制的使用场景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用中断机制有哪些注意事项"><span class="toc-text">使用中断机制有哪些注意事项</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#原则-1"><span class="toc-text">原则-1</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#原则-2"><span class="toc-text">原则-2</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JDK-中有哪些使用中断机制的地方呢？"><span class="toc-text">JDK 中有哪些使用中断机制的地方呢？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#ThreadPoolExecutor"><span class="toc-text">ThreadPoolExecutor</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#FutureTask"><span class="toc-text">FutureTask</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-text">总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#灵魂追问"><span class="toc-text">灵魂追问</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考"><span class="toc-text">参考</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E4%B8%AD%E6%96%AD%E6%9C%BA%E5%88%B6%EF%BC%9F"><span class="toc-text">什么是中断机制？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E6%9C%89%E4%B8%AD%E6%96%AD%E6%9C%BA%E5%88%B6%EF%BC%9F"><span class="toc-text">为什么会有中断机制？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#interrupt-VS-isInterrupted-VS-interrupted"><span class="toc-text">interrupt() VS isInterrupted() VS interrupted()</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#interrupt"><span class="toc-text">interrupt()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#isInterrupted"><span class="toc-text">isInterrupted()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#interrupted"><span class="toc-text">interrupted()</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%AD%E6%96%AD%E6%9C%BA%E5%88%B6%E7%9A%84%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="toc-text">中断机制的使用场景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E4%B8%AD%E6%96%AD%E6%9C%BA%E5%88%B6%E6%9C%89%E5%93%AA%E4%BA%9B%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="toc-text">使用中断机制有哪些注意事项</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8E%9F%E5%88%99-1"><span class="toc-text">原则-1</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8E%9F%E5%88%99-2"><span class="toc-text">原则-2</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JDK-%E4%B8%AD%E6%9C%89%E5%93%AA%E4%BA%9B%E4%BD%BF%E7%94%A8%E4%B8%AD%E6%96%AD%E6%9C%BA%E5%88%B6%E7%9A%84%E5%9C%B0%E6%96%B9%E5%91%A2%EF%BC%9F"><span class="toc-text">JDK 中有哪些使用中断机制的地方呢？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#ThreadPoolExecutor"><span class="toc-text">ThreadPoolExecutor</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#FutureTask"><span class="toc-text">FutureTask</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-text">总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%81%B5%E9%AD%82%E8%BF%BD%E9%97%AE"><span class="toc-text">灵魂追问</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83"><span class="toc-text">参考</span></a></li></ol>
     </div>
   </section>
 
@@ -1121,7 +1123,7 @@
   &nbsp;&nbsp;|&nbsp;&nbsp;  
   
     &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-        class="white-color">264.1k</span>&nbsp;字
+        class="white-color">267.4k</span>&nbsp;字
     
 
   &nbsp;&nbsp;|&nbsp;&nbsp;  
@@ -1176,7 +1178,7 @@
     
     。
   </div>
-  <div><p>博客内容遵循 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
+  <div><p>博客内容遵循 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
 </div>
   <!-- <div class="github-badge">
       <a style="color: #fff" rel="license" href="https://hexo.io/" target="_blank" title="由 Hexo 强力驱动">
@@ -1284,10 +1286,14 @@
 
 
 
-  <script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/app.js"></script>
+  
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/app.js"></script>
 
 
-  <script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/search.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/search.js"></script>
+
 
 
 

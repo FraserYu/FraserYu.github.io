@@ -13,7 +13,7 @@
   
 
   
-  <link rel="alternate" href="/atom.xml" title="日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享">
+  <link rel="alternate" href="/atom.xml" title="日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享" type="application/atom+xml">
   
 
   <meta name="HandheldFriendly" content="True" />
@@ -35,7 +35,9 @@
   
 
   
-    <link rel="stylesheet" href="/style.css">
+    
+<link rel="stylesheet" href="/style.css">
+
   
 
   <script>
@@ -85,7 +87,7 @@
         daovoice('update');
         </script>
     
-</head>
+<meta name="generator" content="Hexo 5.4.0"></head>
 
 <body>
   
@@ -500,7 +502,7 @@
     <section class="article typo">
       <div class="article-entry" itemprop="articleBody">
         <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>不知道你的 team 当中是否采用敏捷开发，总之我们的 team 贯彻敏捷方法很彻底</p>
-<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host@master/blog-img20210711162041.png" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host@master/blog-img20210711162041.png"></p>
 <p>随着敏捷方法的步伐加快，如何加快软件的交付速度变得极为重要，快速交付离不开 DevOps，而 DevOps 技术栈中，Jenkins 绝对是 CI 过程的核心角色。要充分高效的使用 Jenkins，自然离不开 <strong>Jenkinsfile</strong></p>
 <h2 id="什么是-Jenkinsfile？"><a href="#什么是-Jenkinsfile？" class="headerlink" title="什么是 Jenkinsfile？"></a>什么是 Jenkinsfile？</h2><p>其实在前两篇文章中大家已经和 Jenkinsfile 照过面，只不过他们不是当时的主角：</p>
 <ul>
@@ -521,7 +523,7 @@
 <li><p>Scripted Pipeline(脚本式)：Jenkinsfile 以 <code>node</code> 开始</p>
 </li>
 </ul>
-<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host@master/blog-img20210711100520.png" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host@master/blog-img20210711100520.png"></p>
 <p><strong>推荐使用 Declarative Pipeline，因为它提供了很多高级/便利的特性</strong>， Jenkinsfile 虽好，写多了也是非常头疼的，如何减少写 code 是关键</p>
 <h2 id="为什么要用-Jenkins-Shared-Library？"><a href="#为什么要用-Jenkins-Shared-Library？" class="headerlink" title="为什么要用 Jenkins Shared Library？"></a>为什么要用 Jenkins Shared Library？</h2><p>当今微服务的世界，大个头的单体应用都被拆分成了多个小的应用，每个应用基本都会有相同的 Pipeline 步骤： Build，Test，Deploy。Declarative Pipeline 虽好，但每个小的应用都要写那么多重复的内容，作为懒惰的程序猿是忍不了的，因为他们可能仅仅可能是 Git Repo 等参数不同罢了</p>
 <p>所以我们要做的就是把这些共同的内容提取出来，写在一个文件里，形成一个 shared library 让其他 Jenkinsfile 引用，这就避免了大量重复代码</p>
@@ -531,35 +533,32 @@
 <li><p>在 shared library Repo 的根目录创建一个名为 vars 的文件夹</p>
 </li>
 <li><p>在文件夹中创建你自己定义名称的 groovy 文件</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── Jenkinsfile</span><br><span class="line">├── README.md</span><br><span class="line">└── vars</span><br><span class="line">    ├── javaProjectCommonLibrary.groovy</span><br><span class="line">    ├── javaProjectMultiBranchAndParamsCommonLibrary.groovy</span><br><span class="line">    ├── javaProjectMultiParamsCommonLibrary.groovy</span><br><span class="line">    ├── nodeProjectCommonLibrary.groovy</span><br><span class="line">    └── pythonProjectCommonLibrary.groovy</span><br><span class="line"></span><br><span class="line">1 directory, 7 files</span><br></pre></td></tr></table></figure>
-</li>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── Jenkinsfile</span><br><span class="line">├── README.md</span><br><span class="line">└── vars</span><br><span class="line">    ├── javaProjectCommonLibrary.groovy</span><br><span class="line">    ├── javaProjectMultiBranchAndParamsCommonLibrary.groovy</span><br><span class="line">    ├── javaProjectMultiParamsCommonLibrary.groovy</span><br><span class="line">    ├── nodeProjectCommonLibrary.groovy</span><br><span class="line">    └── pythonProjectCommonLibrary.groovy</span><br><span class="line"></span><br><span class="line">1 directory, 7 files</span><br></pre></td></tr></table></figure></li>
 <li><p>在groovy 文件中定义一个名为 call 的方法</p>
-<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//javaProjectCommonLibrary.groovy</span></span><br><span class="line"><span class="keyword">def</span> call(String name = <span class="string">'rgyb'</span>) &#123;</span><br><span class="line">    <span class="comment">// 定义自己的通用步骤</span></span><br><span class="line">    echo <span class="string">"Hello, $&#123;name&#125;."</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-</li>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//javaProjectCommonLibrary.groovy</span></span><br><span class="line"><span class="keyword">def</span> call(String name = <span class="string">&#x27;rgyb&#x27;</span>) &#123;</span><br><span class="line">    <span class="comment">// 定义自己的通用步骤</span></span><br><span class="line">    echo <span class="string">&quot;Hello, $&#123;name&#125;.&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
 </ol>
 <p>这就可以 push 你的 shared library 到 remote 了，在 Jenkins 中再配置一下这个 library 就好了</p>
 <h2 id="如何配置-Shared-Library？"><a href="#如何配置-Shared-Library？" class="headerlink" title="如何配置 Shared Library？"></a>如何配置 Shared Library？</h2><p>进入 Jenkins，依次点击 <code>Manage Jenkins</code> -&gt; <code>Configure System</code> -&gt;   找到 <code>Global Pipeline Libraries</code>, 添加 library 就好，然后 Save 就好了</p>
-<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host@master/blog-img20210711105903.png" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host@master/blog-img20210711105903.png"></p>
 <p>接下来就创建一个 Pipeline job 来引用这个 library </p>
 <h2 id="引用-Jenkins-Shared-Library"><a href="#引用-Jenkins-Shared-Library" class="headerlink" title="引用 Jenkins Shared Library"></a>引用 Jenkins Shared Library</h2><p>如下图，创建一个 pipeline 类型的 job</p>
-<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host@master/blog-img20210711110229.png" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host@master/blog-img20210711110229.png"></p>
 <p>在 Pipeline 位置添加如下内容：</p>
-<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Library</span>(<span class="string">'first-shared-pipeline'</span>) _</span><br><span class="line">javaProjectCommonLibrary <span class="string">'rgyb rubbish'</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Library</span>(<span class="string">&#x27;first-shared-pipeline&#x27;</span>) _</span><br><span class="line">javaProjectCommonLibrary <span class="string">&#x27;rgyb rubbish&#x27;</span></span><br></pre></td></tr></table></figure>
 
 <p>具体如下图</p>
-<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host@master/blog-img20210711110846.png" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host@master/blog-img20210711110846.png"></p>
 <p>Save 之后就可以 build 了, 打开 log console，可以看到醒目的几个大字，大声的读出来：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host@master/blog-img20210711135750.png" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host@master/blog-img20210711135750.png"></p>
 <p>到这里，自定义 Jenkins Shared Library 就已经搞定了。可实际项目中怎么可能只有一个参数这么简单的 pipeline，进阶玩法还是要知道的</p>
 <h2 id="Jenkins-Shared-Library-高级定义"><a href="#Jenkins-Shared-Library-高级定义" class="headerlink" title="Jenkins Shared Library 高级定义"></a>Jenkins Shared Library 高级定义</h2><p>接收多个参数很简单，只需要改一下 call 方法的参数类型就可以，比如我们定义了一个名为 <code>javaProjectMultiParamsCommonLibrary.groovy</code> 的 library，参数类型为 Map</p>
-<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//javaProjectMultiParamsCommonLibrary.groovy</span></span><br><span class="line"><span class="keyword">def</span> call(Map pipelineParams) &#123;</span><br><span class="line">    <span class="comment">//自定义code</span></span><br><span class="line">    echo <span class="string">"Welcome, $&#123;pipelineParams.name&#125;."</span></span><br><span class="line">    echo <span class="string">"Let's talk about a story which names $&#123;pipelineParams.storyName&#125;."</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//javaProjectMultiParamsCommonLibrary.groovy</span></span><br><span class="line"><span class="keyword">def</span> call(Map pipelineParams) &#123;</span><br><span class="line">    <span class="comment">//自定义code</span></span><br><span class="line">    echo <span class="string">&quot;Welcome, $&#123;pipelineParams.name&#125;.&quot;</span></span><br><span class="line">    echo <span class="string">&quot;Let&#x27;s talk about a story which names $&#123;pipelineParams.storyName&#125;.&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>修改一下 job 中传入参数的方式：</p>
-<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Library</span>(<span class="string">'first-shared-pipeline'</span>) _</span><br><span class="line">javaProjectMultiParamsCommonLibrary(<span class="string">name:</span> <span class="string">'rubissh rgyb'</span>, <span class="string">storyName:</span> <span class="string">'Hello World'</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Library</span>(<span class="string">&#x27;first-shared-pipeline&#x27;</span>) _</span><br><span class="line">javaProjectMultiParamsCommonLibrary(<span class="attr">name:</span> <span class="string">&#x27;rubissh rgyb&#x27;</span>, <span class="attr">storyName:</span> <span class="string">&#x27;Hello World&#x27;</span>) </span><br></pre></td></tr></table></figure>
 
 <p>看一下 build 结果：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host@master/blog-img20210711141327.png" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host@master/blog-img20210711141327.png"></p>
 <p>貌似完美，但还是有问题：</p>
 <ol>
 <li>shared library 是供其它 Jenkinsfile 引用的，每个项目都应该有自己可维护的 Jenkinsfile，直接像上面写道 Jenkins Pipeline script 中，显然不是很好的方式，我们也需要将每个项目的 Jenkinsfile 维护在相应的Repo 中</li>
@@ -567,35 +566,35 @@
 <li>一个项目可能有多个 branch，每个 branch 的使用应该互不影响</li>
 </ol>
 <p>为了解决上述问题，我们再创建一个名为 <code>javaProjectMultiBranchAndParamsCommonLibrary.groovy</code> 的 shared library，内容如下：</p>
-<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//javaProjectMultiBranchAndParamsCommonLibrary.groovy</span></span><br><span class="line"><span class="keyword">def</span> call(body) &#123;</span><br><span class="line">    <span class="comment">// evaluate the body block, and collect configuration into the object</span></span><br><span class="line">    <span class="keyword">def</span> pipelineParams= [:]</span><br><span class="line">    body.resolveStrategy = Closure.DELEGATE_FIRST</span><br><span class="line">    body.delegate = pipelineParams</span><br><span class="line">    body()</span><br><span class="line"></span><br><span class="line">    </span><br><span class="line">    echo <span class="string">"$&#123;pipelineParams.NAME&#125;"</span></span><br><span class="line">    echo <span class="string">"$&#123;pipelineParams.STORY_NAME&#125;"</span></span><br><span class="line">    echo <span class="string">"$&#123;pipelineParams.VERSION&#125;"</span>  </span><br><span class="line"></span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//javaProjectMultiBranchAndParamsCommonLibrary.groovy</span></span><br><span class="line"><span class="keyword">def</span> call(body) &#123;</span><br><span class="line">    <span class="comment">// evaluate the body block, and collect configuration into the object</span></span><br><span class="line">    <span class="keyword">def</span> pipelineParams= [:]</span><br><span class="line">    body.resolveStrategy = Closure.DELEGATE_FIRST</span><br><span class="line">    body.delegate = pipelineParams</span><br><span class="line">    body()</span><br><span class="line"></span><br><span class="line">    </span><br><span class="line">    echo <span class="string">&quot;$&#123;pipelineParams.NAME&#125;&quot;</span></span><br><span class="line">    echo <span class="string">&quot;$&#123;pipelineParams.STORY_NAME&#125;&quot;</span></span><br><span class="line">    echo <span class="string">&quot;$&#123;pipelineParams.VERSION&#125;&quot;</span>  </span><br><span class="line"></span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <blockquote>
 <p>body 参数应该是一个闭包，它将闭包中的值设置为对应的配置对象，这样我们只需要在 Jenkinsfile 中按照 key=value 向 Map 中填写参数就可以了</p>
 </blockquote>
 <p>在 Repo 根目录创建 Jenkinsfile，内容如下：</p>
-<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Library</span>(<span class="string">'second-shared-pipeline'</span>) _</span><br><span class="line"></span><br><span class="line">javaProjectMultiBranchAndParamsCommonLibrary &#123;</span><br><span class="line"></span><br><span class="line">    NAME = <span class="string">'rgyb rubbish'</span></span><br><span class="line">    STORY_NAME = <span class="string">'hello world'</span></span><br><span class="line">    VERSION = <span class="string">'1.1.0'</span></span><br><span class="line"></span><br><span class="line">&#125;创</span><br></pre></td></tr></table></figure>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Library</span>(<span class="string">&#x27;second-shared-pipeline&#x27;</span>) _</span><br><span class="line"></span><br><span class="line">javaProjectMultiBranchAndParamsCommonLibrary &#123;</span><br><span class="line"></span><br><span class="line">    NAME = <span class="string">&#x27;rgyb rubbish&#x27;</span></span><br><span class="line">    STORY_NAME = <span class="string">&#x27;hello world&#x27;</span></span><br><span class="line">    VERSION = <span class="string">&#x27;1.1.0&#x27;</span></span><br><span class="line"></span><br><span class="line">&#125;创</span><br></pre></td></tr></table></figure>
 
 <blockquote>
 <p>这里引用 shared library 的名称为：<code>second-shared-pipeline</code></p>
 </blockquote>
 <p>接下来创建一个 <code>Multibranch Pipeline</code> 类型的 job</p>
-<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host@master/blog-img20210711142345.png" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host@master/blog-img20210711142345.png"></p>
 <p>填写 Jenkinsfile 所在 Branch 的信息</p>
-<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host@master/blog-img20210711151438.png" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host@master/blog-img20210711151438.png"></p>
 <p>填写 shared library 的信息，这里名称为 <code>second-shared-pipeline</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host@master/blog-img20210711151603.png" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host@master/blog-img20210711151603.png"></p>
 <p>点击 Save 就会扫描当前 Repo 的所有 branch，这里目前只有 main branch</p>
-<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host@master/blog-img20210711151704.png" alt=""></p>
-<p>进入 main branch，点击 build，就会正常看到结果了<br><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host@master/blog-img20210711164445.png" alt=""></p>
-<p>上面在 Jenkinsfile 的变量引用上，我们都要用 <code>&quot;${pipelineParams.XXXXX}&quot;</code> 这种形式，当参数变多时，也在不断重复写<code>pipelineParams</code> , 所以我们要继续优化，将所有的变量放到内置的 env 对象当中去，这样就可以直接使用变量名称了。结合 pipeline 的 Build， Test，Deploy 步骤，我们再修改一下 shared library（注意 <code>Load Variables</code> stage）内容如下：</p>
-<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> call(body) &#123;</span><br><span class="line">    <span class="comment">// evaluate the body block, and collect configuration into the object</span></span><br><span class="line">    <span class="keyword">def</span> pipelineParams= [:]</span><br><span class="line">    body.resolveStrategy = Closure.DELEGATE_FIRST</span><br><span class="line">    body.delegate = pipelineParams</span><br><span class="line">    body()</span><br><span class="line"></span><br><span class="line">    </span><br><span class="line">    echo <span class="string">"$&#123;pipelineParams.NAME&#125;"</span></span><br><span class="line">    echo <span class="string">"$&#123;pipelineParams.STORY_NAME&#125;"</span></span><br><span class="line">    echo <span class="string">"$&#123;pipelineParams.VERSION&#125;"</span>  </span><br><span class="line"></span><br><span class="line">    pipeline &#123;</span><br><span class="line">        agent none</span><br><span class="line"></span><br><span class="line">        stages &#123;</span><br><span class="line">            stage(<span class="string">'Load Variables'</span>) &#123;</span><br><span class="line">                steps &#123;</span><br><span class="line">                    script &#123;</span><br><span class="line">                        pipelineParams.each &#123;</span><br><span class="line">                            k, v -&gt; env.<span class="string">"$&#123;k&#125;"</span> = <span class="string">"$&#123;v&#125;"</span></span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            stage(<span class="string">'Build'</span>) &#123;</span><br><span class="line">                steps &#123;</span><br><span class="line">                    echo <span class="string">"$&#123;BUILD_STAGE&#125;"</span></span><br><span class="line">                &#125;  </span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            stage(<span class="string">'Test'</span>) &#123;</span><br><span class="line">                steps &#123;</span><br><span class="line">                    echo <span class="string">"$&#123;TEST_STAGE&#125;"</span></span><br><span class="line">                &#125; </span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            stage(<span class="string">'Deploy'</span>) &#123;</span><br><span class="line">                steps &#123;</span><br><span class="line">                    echo <span class="string">"$&#123;DEPLOY_STAGE&#125;"</span></span><br><span class="line">                &#125; </span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host@master/blog-img20210711151704.png"></p>
+<p>进入 main branch，点击 build，就会正常看到结果了<br><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host@master/blog-img20210711164445.png"></p>
+<p>上面在 Jenkinsfile 的变量引用上，我们都要用 <code>&quot;$&#123;pipelineParams.XXXXX&#125;&quot;</code> 这种形式，当参数变多时，也在不断重复写<code>pipelineParams</code> , 所以我们要继续优化，将所有的变量放到内置的 env 对象当中去，这样就可以直接使用变量名称了。结合 pipeline 的 Build， Test，Deploy 步骤，我们再修改一下 shared library（注意 <code>Load Variables</code> stage）内容如下：</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> call(body) &#123;</span><br><span class="line">    <span class="comment">// evaluate the body block, and collect configuration into the object</span></span><br><span class="line">    <span class="keyword">def</span> pipelineParams= [:]</span><br><span class="line">    body.resolveStrategy = Closure.DELEGATE_FIRST</span><br><span class="line">    body.delegate = pipelineParams</span><br><span class="line">    body()</span><br><span class="line"></span><br><span class="line">    </span><br><span class="line">    echo <span class="string">&quot;$&#123;pipelineParams.NAME&#125;&quot;</span></span><br><span class="line">    echo <span class="string">&quot;$&#123;pipelineParams.STORY_NAME&#125;&quot;</span></span><br><span class="line">    echo <span class="string">&quot;$&#123;pipelineParams.VERSION&#125;&quot;</span>  </span><br><span class="line"></span><br><span class="line">    pipeline &#123;</span><br><span class="line">        agent none</span><br><span class="line"></span><br><span class="line">        stages &#123;</span><br><span class="line">            stage(<span class="string">&#x27;Load Variables&#x27;</span>) &#123;</span><br><span class="line">                steps &#123;</span><br><span class="line">                    script &#123;</span><br><span class="line">                        pipelineParams.each &#123;</span><br><span class="line">                            k, v -&gt; env.<span class="string">&quot;$&#123;k&#125;&quot;</span> = <span class="string">&quot;$&#123;v&#125;&quot;</span></span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            stage(<span class="string">&#x27;Build&#x27;</span>) &#123;</span><br><span class="line">                steps &#123;</span><br><span class="line">                    echo <span class="string">&quot;$&#123;BUILD_STAGE&#125;&quot;</span></span><br><span class="line">                &#125;  </span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            stage(<span class="string">&#x27;Test&#x27;</span>) &#123;</span><br><span class="line">                steps &#123;</span><br><span class="line">                    echo <span class="string">&quot;$&#123;TEST_STAGE&#125;&quot;</span></span><br><span class="line">                &#125; </span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            stage(<span class="string">&#x27;Deploy&#x27;</span>) &#123;</span><br><span class="line">                steps &#123;</span><br><span class="line">                    echo <span class="string">&quot;$&#123;DEPLOY_STAGE&#125;&quot;</span></span><br><span class="line">                &#125; </span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>然后在 Jenkinsfile 中添加几个参数：</p>
-<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Library</span>(<span class="string">'second-shared-pipeline'</span>) _</span><br><span class="line"></span><br><span class="line">javaProjectMultiBranchAndParamsCommonLibrary &#123;</span><br><span class="line"></span><br><span class="line">    NAME = <span class="string">'rgyb rubbish'</span></span><br><span class="line">    STORY_NAME = <span class="string">'hello world'</span></span><br><span class="line">    VERSION = <span class="string">'1.1.0'</span></span><br><span class="line"></span><br><span class="line">    BUILD_STAGE = <span class="string">'this is build stage'</span></span><br><span class="line">    TEST_STAGE = <span class="string">'this is test stage'</span></span><br><span class="line">    DEPLOY_STAGE = <span class="string">'this is deploy stage'</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Library</span>(<span class="string">&#x27;second-shared-pipeline&#x27;</span>) _</span><br><span class="line"></span><br><span class="line">javaProjectMultiBranchAndParamsCommonLibrary &#123;</span><br><span class="line"></span><br><span class="line">    NAME = <span class="string">&#x27;rgyb rubbish&#x27;</span></span><br><span class="line">    STORY_NAME = <span class="string">&#x27;hello world&#x27;</span></span><br><span class="line">    VERSION = <span class="string">&#x27;1.1.0&#x27;</span></span><br><span class="line"></span><br><span class="line">    BUILD_STAGE = <span class="string">&#x27;this is build stage&#x27;</span></span><br><span class="line">    TEST_STAGE = <span class="string">&#x27;this is test stage&#x27;</span></span><br><span class="line">    DEPLOY_STAGE = <span class="string">&#x27;this is deploy stage&#x27;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>再次 build，将会看到如下结果</p>
-<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host@master/blog-img20210711153847.png" alt=""></p>
-<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host@master/blog-img20210711161045.png" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host@master/blog-img20210711153847.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host@master/blog-img20210711161045.png"></p>
 <p>相信到这里你已经掌握如何自定义 shared libray 以及如何在 Jenkinsfile 中引用 shared library 了</p>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>我们从当今服务形式出发，发现 DevOps CI 的痛点，结合 Demo，一点点掌握了自定义 shared library，以及实际项目中的规范，过往的 Jenkins 的内容并不多，结合文章开头的两篇文章，玩转 Jenkins Pipeline 就已经不是问题了，如果你项目中有类似需要优化的情况，撸起袖子干吧，做可以帮组内成员省力气的事情，都是加分项哦……</p>
 
@@ -608,7 +607,7 @@
       <div class="personalweixin">
         <br><br>
         <blockquote>
-          <a href="https://mp.weixin.qq.com/s/G7BXuZh0Qh1-mE6ts4LJqQ" target="_blank" rel="noopener">加我微信</a>，咱们交流技术与思想，共同成长
+          <a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/G7BXuZh0Qh1-mE6ts4LJqQ">加我微信</a>，咱们交流技术与思想，共同成长
         </blockquote>
         <br>
 
@@ -646,9 +645,9 @@
   <div class="-mob-share-list share-body">
     
       
-        <a class="-mob-share-qq" title="QQ好友" rel="external nofollow noopener noreferrer"
+        <a class="-mob-share-qq" title="QQ好友" rel="external nofollow noopener noreferrer noopener"
           
-          href="http://connect.qq.com/widget/shareqq/index.html?url=https://dayarch.top/p/jenkins-shared-library.html&title=Jenkins Shared Library | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=前言
+          target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://dayarch.top/p/jenkins-shared-library.html&title=Jenkins Shared Library | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=前言
 不知道你的 team 当中是否采用敏捷开发，总之我们的 team 贯彻敏捷方法很彻底
 
 
@@ -675,9 +674,9 @@
       
     
       
-        <a class="-mob-share-qzone" title="QQ空间" rel="external nofollow noopener noreferrer"
+        <a class="-mob-share-qzone" title="QQ空间" rel="external nofollow noopener noreferrer noopener"
           
-          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://dayarch.top/p/jenkins-shared-library.html&title=Jenkins Shared Library | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=前言
+          target="_blank" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://dayarch.top/p/jenkins-shared-library.html&title=Jenkins Shared Library | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=前言
 不知道你的 team 当中是否采用敏捷开发，总之我们的 team 贯彻敏捷方法很彻底
 
 
@@ -704,9 +703,9 @@
       
     
       
-        <a class="-mob-share-weibo" title="微博" rel="external nofollow noopener noreferrer"
+        <a class="-mob-share-weibo" title="微博" rel="external nofollow noopener noreferrer noopener"
           
-          href="http://service.weibo.com/share/share.php?url=https://dayarch.top/p/jenkins-shared-library.html&title=Jenkins Shared Library | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=前言
+          target="_blank" href="http://service.weibo.com/share/share.php?url=https://dayarch.top/p/jenkins-shared-library.html&title=Jenkins Shared Library | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=前言
 不知道你的 team 当中是否采用敏捷开发，总之我们的 team 贯彻敏捷方法很彻底
 
 
@@ -807,7 +806,7 @@
 </header>
 
     <div class="content pure">
-      <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/jenkins-environment-variables.html" title="Jenkins 使用环境变量" rel="bookmark">Jenkins 使用环境变量</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/jenkins-dynamic-using-git-branch.html" title="Jenkins 动态使用分支名称" rel="bookmark">Jenkins 动态使用分支名称</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/jenkins-config-mail.html" title="Jenkins学习之邮箱配置" rel="bookmark">Jenkins学习之邮箱配置</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/jenkins-hybris-deploy.html" title="Jenkins自动化部署Hybris" rel="bookmark">Jenkins自动化部署Hybris</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/git-worktree-in-practice.html" title="Git Worktree 大法真香" rel="bookmark">Git Worktree 大法真香</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/git-ignore.html" title="Git Ignoring Files" rel="bookmark">Git Ignoring Files</a></h3></div></li></ul>
+      <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/jenkins-environment-variables.html" title="Jenkins 使用环境变量" rel="bookmark">Jenkins 使用环境变量</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/jenkins-dynamic-using-git-branch.html" title="Jenkins 动态使用分支名称" rel="bookmark">Jenkins 动态使用分支名称</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/jenkins-config-mail.html" title="Jenkins学习之邮箱配置" rel="bookmark">Jenkins学习之邮箱配置</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/jenkins-hybris-deploy.html" title="Jenkins自动化部署Hybris" rel="bookmark">Jenkins自动化部署Hybris</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/git-ignore.html" title="Git Ignoring Files" rel="bookmark">Git Ignoring Files</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/git-worktree-in-practice.html" title="Git Worktree 大法真香" rel="bookmark">Git Worktree 大法真香</a></h3></div></li></ul>
     </div>
   </section>
 
@@ -1015,7 +1014,7 @@
 </header>
 
     <div class='content pure'>
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#什么是-Jenkinsfile？"><span class="toc-text">什么是 Jenkinsfile？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#为什么要用-Jenkins-Shared-Library？"><span class="toc-text">为什么要用 Jenkins Shared Library？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#如何创建-Jenkins-Shared-Library？"><span class="toc-text">如何创建 Jenkins Shared Library？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#如何配置-Shared-Library？"><span class="toc-text">如何配置 Shared Library？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#引用-Jenkins-Shared-Library"><span class="toc-text">引用 Jenkins Shared Library</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Jenkins-Shared-Library-高级定义"><span class="toc-text">Jenkins Shared Library 高级定义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-text">总结</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF-Jenkinsfile%EF%BC%9F"><span class="toc-text">什么是 Jenkinsfile？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E7%94%A8-Jenkins-Shared-Library%EF%BC%9F"><span class="toc-text">为什么要用 Jenkins Shared Library？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E5%88%9B%E5%BB%BA-Jenkins-Shared-Library%EF%BC%9F"><span class="toc-text">如何创建 Jenkins Shared Library？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E9%85%8D%E7%BD%AE-Shared-Library%EF%BC%9F"><span class="toc-text">如何配置 Shared Library？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%95%E7%94%A8-Jenkins-Shared-Library"><span class="toc-text">引用 Jenkins Shared Library</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Jenkins-Shared-Library-%E9%AB%98%E7%BA%A7%E5%AE%9A%E4%B9%89"><span class="toc-text">Jenkins Shared Library 高级定义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-text">总结</span></a></li></ol>
     </div>
   </section>
 
@@ -1090,7 +1089,7 @@
   &nbsp;&nbsp;|&nbsp;&nbsp;  
   
     &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-        class="white-color">264.1k</span>&nbsp;字
+        class="white-color">267.4k</span>&nbsp;字
     
 
   &nbsp;&nbsp;|&nbsp;&nbsp;  
@@ -1145,7 +1144,7 @@
     
     。
   </div>
-  <div><p>博客内容遵循 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
+  <div><p>博客内容遵循 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
 </div>
   <!-- <div class="github-badge">
       <a style="color: #fff" rel="license" href="https://hexo.io/" target="_blank" title="由 Hexo 强力驱动">
@@ -1253,10 +1252,14 @@
 
 
 
-  <script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/app.js"></script>
+  
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/app.js"></script>
 
 
-  <script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/search.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/search.js"></script>
+
 
 
 

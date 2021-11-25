@@ -13,7 +13,7 @@
   
 
   
-  <link rel="alternate" href="/atom.xml" title="日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享">
+  <link rel="alternate" href="/atom.xml" title="日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享" type="application/atom+xml">
   
 
   <meta name="HandheldFriendly" content="True" />
@@ -35,7 +35,9 @@
   
 
   
-    <link rel="stylesheet" href="/style.css">
+    
+<link rel="stylesheet" href="/style.css">
+
   
 
   <script>
@@ -85,7 +87,7 @@
         daovoice('update');
         </script>
     
-</head>
+<meta name="generator" content="Hexo 5.4.0"></head>
 
 <body>
   
@@ -483,16 +485,16 @@
     <section class="article typo">
       <div class="article-entry" itemprop="articleBody">
         <h1 id="创建Maven-Web-Project"><a href="#创建Maven-Web-Project" class="headerlink" title="创建Maven Web Project"></a>创建Maven Web Project</h1><hr>
-<h3 id="什么是Maven"><a href="#什么是Maven" class="headerlink" title="什么是Maven"></a>什么是Maven</h3><p>在<a href="http://maven.apache.org/" target="_blank" rel="noopener">Apache Maven</a> 官网上的说明是：<em>Apache Maven is a software project management and comprehension tool. Based on the concept of a project object model (POM), Maven can manage a project’s build, reporting and documentation from a central piece of information.</em>   翻译过来的基本意思就是：<strong>Maven是基于项目对象模型(POM)，可以通过一小段描述信息来管理项目的构建，报告和文档的软件项目管理工 具。</strong></p>
-<a id="more"></a>
+<h3 id="什么是Maven"><a href="#什么是Maven" class="headerlink" title="什么是Maven"></a>什么是Maven</h3><p>在<a target="_blank" rel="noopener" href="http://maven.apache.org/">Apache Maven</a> 官网上的说明是：<em>Apache Maven is a software project management and comprehension tool. Based on the concept of a project object model (POM), Maven can manage a project’s build, reporting and documentation from a central piece of information.</em>   翻译过来的基本意思就是：<strong>Maven是基于项目对象模型(POM)，可以通过一小段描述信息来管理项目的构建，报告和文档的软件项目管理工 具。</strong></p>
+<span id="more"></span>
 
 <h3 id="使用Maven管理项目的好处"><a href="#使用Maven管理项目的好处" class="headerlink" title="使用Maven管理项目的好处"></a>使用Maven管理项目的好处</h3><ol>
-<li><p>对第三方依赖库进行统一的版本管理。</p>
+<li><p> 对第三方依赖库进行统一的版本管理。</p>
 <blockquote>
 <p>只要用了Maven就不用再为每个项目复制spring.jar和hibernate.jar了，Maven会在你需要的时候，自动把这些第三方依赖库找到，你需要编译，Maven就把这些jar包放到classpath里，你需要打包，Maven2就帮你把需要的jar包都复制到WEB- INF/lib/目录下。</p>
 </blockquote>
 </li>
-<li><p>统一项目的目录结构</p>
+<li><p> 统一项目的目录结构</p>
 <blockquote>
 <p> 可以保证所有项目的目录结构都是一样的，目录结构统一的好处就是，你要找源代码就去src/main/java/下，你要找需要放到classpath下的资源，就去src/main/resources/下，你要找单元测试对应的代码和资源，就去src/test/下。每个目录下放什么东西，程序编译，发布的时候，每个目录起什么作用都很清楚明了，不会出现打开项目找不到要找的文件的情况。</p>
 </blockquote>
@@ -504,13 +506,13 @@
 </li>
 <li><p>支持多种插件</p>
 <blockquote>
-<p>在<a href="http://maven.apache.com/和http://mojo.codehaus.org/上可以找到大量的Maven2插件，通过这些插件可以完成多种多样的扩展功能。" target="_blank" rel="noopener">http://maven.apache.com/和http://mojo.codehaus.org/上可以找到大量的Maven2插件，通过这些插件可以完成多种多样的扩展功能。</a></p>
+<p>在<a target="_blank" rel="noopener" href="http://maven.apache.com/%E5%92%8Chttp://mojo.codehaus.org/%E4%B8%8A%E5%8F%AF%E4%BB%A5%E6%89%BE%E5%88%B0%E5%A4%A7%E9%87%8F%E7%9A%84Maven2%E6%8F%92%E4%BB%B6%EF%BC%8C%E9%80%9A%E8%BF%87%E8%BF%99%E4%BA%9B%E6%8F%92%E4%BB%B6%E5%8F%AF%E4%BB%A5%E5%AE%8C%E6%88%90%E5%A4%9A%E7%A7%8D%E5%A4%9A%E6%A0%B7%E7%9A%84%E6%89%A9%E5%B1%95%E5%8A%9F%E8%83%BD%E3%80%82">http://maven.apache.com/和http://mojo.codehaus.org/上可以找到大量的Maven2插件，通过这些插件可以完成多种多样的扩展功能。</a></p>
 </blockquote>
 </li>
 </ol>
 <p>以上只是概念性的东西，陆续会用实例证明以上好处</p>
 <h3 id="下载及安装Maven"><a href="#下载及安装Maven" class="headerlink" title="下载及安装Maven"></a>下载及安装Maven</h3><ol>
-<li>访问<a href="http://maven.apache.org/" target="_blank" rel="noopener">Maven</a> 下载：<br><img src="http://7xkyc7.com1.z0.glb.clouddn.com/blog_3_Maven_download_maven.png" alt="down load Maven"><br/>                 </li>
+<li>访问<a target="_blank" rel="noopener" href="http://maven.apache.org/">Maven</a> 下载：<br><img src="http://7xkyc7.com1.z0.glb.clouddn.com/blog_3_Maven_download_maven.png" alt="down load Maven"><br/>                 </li>
 <li>以Windows 环境为例，将下载的<strong>apache-maven-3.3.9-bin.zip</strong> 解压到某一磁盘目录下，<strong>apache-maven-3.3.9</strong> 作为<strong>MAVEN_HOME</strong> 目录，<br/>       </li>
 <li>新建本地Maven仓库（Repository），编辑<strong>apache-maven-3.3.9\conf\setting.xml</strong> 文件，在本地建立仓库（任意一次盘文件夹下即可）<br><img src="http://7xkyc7.com1.z0.glb.clouddn.com/blog_3_Maven_mavenRepo.png" alt="Maven Repo"><br/>       </li>
 <li>环境变量可配置也可不配置，如果用到命令行必须要配置环境变量。<blockquote>
@@ -527,8 +529,8 @@
 <li>现在新版本的Eclipse已经集成了Maven插件，在Windows-Preferences-Maven节点下的Installations添加Maven, 最后<strong>勾选上添加的Maven</strong>。<br><img src="http://7xkyc7.com1.z0.glb.clouddn.com/blog_3_Maven_addMaven.png" alt="Add Maven"><br/>       </li>
 <li>在Windows-Preferences-Maven节点下的User Setting设置setting.xml 文件<br><img src="http://7xkyc7.com1.z0.glb.clouddn.com/blog_3_Maven_mavenSetting.png" alt="User Setting"><br/>       
 ### 新建Maven Web Project</li>
-<li>鼠标邮件New Maven Project<br><img src="http://7xkyc7.com1.z0.glb.clouddn.com/blog_3_Maven_new_maven1.png" alt="step1"><br/></li>
-<li>选择Artifact ID<br><img src="http://7xkyc7.com1.z0.glb.clouddn.com/blog_3_Maven_new_maven2.png" alt="step2"><br/></li>
+<li> 鼠标邮件New Maven Project<br><img src="http://7xkyc7.com1.z0.glb.clouddn.com/blog_3_Maven_new_maven1.png" alt="step1"><br/></li>
+<li> 选择Artifact ID<br><img src="http://7xkyc7.com1.z0.glb.clouddn.com/blog_3_Maven_new_maven2.png" alt="step2"><br/></li>
 <li>填写required text<br><img src="http://7xkyc7.com1.z0.glb.clouddn.com/blog_3_Maven_new_maven3.png" alt="step3"><br/></li>
 <li>pom.xml 上鼠标邮件run as <strong>Maven install</strong>, 会发现关于这个项目的war包在Maven仓库中已经生成<br><img src="http://7xkyc7.com1.z0.glb.clouddn.com/blog_3_Maven_new_maven4.png" alt="step4"></li>
 </ol>
@@ -552,7 +554,7 @@
 <li>src/main/webapp : war 资源目录</li>
 </ol>
 </blockquote>
-<h3 id="更多"><a href="#更多" class="headerlink" title="更多"></a>更多</h3><p>更多关于<a href="http://mark.leanote.com/post/%E4%BD%BF%E7%94%A8IntelliJ-IDEA-14%E5%92%8CMaven%E5%88%9B%E5%BB%BAjava-web%E9%A1%B9%E7%9B%AE" target="_blank" rel="noopener">IntelliJ IDEA 下创建Maven项</a></p>
+<h3 id="更多"><a href="#更多" class="headerlink" title="更多"></a>更多</h3><p>更多关于<a target="_blank" rel="noopener" href="http://mark.leanote.com/post/%E4%BD%BF%E7%94%A8IntelliJ-IDEA-14%E5%92%8CMaven%E5%88%9B%E5%BB%BAjava-web%E9%A1%B9%E7%9B%AE">IntelliJ IDEA 下创建Maven项</a></p>
 
       </div>
       <!-- <div class="tuijian">
@@ -563,7 +565,7 @@
       <div class="personalweixin">
         <br><br>
         <blockquote>
-          <a href="https://mp.weixin.qq.com/s/G7BXuZh0Qh1-mE6ts4LJqQ" target="_blank" rel="noopener">加我微信</a>，咱们交流技术与思想，共同成长
+          <a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/G7BXuZh0Qh1-mE6ts4LJqQ">加我微信</a>，咱们交流技术与思想，共同成长
         </blockquote>
         <br>
 
@@ -601,9 +603,9 @@
   <div class="-mob-share-list share-body">
     
       
-        <a class="-mob-share-qq" title="QQ好友" rel="external nofollow noopener noreferrer"
+        <a class="-mob-share-qq" title="QQ好友" rel="external nofollow noopener noreferrer noopener"
           
-          href="http://connect.qq.com/widget/shareqq/index.html?url=https://dayarch.top/p/maven-project-structure.html&title=Maven Project | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=创建Maven Web Project
+          target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://dayarch.top/p/maven-project-structure.html&title=Maven Project | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=创建Maven Web Project
 
 
 
@@ -618,9 +620,9 @@
       
     
       
-        <a class="-mob-share-qzone" title="QQ空间" rel="external nofollow noopener noreferrer"
+        <a class="-mob-share-qzone" title="QQ空间" rel="external nofollow noopener noreferrer noopener"
           
-          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://dayarch.top/p/maven-project-structure.html&title=Maven Project | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=创建Maven Web Project
+          target="_blank" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://dayarch.top/p/maven-project-structure.html&title=Maven Project | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=创建Maven Web Project
 
 
 
@@ -635,9 +637,9 @@
       
     
       
-        <a class="-mob-share-weibo" title="微博" rel="external nofollow noopener noreferrer"
+        <a class="-mob-share-weibo" title="微博" rel="external nofollow noopener noreferrer noopener"
           
-          href="http://service.weibo.com/share/share.php?url=https://dayarch.top/p/maven-project-structure.html&title=Maven Project | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=创建Maven Web Project
+          target="_blank" href="http://service.weibo.com/share/share.php?url=https://dayarch.top/p/maven-project-structure.html&title=Maven Project | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=创建Maven Web Project
 
 
 
@@ -726,7 +728,7 @@
 </header>
 
     <div class="content pure">
-      <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/maven-dependency-optional-transitive.html" title="Maven 依赖传递性透彻理解" rel="bookmark">Maven 依赖传递性透彻理解</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/git-worktree-in-practice.html" title="Git Worktree 大法真香" rel="bookmark">Git Worktree 大法真香</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/git-ignore.html" title="Git Ignoring Files" rel="bookmark">Git Ignoring Files</a></h3></div></li></ul>
+      <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/maven-dependency-optional-transitive.html" title="Maven 依赖传递性透彻理解" rel="bookmark">Maven 依赖传递性透彻理解</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/git-ignore.html" title="Git Ignoring Files" rel="bookmark">Git Ignoring Files</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/git-worktree-in-practice.html" title="Git Worktree 大法真香" rel="bookmark">Git Worktree 大法真香</a></h3></div></li></ul>
     </div>
   </section>
 
@@ -934,7 +936,7 @@
 </header>
 
     <div class='content pure'>
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#创建Maven-Web-Project"><span class="toc-text">创建Maven Web Project</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#什么是Maven"><span class="toc-text">什么是Maven</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用Maven管理项目的好处"><span class="toc-text">使用Maven管理项目的好处</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#下载及安装Maven"><span class="toc-text">下载及安装Maven</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Eclipse下配置Maven"><span class="toc-text">Eclipse下配置Maven</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#常用MVN命令"><span class="toc-text">常用MVN命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Maven项目目录结构说明"><span class="toc-text">Maven项目目录结构说明</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#更多"><span class="toc-text">更多</span></a></li></ol></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%88%9B%E5%BB%BAMaven-Web-Project"><span class="toc-text">创建Maven Web Project</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFMaven"><span class="toc-text">什么是Maven</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8Maven%E7%AE%A1%E7%90%86%E9%A1%B9%E7%9B%AE%E7%9A%84%E5%A5%BD%E5%A4%84"><span class="toc-text">使用Maven管理项目的好处</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8B%E8%BD%BD%E5%8F%8A%E5%AE%89%E8%A3%85Maven"><span class="toc-text">下载及安装Maven</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Eclipse%E4%B8%8B%E9%85%8D%E7%BD%AEMaven"><span class="toc-text">Eclipse下配置Maven</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8MVN%E5%91%BD%E4%BB%A4"><span class="toc-text">常用MVN命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Maven%E9%A1%B9%E7%9B%AE%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84%E8%AF%B4%E6%98%8E"><span class="toc-text">Maven项目目录结构说明</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9B%B4%E5%A4%9A"><span class="toc-text">更多</span></a></li></ol></li></ol></li></ol>
     </div>
   </section>
 
@@ -1009,7 +1011,7 @@
   &nbsp;&nbsp;|&nbsp;&nbsp;  
   
     &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-        class="white-color">264.1k</span>&nbsp;字
+        class="white-color">267.4k</span>&nbsp;字
     
 
   &nbsp;&nbsp;|&nbsp;&nbsp;  
@@ -1064,7 +1066,7 @@
     
     。
   </div>
-  <div><p>博客内容遵循 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
+  <div><p>博客内容遵循 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
 </div>
   <!-- <div class="github-badge">
       <a style="color: #fff" rel="license" href="https://hexo.io/" target="_blank" title="由 Hexo 强力驱动">
@@ -1172,10 +1174,14 @@
 
 
 
-  <script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/app.js"></script>
+  
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/app.js"></script>
 
 
-  <script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/search.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/search.js"></script>
+
 
 
 

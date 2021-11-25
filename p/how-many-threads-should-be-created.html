@@ -13,7 +13,7 @@
   
 
   
-  <link rel="alternate" href="/atom.xml" title="日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享">
+  <link rel="alternate" href="/atom.xml" title="日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享" type="application/atom+xml">
   
 
   <meta name="HandheldFriendly" content="True" />
@@ -35,7 +35,9 @@
   
 
   
-    <link rel="stylesheet" href="/style.css">
+    
+<link rel="stylesheet" href="/style.css">
+
   
 
   <script>
@@ -85,7 +87,7 @@
         daovoice('update');
         </script>
     
-</head>
+<meta name="generator" content="Hexo 5.4.0"></head>
 
 <body>
   
@@ -484,11 +486,11 @@
 
     <section class="article typo">
       <div class="article-entry" itemprop="articleBody">
-        <p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200406205924.png" alt=""></fancybox></p>
+        <p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200406205924.png"></fancybox></p>
 <h2 id="为什么要使用多线程？"><a href="#为什么要使用多线程？" class="headerlink" title="为什么要使用多线程？"></a>为什么要使用多线程？</h2><blockquote>
 <p>防止并发编程出错最好的办法就是不写并发程序</p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img%E9%87%8D%E6%96%B0%E7%BB%84%E7%BB%87%E8%AF%AD%E8%A8%80.gif" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img%E9%87%8D%E6%96%B0%E7%BB%84%E7%BB%87%E8%AF%AD%E8%A8%80.gif"></p>
 <p>既然多线程编程容易出错，为什么它还经久不衰呢？</p>
 <p><strong>A：那还用说，肯定在某些方面有特长呗，比如你知道的【它很快，非常快】</strong></p>
 <p>我也很赞同这个答案，但说的不够具体</p>
@@ -502,7 +504,7 @@
 <p>使用多线程就是在正确的场景下通过设置正确个数的线程来最大化程序的运行速度（我感觉你还是啥也没说）</p>
 </blockquote>
 <p>将这句话翻译到硬件级别就是要充分的利用 CPU 和 I/O 的利用率</p>
-<p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200329203812.png" alt=""></fancybox></p>
+<p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200329203812.png"></fancybox></p>
 <p>两个正确得到保证，也就能达到最大化利用 CPU 和 I/O的目的了。最关键是，如何做到两个【正确】？</p>
 <p>在聊具体场景的时候，我们必须要拿出我们的专业性来。送你两个名词 buff 加成</p>
 <ul>
@@ -523,11 +525,11 @@
 </li>
 </ol>
 <p>我们来看下图他们会发生什么？</p>
-<p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200329213204.png" alt=""></fancybox></p>
+<p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200329213204.png"></fancybox></p>
 <p>由于是单核 CPU，所有线程都在等待 CPU 时间片。按照理想情况来看，四个线程执行的时间总和与一个线程5独自完成是相等的，实际上我们还忽略了四个线程上下文切换的开销</p>
 <p><strong>所以，单核CPU处理CPU密集型程序，这种情况并不太适合使用多线程</strong></p>
 <p>此时如果在 4 核CPU下，同样创建四个线程来分段计算，看看会发生什么？</p>
-<p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200329213337.png" alt=""></fancybox></p>
+<p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200329213337.png"></fancybox></p>
 <p>每个线程都有 CPU 来运行，并不会发生等待 CPU 时间片的情况，也没有线程切换的开销。理论情况来看效率提升了 4 倍</p>
 <p><strong>所以，如果是多核CPU 处理 CPU 密集型程序，我们完全可以最大化的利用 CPU 核心数，应用并发编程来提高效率</strong></p>
 <h3 id="I-O密集型程序"><a href="#I-O密集型程序" class="headerlink" title="I/O密集型程序"></a>I/O密集型程序</h3><blockquote>
@@ -535,7 +537,7 @@
 </blockquote>
 <p>我们都知道在进行 I/O 操作时，CPU是空闲状态，所以我们要最大化的利用 CPU，不能让其是空闲状态</p>
 <p>同样在单核 CPU 的情况下：</p>
-<p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200329214829.png" alt=""></fancybox></p>
+<p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200329214829.png"></fancybox></p>
 <p>从上图中可以看出，每个线程都执行了相同长度的 CPU 耗时和 I/O 耗时，如果你将上面的图多画几个周期，CPU操作耗时固定，将 I/O 操作耗时变为 CPU 耗时的 3 倍，你会发现，CPU又有空闲了，这时你就可以新建线程 4，来继续最大化的利用 CPU。</p>
 <p>综上两种情况我们可以做出这样的总结：</p>
 <blockquote>
@@ -555,14 +557,14 @@
 <p>最佳线程数 =  <code>(1/CPU利用率)</code> = <code>1 + (I/O耗时/CPU耗时)</code></p>
 </blockquote>
 <p>我这么体贴，当然担心有些同学不理解这个公式，我们将上图的比例手动带入到上面的公式中：</p>
-<p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200402220324.png" alt=""></fancybox></p>
+<p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200402220324.png"></fancybox></p>
 <p>这是一个CPU核心的最佳线程数，如果多个核心，那么 I/O 密集型程序的最佳线程数就是：</p>
 <blockquote>
 <p>最佳线程数 = <code>CPU核心数</code> *  <code>(1/CPU利用率)</code> =  <code>CPU核心数</code> * <code>（1 + （I/O耗时/CPU耗时)）</code></p>
 </blockquote>
 <p>说到这，有些同学可能有疑问了，要计算 I/O 密集型程序，是要知道 CPU 利用率的，如果我不知道这些，那要怎样给出一个初始值呢？</p>
 <p>按照上面公式，假如几乎全是 I/O耗时，所以纯理论你就可以说是 <strong>2N（N=CPU核数），当然也有说 2N + 1的</strong>，（我猜这个 1 也是 backup），没有找到具体的推倒过程，在【并发编程实战-8.2章节】截图在此，大家有兴趣的可以自己看看</p>
-<p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200401185053.png" alt=""></fancybox></p>
+<p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200401185053.png"></fancybox></p>
 <p><strong>理论上来说，理论上来说，理论上来说</strong>，这样就能达到 CPU 100% 的利用率</p>
 <p>如果理论都好用，那就用不着实践了，也就更不会有调优的事出现了。<strong>不过在初始阶段，我们确实可以按照这个理论之作为伪标准， 毕竟差也可能不会差太多，这样调优也会更好一些</strong></p>
 <p>谈完理论，咱们说点实际的，公式我看懂了（定性阶段结束），但是我有两个疑问：</p>
@@ -582,7 +584,7 @@
 <p>假设要求一个系统的 TPS（Transaction Per Second 或者 Task Per Second）至少为20，然后假设每个Transaction由一个线程完成，继续假设平均每个线程处理一个Transaction的时间为4s</p>
 </blockquote>
 <p><strong>如何设计线程个数，使得可以在1s内处理完20个Transaction？</strong></p>
-<p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200402222407.png" alt=""></fancybox></p>
+<p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200402222407.png"></fancybox></p>
 <p>但是，但是，这是因为没有考虑到CPU数目。家里又没矿，一般服务器的CPU核数为16或者32，如果有80个线程，那么肯定会带来太多不必要的线程上下文切换开销（希望这句话你可以主动说出来），这就需要调优了，来做到最佳 balance</p>
 <h3 id="小问二"><a href="#小问二" class="headerlink" title="小问二"></a>小问二</h3><blockquote>
 <p>计算操作需要5ms，DB操作需要 100ms，对于一台 8个CPU的服务器，怎么设置线程数呢？</p>
@@ -592,14 +594,14 @@
 <blockquote>
 <p>那如果DB的 QPS（Query Per Second）上限是1000，此时这个线程数又该设置为多大呢？</p>
 </blockquote>
-<p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200408165804.png" alt=""></fancybox></p>
+<p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200408165804.png"></fancybox></p>
 <p>同样，这是没有考虑 CPU 数目，接下来就又是细节调优的阶段了</p>
 <p>因为一次请求不仅仅包括 CPU 和 I/O操作，具体的调优过程还要考虑内存资源，网络等具体内容</p>
 <h2 id="增加-CPU-核数一定能解决问题吗？"><a href="#增加-CPU-核数一定能解决问题吗？" class="headerlink" title="增加 CPU 核数一定能解决问题吗？"></a>增加 CPU 核数一定能解决问题吗？</h2><p>看到这，有些同学可能会认为，即便我算出了理论线程数，但实际CPU核数不够，会带来线程上下文切换的开销，所以下一步就需要增加 CPU 核数，那我们盲目的增加 CPU 核数就一定能解决问题吗？</p>
 <p>在讲互斥锁的内容是，我故意遗留了一个知识:</p>
-<h3 id=""><a href="#" class="headerlink" title=""></a></h3><p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200406195447.png" alt=""></fancybox></p>
+<h3 id=""><a href="#" class="headerlink" title=""></a></h3><p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200406195447.png"></fancybox></p>
 <p>怎么理解这个公式呢？</p>
-<p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200406195849.png" alt=""></fancybox></p>
+<p><fancybox><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200406195849.png"></fancybox></p>
 <p>这个结论告诉我们，假如我们的串行率是 5%，那么我们无论采用什么技术，最高也就只能提高 20 倍的性能。</p>
 <p>如何简单粗暴的理解串行百分比（其实都可以通过工具得出这个结果的）呢？来看个小 Tips：</p>
 <blockquote>
@@ -624,7 +626,7 @@
 <li>Java 并发编程之美</li>
 <li>码出高效</li>
 <li>Java 并发编程的艺术</li>
-<li><a href="http://ifeve.com/how-to-calculate-threadpool-size/" target="_blank" rel="noopener">ifeve</a></li>
+<li><a target="_blank" rel="noopener" href="http://ifeve.com/how-to-calculate-threadpool-size/">ifeve</a></li>
 </ul>
 <hr>
 <p>下一篇文章，我们就来说说，你熟悉又陌生的线程池问题</p>
@@ -633,12 +635,12 @@
       <!-- <div class="tuijian">
         <br><br>
         📚相关文章
-        <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-book.html" title="120000字，你们要的Java并发编程图文小册来了" rel="bookmark">120000字，你们要的Java并发编程图文小册来了</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-aqs-acquireshared-and-semaphore.html" title="Java AQS共享式获取同步状态及Semaphore的应用分析" rel="bookmark">Java AQS共享式获取同步状态及Semaphore的应用分析</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-countdownlatch-vs-cyclicbarrier.html" title="CountDownLatch 和 CyclicBarrier 傻傻的分不清楚？" rel="bookmark">CountDownLatch 和 CyclicBarrier 傻傻的分不清楚？</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/executorservice-vs-completionservice.html" title="ExecutorService VS CompletionService" rel="bookmark">ExecutorService VS CompletionService</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-aqs-and-reentrantlock.html" title="Java AQS队列同步器以及ReentrantLock的应用" rel="bookmark">Java AQS队列同步器以及ReentrantLock的应用</a></h3></div></li></ul>
+        <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-book.html" title="120000字，你们要的Java并发编程图文小册来了" rel="bookmark">120000字，你们要的Java并发编程图文小册来了</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-aqs-acquireshared-and-semaphore.html" title="Java AQS共享式获取同步状态及Semaphore的应用分析" rel="bookmark">Java AQS共享式获取同步状态及Semaphore的应用分析</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/executorservice-vs-completionservice.html" title="ExecutorService VS CompletionService" rel="bookmark">ExecutorService VS CompletionService</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-interrupt-mechnism.html" title="Java多线程中断机制" rel="bookmark">Java多线程中断机制</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-thread-life-cycle.html" title="Java线程生命周期这样理解挺简单的" rel="bookmark">Java线程生命周期这样理解挺简单的</a></h3></div></li></ul>
       </div> -->
       <div class="personalweixin">
         <br><br>
         <blockquote>
-          <a href="https://mp.weixin.qq.com/s/G7BXuZh0Qh1-mE6ts4LJqQ" target="_blank" rel="noopener">加我微信</a>，咱们交流技术与思想，共同成长
+          <a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/G7BXuZh0Qh1-mE6ts4LJqQ">加我微信</a>，咱们交流技术与思想，共同成长
         </blockquote>
         <br>
 
@@ -676,9 +678,9 @@
   <div class="-mob-share-list share-body">
     
       
-        <a class="-mob-share-qq" title="QQ好友" rel="external nofollow noopener noreferrer"
+        <a class="-mob-share-qq" title="QQ好友" rel="external nofollow noopener noreferrer noopener"
           
-          href="http://connect.qq.com/widget/shareqq/index.html?url=https://dayarch.top/p/how-many-threads-should-be-created.html&title=面试问，创建多少个线程合适？ | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=为什么要使用多线程？
+          target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://dayarch.top/p/how-many-threads-should-be-created.html&title=面试问，创建多少个线程合适？ | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=为什么要使用多线程？
 防止并发编程出错最好的办法就是不写并发程序
 
 
@@ -707,9 +709,9 @@ A：那还用说，肯定在某些方面有特长呗，比如你知道的【它�
       
     
       
-        <a class="-mob-share-qzone" title="QQ空间" rel="external nofollow noopener noreferrer"
+        <a class="-mob-share-qzone" title="QQ空间" rel="external nofollow noopener noreferrer noopener"
           
-          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://dayarch.top/p/how-many-threads-should-be-created.html&title=面试问，创建多少个线程合适？ | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=为什么要使用多线程？
+          target="_blank" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://dayarch.top/p/how-many-threads-should-be-created.html&title=面试问，创建多少个线程合适？ | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=为什么要使用多线程？
 防止并发编程出错最好的办法就是不写并发程序
 
 
@@ -738,9 +740,9 @@ A：那还用说，肯定在某些方面有特长呗，比如你知道的【它�
       
     
       
-        <a class="-mob-share-weibo" title="微博" rel="external nofollow noopener noreferrer"
+        <a class="-mob-share-weibo" title="微博" rel="external nofollow noopener noreferrer noopener"
           
-          href="http://service.weibo.com/share/share.php?url=https://dayarch.top/p/how-many-threads-should-be-created.html&title=面试问，创建多少个线程合适？ | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=为什么要使用多线程？
+          target="_blank" href="http://service.weibo.com/share/share.php?url=https://dayarch.top/p/how-many-threads-should-be-created.html&title=面试问，创建多少个线程合适？ | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=为什么要使用多线程？
 防止并发编程出错最好的办法就是不写并发程序
 
 
@@ -843,7 +845,7 @@ A：那还用说，肯定在某些方面有特长呗，比如你知道的【它�
 </header>
 
     <div class="content pure">
-      <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-book.html" title="120000字，你们要的Java并发编程图文小册来了" rel="bookmark">120000字，你们要的Java并发编程图文小册来了</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-aqs-acquireshared-and-semaphore.html" title="Java AQS共享式获取同步状态及Semaphore的应用分析" rel="bookmark">Java AQS共享式获取同步状态及Semaphore的应用分析</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-countdownlatch-vs-cyclicbarrier.html" title="CountDownLatch 和 CyclicBarrier 傻傻的分不清楚？" rel="bookmark">CountDownLatch 和 CyclicBarrier 傻傻的分不清楚？</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/executorservice-vs-completionservice.html" title="ExecutorService VS CompletionService" rel="bookmark">ExecutorService VS CompletionService</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-aqs-and-reentrantlock.html" title="Java AQS队列同步器以及ReentrantLock的应用" rel="bookmark">Java AQS队列同步器以及ReentrantLock的应用</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-future-and-callable.html" title="Java Future详解与使用" rel="bookmark">Java Future详解与使用</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-interrupt-mechnism.html" title="Java多线程中断机制" rel="bookmark">Java多线程中断机制</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-thread-life-cycle.html" title="Java线程生命周期这样理解挺简单的" rel="bookmark">Java线程生命周期这样理解挺简单的</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-dead-lock.html" title="Java并发死锁解决思路" rel="bookmark">Java并发死锁解决思路</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java8-completablefuture-tutorial.html" title="java8 CompletableFuture 使用详解" rel="bookmark">java8 CompletableFuture 使用详解</a></h3></div></li></ul>
+      <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-book.html" title="120000字，你们要的Java并发编程图文小册来了" rel="bookmark">120000字，你们要的Java并发编程图文小册来了</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-aqs-acquireshared-and-semaphore.html" title="Java AQS共享式获取同步状态及Semaphore的应用分析" rel="bookmark">Java AQS共享式获取同步状态及Semaphore的应用分析</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/executorservice-vs-completionservice.html" title="ExecutorService VS CompletionService" rel="bookmark">ExecutorService VS CompletionService</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-interrupt-mechnism.html" title="Java多线程中断机制" rel="bookmark">Java多线程中断机制</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-thread-life-cycle.html" title="Java线程生命周期这样理解挺简单的" rel="bookmark">Java线程生命周期这样理解挺简单的</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/difference-between-volatile-and-synchronized-keyword.html" title="volatile和synchronized图文透彻讲解" rel="bookmark">volatile和synchronized图文透彻讲解</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/why-we-need-to-use-threadpool.html" title="为什么要使用线程池?" rel="bookmark">为什么要使用线程池?</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-core.html" title="并发编程三大核心" rel="bookmark">并发编程三大核心</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-dead-lock.html" title="Java并发死锁解决思路" rel="bookmark">Java并发死锁解决思路</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-concurrency-three-questions.html" title="并发编程三大问题" rel="bookmark">并发编程三大问题</a></h3></div></li></ul>
     </div>
   </section>
 
@@ -1051,7 +1053,7 @@ A：那还用说，肯定在某些方面有特长呗，比如你知道的【它�
 </header>
 
     <div class='content pure'>
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#为什么要使用多线程？"><span class="toc-text">为什么要使用多线程？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#并发编程适用于什么场景？"><span class="toc-text">并发编程适用于什么场景？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#CPU-密集型程序"><span class="toc-text">CPU 密集型程序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#I-O密集型程序"><span class="toc-text">I/O密集型程序</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#创建多少个线程合适？"><span class="toc-text">创建多少个线程合适？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#CPU-密集型程序创建多少个线程合适？"><span class="toc-text">CPU 密集型程序创建多少个线程合适？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#I-O密集型程序创建多少个线程合适？"><span class="toc-text">I/O密集型程序创建多少个线程合适？</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#面试小问"><span class="toc-text">面试小问</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#小问一"><span class="toc-text">小问一</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#小问二"><span class="toc-text">小问二</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#增加-CPU-核数一定能解决问题吗？"><span class="toc-text">增加 CPU 核数一定能解决问题吗？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#null"><span class="toc-text"></span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-text">总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#灵魂追问"><span class="toc-text">灵魂追问</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考"><span class="toc-text">参考</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E4%BD%BF%E7%94%A8%E5%A4%9A%E7%BA%BF%E7%A8%8B%EF%BC%9F"><span class="toc-text">为什么要使用多线程？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E9%80%82%E7%94%A8%E4%BA%8E%E4%BB%80%E4%B9%88%E5%9C%BA%E6%99%AF%EF%BC%9F"><span class="toc-text">并发编程适用于什么场景？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#CPU-%E5%AF%86%E9%9B%86%E5%9E%8B%E7%A8%8B%E5%BA%8F"><span class="toc-text">CPU 密集型程序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#I-O%E5%AF%86%E9%9B%86%E5%9E%8B%E7%A8%8B%E5%BA%8F"><span class="toc-text">I&#x2F;O密集型程序</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E5%A4%9A%E5%B0%91%E4%B8%AA%E7%BA%BF%E7%A8%8B%E5%90%88%E9%80%82%EF%BC%9F"><span class="toc-text">创建多少个线程合适？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#CPU-%E5%AF%86%E9%9B%86%E5%9E%8B%E7%A8%8B%E5%BA%8F%E5%88%9B%E5%BB%BA%E5%A4%9A%E5%B0%91%E4%B8%AA%E7%BA%BF%E7%A8%8B%E5%90%88%E9%80%82%EF%BC%9F"><span class="toc-text">CPU 密集型程序创建多少个线程合适？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#I-O%E5%AF%86%E9%9B%86%E5%9E%8B%E7%A8%8B%E5%BA%8F%E5%88%9B%E5%BB%BA%E5%A4%9A%E5%B0%91%E4%B8%AA%E7%BA%BF%E7%A8%8B%E5%90%88%E9%80%82%EF%BC%9F"><span class="toc-text">I&#x2F;O密集型程序创建多少个线程合适？</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9D%A2%E8%AF%95%E5%B0%8F%E9%97%AE"><span class="toc-text">面试小问</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B0%8F%E9%97%AE%E4%B8%80"><span class="toc-text">小问一</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B0%8F%E9%97%AE%E4%BA%8C"><span class="toc-text">小问二</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A2%9E%E5%8A%A0-CPU-%E6%A0%B8%E6%95%B0%E4%B8%80%E5%AE%9A%E8%83%BD%E8%A7%A3%E5%86%B3%E9%97%AE%E9%A2%98%E5%90%97%EF%BC%9F"><span class="toc-text">增加 CPU 核数一定能解决问题吗？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text"></span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-text">总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%81%B5%E9%AD%82%E8%BF%BD%E9%97%AE"><span class="toc-text">灵魂追问</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83"><span class="toc-text">参考</span></a></li></ol>
     </div>
   </section>
 
@@ -1126,7 +1128,7 @@ A：那还用说，肯定在某些方面有特长呗，比如你知道的【它�
   &nbsp;&nbsp;|&nbsp;&nbsp;  
   
     &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-        class="white-color">264.1k</span>&nbsp;字
+        class="white-color">267.4k</span>&nbsp;字
     
 
   &nbsp;&nbsp;|&nbsp;&nbsp;  
@@ -1181,7 +1183,7 @@ A：那还用说，肯定在某些方面有特长呗，比如你知道的【它�
     
     。
   </div>
-  <div><p>博客内容遵循 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
+  <div><p>博客内容遵循 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
 </div>
   <!-- <div class="github-badge">
       <a style="color: #fff" rel="license" href="https://hexo.io/" target="_blank" title="由 Hexo 强力驱动">
@@ -1289,10 +1291,14 @@ A：那还用说，肯定在某些方面有特长呗，比如你知道的【它�
 
 
 
-  <script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/app.js"></script>
+  
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/app.js"></script>
 
 
-  <script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/search.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/search.js"></script>
+
 
 
 

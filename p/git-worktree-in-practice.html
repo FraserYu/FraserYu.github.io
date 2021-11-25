@@ -13,7 +13,7 @@
   
 
   
-  <link rel="alternate" href="/atom.xml" title="日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享">
+  <link rel="alternate" href="/atom.xml" title="日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享" type="application/atom+xml">
   
 
   <meta name="HandheldFriendly" content="True" />
@@ -35,7 +35,9 @@
   
 
   
-    <link rel="stylesheet" href="/style.css">
+    
+<link rel="stylesheet" href="/style.css">
+
   
 
   <script>
@@ -85,7 +87,7 @@
         daovoice('update');
         </script>
     
-</head>
+<meta name="generator" content="Hexo 5.4.0"></head>
 
 <body>
   
@@ -489,7 +491,7 @@
 <li><code>git stash | git stash pop</code> 暂存工作内容，然后再切换到 hotfix</li>
 </ol>
 <p>第二种方式较第一种还好很多，可是面对下面这些场景，stash 依旧不是很好的解决方案</p>
-<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host@master/blog-img20211121205535.png" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host@master/blog-img20211121205535.png"></p>
 <h2 id="我们面对的场景"><a href="#我们面对的场景" class="headerlink" title="我们面对的场景"></a>我们面对的场景</h2><ol>
 <li>正在 main 分支上跑长时间的测试，切换到 hotfix 或 feature, 测试就会中断</li>
 <li>项目非常大，频繁的切换索引，成本非常高</li>
@@ -508,7 +510,7 @@
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git worktree --help</span><br></pre></td></tr></table></figure>
 
 <p>就可以快速看到帮助文档说明：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host@master/blog-img20211121122945.png" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host@master/blog-img20211121122945.png"></p>
 <p>用简单的话来解释 git-worktree 的作用就是：</p>
 <blockquote>
 <p>仅需维护一个 repo，又可以同时在多个 branch 上工作，互不影响</p>
@@ -526,7 +528,7 @@
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">└── amend-crash-demo</span><br><span class="line"></span><br><span class="line">1 directory</span><br></pre></td></tr></table></figure>
 
 <p><code>cd amend-crash-demo</code> 运行命令 <code>git worktree add ../feature/feature2</code></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">➜  amend-crash-demo git:(main) git worktree add ../feature/feature2</span><br><span class="line">Preparing worktree (new branch 'feature2')</span><br><span class="line">HEAD is now at 82b8711 add main file</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">➜  amend-crash-demo git:(main) git worktree add ../feature/feature2</span><br><span class="line">Preparing worktree (new branch &#x27;feature2&#x27;)</span><br><span class="line">HEAD is now at 82b8711 add main file</span><br></pre></td></tr></table></figure>
 
 <p>重新看目录结构</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── amend-crash-demo</span><br><span class="line">└── feature</span><br><span class="line">    └── feature2</span><br><span class="line"></span><br><span class="line">3 directories</span><br></pre></td></tr></table></figure>
@@ -547,13 +549,13 @@
 
 <p>很显然这不是我们想要的，这时我们就需要 -b 参数的支持了，就像 <code>git checkout -b</code> 一样</p>
 <p>执行命令：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git worktree add -b "hotfix/JIRA234-fix-naming" ../hotfix/JIRA234-fix-naming</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git worktree add -b &quot;hotfix/JIRA234-fix-naming&quot; ../hotfix/JIRA234-fix-naming</span><br></pre></td></tr></table></figure>
 
 <p>再来看一下目录结构</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── amend-crash-demo</span><br><span class="line">├── feature</span><br><span class="line">│   └── feature2</span><br><span class="line">└── hotfix</span><br><span class="line">    ├── JIRA234-fix-naming</span><br><span class="line">    └── hotfix</span><br><span class="line">        └── JIRA234-fix-naming</span><br><span class="line"></span><br><span class="line">7 directories</span><br></pre></td></tr></table></figure>
 
 <p>进入 <code>JIRA234-fix-naming</code> 目录，默认是在 <code>hotfix/JIRA234-fix-naming</code> 分支上</p>
-<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host@master/blog-img20211121201404.png" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host@master/blog-img20211121201404.png"></p>
 <p>worktree 建立起来很容易，不加管理，项目目录结构肯定乱糟糟，这是我们不想看到的，所以我们需要清晰的知道某个 repo 都建立了哪些 worktree</p>
 <h2 id="git-worktree-list"><a href="#git-worktree-list" class="headerlink" title="git worktree list"></a>git worktree list</h2><p>所有的worktree 都在共用一个 repo，所以在任意一个 worktree 目录下，都可以执行如下命令来查看 worktree 列表</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git worktree list</span><br></pre></td></tr></table></figure>
@@ -590,12 +592,12 @@
       <!-- <div class="tuijian">
         <br><br>
         📚相关文章
-        <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/git-ignore.html" title="Git Ignoring Files" rel="bookmark">Git Ignoring Files</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/git-multiple-account.html" title="Git配置多个账号（GitLab和GitHub）" rel="bookmark">Git配置多个账号（GitLab和GitHub）</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/git-workflow.html" title="git 使用流程" rel="bookmark">git 使用流程</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/three-ways-to-keep-git-log-clear.html" title="保持清洁的Git提交记录，三招就够了" rel="bookmark">保持清洁的Git提交记录，三招就够了</a></h3></div></li></ul>
+        <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/git-ignore.html" title="Git Ignoring Files" rel="bookmark">Git Ignoring Files</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/git-worktree-in-advance.html" title="Git Worktree 高级使用" rel="bookmark">Git Worktree 高级使用</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/git-multiple-account.html" title="Git配置多个账号（GitLab和GitHub）" rel="bookmark">Git配置多个账号（GitLab和GitHub）</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/git-workflow.html" title="git 使用流程" rel="bookmark">git 使用流程</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/three-ways-to-keep-git-log-clear.html" title="保持清洁的Git提交记录，三招就够了" rel="bookmark">保持清洁的Git提交记录，三招就够了</a></h3></div></li></ul>
       </div> -->
       <div class="personalweixin">
         <br><br>
         <blockquote>
-          <a href="https://mp.weixin.qq.com/s/G7BXuZh0Qh1-mE6ts4LJqQ" target="_blank" rel="noopener">加我微信</a>，咱们交流技术与思想，共同成长
+          <a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/G7BXuZh0Qh1-mE6ts4LJqQ">加我微信</a>，咱们交流技术与思想，共同成长
         </blockquote>
         <br>
 
@@ -633,9 +635,9 @@
   <div class="-mob-share-list share-body">
     
       
-        <a class="-mob-share-qq" title="QQ好友" rel="external nofollow noopener noreferrer"
+        <a class="-mob-share-qq" title="QQ好友" rel="external nofollow noopener noreferrer noopener"
           
-          href="http://connect.qq.com/widget/shareqq/index.html?url=https://dayarch.top/p/git-worktree-in-practice.html&title=Git Worktree 大法真香 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=背景
+          target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://dayarch.top/p/git-worktree-in-practice.html&title=Git Worktree 大法真香 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=背景
 上一篇文章 保持清洁的Git提交记录，三招就够了 ，大家看过后有私下留言说这是非常好用的功能，我突然想到工作中用到的另外一个 Git 功能那也是相当好用，必须全盘托出
 
 作为程序员的我们应该都有一个感受，一旦进入某个项目，从开发，到发布生产，到 hotfix，到后期维护，那基本都有你的份，正在开发某个 feature，老板突然跳出来说让你做生产上的 hotfix 更是家常便饭，面对这种情况，使用 Git 的我们通常有两种解决方案：
@@ -651,9 +653,9 @@
       
     
       
-        <a class="-mob-share-qzone" title="QQ空间" rel="external nofollow noopener noreferrer"
+        <a class="-mob-share-qzone" title="QQ空间" rel="external nofollow noopener noreferrer noopener"
           
-          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://dayarch.top/p/git-worktree-in-practice.html&title=Git Worktree 大法真香 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=背景
+          target="_blank" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://dayarch.top/p/git-worktree-in-practice.html&title=Git Worktree 大法真香 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=背景
 上一篇文章 保持清洁的Git提交记录，三招就够了 ，大家看过后有私下留言说这是非常好用的功能，我突然想到工作中用到的另外一个 Git 功能那也是相当好用，必须全盘托出
 
 作为程序员的我们应该都有一个感受，一旦进入某个项目，从开发，到发布生产，到 hotfix，到后期维护，那基本都有你的份，正在开发某个 feature，老板突然跳出来说让你做生产上的 hotfix 更是家常便饭，面对这种情况，使用 Git 的我们通常有两种解决方案：
@@ -669,9 +671,9 @@
       
     
       
-        <a class="-mob-share-weibo" title="微博" rel="external nofollow noopener noreferrer"
+        <a class="-mob-share-weibo" title="微博" rel="external nofollow noopener noreferrer noopener"
           
-          href="http://service.weibo.com/share/share.php?url=https://dayarch.top/p/git-worktree-in-practice.html&title=Git Worktree 大法真香 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=背景
+          target="_blank" href="http://service.weibo.com/share/share.php?url=https://dayarch.top/p/git-worktree-in-practice.html&title=Git Worktree 大法真香 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=背景
 上一篇文章 保持清洁的Git提交记录，三招就够了 ，大家看过后有私下留言说这是非常好用的功能，我突然想到工作中用到的另外一个 Git 功能那也是相当好用，必须全盘托出
 
 作为程序员的我们应该都有一个感受，一旦进入某个项目，从开发，到发布生产，到 hotfix，到后期维护，那基本都有你的份，正在开发某个 feature，老板突然跳出来说让你做生产上的 hotfix 更是家常便饭，面对这种情况，使用 Git 的我们通常有两种解决方案：
@@ -700,6 +702,25 @@
       
       
           <div class="prev-next">
+              
+                  <section class="prev">
+                      <span class="art-item-left">
+                          <h6><i class="fas fa-chevron-left" aria-hidden="true"></i>&nbsp;上一页</h6>
+                          <h4>
+                              <a href="/p/git-worktree-in-advance.html" rel="prev" title="Git Worktree 高级使用">
+                                
+                                    Git Worktree 高级使用
+                                
+                              </a>
+                          </h4>
+                          
+                              
+                              <h6 class="tags">
+                                  <a class="tag" href="/tags/Git/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> Git</a>
+                              </h6>
+                          
+                      </span>
+                  </section>
               
               
                   <section class="next">
@@ -742,7 +763,7 @@
 </header>
 
     <div class="content pure">
-      <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/git-ignore.html" title="Git Ignoring Files" rel="bookmark">Git Ignoring Files</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/git-multiple-account.html" title="Git配置多个账号（GitLab和GitHub）" rel="bookmark">Git配置多个账号（GitLab和GitHub）</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/git-workflow.html" title="git 使用流程" rel="bookmark">git 使用流程</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/three-ways-to-keep-git-log-clear.html" title="保持清洁的Git提交记录，三招就够了" rel="bookmark">保持清洁的Git提交记录，三招就够了</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/jenkins-shared-library.html" title="Jenkins Shared Library" rel="bookmark">Jenkins Shared Library</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/jenkins-environment-variables.html" title="Jenkins 使用环境变量" rel="bookmark">Jenkins 使用环境变量</a></h3></div></li></ul>
+      <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/git-ignore.html" title="Git Ignoring Files" rel="bookmark">Git Ignoring Files</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/git-worktree-in-advance.html" title="Git Worktree 高级使用" rel="bookmark">Git Worktree 高级使用</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/git-multiple-account.html" title="Git配置多个账号（GitLab和GitHub）" rel="bookmark">Git配置多个账号（GitLab和GitHub）</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/git-workflow.html" title="git 使用流程" rel="bookmark">git 使用流程</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/three-ways-to-keep-git-log-clear.html" title="保持清洁的Git提交记录，三招就够了" rel="bookmark">保持清洁的Git提交记录，三招就够了</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/jenkins-shared-library.html" title="Jenkins Shared Library" rel="bookmark">Jenkins Shared Library</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/jenkins-environment-variables.html" title="Jenkins 使用环境变量" rel="bookmark">Jenkins 使用环境变量</a></h3></div></li></ul>
     </div>
   </section>
 
@@ -950,7 +971,7 @@
 </header>
 
     <div class='content pure'>
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#背景"><span class="toc-text">背景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#我们面对的场景"><span class="toc-text">我们面对的场景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#git-worktree"><span class="toc-text">git-worktree</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#git-worktree-add"><span class="toc-text">git worktree add</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#git-worktree-list"><span class="toc-text">git worktree list</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#git-worktree-remove"><span class="toc-text">git worktree remove</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#git-worktree-prune"><span class="toc-text">git worktree prune</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-text">总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#灵魂追问"><span class="toc-text">灵魂追问</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%83%8C%E6%99%AF"><span class="toc-text">背景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%88%91%E4%BB%AC%E9%9D%A2%E5%AF%B9%E7%9A%84%E5%9C%BA%E6%99%AF"><span class="toc-text">我们面对的场景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#git-worktree"><span class="toc-text">git-worktree</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#git-worktree-add"><span class="toc-text">git worktree add</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#git-worktree-list"><span class="toc-text">git worktree list</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#git-worktree-remove"><span class="toc-text">git worktree remove</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#git-worktree-prune"><span class="toc-text">git worktree prune</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-text">总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%81%B5%E9%AD%82%E8%BF%BD%E9%97%AE"><span class="toc-text">灵魂追问</span></a></li></ol>
     </div>
   </section>
 
@@ -1025,7 +1046,7 @@
   &nbsp;&nbsp;|&nbsp;&nbsp;  
   
     &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-        class="white-color">264.1k</span>&nbsp;字
+        class="white-color">267.4k</span>&nbsp;字
     
 
   &nbsp;&nbsp;|&nbsp;&nbsp;  
@@ -1080,7 +1101,7 @@
     
     。
   </div>
-  <div><p>博客内容遵循 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
+  <div><p>博客内容遵循 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
 </div>
   <!-- <div class="github-badge">
       <a style="color: #fff" rel="license" href="https://hexo.io/" target="_blank" title="由 Hexo 强力驱动">
@@ -1188,10 +1209,14 @@
 
 
 
-  <script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/app.js"></script>
+  
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/app.js"></script>
 
 
-  <script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/search.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/search.js"></script>
+
 
 
 

@@ -3,10 +3,10 @@
   <title>日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享</title>
   <icon>https://dayarch.top/icon.png</icon>
   <subtitle>日拱一兵</subtitle>
-  <link href="/atom.xml" rel="self"/>
+  <link href="https://dayarch.top/atom.xml" rel="self"/>
   
   <link href="https://dayarch.top/"/>
-  <updated>2021-11-22T10:23:43.208Z</updated>
+  <updated>2021-11-25T11:08:35.324Z</updated>
   <id>https://dayarch.top/</id>
   
   <author>
@@ -14,64 +14,80 @@
     
   </author>
   
-  <generator uri="http://hexo.io/">Hexo</generator>
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Git Worktree 高级使用</title>
+    <link href="https://dayarch.top/p/git-worktree-in-advance.html"/>
+    <id>https://dayarch.top/p/git-worktree-in-advance.html</id>
+    <published>2021-11-25T11:07:14.000Z</published>
+    <updated>2021-11-25T11:08:35.324Z</updated>
+    
+    
+    <summary type="html">Git worktree 高级使用</summary>
+    
+    
+    
+    <category term="Coding" scheme="https://dayarch.top/categories/Coding/"/>
+    
+    <category term="DevOps" scheme="https://dayarch.top/categories/Coding/DevOps/"/>
+    
+    
+    <category term="Git" scheme="https://dayarch.top/tags/Git/"/>
+    
+  </entry>
   
   <entry>
     <title>Git Worktree 大法真香</title>
-    <link href="https://dayarch.top//p/git-worktree-in-practice.html"/>
-    <id>https://dayarch.top//p/git-worktree-in-practice.html</id>
+    <link href="https://dayarch.top/p/git-worktree-in-practice.html"/>
+    <id>https://dayarch.top/p/git-worktree-in-practice.html</id>
     <published>2021-11-22T10:21:52.000Z</published>
     <updated>2021-11-22T10:23:43.208Z</updated>
     
-    <summary type="html">
     
-      同时在多个 branch 上工作再也不是问题了
-    
-    </summary>
+    <summary type="html">同时在多个 branch 上工作再也不是问题了</summary>
     
     
-      <category term="Coding" scheme="https://dayarch.top/categories/Coding/"/>
     
-      <category term="DevOps" scheme="https://dayarch.top/categories/Coding/DevOps/"/>
+    <category term="Coding" scheme="https://dayarch.top/categories/Coding/"/>
+    
+    <category term="DevOps" scheme="https://dayarch.top/categories/Coding/DevOps/"/>
     
     
-      <category term="Git" scheme="https://dayarch.top/tags/Git/"/>
+    <category term="Git" scheme="https://dayarch.top/tags/Git/"/>
     
   </entry>
   
   <entry>
     <title>保持清洁的Git提交记录，三招就够了</title>
-    <link href="https://dayarch.top//p/three-ways-to-keep-git-log-clear.html"/>
-    <id>https://dayarch.top//p/three-ways-to-keep-git-log-clear.html</id>
+    <link href="https://dayarch.top/p/three-ways-to-keep-git-log-clear.html"/>
+    <id>https://dayarch.top/p/three-ways-to-keep-git-log-clear.html</id>
     <published>2021-11-21T02:29:52.000Z</published>
     <updated>2021-11-21T02:45:03.729Z</updated>
     
-    <summary type="html">
     
-      保持Git log清洁，是程序员的基本素养
-    
-    </summary>
+    <summary type="html">保持Git log清洁，是程序员的基本素养</summary>
     
     
-      <category term="Coding" scheme="https://dayarch.top/categories/Coding/"/>
     
-      <category term="DevOps" scheme="https://dayarch.top/categories/Coding/DevOps/"/>
+    <category term="Coding" scheme="https://dayarch.top/categories/Coding/"/>
+    
+    <category term="DevOps" scheme="https://dayarch.top/categories/Coding/DevOps/"/>
     
     
-      <category term="Git" scheme="https://dayarch.top/tags/Git/"/>
+    <category term="Git" scheme="https://dayarch.top/tags/Git/"/>
     
   </entry>
   
   <entry>
     <title>花钱上自习，你会选择这么做吗？</title>
-    <link href="https://dayarch.top//p/room-for-individual-study.html"/>
-    <id>https://dayarch.top//p/room-for-individual-study.html</id>
+    <link href="https://dayarch.top/p/room-for-individual-study.html"/>
+    <id>https://dayarch.top/p/room-for-individual-study.html</id>
     <published>2021-07-25T09:18:22.000Z</published>
     <updated>2021-07-25T09:20:10.182Z</updated>
     
-    <summary type="html">
     
-      背景
+    <summary type="html">背景
 各种事情夹杂在一起，身心疲惫，躺在床上的下一秒，就已呼呼大睡
 
 忙的杂乱无章，忙的没有方向，看似很忙，却感觉什么也没收获到。我知道我需要一点独处的空间，静静地思考
@@ -91,30 +107,28 @@
 咖啡厅
 
 
-作为都市小青年，我首先想到的是咖啡厅，路过咖啡
-    
-    </summary>
+作为都市小青年，我首先想到的是咖啡厅，路过咖啡</summary>
     
     
-      <category term="Life" scheme="https://dayarch.top/categories/Life/"/>
     
-      <category term="其他" scheme="https://dayarch.top/categories/Life/%E5%85%B6%E4%BB%96/"/>
+    <category term="Life" scheme="https://dayarch.top/categories/Life/"/>
+    
+    <category term="其他" scheme="https://dayarch.top/categories/Life/%E5%85%B6%E4%BB%96/"/>
     
     
-      <category term="总结" scheme="https://dayarch.top/tags/%E6%80%BB%E7%BB%93/"/>
+    <category term="总结" scheme="https://dayarch.top/tags/%E6%80%BB%E7%BB%93/"/>
     
   </entry>
   
   <entry>
     <title>Jenkins Shared Library</title>
-    <link href="https://dayarch.top//p/jenkins-shared-library.html"/>
-    <id>https://dayarch.top//p/jenkins-shared-library.html</id>
+    <link href="https://dayarch.top/p/jenkins-shared-library.html"/>
+    <id>https://dayarch.top/p/jenkins-shared-library.html</id>
     <published>2021-07-11T08:34:13.000Z</published>
     <updated>2021-07-11T08:45:13.756Z</updated>
     
-    <summary type="html">
     
-      前言
+    <summary type="html">前言
 不知道你的 team 当中是否采用敏捷开发，总之我们的 team 贯彻敏捷方法很彻底
 
 
@@ -131,76 +145,70 @@
    
    
 
-终于不用跑龙套了，在 Jenk
-    
-    </summary>
+终于不用跑龙套了，在 Jenk</summary>
     
     
-      <category term="Coding" scheme="https://dayarch.top/categories/Coding/"/>
     
-      <category term="DevOps" scheme="https://dayarch.top/categories/Coding/DevOps/"/>
+    <category term="Coding" scheme="https://dayarch.top/categories/Coding/"/>
+    
+    <category term="DevOps" scheme="https://dayarch.top/categories/Coding/DevOps/"/>
     
     
-      <category term="Jenkins" scheme="https://dayarch.top/tags/Jenkins/"/>
+    <category term="Jenkins" scheme="https://dayarch.top/tags/Jenkins/"/>
     
   </entry>
   
   <entry>
     <title>IntelliJ IDEA 高级Debug技巧，助你起飞</title>
-    <link href="https://dayarch.top//p/intellj-idea-advanced-debug.html"/>
-    <id>https://dayarch.top//p/intellj-idea-advanced-debug.html</id>
+    <link href="https://dayarch.top/p/intellj-idea-advanced-debug.html"/>
+    <id>https://dayarch.top/p/intellj-idea-advanced-debug.html</id>
     <published>2021-05-12T07:20:38.000Z</published>
     <updated>2021-05-12T07:24:04.351Z</updated>
     
-    <summary type="html">
     
-      我们手中拿着强有力的武器，却不知道如何使用，IDEA 非常强大，痛程序猿所痛，并提供完美解决方案，但多数程序猿都不知道使用这些功能，IDEA 高级调试技巧，在工作和阅读源码上都可以提高很多效率
-    
-    </summary>
+    <summary type="html">我们手中拿着强有力的武器，却不知道如何使用，IDEA 非常强大，痛程序猿所痛，并提供完美解决方案，但多数程序猿都不知道使用这些功能，IDEA 高级调试技巧，在工作和阅读源码上都可以提高很多效率</summary>
     
     
-      <category term="Coding" scheme="https://dayarch.top/categories/Coding/"/>
     
-      <category term="Java" scheme="https://dayarch.top/categories/Coding/Java/"/>
+    <category term="Coding" scheme="https://dayarch.top/categories/Coding/"/>
+    
+    <category term="Java" scheme="https://dayarch.top/categories/Coding/Java/"/>
     
     
-      <category term="IntelliJ IDEA" scheme="https://dayarch.top/tags/IntelliJ-IDEA/"/>
+    <category term="IntelliJ IDEA" scheme="https://dayarch.top/tags/IntelliJ-IDEA/"/>
     
   </entry>
   
   <entry>
     <title>IntelliJ IDEA 高级调试之Stream Trace</title>
-    <link href="https://dayarch.top//p/idea-stream-trace.html"/>
-    <id>https://dayarch.top//p/idea-stream-trace.html</id>
+    <link href="https://dayarch.top/p/idea-stream-trace.html"/>
+    <id>https://dayarch.top/p/idea-stream-trace.html</id>
     <published>2021-05-11T01:32:06.000Z</published>
     <updated>2021-05-12T07:21:15.818Z</updated>
     
-    <summary type="html">
     
-      自从 Java 8 开始，作为程序员的我们都离不开 Stream 相关功能的使用，书写起来那叫一个流畅（这个 feel～～）。但总是有一些时候，我们对 stream 的操作所要的结果和预期不符，这就需要我们逐步调试，定位问题, IntelliJ IDEA 的 Stream Trace 就可以轻松帮助我们可视化问题所在
-    
-    </summary>
+    <summary type="html">自从 Java 8 开始，作为程序员的我们都离不开 Stream 相关功能的使用，书写起来那叫一个流畅（这个 feel～～）。但总是有一些时候，我们对 stream 的操作所要的结果和预期不符，这就需要我们逐步调试，定位问题, IntelliJ IDEA 的 Stream Trace 就可以轻松帮助我们可视化问题所在</summary>
     
     
-      <category term="Coding" scheme="https://dayarch.top/categories/Coding/"/>
     
-      <category term="Java" scheme="https://dayarch.top/categories/Coding/Java/"/>
+    <category term="Coding" scheme="https://dayarch.top/categories/Coding/"/>
+    
+    <category term="Java" scheme="https://dayarch.top/categories/Coding/Java/"/>
     
     
-      <category term="IntelliJ IDEA" scheme="https://dayarch.top/tags/IntelliJ-IDEA/"/>
+    <category term="IntelliJ IDEA" scheme="https://dayarch.top/tags/IntelliJ-IDEA/"/>
     
   </entry>
   
   <entry>
     <title>Jenkins 动态使用分支名称</title>
-    <link href="https://dayarch.top//p/jenkins-dynamic-using-git-branch.html"/>
-    <id>https://dayarch.top//p/jenkins-dynamic-using-git-branch.html</id>
+    <link href="https://dayarch.top/p/jenkins-dynamic-using-git-branch.html"/>
+    <id>https://dayarch.top/p/jenkins-dynamic-using-git-branch.html</id>
     <published>2021-03-28T12:33:56.000Z</published>
     <updated>2021-03-28T12:35:17.088Z</updated>
     
-    <summary type="html">
     
-      前言
+    <summary type="html">前言
 在上一篇 Jenkins 使用环境变量 中，帮助大家使用一条 Docker 命令就可以快速玩转 Jenkins，同时用最简单的方式解释了 Jenkins 中让人混乱的环境变量，本文还是接着变量说点事情
 
 一般成熟的项目流程都会通过 Jenkins Pipeline 来做 CI 部分，在默认 Jenkins 环境配置中，Jenkins Pipeline 分为两种：
@@ -212,76 +220,70 @@
 
 
 
-如果使用了多分支 Pipeline，就不会存在动态使用分支名称的问题了。
-    
-    </summary>
+如果使用了多分支 Pipeline，就不会存在动态使用分支名称的问题了。</summary>
     
     
-      <category term="Coding" scheme="https://dayarch.top/categories/Coding/"/>
     
-      <category term="DevOps" scheme="https://dayarch.top/categories/Coding/DevOps/"/>
+    <category term="Coding" scheme="https://dayarch.top/categories/Coding/"/>
+    
+    <category term="DevOps" scheme="https://dayarch.top/categories/Coding/DevOps/"/>
     
     
-      <category term="Jenkins" scheme="https://dayarch.top/tags/Jenkins/"/>
+    <category term="Jenkins" scheme="https://dayarch.top/tags/Jenkins/"/>
     
   </entry>
   
   <entry>
     <title>120000字，你们要的Java并发编程图文小册来了</title>
-    <link href="https://dayarch.top//p/java-concurrency-book.html"/>
-    <id>https://dayarch.top//p/java-concurrency-book.html</id>
+    <link href="https://dayarch.top/p/java-concurrency-book.html"/>
+    <id>https://dayarch.top/p/java-concurrency-book.html</id>
     <published>2021-03-07T13:03:39.000Z</published>
     <updated>2021-03-07T13:21:18.139Z</updated>
     
-    <summary type="html">
     
-      Java并发编程电子书小册
-    
-    </summary>
+    <summary type="html">Java并发编程电子书小册</summary>
     
     
-      <category term="Coding" scheme="https://dayarch.top/categories/Coding/"/>
     
-      <category term="Java-Concurrency" scheme="https://dayarch.top/categories/Coding/Java-Concurrency/"/>
+    <category term="Coding" scheme="https://dayarch.top/categories/Coding/"/>
+    
+    <category term="Java-Concurrency" scheme="https://dayarch.top/categories/Coding/Java-Concurrency/"/>
     
     
-      <category term="Java-Concurrency" scheme="https://dayarch.top/tags/Java-Concurrency/"/>
+    <category term="Java-Concurrency" scheme="https://dayarch.top/tags/Java-Concurrency/"/>
     
   </entry>
   
   <entry>
     <title>ForkJoinPool大剖析</title>
-    <link href="https://dayarch.top//p/java-fork-join-pool.html"/>
-    <id>https://dayarch.top//p/java-fork-join-pool.html</id>
+    <link href="https://dayarch.top/p/java-fork-join-pool.html"/>
+    <id>https://dayarch.top/p/java-fork-join-pool.html</id>
     <published>2021-02-17T06:45:52.000Z</published>
     <updated>2021-03-28T12:39:39.647Z</updated>
     
-    <summary type="html">
     
-      ForkJoinPool 是分治算法 Java 的典型应用，这是一个效率更高的线程池，但是理解它的原理还是相对困难，本文就从源码剖析的角度来理解 ForkJoinPool
-    
-    </summary>
+    <summary type="html">ForkJoinPool 是分治算法 Java 的典型应用，这是一个效率更高的线程池，但是理解它的原理还是相对困难，本文就从源码剖析的角度来理解 ForkJoinPool</summary>
     
     
-      <category term="Coding" scheme="https://dayarch.top/categories/Coding/"/>
     
-      <category term="Java-Concurrency" scheme="https://dayarch.top/categories/Coding/Java-Concurrency/"/>
+    <category term="Coding" scheme="https://dayarch.top/categories/Coding/"/>
+    
+    <category term="Java-Concurrency" scheme="https://dayarch.top/categories/Coding/Java-Concurrency/"/>
     
     
-      <category term="Java-Concurrency" scheme="https://dayarch.top/tags/Java-Concurrency/"/>
+    <category term="Java-Concurrency" scheme="https://dayarch.top/tags/Java-Concurrency/"/>
     
   </entry>
   
   <entry>
     <title>Jenkins 使用环境变量</title>
-    <link href="https://dayarch.top//p/jenkins-environment-variables.html"/>
-    <id>https://dayarch.top//p/jenkins-environment-variables.html</id>
+    <link href="https://dayarch.top/p/jenkins-environment-variables.html"/>
+    <id>https://dayarch.top/p/jenkins-environment-variables.html</id>
     <published>2021-01-06T13:04:20.000Z</published>
     <updated>2021-01-06T13:13:27.777Z</updated>
     
-    <summary type="html">
     
-      前言
+    <summary type="html">前言
 Jenkins， DevOps 技术栈的核心之一，CI/CD 离不开编写 Pipeline 脚本，上手 Jenkins ，简单查一下文档，你就应该不会被 agent，stages，step 这类关键词弄懵，也能很快构建出 pipeline 的骨架
 
 但是当向骨架中填充内容的时候，尤其如何利用环境变量（系统内置 ｜ 自定义），多数人都会变得比较混乱，浪费很多时间，本文就帮助大家快速通关环境变量
@@ -294,247 +296,205 @@ Jenkins， DevOps 技术栈的核心之一，CI/CD 离不开编写 Pipeline 脚�
 1
 
 
-docker containe
-    
-    </summary>
+docker containe</summary>
     
     
-      <category term="Coding" scheme="https://dayarch.top/categories/Coding/"/>
     
-      <category term="DevOps" scheme="https://dayarch.top/categories/Coding/DevOps/"/>
+    <category term="Coding" scheme="https://dayarch.top/categories/Coding/"/>
+    
+    <category term="DevOps" scheme="https://dayarch.top/categories/Coding/DevOps/"/>
     
     
-      <category term="Jenkins" scheme="https://dayarch.top/tags/Jenkins/"/>
+    <category term="Jenkins" scheme="https://dayarch.top/tags/Jenkins/"/>
     
   </entry>
   
   <entry>
     <title>2020归零，2021走你</title>
-    <link href="https://dayarch.top//p/2020-to-2021.html"/>
-    <id>https://dayarch.top//p/2020-to-2021.html</id>
+    <link href="https://dayarch.top/p/2020-to-2021.html"/>
+    <id>https://dayarch.top/p/2020-to-2021.html</id>
     <published>2020-12-31T12:46:10.000Z</published>
     <updated>2021-01-06T13:08:12.370Z</updated>
     
-    <summary type="html">
     
-      评论区留下你 2021 敢于公开被大家监督的 flag，年底检查作业，你想留级吗？
-    
-    </summary>
+    <summary type="html">评论区留下你 2021 敢于公开被大家监督的 flag，年底检查作业，你想留级吗？</summary>
     
     
-      <category term="Life" scheme="https://dayarch.top/categories/Life/"/>
     
-      <category term="其他" scheme="https://dayarch.top/categories/Life/%E5%85%B6%E4%BB%96/"/>
+    <category term="Life" scheme="https://dayarch.top/categories/Life/"/>
+    
+    <category term="其他" scheme="https://dayarch.top/categories/Life/%E5%85%B6%E4%BB%96/"/>
     
     
-      <category term="总结" scheme="https://dayarch.top/tags/%E6%80%BB%E7%BB%93/"/>
+    <category term="总结" scheme="https://dayarch.top/tags/%E6%80%BB%E7%BB%93/"/>
     
   </entry>
   
   <entry>
     <title>Docker Container就是个进程</title>
-    <link href="https://dayarch.top//p/docker-container-is-a-process.html"/>
-    <id>https://dayarch.top//p/docker-container-is-a-process.html</id>
+    <link href="https://dayarch.top/p/docker-container-is-a-process.html"/>
+    <id>https://dayarch.top/p/docker-container-is-a-process.html</id>
     <published>2020-12-22T09:16:18.000Z</published>
     <updated>2020-12-22T09:20:39.067Z</updated>
     
-    <summary type="html">
     
-      学习新内容有门槛，降低门槛的办法就是贴近我们已有知识，Docker Container 其实就是一个进程，进程是可以获取操作系统资源的，Container 亦是如此，只不过具体的方式在上层做了封装略有不同
-    
-    </summary>
+    <summary type="html">学习新内容有门槛，降低门槛的办法就是贴近我们已有知识，Docker Container 其实就是一个进程，进程是可以获取操作系统资源的，Container 亦是如此，只不过具体的方式在上层做了封装略有不同</summary>
     
     
-      <category term="Coding" scheme="https://dayarch.top/categories/Coding/"/>
     
-      <category term="Docker" scheme="https://dayarch.top/categories/Coding/Docker/"/>
+    <category term="Coding" scheme="https://dayarch.top/categories/Coding/"/>
+    
+    <category term="Docker" scheme="https://dayarch.top/categories/Coding/Docker/"/>
     
     
-      <category term="Docker" scheme="https://dayarch.top/tags/Docker/"/>
+    <category term="Docker" scheme="https://dayarch.top/tags/Docker/"/>
     
   </entry>
   
   <entry>
     <title>Docker命令自动补全</title>
-    <link href="https://dayarch.top//p/docker-install-command-completion.html"/>
-    <id>https://dayarch.top//p/docker-install-command-completion.html</id>
+    <link href="https://dayarch.top/p/docker-install-command-completion.html"/>
+    <id>https://dayarch.top/p/docker-install-command-completion.html</id>
     <published>2020-12-04T14:23:44.000Z</published>
     <updated>2020-12-04T14:26:50.135Z</updated>
     
-    <summary type="html">
     
-      安装Docker命令补全，加速学习
-    
-    </summary>
+    <summary type="html">安装Docker命令补全，加速学习</summary>
     
     
-      <category term="Coding" scheme="https://dayarch.top/categories/Coding/"/>
     
-      <category term="Docker" scheme="https://dayarch.top/categories/Coding/Docker/"/>
+    <category term="Coding" scheme="https://dayarch.top/categories/Coding/"/>
+    
+    <category term="Docker" scheme="https://dayarch.top/categories/Coding/Docker/"/>
     
     
-      <category term="Docker" scheme="https://dayarch.top/tags/Docker/"/>
+    <category term="Docker" scheme="https://dayarch.top/tags/Docker/"/>
     
   </entry>
   
   <entry>
     <title>PowerToys,一款强大的Windows工具</title>
-    <link href="https://dayarch.top//p/powertoys-a-powerful-tool-in-Windows.html"/>
-    <id>https://dayarch.top//p/powertoys-a-powerful-tool-in-Windows.html</id>
+    <link href="https://dayarch.top/p/powertoys-a-powerful-tool-in-Windows.html"/>
+    <id>https://dayarch.top/p/powertoys-a-powerful-tool-in-Windows.html</id>
     <published>2020-11-29T13:15:19.000Z</published>
     <updated>2020-11-29T13:30:41.739Z</updated>
     
-    <summary type="html">
     
-      Windows 下强有力的多合一工具，颜色提取器，文件重命名，多窗口管理，快捷键管理，文件快速查找等功能一应俱全
-    
-    </summary>
+    <summary type="html">Windows 下强有力的多合一工具，颜色提取器，文件重命名，多窗口管理，快捷键管理，文件快速查找等功能一应俱全</summary>
     
     
-      <category term="Coding" scheme="https://dayarch.top/categories/Coding/"/>
     
-      <category term="Tools" scheme="https://dayarch.top/categories/Coding/Tools/"/>
+    <category term="Coding" scheme="https://dayarch.top/categories/Coding/"/>
+    
+    <category term="Tools" scheme="https://dayarch.top/categories/Coding/Tools/"/>
     
     
-      <category term="工具" scheme="https://dayarch.top/tags/%E5%B7%A5%E5%85%B7/"/>
+    <category term="工具" scheme="https://dayarch.top/tags/%E5%B7%A5%E5%85%B7/"/>
     
   </entry>
   
   <entry>
     <title>cheat.sh使用详解</title>
-    <link href="https://dayarch.top//p/cheat.sh-usage.html"/>
-    <id>https://dayarch.top//p/cheat.sh-usage.html</id>
+    <link href="https://dayarch.top/p/cheat.sh-usage.html"/>
+    <id>https://dayarch.top/p/cheat.sh-usage.html</id>
     <published>2020-11-26T14:23:57.000Z</published>
     <updated>2020-11-29T13:22:23.014Z</updated>
     
-    <summary type="html">
     
-      作为程序员需要了解的东西有很多，日常编码和写脚本脱离不开各式语言与 Linux 命令。为了记住一些杂乱的或不被经常使用的知识点，我们迫切需要一个“小抄”/备忘录
-    
-    </summary>
+    <summary type="html">作为程序员需要了解的东西有很多，日常编码和写脚本脱离不开各式语言与 Linux 命令。为了记住一些杂乱的或不被经常使用的知识点，我们迫切需要一个“小抄”/备忘录</summary>
     
     
-      <category term="Coding" scheme="https://dayarch.top/categories/Coding/"/>
     
-      <category term="Tools" scheme="https://dayarch.top/categories/Coding/Tools/"/>
+    <category term="Coding" scheme="https://dayarch.top/categories/Coding/"/>
+    
+    <category term="Tools" scheme="https://dayarch.top/categories/Coding/Tools/"/>
     
     
-      <category term="工具" scheme="https://dayarch.top/tags/%E5%B7%A5%E5%85%B7/"/>
+    <category term="工具" scheme="https://dayarch.top/tags/%E5%B7%A5%E5%85%B7/"/>
     
   </entry>
   
   <entry>
     <title>Intellij IDEA 创建Scratch files 和 Scratch buffers</title>
-    <link href="https://dayarch.top//p/scratch-files-and-scratch-bufferss.html"/>
-    <id>https://dayarch.top//p/scratch-files-and-scratch-bufferss.html</id>
+    <link href="https://dayarch.top/p/scratch-files-and-scratch-bufferss.html"/>
+    <id>https://dayarch.top/p/scratch-files-and-scratch-bufferss.html</id>
     <published>2020-10-31T13:18:28.000Z</published>
     <updated>2020-10-31T13:22:33.095Z</updated>
     
-    <summary type="html">
     
-      有时候我们需要在项目之外创建一些临时文件或一些实验性代码，创建在项目中可能一不小心 Git 误提交，不创建项目里又需要切换到其他应用上来回拷贝，对于专注 coding 的我们来说，总显得不够流畅，IDEA 其实早已为我们解决了这个痛点，借助 Scratch files 和 Scratch buffers 就可以解决
-    
-    </summary>
+    <summary type="html">有时候我们需要在项目之外创建一些临时文件或一些实验性代码，创建在项目中可能一不小心 Git 误提交，不创建项目里又需要切换到其他应用上来回拷贝，对于专注 coding 的我们来说，总显得不够流畅，IDEA 其实早已为我们解决了这个痛点，借助 Scratch files 和 Scratch buffers 就可以解决</summary>
     
     
-      <category term="Coding" scheme="https://dayarch.top/categories/Coding/"/>
     
-      <category term="Java" scheme="https://dayarch.top/categories/Coding/Java/"/>
+    <category term="Coding" scheme="https://dayarch.top/categories/Coding/"/>
+    
+    <category term="Java" scheme="https://dayarch.top/categories/Coding/Java/"/>
     
     
-      <category term="IntelliJ IDEA" scheme="https://dayarch.top/tags/IntelliJ-IDEA/"/>
+    <category term="IntelliJ IDEA" scheme="https://dayarch.top/tags/IntelliJ-IDEA/"/>
     
   </entry>
   
   <entry>
     <title>借助Serverless Framework玩转AWS Lambda</title>
-    <link href="https://dayarch.top//p/aws-lambda-with-serverless-framework.html"/>
-    <id>https://dayarch.top//p/aws-lambda-with-serverless-framework.html</id>
+    <link href="https://dayarch.top/p/aws-lambda-with-serverless-framework.html"/>
+    <id>https://dayarch.top/p/aws-lambda-with-serverless-framework.html</id>
     <published>2020-10-12T11:13:44.000Z</published>
     <updated>2021-02-17T07:02:52.090Z</updated>
     
-    <summary type="html">
     
-      Serverless 进一步将业务单元进行细分，职责更加单一，AWS Lambda 具有成熟的 serverless 功能，借助 Serverless Framework 可以快速开发以及部署 Serverless
-    
-    </summary>
+    <summary type="html">Serverless 进一步将业务单元进行细分，职责更加单一，AWS Lambda 具有成熟的 serverless 功能，借助 Serverless Framework 可以快速开发以及部署 Serverless</summary>
     
     
-      <category term="AWS" scheme="https://dayarch.top/categories/AWS/"/>
+    
+    <category term="AWS" scheme="https://dayarch.top/categories/AWS/"/>
     
     
-      <category term="AWS" scheme="https://dayarch.top/tags/AWS/"/>
+    <category term="AWS" scheme="https://dayarch.top/tags/AWS/"/>
     
-      <category term="lambda" scheme="https://dayarch.top/tags/lambda/"/>
+    <category term="lambda" scheme="https://dayarch.top/tags/lambda/"/>
     
   </entry>
   
   <entry>
     <title>reveal-md 写出不一样的PPT</title>
-    <link href="https://dayarch.top//p/reveal-md-ppt.html"/>
-    <id>https://dayarch.top//p/reveal-md-ppt.html</id>
+    <link href="https://dayarch.top/p/reveal-md-ppt.html"/>
+    <id>https://dayarch.top/p/reveal-md-ppt.html</id>
     <published>2020-09-07T10:30:25.000Z</published>
     <updated>2020-11-29T13:22:32.003Z</updated>
     
-    <summary type="html">
     
-      通常程序员瞧不上写PPT抑或不愿意写PPT，其实这是一个不容被忽视的软技能，通过PPT的演示可以锻炼一个人的综合能力
-    
-    </summary>
+    <summary type="html">通常程序员瞧不上写PPT抑或不愿意写PPT，其实这是一个不容被忽视的软技能，通过PPT的演示可以锻炼一个人的综合能力</summary>
     
     
-      <category term="Coding" scheme="https://dayarch.top/categories/Coding/"/>
     
-      <category term="Tools" scheme="https://dayarch.top/categories/Coding/Tools/"/>
+    <category term="Coding" scheme="https://dayarch.top/categories/Coding/"/>
+    
+    <category term="Tools" scheme="https://dayarch.top/categories/Coding/Tools/"/>
     
     
-      <category term="总结" scheme="https://dayarch.top/tags/%E6%80%BB%E7%BB%93/"/>
+    <category term="总结" scheme="https://dayarch.top/tags/%E6%80%BB%E7%BB%93/"/>
     
   </entry>
   
   <entry>
     <title>分分钟搞定Java 并发队列</title>
-    <link href="https://dayarch.top//p/java-concurrency-queue.html"/>
-    <id>https://dayarch.top//p/java-concurrency-queue.html</id>
+    <link href="https://dayarch.top/p/java-concurrency-queue.html"/>
+    <id>https://dayarch.top/p/java-concurrency-queue.html</id>
     <published>2020-08-23T02:31:08.000Z</published>
     <updated>2020-08-23T02:38:50.417Z</updated>
     
-    <summary type="html">
     
-      Java 并发队列多种多样，有阻塞式和非阻塞式，乍一看眼花缭乱的队列确实不知道如何下手，以及如何快速区分他们，本文就站在更高的视角来看 Java 并发队列，以及说明他们的实际用途，快速搞定他们
-    
-    </summary>
+    <summary type="html">Java 并发队列多种多样，有阻塞式和非阻塞式，乍一看眼花缭乱的队列确实不知道如何下手，以及如何快速区分他们，本文就站在更高的视角来看 Java 并发队列，以及说明他们的实际用途，快速搞定他们</summary>
     
     
-      <category term="Coding" scheme="https://dayarch.top/categories/Coding/"/>
     
-      <category term="Java-Concurrency" scheme="https://dayarch.top/categories/Coding/Java-Concurrency/"/>
+    <category term="Coding" scheme="https://dayarch.top/categories/Coding/"/>
     
-    
-      <category term="Java-Concurrency" scheme="https://dayarch.top/tags/Java-Concurrency/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>ExecutorService VS CompletionService</title>
-    <link href="https://dayarch.top//p/executorservice-vs-completionservice.html"/>
-    <id>https://dayarch.top//p/executorservice-vs-completionservice.html</id>
-    <published>2020-08-10T12:46:51.000Z</published>
-    <updated>2020-10-12T11:34:36.010Z</updated>
-    
-    <summary type="html">
-    
-      曾几何时以为 Executorservice 和 Future 的结合，就可以打天下了，但是在某些场景下具有致命缺陷，CompletionService 却弥补了他们的不足
-    
-    </summary>
+    <category term="Java-Concurrency" scheme="https://dayarch.top/categories/Coding/Java-Concurrency/"/>
     
     
-      <category term="Coding" scheme="https://dayarch.top/categories/Coding/"/>
-    
-      <category term="Java-Concurrency" scheme="https://dayarch.top/categories/Coding/Java-Concurrency/"/>
-    
-    
-      <category term="Java-Concurrency" scheme="https://dayarch.top/tags/Java-Concurrency/"/>
+    <category term="Java-Concurrency" scheme="https://dayarch.top/tags/Java-Concurrency/"/>
     
   </entry>
   

@@ -13,7 +13,7 @@
   
 
   
-  <link rel="alternate" href="/atom.xml" title="日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享">
+  <link rel="alternate" href="/atom.xml" title="日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享" type="application/atom+xml">
   
 
   <meta name="HandheldFriendly" content="True" />
@@ -35,7 +35,9 @@
   
 
   
-    <link rel="stylesheet" href="/style.css">
+    
+<link rel="stylesheet" href="/style.css">
+
   
 
   <script>
@@ -85,7 +87,7 @@
         daovoice('update');
         </script>
     
-</head>
+<meta name="generator" content="Hexo 5.4.0"></head>
 
 <body>
   
@@ -492,19 +494,19 @@
 <p>那要如何轻松管理与使用多个版本 Java？</p>
 <h2 id="多版本-Java-管理"><a href="#多版本-Java-管理" class="headerlink" title="多版本 Java 管理"></a>多版本 Java 管理</h2><p>显然我们不是第一个有这种困境的人，我所知道的现有方案有三种:</p>
 <ol>
-<li><a href="https://github.com/shyiko/jabba" target="_blank" rel="noopener">Jabba</a></li>
-<li><a href="https://github.com/jenv/jenv" target="_blank" rel="noopener">jenv</a></li>
-<li><a href="https://sdkman.io/" target="_blank" rel="noopener">sdkman</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/shyiko/jabba">Jabba</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/jenv/jenv">jenv</a></li>
+<li><a target="_blank" rel="noopener" href="https://sdkman.io/">sdkman</a></li>
 </ol>
 <p>本文主要说明如何通过 sdkman 打破我们面临的困境，帮助我们灵活配置与使用 Java</p>
 <h2 id="sdkman-介绍"><a href="#sdkman-介绍" class="headerlink" title="sdkman 介绍"></a>sdkman 介绍</h2><p>SDKMAN 是一个用于在大多数基于 Unix 系统上管理 <strong>多个软件开发工具包</strong> (Java, Groovy, Scala, Kotlin and Ceylon. Ant, Gradle 等) 的并行版本的工具 。</p>
 <p>它提供了一个方便的命令行接口 (CLI) 和 API，用于<code>安装</code>、<code>切换</code>、<code>删除</code>和<code>列出候选对象</code>。本文主要通过管理 Java 来说明 sdkman 的使用</p>
 <h2 id="sdkman-安装"><a href="#sdkman-安装" class="headerlink" title="sdkman 安装"></a>sdkman 安装</h2><p>在类 unix 平台上安装 sdkman 非常容易。它可以顺利的安装在Mac OSX、Linux、WLS、Cygwin、Solaris和FreeBSD 上，同时还支持Bash和 ZSH shell。</p>
 <p>只需打开一个新终端机并输入:</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> curl -s <span class="string">"https://get.sdkman.io"</span> | bash</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> curl -s <span class="string">&quot;https://get.sdkman.io&quot;</span> | bash</span></span><br></pre></td></tr></table></figure>
 
 <p>按照相应的指令提示，完成相应的操作后继续输入:</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">source</span> <span class="string">"<span class="variable">$HOME</span>/.sdkman/bin/sdkman-init.sh"</span></span></span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">source</span> <span class="string">&quot;<span class="variable">$HOME</span>/.sdkman/bin/sdkman-init.sh&quot;</span></span></span><br></pre></td></tr></table></figure>
 
 <p>到这里我们就可以验证 sdk 的安装版本了:</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> sdk version</span></span><br></pre></td></tr></table></figure>
@@ -515,7 +517,7 @@
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> sudo apt-get install zip unzip</span></span><br></pre></td></tr></table></figure>
 
 <p>从上面的安装命令上可以看出，sdkman 默认的安装路径是在<code>$HOME/.sdkman</code> 下，我们也可以自定义安装路径，只需要指定 <code>SDKMAN_DIR</code> 变量值就好了:</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">export</span> SDKMAN_DIR=<span class="string">"/usr/local/sdkman"</span> &amp;&amp; curl -s <span class="string">"https://get.sdkman.io"</span> | bash</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">export</span> SDKMAN_DIR=<span class="string">&quot;/usr/local/sdkman&quot;</span> &amp;&amp; curl -s <span class="string">&quot;https://get.sdkman.io&quot;</span> | bash</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 <p>到这里 sdkman 的安装就结束了，我们来看看如何使用</p>
 <h2 id="sdkman-使用教程"><a href="#sdkman-使用教程" class="headerlink" title="sdkman 使用教程"></a>sdkman 使用教程</h2><p>命令行下学习一个新玩意当然是查看它的 help 命令，输入:</p>
@@ -523,7 +525,7 @@
 <p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgXnip2019-11-13_15-35-22.jpg" alt="sdk help"></p>
 <p>感觉上图按颜色区分内容后，sdkman 的使用说明也就结束了，我们按照上面的图来详细说明一下使用教程</p>
 <h3 id="sdk-list"><a href="#sdk-list" class="headerlink" title="sdk list"></a>sdk list</h3><p>先来输入:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sdk list</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sdk list</span><br></pre></td></tr></table></figure>
 <p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgXnip2019-11-13_16-07-35.jpg" alt="sdk list"></p>
 <p>绿色的标记就是 sdkman 集成的所有可用的 candidate，通过按回车「enter」按键，会看到更多可用 candidate</p>
 <p>我们指定 candidate，输入:</p>
@@ -533,7 +535,7 @@
 <p>从上图中可以看到所有 java 可用的版本 version，以及标识 indentifier，以及状态 status，我已经安装了 java 12 和 11</p>
 <p>有了这些信息做铺垫，我们可以安装任意 sdkman 内置的软件开发包了，继续以 java 为例</p>
 <h3 id="sdk-install"><a href="#sdk-install" class="headerlink" title="sdk install"></a>sdk install</h3><p>回看 sdkman help 命令的输出，使用 install 命令，我们再安装一个 Java 最新 <code>13.0.1.j9</code> 版本</p>
-<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgXnip2019-11-13_16-28-17.jpg" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgXnip2019-11-13_16-28-17.jpg"></p>
 <p>从上图你可以看出，绿色标记的内容是 list 命令结果中的 version 值，但是报错不可用，输入<code>indentifier</code> 编号才能正常下载，这里需要注意</p>
 <p>安装完后，status 就会编程 installed 状态</p>
 <h3 id="sdk-current"><a href="#sdk-current" class="headerlink" title="sdk current"></a>sdk current</h3><p>当安装多个版本的 java 时，我们输入下面命令获取当前正在用 candidate 的版本</p>
@@ -542,13 +544,13 @@
 <p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgXnip2019-11-13_17-53-25.jpg" alt="sdk current java"></p>
 <h3 id="sdk-use"><a href="#sdk-use" class="headerlink" title="sdk use"></a>sdk use</h3><p>了解了当前使用版本，如果我们想切换到其他版本, 可以输入:</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> sdk use java 12.0.2.j9-adpt</span></span><br></pre></td></tr></table></figure>
-<p>注意⚠️: 这里同样是指定的 indentifier 的值<br><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgXnip2019-11-13_17-56-22.jpg" alt=""></p>
+<p>注意⚠️: 这里同样是指定的 indentifier 的值<br><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgXnip2019-11-13_17-56-22.jpg"></p>
 <h3 id="sdk-default"><a href="#sdk-default" class="headerlink" title="sdk default"></a>sdk default</h3><p>如果我们想指定某个版本为默认版本，可以输入:</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> sdk default java jdk1.8.0_162.jdk</span></span><br></pre></td></tr></table></figure>
 <p>注意⚠️: 这里同样是指定的 indentifier 的值</p>
-<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgXnip2019-11-13_18-00-41.jpg" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgXnip2019-11-13_18-00-41.jpg"></p>
 <h3 id="sdk-uninstall"><a href="#sdk-uninstall" class="headerlink" title="sdk uninstall"></a>sdk uninstall</h3><p>当我们想卸载某个版本可以输入:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sdk uninstall java 12.0.2.j9-adpt</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sdk uninstall java 12.0.2.j9-adpt</span><br></pre></td></tr></table></figure>
 <p>注意⚠️: 这里同样是指定的 indentifier 的值</p>
 <h3 id="sdk-upgrade"><a href="#sdk-upgrade" class="headerlink" title="sdk upgrade"></a>sdk upgrade</h3><p>如果我们想升级某个 candidate，可以输入:</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> sdk upgrade java</span></span><br></pre></td></tr></table></figure>
@@ -560,19 +562,19 @@
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> sdk flush archives</span></span><br></pre></td></tr></table></figure>
 
 <p>清理临时文件内容:</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> sdk flush temp</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> sdk flush temp</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 <p>到这里 sdkman 的基本使用就已经介绍完了，其实这些命令都不用急，想不起来的时候执行 <code>sdk help</code> 来临时查看一下就好</p>
 <h2 id="sdkman-卸载"><a href="#sdkman-卸载" class="headerlink" title="sdkman 卸载"></a>sdkman 卸载</h2><p>如果我们不喜欢 sdkman 了，我们也可以轻松的卸载掉它:</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> tar zcvf ~/sdkman-backup_$(date +%F-%kh%M).tar.gz -C ~/ .sdkman</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> rm -rf ~/.sdkman</span></span><br></pre></td></tr></table></figure>
 
 <p>最后打开你的 .bashrc、.bash_profile 和/或者 .profile，找到并删除下面这几行。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!</span></span><br><span class="line">[[ -s "/home/dudette/.sdkman/bin/sdkman-init.sh" ]] &amp;&amp; source "/home/dudette/.sdkman/bin/sdkman-init.sh"</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!</span></span><br><span class="line">[[ -s &quot;/home/dudette/.sdkman/bin/sdkman-init.sh&quot; ]] &amp;&amp; source &quot;/home/dudette/.sdkman/bin/sdkman-init.sh&quot;</span><br></pre></td></tr></table></figure>
 
 <p>我用的 zshrc，找到 .zshrc 文件删除掉上面内容即可</p>
 <p>到这里基于 Unix 系统的，有关 sdkman 的安装，使用及下载都已经介绍完了，可以上手试一试了，相信很多小伙伴用的是 Windows，除了 jenv， sdkman 和 Jabba 都有 windows 用户的解决方案:</p>
 <h2 id="sdkman-windows-解决方案"><a href="#sdkman-windows-解决方案" class="headerlink" title="sdkman windows 解决方案"></a>sdkman windows 解决方案</h2><p>在 sdkman 官网首页同样为 windows 用户提供了解决方案，小伙伴们找到如下位置查看即可</p>
-<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgXnip2019-11-13_18-19-21.jpg" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgXnip2019-11-13_18-19-21.jpg"></p>
 <p>我看了一下过程，也是很简单，由于手头没有 windows 电脑，这个请小伙伴们自行尝试吧，有问题欢迎留言 </p>
 <h2 id="灵魂追问"><a href="#灵魂追问" class="headerlink" title="灵魂追问"></a>灵魂追问</h2><ol>
 <li>你现在用的 Java 版本是多少？</li>
@@ -584,12 +586,12 @@
       <!-- <div class="tuijian">
         <br><br>
         📚相关文章
-        <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/jdk12-new-feature-overview.html" title="Java 12 新特性一览" rel="bookmark">Java 12 新特性一览</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/jdk12-collectors-teeing-api-usage.html" title="Java12 Collectors.teeing 的使用详解" rel="bookmark">Java12 Collectors.teeing 的使用详解</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-equals-hashcode.html" title="Java equals 和 hashCode 面试那点事" rel="bookmark">Java equals 和 hashCode 面试那点事</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/lombok-usage.html" title="Lombok 使用教程详解" rel="bookmark">Lombok 使用教程详解</a></h3></div></li></ul>
+        <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/jdk12-new-feature-overview.html" title="Java 12 新特性一览" rel="bookmark">Java 12 新特性一览</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-equals-hashcode.html" title="Java equals 和 hashCode 面试那点事" rel="bookmark">Java equals 和 hashCode 面试那点事</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/jdk12-collectors-teeing-api-usage.html" title="Java12 Collectors.teeing 的使用详解" rel="bookmark">Java12 Collectors.teeing 的使用详解</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/lombok-usage.html" title="Lombok 使用教程详解" rel="bookmark">Lombok 使用教程详解</a></h3></div></li></ul>
       </div> -->
       <div class="personalweixin">
         <br><br>
         <blockquote>
-          <a href="https://mp.weixin.qq.com/s/G7BXuZh0Qh1-mE6ts4LJqQ" target="_blank" rel="noopener">加我微信</a>，咱们交流技术与思想，共同成长
+          <a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/G7BXuZh0Qh1-mE6ts4LJqQ">加我微信</a>，咱们交流技术与思想，共同成长
         </blockquote>
         <br>
 
@@ -627,9 +629,9 @@
   <div class="-mob-share-list share-body">
     
       
-        <a class="-mob-share-qq" title="QQ好友" rel="external nofollow noopener noreferrer"
+        <a class="-mob-share-qq" title="QQ好友" rel="external nofollow noopener noreferrer noopener"
           
-          href="http://connect.qq.com/widget/shareqq/index.html?url=https://dayarch.top/p/multiple-java-management.html&title=SDKMAN 统一灵活管理多版本Java | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=近两年，Java 版本升级频繁，感觉刚刚掌握 Java8，写本文时，已听到 java14 的消息，无论是尝鲜新特性(Java12 中超级香的一个功能)，还是由于项目升级/兼容需要，我们可能都要面临管理多个 Java 版本的情
+          target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://dayarch.top/p/multiple-java-management.html&title=SDKMAN 统一灵活管理多版本Java | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=近两年，Java 版本升级频繁，感觉刚刚掌握 Java8，写本文时，已听到 java14 的消息，无论是尝鲜新特性(Java12 中超级香的一个功能)，还是由于项目升级/兼容需要，我们可能都要面临管理多个 Java 版本的情
 
 另外 Oracle 自 Java11 开始，更改了用户协议，任何商用都会收费。在写本文时，得到消息「微软宣布加入 OpenJDK」，打不过就选择 OpenJDK。随便 G 一下，当个故事了解就可以
 
@@ -643,9 +645,9 @@
       
     
       
-        <a class="-mob-share-qzone" title="QQ空间" rel="external nofollow noopener noreferrer"
+        <a class="-mob-share-qzone" title="QQ空间" rel="external nofollow noopener noreferrer noopener"
           
-          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://dayarch.top/p/multiple-java-management.html&title=SDKMAN 统一灵活管理多版本Java | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=近两年，Java 版本升级频繁，感觉刚刚掌握 Java8，写本文时，已听到 java14 的消息，无论是尝鲜新特性(Java12 中超级香的一个功能)，还是由于项目升级/兼容需要，我们可能都要面临管理多个 Java 版本的情
+          target="_blank" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://dayarch.top/p/multiple-java-management.html&title=SDKMAN 统一灵活管理多版本Java | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=近两年，Java 版本升级频繁，感觉刚刚掌握 Java8，写本文时，已听到 java14 的消息，无论是尝鲜新特性(Java12 中超级香的一个功能)，还是由于项目升级/兼容需要，我们可能都要面临管理多个 Java 版本的情
 
 另外 Oracle 自 Java11 开始，更改了用户协议，任何商用都会收费。在写本文时，得到消息「微软宣布加入 OpenJDK」，打不过就选择 OpenJDK。随便 G 一下，当个故事了解就可以
 
@@ -659,9 +661,9 @@
       
     
       
-        <a class="-mob-share-weibo" title="微博" rel="external nofollow noopener noreferrer"
+        <a class="-mob-share-weibo" title="微博" rel="external nofollow noopener noreferrer noopener"
           
-          href="http://service.weibo.com/share/share.php?url=https://dayarch.top/p/multiple-java-management.html&title=SDKMAN 统一灵活管理多版本Java | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=近两年，Java 版本升级频繁，感觉刚刚掌握 Java8，写本文时，已听到 java14 的消息，无论是尝鲜新特性(Java12 中超级香的一个功能)，还是由于项目升级/兼容需要，我们可能都要面临管理多个 Java 版本的情
+          target="_blank" href="http://service.weibo.com/share/share.php?url=https://dayarch.top/p/multiple-java-management.html&title=SDKMAN 统一灵活管理多版本Java | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=近两年，Java 版本升级频繁，感觉刚刚掌握 Java8，写本文时，已听到 java14 的消息，无论是尝鲜新特性(Java12 中超级香的一个功能)，还是由于项目升级/兼容需要，我们可能都要面临管理多个 Java 版本的情
 
 另外 Oracle 自 Java11 开始，更改了用户协议，任何商用都会收费。在写本文时，得到消息「微软宣布加入 OpenJDK」，打不过就选择 OpenJDK。随便 G 一下，当个故事了解就可以
 
@@ -722,7 +724,7 @@
                           
                               
                               <h6 class="tags">
-                                  <a class="tag" href="/tags/Spring-Boot/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> Spring Boot</a> <a class="tag" href="/tags/MessageConverter/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> MessageConverter</a> <a class="tag" href="/tags/HTTP/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> HTTP</a>
+                                  <a class="tag" href="/tags/Spring-Boot/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> Spring Boot</a> <a class="tag" href="/tags/HTTP/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> HTTP</a> <a class="tag" href="/tags/MessageConverter/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> MessageConverter</a>
                               </h6>
                           
                       </span>
@@ -749,7 +751,7 @@
 </header>
 
     <div class="content pure">
-      <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/jdk12-new-feature-overview.html" title="Java 12 新特性一览" rel="bookmark">Java 12 新特性一览</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/jdk12-collectors-teeing-api-usage.html" title="Java12 Collectors.teeing 的使用详解" rel="bookmark">Java12 Collectors.teeing 的使用详解</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-equals-hashcode.html" title="Java equals 和 hashCode 面试那点事" rel="bookmark">Java equals 和 hashCode 面试那点事</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/lombok-usage.html" title="Lombok 使用教程详解" rel="bookmark">Lombok 使用教程详解</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/easyexcel-read.html" title="EasyExcel读取Excel实际应用" rel="bookmark">EasyExcel读取Excel实际应用</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/http-client-advanced-usage.html" title="IntelliJ IDEA HTTP Client高级使用详解" rel="bookmark">IntelliJ IDEA HTTP Client高级使用详解</a></h3></div></li></ul>
+      <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/jdk12-new-feature-overview.html" title="Java 12 新特性一览" rel="bookmark">Java 12 新特性一览</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/java-equals-hashcode.html" title="Java equals 和 hashCode 面试那点事" rel="bookmark">Java equals 和 hashCode 面试那点事</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/jdk12-collectors-teeing-api-usage.html" title="Java12 Collectors.teeing 的使用详解" rel="bookmark">Java12 Collectors.teeing 的使用详解</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/lombok-usage.html" title="Lombok 使用教程详解" rel="bookmark">Lombok 使用教程详解</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/http-client-advanced-usage.html" title="IntelliJ IDEA HTTP Client高级使用详解" rel="bookmark">IntelliJ IDEA HTTP Client高级使用详解</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/intellj-idea-advanced-debug.html" title="IntelliJ IDEA 高级Debug技巧，助你起飞" rel="bookmark">IntelliJ IDEA 高级Debug技巧，助你起飞</a></h3></div></li></ul>
     </div>
   </section>
 
@@ -957,7 +959,7 @@
 </header>
 
     <div class='content pure'>
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#多版本-Java-管理"><span class="toc-text">多版本 Java 管理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#sdkman-介绍"><span class="toc-text">sdkman 介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#sdkman-安装"><span class="toc-text">sdkman 安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#sdkman-使用教程"><span class="toc-text">sdkman 使用教程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#sdk-list"><span class="toc-text">sdk list</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#sdk-install"><span class="toc-text">sdk install</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#sdk-current"><span class="toc-text">sdk current</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#sdk-use"><span class="toc-text">sdk use</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#sdk-default"><span class="toc-text">sdk default</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#sdk-uninstall"><span class="toc-text">sdk uninstall</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#sdk-upgrade"><span class="toc-text">sdk upgrade</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#sdk-flush"><span class="toc-text">sdk flush</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#sdkman-卸载"><span class="toc-text">sdkman 卸载</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#sdkman-windows-解决方案"><span class="toc-text">sdkman windows 解决方案</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#灵魂追问"><span class="toc-text">灵魂追问</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%9A%E7%89%88%E6%9C%AC-Java-%E7%AE%A1%E7%90%86"><span class="toc-text">多版本 Java 管理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#sdkman-%E4%BB%8B%E7%BB%8D"><span class="toc-text">sdkman 介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#sdkman-%E5%AE%89%E8%A3%85"><span class="toc-text">sdkman 安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#sdkman-%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B"><span class="toc-text">sdkman 使用教程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#sdk-list"><span class="toc-text">sdk list</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#sdk-install"><span class="toc-text">sdk install</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#sdk-current"><span class="toc-text">sdk current</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#sdk-use"><span class="toc-text">sdk use</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#sdk-default"><span class="toc-text">sdk default</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#sdk-uninstall"><span class="toc-text">sdk uninstall</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#sdk-upgrade"><span class="toc-text">sdk upgrade</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#sdk-flush"><span class="toc-text">sdk flush</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#sdkman-%E5%8D%B8%E8%BD%BD"><span class="toc-text">sdkman 卸载</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#sdkman-windows-%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="toc-text">sdkman windows 解决方案</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%81%B5%E9%AD%82%E8%BF%BD%E9%97%AE"><span class="toc-text">灵魂追问</span></a></li></ol>
     </div>
   </section>
 
@@ -1032,7 +1034,7 @@
   &nbsp;&nbsp;|&nbsp;&nbsp;  
   
     &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-        class="white-color">264.1k</span>&nbsp;字
+        class="white-color">267.4k</span>&nbsp;字
     
 
   &nbsp;&nbsp;|&nbsp;&nbsp;  
@@ -1087,7 +1089,7 @@
     
     。
   </div>
-  <div><p>博客内容遵循 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
+  <div><p>博客内容遵循 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
 </div>
   <!-- <div class="github-badge">
       <a style="color: #fff" rel="license" href="https://hexo.io/" target="_blank" title="由 Hexo 强力驱动">
@@ -1195,10 +1197,14 @@
 
 
 
-  <script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/app.js"></script>
+  
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/app.js"></script>
 
 
-  <script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/search.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/search.js"></script>
+
 
 
 

@@ -13,7 +13,7 @@
   
 
   
-  <link rel="alternate" href="/atom.xml" title="日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享">
+  <link rel="alternate" href="/atom.xml" title="日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享" type="application/atom+xml">
   
 
   <meta name="HandheldFriendly" content="True" />
@@ -35,7 +35,9 @@
   
 
   
-    <link rel="stylesheet" href="/style.css">
+    
+<link rel="stylesheet" href="/style.css">
+
   
 
   <script>
@@ -85,7 +87,7 @@
         daovoice('update');
         </script>
     
-</head>
+<meta name="generator" content="Hexo 5.4.0"></head>
 
 <body>
   
@@ -488,11 +490,11 @@
 <p>通常Restful返回的Json格式数据，里面包含很多为空值null的字段，我们没必要将这些字段返回给前端，应该给出更多的有效字段，所以我们需要在Converter Message的时候将这些null值字段给过滤掉</p>
 </blockquote>
 <h4 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h4><p>添加 <strong>@JsonInclude(JsonInclude.Include.NON_NULL)</strong> 注解<br>该方法很简单，但是我们有太多的返回类型，一一添加也是很大的工作量，所以我们需要在转换的源头进行控制</p>
-<a id="more"></a>
+<span id="more"></span>
 
 
 <h4 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h4><p>实现 <strong>WebMvcConfigurer</strong> 接口，添加 <strong>@EnableWebMvc</strong> 和 <strong>@Configuration</strong> 注解，然后重写 <strong>MappingJackson2HttpMessageConverter 中 getObjectMapper() 方法</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@EnableWebMvc</span></span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WebConfig</span> <span class="keyword">implements</span> <span class="title">WebMvcConfigurer</span></span>&#123;</span><br><span class="line">  <span class="comment">//... 省略重写的其他方法</span></span><br><span class="line"></span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">configureMessageConverters</span><span class="params">(List&lt;HttpMessageConverter&lt;?&gt;&gt; converters)</span> </span>&#123;</span><br><span class="line">   <span class="keyword">super</span>.configureMessageConverters(converters);</span><br><span class="line">   <span class="comment">//对应无法直接返回String类型</span></span><br><span class="line">   converters.add(<span class="number">0</span>, <span class="keyword">new</span> MappingJackson2HttpMessageConverter()&#123;</span><br><span class="line">           <span class="meta">@Override</span></span><br><span class="line">           <span class="function"><span class="keyword">public</span> ObjectMapper <span class="title">getObjectMapper</span><span class="params">()</span> </span>&#123;</span><br><span class="line">               <span class="keyword">super</span>.getObjectMapper().setSerializationInclusion(JsonInclude.Include.NON_NULL);</span><br><span class="line">               <span class="keyword">return</span> <span class="keyword">super</span>.getObjectMapper();</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@EnableWebMvc</span></span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WebConfig</span> <span class="keyword">implements</span> <span class="title">WebMvcConfigurer</span></span>&#123;</span><br><span class="line">  <span class="comment">//... 省略重写的其他方法</span></span><br><span class="line"></span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">configureMessageConverters</span><span class="params">(List&lt;HttpMessageConverter&lt;?&gt;&gt; converters)</span> </span>&#123;</span><br><span class="line">   <span class="keyword">super</span>.configureMessageConverters(converters);</span><br><span class="line">   <span class="comment">//对应无法直接返回String类型</span></span><br><span class="line">   converters.add(<span class="number">0</span>, <span class="keyword">new</span> MappingJackson2HttpMessageConverter()&#123;</span><br><span class="line">           <span class="meta">@Override</span></span><br><span class="line">           <span class="function"><span class="keyword">public</span> ObjectMapper <span class="title">getObjectMapper</span><span class="params">()</span> </span>&#123;</span><br><span class="line">               <span class="keyword">super</span>.getObjectMapper().setSerializationInclusion(JsonInclude.Include.NON_NULL);</span><br><span class="line">               <span class="keyword">return</span> <span class="keyword">super</span>.getObjectMapper();</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <p>这样所有的null值都会被过滤掉，注意这里使用的是 <strong>JsonInclude.Include.NON_NULL</strong>， Json中的某个集合如果为空还是会返回空数组，我们希望把这样的数据也过滤掉，只需要将<strong>JsonInclude.Include.NON_NULL</strong> 修改为 <strong>JsonInclude.Include.NON_EMPTY</strong></p>
 <p>这样就好了，返回给前端清晰有效的数据.</p>
 
@@ -500,12 +502,12 @@
       <!-- <div class="tuijian">
         <br><br>
         📚相关文章
-        <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/spring-boot-condition-annotation.html" title="@Conditional注解，Spring Boot 的灵活配置" rel="bookmark">@Conditional注解，Spring Boot 的灵活配置</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/easyexcel-read.html" title="EasyExcel读取Excel实际应用" rel="bookmark">EasyExcel读取Excel实际应用</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/spring-boot-messageconverter.html" title="HttpMessageConverter转换原理解析" rel="bookmark">HttpMessageConverter转换原理解析</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/spring-boot-configurationProperties-usage.html" title="Spring Boot @ConfigurationProperties 注解最强使用详解" rel="bookmark">Spring Boot @ConfigurationProperties 注解最强使用详解</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/spring-bean-lifecycle-destroy.html" title="Spring Bean生命周期之缘尽" rel="bookmark">Spring Bean生命周期之缘尽</a></h3></div></li></ul>
+        <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/spring-boot-condition-annotation.html" title="@Conditional注解，Spring Boot 的灵活配置" rel="bookmark">@Conditional注解，Spring Boot 的灵活配置</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/spring-bean-lifecycle-destroy.html" title="Spring Bean生命周期之缘尽" rel="bookmark">Spring Bean生命周期之缘尽</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/spring-bean-lifecycle-creation.html" title="Spring Bean生命周期之缘起" rel="bookmark">Spring Bean生命周期之缘起</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/spring-boot-starter-custom.html" title="Spring Boot 自定义starter 全面教程" rel="bookmark">Spring Boot 自定义starter 全面教程</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/spring-data-binding-mechanism.html" title="Spring 数据绑定剖析" rel="bookmark">Spring 数据绑定剖析</a></h3></div></li></ul>
       </div> -->
       <div class="personalweixin">
         <br><br>
         <blockquote>
-          <a href="https://mp.weixin.qq.com/s/G7BXuZh0Qh1-mE6ts4LJqQ" target="_blank" rel="noopener">加我微信</a>，咱们交流技术与思想，共同成长
+          <a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/G7BXuZh0Qh1-mE6ts4LJqQ">加我微信</a>，咱们交流技术与思想，共同成长
         </blockquote>
         <br>
 
@@ -543,9 +545,9 @@
   <div class="-mob-share-list share-body">
     
       
-        <a class="-mob-share-qq" title="QQ好友" rel="external nofollow noopener noreferrer"
+        <a class="-mob-share-qq" title="QQ好友" rel="external nofollow noopener noreferrer noopener"
           
-          href="http://connect.qq.com/widget/shareqq/index.html?url=https://dayarch.top/p/spring-boot-json-return-non-null.html&title=Springboot Json格式数据不返回null值属性 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=Spring ResponseBody without null field通常Restful返回的Json格式数据，里面包含很多为空值null的字段，我们没必要将这些字段返回给前端，应该给出更多的有效字段，所以我们需要在Converter Message的时候将这些null值字段给过滤掉
+          target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://dayarch.top/p/spring-boot-json-return-non-null.html&title=Springboot Json格式数据不返回null值属性 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=Spring ResponseBody without null field通常Restful返回的Json格式数据，里面包含很多为空值null的字段，我们没必要将这些字段返回给前端，应该给出更多的有效字段，所以我们需要在Converter Message的时候将这些null值字段给过滤掉
 
 方法一
 添加 @JsonInclude(JsonInclude.Include.NON_NULL) 注解
@@ -562,9 +564,9 @@
       
     
       
-        <a class="-mob-share-qzone" title="QQ空间" rel="external nofollow noopener noreferrer"
+        <a class="-mob-share-qzone" title="QQ空间" rel="external nofollow noopener noreferrer noopener"
           
-          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://dayarch.top/p/spring-boot-json-return-non-null.html&title=Springboot Json格式数据不返回null值属性 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=Spring ResponseBody without null field通常Restful返回的Json格式数据，里面包含很多为空值null的字段，我们没必要将这些字段返回给前端，应该给出更多的有效字段，所以我们需要在Converter Message的时候将这些null值字段给过滤掉
+          target="_blank" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://dayarch.top/p/spring-boot-json-return-non-null.html&title=Springboot Json格式数据不返回null值属性 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=Spring ResponseBody without null field通常Restful返回的Json格式数据，里面包含很多为空值null的字段，我们没必要将这些字段返回给前端，应该给出更多的有效字段，所以我们需要在Converter Message的时候将这些null值字段给过滤掉
 
 方法一
 添加 @JsonInclude(JsonInclude.Include.NON_NULL) 注解
@@ -581,9 +583,9 @@
       
     
       
-        <a class="-mob-share-weibo" title="微博" rel="external nofollow noopener noreferrer"
+        <a class="-mob-share-weibo" title="微博" rel="external nofollow noopener noreferrer noopener"
           
-          href="http://service.weibo.com/share/share.php?url=https://dayarch.top/p/spring-boot-json-return-non-null.html&title=Springboot Json格式数据不返回null值属性 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=Spring ResponseBody without null field通常Restful返回的Json格式数据，里面包含很多为空值null的字段，我们没必要将这些字段返回给前端，应该给出更多的有效字段，所以我们需要在Converter Message的时候将这些null值字段给过滤掉
+          target="_blank" href="http://service.weibo.com/share/share.php?url=https://dayarch.top/p/spring-boot-json-return-non-null.html&title=Springboot Json格式数据不返回null值属性 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=Spring ResponseBody without null field通常Restful返回的Json格式数据，里面包含很多为空值null的字段，我们没必要将这些字段返回给前端，应该给出更多的有效字段，所以我们需要在Converter Message的时候将这些null值字段给过滤掉
 
 方法一
 添加 @JsonInclude(JsonInclude.Include.NON_NULL) 注解
@@ -647,7 +649,7 @@
                           
                               
                               <h6 class="tags">
-                                  <a class="tag" href="/tags/Docker/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> Docker</a> <a class="tag" href="/tags/Spring-Boot/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> Spring Boot</a>
+                                  <a class="tag" href="/tags/Spring-Boot/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> Spring Boot</a> <a class="tag" href="/tags/Docker/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> Docker</a>
                               </h6>
                           
                       </span>
@@ -674,7 +676,7 @@
 </header>
 
     <div class="content pure">
-      <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/spring-boot-condition-annotation.html" title="@Conditional注解，Spring Boot 的灵活配置" rel="bookmark">@Conditional注解，Spring Boot 的灵活配置</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/easyexcel-read.html" title="EasyExcel读取Excel实际应用" rel="bookmark">EasyExcel读取Excel实际应用</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/spring-boot-messageconverter.html" title="HttpMessageConverter转换原理解析" rel="bookmark">HttpMessageConverter转换原理解析</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/spring-boot-configurationProperties-usage.html" title="Spring Boot @ConfigurationProperties 注解最强使用详解" rel="bookmark">Spring Boot @ConfigurationProperties 注解最强使用详解</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/spring-bean-lifecycle-destroy.html" title="Spring Bean生命周期之缘尽" rel="bookmark">Spring Bean生命周期之缘尽</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/spring-boot-starter-custom.html" title="Spring Boot 自定义starter 全面教程" rel="bookmark">Spring Boot 自定义starter 全面教程</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/spring-bean-lifecycle-creation.html" title="Spring Bean生命周期之缘起" rel="bookmark">Spring Bean生命周期之缘起</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/spring-data-binding-mechanism.html" title="Spring 数据绑定剖析" rel="bookmark">Spring 数据绑定剖析</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/shiro-in-practice.html" title="Shiro—小而美的安全框架" rel="bookmark">Shiro—小而美的安全框架</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/spring-aware.html" title="Spring Aware 到底是什么？" rel="bookmark">Spring Aware 到底是什么？</a></h3></div></li></ul>
+      <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/spring-boot-condition-annotation.html" title="@Conditional注解，Spring Boot 的灵活配置" rel="bookmark">@Conditional注解，Spring Boot 的灵活配置</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/spring-bean-lifecycle-destroy.html" title="Spring Bean生命周期之缘尽" rel="bookmark">Spring Bean生命周期之缘尽</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/spring-bean-lifecycle-creation.html" title="Spring Bean生命周期之缘起" rel="bookmark">Spring Bean生命周期之缘起</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/spring-boot-starter-custom.html" title="Spring Boot 自定义starter 全面教程" rel="bookmark">Spring Boot 自定义starter 全面教程</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/spring-data-binding-mechanism.html" title="Spring 数据绑定剖析" rel="bookmark">Spring 数据绑定剖析</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/docker-deploy-spring-boot.html" title="使用 Docker 部署 Spring Boot" rel="bookmark">使用 Docker 部署 Spring Boot</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/spring-boot-execute-on-startup.html" title="在Spring Boot启动时执行代码的几种方法" rel="bookmark">在Spring Boot启动时执行代码的几种方法</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/difference-between-beanfactory-and-applicationcontext.html" title="面试还不知道BeanFactory和ApplicationContext的区别？" rel="bookmark">面试还不知道BeanFactory和ApplicationContext的区别？</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/spring-aware.html" title="Spring Aware 到底是什么？" rel="bookmark">Spring Aware 到底是什么？</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/springmvc-response-status.html" title="Spring MVC 之 @ResponseStatus" rel="bookmark">Spring MVC 之 @ResponseStatus</a></h3></div></li></ul>
     </div>
   </section>
 
@@ -882,7 +884,7 @@
 </header>
 
     <div class='content pure'>
-      <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#方法一"><span class="toc-text">方法一</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#方法二"><span class="toc-text">方法二</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%B9%E6%B3%95%E4%B8%80"><span class="toc-text">方法一</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%B9%E6%B3%95%E4%BA%8C"><span class="toc-text">方法二</span></a></li></ol>
     </div>
   </section>
 
@@ -957,7 +959,7 @@
   &nbsp;&nbsp;|&nbsp;&nbsp;  
   
     &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-        class="white-color">264.1k</span>&nbsp;字
+        class="white-color">267.4k</span>&nbsp;字
     
 
   &nbsp;&nbsp;|&nbsp;&nbsp;  
@@ -1012,7 +1014,7 @@
     
     。
   </div>
-  <div><p>博客内容遵循 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
+  <div><p>博客内容遵循 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
 </div>
   <!-- <div class="github-badge">
       <a style="color: #fff" rel="license" href="https://hexo.io/" target="_blank" title="由 Hexo 强力驱动">
@@ -1120,10 +1122,14 @@
 
 
 
-  <script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/app.js"></script>
+  
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/app.js"></script>
 
 
-  <script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/search.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/search.js"></script>
+
 
 
 
