@@ -92,6 +92,7 @@ ignore:
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
 theme: hexo-theme-material-x
+# theme: volantis
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
