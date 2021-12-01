@@ -4,12 +4,12 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   
-  <title>Category: Node.js | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享</title>
+  <title>一键生成Git Worktree 工作目录 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享</title>
   
-  <meta name="keywords" content="Java,SpringBoot,并发编程, ElasticSearch, 日拱一兵">
+  <meta name="keywords" content="Git, worktree, Java,SpringBoot,并发编程, ElasticSearch, 日拱一兵">
   
   
-  <meta name="description" content="本站是日拱一兵的技术分享博客，内容涵盖Java后端技术、Spring Boot、Java并发编程等技术研究与分享，用有趣的方式解读技术">
+  <meta name="description" content="一键生成git worktree 工作目录, 本站是日拱一兵的技术分享博客，内容涵盖Java后端技术、Spring Boot、Java并发编程等技术研究与分享，用有趣的方式解读技术">
   
 
   
@@ -93,7 +93,7 @@
   
   
   <div class="cover-wrapper">
-    <cover class='cover  half'>
+    <cover class='cover post half'>
       
         
   <img class='logo' src='/assets/logo.png'/>
@@ -385,40 +385,26 @@
 
   <div class="l_body">
     <div class='body-wrapper'>
-      
-<div class='l_main'>
+      <div class='l_main'>
   
+
+  <article id="post" class="post white-box article-type-post" itemscope itemprop="blogPost">
     
-      
-  <section class="post-list">
-    
-      
-        
-          
-        
-      
-    
-    
-      
-        
-          <div class='post-wrapper'>
-            <article class="post reveal ">
-  
 
 
   <section class='meta'>
     
     
-      <a title='Java后端的我在学Node.js 你敢信？' href='/p/start-to-learn-nodejs.html'><img class='thumbnail' src='https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-img20200227085626.png'></a>
-    
     <div class="meta" id="header-meta">
       
         
-  <h2 class="title">
-    <a href="/p/start-to-learn-nodejs.html">
-      Java后端的我在学Node.js 你敢信？
-    </a>
-  </h2>
+  
+    <h1 class="title">
+      <a href="/p/git-worktree-with-script.html">
+        一键生成Git Worktree 工作目录
+      </a>
+    </h1>
+  
 
 
       
@@ -446,7 +432,7 @@
             <div class="new-meta-item date">
   <a class='notlink'>
     <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-    <p>2020-02-27</p>
+    <p>2021-12-01</p>
   </a>
 </div>
 
@@ -456,11 +442,29 @@
             
   
   <div class='new-meta-item category'>
-    <a href='/categories/Coding/Node-js/' rel="nofollow">
+    <a href='/categories/Coding/DevOps/' rel="nofollow">
       <i class="fas fa-folder-open" aria-hidden="true"></i>
-      <p>Coding&nbsp;/&nbsp;Node.js</p>
+      <p>Coding&nbsp;/&nbsp;DevOps</p>
     </a>
   </div>
+
+
+          
+        
+          
+            
+  
+    <div class="new-meta-item browse busuanzi">
+      <a class='notlink'>
+        <i class="fas fa-eye" aria-hidden="true"></i>
+        <p>
+          <span id="busuanzi_value_page_pv">
+            <i class="fas fa-spinner fa-spin fa-fw" aria-hidden="true"></i>
+          </span>
+        </p>
+      </a>
+    </div>
+  
 
 
           
@@ -478,48 +482,351 @@
   </section>
 
 
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      项目需要，我需要储备一些Node.js 相关的知识了，整体感觉是一件好事
+    <section class="article typo">
+      <div class="article-entry" itemprop="articleBody">
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>上一篇文章<a href="https://dayarch.top/p/git-worktree-in-advance.html">Git Worktree 高级使用</a> 整体反应不错，这完全是日常开发中可以用到的奇淫技巧。微服务环境下，通常我们都会有多个 repo，高级用法好归好，但每个 repo 都按照高级用法进行配置，还是比较麻烦的，你看这不就有同学发声了嘛</p>
+<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host@master/blog-img20211201153240.png"></p>
+<p>说者有心，听者有意，那就写个脚本吧</p>
+<h2 id="Git-Worktree-脚本"><a href="#Git-Worktree-脚本" class="headerlink" title="Git Worktree 脚本"></a>Git Worktree 脚本</h2><p>个人不是很擅长写 bash script，磕磕绊绊写了一个 <code>worktree.sh</code>，完全执行上一篇文章的整个过程</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash -e</span></span><br><span class="line"></span><br><span class="line">repo=<span class="variable">$1</span></span><br><span class="line">dir=<span class="string">&quot;<span class="variable">$&#123;repo##*/&#125;</span>&quot;</span></span><br><span class="line">dir=<span class="string">&quot;<span class="variable">$&#123;dir%.*&#125;</span>&quot;</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$dir</span></span><br><span class="line">branch=<span class="variable">$2</span></span><br><span class="line">defaultBranch=<span class="string">&quot;<span class="variable">$&#123;branch:-main&#125;</span>&quot;</span></span><br><span class="line"></span><br><span class="line">mkdir -p <span class="variable">$dir</span></span><br><span class="line"><span class="built_in">cd</span> <span class="variable">$dir</span></span><br><span class="line"></span><br><span class="line">git <span class="built_in">clone</span> --bare <span class="variable">$repo</span> .bare</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;gitdir: ./.bare&quot;</span> &gt; .git</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;    fetch = +refs/heads/*:refs/remotes/origin/*&quot;</span> &gt;&gt; ./.bare/config</span><br><span class="line"></span><br><span class="line">git worktree add <span class="variable">$defaultBranch</span></span><br></pre></td></tr></table></figure>
 
-背景
-从前，我也写过前端，不过那会最多用到HTML5 +jQuery相关技术。也没有准确的时间点来划分，我就忽忽悠悠的专注于Java后端了
+<p>这个 script 接收两个参数</p>
+<ol>
+<li>第一个参数是 <strong>repo</strong>，<code>https | ssh</code> 两种方式都可以</li>
+<li>第二个参数是 <strong>branch</strong>，不同的 repo 默认的主分支命名可能不一样，Github 现在将主分支命从 master 改为 <code>main</code>，所以这里默认值就是 <code>main</code></li>
+</ol>
+<blockquote>
+<p>该脚本默认创建 repo 同名文件夹</p>
+</blockquote>
+<p>将 worktree.sh 保存在磁盘目录的某个位置，并授权(最大权限)</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod -R 777 worktree.sh</span><br></pre></td></tr></table></figure>
 
+<p>接下来就测试一下效果</p>
+<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host@master/blog-img2021-12-01at16.00.47.gif"></p>
+<p>假如默认主分支名是 <code>develop</code>, 我们只需要添加一个参数就可以了：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">../worktree.sh git@github.com:FraserYu/amend-crash-demo.git develop</span><br></pre></td></tr></table></figure>
 
+<p>每次找可执行文件的目录很显然不是一个好的方式，我们需要起个别名，配知道环境变量中，这样方便我们全局使用，根据自己电脑情况打开 <code>.zshrc</code> 或 <code>.bashprofile</code> 文件（我用的前者）</p>
+<p>在里面创建一个别名 <code>gwt</code>(感觉这个名字好高端)：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alias gwt=&#x27;/Users/rgyb/Documents/projects/personal/worktree.sh&#x27;</span><br></pre></td></tr></table></figure>
 
-像现在的大前端Angular、VUE、REACT这些大前端框架我只是略有了解，完全没有用过，用Node作为中间服务器也是相对陌生状态，项目中需要，我是一定不会放过这个可以掉头发的良机（想法很简答， 跳出自己的舒适区）
+<p>然后刷新一下该文件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source ～/.zshrc</span><br></pre></td></tr></table></figure>
 
+<p>再来看一下效果：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host@master/blog-img2021-12-01at16.10.42.gif"></p>
+<p>到这里，使用 worktree 应该非常简单了吧</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>如果你有多分支切换的各种痛点，学会使用 git worktree，那些问题将不复存在。服务提供全套，脚本放在了</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/FraserYu/script.git%EF%BC%8C">https://github.com/FraserYu/script.git，</a> 有什么问题欢迎留言</p>
 
+      </div>
+      <!-- <div class="tuijian">
+        <br><br>
+        📚相关文章
+        <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/git-ignore.html" title="Git Ignoring Files" rel="bookmark">Git Ignoring Files</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/git-worktree-in-practice.html" title="Git Worktree 大法真香" rel="bookmark">Git Worktree 大法真香</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/git-worktree-in-advance.html" title="Git Worktree 高级使用" rel="bookmark">Git Worktree 高级使用</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/git-multiple-account.html" title="Git配置多个账号（GitLab和GitHub）" rel="bookmark">Git配置多个账号（GitLab和GitHub）</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/git-workflow.html" title="git 使用流程" rel="bookmark">git 使用流程</a></h3></div></li></ul>
+      </div> -->
+      <div class="personalweixin">
+        <br><br>
+        <blockquote>
+          <a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/G7BXuZh0Qh1-mE6ts4LJqQ">加我微信</a>，咱们交流技术与思想，共同成长
+        </blockquote>
+        <br>
 
-毕竟要在实际项目中写Node代码的，这么严峻的问题我是要认真对待的，要不然会让队友消耗太多 WTFs/min 能量（这是什么含义？请看【读《Clean C
+      </div>
       
-        <div class="readmore">
-          <a href="/p/start-to-learn-nodejs.html" class="flat-box">
-            <i class="fas fa-book-open fa-fw" aria-hidden="true"></i>
-            阅读全文
-          </a>
-        </div>
+      
+        <br>
+        
+
+
+  <section class='meta' id="footer-meta">
+    <div class='new-meta-box'>
+      
+        
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-12-01T16:17:27+08:00">
+  <a class='notlink'>
+    <i class="fas fa-clock" aria-hidden="true"></i>
+    <p>更新于 2021年12月1日</p>
+  </a>
+</div>
+
+        
+      
+        
+          
+  
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/Git/" rel="nofollow"><i class="fas fa-tag" aria-hidden="true"></i><p>Git</p></a></div>
+
+
+        
+      
+        
+          
+  <div class="new-meta-item share -mob-share-list">
+  <div class="-mob-share-list share-body">
+    
+      
+        <a class="-mob-share-qq" title="QQ好友" rel="external nofollow noopener noreferrer noopener"
+          
+          target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://dayarch.top/p/git-worktree-with-script.html&title=一键生成Git Worktree 工作目录 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=前言
+上一篇文章Git Worktree 高级使用 整体反应不错，这完全是日常开发中可以用到的奇淫技巧。微服务环境下，通常我们都会有多个 repo，高级用法好归好，但每个 repo 都按照高级用法进行配置，还是比较麻烦的，你看这不就有同学发声了嘛
+
+
+
+说者有心，听者有意，那就写个脚本吧
+
+Git Worktree 脚本
+个人不是很擅长写 bash script，磕磕绊绊写了一个 worktree.sh，完全执行上一篇文章的整个过程
+
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+
+
+#!/bin/bash -e
+
+repo=$1
+dir="${repo#"
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/assets@19.1.9/logo/128/qq.png">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-qzone" title="QQ空间" rel="external nofollow noopener noreferrer noopener"
+          
+          target="_blank" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://dayarch.top/p/git-worktree-with-script.html&title=一键生成Git Worktree 工作目录 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=前言
+上一篇文章Git Worktree 高级使用 整体反应不错，这完全是日常开发中可以用到的奇淫技巧。微服务环境下，通常我们都会有多个 repo，高级用法好归好，但每个 repo 都按照高级用法进行配置，还是比较麻烦的，你看这不就有同学发声了嘛
+
+
+
+说者有心，听者有意，那就写个脚本吧
+
+Git Worktree 脚本
+个人不是很擅长写 bash script，磕磕绊绊写了一个 worktree.sh，完全执行上一篇文章的整个过程
+
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+
+
+#!/bin/bash -e
+
+repo=$1
+dir="${repo#"
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/assets@19.1.9/logo/128/qzone.png">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-weibo" title="微博" rel="external nofollow noopener noreferrer noopener"
+          
+          target="_blank" href="http://service.weibo.com/share/share.php?url=https://dayarch.top/p/git-worktree-with-script.html&title=一键生成Git Worktree 工作目录 | 日拱一兵｜Java｜Spring Boot｜Java并发编程｜最新干货分享&pics=https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png&summary=前言
+上一篇文章Git Worktree 高级使用 整体反应不错，这完全是日常开发中可以用到的奇淫技巧。微服务环境下，通常我们都会有多个 repo，高级用法好归好，但每个 repo 都按照高级用法进行配置，还是比较麻烦的，你看这不就有同学发声了嘛
+
+
+
+说者有心，听者有意，那就写个脚本吧
+
+Git Worktree 脚本
+个人不是很擅长写 bash script，磕磕绊绊写了一个 worktree.sh，完全执行上一篇文章的整个过程
+
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+
+
+#!/bin/bash -e
+
+repo=$1
+dir="${repo#"
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/assets@19.1.9/logo/128/weibo.png">
+          
+        </a>
+      
+    
+  </div>
+</div>
+
+
+
+        
       
     </div>
-    
   </section>
-</article>
 
+
+      
+      
+          <div class="prev-next">
+              
+              
+                  <section class="next">
+                      <span class="art-item-right" aria-hidden="true">
+                          <h6>下一页&nbsp;<i class="fas fa-chevron-right" aria-hidden="true"></i></h6>
+                          <h4>
+                              <a href="/p/git-worktree-in-advance.html" rel="prev" title="Git Worktree 高级使用">
+                                  
+                                      Git Worktree 高级使用
+                                  
+                              </a>
+                          </h4>
+                          
+                              
+                              <h6 class="tags">
+                                  <a class="tag" href="/tags/Git/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> Git</a>
+                              </h6>
+                          
+                      </span>
+                  </section>
+              
           </div>
+      
+    </section>
+  </article>
+
+
+  
+    
+  
+    
+      
+        
+          
+  <section class='widget related_posts'>
+    
+<header class='pure'>
+  <div><i class="fas fa-bookmark fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;相关文章</div>
+  
+</header>
+
+    <div class="content pure">
+      <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/git-ignore.html" title="Git Ignoring Files" rel="bookmark">Git Ignoring Files</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/git-worktree-in-practice.html" title="Git Worktree 大法真香" rel="bookmark">Git Worktree 大法真香</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/git-worktree-in-advance.html" title="Git Worktree 高级使用" rel="bookmark">Git Worktree 高级使用</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/git-multiple-account.html" title="Git配置多个账号（GitLab和GitHub）" rel="bookmark">Git配置多个账号（GitLab和GitHub）</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/git-workflow.html" title="git 使用流程" rel="bookmark">git 使用流程</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/three-ways-to-keep-git-log-clear.html" title="保持清洁的Git提交记录，三招就够了" rel="bookmark">保持清洁的Git提交记录，三招就够了</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/jenkins-shared-library.html" title="Jenkins Shared Library" rel="bookmark">Jenkins Shared Library</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/p/jenkins-environment-variables.html" title="Jenkins 使用环境变量" rel="bookmark">Jenkins 使用环境变量</a></h3></div></li></ul>
+    </div>
+  </section>
+
+
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
         
       
     
-  </section>
   
     
-    <!-- 根据主题中的设置决定是否在archive中针对摘要部分的MathJax公式加载mathjax.js文件 -->
-    
-    
-
   
 
 
-    
+  <!-- 显示推荐文章和评论 -->
+
+
+
+  <article class="post white-box comments">
+    <section class="article typo">
+      <h4><i class="fas fa-comments fa-fw" aria-hidden="true"></i>&nbsp;评论</h4>
+      
+      
+      
+        <section id="comments">
+          <div id="gitalk-container"></div>
+        </section>
+      
+      
+    </section>
+  </article>
+
+
+
+
+
+
+<!-- 根据页面mathjax变量决定是否加载MathJax数学公式js -->
+
+
+
+  <script>
+    window.subData = {
+      title: '一键生成Git Worktree 工作目录',
+      tools: true
+    }
+  </script>
+
+
+
+  <script src="https://my.openwrite.cn/js/readmore.js" type="text/javascript"></script>
+  <script>
+      const btw = new BTWPlugin();
+      btw.init({
+          id: 'post',
+          blogId: '10015-1569397635991-668',
+          name: '日拱一兵',
+          qrcode: 'https://rgyb.sunluomeng.top/%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%96%87%E7%AB%A0/%E6%84%9F%E6%83%B3%E4%B8%8E%E6%80%BB%E7%BB%93/_image/2019-07-25/qrcode.jpg',
+          keyword: 'tanrgyb',
+      });
+  </script>
   
 
 </div>
@@ -528,48 +835,6 @@
     
     
       
-      
-        
-          
-          
-        
-          
-          
-        
-          
-          
-        
-          
-          
-            
-              <section class='widget plain'>
-  
-<header class='pure'>
-  <div><i class="fas fa-bullhorn fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;公告</div>
-  
-</header>
-
-  <div class='content pure'>
-    <p>博客持续升级改造中… 如有问题请<a href="/comments/">留言</a>交流，也可以加我 <a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/G7BXuZh0Qh1-mE6ts4LJqQ%22">微信</a></p>
-
-  </div>
-</section>
-
-            
-          
-        
-          
-          
-        
-          
-          
-        
-          
-          
-        
-          
-          
-        
       
         
           
@@ -684,194 +949,19 @@
         
           
           
-        
-          
-          
-        
-          
-          
-            
-              <section class='widget grid'>
-  
-<header class='pure'>
-  <div><i class="fas fa-map-signs fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;站内导航</div>
-  
-</header>
-
-  <div class='content pure'>
-    <ul class="grid navgation">
-      
-        <li><a class="flat-box" title="/" href="/"
-          
-            rel="nofollow"
-          
-          
-          id="home">
-          
-            <i class="fas fa-clock fa-fw" aria-hidden="true"></i>
-          
-          近期文章
-        </a></li>
-      
-        <li><a class="flat-box" title="/archives/" href="/archives/"
-          
-            rel="nofollow"
-          
-          
-          id="archives">
-          
-            <i class="fas fa-archive fa-fw" aria-hidden="true"></i>
-          
-          文章归档
-        </a></li>
-      
-        <li><a class="flat-box" title="/categories/Coding/Java-Concurrency" href="/categories/Coding/Java-Concurrency"
-          
-            rel="nofollow"
-          
-          
-          id="categoriesCodingJava-Concurrency">
-          
-            <i class="fas fa-th-list fa-fw" aria-hidden="true"></i>
-          
-          并发系列
-        </a></li>
-      
-        <li><a class="flat-box" title="/comments/" href="/comments/"
-          
-            rel="nofollow"
-          
-          
-          id="comments">
-          
-            <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
-          
-          留言看板
-        </a></li>
-      
-        <li><a class="flat-box" title="/website/" href="/website/"
-          
-            rel="nofollow"
-          
-          
-          id="website">
-          
-            <i class="fas fa-file fa-fw" aria-hidden="true"></i>
-          
-          维护日志
-        </a></li>
-      
-        <li><a class="flat-box" title="/books/" href="/books/"
-          
-            rel="nofollow"
-          
-          
-          id="books">
-          
-            <i class="fas fa-book fa-fw" aria-hidden="true"></i>
-          
-          我的书房
-        </a></li>
-      
-    </ul>
-  </div>
-</section>
-
-            
-          
-        
-          
-          
-        
-          
-          
-        
-          
-          
-        
-      
-        
-          
-          
-        
-          
-          
-        
-          
-          
-        
-          
-          
-        
-          
-          
-        
-          
-          
             
               
-  <section class='widget category'>
+  <section class='widget toc-wrapper'>
     
 <header class='pure'>
-  <div><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;文章分类</div>
+  <div><i class="fas fa-list fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;本文目录</div>
   
-    <a class="rightBtn rotate90"
-    
-      rel="nofollow"
-    
-    
-      target="blank"
-    
-    href="/blog/categories/"
-    title="blog/categories/">
-    <i class="fas fa-expand-arrows-alt fa-fw"></i></a>
+    <!-- <div class='wrapper'><a class="s-toc rightBtn" rel="external nofollow noopener noreferrer" href="javascript:void(0)"><i class="fas fa-thumbtack fa-fw"></i></a></div> -->
   
 </header>
 
     <div class='content pure'>
-      <ul class="entry">
-        
-          <li><a class="flat-box" title="/categories/AWS/" href="/categories/AWS/"><div class='name'>AWS</div><div class='badge'>(1)</div></a></li>
-        
-          <li><a class="flat-box" title="/categories/Coding/" href="/categories/Coding/"><div class='name'>Coding</div><div class='badge'>(102)</div></a></li>
-        
-          <li><a class="flat-box child" title="/categories/Coding/Arthas/" href="/categories/Coding/Arthas/"><div class='name'>Arthas</div><div class='badge'>(1)</div></a></li>
-        
-          <li><a class="flat-box child" title="/categories/Coding/DevOps/" href="/categories/Coding/DevOps/"><div class='name'>DevOps</div><div class='badge'>(14)</div></a></li>
-        
-          <li><a class="flat-box child" title="/categories/Coding/Docker/" href="/categories/Coding/Docker/"><div class='name'>Docker</div><div class='badge'>(7)</div></a></li>
-        
-          <li><a class="flat-box child" title="/categories/Coding/Java-Concurrency/" href="/categories/Coding/Java-Concurrency/"><div class='name'>Java-Concurrency</div><div class='badge'>(24)</div></a></li>
-        
-          <li><a class="flat-box child" title="/categories/Coding/Java/" href="/categories/Coding/Java/"><div class='name'>Java</div><div class='badge'>(18)</div></a></li>
-        
-          <li><a class="flat-box child" title="/categories/Coding/Linux/" href="/categories/Coding/Linux/"><div class='name'>Linux</div><div class='badge'>(1)</div></a></li>
-        
-          <li><a class="flat-box child" title="/categories/Coding/Node-js/" href="/categories/Coding/Node-js/"><div class='name'>Node.js</div><div class='badge'>(1)</div></a></li>
-        
-          <li><a class="flat-box child" title="/categories/Coding/Others/" href="/categories/Coding/Others/"><div class='name'>Others</div><div class='badge'>(7)</div></a></li>
-        
-          <li><a class="flat-box child" title="/categories/Coding/Spring-Boot/" href="/categories/Coding/Spring-Boot/"><div class='name'>Spring-Boot</div><div class='badge'>(18)</div></a></li>
-        
-          <li><a class="flat-box child" title="/categories/Coding/Spring/" href="/categories/Coding/Spring/"><div class='name'>Spring</div><div class='badge'>(1)</div></a></li>
-        
-          <li><a class="flat-box child" title="/categories/Coding/Tools/" href="/categories/Coding/Tools/"><div class='name'>Tools</div><div class='badge'>(3)</div></a></li>
-        
-          <li><a class="flat-box child" title="/categories/Coding/%E5%AE%89%E5%85%A8-%E5%8D%8F%E8%AE%AE-%E8%A7%84%E8%8C%83/" href="/categories/Coding/%E5%AE%89%E5%85%A8-%E5%8D%8F%E8%AE%AE-%E8%A7%84%E8%8C%83/"><div class='name'>安全-协议-规范</div><div class='badge'>(3)</div></a></li>
-        
-          <li><a class="flat-box child" title="/categories/Coding/%E6%95%B0%E6%8D%AE%E5%BA%93-%E6%8C%81%E4%B9%85%E5%B1%82-SQL/" href="/categories/Coding/%E6%95%B0%E6%8D%AE%E5%BA%93-%E6%8C%81%E4%B9%85%E5%B1%82-SQL/"><div class='name'>数据库-持久层-SQL</div><div class='badge'>(4)</div></a></li>
-        
-          <li><a class="flat-box" title="/categories/Life/" href="/categories/Life/"><div class='name'>Life</div><div class='badge'>(10)</div></a></li>
-        
-          <li><a class="flat-box child" title="/categories/Life/English/" href="/categories/Life/English/"><div class='name'>English</div><div class='badge'>(2)</div></a></li>
-        
-          <li><a class="flat-box child" title="/categories/Life/%E5%85%B6%E4%BB%96/" href="/categories/Life/%E5%85%B6%E4%BB%96/"><div class='name'>其他</div><div class='badge'>(6)</div></a></li>
-        
-          <li><a class="flat-box child" title="/categories/Life/%E6%8A%95%E8%B5%84%E7%90%86%E8%B4%A2%E5%AD%A6%E4%B9%A0/" href="/categories/Life/%E6%8A%95%E8%B5%84%E7%90%86%E8%B4%A2%E5%AD%A6%E4%B9%A0/"><div class='name'>投资理财学习</div><div class='badge'>(1)</div></a></li>
-        
-          <li><a class="flat-box child" title="/categories/Life/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/" href="/categories/Life/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"><div class='name'>读书笔记</div><div class='badge'>(1)</div></a></li>
-        
-      </ul>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Git-Worktree-%E8%84%9A%E6%9C%AC"><span class="toc-text">Git Worktree 脚本</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-text">总结</span></a></li></ol>
     </div>
   </section>
 
@@ -885,8 +975,6 @@
           
           
         
-      
-        
           
           
         
@@ -894,120 +982,6 @@
           
         
           
-          
-        
-          
-          
-        
-          
-          
-        
-          
-          
-        
-          
-          
-            
-              
-  <section class='widget tagcloud'>
-    
-<header class='pure'>
-  <div><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;热门标签</div>
-  
-    <a class="rightBtn rotate90"
-    
-      rel="nofollow"
-    
-    
-      target="blank"
-    
-    href="/blog/tags/"
-    title="blog/tags/">
-    <i class="fas fa-expand-arrows-alt fa-fw"></i></a>
-  
-</header>
-
-    <div class='content pure'>
-      <a href="/tags/AOP/" style="font-size: 14px; color: #999">AOP</a> <a href="/tags/AWS/" style="font-size: 14px; color: #999">AWS</a> <a href="/tags/ArrayList/" style="font-size: 14px; color: #999">ArrayList</a> <a href="/tags/Arthas/" style="font-size: 14px; color: #999">Arthas</a> <a href="/tags/Chrome/" style="font-size: 14px; color: #999">Chrome</a> <a href="/tags/ClassLoader/" style="font-size: 14px; color: #999">ClassLoader</a> <a href="/tags/Docker/" style="font-size: 21.5px; color: #666">Docker</a> <a href="/tags/EasyExcel/" style="font-size: 14px; color: #999">EasyExcel</a> <a href="/tags/English/" style="font-size: 15.25px; color: #919191">English</a> <a href="/tags/Excel/" style="font-size: 15.25px; color: #919191">Excel</a> <a href="/tags/Exception/" style="font-size: 14px; color: #999">Exception</a> <a href="/tags/Git/" style="font-size: 21.5px; color: #666">Git</a> <a href="/tags/GitHub-Pages/" style="font-size: 14px; color: #999">GitHub Pages</a> <a href="/tags/Github/" style="font-size: 14px; color: #999">Github</a> <a href="/tags/HTTP/" style="font-size: 15.25px; color: #919191">HTTP</a> <a href="/tags/Happens-before/" style="font-size: 14px; color: #999">Happens-before</a> <a href="/tags/Hybris/" style="font-size: 14px; color: #999">Hybris</a> <a href="/tags/IO/" style="font-size: 14px; color: #999">IO</a> <a href="/tags/IntelliJ-IDEA/" style="font-size: 21.5px; color: #666">IntelliJ IDEA</a> <a href="/tags/JDK/" style="font-size: 14px; color: #999">JDK</a> <a href="/tags/JDK%E6%BA%90%E7%A0%81/" style="font-size: 14px; color: #999">JDK源码</a> <a href="/tags/JVM/" style="font-size: 15.25px; color: #919191">JVM</a> <a href="/tags/Java/" style="font-size: 19px; color: #777">Java</a> <a href="/tags/Java-Concurrency/" style="font-size: 24px; color: #555">Java-Concurrency</a> <a href="/tags/Jenkins/" style="font-size: 19px; color: #777">Jenkins</a> <a href="/tags/Jrebel/" style="font-size: 14px; color: #999">Jrebel</a> <a href="/tags/Json/" style="font-size: 15.25px; color: #919191">Json</a> <a href="/tags/Linux/" style="font-size: 14px; color: #999">Linux</a> <a href="/tags/Lombok/" style="font-size: 14px; color: #999">Lombok</a> <a href="/tags/Maven/" style="font-size: 15.25px; color: #919191">Maven</a> <a href="/tags/MessageConverter/" style="font-size: 14px; color: #999">MessageConverter</a> <a href="/tags/MyBatis/" style="font-size: 14px; color: #999">MyBatis</a> <a href="/tags/MySQL/" style="font-size: 16.5px; color: #888">MySQL</a> <a href="/tags/Node/" style="font-size: 14px; color: #999">Node</a> <a href="/tags/OAuth2-0/" style="font-size: 14px; color: #999">OAuth2.0</a> <a href="/tags/POI/" style="font-size: 14px; color: #999">POI</a> <a href="/tags/PostMan/" style="font-size: 14px; color: #999">PostMan</a> <a href="/tags/RESTful/" style="font-size: 14px; color: #999">RESTful</a> <a href="/tags/SSL/" style="font-size: 14px; color: #999">SSL</a> <a href="/tags/Shiro/" style="font-size: 14px; color: #999">Shiro</a> <a href="/tags/Spring/" style="font-size: 15.25px; color: #919191">Spring</a> <a href="/tags/Spring-Aware/" style="font-size: 14px; color: #999">Spring Aware</a> <a href="/tags/Spring-Bean/" style="font-size: 17.75px; color: #808080">Spring Bean</a> <a href="/tags/Spring-Boot/" style="font-size: 22.75px; color: #5e5e5e">Spring Boot</a> <a href="/tags/Spring-Data-Binding/" style="font-size: 14px; color: #999">Spring Data Binding</a> <a href="/tags/SpringMVC/" style="font-size: 14px; color: #999">SpringMVC</a> <a href="/tags/Springboot/" style="font-size: 14px; color: #999">Springboot</a> <a href="/tags/Starter/" style="font-size: 14px; color: #999">Starter</a> <a href="/tags/Windows/" style="font-size: 14px; color: #999">Windows</a> <a href="/tags/annotation/" style="font-size: 14px; color: #999">annotation</a> <a href="/tags/lambda/" style="font-size: 14px; color: #999">lambda</a> <a href="/tags/synchronized/" style="font-size: 14px; color: #999">synchronized</a> <a href="/tags/thread/" style="font-size: 14px; color: #999">thread</a> <a href="/tags/volatile/" style="font-size: 15.25px; color: #919191">volatile</a> <a href="/tags/%E4%BA%8C%E5%8F%89%E6%9F%A5%E6%89%BE%E6%A0%91/" style="font-size: 14px; color: #999">二叉查找树</a> <a href="/tags/%E4%BA%92%E6%96%A5/" style="font-size: 14px; color: #999">互斥</a> <a href="/tags/%E5%88%86%E5%B7%A5/" style="font-size: 14px; color: #999">分工</a> <a href="/tags/%E5%8E%9F%E5%AD%90%E6%80%A7/" style="font-size: 14px; color: #999">原子性</a> <a href="/tags/%E5%8F%AF%E8%A7%81%E6%80%A7/" style="font-size: 14px; color: #999">可见性</a> <a href="/tags/%E5%90%8C%E6%AD%A5/" style="font-size: 14px; color: #999">同步</a> <a href="/tags/%E5%A4%9A%E6%80%81/" style="font-size: 14px; color: #999">多态</a> <a href="/tags/%E5%B7%A5%E5%85%B7/" style="font-size: 15.25px; color: #919191">工具</a> <a href="/tags/%E5%B9%B6%E5%8F%91/" style="font-size: 14px; color: #999">并发</a> <a href="/tags/%E5%BE%AE%E4%BF%A1/" style="font-size: 14px; color: #999">微信</a> <a href="/tags/%E6%80%BB%E7%BB%93/" style="font-size: 20.25px; color: #6f6f6f">总结</a> <a href="/tags/%E6%8C%87%E6%95%B0%E5%9F%BA%E9%87%91/" style="font-size: 14px; color: #999">指数基金</a> <a href="/tags/%E6%9C%89%E5%BA%8F%E6%80%A7/" style="font-size: 14px; color: #999">有序性</a> <a href="/tags/%E6%AD%BB%E9%94%81/" style="font-size: 14px; color: #999">死锁</a> <a href="/tags/%E6%B3%A8%E8%A7%A3/" style="font-size: 15.25px; color: #919191">注解</a> <a href="/tags/%E7%83%AD%E9%83%A8%E7%BD%B2/" style="font-size: 14px; color: #999">热部署</a> <a href="/tags/%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/" style="font-size: 17.75px; color: #808080">生命周期</a> <a href="/tags/%E7%BA%A2%E9%BB%91%E6%A0%91/" style="font-size: 14px; color: #999">红黑树</a> <a href="/tags/%E8%A1%A8%E6%83%85/" style="font-size: 14px; color: #999">表情</a> <a href="/tags/%E8%B4%B9%E7%94%A8/" style="font-size: 14px; color: #999">费用</a> <a href="/tags/%E9%94%81/" style="font-size: 15.25px; color: #919191">锁</a> <a href="/tags/%E9%94%81%E7%B2%92%E5%BA%A6/" style="font-size: 14px; color: #999">锁粒度</a> <a href="/tags/%E9%9D%A2%E8%AF%95/" style="font-size: 17.75px; color: #808080">面试</a>
-    </div>
-  </section>
-
-
-            
-          
-        
-          
-          
-        
-      
-        
-          
-          
-        
-          
-          
-        
-          
-          
-        
-          
-          
-        
-          
-          
-        
-          
-          
-        
-          
-          
-        
-          
-          
-            
-              
-
-
-  <section class='widget music'>
-    
-<header class='pure'>
-  <div><i class="fas fa-compact-disc fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;最近在听</div>
-  
-    <a class="rightBtn"
-    
-      rel="external nofollow noopener noreferrer"
-    
-    
-      target="_blank"
-    
-    href="https://music.163.com/#/my/m/music/playlist?id=2565998811"
-    title="https://music.163.com/#/my/m/music/playlist?id=2565998811">
-    <i class="far fa-heart fa-fw"></i></a>
-  
-</header>
-
-    <div class='content pure'>
-      
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.7.0/dist/APlayer.min.css">
-  <div class="aplayer"
-    data-theme="#1BCDFC"
-    
-    
-    data-mode="circulation"
-    data-server="netease"
-    data-type="playlist"
-    data-id="2565998811"
-    data-volume="0.7">
-  </div>
-  <script src="https://cdn.jsdelivr.net/npm/aplayer@1.7.0/dist/APlayer.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/meting@1.1.0/dist/Meting.min.js"></script>
-
-
-    </div>
-  </section>
-
-
-            
           
         
       
@@ -1127,6 +1101,22 @@
 <script>setLoadingBarProgress(80);</script>
 
 
+<script>
+    (function(){
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        }
+        else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+   
+
       <script>setLoadingBarProgress(60);</script>
     </div>
     <a class="s-top fas fa-arrow-up fa-fw" href='javascript:void(0)'></a>
@@ -1187,6 +1177,23 @@
 
 
 
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+  <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+  <script type="text/javascript">
+    var gitalk = new Gitalk({
+      clientID: "57bd3ce366ba25a73a1a",
+      clientSecret: "bab4a248180b9ac85b16fb44bf4ba171648f9cab",
+      repo: "myBlogTalk",
+      owner: "FraserYu",
+      admin: "FraserYu",
+      
+        id: location.pathname,      // Ensure uniqueness and length less than 50
+      
+      distractionFreeMode: false  // Facebook-like distraction free mode
+    });
+    gitalk.render('gitalk-container');
+  </script>
 
 
 

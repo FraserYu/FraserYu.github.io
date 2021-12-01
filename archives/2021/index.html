@@ -409,6 +409,8 @@
           
         
           
+        
+          
             <div class='post-wrapper'>
               <article class="post reveal ">
   
@@ -548,11 +550,142 @@ Java 有并发，并发知识之大，一口吃不下
             </div>
           
         
-          
-        
       
     
     
+      
+        
+          <div class='post-wrapper'>
+            <article class="post reveal ">
+  
+
+
+  <section class='meta'>
+    
+    
+    <div class="meta" id="header-meta">
+      
+        
+  <h2 class="title">
+    <a href="/p/git-worktree-with-script.html">
+      一键生成Git Worktree 工作目录
+    </a>
+  </h2>
+
+
+      
+      <div class='new-meta-box'>
+        
+          
+        
+          
+            
+  <div class='new-meta-item author'>
+    
+      <a href="https://dayarch.top" rel="nofollow">
+        
+          <img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png">
+        
+        <p>tanθ</p>
+      </a>
+    
+  </div>
+
+
+          
+        
+          
+            <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+    <p>2021-12-01</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+  
+  <div class='new-meta-item category'>
+    <a href='/categories/Coding/DevOps/' rel="nofollow">
+      <i class="fas fa-folder-open" aria-hidden="true"></i>
+      <p>Coding&nbsp;/&nbsp;DevOps</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            
+
+          
+        
+      </div>
+      
+        <hr>
+      
+    </div>
+  </section>
+
+
+  <section class="article typo">
+    <div class="article-entry" itemprop="articleBody">
+      前言
+上一篇文章Git Worktree 高级使用 整体反应不错，这完全是日常开发中可以用到的奇淫技巧。微服务环境下，通常我们都会有多个 repo，高级用法好归好，但每个 repo 都按照高级用法进行配置，还是比较麻烦的，你看这不就有同学发声了嘛
+
+
+
+说者有心，听者有意，那就写个脚本吧
+
+Git Worktree 脚本
+个人不是很擅长写 bash script，磕磕绊绊写了一个 worktree.sh，完全执行上一篇文章的整个过程
+
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+
+
+#!/bin/bash -e
+
+repo=$1
+dir="${repo#
+      
+        <div class="readmore">
+          <a href="/p/git-worktree-with-script.html" class="flat-box">
+            <i class="fas fa-book-open fa-fw" aria-hidden="true"></i>
+            阅读全文
+          </a>
+        </div>
+      
+    </div>
+    
+      <div class="full-width auto-padding tags">
+        
+          <a href="/tags/Git/" rel="nofollow"><i class="fas fa-tag fa-fw"></i> Git</a>
+        
+      </div>
+    
+  </section>
+</article>
+
+          </div>
+        
       
         
           <div class='post-wrapper'>
@@ -1508,113 +1641,6 @@ public static void main(String[] args) {
       
         
       
-        
-          <div class='post-wrapper'>
-            <article class="post reveal ">
-  
-
-
-  <section class='meta'>
-    
-    
-      <a title='ForkJoinPool大剖析' href='/p/java-fork-join-pool.html'><img class='thumbnail' src='https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgconcurrency.png'></a>
-    
-    <div class="meta" id="header-meta">
-      
-        
-  <h2 class="title">
-    <a href="/p/java-fork-join-pool.html">
-      ForkJoinPool大剖析
-    </a>
-  </h2>
-
-
-      
-      <div class='new-meta-box'>
-        
-          
-        
-          
-            
-  <div class='new-meta-item author'>
-    
-      <a href="https://dayarch.top" rel="nofollow">
-        
-          <img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host/blog-imgavatar.png">
-        
-        <p>tanθ</p>
-      </a>
-    
-  </div>
-
-
-          
-        
-          
-            <div class="new-meta-item date">
-  <a class='notlink'>
-    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-    <p>2021-02-17</p>
-  </a>
-</div>
-
-          
-        
-          
-            
-  
-  <div class='new-meta-item category'>
-    <a href='/categories/Coding/Java-Concurrency/' rel="nofollow">
-      <i class="fas fa-folder-open" aria-hidden="true"></i>
-      <p>Coding&nbsp;/&nbsp;Java-Concurrency</p>
-    </a>
-  </div>
-
-
-          
-        
-          
-            
-
-          
-        
-      </div>
-      
-        <hr>
-      
-    </div>
-  </section>
-
-
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      知识回顾
-并发工具类我们已经讲了很多，这些工具类的「目标」是让我们只关注任务本身，并且忽视线程间合作细节，简化了并发编程难度的同时，也增加了很多安全性。工具类的对使用者的「目标」虽然一致，但每一个工具类本身都有它独特的应用场景，比如：
-
- * 我会手动创建线程，为什么要使用线程池? 介绍了使用线程池管理线程将一个大任务分解成多个子任务来简单执行，借助 不会用Java Future，我怀疑你泡茶没我快, 又是超长图文！！ 的 Future 特性获取子任务执行结果——二者结合使用就可以处理简单的并行任务
- * 搞定 CompletableFuture，并发异步编程和编写串行程序还有什么区别？ 借助
-      
-        <div class="readmore">
-          <a href="/p/java-fork-join-pool.html" class="flat-box">
-            <i class="fas fa-book-open fa-fw" aria-hidden="true"></i>
-            阅读全文
-          </a>
-        </div>
-      
-    </div>
-    
-      <div class="full-width auto-padding tags">
-        
-          <a href="/tags/Java-Concurrency/" rel="nofollow"><i class="fas fa-tag fa-fw"></i> Java-Concurrency</a>
-        
-      </div>
-    
-  </section>
-</article>
-
-          </div>
-        
-      
     
   </section>
   
@@ -1956,11 +1982,11 @@ public static void main(String[] args) {
         
           <li><a class="flat-box" title="/categories/AWS/" href="/categories/AWS/"><div class='name'>AWS</div><div class='badge'>(1)</div></a></li>
         
-          <li><a class="flat-box" title="/categories/Coding/" href="/categories/Coding/"><div class='name'>Coding</div><div class='badge'>(101)</div></a></li>
+          <li><a class="flat-box" title="/categories/Coding/" href="/categories/Coding/"><div class='name'>Coding</div><div class='badge'>(102)</div></a></li>
         
           <li><a class="flat-box child" title="/categories/Coding/Arthas/" href="/categories/Coding/Arthas/"><div class='name'>Arthas</div><div class='badge'>(1)</div></a></li>
         
-          <li><a class="flat-box child" title="/categories/Coding/DevOps/" href="/categories/Coding/DevOps/"><div class='name'>DevOps</div><div class='badge'>(13)</div></a></li>
+          <li><a class="flat-box child" title="/categories/Coding/DevOps/" href="/categories/Coding/DevOps/"><div class='name'>DevOps</div><div class='badge'>(14)</div></a></li>
         
           <li><a class="flat-box child" title="/categories/Coding/Docker/" href="/categories/Coding/Docker/"><div class='name'>Docker</div><div class='badge'>(7)</div></a></li>
         
@@ -2051,7 +2077,7 @@ public static void main(String[] args) {
 </header>
 
     <div class='content pure'>
-      <a href="/tags/AOP/" style="font-size: 14px; color: #999">AOP</a> <a href="/tags/AWS/" style="font-size: 14px; color: #999">AWS</a> <a href="/tags/ArrayList/" style="font-size: 14px; color: #999">ArrayList</a> <a href="/tags/Arthas/" style="font-size: 14px; color: #999">Arthas</a> <a href="/tags/Chrome/" style="font-size: 14px; color: #999">Chrome</a> <a href="/tags/ClassLoader/" style="font-size: 14px; color: #999">ClassLoader</a> <a href="/tags/Docker/" style="font-size: 21.5px; color: #666">Docker</a> <a href="/tags/EasyExcel/" style="font-size: 14px; color: #999">EasyExcel</a> <a href="/tags/English/" style="font-size: 15.25px; color: #919191">English</a> <a href="/tags/Excel/" style="font-size: 15.25px; color: #919191">Excel</a> <a href="/tags/Exception/" style="font-size: 14px; color: #999">Exception</a> <a href="/tags/Git/" style="font-size: 20.25px; color: #6f6f6f">Git</a> <a href="/tags/GitHub-Pages/" style="font-size: 14px; color: #999">GitHub Pages</a> <a href="/tags/Github/" style="font-size: 14px; color: #999">Github</a> <a href="/tags/HTTP/" style="font-size: 15.25px; color: #919191">HTTP</a> <a href="/tags/Happens-before/" style="font-size: 14px; color: #999">Happens-before</a> <a href="/tags/Hybris/" style="font-size: 14px; color: #999">Hybris</a> <a href="/tags/IO/" style="font-size: 14px; color: #999">IO</a> <a href="/tags/IntelliJ-IDEA/" style="font-size: 21.5px; color: #666">IntelliJ IDEA</a> <a href="/tags/JDK/" style="font-size: 14px; color: #999">JDK</a> <a href="/tags/JDK%E6%BA%90%E7%A0%81/" style="font-size: 14px; color: #999">JDK源码</a> <a href="/tags/JVM/" style="font-size: 15.25px; color: #919191">JVM</a> <a href="/tags/Java/" style="font-size: 19px; color: #777">Java</a> <a href="/tags/Java-Concurrency/" style="font-size: 24px; color: #555">Java-Concurrency</a> <a href="/tags/Jenkins/" style="font-size: 19px; color: #777">Jenkins</a> <a href="/tags/Jrebel/" style="font-size: 14px; color: #999">Jrebel</a> <a href="/tags/Json/" style="font-size: 15.25px; color: #919191">Json</a> <a href="/tags/Linux/" style="font-size: 14px; color: #999">Linux</a> <a href="/tags/Lombok/" style="font-size: 14px; color: #999">Lombok</a> <a href="/tags/Maven/" style="font-size: 15.25px; color: #919191">Maven</a> <a href="/tags/MessageConverter/" style="font-size: 14px; color: #999">MessageConverter</a> <a href="/tags/MyBatis/" style="font-size: 14px; color: #999">MyBatis</a> <a href="/tags/MySQL/" style="font-size: 16.5px; color: #888">MySQL</a> <a href="/tags/Node/" style="font-size: 14px; color: #999">Node</a> <a href="/tags/OAuth2-0/" style="font-size: 14px; color: #999">OAuth2.0</a> <a href="/tags/POI/" style="font-size: 14px; color: #999">POI</a> <a href="/tags/PostMan/" style="font-size: 14px; color: #999">PostMan</a> <a href="/tags/RESTful/" style="font-size: 14px; color: #999">RESTful</a> <a href="/tags/SSL/" style="font-size: 14px; color: #999">SSL</a> <a href="/tags/Shiro/" style="font-size: 14px; color: #999">Shiro</a> <a href="/tags/Spring/" style="font-size: 15.25px; color: #919191">Spring</a> <a href="/tags/Spring-Aware/" style="font-size: 14px; color: #999">Spring Aware</a> <a href="/tags/Spring-Bean/" style="font-size: 17.75px; color: #808080">Spring Bean</a> <a href="/tags/Spring-Boot/" style="font-size: 22.75px; color: #5e5e5e">Spring Boot</a> <a href="/tags/Spring-Data-Binding/" style="font-size: 14px; color: #999">Spring Data Binding</a> <a href="/tags/SpringMVC/" style="font-size: 14px; color: #999">SpringMVC</a> <a href="/tags/Springboot/" style="font-size: 14px; color: #999">Springboot</a> <a href="/tags/Starter/" style="font-size: 14px; color: #999">Starter</a> <a href="/tags/Windows/" style="font-size: 14px; color: #999">Windows</a> <a href="/tags/annotation/" style="font-size: 14px; color: #999">annotation</a> <a href="/tags/lambda/" style="font-size: 14px; color: #999">lambda</a> <a href="/tags/synchronized/" style="font-size: 14px; color: #999">synchronized</a> <a href="/tags/thread/" style="font-size: 14px; color: #999">thread</a> <a href="/tags/volatile/" style="font-size: 15.25px; color: #919191">volatile</a> <a href="/tags/%E4%BA%8C%E5%8F%89%E6%9F%A5%E6%89%BE%E6%A0%91/" style="font-size: 14px; color: #999">二叉查找树</a> <a href="/tags/%E4%BA%92%E6%96%A5/" style="font-size: 14px; color: #999">互斥</a> <a href="/tags/%E5%88%86%E5%B7%A5/" style="font-size: 14px; color: #999">分工</a> <a href="/tags/%E5%8E%9F%E5%AD%90%E6%80%A7/" style="font-size: 14px; color: #999">原子性</a> <a href="/tags/%E5%8F%AF%E8%A7%81%E6%80%A7/" style="font-size: 14px; color: #999">可见性</a> <a href="/tags/%E5%90%8C%E6%AD%A5/" style="font-size: 14px; color: #999">同步</a> <a href="/tags/%E5%A4%9A%E6%80%81/" style="font-size: 14px; color: #999">多态</a> <a href="/tags/%E5%B7%A5%E5%85%B7/" style="font-size: 15.25px; color: #919191">工具</a> <a href="/tags/%E5%B9%B6%E5%8F%91/" style="font-size: 14px; color: #999">并发</a> <a href="/tags/%E5%BE%AE%E4%BF%A1/" style="font-size: 14px; color: #999">微信</a> <a href="/tags/%E6%80%BB%E7%BB%93/" style="font-size: 20.25px; color: #6f6f6f">总结</a> <a href="/tags/%E6%8C%87%E6%95%B0%E5%9F%BA%E9%87%91/" style="font-size: 14px; color: #999">指数基金</a> <a href="/tags/%E6%9C%89%E5%BA%8F%E6%80%A7/" style="font-size: 14px; color: #999">有序性</a> <a href="/tags/%E6%AD%BB%E9%94%81/" style="font-size: 14px; color: #999">死锁</a> <a href="/tags/%E6%B3%A8%E8%A7%A3/" style="font-size: 15.25px; color: #919191">注解</a> <a href="/tags/%E7%83%AD%E9%83%A8%E7%BD%B2/" style="font-size: 14px; color: #999">热部署</a> <a href="/tags/%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/" style="font-size: 17.75px; color: #808080">生命周期</a> <a href="/tags/%E7%BA%A2%E9%BB%91%E6%A0%91/" style="font-size: 14px; color: #999">红黑树</a> <a href="/tags/%E8%A1%A8%E6%83%85/" style="font-size: 14px; color: #999">表情</a> <a href="/tags/%E8%B4%B9%E7%94%A8/" style="font-size: 14px; color: #999">费用</a> <a href="/tags/%E9%94%81/" style="font-size: 15.25px; color: #919191">锁</a> <a href="/tags/%E9%94%81%E7%B2%92%E5%BA%A6/" style="font-size: 14px; color: #999">锁粒度</a> <a href="/tags/%E9%9D%A2%E8%AF%95/" style="font-size: 17.75px; color: #808080">面试</a>
+      <a href="/tags/AOP/" style="font-size: 14px; color: #999">AOP</a> <a href="/tags/AWS/" style="font-size: 14px; color: #999">AWS</a> <a href="/tags/ArrayList/" style="font-size: 14px; color: #999">ArrayList</a> <a href="/tags/Arthas/" style="font-size: 14px; color: #999">Arthas</a> <a href="/tags/Chrome/" style="font-size: 14px; color: #999">Chrome</a> <a href="/tags/ClassLoader/" style="font-size: 14px; color: #999">ClassLoader</a> <a href="/tags/Docker/" style="font-size: 21.5px; color: #666">Docker</a> <a href="/tags/EasyExcel/" style="font-size: 14px; color: #999">EasyExcel</a> <a href="/tags/English/" style="font-size: 15.25px; color: #919191">English</a> <a href="/tags/Excel/" style="font-size: 15.25px; color: #919191">Excel</a> <a href="/tags/Exception/" style="font-size: 14px; color: #999">Exception</a> <a href="/tags/Git/" style="font-size: 21.5px; color: #666">Git</a> <a href="/tags/GitHub-Pages/" style="font-size: 14px; color: #999">GitHub Pages</a> <a href="/tags/Github/" style="font-size: 14px; color: #999">Github</a> <a href="/tags/HTTP/" style="font-size: 15.25px; color: #919191">HTTP</a> <a href="/tags/Happens-before/" style="font-size: 14px; color: #999">Happens-before</a> <a href="/tags/Hybris/" style="font-size: 14px; color: #999">Hybris</a> <a href="/tags/IO/" style="font-size: 14px; color: #999">IO</a> <a href="/tags/IntelliJ-IDEA/" style="font-size: 21.5px; color: #666">IntelliJ IDEA</a> <a href="/tags/JDK/" style="font-size: 14px; color: #999">JDK</a> <a href="/tags/JDK%E6%BA%90%E7%A0%81/" style="font-size: 14px; color: #999">JDK源码</a> <a href="/tags/JVM/" style="font-size: 15.25px; color: #919191">JVM</a> <a href="/tags/Java/" style="font-size: 19px; color: #777">Java</a> <a href="/tags/Java-Concurrency/" style="font-size: 24px; color: #555">Java-Concurrency</a> <a href="/tags/Jenkins/" style="font-size: 19px; color: #777">Jenkins</a> <a href="/tags/Jrebel/" style="font-size: 14px; color: #999">Jrebel</a> <a href="/tags/Json/" style="font-size: 15.25px; color: #919191">Json</a> <a href="/tags/Linux/" style="font-size: 14px; color: #999">Linux</a> <a href="/tags/Lombok/" style="font-size: 14px; color: #999">Lombok</a> <a href="/tags/Maven/" style="font-size: 15.25px; color: #919191">Maven</a> <a href="/tags/MessageConverter/" style="font-size: 14px; color: #999">MessageConverter</a> <a href="/tags/MyBatis/" style="font-size: 14px; color: #999">MyBatis</a> <a href="/tags/MySQL/" style="font-size: 16.5px; color: #888">MySQL</a> <a href="/tags/Node/" style="font-size: 14px; color: #999">Node</a> <a href="/tags/OAuth2-0/" style="font-size: 14px; color: #999">OAuth2.0</a> <a href="/tags/POI/" style="font-size: 14px; color: #999">POI</a> <a href="/tags/PostMan/" style="font-size: 14px; color: #999">PostMan</a> <a href="/tags/RESTful/" style="font-size: 14px; color: #999">RESTful</a> <a href="/tags/SSL/" style="font-size: 14px; color: #999">SSL</a> <a href="/tags/Shiro/" style="font-size: 14px; color: #999">Shiro</a> <a href="/tags/Spring/" style="font-size: 15.25px; color: #919191">Spring</a> <a href="/tags/Spring-Aware/" style="font-size: 14px; color: #999">Spring Aware</a> <a href="/tags/Spring-Bean/" style="font-size: 17.75px; color: #808080">Spring Bean</a> <a href="/tags/Spring-Boot/" style="font-size: 22.75px; color: #5e5e5e">Spring Boot</a> <a href="/tags/Spring-Data-Binding/" style="font-size: 14px; color: #999">Spring Data Binding</a> <a href="/tags/SpringMVC/" style="font-size: 14px; color: #999">SpringMVC</a> <a href="/tags/Springboot/" style="font-size: 14px; color: #999">Springboot</a> <a href="/tags/Starter/" style="font-size: 14px; color: #999">Starter</a> <a href="/tags/Windows/" style="font-size: 14px; color: #999">Windows</a> <a href="/tags/annotation/" style="font-size: 14px; color: #999">annotation</a> <a href="/tags/lambda/" style="font-size: 14px; color: #999">lambda</a> <a href="/tags/synchronized/" style="font-size: 14px; color: #999">synchronized</a> <a href="/tags/thread/" style="font-size: 14px; color: #999">thread</a> <a href="/tags/volatile/" style="font-size: 15.25px; color: #919191">volatile</a> <a href="/tags/%E4%BA%8C%E5%8F%89%E6%9F%A5%E6%89%BE%E6%A0%91/" style="font-size: 14px; color: #999">二叉查找树</a> <a href="/tags/%E4%BA%92%E6%96%A5/" style="font-size: 14px; color: #999">互斥</a> <a href="/tags/%E5%88%86%E5%B7%A5/" style="font-size: 14px; color: #999">分工</a> <a href="/tags/%E5%8E%9F%E5%AD%90%E6%80%A7/" style="font-size: 14px; color: #999">原子性</a> <a href="/tags/%E5%8F%AF%E8%A7%81%E6%80%A7/" style="font-size: 14px; color: #999">可见性</a> <a href="/tags/%E5%90%8C%E6%AD%A5/" style="font-size: 14px; color: #999">同步</a> <a href="/tags/%E5%A4%9A%E6%80%81/" style="font-size: 14px; color: #999">多态</a> <a href="/tags/%E5%B7%A5%E5%85%B7/" style="font-size: 15.25px; color: #919191">工具</a> <a href="/tags/%E5%B9%B6%E5%8F%91/" style="font-size: 14px; color: #999">并发</a> <a href="/tags/%E5%BE%AE%E4%BF%A1/" style="font-size: 14px; color: #999">微信</a> <a href="/tags/%E6%80%BB%E7%BB%93/" style="font-size: 20.25px; color: #6f6f6f">总结</a> <a href="/tags/%E6%8C%87%E6%95%B0%E5%9F%BA%E9%87%91/" style="font-size: 14px; color: #999">指数基金</a> <a href="/tags/%E6%9C%89%E5%BA%8F%E6%80%A7/" style="font-size: 14px; color: #999">有序性</a> <a href="/tags/%E6%AD%BB%E9%94%81/" style="font-size: 14px; color: #999">死锁</a> <a href="/tags/%E6%B3%A8%E8%A7%A3/" style="font-size: 15.25px; color: #919191">注解</a> <a href="/tags/%E7%83%AD%E9%83%A8%E7%BD%B2/" style="font-size: 14px; color: #999">热部署</a> <a href="/tags/%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/" style="font-size: 17.75px; color: #808080">生命周期</a> <a href="/tags/%E7%BA%A2%E9%BB%91%E6%A0%91/" style="font-size: 14px; color: #999">红黑树</a> <a href="/tags/%E8%A1%A8%E6%83%85/" style="font-size: 14px; color: #999">表情</a> <a href="/tags/%E8%B4%B9%E7%94%A8/" style="font-size: 14px; color: #999">费用</a> <a href="/tags/%E9%94%81/" style="font-size: 15.25px; color: #919191">锁</a> <a href="/tags/%E9%94%81%E7%B2%92%E5%BA%A6/" style="font-size: 14px; color: #999">锁粒度</a> <a href="/tags/%E9%9D%A2%E8%AF%95/" style="font-size: 17.75px; color: #808080">面试</a>
     </div>
   </section>
 
@@ -2185,7 +2211,7 @@ public static void main(String[] args) {
   &nbsp;&nbsp;|&nbsp;&nbsp;  
   
     &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-        class="white-color">267.4k</span>&nbsp;字
+        class="white-color">267.9k</span>&nbsp;字
     
 
   &nbsp;&nbsp;|&nbsp;&nbsp;  

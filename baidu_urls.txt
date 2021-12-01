@@ -1,5 +1,5 @@
+https://dayarch.top/p/git-worktree-with-script.html
 https://dayarch.top/p/git-worktree-in-advance.html
 https://dayarch.top/p/git-worktree-in-practice.html
 https://dayarch.top/p/three-ways-to-keep-git-log-clear.html
 https://dayarch.top/p/room-for-individual-study.html
-https://dayarch.top/p/jenkins-shared-library.html

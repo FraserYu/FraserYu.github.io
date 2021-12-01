@@ -6,7 +6,7 @@
   <link href="https://dayarch.top/atom.xml" rel="self"/>
   
   <link href="https://dayarch.top/"/>
-  <updated>2021-11-25T11:08:35.324Z</updated>
+  <updated>2021-12-01T08:17:27.401Z</updated>
   <id>https://dayarch.top/</id>
   
   <author>
@@ -15,6 +15,27 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>一键生成Git Worktree 工作目录</title>
+    <link href="https://dayarch.top/p/git-worktree-with-script.html"/>
+    <id>https://dayarch.top/p/git-worktree-with-script.html</id>
+    <published>2021-12-01T07:27:06.000Z</published>
+    <updated>2021-12-01T08:17:27.401Z</updated>
+    
+    
+    <summary type="html">一键生成git worktree 工作目录</summary>
+    
+    
+    
+    <category term="Coding" scheme="https://dayarch.top/categories/Coding/"/>
+    
+    <category term="DevOps" scheme="https://dayarch.top/categories/Coding/DevOps/"/>
+    
+    
+    <category term="Git" scheme="https://dayarch.top/tags/Git/"/>
+    
+  </entry>
   
   <entry>
     <title>Git Worktree 高级使用</title>
@@ -474,27 +495,6 @@ docker containe</summary>
     
     
     <category term="总结" scheme="https://dayarch.top/tags/%E6%80%BB%E7%BB%93/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>分分钟搞定Java 并发队列</title>
-    <link href="https://dayarch.top/p/java-concurrency-queue.html"/>
-    <id>https://dayarch.top/p/java-concurrency-queue.html</id>
-    <published>2020-08-23T02:31:08.000Z</published>
-    <updated>2020-08-23T02:38:50.417Z</updated>
-    
-    
-    <summary type="html">Java 并发队列多种多样，有阻塞式和非阻塞式，乍一看眼花缭乱的队列确实不知道如何下手，以及如何快速区分他们，本文就站在更高的视角来看 Java 并发队列，以及说明他们的实际用途，快速搞定他们</summary>
-    
-    
-    
-    <category term="Coding" scheme="https://dayarch.top/categories/Coding/"/>
-    
-    <category term="Java-Concurrency" scheme="https://dayarch.top/categories/Coding/Java-Concurrency/"/>
-    
-    
-    <category term="Java-Concurrency" scheme="https://dayarch.top/tags/Java-Concurrency/"/>
     
   </entry>
   
