@@ -6,7 +6,7 @@
   <link href="https://dayarch.top/atom.xml" rel="self"/>
   
   <link href="https://dayarch.top/"/>
-  <updated>2021-12-01T08:17:27.401Z</updated>
+  <updated>2021-12-25T02:12:26.710Z</updated>
   <id>https://dayarch.top/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>锁记————偏向锁注定过不好这一生</title>
+    <link href="https://dayarch.top/p/java-biased-lock.html"/>
+    <id>https://dayarch.top/p/java-biased-lock.html</id>
+    <published>2021-12-25T02:10:52.000Z</published>
+    <updated>2021-12-25T02:12:26.710Z</updated>
+    
+    
+    <summary type="html">偏向锁的一生</summary>
+    
+    
+    
+    <category term="Coding" scheme="https://dayarch.top/categories/Coding/"/>
+    
+    <category term="Java-Concurrency" scheme="https://dayarch.top/categories/Coding/Java-Concurrency/"/>
+    
+    
+    <category term="Java-Concurrency" scheme="https://dayarch.top/tags/Java-Concurrency/"/>
+    
+    <category term="锁" scheme="https://dayarch.top/tags/%E9%94%81/"/>
+    
+  </entry>
   
   <entry>
     <title>一键生成Git Worktree 工作目录</title>
@@ -474,27 +497,6 @@ docker containe</summary>
     <category term="AWS" scheme="https://dayarch.top/tags/AWS/"/>
     
     <category term="lambda" scheme="https://dayarch.top/tags/lambda/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>reveal-md 写出不一样的PPT</title>
-    <link href="https://dayarch.top/p/reveal-md-ppt.html"/>
-    <id>https://dayarch.top/p/reveal-md-ppt.html</id>
-    <published>2020-09-07T10:30:25.000Z</published>
-    <updated>2020-11-29T13:22:32.003Z</updated>
-    
-    
-    <summary type="html">通常程序员瞧不上写PPT抑或不愿意写PPT，其实这是一个不容被忽视的软技能，通过PPT的演示可以锻炼一个人的综合能力</summary>
-    
-    
-    
-    <category term="Coding" scheme="https://dayarch.top/categories/Coding/"/>
-    
-    <category term="Tools" scheme="https://dayarch.top/categories/Coding/Tools/"/>
-    
-    
-    <category term="总结" scheme="https://dayarch.top/tags/%E6%80%BB%E7%BB%93/"/>
     
   </entry>
   
