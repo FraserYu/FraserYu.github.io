@@ -6,7 +6,7 @@
   <link href="https://dayarch.top/atom.xml" rel="self"/>
   
   <link href="https://dayarch.top/"/>
-  <updated>2021-12-25T12:51:09.891Z</updated>
+  <updated>2021-12-25T14:55:08.016Z</updated>
   <id>https://dayarch.top/</id>
   
   <author>
@@ -15,6 +15,19 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>test</title>
+    <link href="https://dayarch.top/p/ckxly2iv70000t047b917f6ic.html"/>
+    <id>https://dayarch.top/p/ckxly2iv70000t047b917f6ic.html</id>
+    <published>2021-12-25T14:55:08.000Z</published>
+    <updated>2021-12-25T14:55:08.016Z</updated>
+    
+    
+    
+    
+    
+  </entry>
   
   <entry>
     <title>锁记————偏向锁注定过不好这一生</title>
@@ -476,27 +489,6 @@ docker containe</summary>
     
     
     <category term="IntelliJ IDEA" scheme="https://dayarch.top/tags/IntelliJ-IDEA/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>借助Serverless Framework玩转AWS Lambda</title>
-    <link href="https://dayarch.top/p/aws-lambda-with-serverless-framework.html"/>
-    <id>https://dayarch.top/p/aws-lambda-with-serverless-framework.html</id>
-    <published>2020-10-12T11:13:44.000Z</published>
-    <updated>2021-02-17T07:02:52.090Z</updated>
-    
-    
-    <summary type="html">Serverless 进一步将业务单元进行细分，职责更加单一，AWS Lambda 具有成熟的 serverless 功能，借助 Serverless Framework 可以快速开发以及部署 Serverless</summary>
-    
-    
-    
-    <category term="AWS" scheme="https://dayarch.top/categories/AWS/"/>
-    
-    
-    <category term="AWS" scheme="https://dayarch.top/tags/AWS/"/>
-    
-    <category term="lambda" scheme="https://dayarch.top/tags/lambda/"/>
     
   </entry>
   
