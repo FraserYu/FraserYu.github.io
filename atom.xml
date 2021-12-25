@@ -6,7 +6,7 @@
   <link href="https://dayarch.top/atom.xml" rel="self"/>
   
   <link href="https://dayarch.top/"/>
-  <updated>2021-12-25T02:12:26.710Z</updated>
+  <updated>2021-12-25T12:51:09.891Z</updated>
   <id>https://dayarch.top/</id>
   
   <author>
@@ -21,10 +21,10 @@
     <link href="https://dayarch.top/p/java-biased-lock.html"/>
     <id>https://dayarch.top/p/java-biased-lock.html</id>
     <published>2021-12-25T02:10:52.000Z</published>
-    <updated>2021-12-25T02:12:26.710Z</updated>
+    <updated>2021-12-25T12:51:09.891Z</updated>
     
     
-    <summary type="html">偏向锁的一生</summary>
+    <summary type="html">偏向锁的一生, JDK15开始，偏向默认取消了</summary>
     
     
     
