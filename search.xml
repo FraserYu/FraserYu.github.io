@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>爱不释手的网页荧光标记工具</title>
+      <link href="//p/highlight-tool-weava.html"/>
+      <url>//p/highlight-tool-weava.html</url>
+      
+        <content type="html"><![CDATA[<p>无意间被同事看到，惊呼，你是怎么在网页上做标记的？</p><p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host@master/blog-img20211230192322.png"></p><p>这其实是我个人浏览网页，每日浏览大量信息，从中标记重要信息必备的工具</p><h2 id="个人痛点"><a href="#个人痛点" class="headerlink" title="个人痛点"></a>个人痛点</h2><ol><li>每日要浏览很多网页或者查阅资料，浏览过后重新定位重要信息又要费时查找</li><li>虽然印象笔记或有道笔记插件可以做摘录，但当查找信息时，要在多个应用之间切换，显得不够流畅</li><li>读文章没办法标记重要信息，在大脑中串联上下文</li></ol><p>总之我需要一个可以<strong>简化研究过程，提升工作效率，让我不再费时追踪资料来源、复制粘贴及引文</strong>的工具</p><h2 id="Weava"><a href="#Weava" class="headerlink" title="Weava"></a>Weava</h2><p><code>Weava</code> 是一个 Chrome 浏览器的插件｜扩展，它就是可以帮我解决上述痛点的工具，说的再具体一点，它可以：</p><ol><li>用多种不同颜色于网站或PDF进行标记和注释，只需一次点击就可以重新访问网站</li><li>在文件夹及子文件夹整理你的萤光标记</li><li>将萤光标记自动生成引文</li><li>随时随地浏览你的萤光标记。你的萤光标记都保存于云端（需要登陆）</li></ol><p>它既可以用于标记网页，又可以用于标记 PDF，使用很简单，鼠标左键选中，右键直接标记颜色就可以：</p><p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host@master/blog-img20211230205759.png"></p><p>标记颜色后，鼠标单击，直接可以添加自己的 note</p><p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host@master/blog-img20211230205832.png"></p><p>至于颜色的含义，完全可以按照你心目中的优先级｜影响｜功能进行标记，这样登陆云端之后，就可以看到你所有标记的内容，如下所示：</p><p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host@master/blog-img20211230210910.png"></p><p>点击某个网页，查看详情，再点击具体标记就可以直接跳转到标记所在网页位置，非常方便，一个字「爽」</p><p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host@master/blog-img20211230211145.png"></p><p>免费版对于我个人来说，已经完全够用，如果你还有更高的实用要求，可以购买专业版</p><p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host@master/blog-img20211230210432.png"></p><p>鉴于 Chrome 扩展可能需要 <code>KXSW</code>，我这面也直接将这个扩展打包出来，<strong>公众号回复【weava】就可以获取</strong></p><p>如果你手动安装插件遇到什么问题，可以参考这篇文章：<a href="https://www.jianshu.com/p/bb51dc91b93a%EF%BC%8C%E5%85%A8%E5%A5%97%E6%9C%8D%E5%8A%A1%E5%8F%AA%E8%83%BD%E5%88%B0%E8%BF%99%E9%87%8C%E4%BA%86%E3%80%82%E6%9C%80%E5%90%8E%EF%BC%8C**%E6%B6%89%E5%8F%8A%E5%88%B0%E5%85%AC%E5%8F%B8%E6%9C%BA%E5%AF%86%E7%9A%84%E6%96%87%E4%BB%B6%EF%BC%8C%E5%BB%BA%E8%AE%AE%E5%92%A8%E8%AF%A2">https://www.jianshu.com/p/bb51dc91b93a，全套服务只能到这里了。最后，**涉及到公司机密的文件，建议咨询</a> IT 后再决定是否实用该插件**</p><p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host@master/blog-img20211230212607.png"></p><p>你以为这就结束了？还有个彩蛋</p><p>关于 Chrome 浏览器的使用，我还有个习惯，因为公司系统太多，需要打开的内容又很多，所以我通常会在 Chrome 上分组打开网页内容(你知道有这个功能吗)：</p><p>Tab 上鼠标右键，直接添加 Tab 到已有 group 或者新的 group 中</p><p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host@master/blog-img20211230212850.png"></p><p>选择颜色，填写 group 名称就可以了</p><p><img src="https://cdn.jsdelivr.net/gh/FraserYu/img-host@master/blog-img20211230213252.png"></p><p>这样，我们就可以分组归类网页，非常方便与高效</p><p>![](<a href="https://cdn.jsdelivr.net/gh/FraserYu/img-host@master/blog-img2021-12-30">https://cdn.jsdelivr.net/gh/FraserYu/img-host@master/blog-img2021-12-30</a> 21.48.19.gif)</p><p>最后，<strong>公众号回复 【工具】获取更多内容</strong>，如果你有哪些可以帮助解决类似场景的工具，还请留言区亮瞎我</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Coding </category>
+          
+          <category> Tools </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 工具 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>锁记————偏向锁注定过不好这一生</title>
       <link href="//p/java-biased-lock.html"/>
       <url>//p/java-biased-lock.html</url>
